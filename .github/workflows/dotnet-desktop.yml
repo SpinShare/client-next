@@ -39,15 +39,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-      - name: List Files 1
+      - name: List Files
         run: |
-          ls -l artifacts
-      - name: List Files 2
-        run: |
-          ls -ld artifacts
-      - name: List Files 3
-        run: |
-          ls -ld artifacts/artifacts
+          ls -l -d -1 artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
