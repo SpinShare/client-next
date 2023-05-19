@@ -27,7 +27,6 @@ jobs:
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: artifacts
           name: ${{ matrix.os }}.zip
           retention-days: 1
   release:
@@ -41,14 +40,12 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -ld artifacts
+          ls -ld .
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            /home/runner/work/client-next/client-next/artifacts/macos-latest.zip
-            /home/runner/work/client-next/client-next/artifacts/ubuntu-latest.zip
-            /home/runner/work/client-next/client-next/artifacts/windows-latest.zip
+            */*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
