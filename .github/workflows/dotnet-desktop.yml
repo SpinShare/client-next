@@ -45,7 +45,10 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          files: '*/*.zip'
+          files: |
+            artifacts/macos-latest.zip
+            artifacts/windows-latest.zip
+            artifacts/ubuntu-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
