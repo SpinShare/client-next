@@ -48,12 +48,12 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -l artifacts
+          ls -lp artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            **/*.zip
+            artifacts/**/*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
