@@ -20,13 +20,17 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Archive build artifacts
+      - name: Create Folder Structure for Archive
         run: |
           mkdir -p artifacts/${{ matrix.os }}
           cp -r bin/Release/net6.0/* artifacts/${{ matrix.os }}/
           ls -l artifacts/${{ matrix.os }}
           cd artifacts/${{ matrix.os }}
-          zip -r ../../artifacts/${{ matrix.os }}.zip .
+      - name: Archive build artifacts
+        uses: vimtor/action-zip@v1
+        with:
+          files: .
+          dest: ../../artifacts/${{ matrix.os }}.zip
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
