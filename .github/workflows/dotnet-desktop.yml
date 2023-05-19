@@ -24,7 +24,8 @@ jobs:
           mkdir -p artifacts/${{ matrix.os }}
           cp -r bin/Release/net6.0/* artifacts/${{ matrix.os }}/
           ls -l artifacts/${{ matrix.os }}
-          zip -r artifacts/${{ matrix.os }}.zip artifacts/${{ matrix.os }}
+          cd artifacts/${{ matrix.os }}
+          zip -r ../../artifacts/${{ matrix.os }}.zip .
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
