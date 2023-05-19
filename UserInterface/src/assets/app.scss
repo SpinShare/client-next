@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap');
+
+:root {
+    --colorPrimary: 232, 77, 177;
+    --colorSecondary: 113, 79, 172;
+    --colorError: 255, 56, 99;
+    --colorSuccess: 61, 251, 132;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+body {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    background: #111;
+    color: #fff;
+}
+a {
+    color: #fff;
+
+    &:hover {
+        text-decoration: none;
+    }
+}

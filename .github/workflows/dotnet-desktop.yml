@@ -1,0 +1,37 @@
+name: Build and Release
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore NuGet packages
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release
+      - name: Archive build artifacts
+        run: |
+          mkdir -p artifacts/${{ matrix.os }}
+          cp -r bin/Release/* artifacts/${{ matrix.os }}/
+          zip -r artifacts/${{ matrix.os }}.zip artifacts/${{ matrix.os }}
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/windows-latest.zip
+            artifacts/macos-latest.zip
+            artifacts/ubuntu-latest.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: true

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FB1357;}
+	.st1{fill:#25A7FB;}
+	.st2{fill:#3DFB84;}
+	.st3{fill:#FFFFFF;}
+</style>
+    <g>
+	<path class="st0" d="M100,190V10c0-5.52-4.48-10-10-10S80,4.48,80,10v180c0,5.52,4.48,10,10,10S100,195.52,100,190z"/>
+        <path class="st1" d="M130,25c-5.52,0-10,4.48-10,10v130c0,5.52,4.48,10,10,10s10-4.48,10-10V35C140,29.48,135.52,25,130,25z"/>
+        <path class="st2" d="M170,50c-5.52,0-10,4.48-10,10v80c0,5.52,4.48,10,10,10s10-4.48,10-10V60C180,54.48,175.52,50,170,50z"/>
+        <path class="st2" d="M10,150c5.52,0,10-4.48,10-10V60c0-5.52-4.48-10-10-10S0,54.48,0,60v80C0,145.52,4.48,150,10,150z"/>
+        <path class="st1" d="M50,25c-5.52,0-10,4.48-10,10v130c0,5.52,4.48,10,10,10s10-4.48,10-10V35C60,29.48,55.52,25,50,25z"/>
+</g>
+</svg>
