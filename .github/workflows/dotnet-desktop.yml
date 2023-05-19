@@ -48,7 +48,9 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -lp artifacts
+          ls -lp artifacts/macos-latest.zip/
+          ls -lp artifacts/ubuntu-latest.zip/
+          ls -lp artifacts/windows-latest.zip/
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
