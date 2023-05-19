@@ -39,14 +39,20 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-      - name: List Files
+      - name: List Files 1
+        run: |
+          ls -l artifacts
+      - name: List Files 2
         run: |
           ls -ld artifacts
+      - name: List Files 3
+        run: |
+          ls -ld artifacts/artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            */*.zip
+            **/*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
