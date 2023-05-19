@@ -24,17 +24,20 @@ jobs:
         run: |
           mkdir -p artifacts/${{ matrix.os }}
           cp -r bin/Release/net6.0/* artifacts/${{ matrix.os }}/
-          ls -l artifacts/${{ matrix.os }}
+          ls -lp artifacts/${{ matrix.os }}
           cd artifacts/${{ matrix.os }}
       - name: Archive build artifacts
         uses: vimtor/action-zip@v1
         with:
           files: .
           dest: ../../artifacts/${{ matrix.os }}.zip
+      - name: List Files
+        run: |
+          ls -lp artifacts
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: artifacts
+          path: artifacts/${{ matrix.os }}.zip
           name: ${{ matrix.os }}.zip
           retention-days: 1
   release:
@@ -48,16 +51,12 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -lp artifacts/macos-latest.zip/macos-latest/
-          ls -lp artifacts/ubuntu-latest.zip/ubuntu-latest/
-          ls -lp artifacts/windows-latest.zip/windows-latest/
+          ls -lp artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/macos-latest.zip/macos-latest/macos-latest.zip
-            artifacts/ubuntu-latest.zip/ubuntu-latest/ubuntu-latest.zip
-            artifacts/windows-latest.zip/windows-latest/windows-latest.zip
+            **.*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
