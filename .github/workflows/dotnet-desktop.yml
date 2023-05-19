@@ -25,12 +25,11 @@ jobs:
           mkdir -p artifacts/${{ matrix.os }}
           cp -r bin/Release/net6.0/* artifacts/${{ matrix.os }}/
           ls -lp artifacts/${{ matrix.os }}
-          cd artifacts/${{ matrix.os }}
       - name: Archive build artifacts
         uses: vimtor/action-zip@v1
         with:
-          files: .
-          dest: ../../artifacts/${{ matrix.os }}.zip
+          files: artifacts/${{ matrix.os }}
+          dest: artifacts/${{ matrix.os }}.zip
       - name: List Files
         run: |
           ls -lp artifacts
