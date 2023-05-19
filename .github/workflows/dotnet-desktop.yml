@@ -31,6 +31,7 @@ jobs:
           path: artifacts/${{ matrix.os }}.zip
           retention-days: 1
   release:
+    needs: build
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
