@@ -41,14 +41,14 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -l artifacts
+          ls -ld artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/macos-latest.zip
-            artifacts/windows-latest.zip
-            artifacts/ubuntu-latest.zip
+            ~/artifacts/macos-latest.zip
+            ~/artifacts/windows-latest.zip
+            ~/artifacts/ubuntu-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
