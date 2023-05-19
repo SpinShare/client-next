@@ -53,7 +53,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/**/*.zip
+            artifacts/macos-latest.zip/macos-latest.zip
+            artifacts/ubuntu-latest.zip/ubuntu-latest.zip
+            artifacts/windows-latest.zip/windows-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
