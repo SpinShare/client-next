@@ -27,8 +27,7 @@ jobs:
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: release-artifact
-          path: artifacts/${{ matrix.os }}.zip
+          path: artifacts
           retention-days: 1
   release:
     needs: build
@@ -38,18 +37,12 @@ jobs:
       - name: Retrieve Release Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: release-artifact
-          path: |
-            artifacts/windows-latest.zip
-            artifacts/macos-latest.zip
-            artifacts/ubuntu-latest.zip
+          path: artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/windows-latest.zip
-            artifacts/macos-latest.zip
-            artifacts/ubuntu-latest.zip
+            artifacts/*
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
