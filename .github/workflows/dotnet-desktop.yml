@@ -48,16 +48,16 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -lp artifacts/macos-latest.zip/
-          ls -lp artifacts/ubuntu-latest.zip/
-          ls -lp artifacts/windows-latest.zip/
+          ls -lp artifacts/macos-latest.zip/macos-latest/
+          ls -lp artifacts/ubuntu-latest.zip/ubuntu-latest/
+          ls -lp artifacts/windows-latest.zip/windows-latest/
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/macos-latest.zip/macos-latest.zip
-            artifacts/ubuntu-latest.zip/ubuntu-latest.zip
-            artifacts/windows-latest.zip/windows-latest.zip
+            artifacts/macos-latest.zip/macos-latest/macos-latest.zip
+            artifacts/ubuntu-latest.zip/ubuntu-latest/ubuntu-latest.zip
+            artifacts/windows-latest.zip/windows-latest/windows-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
