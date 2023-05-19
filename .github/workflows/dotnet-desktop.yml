@@ -4,8 +4,9 @@ on: [push]
 
 jobs:
   build:
+    name: build-${{ matrix.os }}
     permissions: write-all
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
@@ -18,7 +19,7 @@ jobs:
       - name: Restore NuGet packages
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release --no-restore
       - name: Archive build artifacts
         run: |
           mkdir -p artifacts/${{ matrix.os }}
