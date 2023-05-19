@@ -48,8 +48,8 @@ jobs:
           files: |
             **/*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ github.ref }}
-          name: Release ${{ github.ref }}
+          generate_release_notes: true
+          name: Release ${{ github.event.repository.updated_at }}
           draft: true
           prerelease: true
     
