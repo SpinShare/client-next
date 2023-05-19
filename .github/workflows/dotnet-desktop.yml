@@ -24,6 +24,24 @@ jobs:
           mkdir -p artifacts/${{ matrix.os }}
           cp -r bin/Release/* artifacts/${{ matrix.os }}/
           zip -r artifacts/${{ matrix.os }}.zip artifacts/${{ matrix.os }}
+      - name: Save Release Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-artifact
+          path: artifacts/${{ matrix.os }}.zip
+          retention-days: 1
+  release:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve Release Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-artifact
+          path: |
+            artifacts/windows-latest.zip
+            artifacts/macos-latest.zip
+            artifacts/ubuntu-latest.zip
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
@@ -36,3 +54,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: true
+    
