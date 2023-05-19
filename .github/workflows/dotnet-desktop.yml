@@ -27,7 +27,7 @@ jobs:
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: .
+          path: artifacts
           name: ${{ matrix.os }}.zip
           retention-days: 1
   release:
@@ -41,7 +41,7 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -ld .
+          ls -ld artifacts
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
