@@ -125,7 +125,19 @@ public class LibraryCache
     {
         return Library;
     }
-    
+
+    public Dictionary<string, object> GetState(string fileReference, string currentUpdateHash)
+    {
+        Dictionary<string, object> response = new();
+
+        LibraryItem? item = Library.Find(x => x.SpinShareReference == fileReference) ?? null;
+        response.Add("spinshareReference", fileReference);
+        response.Add("installed", item != null);
+        response.Add("updated", item?.UpdateHash == currentUpdateHash);
+
+        return response;
+    }
+
     public static string GetLibraryPath()
     {
         string libraryPath = "";

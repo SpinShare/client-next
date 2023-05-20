@@ -1,9 +1,9 @@
 <template>
     <AppLayout>
         <section class="view-library">
-            <header>
-                <h1>Library</h1>
-            </header>
+            <SpinHeader
+                label="Library"
+            />
             <SpinLoader v-if="loadingLibrary" />
             <LibraryChartList
                 :charts="library"
@@ -45,11 +45,6 @@ emitter.on('library-get-response', (response) => {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-
-    & h1 {
-        font-size: 24px;
-        font-weight: 700;
-    }
+    gap: 10px;
 }
 </style>

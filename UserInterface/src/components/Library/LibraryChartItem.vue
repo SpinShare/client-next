@@ -1,5 +1,9 @@
 <template>
-    <div class="chart-item">
+    <div
+        class="chart-item"
+        :class="isSpinShare ? 'is-spinshare' : 'is-local'"
+        @click="handleClick"
+    >
         <div class="cover" :style="`background-image: url(${ Cover })`"></div>
         <div class="meta">
             <div class="title">{{ Title }}</div>
@@ -31,7 +35,10 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+import router from "@/router";
+
+const props = defineProps({
     SpinShareReference: {
         type: [String, Boolean],
         default: false,
@@ -73,6 +80,16 @@ defineProps({
         default: false,
     },
 });
+
+const isSpinShare = computed(() => props.SpinShareReference.includes('spinshare_') && props.SpinShareReference.split(" ")[0].length === 23);
+
+const handleClick = () => {
+    if(isSpinShare) {
+        router.push({
+            path: '/chart/' + props.SpinShareReference.split(" ")[0],
+        });
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -100,7 +117,7 @@ defineProps({
 
         & .artist {
             color: rgba(255,255,255,0.4);
-            font-size: 14px;
+            font-size: 0.9em;
         }
         & .difficulties {
             display: flex;
@@ -111,7 +128,7 @@ defineProps({
                 padding: 3px 7px;
                 background: rgba(255,255,255,0.07);
                 border-radius: 2px;
-                font-size: 10px;
+                font-size: 0.6em;
 
                 & span:nth-child(1) {
                     font-weight: bold;
@@ -128,9 +145,13 @@ defineProps({
         }
     }
 
-    &:hover {
+    &:not(.is-local):hover {
         background: rgba(255,255,255,0.14);
         cursor: pointer;
+    }
+    &.is-local {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.07);
     }
 }
 </style>

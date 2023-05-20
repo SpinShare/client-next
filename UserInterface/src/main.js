@@ -21,9 +21,15 @@ app.use(Router);
 import SpinButton from "@/components/Common/SpinButton.vue";
 import SpinLoader from "@/components/Common/SpinLoader.vue";
 import SpinSwitch from "@/components/Common/SpinSwitch.vue";
+import SpinHeader from "@/components/Common/SpinHeader.vue";
+import SpinTabBar from "@/components/Common/SpinTabBar.vue";
+import SpinTabItem from "@/components/Common/SpinTabItem.vue";
 
 app.component('SpinButton', SpinButton);
 app.component('SpinLoader', SpinLoader);
 app.component('SpinSwitch', SpinSwitch);
+app.component('SpinHeader', SpinHeader);
+app.component('SpinTabBar', SpinTabBar);
+app.component('SpinTabItem', SpinTabItem);
 
 app.mount('#app');

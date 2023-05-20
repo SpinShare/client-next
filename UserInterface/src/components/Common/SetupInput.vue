@@ -47,7 +47,7 @@ defineProps({
         gap: 10px;
         
         & .label {
-            font-size: 14px;
+            font-size: 0.9em;
         }
         & .hint {
             color: rgba(255,255,255,0.4);
@@ -64,7 +64,7 @@ defineProps({
             border: 0;
             color: #fff;
             font-family: 'Work Sans', sans-serif;
-            font-size: 16px;
+            font-size: 1em;
             border-radius: 4px;
             padding: 0 15px;
             height: 40px;
@@ -84,7 +84,7 @@ defineProps({
                 border: 0;
                 color: #fff;
                 font-family: 'Work Sans', sans-serif;
-                font-size: 16px;
+                font-size: 1em;
                 border-radius: 4px;
                 padding: 0 15px;
                 height: 40px;

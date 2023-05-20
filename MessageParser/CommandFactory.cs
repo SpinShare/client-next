@@ -6,8 +6,6 @@ public class CommandFactory
     {
         switch(command)
         {
-            case "Ping":
-                return new CommandPing();
             case "open-in-browser":
                 return new CommandOpenInBrowser();
             case "library-select-path":
@@ -18,6 +16,8 @@ public class CommandFactory
                 return new CommandLibraryBuildCache();
             case "library-get":
                 return new CommandLibraryGet();
+            case "library-get-state":
+                return new CommandLibraryGetState();
             case "settings-set":
                 return new CommandSettingsSet();
             default:

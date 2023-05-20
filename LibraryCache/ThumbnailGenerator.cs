@@ -5,7 +5,7 @@ using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 
-public class ThumbnailGenerator
+public static class ThumbnailGenerator
 {
     public static async Task<string> ToBase64(string imagePath)
     {

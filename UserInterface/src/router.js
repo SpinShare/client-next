@@ -9,6 +9,8 @@ import ViewSetupStep4 from './views/Setup/Step4.vue';
 import ViewDiscover from './views/Discover.vue';
 import ViewLibrary from './views/Library.vue';
 import ViewSettings from './views/Settings.vue';
+import ViewChartDetail from './views/Chart/Detail.vue';
+import ViewError from './views/Error.vue';
 
 const routes = [
     {
@@ -36,12 +38,20 @@ const routes = [
         component: ViewDiscover,
     },
     {
+        path: '/chart/:chartId',
+        component: ViewChartDetail,
+    },
+    {
         path: '/library',
         component: ViewLibrary,
     },
     {
         path: '/settings',
         component: ViewSettings,
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        component: ViewError
     },
 ];
 

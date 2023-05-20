@@ -2,10 +2,10 @@ namespace SpinShareClient.LibraryCache;
 
 public class SRTBTrackInfo
 {
-    public SRTBTrackInfoAlbumArtReference albumArtReference;
-    public string artistName;
-    public string title;
-    public string charter;
+    public SRTBTrackInfoAlbumArtReference? albumArtReference;
+    public string? artistName;
+    public string? title;
+    public string? charter;
     public List<SRTBTrackInfoDifficulty> difficulties = new();
 }
 

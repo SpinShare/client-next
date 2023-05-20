@@ -118,10 +118,10 @@ const handleContinue = () => { emit('continue'); };
             }
             & .subheader {
                 color: rgba(255,255,255,0.4);
-                font-size: 14px;
+                font-size: 0.9em;
             }
             & .step-title {
-                font-size: 24px;
+                font-size: 1.5em;
                 font-weight: 700;
             }
         }
