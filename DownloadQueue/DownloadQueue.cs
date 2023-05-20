@@ -57,7 +57,8 @@ public class DownloadQueue
         
         // TODO: Add Download Item to Queue
         
-        // TODO: Kick off Queue
+        // Kick Off Queue
+        _ = WorkQueue();
     }
 
     public async Task WorkQueue()
