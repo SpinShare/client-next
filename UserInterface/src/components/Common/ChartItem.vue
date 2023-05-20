@@ -1,5 +1,8 @@
 <template>
-    <div class="chart-item">
+    <div
+        class="chart-item"
+        @click="handleClick"
+    >
         <div class="cover" :style="`background-image: url(${ cover })`"></div>
         <div class="meta">
             <div class="title">{{ title }}</div>
@@ -31,7 +34,9 @@
 </template>
 
 <script setup>
-defineProps({
+import router from "@/router";
+
+const props = defineProps({
     id: {
         type: Number,
         required: true,
@@ -93,6 +98,12 @@ defineProps({
         default: 0,
     },
 });
+
+const handleClick = () => {
+    router.push({
+        path: '/chart/' + props.id,
+    });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -120,7 +131,7 @@ defineProps({
         
         & .artist {
             color: rgba(255,255,255,0.4);
-            font-size: 14px;
+            font-size: 0.9em;
         }
         & .difficulties {
             display: flex;
@@ -131,7 +142,7 @@ defineProps({
                 padding: 3px 7px;
                 background: rgba(255,255,255,0.07);
                 border-radius: 2px;
-                font-size: 10px;
+                font-size: 0.6em;
 
                 & span:nth-child(1) {
                     font-weight: bold;

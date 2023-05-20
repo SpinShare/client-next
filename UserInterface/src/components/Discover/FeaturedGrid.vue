@@ -1,7 +1,7 @@
 <template>
     <ChartList
         v-if="featuredPlaylist"
-        :charts="featuredPlaylist.songs.slice(0, 6)"
+        :charts="featuredPlaylist.songs.reverse().slice(0, 6)"
     />
     <SpinLoader
             v-if="!featuredPlaylist"

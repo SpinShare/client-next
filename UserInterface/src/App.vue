@@ -1,7 +1,9 @@
 <template>
-    <transition name="slide-fade">
-        <router-view></router-view>
-    </transition>
+    <router-view v-slot="{ Component, route }">
+        <transition :name="route.path.includes('setup') ? 'setup' : 'default'" mode="out-in">
+            <component :is="Component" :key="route.path" />
+        </transition>
+    </router-view>
 </template>
 
 <script setup>
@@ -26,17 +28,27 @@ window.external.receiveMessage((rawResponse) => {
     }
 }
 
-.slide-fade-enter-active {
+.setup-enter-active {
     transition: all 0.2s ease-out;
 }
-
-.slide-fade-leave-active {
+.setup-leave-active {
     transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
 }
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.setup-enter-from,
+.setup-leave-to {
     transform: translateX(20px);
+    opacity: 0;
+}
+
+.default-enter-active {
+    transition: all 0.15s ease-out;
+}
+.default-leave-active {
+    transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.default-enter-from,
+.default-leave-to {
+    transform: scale(0.975);
     opacity: 0;
 }
 </style>

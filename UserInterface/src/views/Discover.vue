@@ -47,7 +47,7 @@ onMounted(async () => {
         
         & header {
             & h1 {
-                font-size: 24px;
+                font-size: 1.5em;
                 font-weight: 700;
             }
         }

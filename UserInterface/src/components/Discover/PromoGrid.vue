@@ -19,6 +19,8 @@
 </template>
 
 <script setup>
+import router from "@/router";
+
 const BUTTON_TYPE_CHART = 0;
 const BUTTON_TYPE_PLAYLIST = 1;
 const BUTTON_TYPE_SEARCHQUERY = 2;
@@ -48,7 +50,9 @@ const getButtonIcon = (type) => {
 const handlePromoClick = (buttonData) => {
     switch(buttonData.type) {
         case BUTTON_TYPE_CHART:
-            // TODO
+            router.push({
+                path: '/chart/' + buttonData.data,
+            });
             break;
         case BUTTON_TYPE_PLAYLIST:
             // TODO
@@ -58,7 +62,6 @@ const handlePromoClick = (buttonData) => {
             break;
         default:
         case BUTTON_TYPE_EXTERNALURL:
-            // Sending Message to C#
             window.external.sendMessage(JSON.stringify({
                 command: "open-in-browser",
                 data: buttonData.data,
@@ -93,7 +96,7 @@ const handlePromoClick = (buttonData) => {
             
             & .type {
                 color: rgba(255,255,255,0.4);
-                font-size: 14px;
+                font-size: 0.9em;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
             }

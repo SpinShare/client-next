@@ -19,6 +19,10 @@ export async function getPromos() {
     return await getData('promos') ?? [];
 }
 
+export async function getChart(chartId) {
+    return await getData('song/' + chartId) ?? null;
+}
+
 export async function getPlaylist(playlistId) {
     return await getData('playlist/' + playlistId) ?? null;
 }

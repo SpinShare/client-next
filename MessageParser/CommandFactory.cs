@@ -18,6 +18,8 @@ public class CommandFactory
                 return new CommandLibraryBuildCache();
             case "library-get":
                 return new CommandLibraryGet();
+            case "library-get-state":
+                return new CommandLibraryGetState();
             case "settings-set":
                 return new CommandSettingsSet();
             default:
