@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace SpinShareClient.LibraryCache;
@@ -96,12 +100,9 @@ public class LibraryCache
         // Generating MD5 Update Hash
         using (var md5 = MD5.Create())
         {
-            var inputBytes = Encoding.UTF8.GetBytes(srtbJson);
-            using (var stream = new MemoryStream(inputBytes))
-            {
-                var hashBytes = await md5.ComputeHashAsync(stream);
-                libraryItem.UpdateHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-            }
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(srtbJson));
+            libraryItem.UpdateHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
+            Console.WriteLine("MD5 hash of string: " + libraryItem.UpdateHash);
         }
             
         Library.Add(libraryItem);

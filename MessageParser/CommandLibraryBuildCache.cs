@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace SpinShareClient.MessageParser;
 
 using LibraryCache;

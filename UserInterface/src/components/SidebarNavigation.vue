@@ -28,6 +28,7 @@
             </router-link>
             <div class="item" v-tooltip.right="'Downloads'">
                 <span class="mdi mdi-download-box-outline"></span>
+                {{ downloadQueueCount }}
             </div>
             <router-link to="/settings" class="item" v-tooltip.right="'Settings'">
                 <span class="mdi mdi-cog-outline"></span>
@@ -35,6 +36,26 @@
         </nav>
     </aside>
 </template>
+
+<script setup>
+import { ref, inject } from 'vue';
+const emitter = inject('emitter');
+
+const downloadQueueCount = ref(0);
+
+emitter.on('queue-get-count-response', (data) => {
+    downloadQueueCount.value = data;
+    
+    if(data > 0) {
+        setTimeout(() => {
+            window.external.sendMessage(JSON.stringify({
+                command: "queue-get-count",
+                data: null,
+            }));
+        }, 5000);
+    }
+});
+</script>
 
 <style lang="scss" scoped>
 aside {
@@ -90,5 +111,3 @@ aside {
     }
 }
 </style>
-<script setup>
-</script>

@@ -7,7 +7,7 @@ public class DownloadItem
     public string? Artist;
     public string? Charter;
     public string? Cover;
-    public string? SpinShareReference;
+    public string? FileReference;
     public DownloadState State = DownloadState.Queued;
 }
 

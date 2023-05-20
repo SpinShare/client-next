@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
-using Newtonsoft.Json;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SpinShareClient.DownloadQueue;
 
@@ -51,27 +56,23 @@ public class DownloadQueue
         return Queue.Count;
     }
 
-    public async Task AddToQueue(int ID)
+    public async Task AddToQueue(DownloadItem newItem)
     {
-        // TODO: Create DownloadItem
-        
-        // TODO: Add Download Item to Queue
-        
-        // Kick Off Queue
+        Queue.Enqueue(newItem);
         _ = WorkQueue();
     }
 
-    public async Task WorkQueue()
+    private async Task WorkQueue()
     {
         if (Queue.Count == 0) return;
         
-        DownloadItem item = Queue.Dequeue();
-        
+        DownloadItem item = Queue.Peek();
+
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Starting");
 
         string tempFolder = Path.GetTempPath();
-        string zipFilePath = Path.Combine(tempFolder, item.SpinShareReference + ".zip");
-        string extractedFilePath = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(zipFilePath));
+        string zipFilePath = Path.Combine(tempFolder, item.FileReference + ".zip");
+        string extractedFilePath = Path.Combine(tempFolder, item.FileReference);
 
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Downloading to Temp");
         item.State = DownloadState.Downloading;
@@ -88,13 +89,17 @@ public class DownloadQueue
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Caching");
         item.State = DownloadState.Caching;
-        string srtbFilePath = Path.Combine(_libraryPath, item.SpinShareReference + ".srtb");
+        string srtbFilePath = Path.Combine(_libraryPath, item.FileReference + ".srtb");
         LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
         await libraryCache.AddToCache(srtbFilePath);
         await libraryCache.SaveCache();
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Finished");
         item.State = DownloadState.Done;
+
+        // Dequeue afterwards to display count properly until process is done
+        Queue.Dequeue();
+        
         // TODO: Send Update Queue to Client
         
         if (Queue.Count > 0)

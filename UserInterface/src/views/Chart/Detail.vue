@@ -53,6 +53,7 @@
                                     icon="download"
                                     color="primary"
                                     label="Add to queue"
+                                    @click="handleAddToQueue"
                                 />
                             </template>
                         </template>
@@ -157,6 +158,19 @@ const handleReport = () => {
     }));
 };
 
+const handleAddToQueue = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "queue-add",
+        data: {
+            id: chart.value.id,
+            title: chart.value.title,
+            artist: chart.value.artist,
+            charter: chart.value.charter,
+            cover: chart.value.cover,
+            fileReference: chart.value.fileReference,
+        },
+    }));
+};
 
 const currentTab = ref(0);
 

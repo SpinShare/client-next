@@ -3,7 +3,18 @@
         <section class="view-library">
             <SpinHeader
                 label="Library"
-            />
+            >
+                <SpinButton
+                    icon="folder"
+                    @click="handleOpenLibrary"
+                />
+                <SpinButton
+                    icon="plus"
+                />
+                <SpinButton
+                    icon="refresh"
+                />
+            </SpinHeader>
             <SpinLoader v-if="loadingLibrary" />
             <LibraryChartList
                 :charts="library"
@@ -25,6 +36,13 @@ onMounted(() => {
     loadLibrary();
 });
 
+const handleOpenLibrary = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "library-open-in-explorer",
+        data: "",
+    }));
+};
+
 const loadLibrary = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-get",
@@ -45,6 +63,6 @@ emitter.on('library-get-response', (response) => {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 </style>
