@@ -5,8 +5,6 @@ using Newtonsoft.Json;
 
 namespace SpinShareClient.LibraryCache;
 
-using Newtonsoft.Json.Linq;
-
 public class LibraryCache
 {
     private SettingsManager? _settingsManager;
@@ -65,33 +63,7 @@ public class LibraryCache
             Stopwatch itemWatch = new Stopwatch();
             itemWatch.Start();
             
-            string filePath = filePaths[i];
-            LibraryItem libraryItem = new();
-            
-            string fileName = Path.GetFileName(filePath);
-            string spinshareReference = Path.GetFileNameWithoutExtension(filePath);
-
-            string srtbJson = await File.ReadAllTextAsync(filePath);
-            UnityScriptableObject? srtbData = JsonConvert.DeserializeObject<UnityScriptableObject>(srtbJson) ?? null;
-            if (srtbData == null) continue; // Skip over broken charts
-            
-            await libraryItem.Load(srtbData);
-
-            libraryItem.FileName = fileName;
-            libraryItem.SpinShareReference = spinshareReference;
-            
-            // Generating MD5 Update Hash
-            using (var md5 = MD5.Create())
-            {
-                var inputBytes = Encoding.UTF8.GetBytes(srtbJson);
-                using (var stream = new MemoryStream(inputBytes))
-                {
-                    var hashBytes = await md5.ComputeHashAsync(stream);
-                    libraryItem.UpdateHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-                }
-            }
-            
-            Library.Add(libraryItem);
+            await AddToCache(filePaths[i]);
         
             itemWatch.Stop();
             Console.WriteLine("[LibraryCache] Finished " + i + " of " + filePaths.Length + " (in " + itemWatch.Elapsed.ToString("mm\\:ss\\.ff") + ")");
@@ -103,19 +75,51 @@ public class LibraryCache
         await SaveCache();
     }
 
+    public async Task AddToCache(string filePath)
+    {
+        Console.WriteLine("[LibraryCache] Adding to Cache: " + filePath);
+        
+        LibraryItem libraryItem = new();
+            
+        string fileName = Path.GetFileName(filePath);
+        string spinshareReference = Path.GetFileNameWithoutExtension(filePath);
+
+        string srtbJson = await File.ReadAllTextAsync(filePath);
+        UnityScriptableObject? srtbData = JsonConvert.DeserializeObject<UnityScriptableObject>(srtbJson) ?? null;
+        if (srtbData == null) return; // Skip over broken charts
+            
+        await libraryItem.Load(srtbData);
+
+        libraryItem.FileName = fileName;
+        libraryItem.SpinShareReference = spinshareReference;
+            
+        // Generating MD5 Update Hash
+        using (var md5 = MD5.Create())
+        {
+            var inputBytes = Encoding.UTF8.GetBytes(srtbJson);
+            using (var stream = new MemoryStream(inputBytes))
+            {
+                var hashBytes = await md5.ComputeHashAsync(stream);
+                libraryItem.UpdateHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            }
+        }
+            
+        Library.Add(libraryItem);
+    }
+
     private void LoadCache()
     {
         string json = File.ReadAllText(_libraryCacheFilePath);
-        Library = JsonConvert.DeserializeObject<List<LibraryItem>>(json) ?? new();
+        Library = JsonConvert.DeserializeObject<List<LibraryItem>>(json) ?? new List<LibraryItem>();
     }
 
-    public async Task Clear()
+    public async Task ClearCache()
     {
         Library.Clear();
         await SaveCache();
     }
 
-    private async Task SaveCache()
+    public async Task SaveCache()
     {
         string json = JsonConvert.SerializeObject(Library, Formatting.Indented);
         await File.WriteAllTextAsync(_libraryCacheFilePath, json);

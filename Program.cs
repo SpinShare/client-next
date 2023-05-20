@@ -49,6 +49,8 @@ internal static class Program
 
         var initPage = "#/";
 
+        SettingsManager settingsManager = SettingsManager.GetInstance();
+        
         // Setup if there are no settings
         if (!SettingsManager.SettingsFileExists())
         {
@@ -56,8 +58,6 @@ internal static class Program
         }
         else
         {
-            SettingsManager settingsManager = SettingsManager.GetInstance();
-
             if (!settingsManager.Exists("library.path") || !settingsManager.Exists("app.silentQueue") ||
                 !settingsManager.Exists("app.language") || !settingsManager.Exists("app.setup.done"))
             {
