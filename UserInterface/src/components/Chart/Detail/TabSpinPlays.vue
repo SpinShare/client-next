@@ -1,14 +1,62 @@
 <template>
     <section class="chart-detail-tab-spinplays">
-        SpinPlays: {{ id }}
+        <div class="spinplays-list" v-if="spinplays">
+            <SpinPlayItem
+                v-for="spinplay in spinplays.spinPlays"
+                :key="spinplay.id"
+                v-bind="spinplay"
+            />
+        </div>
+        <SpinLoader v-else />
     </section>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { getChartSpinPlays } from "@/api/api";
+import SpinPlayItem from "@/components/Chart/Detail/SpinPlayItem.vue";
+
 const props = defineProps({
     id: {
         type: Number,
         default: 0,
     },
 });
+
+const spinplays = ref([]);
+
+onMounted(async () => {
+    spinplays.value = await getChartSpinPlays(props.id);
+});
 </script>
+
+<style lang="scss" scoped>
+.chart-detail-tab-spinplays {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    & .spinplays-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .chart-detail-tab-spinplays {
+        & .spinplays-list {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .chart-detail-tab-spinplays {
+        & .spinplays-list {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+</style>

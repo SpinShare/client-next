@@ -26,3 +26,11 @@ export async function getChart(chartId) {
 export async function getPlaylist(playlistId) {
     return await getData('playlist/' + playlistId) ?? null;
 }
+
+export async function getChartReviews(chartId) {
+    return await getData('song/' + chartId + '/reviews') ?? [];
+}
+
+export async function getChartSpinPlays(chartId) {
+    return await getData('song/' + chartId + '/spinplays') ?? [];
+}

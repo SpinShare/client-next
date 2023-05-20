@@ -95,6 +95,10 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
         line-height: 1.5em;
         white-space: pre-line;
         color: rgba(255,255,255,0.6);
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        user-select: auto;
+        cursor: text;
     }
     & .tags {
         display: flex;
@@ -138,6 +142,22 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
             & .label {
                 color: rgba(255,255,255,0.4);
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .chart-detail-tab-overview {
+        & .details {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .chart-detail-tab-overview {
+        & .details {
+            grid-template-columns: 1fr;
         }
     }
 }

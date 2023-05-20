@@ -22,7 +22,9 @@ const loadingLibrary = ref(false);
 const library = ref([]);
 
 onMounted(() => {
-    loadLibrary();
+    setTimeout(() => {
+        loadLibrary();
+    }, 1000);
 });
 
 const loadLibrary = () => {
