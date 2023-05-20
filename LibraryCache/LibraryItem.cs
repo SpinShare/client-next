@@ -6,17 +6,17 @@ namespace SpinShareClient.LibraryCache;
 
 public class LibraryItem
 {
-    public string FileName;
-    public string Title;
-    public string Artist;
-    public string Charter;
+    public string? FileName;
+    public string? Title;
+    public string? Artist;
+    public string? Charter;
     public string? Cover;
     public int? EasyDifficulty;
     public int? NormalDifficulty;
     public int? HardDifficulty;
     public int? ExpertDifficulty;
     public int? XDDifficulty;
-    public string UpdateHash;
+    public string? UpdateHash;
     public string? SpinShareReference;
 
     public async Task Load(UnityScriptableObject data)
@@ -45,7 +45,7 @@ public class LibraryItem
             SRTBTrackData.DifficultyType difficultyType = difficulty._difficulty;
 
             if (trackData.difficultyType != SRTBTrackData.DifficultyType.Unknown) {
-                difficultyType = trackData.difficultyType;
+                difficultyType = trackData.difficultyType ?? SRTBTrackData.DifficultyType.Unknown;
             }
 
             switch (difficultyType)

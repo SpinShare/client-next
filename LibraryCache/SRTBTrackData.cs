@@ -2,8 +2,8 @@ namespace SpinShareClient.LibraryCache;
 
 public class SRTBTrackData
 {
-    public int difficultyRating;
-    public DifficultyType difficultyType;
+    public int? difficultyRating;
+    public DifficultyType? difficultyType;
 
     public enum DifficultyType {
         Unknown = 0,

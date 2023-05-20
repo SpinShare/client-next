@@ -6,8 +6,6 @@ public class CommandFactory
     {
         switch(command)
         {
-            case "Ping":
-                return new CommandPing();
             case "open-in-browser":
                 return new CommandOpenInBrowser();
             case "library-select-path":

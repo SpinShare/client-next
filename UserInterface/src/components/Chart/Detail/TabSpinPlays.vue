@@ -32,10 +32,10 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .chart-detail-tab-spinplays {
-    padding: 25px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 40px;
 
     & .spinplays-list {
         display: grid;

@@ -2,17 +2,17 @@
     <AppLayout>
         <section class="view-discover">
             <section>
-                <header>
-                    <h1>Discover</h1>
-                </header>
+                <SpinHeader
+                    label="Discover"
+                />
                 <PromoGrid
                     :promos="promos"
                 />
             </section>
             <section>
-                <header>
-                    <h1>Featured</h1>
-                </header>
+                <SpinHeader
+                    label="Featured"
+                />
                 <FeaturedGrid />
             </section>
         </section>
@@ -44,13 +44,6 @@ onMounted(async () => {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        
-        & header {
-            & h1 {
-                font-size: 1.5em;
-                font-weight: 700;
-            }
-        }
     }
 }
 </style>

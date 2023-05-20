@@ -179,7 +179,7 @@ const handleTabChange = (i) => {
 }
 .view-chart-detail {
     & header {
-        padding: 25px;
+        padding: 25px 40px;
         height: 200px;
         border-radius: 6px;
         display: grid;

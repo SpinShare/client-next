@@ -86,9 +86,9 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
 
 <style lang="scss" scoped>
 .chart-detail-tab-overview {
-    padding: 25px;
+    padding: 40px;
     display: flex;
-    gap: 25px;
+    gap: 40px;
     flex-direction: column;
     
     & .description {
