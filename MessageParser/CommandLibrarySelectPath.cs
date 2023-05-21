@@ -1,3 +1,4 @@
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SpinShareClient.MessageParser;
@@ -9,7 +10,16 @@ public class CommandLibrarySelectPath : ICommand
 {
     public async Task<object> Execute(object? data)
     {
-        DialogResult result = Dialog.FolderPicker(LibraryCache.GetLibraryPath());
+        string defaultLibraryPath = LibraryCache.GetLibraryPath() ?? "";
+        DialogResult result;
+        if (Directory.Exists(defaultLibraryPath))
+        {
+            result = Dialog.FolderPicker(LibraryCache.GetLibraryPath());            
+        }
+        else
+        {
+            result = Dialog.FolderPicker();
+        }
 
         Message response = new() {
             Command = "library-get-path",
