@@ -13,7 +13,7 @@ public class DownloadQueue
     private SettingsManager? _settingsManager;
     private static DownloadQueue? _instance;
     private static readonly object _lock = new();
-    private readonly string _libraryPath;
+    private readonly string? _libraryPath;
     public Queue<DownloadItem> Queue = new();
     
     private readonly HttpClient _client = new();
@@ -60,11 +60,14 @@ public class DownloadQueue
     {
         Queue.Enqueue(newItem);
         _ = WorkQueue();
+        
+        await Task.Yield();
     }
 
     private async Task WorkQueue()
     {
         if (Queue.Count == 0) return;
+        if (_libraryPath == null) return;
         
         DownloadItem item = Queue.Peek();
 
@@ -72,7 +75,7 @@ public class DownloadQueue
 
         string tempFolder = Path.GetTempPath();
         string zipFilePath = Path.Combine(tempFolder, item.FileReference + ".zip");
-        string extractedFilePath = Path.Combine(tempFolder, item.FileReference);
+        string extractedFilePath = Path.Combine(tempFolder, item.FileReference ?? "");
 
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Downloading to Temp");
         item.State = DownloadState.Downloading;
@@ -89,7 +92,7 @@ public class DownloadQueue
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Caching");
         item.State = DownloadState.Caching;
-        string srtbFilePath = Path.Combine(_libraryPath, item.FileReference + ".srtb");
+        string srtbFilePath = Path.Combine(_libraryPath ?? "", item.FileReference + ".srtb");
         LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
         await libraryCache.AddToCache(srtbFilePath);
         await libraryCache.SaveCache();

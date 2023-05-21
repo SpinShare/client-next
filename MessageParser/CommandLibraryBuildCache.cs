@@ -8,7 +8,7 @@ public class CommandLibraryBuildCache : ICommand
 {
     private LibraryCache? _libraryCache;
     
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
         _libraryCache = LibraryCache.GetInstance();
         

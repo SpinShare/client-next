@@ -15,7 +15,7 @@ public class LibraryCache
     private static LibraryCache? _instance;
     private static readonly object _lock = new();
     private readonly string _libraryCacheFilePath;
-    private readonly string _libraryPath;
+    private readonly string? _libraryPath;
     public List<LibraryItem> Library = new();
 
     private LibraryCache()
@@ -81,7 +81,7 @@ public class LibraryCache
 
     public async Task AddToCache(string filePath)
     {
-        Console.WriteLine("[LibraryCache] Adding to Cache: " + filePath);
+        Console.WriteLine("[LibraryCache] Adding to Cache: " + Path.GetFileName(filePath));
         
         LibraryItem libraryItem = new();
             
@@ -91,7 +91,7 @@ public class LibraryCache
         string srtbJson = await File.ReadAllTextAsync(filePath);
         UnityScriptableObject? srtbData = JsonConvert.DeserializeObject<UnityScriptableObject>(srtbJson) ?? null;
         if (srtbData == null) return; // Skip over broken charts
-            
+
         await libraryItem.Load(srtbData);
 
         libraryItem.FileName = fileName;
@@ -102,7 +102,6 @@ public class LibraryCache
         {
             var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(srtbJson));
             libraryItem.UpdateHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
-            Console.WriteLine("MD5 hash of string: " + libraryItem.UpdateHash);
         }
             
         Library.Add(libraryItem);
@@ -143,15 +142,15 @@ public class LibraryCache
         return response;
     }
 
-    public static string GetLibraryPath()
+    public static string? GetLibraryPath()
     {
-        string libraryPath = "";
+        string? libraryPath = "";
 
         switch (Environment.OSVersion.Platform)
         {
             case PlatformID.Unix:
                 libraryPath = Path.Combine(
-                    Environment.GetEnvironmentVariable("HOME"),
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
                     ".steam/steam/steamapps/compatdata/1058830/pfx/drive_c/users/steamuser/AppData/LocalLow/Super Spin Digital/Spin Rhythm XD/Custom"
                 );
                 break;
@@ -165,7 +164,7 @@ public class LibraryCache
 
             case PlatformID.MacOSX:
                 libraryPath = Path.Combine(
-                    Environment.GetEnvironmentVariable("HOME"),
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
                     "Library/Application Support/Steam/steamapps/common/Spin Rhythm/Custom"
                 );
                 break;

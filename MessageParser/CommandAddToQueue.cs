@@ -9,8 +9,9 @@ public class CommandAddToQueue : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
+        if (data == null) return false;
         _downloadQueue = DownloadQueue.GetInstance();
         
         JObject dataItem = (JObject)data;

@@ -6,13 +6,14 @@ namespace SpinShareClient.MessageParser;
 
 public class CommandOpenInExplorer : ICommand
 {
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
+        if (data == null) return false;
         var path = data.ToString();
         
         if (!System.IO.Directory.Exists(path)) return false;
 
-        string cmd = null;
+        string cmd;
         switch (Environment.OSVersion.Platform)
         {
             case PlatformID.Unix:
@@ -34,6 +35,8 @@ public class CommandOpenInExplorer : ICommand
         openExplorerProcess.StartInfo.UseShellExecute = false;
         openExplorerProcess.StartInfo.CreateNoWindow = true;
         openExplorerProcess.Start();
+        
+        await Task.Yield();
 
         return true;
     }

@@ -10,8 +10,9 @@ public class CommandSettingsSet : ICommand
 {
     private SettingsManager? _settingsManager;
     
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
+        if (data == null) return false;
         _settingsManager = SettingsManager.GetInstance();
 
         JArray dataArray = (JArray)data;
@@ -34,6 +35,8 @@ public class CommandSettingsSet : ICommand
             Command = "settings-set-response",
             Data = _settingsManager.GetFull()
         };
+        
+        await Task.Yield();
 
         return response;
     }

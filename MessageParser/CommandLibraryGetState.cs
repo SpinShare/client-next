@@ -9,8 +9,10 @@ public class CommandLibraryGetState : ICommand
 {
     private LibraryCache? _libraryCache;
     
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
+        if (data == null) return false;
+        
         _libraryCache = LibraryCache.GetInstance();
         
         JObject dataItem = (JObject)data;
@@ -22,6 +24,8 @@ public class CommandLibraryGetState : ICommand
             Command = "library-get-state-response",
             Data = _libraryCache.GetState(fileReference, updateHash)
         };
+        
+        await Task.Yield();
 
         return response;
     }

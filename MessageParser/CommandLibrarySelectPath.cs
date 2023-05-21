@@ -7,7 +7,7 @@ using LibraryCache;
 
 public class CommandLibrarySelectPath : ICommand
 {
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
         DialogResult result = Dialog.FolderPicker(LibraryCache.GetLibraryPath());
 
@@ -20,6 +20,8 @@ public class CommandLibrarySelectPath : ICommand
         {
             response.Data = result.Path;
         }
+        
+        await Task.Yield();
 
         return response;
     }

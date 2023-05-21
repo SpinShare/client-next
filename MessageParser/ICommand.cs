@@ -3,5 +3,5 @@ using System.Threading.Tasks;
 
 public interface ICommand
 {
-    Task<object> Execute(object data);
+    Task<object> Execute(object? data);
 }

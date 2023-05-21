@@ -8,7 +8,7 @@ public class CommandGetQueueCount : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
-    public async Task<object> Execute(object data)
+    public async Task<object> Execute(object? data)
     {
         _downloadQueue = DownloadQueue.GetInstance();
 
@@ -16,6 +16,8 @@ public class CommandGetQueueCount : ICommand
             Command = "queue-get-count-response",
             Data = _downloadQueue.GetQueueCount()
         };
+
+        await Task.Yield();
 
         return response;
     }

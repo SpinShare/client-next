@@ -21,7 +21,10 @@ public class LibraryItem
 
     public async Task Load(UnityScriptableObject data)
     {
-        string? trackInfoJson = data.largeStringValuesContainer.values.Find(x => x.key.Contains("TrackInfo"))?.val ?? null;
+        string? libraryPath = LibraryCache.GetLibraryPath();
+        if (libraryPath == null) return;
+        
+        string? trackInfoJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains("TrackInfo"))?.val ?? null;
         if (trackInfoJson == null) return;
 
         SRTBTrackInfo? trackInfo = JsonConvert.DeserializeObject<SRTBTrackInfo>(trackInfoJson) ?? null;
@@ -36,7 +39,7 @@ public class LibraryItem
             // Skip over inactive difficulties
             if (difficulty._active != true) continue;
 
-            string? trackDataJson = data.largeStringValuesContainer.values.Find(x => x.key.Contains(difficulty.assetName))?.val ?? null;
+            string? trackDataJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains(difficulty.assetName))?.val ?? null;
             if (trackDataJson == null) continue; // Skip over missing trackdata
 
             SRTBTrackData? trackData = JsonConvert.DeserializeObject<SRTBTrackData>(trackDataJson) ?? null;
@@ -69,7 +72,7 @@ public class LibraryItem
         }
         
         // Cover Thumbnail Generation
-        string albumArtPath = Path.Combine(LibraryCache.GetLibraryPath(), "AlbumArt", trackInfo.albumArtReference.assetName + ".png");
+        string albumArtPath = Path.Combine(libraryPath, "AlbumArt", trackInfo.albumArtReference?.assetName + ".png");
         if (File.Exists(albumArtPath))
         {
             Cover = await ThumbnailGenerator.ToBase64(albumArtPath);

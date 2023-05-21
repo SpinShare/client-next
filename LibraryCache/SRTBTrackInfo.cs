@@ -13,12 +13,12 @@ public class SRTBTrackInfo
 
 public class SRTBTrackInfoAlbumArtReference
 {
-    public string assetName;
+    public string assetName = "";
 }
 
 public class SRTBTrackInfoDifficulty
 {
-    public bool _active;
-    public string assetName;
-    public SRTBTrackData.DifficultyType _difficulty;
+    public bool _active = false;
+    public string assetName = "";
+    public SRTBTrackData.DifficultyType _difficulty = SRTBTrackData.DifficultyType.Unknown;
 }
