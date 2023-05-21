@@ -16,6 +16,7 @@
 		the `./wwwroot` folder to `./Resources/wwwroot`.
 		-->
 		<EmbedWwwRoot>false</EmbedWwwRoot>
+		<SelfContained>true</SelfContained>
 	</PropertyGroup>
 
 	<ItemGroup>
