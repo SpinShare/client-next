@@ -84,7 +84,7 @@ const handlePromoClick = (buttonData) => {
         
         & .cover {
             grid-column: 1 / span 2;
-            background-color: rgba(255,255,255,0.07);
+            background-color: rgba(var(--colorBaseText),0.07);
             background-position: center;
             background-size: cover;
             height: 200px;
@@ -95,7 +95,7 @@ const handlePromoClick = (buttonData) => {
             gap: 5px;
             
             & .type {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 font-size: 0.9em;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;

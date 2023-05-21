@@ -40,6 +40,17 @@ window.external.receiveMessage((rawResponse) => {
     opacity: 0;
 }
 
+.queue-enter-active {
+    transition: all 0.15s ease-out;
+}
+.queue-leave-active {
+    transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.queue-enter-from,
+.queue-leave-to {
+    opacity: 0;
+}
+
 .default-enter-active {
     transition: all 0.15s ease-out;
 }

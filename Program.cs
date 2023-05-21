@@ -24,12 +24,12 @@ internal static class Program
         MessageHandler messageHandler = new MessageHandler();
 
         var window = new PhotinoWindow()
+            .SetLogVerbosity(2)
             .SetTitle(windowTitle)
             .SetSize(1100, 750)
             .SetUseOsDefaultSize(false)
             .Center()
             .SetResizable(true)
-            .SetLogVerbosity(1)
             /* FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
@@ -8,7 +9,7 @@ public class CommandLibraryGet : ICommand
 {
     private LibraryCache? _libraryCache;
     
-    public async Task<object> Execute(object? data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
         _libraryCache = LibraryCache.GetInstance();
 
@@ -19,6 +20,6 @@ public class CommandLibraryGet : ICommand
             Data = _libraryCache.GetLibrary()
         };
 
-        return response;
+        MessageHandler.SendResponse(sender, response);
     }
 }

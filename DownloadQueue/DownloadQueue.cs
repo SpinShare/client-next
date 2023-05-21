@@ -5,6 +5,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PhotinoNET;
+using SpinShareClient.MessageParser;
 
 namespace SpinShareClient.DownloadQueue;
 
@@ -14,7 +16,9 @@ public class DownloadQueue
     private static DownloadQueue? _instance;
     private static readonly object _lock = new();
     private readonly string? _libraryPath;
+    // TODO: Rework to List
     public Queue<DownloadItem> Queue = new();
+    public bool IsRunning = false;
     
     private readonly HttpClient _client = new();
 
@@ -56,18 +60,23 @@ public class DownloadQueue
         return Queue.Count;
     }
 
-    public async Task AddToQueue(DownloadItem newItem)
+    public async Task AddToQueue(PhotinoWindow? sender, DownloadItem newItem)
     {
         Queue.Enqueue(newItem);
-        _ = WorkQueue();
+        
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
+        _ = WorkQueue(sender);
         
         await Task.Yield();
     }
 
-    private async Task WorkQueue()
+    private async Task WorkQueue(PhotinoWindow? sender)
     {
         if (Queue.Count == 0) return;
         if (_libraryPath == null) return;
+        if (IsRunning) return;
+
+        IsRunning = true;
         
         DownloadItem item = Queue.Peek();
 
@@ -79,19 +88,23 @@ public class DownloadQueue
 
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Downloading to Temp");
         item.State = DownloadState.Downloading;
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await DownloadFileAsync("https://spinsha.re/api/song/" + item.ID + "/download", zipFilePath);
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Extracing to Temp");
         item.State = DownloadState.Extracting;
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await UnzipAsync(zipFilePath, extractedFilePath);
 
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Copying to Library");
         item.State = DownloadState.Copying;
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await MoveFilesAsync(extractedFilePath, _libraryPath);
         await CleanupAsync(zipFilePath, extractedFilePath);
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Caching");
         item.State = DownloadState.Caching;
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         string srtbFilePath = Path.Combine(_libraryPath ?? "", item.FileReference + ".srtb");
         LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
         await libraryCache.AddToCache(srtbFilePath);
@@ -99,15 +112,20 @@ public class DownloadQueue
         
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Finished");
         item.State = DownloadState.Done;
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
 
+        // TODO: Rework this to hold DONE items for state consistency
         // Dequeue afterwards to display count properly until process is done
         Queue.Dequeue();
-        
-        // TODO: Send Update Queue to Client
-        
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
+
         if (Queue.Count > 0)
         {
-            _ = WorkQueue();
+            await WorkQueue(sender);
+        }
+        else
+        {
+            IsRunning = false;
         }
     }
 

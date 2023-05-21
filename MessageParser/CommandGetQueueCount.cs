@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
@@ -8,7 +9,7 @@ public class CommandGetQueueCount : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
-    public async Task<object> Execute(object? data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
         _downloadQueue = DownloadQueue.GetInstance();
 
@@ -18,7 +19,7 @@ public class CommandGetQueueCount : ICommand
         };
 
         await Task.Yield();
-
-        return response;
+        
+        MessageHandler.SendResponse(sender, response);
     }
 }

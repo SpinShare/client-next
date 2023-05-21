@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
@@ -9,9 +10,9 @@ public class CommandAddToQueue : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
-    public async Task<object> Execute(object? data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        if (data == null) return false;
+        if (data == null) return;
         _downloadQueue = DownloadQueue.GetInstance();
         
         JObject dataItem = (JObject)data;
@@ -23,7 +24,7 @@ public class CommandAddToQueue : ICommand
         string? cover = dataItem.GetValue("cover")?.ToObject<string>();
         string? fileReference = dataItem.GetValue("fileReference")?.ToObject<string>();
 
-        await _downloadQueue.AddToQueue(new DownloadItem()
+        await _downloadQueue.AddToQueue(sender, new DownloadItem()
         {
             ID = id,
             Title = title,
@@ -32,12 +33,5 @@ public class CommandAddToQueue : ICommand
             Cover = cover,
             FileReference = fileReference
         });
-
-        Message response = new() {
-            Command = "queue-get-count-response",
-            Data = _downloadQueue.GetQueueCount()
-        };
-
-        return response;
     }
 }

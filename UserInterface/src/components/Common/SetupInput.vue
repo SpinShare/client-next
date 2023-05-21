@@ -50,7 +50,7 @@ defineProps({
             font-size: 0.9em;
         }
         & .hint {
-            color: rgba(255,255,255,0.4);
+            color: rgba(var(--colorBaseText),0.4);
             line-height: 1.25em;
         }
     }
@@ -60,9 +60,9 @@ defineProps({
         gap: 5px;
 
         & input[type=text] {
-            background: rgba(255,255,255,0.07);
+            background: rgba(var(--colorBaseText),0.07);
             border: 0;
-            color: #fff;
+            color: rgb(var(--colorBaseText));
             font-family: 'Work Sans', sans-serif;
             font-size: 1em;
             border-radius: 4px;
@@ -80,9 +80,9 @@ defineProps({
             & select {
                 width: 100%;
                 appearance: none;
-                background: rgba(255,255,255,0.07);
+                background: rgba(var(--colorBaseText),0.07);
                 border: 0;
-                color: #fff;
+                color: rgb(var(--colorBaseText));
                 font-family: 'Work Sans', sans-serif;
                 font-size: 1em;
                 border-radius: 4px;
@@ -91,7 +91,7 @@ defineProps({
 
                 & option {
                     background: #222;
-                    color: #fff;
+                    color: rgb(var(--colorBaseText));
                 }
             }
 

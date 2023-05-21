@@ -109,7 +109,7 @@ const handleClick = () => {
 <style lang="scss" scoped>
 .chart-item {
     height: 85px;
-    background: rgba(255,255,255,0.07);
+    background: rgba(var(--colorBaseText),0.07);
     border-radius: 6px;
     padding: 10px;
     display: grid;
@@ -130,7 +130,7 @@ const handleClick = () => {
         gap: 3px;
         
         & .artist {
-            color: rgba(255,255,255,0.4);
+            color: rgba(var(--colorBaseText),0.4);
             font-size: 0.9em;
         }
         & .difficulties {
@@ -140,7 +140,7 @@ const handleClick = () => {
 
             & > span {
                 padding: 3px 7px;
-                background: rgba(255,255,255,0.07);
+                background: rgba(var(--colorBaseText),0.07);
                 border-radius: 2px;
                 font-size: 0.6em;
 
@@ -160,7 +160,7 @@ const handleClick = () => {
     }
     
     &:hover {
-        background: rgba(255,255,255,0.14);
+        background: rgba(var(--colorBaseText),0.14);
         cursor: pointer;
     }
 }

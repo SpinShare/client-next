@@ -1,17 +1,18 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
 public class CommandOpenInExplorer : ICommand
 {
-    public async Task<object> Execute(object? data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        if (data == null) return false;
+        if (data == null) return;
         var path = data.ToString();
         
-        if (!System.IO.Directory.Exists(path)) return false;
+        if (!System.IO.Directory.Exists(path)) return;
 
         string cmd;
         switch (Environment.OSVersion.Platform)
@@ -37,7 +38,5 @@ public class CommandOpenInExplorer : ICommand
         openExplorerProcess.Start();
         
         await Task.Yield();
-
-        return true;
     }
 }

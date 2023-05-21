@@ -94,7 +94,7 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
     & .description {
         line-height: 1.5em;
         white-space: pre-line;
-        color: rgba(255,255,255,0.6);
+        color: rgba(var(--colorBaseText),0.6);
         -webkit-user-select: auto;
         -moz-user-select: auto;
         user-select: auto;
@@ -108,14 +108,14 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
         & .item {
             display: block;
             padding: 5px 10px;
-            background: rgba(255,255,255, 0.14);
-            color: rgb(255, 255, 255);
+            background: rgba(var(--colorBaseText), 0.14);
+            color: rgb(var(--colorBaseText));
             border-radius: 4px;
             font-size: 0.9em;
             transition: 0.15s ease-in-out all;
             
             &:hover {
-                background: rgba(255,255,255, 0.21);
+                background: rgba(var(--colorBaseText), 0.21);
                 cursor: pointer;
             }
         }
@@ -127,7 +127,7 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
         
         & .item {
             padding: 15px;
-            border: 1px solid rgba(255,255,255,0.14);
+            border: 1px solid rgba(var(--colorBaseText),0.14);
             border-radius: 6px;
             display: grid;
             grid-template-columns: auto 1fr;
@@ -140,7 +140,7 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
             }
             
             & .label {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
             }
         }
     }

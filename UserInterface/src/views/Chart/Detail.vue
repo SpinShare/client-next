@@ -217,11 +217,11 @@ const handleTabChange = (i) => {
                 font-size: 1.15em;
             }
             & .subtitle {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 margin-bottom: 5px;
             }
             & .artist {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 font-size: 0.9em;
             }
             & .difficulties {
@@ -231,7 +231,7 @@ const handleTabChange = (i) => {
 
                 & > span {
                     padding: 3px 7px;
-                    background: rgba(255,255,255,0.07);
+                    background: rgba(var(--colorBaseText),0.07);
                     border-radius: 2px;
                     font-size: 0.6em;
 

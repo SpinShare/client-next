@@ -26,40 +26,45 @@
             <router-link to="/library" class="item" v-tooltip.right="'Your Library'">
                 <span class="mdi mdi-archive-music-outline"></span>
             </router-link>
-            <div class="item" v-tooltip.right="'Downloads'">
+            <div
+                class="item"
+                :class="{'active': downloadQueueActive}"
+                v-tooltip.right="'Downloads'"
+                @click="toggleDownloadQueue"
+            >
                 <span class="mdi mdi-download-box-outline"></span>
-                {{ downloadQueueCount }}
+                <div class="badge">{{ downloadQueueCount }}</div>
             </div>
             <router-link to="/settings" class="item" v-tooltip.right="'Settings'">
                 <span class="mdi mdi-cog-outline"></span>
             </router-link>
         </nav>
+        
+        <DownloadQueue @change-active="(state) => { downloadQueueActive = state }" />
     </aside>
 </template>
 
 <script setup>
 import { ref, inject } from 'vue';
+import DownloadQueue from "@/components/DownloadQueue.vue";
 const emitter = inject('emitter');
 
 const downloadQueueCount = ref(0);
+const downloadQueueActive = ref(false);
 
 emitter.on('queue-get-count-response', (data) => {
     downloadQueueCount.value = data;
-    
-    if(data > 0) {
-        setTimeout(() => {
-            window.external.sendMessage(JSON.stringify({
-                command: "queue-get-count",
-                data: null,
-            }));
-        }, 5000);
-    }
 });
+
+const toggleDownloadQueue = () => {
+    emitter.emit('download-queue-toggle');
+};
 </script>
 
 <style lang="scss" scoped>
 aside {
-    border-right: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(var(--colorBaseText),0.07);
+    background: var(--colorBase);
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-gap: 15px;
@@ -93,18 +98,31 @@ aside {
             justify-content: center;
             align-items: center;
             transition: 0.15s ease-in-out all;
+            position: relative;
             
             & > span {
                 font-size: 22px;
             }
+            
+            & .badge {
+                background: rgb(var(--colorPrimary));
+                color: rgb(var(--colorBaseText));
+                font-size: 0.75em;
+                font-weight: bold;
+                padding: 3px 5px;
+                border-radius: 50px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
 
-            &.router-link-exact-active {
+            &.router-link-exact-active, &.active {
                 background: rgba(var(--colorPrimary), 15%);
                 color: rgba(var(--colorPrimary), 100%);
             }
             
-            &:not(.router-link-exact-active):hover {
-                background: rgba(255,255,255,0.07);
+            &:not(.router-link-exact-active):not(.active):hover {
+                background: rgba(var(--colorBaseText),0.07);
                 cursor: pointer;
             }
         }

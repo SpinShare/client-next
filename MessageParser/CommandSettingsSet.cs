@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
@@ -10,9 +11,9 @@ public class CommandSettingsSet : ICommand
 {
     private SettingsManager? _settingsManager;
     
-    public async Task<object> Execute(object? data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        if (data == null) return false;
+        if (data == null) return;
         _settingsManager = SettingsManager.GetInstance();
 
         JArray dataArray = (JArray)data;
@@ -38,6 +39,6 @@ public class CommandSettingsSet : ICommand
         
         await Task.Yield();
 
-        return response;
+        MessageHandler.SendResponse(sender, response);
     }
 }
