@@ -6,7 +6,7 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
-public class CommandAddToQueue : ICommand
+public class CommandQueueAdd : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
@@ -31,7 +31,8 @@ public class CommandAddToQueue : ICommand
             Artist = artist,
             Charter = charter,
             Cover = cover,
-            FileReference = fileReference
+            FileReference = fileReference,
+            State = DownloadState.Queued,
         });
     }
 }

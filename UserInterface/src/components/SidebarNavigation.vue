@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 import DownloadQueue from "@/components/DownloadQueue.vue";
 const emitter = inject('emitter');
 
@@ -54,6 +54,15 @@ const downloadQueueActive = ref(false);
 
 emitter.on('queue-get-count-response', (data) => {
     downloadQueueCount.value = data;
+});
+
+onMounted(() => {
+    console.log("Mounted");
+    
+    window.external.sendMessage(JSON.stringify({
+        command: "queue-get-count",
+        data: "",
+    }));
 });
 
 const toggleDownloadQueue = () => {

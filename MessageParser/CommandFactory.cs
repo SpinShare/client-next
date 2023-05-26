@@ -25,9 +25,11 @@ public class CommandFactory
             case "library-get-state":
                 return new CommandLibraryGetState();
             case "queue-add":
-                return new CommandAddToQueue();
+                return new CommandQueueAdd();
             case "queue-get-count":
-                return new CommandGetQueueCount();
+                return new CommandQueueGetCount();
+            case "queue-get":
+                return new CommandQueueGet();
             case "settings-set":
                 return new CommandSettingsSet();
             default:

@@ -5,7 +5,7 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
-public class CommandGetQueueCount : ICommand
+public class CommandQueueGetCount : ICommand
 {
     private DownloadQueue? _downloadQueue;
     

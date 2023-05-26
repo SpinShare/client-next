@@ -13,6 +13,7 @@
                 />
                 <SpinButton
                     icon="refresh"
+                    @click="handleRebuildCache"
                 />
             </SpinHeader>
             <SpinLoader v-if="loadingLibrary" />
@@ -27,6 +28,7 @@
 import { ref, onMounted, inject } from 'vue';
 import AppLayout from "@/layouts/AppLayout.vue";
 import LibraryChartList from "@/components/Library/LibraryChartList.vue";
+import router from "@/router";
 const emitter = inject('emitter');
 
 const loadingLibrary = ref(false);
@@ -51,6 +53,11 @@ const loadLibrary = () => {
     
     loadingLibrary.value = true;
 };
+
+const handleRebuildCache = () => {
+    // TODO: Custom Page
+    router.push({ path: '/setup/step-2' });
+}
 
 emitter.on('library-get-response', (response) => {
     loadingLibrary.value = false;

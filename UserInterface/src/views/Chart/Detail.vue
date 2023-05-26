@@ -33,7 +33,7 @@
                         </span>
                     </div>
                     <div class="actions">
-                        <template v-if="libraryState">
+                        <template v-if="libraryState && !queueState">
                             <template v-if="libraryState.installed">
                                 <SpinButton
                                     v-if="libraryState.updated"
@@ -47,6 +47,10 @@
                                     color="success"
                                     label="Update"
                                 />
+                                <SpinButton
+                                    icon="controller"
+                                    label="Play"
+                                />
                             </template>
                             <template v-else>
                                 <SpinButton
@@ -56,6 +60,13 @@
                                     @click="handleAddToQueue"
                                 />
                             </template>
+                        </template>
+                        <template v-else-if="queueState">
+                            <SpinButton
+                                loading
+                                :label="queueState === 0 ? 'Queued' : 'Downloading'"
+                                disabled
+                            />
                         </template>
                         <template v-else>
                             <SpinButton
@@ -128,9 +139,32 @@ import TabPlaylists from "@/components/Chart/Detail/TabPlaylists.vue";
 const route = useRoute();
 const chart = ref(null);
 const libraryState = ref(null);
+const queueState = ref(null);
 
 onMounted(async () => {
     chart.value = await getChart(route.params.chartId);
+    checkLibraryState();
+});
+
+emitter.on('library-get-state-response', (state) => {
+    if(state.spinshareReference === chart.value.fileReference) {
+        libraryState.value = state;
+    }
+});
+
+emitter.on('queue-item-update-response', (item) => {
+    if(chart.value.id === item.ID) {
+        queueState.value = item.State;
+
+        // Done
+        if (item.State === 5) {
+            queueState.value = false;
+            checkLibraryState();
+        }
+    }
+});
+
+const checkLibraryState = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-get-state",
         data: {
@@ -138,11 +172,7 @@ onMounted(async () => {
             updateHash: chart.value.updateHash,
         },
     }));
-});
-
-emitter.on('library-get-state-response', (state) => {
-    libraryState.value = state;
-});
+};
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(JSON.stringify({

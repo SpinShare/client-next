@@ -61,10 +61,20 @@ emitter.on('queue-item-update-response', (downloadItem) => {
         queue.value.push(downloadItem);
     }
 });
+emitter.on('queue-get-response', (newQueue) => {
+    queue.value = newQueue;
+});
 
 const changeState = (newState) => {
     isActive.value = newState;
     emit('change-active', isActive.value);
+    
+    if(newState) {
+        window.external.sendMessage(JSON.stringify({
+            command: "queue-get",
+            data: "",
+        }));
+    }
 }
 
 const getCurrentState = (stateId) => {
@@ -110,13 +120,13 @@ const getCurrentState = (stateId) => {
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             padding: 15px;
             border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
 
             & .cover {
                 aspect-ratio: 1 / 1;
-                height: 60px;
+                height: 48px;
                 border-radius: 4px;
                 background-position: center;
                 background-size: cover;

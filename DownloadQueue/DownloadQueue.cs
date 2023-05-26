@@ -17,7 +17,7 @@ public class DownloadQueue
     private static readonly object _lock = new();
     private readonly string? _libraryPath;
     // TODO: Rework to List
-    public Queue<DownloadItem> Queue = new();
+    public List<DownloadItem> Queue = new();
     public bool IsRunning = false;
     
     private readonly HttpClient _client = new();
@@ -52,17 +52,25 @@ public class DownloadQueue
 
     public List<DownloadItem> GetQueue()
     {
-        return Queue.ToList();
+        return Queue;
     }
 
-    public int GetQueueCount()
+    public int GetQueueCount(DownloadState? state = null)
     {
-        return Queue.Count;
+        if (state != null)
+        {
+            return Queue.Count(x => x.State == state);
+        }
+        
+        return Queue.Count(x => x.State != DownloadState.Done);
     }
 
     public async Task AddToQueue(PhotinoWindow? sender, DownloadItem newItem)
     {
-        Queue.Enqueue(newItem);
+        if (Queue.All(x => x.ID != newItem.ID))
+        {
+            Queue.Add(newItem);
+        }
         
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
         _ = WorkQueue(sender);
@@ -72,13 +80,13 @@ public class DownloadQueue
 
     private async Task WorkQueue(PhotinoWindow? sender)
     {
-        if (Queue.Count == 0) return;
+        if (GetQueueCount(DownloadState.Queued) == 0) return;
         if (_libraryPath == null) return;
         if (IsRunning) return;
 
         IsRunning = true;
         
-        DownloadItem item = Queue.Peek();
+        DownloadItem item = Queue.First(x => x.State == DownloadState.Queued);
 
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Starting");
 
@@ -113,19 +121,13 @@ public class DownloadQueue
         Console.WriteLine("[DownloadQueue] #" + item.ID + " > Finished");
         item.State = DownloadState.Done;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
-
-        // TODO: Rework this to hold DONE items for state consistency
-        // Dequeue afterwards to display count properly until process is done
-        Queue.Dequeue();
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
 
-        if (Queue.Count > 0)
+        IsRunning = false;
+        
+        if (GetQueueCount(DownloadState.Queued) > 0)
         {
             await WorkQueue(sender);
-        }
-        else
-        {
-            IsRunning = false;
         }
     }
 
