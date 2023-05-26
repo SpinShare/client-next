@@ -62,4 +62,13 @@ window.external.receiveMessage((rawResponse) => {
     transform: scale(0.975);
     opacity: 0;
 }
+
+@keyframes loadingLoop {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 </style>

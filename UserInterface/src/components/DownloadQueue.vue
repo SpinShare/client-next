@@ -2,12 +2,15 @@
     <transition name="queue">
         <section class="download-queue-shade" v-if="isActive" @click.self="changeState(false)">
             <section class="download-queue">
-                <div class="item" v-for="item in queue">
+                <div
+                    class="item"
+                    v-for="item in queue"
+                    :class="'state-' + item.State"
+                >
                     <div class="cover" :style="`background-image: url(${ item.Cover })`"></div>
                     <div class="meta">
                         <div class="title">{{ item.Title }}</div>
                         <div class="artist">{{ item.Artist }} &bull; {{ item.Charter }}</div>
-                        <div class="state">{{ getCurrentState(item.State) }}</div>
                     </div>
                     <div class="actions">
                         <SpinButton
@@ -15,6 +18,9 @@
                             icon="trash-can-outline"
                             color="danger"
                         />
+                        <div class="loading" v-if="[STATE_DOWNLOADING, STATE_EXTRACTING, STATE_COPYING, STATE_CACHING].includes(item.State)">
+                            <span class="mdi mdi-loading"></span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -103,13 +109,14 @@ const getCurrentState = (stateId) => {
         & .item {
             display: grid;
             grid-template-columns: auto 1fr auto;
+            align-items: center;
             gap: 15px;
             padding: 15px;
             border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
 
             & .cover {
                 aspect-ratio: 1 / 1;
-                height: 100%;
+                height: 60px;
                 border-radius: 4px;
                 background-position: center;
                 background-size: cover;
@@ -122,6 +129,24 @@ const getCurrentState = (stateId) => {
                     color: rgba(var(--colorBaseText),0.4);
                     font-size: 0.9em;
                 }
+            }
+            & .actions {
+                & .loading {
+                    width: 28px;
+                    height: 28px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 22px;
+                    animation: loadingLoop 0.4s linear infinite;
+                }
+            }
+            
+            &.state-0 {
+                opacity: 0.3;
+            }
+            &.state-5 {
+                background: rgba(var(--colorSuccess), 0.14);
             }
         }
     }

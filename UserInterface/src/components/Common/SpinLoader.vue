@@ -27,13 +27,4 @@
         animation: loadingLoop 0.4s linear infinite;
     }
 }
-
-@keyframes loadingLoop {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
 </style>
