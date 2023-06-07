@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
       - name: Restore NuGet packages
         run: dotnet restore
       - name: Build
@@ -26,7 +26,7 @@ jobs:
       - name: Create Folder Structure for Archive
         run: |
           mkdir -p artifacts/${{ matrix.os }}
-          cp -r bin/Release/net6.0/* artifacts/${{ matrix.os }}/
+          cp -r bin/Release/net7.0/* artifacts/${{ matrix.os }}/
           ls -lp artifacts/${{ matrix.os }}
       - name: Archive build artifacts
         uses: vimtor/action-zip@v1

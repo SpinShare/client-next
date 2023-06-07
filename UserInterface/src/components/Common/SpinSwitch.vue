@@ -49,14 +49,14 @@ const handleInput = () => emit('update:modelValue', !val.value);
         position: absolute;
         z-index: 0;
         inset: 0;
-        background: rgba(255, 255, 255, 0.14);
+        background: rgba(var(--colorBaseText), 0.14);
         border-radius: 40px;
         transition: 0.15s ease-in-out all;
     }
 
     input {
         appearance: none;
-        background: rgba(255, 255, 255, 0.21);
+        background: rgba(var(--colorBaseText), 0.21);
         width: 10px;
         height: 10px;
         border-radius: 50px;
@@ -69,7 +69,7 @@ const handleInput = () => emit('update:modelValue', !val.value);
         transition: 0.15s ease-in-out all;
 
         &:checked {
-            background: #ffffff;
+            background: rgb(var(--colorBaseText));
             margin-left: 25px;
 
             & + .background {
@@ -79,7 +79,7 @@ const handleInput = () => emit('update:modelValue', !val.value);
     }
     &:not(.disabled):hover {
         & .background {
-            background: rgba(255, 255, 255, 0.21);
+            background: rgba(var(--colorBaseText), 0.21);
         }
         & input:checked + .background {
             background: rgba(var(--colorPrimary), 0.75);

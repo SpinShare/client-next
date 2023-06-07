@@ -1,21 +1,24 @@
-using System.Threading.Tasks;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
+using DownloadQueue;
 
-public class CommandLibraryGetPath : ICommand
+public class CommandQueueGet : ICommand
 {
+    private DownloadQueue? _downloadQueue;
+    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        _downloadQueue = DownloadQueue.GetInstance();
+
         Message response = new() {
-            Command = "library-get-path-response",
-            Data = LibraryCache.GetLibraryPath()
+            Command = "queue-get-response",
+            Data = _downloadQueue.GetQueue()
         };
 
         await Task.Yield();
-
+        
         MessageHandler.SendResponse(sender, response);
     }
 }

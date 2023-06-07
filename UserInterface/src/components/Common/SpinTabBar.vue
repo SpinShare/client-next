@@ -35,7 +35,7 @@ const handleTabChange = (i) => {
 <style lang="scss" scoped>
 .spin-tab-bar {
     display: flex;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
     padding: 0 25px;
     gap: 10px;
 }

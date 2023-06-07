@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using PhotinoNET;
 using PhotinoNET.Server;
 using SpinShareClient.MessageParser;
@@ -23,12 +24,12 @@ internal static class Program
         MessageHandler messageHandler = new MessageHandler();
 
         var window = new PhotinoWindow()
+            .SetLogVerbosity(2)
             .SetTitle(windowTitle)
             .SetSize(1100, 750)
             .SetUseOsDefaultSize(false)
             .Center()
             .SetResizable(true)
-            .SetLogVerbosity(1)
             /* FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {
@@ -49,6 +50,8 @@ internal static class Program
 
         var initPage = "#/";
 
+        SettingsManager settingsManager = SettingsManager.GetInstance();
+        
         // Setup if there are no settings
         if (!SettingsManager.SettingsFileExists())
         {
@@ -56,8 +59,6 @@ internal static class Program
         }
         else
         {
-            SettingsManager settingsManager = SettingsManager.GetInstance();
-
             if (!settingsManager.Exists("library.path") || !settingsManager.Exists("app.silentQueue") ||
                 !settingsManager.Exists("app.language") || !settingsManager.Exists("app.setup.done"))
             {

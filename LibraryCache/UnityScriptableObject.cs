@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SpinShareClient.LibraryCache;
 
 public class UnityScriptableObject

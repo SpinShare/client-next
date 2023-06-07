@@ -1,10 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap');
 
 :root {
+    --colorBase: 17, 17, 17;
+    --colorBaseText: 255,255,255;
     --colorPrimary: 232, 77, 177;
     --colorSecondary: 113, 79, 172;
     --colorError: 255, 56, 99;
     --colorSuccess: 61, 251, 132;
+    --mx-menu-backgroud: #303031;
+    --mx-menu-hover-backgroud: #636363;
+    --mx-menu-active-backgroud: #555555;
+    --mx-menu-open-backgroud: #636363;
+    --mx-menu-open-hover-backgroud: #636363;
+    --mx-menu-divider: #464646;
+    --mx-menu-text: #ffffff;
+    --mx-menu-hover-text: #ffffff;
+    --mx-menu-active-text: #ffffff;
+    --mx-menu-open-text: #ffffff;
+    --mx-menu-open-hover-text: #ffffff;
+    --mx-menu-disabled-text: #9c9c9c;
+    --mx-menu-shadow-color: rgba(51, 51, 51, 0.2);
+    --mx-menu-shortcut-backgroud: #505050;
+    --mx-menu-shortcut-backgroud-hover:#505050;
+    --mx-menu-shortcut-backgroud-active:#505050;
+    --mx-menu-shortcut-backgroud-open:#505050;
+    --mx-menu-shortcut-backgroud-disabled:#444444;
+    --mx-menu-shortcut-text: #f1f1f1;
+    --mx-menu-shortcut-text-hover: #ffffff;
+    --mx-menu-shortcut-text-active: #ffffff;
+    --mx-menu-shortcut-text-open: #ffffff;
+    --mx-menu-shortcut-text-disabled: #9d9d9d;
+}
+
+:root[data-theme='light'] {
+    --colorBase: 255, 255, 255;
+    --colorBaseText: 17, 17, 17;
+    --colorPrimary: 232, 77, 177;
+    --colorError: 255, 56, 99;
+
+    // Context Menu
+    --mx-menu-backgroud: #fff;
+    --mx-menu-hover-backgroud: #f1f1f1;
+    --mx-menu-active-backgroud: #dfdfdf;
+    --mx-menu-open-backgroud: #f1f1f1;
+    --mx-menu-open-hover-backgroud: #f1f1f1;
+    --mx-menu-divider: #f0f0f0;
+    --mx-menu-text: #2e2e2e;
+    --mx-menu-hover-text: #2e2e2e;
+    --mx-menu-active-text: #2e2e2e;
+    --mx-menu-open-text: #2e2e2e;
+    --mx-menu-open-hover-text: #2e2e2e;
+    --mx-menu-disabled-text: #c9c8c8;
+    --mx-menu-icon-size: 16px;
+    --mx-menu-shadow-color: rgba(0, 0, 0, 0.1);
+    --mx-menu-backgroud-radius: 10px;
+    --mx-menu-shortcut-backgroud: #ebebeb;
+    --mx-menu-shortcut-backgroud-hover:#ebebeb;
+    --mx-menu-shortcut-backgroud-active:#ebebeb;
+    --mx-menu-shortcut-backgroud-open:#ebebeb;
+    --mx-menu-shortcut-backgroud-disabled:#fdfdfd;
+    --mx-menu-shortcut-text: #424242;
+    --mx-menu-shortcut-text-hover: #424242;
+    --mx-menu-shortcut-text-active: #424242;
+    --mx-menu-shortcut-text-open: #424242;
+    --mx-menu-shortcut-text-disabled: #a5a5a5;
+    --mx-menu-focus-color: #0085f1;
+    --mx-menu-placeholder-width: 24px;
 }
 
 html, body {
@@ -20,13 +81,48 @@ html, body {
 body {
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
-    background: #111;
-    color: #fff;
+    background: rgb(var(--colorBase));
+    color: rgb(var(--colorBaseText));
+    overflow: hidden;
 }
 a {
-    color: #fff;
+    color: rgb(var(--colorBaseText));
 
     &:hover {
         text-decoration: none;
+    }
+}
+
+/* Tooltip */
+
+/* Context Menu */
+.mx-menu-bar.spinshare,
+.mx-context-menu.spinshare {
+    --mx-menu-placeholder-width: 25px;
+    --mx-menu-icon-size: 18px;
+    
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    border-radius: 6px;
+    padding: 6px 0;
+    box-shadow: 0px 1px 2px 1px var(--mx-menu-shadow-color);
+    border: 1px solid rgba(var(--colorBaseText), 0.14);
+
+    .mx-context-menu-item {
+        padding: 8px 10px;
+        cursor: pointer;
+        line-height: 1em;
+        
+        & .label {
+            transform: translateY(-1px);
+        }
+        
+        & .mx-shortcut {
+            margin-right: 5px;
+        }
+        & .mx-right-arrow {
+            width: 10px;
+            height: 10px;
+        }
     }
 }

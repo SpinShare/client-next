@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
@@ -8,8 +10,10 @@ public class CommandLibraryGetState : ICommand
 {
     private LibraryCache? _libraryCache;
     
-    public async Task<object> Execute(object data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        if (data == null) return;
+        
         _libraryCache = LibraryCache.GetInstance();
         
         JObject dataItem = (JObject)data;
@@ -21,7 +25,9 @@ public class CommandLibraryGetState : ICommand
             Command = "library-get-state-response",
             Data = _libraryCache.GetState(fileReference, updateHash)
         };
+        
+        await Task.Yield();
 
-        return response;
+        MessageHandler.SendResponse(sender, response);
     }
 }

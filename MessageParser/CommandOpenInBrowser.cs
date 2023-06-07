@@ -1,11 +1,14 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
+using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
 public class CommandOpenInBrowser : ICommand
 {
-    public async Task<object> Execute(object data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        if (data == null) return;
         var url = data.ToString();
 
         Process openBrowserProcess = new Process();
@@ -13,6 +16,6 @@ public class CommandOpenInBrowser : ICommand
         openBrowserProcess.StartInfo.FileName = url;
         openBrowserProcess.Start();
 
-        return true;
+        await Task.Yield();
     }
 }

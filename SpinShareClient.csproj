@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -16,6 +16,8 @@
 		the `./wwwroot` folder to `./Resources/wwwroot`.
 		-->
 		<EmbedWwwRoot>false</EmbedWwwRoot>
+		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
+		<SelfContained>true</SelfContained>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -38,6 +40,8 @@
 	<ItemGroup>
 		<!-- Don't publish the UI source files, but do show them in the project files list -->
 		<Content Remove="$(UiRoot)**" />
+		<Content Include=".github\ISSUE_TEMPLATE\bug_report.md" />
+		<Content Include=".github\workflows\dotnet-desktop.yml" />
 		<None Remove="$(UiRoot)**" />
 		<None Include="$(UiRoot)**" Exclude="$(UiRoot)node_modules\**" />
 		<None Remove="obj\**" />
@@ -50,6 +54,11 @@
 
 	<ItemGroup>
 	  <Compile Remove="obj\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UserInterface\src\components\Settings\" />
+	  <Folder Include="UserInterface\src\components\Setup\" />
 	</ItemGroup>
 
 	<Target Name="EnsureNodeEnv" BeforeTargets="BuildUserInterface" Condition=" !Exists('$(UiRoot)node_modules') ">

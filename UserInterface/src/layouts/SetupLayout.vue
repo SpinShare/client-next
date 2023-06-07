@@ -88,7 +88,7 @@ const handleContinue = () => { emit('continue'); };
             & .step {
                 width: 100%;
                 height: 3px;
-                background: rgba(255,255,255,0.15);
+                background: rgba(var(--colorBaseText),0.15);
 
                 &:first-child {
                     border-top-left-radius: 5px;
@@ -117,7 +117,7 @@ const handleContinue = () => { emit('continue'); };
                 grid-row: 1 / span 2;
             }
             & .subheader {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 font-size: 0.9em;
             }
             & .step-title {
@@ -135,7 +135,7 @@ const handleContinue = () => { emit('continue'); };
                 margin: 0 auto;
             }
             & p {
-                color: rgba(255,255,255,0.6);
+                color: rgba(var(--colorBaseText),0.6);
                 line-height: 1.25em;
             }
         }

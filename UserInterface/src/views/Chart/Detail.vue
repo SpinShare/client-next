@@ -33,7 +33,7 @@
                         </span>
                     </div>
                     <div class="actions">
-                        <template v-if="libraryState">
+                        <template v-if="libraryState && !queueState">
                             <template v-if="libraryState.installed">
                                 <SpinButton
                                     v-if="libraryState.updated"
@@ -47,14 +47,26 @@
                                     color="success"
                                     label="Update"
                                 />
+                                <SpinButton
+                                    icon="controller"
+                                    label="Play"
+                                />
                             </template>
                             <template v-else>
                                 <SpinButton
                                     icon="download"
                                     color="primary"
                                     label="Add to queue"
+                                    @click="handleAddToQueue"
                                 />
                             </template>
+                        </template>
+                        <template v-else-if="queueState">
+                            <SpinButton
+                                loading
+                                :label="queueState === 0 ? 'Queued' : 'Downloading'"
+                                disabled
+                            />
                         </template>
                         <template v-else>
                             <SpinButton
@@ -127,9 +139,32 @@ import TabPlaylists from "@/components/Chart/Detail/TabPlaylists.vue";
 const route = useRoute();
 const chart = ref(null);
 const libraryState = ref(null);
+const queueState = ref(null);
 
 onMounted(async () => {
     chart.value = await getChart(route.params.chartId);
+    checkLibraryState();
+});
+
+emitter.on('library-get-state-response', (state) => {
+    if(state.spinshareReference === chart.value.fileReference) {
+        libraryState.value = state;
+    }
+});
+
+emitter.on('queue-item-update-response', (item) => {
+    if(chart.value.id === item.ID) {
+        queueState.value = item.State;
+
+        // Done
+        if (item.State === 5) {
+            queueState.value = false;
+            checkLibraryState();
+        }
+    }
+});
+
+const checkLibraryState = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-get-state",
         data: {
@@ -137,11 +172,7 @@ onMounted(async () => {
             updateHash: chart.value.updateHash,
         },
     }));
-});
-
-emitter.on('library-get-state-response', (state) => {
-    libraryState.value = state;
-});
+};
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(JSON.stringify({
@@ -157,6 +188,19 @@ const handleReport = () => {
     }));
 };
 
+const handleAddToQueue = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "queue-add",
+        data: {
+            id: chart.value.id,
+            title: chart.value.title,
+            artist: chart.value.artist,
+            charter: chart.value.charter,
+            cover: chart.value.cover,
+            fileReference: chart.value.fileReference,
+        },
+    }));
+};
 
 const currentTab = ref(0);
 
@@ -203,11 +247,11 @@ const handleTabChange = (i) => {
                 font-size: 1.15em;
             }
             & .subtitle {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 margin-bottom: 5px;
             }
             & .artist {
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
                 font-size: 0.9em;
             }
             & .difficulties {
@@ -217,7 +261,7 @@ const handleTabChange = (i) => {
 
                 & > span {
                     padding: 3px 7px;
-                    background: rgba(255,255,255,0.07);
+                    background: rgba(var(--colorBaseText),0.07);
                     border-radius: 2px;
                     font-size: 0.6em;
 

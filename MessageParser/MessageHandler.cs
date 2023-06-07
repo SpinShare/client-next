@@ -20,11 +20,15 @@ public class MessageHandler
         if (msg?.Command == null) return;
         
         var command = _commandFactory.GetCommand(msg.Command);
-        var result = await command.Execute(msg.Data);
+        
+        await command.Execute(window, msg.Data);
+    }
 
-        // Convert result to json and send it back
+    public static void SendResponse(PhotinoWindow? sender, object result)
+    {
+        if (sender == null) return;
+        
         var resultJson = JsonConvert.SerializeObject(result);
-
-        window?.SendWebMessage(resultJson);
+        sender?.SendWebMessage(resultJson);
     }
 }

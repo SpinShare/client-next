@@ -39,8 +39,8 @@ defineProps({
 
 <style lang="scss" scoped>
 button {
-    background: rgba(255,255,255,0.07);
-    color: #fff;
+    background: rgba(var(--colorBaseText),0.07);
+    color: rgb(var(--colorBaseText));
     border-radius: 4px;
     padding: 0 15px;
     height: 40px;
@@ -50,6 +50,8 @@ button {
     justify-content: center;
     align-items: center;
     gap: 6px;
+    position: relative;
+    overflow: hidden;
     transition: 0.15s ease-in-out all;
     
     & .mdi {
@@ -75,8 +77,8 @@ button {
     }
     
     &.color-default {
-        background: rgba(255,255,255,0.07);
-        color: #fff;
+        background: rgba(var(--colorBaseText),0.07);
+        color: rgb(var(--colorBaseText));
     }
     &.color-primary {
         background: rgba(var(--colorPrimary),0.2);
@@ -91,20 +93,20 @@ button {
         color: rgb(var(--colorSuccess));
     }
     &.color-bright {
-        background: rgba(255,255,255,0.8);
-        color: #222;
+        background: rgba(var(--colorBaseText),0.8);
+        color: rgb(var(--colorBase));
     }
     &.color-transparent {
         background: transparent;
-        color: #fff;
+        color: rgb(var(--colorBaseText));
     }
     
     &:not([disabled]):hover {
         cursor: pointer;
-        background: rgba(255,255,255,0.14);
+        background: rgba(var(--colorBaseText),0.14);
         
         &.color-default {
-            background: rgba(255,255,255,0.14);
+            background: rgba(var(--colorBaseText),0.14);
         }
         &.color-primary {
             background: rgba(var(--colorPrimary),0.35);
@@ -116,11 +118,11 @@ button {
             background: rgba(var(--colorSuccess),0.35);
         }
         &.color-bright {
-            background: #fff;
+            background: rgb(var(--colorBaseText));
         }
         &.color-transparent {
-            background: rgba(255,255,255,0.07);
-            color: #fff;
+            background: rgba(var(--colorBaseText),0.07);
+            color: rgb(var(--colorBaseText));
         }
     }
 }

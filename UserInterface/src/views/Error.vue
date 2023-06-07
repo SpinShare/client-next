@@ -33,7 +33,7 @@ import AppLayout from "@/layouts/AppLayout.vue";
             font-weight: 600;
         }
         & p {
-            color: rgba(255,255,255,0.6);
+            color: rgba(var(--colorBaseText),0.6);
             line-height: 1.25em;
         }
     }

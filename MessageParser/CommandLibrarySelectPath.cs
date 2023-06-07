@@ -1,3 +1,7 @@
+using System.IO;
+using System.Threading.Tasks;
+using PhotinoNET;
+
 namespace SpinShareClient.MessageParser;
 
 using NativeFileDialogSharp;
@@ -5,12 +9,21 @@ using LibraryCache;
 
 public class CommandLibrarySelectPath : ICommand
 {
-    public async Task<object> Execute(object data)
+    public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        DialogResult result = Dialog.FolderPicker(LibraryCache.GetLibraryPath());
+        string defaultLibraryPath = LibraryCache.GetLibraryPath() ?? "";
+        DialogResult result;
+        if (Directory.Exists(defaultLibraryPath))
+        {
+            result = Dialog.FolderPicker(LibraryCache.GetLibraryPath());            
+        }
+        else
+        {
+            result = Dialog.FolderPicker();
+        }
 
         Message response = new() {
-            Command = "library-get-path",
+            Command = "library-get-path-response",
             Data = ""
         };
         
@@ -18,7 +31,11 @@ public class CommandLibrarySelectPath : ICommand
         {
             response.Data = result.Path;
         }
+        
+        Console.WriteLine(result);
+        
+        await Task.Yield();
 
-        return response;
+        MessageHandler.SendResponse(sender, response);
     }
 }

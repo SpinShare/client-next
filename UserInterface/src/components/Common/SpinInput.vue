@@ -34,11 +34,16 @@ defineProps({
 .setup-input {
     display: grid;
     gap: 10px;
-    
-    &.type-switch {
+
+    &.type-horizontal {
         grid-template-columns: 1fr auto;
         gap: 50px;
         align-items: center;
+    }
+    &.type-library-path {
+        & .input {
+            grid-template-columns: 1fr auto auto;
+        }
     }
 
     & .text {
@@ -50,19 +55,18 @@ defineProps({
             font-size: 0.9em;
         }
         & .hint {
-            color: rgba(255,255,255,0.4);
+            color: rgba(var(--colorBaseText),0.4);
             line-height: 1.25em;
         }
     }
     & .input {
         display: grid;
-        grid-template-columns: 1fr auto auto;
         gap: 5px;
 
         & input[type=text] {
-            background: rgba(255,255,255,0.07);
+            background: rgba(var(--colorBaseText),0.07);
             border: 0;
-            color: #fff;
+            color: rgb(var(--colorBaseText));
             font-family: 'Work Sans', sans-serif;
             font-size: 1em;
             border-radius: 4px;
@@ -76,22 +80,24 @@ defineProps({
         }
         & .select {
             position: relative;
+            cursor: pointer;
             
             & select {
                 width: 100%;
                 appearance: none;
-                background: rgba(255,255,255,0.07);
+                background: rgba(var(--colorBaseText),0.07);
                 border: 0;
-                color: #fff;
+                color: rgb(var(--colorBaseText));
                 font-family: 'Work Sans', sans-serif;
                 font-size: 1em;
                 border-radius: 4px;
                 padding: 0 15px;
                 height: 40px;
+                margin-right: 25px;
 
                 & option {
-                    background: #222;
-                    color: #fff;
+                    background: rgb(var(--colorBase));
+                    color: rgb(var(--colorBaseText));
                 }
             }
 

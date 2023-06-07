@@ -60,7 +60,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
 
 <style lang="scss" scoped>
 .review-item {
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(var(--colorBaseText),0.07);
     padding: 15px;
     border-radius: 6px;
     display: grid;
@@ -89,7 +89,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             }
             & .pronouns {
                 font-size: 0.75em;
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
             }
             & .tags {
                 margin-top: 2px;
@@ -98,7 +98,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
                 gap: 5px;
                 
                 & .tag {
-                    background: rgba(255,255,255,0.07);
+                    background: rgba(var(--colorBaseText),0.07);
                     display: flex;
                     gap: 5px;
                     padding: 3px 10px 3px 7px;
@@ -140,7 +140,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             display: flex;
             gap: 5px;
             align-items: center;
-            color: rgba(255,255,255,0.4);
+            color: rgba(var(--colorBaseText),0.4);
             
             & > span:nth-child(2) {
                 font-size: 0.75em;
