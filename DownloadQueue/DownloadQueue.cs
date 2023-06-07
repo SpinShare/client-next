@@ -50,6 +50,13 @@ public class DownloadQueue
         Queue.Clear();
     }
 
+    public List<DownloadItem> ClearQueueWithState(DownloadState state)
+    {
+        Queue.RemoveAll(x => x.State == state);
+
+        return Queue;
+    }
+
     public List<DownloadItem> GetQueue()
     {
         return Queue;
@@ -71,7 +78,7 @@ public class DownloadQueue
         {
             Queue.Add(newItem);
         }
-        
+
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
         _ = WorkQueue(sender);
         

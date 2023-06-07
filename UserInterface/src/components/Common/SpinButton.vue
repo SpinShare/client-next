@@ -50,6 +50,8 @@ button {
     justify-content: center;
     align-items: center;
     gap: 6px;
+    position: relative;
+    overflow: hidden;
     transition: 0.15s ease-in-out all;
     
     & .mdi {

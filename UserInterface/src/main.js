@@ -2,12 +2,13 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import Router from "@/router";
 
+import FloatingVue from 'floating-vue';
+import 'floating-vue/dist/style.css';
+import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css';
+
 import './assets/reset.scss';
 import './assets/app.scss';
 import '@mdi/font/scss/materialdesignicons.scss';
-
-import FloatingVue from 'floating-vue';
-import 'floating-vue/dist/style.css';
 
 import mitt from 'mitt';
 

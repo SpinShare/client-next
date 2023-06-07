@@ -1,5 +1,7 @@
 <template>
-    <header>
+    <header
+        :class="`type-${type}`"
+    >
         <h1>{{ label }}</h1>
         <div class="actions">
             <slot />
@@ -12,6 +14,10 @@ defineProps({
     label: {
         type: String,
         required: true,
+    },
+    type: {
+        type: String,
+        default: 'default',
     }
 });
 </script>
@@ -30,6 +36,12 @@ header {
     & .actions {
         display: flex;
         gap: 5px;
+    }
+    
+    &.type-small {
+        & h1 {
+            font-size: 1.15em;
+        }
     }
 }
 </style>

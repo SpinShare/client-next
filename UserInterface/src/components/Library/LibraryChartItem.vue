@@ -105,8 +105,8 @@ const handleClick = () => {
     transition: 0.15s ease-in-out all;
 
     & .cover {
-        aspect-ratio: 1 / 1;
-        height: 100%;
+        width: 65px;
+        height: 65px;
         border-radius: 4px;
         background-position: center;
         background-size: cover;

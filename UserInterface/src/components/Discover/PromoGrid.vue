@@ -7,7 +7,7 @@
                 <div class="title">{{ promo.title.replace(/<[^>]*>?/gm, '') }}</div>
             </div>
             <SpinButton
-                :icon="getButtonIcon(promo.button.type)"
+                :icon="getButtonIcon(promo.button)"
                 label="Open"
                 @click="handlePromoClick(promo.button)"
             />
@@ -33,8 +33,13 @@ defineProps({
     }
 });
 
-const getButtonIcon = (type) => {
-    switch(type) {
+const getButtonIcon = (buttonData) => {
+    // Edge Case: Old Promos with Playlists are setup as an external URL
+    if(buttonData.type === BUTTON_TYPE_EXTERNALURL && buttonData.data.includes('playlist')) {
+        return 'playlist-music';
+    }
+    
+    switch(buttonData.type) {
         case BUTTON_TYPE_CHART:
             return 'album';
         case BUTTON_TYPE_PLAYLIST:
@@ -48,6 +53,14 @@ const getButtonIcon = (type) => {
 };
 
 const handlePromoClick = (buttonData) => {
+    // Edge Case: Old Promos with Playlists are setup as an external URL
+    if(buttonData.type === BUTTON_TYPE_EXTERNALURL && buttonData.data.includes('playlist')) {
+        router.push({
+            path: '/playlist/' + buttonData.data.split("/").at(-1),
+        });
+        return;
+    }
+    
     switch(buttonData.type) {
         case BUTTON_TYPE_CHART:
             router.push({
@@ -55,7 +68,9 @@ const handlePromoClick = (buttonData) => {
             });
             break;
         case BUTTON_TYPE_PLAYLIST:
-            // TODO
+            router.push({
+                path: '/playlist/' + buttonData.data,
+            });
             break;
         case BUTTON_TYPE_SEARCHQUERY:
             // TODO

@@ -2,6 +2,16 @@
     <transition name="queue">
         <section class="download-queue-shade" v-if="isActive" @click.self="changeState(false)">
             <section class="download-queue">
+                <SpinHeader
+                    label="Download Queue"
+                    type="small"
+                >
+                    <SpinButton
+                        icon="notification-clear-all"
+                        label="Clear"
+                        @click="handleClearQueue"
+                    />
+                </SpinHeader>
                 <div
                     class="item"
                     v-for="item in queue"
@@ -93,6 +103,13 @@ const getCurrentState = (stateId) => {
             return 'done';
     }
 };
+
+const handleClearQueue = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "queue-clear",
+        data: STATE_DONE,
+    }));
+};
 </script>
 
 <style lang="scss">
@@ -115,6 +132,10 @@ const getCurrentState = (stateId) => {
         border-right: 1px solid rgba(var(--colorBaseText),0.07);
         display: flex;
         flex-direction: column;
+        
+        & header {
+            padding: 10px 20px;
+        }
         
         & .item {
             display: grid;

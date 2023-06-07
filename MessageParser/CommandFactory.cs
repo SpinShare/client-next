@@ -30,6 +30,8 @@ public class CommandFactory
                 return new CommandQueueGetCount();
             case "queue-get":
                 return new CommandQueueGet();
+            case "queue-clear":
+                return new CommandQueueClear();
             case "settings-open-in-explorer":
                 return new CommandSettingsOpenInExplorer();
             case "settings-get":
