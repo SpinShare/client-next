@@ -26,6 +26,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Photino.NET" Version="2.3.0" />
 		<PackageReference Include="Photino.NET.Server" Version="1.0.0" />
+		<PackageReference Include="Sentry" Version="3.33.0" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
 		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
 	</ItemGroup>
