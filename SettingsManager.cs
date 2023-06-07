@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace SpinShareClient;
@@ -6,7 +9,7 @@ public class SettingsManager
 {
     private static SettingsManager? _instance;
     private static readonly object _lock = new();
-    private Dictionary<string, object> _settings = new();
+    private Dictionary<string, object?> _settings = new();
     private readonly string _settingsFilePath;
 
     private SettingsManager()
@@ -28,7 +31,7 @@ public class SettingsManager
         }
         else
         {
-            _settings = new Dictionary<string, object>();
+            _settings = new Dictionary<string, object?>();
         }
     }
 
@@ -47,17 +50,17 @@ public class SettingsManager
         return _instance;
     }
 
-    public T Get<T>(string key)
+    public T? Get<T>(string key)
     {
         if (_settings.TryGetValue(key, out var value))
         {
-            return (T)Convert.ChangeType(value, typeof(T));
+            return (T)Convert.ChangeType(value, typeof(T))!;
         }
 
         return default;
     }
 
-    public void Set<T>(string key, T value)
+    public void Set<T>(string key, T? value)
     {
         _settings[key] = value;
         SaveSettings();
@@ -74,7 +77,7 @@ public class SettingsManager
         SaveSettings();
     }
 
-    public Dictionary<string, object> GetFull()
+    public Dictionary<string, object?> GetFull()
     {
         return _settings;
     }
@@ -87,7 +90,7 @@ public class SettingsManager
     private void LoadSettings()
     {
         string json = File.ReadAllText(_settingsFilePath);
-        _settings = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+        _settings = JsonConvert.DeserializeObject<Dictionary<string, object?>>(json) ?? new();
     }
 
     private void SaveSettings()

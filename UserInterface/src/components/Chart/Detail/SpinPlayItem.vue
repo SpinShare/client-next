@@ -54,7 +54,7 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .spinplay-item {
-    background: rgba(255,255,255,0.07);
+    background: rgba(var(--colorBaseText),0.07);
     border-radius: 6px;
     display: grid;
     overflow: hidden;
@@ -91,7 +91,7 @@ const handleClick = () => {
             }
             & .pronouns {
                 font-size: 0.75em;
-                color: rgba(255,255,255,0.4);
+                color: rgba(var(--colorBaseText),0.4);
             }
             & .tags {
                 margin-top: 2px;
@@ -100,7 +100,7 @@ const handleClick = () => {
                 gap: 5px;
 
                 & .tag {
-                    background: rgba(255,255,255,0.07);
+                    background: rgba(var(--colorBaseText),0.07);
                     display: flex;
                     gap: 5px;
                     padding: 3px 10px 3px 7px;
@@ -126,7 +126,7 @@ const handleClick = () => {
     }
     
     &:hover {
-        background: rgba(255,255,255,0.14);
+        background: rgba(var(--colorBaseText),0.14);
         cursor: pointer;
     }
 }

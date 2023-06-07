@@ -4,7 +4,7 @@
         :charts="featuredPlaylist.songs.reverse().slice(0, 6)"
     />
     <SpinLoader
-            v-if="!featuredPlaylist"
+        v-if="!featuredPlaylist"
     />
 </template>
 

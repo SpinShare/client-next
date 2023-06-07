@@ -1,19 +1,20 @@
-using System.Threading.Tasks;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
-
-public class CommandLibraryGetPath : ICommand
+public class CommandSettingsGetFull : ICommand
 {
+    private SettingsManager? _settingsManager;
+    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        Message response = new() {
-            Command = "library-get-path-response",
-            Data = LibraryCache.GetLibraryPath()
-        };
+        _settingsManager = SettingsManager.GetInstance();
 
+        Message response = new() {
+            Command = "settings-get-full-response",
+            Data = _settingsManager.GetFull()
+        };
+        
         await Task.Yield();
 
         MessageHandler.SendResponse(sender, response);

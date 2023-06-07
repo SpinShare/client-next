@@ -25,12 +25,12 @@ defineProps({
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(var(--colorBaseText),0.6);
     transition: 0.15s ease-in-out background, 0.15s ease-in-out color;
     overflow: hidden;
     
     &:hover {
-        background: rgba(255,255,255,0.07);
+        background: rgba(var(--colorBaseText),0.07);
         cursor: pointer;
     }
     &::after {
@@ -45,7 +45,7 @@ defineProps({
         transform: translateY(4px);
     }
     &.active {
-        color: rgba(255,255,255,1);
+        color: rgba(var(--colorBaseText),1);
 
         &::after {
             background: rgb(var(--colorPrimary));

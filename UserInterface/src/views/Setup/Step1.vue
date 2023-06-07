@@ -7,8 +7,9 @@
         :can-continue="libraryPath !== '' && !savingSettings"
         :can-back="!savingSettings"
     >
-        <SetupInput
+        <SpinInput
             label="Customs folder path"
+            type="library-path"
         >
             <input
                     type="text"
@@ -27,7 +28,7 @@
                     @click="getLibraryPathAutomatically"
                     v-tooltip="'Detect automatically'"
             />
-        </SetupInput>
+        </SpinInput>
     </SetupLayout>
 </template>
 
@@ -35,7 +36,6 @@
 import { ref, onMounted, inject } from 'vue';
 import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
-import SetupInput from "@/components/Common/SetupInput.vue";
 const emitter = inject('emitter');
 
 const libraryPath = ref("");

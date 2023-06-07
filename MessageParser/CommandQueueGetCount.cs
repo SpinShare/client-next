@@ -3,19 +3,23 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
+using DownloadQueue;
 
-public class CommandLibraryGetPath : ICommand
+public class CommandQueueGetCount : ICommand
 {
+    private DownloadQueue? _downloadQueue;
+    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        _downloadQueue = DownloadQueue.GetInstance();
+
         Message response = new() {
-            Command = "library-get-path-response",
-            Data = LibraryCache.GetLibraryPath()
+            Command = "queue-get-count-response",
+            Data = _downloadQueue.GetQueueCount()
         };
 
         await Task.Yield();
-
+        
         MessageHandler.SendResponse(sender, response);
     }
 }
