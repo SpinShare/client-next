@@ -1,8 +1,6 @@
-﻿using System;
-using System.Reflection;
-using PhotinoNET;
+﻿using PhotinoNET;
 using PhotinoNET.Server;
-using SpinShareClient.MessageParser;
+using Sentry;
 
 namespace SpinShareClient;
 
@@ -13,6 +11,15 @@ internal static class Program
     [STAThread]
     static void Main(string[] args)
     {
+        SentrySdk.Init(options =>
+        {
+            options.Dsn = "https://8ee3ec205d27494ebaff5ce378db752c@o1420803.ingest.sentry.io/4505318580879360";
+            options.Debug = true;
+            options.AutoSessionTracking = true;
+            options.IsGlobalModeEnabled = true;
+            options.EnableTracing = true;
+        });
+        
         PhotinoServer
             .CreateStaticFileServer(args, out string baseUrl)
             .RunAsync();
