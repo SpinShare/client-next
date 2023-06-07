@@ -7,13 +7,37 @@
 </template>
 
 <script setup>
-import {inject} from 'vue';
+import {ref, inject, onMounted} from 'vue';
 const emitter = inject('emitter');
+
+const theme = ref('dark');
 
 window.external.receiveMessage((rawResponse) => {
     const response = JSON.parse(rawResponse);
     emitter.emit(response.Command, response.Data);
 });
+
+emitter.on('settings-get-response', (setting) => {
+    if(setting.key === "app.theme") {
+        setTheme(setting.data);
+    }
+});
+
+emitter.on('update-theme', (newTheme) => {
+    setTheme(newTheme);
+})
+
+onMounted(() => {
+    window.external.sendMessage(JSON.stringify({
+        command: "settings-get",
+        data: "app.theme",
+    }));
+});
+
+const setTheme = (newTheme) => {
+    theme.value = newTheme ?? 'light';
+    document.documentElement.dataset.theme = theme.value;
+};
 </script>
 
 <style lang="scss">

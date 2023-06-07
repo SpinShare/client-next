@@ -92,7 +92,7 @@ button {
     }
     &.color-bright {
         background: rgba(var(--colorBaseText),0.8);
-        color: #222;
+        color: rgb(var(--colorBase));
     }
     &.color-transparent {
         background: transparent;

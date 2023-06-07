@@ -9,6 +9,13 @@
     --colorSuccess: 61, 251, 132;
 }
 
+:root[data-theme='light'] {
+    --colorBase: 255, 255, 255;
+    --colorBaseText: 17, 17, 17;
+    --colorPrimary: 232, 77, 177;
+    --colorError: 255, 56, 99;
+}
+
 html, body {
     margin: 0;
     padding: 0;

@@ -57,8 +57,6 @@ emitter.on('queue-get-count-response', (data) => {
 });
 
 onMounted(() => {
-    console.log("Mounted");
-    
     window.external.sendMessage(JSON.stringify({
         command: "queue-get-count",
         data: "",

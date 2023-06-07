@@ -34,11 +34,16 @@ defineProps({
 .setup-input {
     display: grid;
     gap: 10px;
-    
-    &.type-switch {
+
+    &.type-horizontal {
         grid-template-columns: 1fr auto;
         gap: 50px;
         align-items: center;
+    }
+    &.type-library-path {
+        & .input {
+            grid-template-columns: 1fr auto auto;
+        }
     }
 
     & .text {
@@ -56,7 +61,6 @@ defineProps({
     }
     & .input {
         display: grid;
-        grid-template-columns: 1fr auto auto;
         gap: 5px;
 
         & input[type=text] {
@@ -76,6 +80,7 @@ defineProps({
         }
         & .select {
             position: relative;
+            cursor: pointer;
             
             & select {
                 width: 100%;
@@ -88,9 +93,10 @@ defineProps({
                 border-radius: 4px;
                 padding: 0 15px;
                 height: 40px;
+                margin-right: 25px;
 
                 & option {
-                    background: #222;
+                    background: rgb(var(--colorBase));
                     color: rgb(var(--colorBaseText));
                 }
             }

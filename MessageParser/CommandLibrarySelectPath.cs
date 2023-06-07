@@ -23,7 +23,7 @@ public class CommandLibrarySelectPath : ICommand
         }
 
         Message response = new() {
-            Command = "library-get-path",
+            Command = "library-get-path-response",
             Data = ""
         };
         
@@ -31,6 +31,8 @@ public class CommandLibrarySelectPath : ICommand
         {
             response.Data = result.Path;
         }
+        
+        Console.WriteLine(result);
         
         await Task.Yield();
 
