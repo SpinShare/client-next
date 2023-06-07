@@ -61,7 +61,7 @@ public class LibraryCache
         Stopwatch fullWatch = new Stopwatch();
         fullWatch.Start();
         
-        string[] filePaths = Directory.GetFiles(_libraryPath);
+        string[] filePaths = Directory.GetFiles(_libraryPath, "*.srtb");
         for (int i = 0; i < filePaths.Length; i++)
         {
             Stopwatch itemWatch = new Stopwatch();
