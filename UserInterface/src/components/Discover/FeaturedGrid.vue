@@ -1,7 +1,7 @@
 <template>
     <ChartList
         v-if="featuredPlaylist"
-        :charts="featuredPlaylist.songs.reverse().slice(0, 6)"
+        :charts="featuredPlaylist"
     />
     <SpinLoader
         v-if="!featuredPlaylist"
@@ -10,13 +10,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getPlaylist } from "@/api/api";
+import {FEATURED_PLAYLIST_ID, getPlaylist} from "@/api/api";
 import ChartList from "@/components/Common/ChartList.vue";
 
 const featuredPlaylist = ref(null);
 
 onMounted(async () => {
-    featuredPlaylist.value = await getPlaylist(144);
+    let playlist = await getPlaylist(FEATURED_PLAYLIST_ID);
+    featuredPlaylist.value = playlist?.songs?.reverse().slice(0, 6) ?? null;
 });
 </script>
 
