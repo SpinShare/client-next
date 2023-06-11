@@ -12,7 +12,13 @@
             <section>
                 <SpinHeader
                     label="Featured"
-                />
+                >
+                    <SpinButton
+                        icon="playlist-music"
+                        label="See more"
+                        @click="handleOpenFeaturedPlaylist"
+                    />
+                </SpinHeader>
                 <FeaturedGrid />
             </section>
         </section>
@@ -22,15 +28,22 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import PromoGrid from "@/components/Discover/PromoGrid.vue";
-import { getPromos } from "@/api/api";
+import {FEATURED_PLAYLIST_ID, getPromos} from "@/api/api";
 import FeaturedGrid from "@/components/Discover/FeaturedGrid.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
+import router from "@/router";
 
 const promos = ref([]);
 
 onMounted(async () => {
     promos.value = await getPromos();
 });
+
+const handleOpenFeaturedPlaylist = () => {
+    router.push({
+        path: '/playlist/' + FEATURED_PLAYLIST_ID,
+    });
+};
 </script>
 
 <style lang="scss" scoped>
