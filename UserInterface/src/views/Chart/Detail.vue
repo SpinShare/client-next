@@ -233,8 +233,8 @@ const handleTabChange = (i) => {
         transition: 0.15s ease-in-out all;
 
         & .cover {
-            aspect-ratio: 1 / 1;
-            height: 100%;
+            width: 128px;
+            height: 128px;
             border-radius: 4px;
             background-position: center;
             background-size: cover;

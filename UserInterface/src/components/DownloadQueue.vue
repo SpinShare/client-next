@@ -146,7 +146,7 @@ const handleClearQueue = () => {
             border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
 
             & .cover {
-                aspect-ratio: 1 / 1;
+                width: 48px;
                 height: 48px;
                 border-radius: 4px;
                 background-position: center;
