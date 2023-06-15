@@ -26,6 +26,7 @@ import SpinHeader from "@/components/Common/SpinHeader.vue";
 import SpinTabBar from "@/components/Common/SpinTabBar.vue";
 import SpinTabItem from "@/components/Common/SpinTabItem.vue";
 import SpinInput from "@/components/Common/SpinInput.vue";
+import SpinSelect from "@/components/Common/SpinSelect.vue";
 
 app.component('SpinButton', SpinButton);
 app.component('SpinLoader', SpinLoader);
@@ -34,5 +35,6 @@ app.component('SpinHeader', SpinHeader);
 app.component('SpinTabBar', SpinTabBar);
 app.component('SpinTabItem', SpinTabItem);
 app.component('SpinInput', SpinInput);
+app.component('SpinSelect', SpinSelect);
 
 app.mount('#app');
