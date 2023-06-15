@@ -88,7 +88,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
                 gap: 10px;
             }
             & .pronouns {
-                font-size: 0.75em;
+                font-size: 0.75rem;
                 color: rgba(var(--colorBaseText),0.4);
             }
             & .tags {
@@ -98,7 +98,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
                 gap: 5px;
                 
                 & .tag {
-                    background: rgba(var(--colorBaseText),0.07);
+                    background: rgba(var(--colorBaseText), 0.07);
                     display: flex;
                     gap: 5px;
                     padding: 3px 10px 3px 7px;
@@ -106,8 +106,8 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
                     align-items: center;
 
                     & > span:nth-child(2) {
-                        font-size: 0.75em;
-                        line-height: 0.75em;
+                        font-size: 0.75rem;
+                        line-height: 0.75rem;
                     }
 
                     &.tag-verified {
@@ -124,10 +124,10 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
     }
     
     & .comment {
-        line-height: 1.5em;
-        -webkit-user-select: auto;
-        -moz-user-select: auto;
-        user-select: auto;
+        line-height: 1.5rem;
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        user-select: text;
         cursor: text;
     }
     
@@ -143,14 +143,14 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             color: rgba(var(--colorBaseText),0.4);
             
             & > span:nth-child(2) {
-                font-size: 0.75em;
+                font-size: 0.75rem;
             }
         }
         
         & .tag-recommended {
             padding: 5px 10px;
             border-radius: 100px;
-            font-size: 0.75em;
+            font-size: 0.75rem;
             background: rgba(var(--colorSuccess), 0.2);
             color: rgba(var(--colorSuccess));
         }

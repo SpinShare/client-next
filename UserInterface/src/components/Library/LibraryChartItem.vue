@@ -95,7 +95,7 @@ const handleClick = () => {
 <style lang="scss" scoped>
 .chart-item {
     height: 85px;
-    background: rgba(var(--colorBaseText),0.07);
+    background: rgba(var(--colorBaseText), 0.07);
     border-radius: 6px;
     padding: 10px;
     display: grid;
@@ -117,7 +117,7 @@ const handleClick = () => {
 
         & .artist {
             color: rgba(var(--colorBaseText),0.4);
-            font-size: 0.9em;
+            font-size: 0.9rem;
         }
         & .difficulties {
             display: flex;
@@ -126,9 +126,9 @@ const handleClick = () => {
 
             & > span {
                 padding: 3px 7px;
-                background: rgba(var(--colorBaseText),0.07);
+                background: rgba(var(--colorBaseText), 0.07);
                 border-radius: 2px;
-                font-size: 0.6em;
+                font-size: 0.6rem;
 
                 & span:nth-child(1) {
                     font-weight: bold;

@@ -30,7 +30,7 @@ header {
     align-items: center;
     
     & h1 {
-        font-size: 1.5em;
+        font-size: 1.5rem;
         font-weight: 700;
     }
     & .actions {
@@ -40,7 +40,7 @@ header {
     
     &.type-small {
         & h1 {
-            font-size: 1.15em;
+            font-size: 1.15rem;
         }
     }
 }

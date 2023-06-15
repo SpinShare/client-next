@@ -30,7 +30,7 @@ defineProps({
     overflow: hidden;
     
     &:hover {
-        background: rgba(var(--colorBaseText),0.07);
+        background: rgba(var(--colorBaseText), 0.07);
         cursor: pointer;
     }
     &::after {

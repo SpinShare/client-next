@@ -111,9 +111,9 @@ const handlePromoClick = (buttonData) => {
             
             & .type {
                 color: rgba(var(--colorBaseText),0.4);
-                font-size: 0.9em;
+                font-size: 0.9rem;
                 text-transform: uppercase;
-                letter-spacing: 0.1em;
+                letter-spacing: 0.1rem;
             }
         }
     }
