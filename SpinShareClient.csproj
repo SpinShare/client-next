@@ -6,7 +6,7 @@
 		<Platforms>AnyCPU</Platforms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>3.0.2-preview</Version>
+		<Version>3.0.3-preview</Version>
    		<!-- Generate embedded file manifest when using the Photino.NET StaticFileServer -->
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 		<!--
@@ -55,11 +55,6 @@
 
 	<ItemGroup>
 	  <Compile Remove="obj\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="UserInterface\src\components\Settings\" />
-	  <Folder Include="UserInterface\src\components\Setup\" />
 	</ItemGroup>
 
 	<Target Name="EnsureNodeEnv" BeforeTargets="BuildUserInterface" Condition=" !Exists('$(UiRoot)node_modules') ">
