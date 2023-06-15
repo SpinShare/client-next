@@ -74,13 +74,13 @@ export async function searchCharts(query, filters) {
     console.log("[API] searchCharts " + query);
     return await getData('searchCharts', {
         searchQuery: query,
-        diffEasy: filters['diffEasy'] ?? null,
-        diffNormal: filters['diffNormal'] ?? null,
-        diffHard: filters['diffHard'] ?? null,
-        diffExpert: filters['diffExpert'] ?? null,
-        diffXD: filters['diffXD'] ?? null,
-        diffRatingFrom: filters['diffRatingFrom'] ?? null,
-        diffRatingTo: filters['diffRatingTo'] ?? null,
-        showExplicit: filters['showExplicit'] ?? null,
+        diffEasy: filters?.diffEasy ?? null,
+        diffNormal: filters?.diffNormal ?? null,
+        diffHard: filters?.diffHard ?? null,
+        diffExpert: filters?.diffExpert ?? null,
+        diffXD: filters?.diffXD ?? null,
+        diffRatingFrom: filters?.diffRatingFrom ?? null,
+        diffRatingTo: filters?.diffRatingTo ?? null,
+        showExplicit: filters?.showExplicit ?? null,
     }) ?? [];
 }

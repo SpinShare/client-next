@@ -13,6 +13,7 @@
             type="search"
             placeholder="Search query..."
             v-model="searchInputQuery"
+            @keyup.enter="handleSearch"
             :disabled="isSearching"
         />
         <transition name="default">
