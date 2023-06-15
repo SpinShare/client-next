@@ -12,7 +12,11 @@ public class CommandQueueClear : ICommand
     {
         _downloadQueue = DownloadQueue.GetInstance();
         
-        var downloadState = int.Parse(data.ToString());
+        int downloadState = (int)DownloadState.Queued;
+        if (int.TryParse(data?.ToString(), out int state))
+        {
+            downloadState = state;
+        }
 
         Message response = new() {
             Command = "queue-get-response",
