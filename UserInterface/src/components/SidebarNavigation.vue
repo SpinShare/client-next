@@ -114,7 +114,7 @@ aside {
             & .badge {
                 background: rgb(var(--colorPrimary));
                 color: rgb(var(--colorBaseText));
-                font-size: 0.75em;
+                font-size: 0.75rem;
                 font-weight: bold;
                 padding: 3px 5px;
                 border-radius: 50px;
@@ -129,7 +129,7 @@ aside {
             }
             
             &:not(.router-link-exact-active):not(.active):hover {
-                background: rgba(var(--colorBaseText),0.07);
+                background: rgba(var(--colorBaseText), 0.07);
                 cursor: pointer;
             }
         }

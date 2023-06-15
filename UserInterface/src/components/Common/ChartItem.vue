@@ -3,6 +3,7 @@
         class="chart-item"
         @click.left="handleClick"
         @click.middle="handleAddToQueue"
+        @mousedown.middle.prevent.stop
     >
         <div class="cover" :style="`background-image: url(${ cover })`">
             <template v-if="libraryState">
@@ -178,7 +179,9 @@ const handleClick = () => {
     });
 };
 
-const handleAddToQueue = () => {
+const handleAddToQueue = (event) => {
+    event.preventDefault();
+    
     if(queueState.value !== null) return;
     
     window.external.sendMessage(JSON.stringify({
@@ -241,9 +244,17 @@ const handleAddToQueue = () => {
         display: grid;
         gap: 3px;
         
+        & .title, & .subtitle {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         & .artist {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: rgba(var(--colorBaseText),0.4);
-            font-size: 0.9em;
+            font-size: 0.9rem;
         }
         & .difficulties {
             display: flex;
@@ -254,7 +265,7 @@ const handleAddToQueue = () => {
                 padding: 3px 7px;
                 background: rgba(var(--colorBaseText),0.07);
                 border-radius: 2px;
-                font-size: 0.6em;
+                font-size: 0.6rem;
 
                 & span:nth-child(1) {
                     font-weight: bold;

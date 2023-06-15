@@ -1,8 +1,16 @@
 export const SUPPORTED_VERSION = 1;
 export const FEATURED_PLAYLIST_ID = 144;
 
-async function getData(endpoint) {
-    const res = await fetch('https://spinsha.re/api/' + endpoint);
+async function getData(endpoint, data = null) {
+    let res;
+    if(data !== null) {
+        res = await fetch('https://spinsha.re/api/' + endpoint, {
+            method: 'POST',
+            body: JSON.stringify(data) ?? null
+        });
+    } else {
+        res = await fetch('https://spinsha.re/api/' + endpoint);
+    }
     const body = await res.json();
 
     if(body.version !== SUPPORTED_VERSION) {
@@ -38,7 +46,41 @@ export async function getChartReviews(chartId) {
     return await getData('song/' + chartId + '/reviews') ?? [];
 }
 
+export async function getChartPlaylists(chartId) {
+    console.log("[API] getChartPlaylists " + chartId);
+    return await getData('song/' + chartId + '/playlists') ?? [];
+}
+
 export async function getChartSpinPlays(chartId) {
     console.log("[API] getChartSpinPlays " + chartId);
     return await getData('song/' + chartId + '/spinplays') ?? [];
+}
+
+export async function searchUsers(query) {
+    console.log("[API] searchUsers " + query);
+    return await getData('searchUsers', {
+        searchQuery: query,
+    }) ?? [];
+}
+
+export async function searchPlaylists(query) {
+    console.log("[API] searchPlaylists " + query);
+    return await getData('searchPlaylists', {
+        searchQuery: query,
+    }) ?? [];
+}
+
+export async function searchCharts(query, filters) {
+    console.log("[API] searchCharts " + query);
+    return await getData('searchCharts', {
+        searchQuery: query,
+        diffEasy: filters['diffEasy'] ?? null,
+        diffNormal: filters['diffNormal'] ?? null,
+        diffHard: filters['diffHard'] ?? null,
+        diffExpert: filters['diffExpert'] ?? null,
+        diffXD: filters['diffXD'] ?? null,
+        diffRatingFrom: filters['diffRatingFrom'] ?? null,
+        diffRatingTo: filters['diffRatingTo'] ?? null,
+        showExplicit: filters['showExplicit'] ?? null,
+    }) ?? [];
 }

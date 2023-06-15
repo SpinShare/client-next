@@ -52,11 +52,11 @@ defineProps({
         gap: 10px;
         
         & .label {
-            font-size: 0.9em;
+            font-size: 0.9rem;
         }
         & .hint {
             color: rgba(var(--colorBaseText),0.4);
-            line-height: 1.25em;
+            line-height: 1.25rem;
         }
     }
     & .input {
@@ -64,18 +64,22 @@ defineProps({
         gap: 5px;
 
         & input[type=text] {
-            background: rgba(var(--colorBaseText),0.07);
+            background: rgba(var(--colorBaseText), 0.07);
             border: 0;
             color: rgb(var(--colorBaseText));
             font-family: 'Work Sans', sans-serif;
-            font-size: 1em;
+            font-size: 1rem;
             border-radius: 4px;
             padding: 0 15px;
             height: 40px;
+            transition: 0.15s ease-in-out all;
 
             &:disabled {
                 opacity: 0.4;
                 cursor: not-allowed;
+            }
+            &:not(:disabled):hover {
+                background: rgba(var(--colorBaseText), 0.14);
             }
         }
         & .select {
@@ -85,11 +89,11 @@ defineProps({
             & select {
                 width: 100%;
                 appearance: none;
-                background: rgba(var(--colorBaseText),0.07);
+                background: rgba(var(--colorBaseText), 0.07);
                 border: 0;
                 color: rgb(var(--colorBaseText));
                 font-family: 'Work Sans', sans-serif;
-                font-size: 1em;
+                font-size: 1rem;
                 border-radius: 4px;
                 padding: 0 15px;
                 height: 40px;
