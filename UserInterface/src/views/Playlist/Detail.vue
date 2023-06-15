@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="description">
+                <div class="description" v-if="playlist.description">
                     {{ playlist.description }}
                 </div>
             </header>
@@ -137,7 +137,7 @@ const handleOpenInBrowser = () => {
                     gap: 10px;
                     
                     & h1 {
-                        font-size: 1.5em;
+                        font-size: 1.5rem;
                         color: rgb(255, 255, 255);
                     }
                     & .meta {
@@ -152,14 +152,14 @@ const handleOpenInBrowser = () => {
                             color: rgba(255, 255, 255 ,0.6);
 
                             & > span:nth-child(2) {
-                                font-size: 0.75em;
+                                font-size: 0.75rem;
                             }
                         }
 
                         & .tag-official {
                             padding: 5px 10px;
                             border-radius: 100px;
-                            font-size: 0.75em;
+                            font-size: 0.75rem;
                             background: rgba(var(--colorSuccess), 0.2);
                             color: rgba(var(--colorSuccess));
                         }
@@ -180,12 +180,12 @@ const handleOpenInBrowser = () => {
             display: flex;
             gap: 40px;
             flex-direction: column;
-            line-height: 1.5em;
+            line-height: 1.5rem;
             white-space: pre-line;
             color: rgba(var(--colorBaseText),0.6);
-            -webkit-user-select: auto;
-            -moz-user-select: auto;
-            user-select: auto;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
             cursor: text;
         }
     }
