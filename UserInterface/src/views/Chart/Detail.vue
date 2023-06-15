@@ -233,8 +233,8 @@ const handleTabChange = (i) => {
         transition: 0.15s ease-in-out all;
 
         & .cover {
-            aspect-ratio: 1 / 1;
-            height: 100%;
+            width: 160px;
+            height: 160px;
             border-radius: 4px;
             background-position: center;
             background-size: cover;
@@ -244,7 +244,7 @@ const handleTabChange = (i) => {
             gap: 5px;
 
             & .title {
-                font-size: 1.15em;
+                font-size: 1.15rem;
             }
             & .subtitle {
                 color: rgba(var(--colorBaseText),0.4);
@@ -252,7 +252,7 @@ const handleTabChange = (i) => {
             }
             & .artist {
                 color: rgba(var(--colorBaseText),0.4);
-                font-size: 0.9em;
+                font-size: 0.9rem;
             }
             & .difficulties {
                 display: flex;
@@ -261,9 +261,9 @@ const handleTabChange = (i) => {
 
                 & > span {
                     padding: 3px 7px;
-                    background: rgba(var(--colorBaseText),0.07);
+                    background: rgba(var(--colorBaseText), 0.07);
                     border-radius: 2px;
-                    font-size: 0.6em;
+                    font-size: 0.6rem;
 
                     & span:nth-child(1) {
                         font-weight: bold;

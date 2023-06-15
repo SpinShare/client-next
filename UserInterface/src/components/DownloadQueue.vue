@@ -1,6 +1,10 @@
 <template>
     <transition name="queue">
-        <section class="download-queue-shade" v-if="isActive" @click.self="changeState(false)">
+        <section
+            class="download-queue-shade"
+            v-if="isActive"
+            @click.self="changeState(false)"
+        >
             <section class="download-queue">
                 <SpinHeader
                     label="Download Queue"
@@ -119,7 +123,8 @@ const handleClearQueue = () => {
     bottom: 0;
     top: 0;
     right: 0;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
     z-index: 10;
     cursor: pointer;
     
@@ -146,7 +151,7 @@ const handleClearQueue = () => {
             border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
 
             & .cover {
-                aspect-ratio: 1 / 1;
+                width: 48px;
                 height: 48px;
                 border-radius: 4px;
                 background-position: center;
@@ -158,7 +163,7 @@ const handleClearQueue = () => {
 
                 & .artist {
                     color: rgba(var(--colorBaseText),0.4);
-                    font-size: 0.9em;
+                    font-size: 0.9rem;
                 }
             }
             & .actions {

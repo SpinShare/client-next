@@ -29,12 +29,12 @@ import AppLayout from "@/layouts/AppLayout.vue";
         gap: 15px;
         
         & h1 {
-            font-size: 4em;
+            font-size: 4rem;
             font-weight: 600;
         }
         & p {
             color: rgba(var(--colorBaseText),0.6);
-            line-height: 1.25em;
+            line-height: 1.25rem;
         }
     }
 }

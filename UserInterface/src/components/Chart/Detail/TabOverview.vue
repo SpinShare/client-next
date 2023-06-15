@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import {computed} from 'vue';
 import moment from 'moment';
 
 const props = defineProps({
@@ -92,12 +92,12 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
     flex-direction: column;
     
     & .description {
-        line-height: 1.5em;
+        line-height: 1.5rem;
         white-space: pre-line;
         color: rgba(var(--colorBaseText),0.6);
-        -webkit-user-select: auto;
-        -moz-user-select: auto;
-        user-select: auto;
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        user-select: text;
         cursor: text;
     }
     & .tags {
@@ -111,7 +111,7 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
             background: rgba(var(--colorBaseText), 0.14);
             color: rgb(var(--colorBaseText));
             border-radius: 4px;
-            font-size: 0.9em;
+            font-size: 0.9rem;
             transition: 0.15s ease-in-out all;
             
             &:hover {

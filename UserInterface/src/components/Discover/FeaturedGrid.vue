@@ -17,7 +17,7 @@ const featuredPlaylist = ref(null);
 
 onMounted(async () => {
     let playlist = await getPlaylist(FEATURED_PLAYLIST_ID);
-    featuredPlaylist.value = playlist?.songs?.reverse().slice(0, 6) ?? null;
+    featuredPlaylist.value = playlist?.songs?.slice(0, 6) ?? null;
 });
 </script>
 

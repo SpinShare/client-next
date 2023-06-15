@@ -54,7 +54,7 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .spinplay-item {
-    background: rgba(var(--colorBaseText),0.07);
+    background: rgba(var(--colorBaseText), 0.07);
     border-radius: 6px;
     display: grid;
     overflow: hidden;
@@ -90,7 +90,7 @@ const handleClick = () => {
                 gap: 10px;
             }
             & .pronouns {
-                font-size: 0.75em;
+                font-size: 0.75rem;
                 color: rgba(var(--colorBaseText),0.4);
             }
             & .tags {
@@ -100,7 +100,7 @@ const handleClick = () => {
                 gap: 5px;
 
                 & .tag {
-                    background: rgba(var(--colorBaseText),0.07);
+                    background: rgba(var(--colorBaseText), 0.07);
                     display: flex;
                     gap: 5px;
                     padding: 3px 10px 3px 7px;
@@ -108,8 +108,8 @@ const handleClick = () => {
                     align-items: center;
 
                     & > span:nth-child(2) {
-                        font-size: 0.75em;
-                        line-height: 0.75em;
+                        font-size: 0.75rem;
+                        line-height: 0.75rem;
                     }
 
                     &.tag-verified {

@@ -21,7 +21,7 @@ import SidebarNavigation from "@/components/SidebarNavigation.vue";
     grid-template-columns: 60px 1fr;
 
     & > main {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 </style>

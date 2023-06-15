@@ -2,7 +2,7 @@
     <button
         @click="emit('click')"
         :disabled="disabled"
-        :class="`color-${color}`"
+        :class="`color-${color} ${reversed ? 'reversed' : ''}`"
     >
         <span v-if="loading" :class="`loading mdi mdi-loading`"></span>
         <span v-if="icon && !loading" :class="`mdi mdi-${icon}`"></span>
@@ -30,6 +30,10 @@ defineProps({
         type: [String, Boolean],
         default: false,
     },
+    reversed: {
+        type: [String, Boolean],
+        default: false,
+    },
     color: {
         type: String,
         default: 'default',
@@ -39,7 +43,7 @@ defineProps({
 
 <style lang="scss" scoped>
 button {
-    background: rgba(var(--colorBaseText),0.07);
+    background: rgba(var(--colorBaseText), 0.07);
     color: rgb(var(--colorBaseText));
     border-radius: 4px;
     padding: 0 15px;
@@ -68,16 +72,19 @@ button {
     }
     & .label {
         font-family: 'Work Sans', sans-serif;
-        font-size: 1em;
+        font-size: 1rem;
     }
     
     &[disabled] {
         opacity: 0.3;
         cursor: not-allowed;
     }
+    &.reversed {
+        flex-direction: row-reverse;
+    }
     
     &.color-default {
-        background: rgba(var(--colorBaseText),0.07);
+        background: rgba(var(--colorBaseText), 0.07);
         color: rgb(var(--colorBaseText));
     }
     &.color-primary {
@@ -121,7 +128,7 @@ button {
             background: rgb(var(--colorBaseText));
         }
         &.color-transparent {
-            background: rgba(var(--colorBaseText),0.07);
+            background: rgba(var(--colorBaseText), 0.07);
             color: rgb(var(--colorBaseText));
         }
     }

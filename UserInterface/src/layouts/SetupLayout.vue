@@ -118,10 +118,10 @@ const handleContinue = () => { emit('continue'); };
             }
             & .subheader {
                 color: rgba(var(--colorBaseText),0.4);
-                font-size: 0.9em;
+                font-size: 0.9rem;
             }
             & .step-title {
-                font-size: 1.5em;
+                font-size: 1.5rem;
                 font-weight: 700;
             }
         }
@@ -136,7 +136,7 @@ const handleContinue = () => { emit('continue'); };
             }
             & p {
                 color: rgba(var(--colorBaseText),0.6);
-                line-height: 1.25em;
+                line-height: 1.25rem;
             }
         }
         & > .actions {

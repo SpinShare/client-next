@@ -1,18 +1,19 @@
 <template>
-    <section class="chart-list">
-        <ChartItem
-            v-for="chart in charts"
-            :key="chart.id"
-            v-bind="chart"
+    <section class="playlist-list">
+        <PlaylistItem
+            v-for="playlist in playlists"
+            :key="playlist.id"
+            v-bind="playlist"
         />
     </section>
 </template>
 
 <script setup>
-import ChartItem from "@/components/Common/ChartItem.vue";
+import PlaylistItem from "@/components/Common/PlaylistItem.vue";
+import UserItem from "@/components/Common/UserItem.vue";
 
 defineProps({
-    charts: {
+    playlists: {
         type: Array,
         default: () => [],
     }
@@ -20,20 +21,20 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.chart-list {
+.playlist-list {
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr;
 }
 
 @media screen and (min-width: 1400px) {
-    .chart-list {
+    .playlist-list {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .chart-list {
+    .playlist-list {
         grid-template-columns: 1fr;
     }
 }
