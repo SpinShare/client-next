@@ -2,6 +2,7 @@
     <section class="chart-list">
         <ChartItem
             v-for="chart in charts"
+            :key="chart.id"
             v-bind="chart"
         />
     </section>
