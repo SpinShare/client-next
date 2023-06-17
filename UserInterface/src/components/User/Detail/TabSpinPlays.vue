@@ -23,7 +23,7 @@ const props = defineProps({
     },
 });
 
-const spinplays = ref([]);
+const spinplays = ref(null);
 
 onMounted(async () => {
     spinplays.value = await getUserSpinPlays(props.id);

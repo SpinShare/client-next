@@ -19,6 +19,18 @@
                             <span>Supporter</span>
                         </span>
                     </div>
+                    <div class="actions">
+                        <SpinButton
+                            icon="open-in-new"
+                            v-tooltip="'Open on SpinSha.re'"
+                            @click="handleOpenInBrowser"
+                        />
+                        <SpinButton
+                            icon="flag-outline"
+                            v-tooltip="'Report'"
+                            @click="handleReport"
+                        />
+                    </div>
                 </div>
             </header>
             <SpinTabBar
@@ -78,6 +90,13 @@ const user = ref(null);
 onMounted(async () => {
     user.value = await getUser(route.params.userId);
 });
+
+const handleReport = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "open-in-browser",
+        data: "https://spinsha.re/report/user/" + user.value.id,
+    }));
+};
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(JSON.stringify({
@@ -163,6 +182,11 @@ const handleTabChange = (i) => {
                         color: rgba(var(--colorPrimary));
                     }
                 }
+            }
+            & .actions {
+                margin-top: 10px;
+                display: flex;
+                gap: 5px;
             }
         }
     }

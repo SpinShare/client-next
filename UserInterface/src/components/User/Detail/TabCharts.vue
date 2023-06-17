@@ -20,7 +20,7 @@ const props = defineProps({
     },
 });
 
-const charts = ref([]);
+const charts = ref(null);
 
 onMounted(async () => {
     charts.value = await getUserCharts(props.id);

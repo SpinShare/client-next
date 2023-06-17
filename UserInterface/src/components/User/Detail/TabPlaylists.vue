@@ -20,7 +20,7 @@ const props = defineProps({
     },
 });
 
-const playlists = ref([]);
+const playlists = ref(null);
 
 onMounted(async () => {
     playlists.value = await getUserPlaylists(props.id);

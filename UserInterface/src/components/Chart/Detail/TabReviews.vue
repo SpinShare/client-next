@@ -23,7 +23,7 @@ const props = defineProps({
     },
 });
 
-const reviews = ref([]);
+const reviews = ref(null);
 
 onMounted(async () => {
     reviews.value = await getChartReviews(props.id);
