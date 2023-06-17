@@ -57,10 +57,6 @@
 	  <Compile Remove="obj\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UserInterface\src\views\User\" />
-	</ItemGroup>
-
 	<Target Name="EnsureNodeEnv" BeforeTargets="BuildUserInterface" Condition=" !Exists('$(UiRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
 		<Exec Command="node --version" ContinueOnError="true">

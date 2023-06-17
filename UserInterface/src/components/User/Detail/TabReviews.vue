@@ -1,8 +1,8 @@
 <template>
-    <section class="chart-detail-tab-reviews">
+    <section class="user-detail-tab-reviews">
         <div class="reviews-list" v-if="reviews">
             <ReviewItem
-                v-for="review in reviews.reviews"
+                v-for="review in reviews"
                 :key="review.id"
                 v-bind="review"
             />
@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getChartReviews } from "@/api/api";
+import {getUserReviews} from "@/api/api";
 import ReviewItem from "@/components/Chart/Detail/ReviewItem.vue";
 
 const props = defineProps({
@@ -26,17 +26,17 @@ const props = defineProps({
 const reviews = ref(null);
 
 onMounted(async () => {
-    reviews.value = await getChartReviews(props.id);
+    reviews.value = await getUserReviews(props.id);
 });
 </script>
 
 <style lang="scss" scoped>
-.chart-detail-tab-reviews {
+.user-detail-tab-reviews {
     padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    
+
     & .reviews-list {
         display: grid;
         gap: 15px;
