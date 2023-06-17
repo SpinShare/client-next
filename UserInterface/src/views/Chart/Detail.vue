@@ -101,6 +101,7 @@
                 :is-explicit="chart.isExplicit"
                 :upload-date="chart.uploadDate"
                 :update-date="chart.updateDate"
+                :uploader="chart.uploader"
             />
             <TabReviews
                 v-if="currentTab === TAB_REVIEWS"

@@ -31,6 +31,11 @@ export async function getPromos() {
     return await getData('promos') ?? [];
 }
 
+export async function getUser(userId) {
+    console.log("[API] getUser " + userId);
+    return await getData('user/' + userId) ?? null;
+}
+
 export async function getChart(chartId) {
     console.log("[API] getChart " + chartId);
     return await getData('song/' + chartId) ?? null;
