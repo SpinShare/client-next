@@ -12,6 +12,7 @@ import ViewLibrary from './views/Library.vue';
 import ViewSettings from './views/Settings.vue';
 import ViewChartDetail from './views/Chart/Detail.vue';
 import ViewPlaylistDetail from './views/Playlist/Detail.vue';
+import ViewUserDetail from './views/User/Detail.vue';
 import ViewError from './views/Error.vue';
 
 const routes = [
@@ -50,6 +51,10 @@ const routes = [
     {
         path: '/playlist/:playlistId',
         component: ViewPlaylistDetail,
+    },
+    {
+        path: '/user/:userId',
+        component: ViewUserDetail,
     },
     {
         path: '/library',
