@@ -38,12 +38,20 @@
                 <div class="label">Last update</div>
             </div>
         </div>
+        <div
+            v-if="uploaderUser"
+            class="uploader"
+        >
+            <UserItem v-bind="uploaderUser" />
+        </div>
     </section>
 </template>
 
 <script setup>
-import {computed} from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import moment from 'moment';
+import {getUser} from "@/api/api";
+import UserItem from "@/components/Common/UserItem.vue";
 
 const props = defineProps({
     description: {
@@ -80,8 +88,14 @@ const props = defineProps({
     },
 });
 
+const uploaderUser = ref(null);
+
 const relativeUploadDate = computed(() => moment(props.uploadDate.date).startOf("minute").fromNow());
 const relativeUpdateDate = computed(() => props.updateDate ? moment(props.updateDate?.date).startOf("minute").fromNow() : "Never");
+
+onMounted(async () => {
+    uploaderUser.value = await getUser(props.uploader);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -119,6 +133,11 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
                 cursor: pointer;
             }
         }
+    }
+    & .uploader {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
     }
     & .details {
         display: grid;

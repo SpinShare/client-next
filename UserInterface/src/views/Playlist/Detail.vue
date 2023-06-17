@@ -44,8 +44,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="description" v-if="playlist.description">
-                    {{ playlist.description }}
+                <div class="meta">
+                    <div class="description" v-if="playlist.description">
+                        {{ playlist.description }}
+                    </div>
+                    <div
+                        v-if="playlist.user && !playlist.isOfficial"
+                        class="user"
+                    >
+                        <UserItem v-bind="playlist.user" />
+                    </div>
                 </div>
             </header>
             
@@ -71,6 +79,7 @@ const emitter = inject('emitter');
 
 import AppLayout from "../../layouts/AppLayout.vue";
 import ChartList from "@/components/Common/ChartList.vue";
+import UserItem from "@/components/Common/UserItem.vue";
 
 const route = useRoute();
 const playlist = ref(null);
@@ -174,19 +183,29 @@ const handleOpenInBrowser = () => {
                 }
             }
         }
-        
-        & .description {
+        & > .meta {
             padding: 40px;
             display: flex;
-            gap: 40px;
             flex-direction: column;
-            line-height: 1.5rem;
-            white-space: pre-line;
-            color: rgba(var(--colorBaseText),0.6);
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            user-select: text;
-            cursor: text;
+            gap: 20px;
+
+            & .description {
+                display: flex;
+                gap: 40px;
+                flex-direction: column;
+                line-height: 1.5rem;
+                white-space: pre-line;
+                color: rgba(var(--colorBaseText),0.6);
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                user-select: text;
+                cursor: text;
+            }
+            & .user {
+                margin: 0 auto;
+                width: 100%;
+                max-width: 500px;
+            }
         }
     }
     & .chart-list {

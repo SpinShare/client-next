@@ -31,6 +31,31 @@ export async function getPromos() {
     return await getData('promos') ?? [];
 }
 
+export async function getUser(userId) {
+    console.log("[API] getUser " + userId);
+    return await getData('user/' + userId) ?? null;
+}
+
+export async function getUserCharts(userId) {
+    console.log("[API] getUserCharts " + userId);
+    return await getData('user/' + userId + '/charts') ?? null;
+}
+
+export async function getUserPlaylists(userId) {
+    console.log("[API] getUserPlaylists " + userId);
+    return await getData('user/' + userId + '/playlists') ?? null;
+}
+
+export async function getUserReviews(userId) {
+    console.log("[API] getUserReviews " + userId);
+    return await getData('user/' + userId + '/reviews') ?? null;
+}
+
+export async function getUserSpinPlays(userId) {
+    console.log("[API] getUserSpinPlays " + userId);
+    return await getData('user/' + userId + '/spinplays') ?? null;
+}
+
 export async function getChart(chartId) {
     console.log("[API] getChart " + chartId);
     return await getData('song/' + chartId) ?? null;
@@ -74,13 +99,13 @@ export async function searchCharts(query, filters) {
     console.log("[API] searchCharts " + query);
     return await getData('searchCharts', {
         searchQuery: query,
-        diffEasy: filters['diffEasy'] ?? null,
-        diffNormal: filters['diffNormal'] ?? null,
-        diffHard: filters['diffHard'] ?? null,
-        diffExpert: filters['diffExpert'] ?? null,
-        diffXD: filters['diffXD'] ?? null,
-        diffRatingFrom: filters['diffRatingFrom'] ?? null,
-        diffRatingTo: filters['diffRatingTo'] ?? null,
-        showExplicit: filters['showExplicit'] ?? null,
+        diffEasy: filters?.diffEasy ?? null,
+        diffNormal: filters?.diffNormal ?? null,
+        diffHard: filters?.diffHard ?? null,
+        diffExpert: filters?.diffExpert ?? null,
+        diffXD: filters?.diffXD ?? null,
+        diffRatingFrom: filters?.diffRatingFrom ?? null,
+        diffRatingTo: filters?.diffRatingTo ?? null,
+        showExplicit: filters?.showExplicit ?? null,
     }) ?? [];
 }

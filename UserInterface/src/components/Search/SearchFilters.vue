@@ -1,4 +1,5 @@
 <template>
+    <div>
     <SpinButton
         icon="filter-variant"
         label="Filter"
@@ -66,6 +67,7 @@
             </div>
         </div>
     </transition>
+    </div>
 </template>
 
 <script setup>

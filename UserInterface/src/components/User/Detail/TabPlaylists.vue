@@ -1,5 +1,5 @@
 <template>
-    <section class="chart-detail-tab-playlists">
+    <section class="user-detail-tab-playlists">
         <PlaylistList
             v-if="playlists"
             :playlists="playlists"
@@ -11,7 +11,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import PlaylistList from "@/components/Common/PlaylistList.vue";
-import {getChartPlaylists} from "@/api/api";
+import {getUserPlaylists} from "@/api/api";
 
 const props = defineProps({
     id: {
@@ -23,12 +23,12 @@ const props = defineProps({
 const playlists = ref(null);
 
 onMounted(async () => {
-    playlists.value = await getChartPlaylists(props.id);
+    playlists.value = await getUserPlaylists(props.id);
 });
 </script>
 
 <style lang="scss" scoped>
-.chart-detail-tab-playlists {
+.user-detail-tab-playlists {
     padding: 40px;
 }
 </style>

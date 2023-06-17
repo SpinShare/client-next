@@ -34,6 +34,12 @@ const handleTabChange = (i) => {
 
 <style lang="scss" scoped>
 .spin-tab-bar {
+    background: rgb(var(--colorBase));
+    position: sticky;
+    z-index: 10;
+    left: 60px;
+    right: 0;
+    top: 0;
     display: flex;
     border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
     padding: 0 25px;
