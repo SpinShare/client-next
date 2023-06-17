@@ -95,7 +95,6 @@ const relativeUpdateDate = computed(() => props.updateDate ? moment(props.update
 
 onMounted(async () => {
     uploaderUser.value = await getUser(props.uploader);
-    console.log(uploaderUser.value);
 });
 </script>
 
