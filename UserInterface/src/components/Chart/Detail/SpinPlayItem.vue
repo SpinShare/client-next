@@ -39,8 +39,8 @@ const props = defineProps({
         required: true,
     },
     videoThumbnail: {
-        type: String,
-        required: true,
+        type: [String, Boolean],
+        default: false,
     },
 });
 

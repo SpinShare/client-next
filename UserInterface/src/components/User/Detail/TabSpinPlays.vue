@@ -27,7 +27,6 @@ const spinplays = ref(null);
 
 onMounted(async () => {
     spinplays.value = await getUserSpinPlays(props.id);
-    console.log(spinplays.value);
 });
 </script>
 

@@ -41,7 +41,7 @@ const parseDescription = (description) => {
 .user-detail-tab-overview {
     padding: 40px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     
     & .card {
@@ -82,6 +82,18 @@ const parseDescription = (description) => {
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .user-detail-tab-overview {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .user-detail-tab-overview {
+        grid-template-columns: 1fr;
     }
 }
 </style>
