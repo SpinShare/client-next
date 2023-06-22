@@ -56,6 +56,26 @@ export async function getUserSpinPlays(userId) {
     return await getData('user/' + userId + '/spinplays') ?? null;
 }
 
+export async function getNewCharts(page = 0) {
+    console.log("[API] getNewCharts " + page);
+    return await getData('songs/new/' + page) ?? [];
+}
+
+export async function getUpdatedCharts(page = 0) {
+    console.log("[API] getUpdatedCharts " + page);
+    return await getData('songs/updated/' + page) ?? [];
+}
+
+export async function getHotThisWeekCharts(page = 0) {
+    console.log("[API] getHotThisWeekCharts " + page);
+    return await getData('songs/hotThisWeek/' + page) ?? [];
+}
+
+export async function getHotThisMonthCharts(page = 0) {
+    console.log("[API] getHotThisMonthCharts " + page);
+    return await getData('songs/hotThisMonth/' + page) ?? [];
+}
+
 export async function getChart(chartId) {
     console.log("[API] getChart " + chartId);
     return await getData('song/' + chartId) ?? null;
