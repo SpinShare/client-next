@@ -1,15 +1,20 @@
 <template>
     <section class="chart-list">
-        <ChartItem
-            v-for="chart in charts"
+        <template
+            v-for="(chart, i) in charts"
             :key="chart.id"
-            v-bind="chart"
-        />
+        >
+            <ChartItem
+                v-bind="chart"
+                :style="`animation-delay: ${0.025 * i}s`"
+            />
+        </template>
     </section>
 </template>
 
 <script setup>
 import ChartItem from "@/components/Common/ChartItem.vue";
+import {onMounted, ref} from "vue";
 
 defineProps({
     charts: {
@@ -24,6 +29,11 @@ defineProps({
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr;
+    
+    & .chart-item {
+        opacity: 0;
+        animation: chartEntrance 0.2s ease-in-out forwards;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -32,9 +42,24 @@ defineProps({
     }
 }
 
+@media screen and (min-width: 1850px) {
+    .chart-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .chart-list {
         grid-template-columns: 1fr;
+    }
+}
+
+@keyframes chartEntrance {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 </style>

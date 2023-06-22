@@ -11,13 +11,13 @@
             <router-link to="/search" class="item" v-tooltip.right="'Search'">
                 <span class="mdi mdi-magnify"></span>
             </router-link>
-            <router-link to="/lists/new" class="item" v-tooltip.right="'New'">
+            <router-link to="/discover/new/0" class="item" v-tooltip.right="'New'">
                 <span class="mdi mdi-new-box"></span>
             </router-link>
-            <router-link to="/lists/updated" class="item" v-tooltip.right="'Updated'">
+            <router-link to="/discover/updated/0" class="item" v-tooltip.right="'Updated'">
                 <span class="mdi mdi-update"></span>
             </router-link>
-            <router-link to="/lists/hot" class="item" v-tooltip.right="'Trending'">
+            <router-link to="/discover/hotThisWeek/0" class="item" v-tooltip.right="'Trending'">
                 <span class="mdi mdi-fire"></span>
             </router-link>
         </nav>

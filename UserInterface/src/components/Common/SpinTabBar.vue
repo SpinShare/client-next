@@ -14,22 +14,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref, watch} from 'vue';
 
 const emit = defineEmits(['change']);
 const props = defineProps({
+    selected: {
+        type: Number,
+        default: 0,
+    },
     tabs: {
         type: Array,
         default: () => [],
     }
 });
 
-const activeTab = ref(0);
+const activeTab = ref(props.selected);
 
 const handleTabChange = (i) => {
     activeTab.value = i;
     emit('change', i);
 }
+
+watch(() => props.selected, (oldSelected, newSelected) => {
+    console.log("change " + oldSelected + "," + newSelected)
+    activeTab.value = newSelected;
+});
 </script>
 
 <style lang="scss" scoped>

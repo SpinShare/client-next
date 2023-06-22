@@ -7,6 +7,7 @@ import ViewSetupStep3 from './views/Setup/Step3.vue';
 import ViewSetupStep4 from './views/Setup/Step4.vue';
 
 import ViewDiscover from './views/Discover.vue';
+import ViewDiscoverList from './views/Discover/List.vue';
 import ViewSearch from './views/Search.vue';
 import ViewLibrary from './views/Library.vue';
 import ViewSettings from './views/Settings.vue';
@@ -39,6 +40,10 @@ const routes = [
     {
         path: '/',
         component: ViewDiscover,
+    },
+    {
+        path: '/discover/:tab/:page',
+        component: ViewDiscoverList,
     },
     {
         path: '/search',
