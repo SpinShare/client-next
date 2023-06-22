@@ -18,11 +18,6 @@ public class SettingsManager
         
         string appFolder = GetAppFolder();
 
-        if (!Directory.Exists(appFolder))
-        {
-            Directory.CreateDirectory(appFolder);
-        }
-
         _settingsFilePath = Path.Combine(appFolder, "settings.json");
 
         if (File.Exists(_settingsFilePath))
@@ -103,6 +98,11 @@ public class SettingsManager
     {
         string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         string appFolder = Path.Combine(folder, "SpinShare");
+
+        if (!Directory.Exists(appFolder))
+        {
+            Directory.CreateDirectory(appFolder);
+        }
 
         return appFolder;
     }

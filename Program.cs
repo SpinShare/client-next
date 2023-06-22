@@ -8,9 +8,12 @@ using MessageParser;
 
 internal static class Program
 {
+    private static FileStream? _lockFile;
+    
     [STAThread]
     static void Main(string[] args)
     {
+        // Error Logging
         SentrySdk.Init(options =>
         {
             options.Dsn = "https://8ee3ec205d27494ebaff5ce378db752c@o1420803.ingest.sentry.io/4505318580879360";
@@ -19,6 +22,13 @@ internal static class Program
             options.IsGlobalModeEnabled = true;
             options.EnableTracing = true;
         });
+        
+        // Single Instance Lock
+        AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+        if (!IsSingleInstance())
+        {
+            return;
+        }
         
         PhotinoServer
             .CreateStaticFileServer(args, out string baseUrl)
@@ -90,5 +100,26 @@ internal static class Program
 #endif
 
         window.WaitForClose();
+    }
+
+    private static void OnProcessExit(object? sender, EventArgs e)
+    {
+        _lockFile?.Close();
+        _lockFile = null;
+    }
+
+    static bool IsSingleInstance()
+    {
+        string lockFileName = Path.Combine(SettingsManager.GetAppFolder(), "app.lock");
+
+        try
+        {
+            _lockFile = new FileStream(lockFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            return true;
+        }
+        catch (IOException)
+        {
+            return false;
+        }
     }
 }
