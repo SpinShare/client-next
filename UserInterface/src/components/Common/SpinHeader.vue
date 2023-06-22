@@ -2,7 +2,7 @@
     <header
         :class="`type-${type}`"
     >
-        <h1>{{ label }}</h1>
+        <h1 v-if="label">{{ label }}</h1>
         <div class="actions">
             <slot />
         </div>
@@ -12,8 +12,8 @@
 <script setup>
 defineProps({
     label: {
-        type: String,
-        required: true,
+        type: [String, Boolean],
+        default: false,
     },
     type: {
         type: String,
@@ -24,14 +24,15 @@ defineProps({
 
 <style lang="scss" scoped>
 header {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
     gap: 25px;
     align-items: center;
+    justify-content: center;
     
     & h1 {
         font-size: 1.5rem;
         font-weight: 700;
+        flex-grow: 1;
     }
     & .actions {
         display: flex;
