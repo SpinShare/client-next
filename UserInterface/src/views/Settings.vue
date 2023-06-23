@@ -12,7 +12,7 @@
                 <SpinButton
                     icon="content-save"
                     label="Save"
-                    color="bright"
+                    :color="settingsDirty ? 'bright' : 'default'"
                     @click="handleSave"
                 />
             </SpinHeader>
@@ -46,6 +46,7 @@
                 <div class="select">
                     <select
                         v-model="settingLanguage"
+                        @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
                         <option value="en-US">English</option>
@@ -64,6 +65,7 @@
                 <div class="select">
                     <select
                         v-model="settingTheme"
+                        @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
                         <option value="dark">Dark</option>
@@ -79,6 +81,7 @@
             >
                 <SpinSwitch
                     v-model="settingSilentQueue"
+                    @change="settingsDirty = true"
                     :disabled="savingSettings"
                 />
             </SpinInput>
@@ -122,6 +125,7 @@ const settingLanguage = ref('en-US');
 const settingTheme = ref('dark');
 const settingSilentQueue = ref(false);
 const savingSettings = ref(false);
+const settingsDirty = ref(false);
 //const checkingForUpdates = ref(false);
 
 onMounted(() => {
@@ -132,7 +136,8 @@ onMounted(() => {
 });
 
 emitter.on('library-get-path-response', (path) => {
-    console.log(path);
+    settingsDirty.value = true;
+    
     if(path !== '') {
         settingLibraryPath.value = path;
     }
@@ -140,6 +145,7 @@ emitter.on('library-get-path-response', (path) => {
 
 emitter.on('settings-set-response', (settings) => {
     savingSettings.value = false;
+    settingsDirty.value = false;
     setSettings(settings);
 });
 
