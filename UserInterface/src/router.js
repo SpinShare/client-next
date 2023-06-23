@@ -10,10 +10,11 @@ import ViewDiscover from './views/Discover.vue';
 import ViewDiscoverList from './views/Discover/List.vue';
 import ViewSearch from './views/Search.vue';
 import ViewLibrary from './views/Library.vue';
-import ViewSettings from './views/Settings.vue';
 import ViewChartDetail from './views/Chart/Detail.vue';
 import ViewPlaylistDetail from './views/Playlist/Detail.vue';
 import ViewUserDetail from './views/User/Detail.vue';
+import ViewSettings from './views/Settings.vue';
+import ViewLicenses from './views/Licenses.vue';
 import ViewError from './views/Error.vue';
 
 const routes = [
@@ -68,6 +69,10 @@ const routes = [
     {
         path: '/settings',
         component: ViewSettings,
+    },
+    {
+        path: '/licenses',
+        component: ViewLicenses,
     },
     {
         path: "/:pathMatch(.*)*",

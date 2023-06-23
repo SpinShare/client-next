@@ -6,7 +6,8 @@
             >
                 <SpinButton
                     @click="openSettingsFolder"
-                    label="Open Settings Folder"
+                    icon="folder"
+                    v-tooltip="'Open settings folder'"
                 />
                 <SpinButton
                     icon="content-save"
@@ -39,6 +40,7 @@
             </SpinInput>
             <SpinInput
                 label="Language"
+                hint="Translation by SpinShare"
                 type="horizontal"
             >
                 <div class="select">
@@ -56,13 +58,13 @@
             </SpinInput>
             <SpinInput
                 label="Theme"
+                hint="Save to apply your theme"
                 type="horizontal"
             >
                 <div class="select">
                     <select
                         v-model="settingTheme"
                         :disabled="savingSettings"
-                        @change="changeTheme"
                     >
                         <option value="dark">Dark</option>
                         <option value="light">Light</option>
@@ -94,6 +96,16 @@
                     @click="checkForUpdates"
                 />
             </SpinInput> -->
+            <SpinInput
+                label="Third Party licenses"
+                hint="This project was created with third party libraries."
+                type="horizontal"
+            >
+                <SpinButton
+                    label="See licenses"
+                    @click="openLicenses"
+                />
+            </SpinInput>
         </section>
     </AppLayout>
 </template>
@@ -102,6 +114,7 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import SpinInput from "@/components/Common/SpinInput.vue";
 import { ref, inject, onMounted } from 'vue';
+import router from "@/router";
 const emitter = inject('emitter');
 
 const settingLibraryPath = ref('');
@@ -158,6 +171,12 @@ const getLibraryPathAutomatically = () => {
     checkingForUpdates.value = true;
 }; */
 
+const openLicenses = () => {
+    router.push({
+        path: '/licenses',
+    });
+};
+
 const handleSave = () => {
     window.external.sendMessage(JSON.stringify({
         command: "settings-set",
@@ -186,10 +205,6 @@ const setSettings = (settings) => {
     settingLibraryPath.value = settings['library.path'];
 
     emitter.emit('update-theme', settings['app.theme']);
-};
-
-const changeTheme = () => {
-    emitter.emit('update-theme', settingTheme.value);
 };
 </script>
 

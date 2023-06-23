@@ -17,7 +17,7 @@
                     
                     <SpinHeader>
                         <SpinButton
-                            icon="menu-left"
+                            icon="arrow-left"
                             :disabled="currentPage < 1"
                             @click="navigatePrevious"
                         />
@@ -27,7 +27,7 @@
                             color="transparent"
                         />
                         <SpinButton
-                            icon="menu-right"
+                            icon="arrow-right"
                             :disabled="charts.length < 12"
                             @click="navigateNext"
                         />

@@ -33,7 +33,7 @@
 
 	<PropertyGroup>
 		<UiRoot>UserInterface\</UiRoot>
-    <UiBuildOutput>dist\</UiBuildOutput>
+    	<UiBuildOutput>dist\</UiBuildOutput>
 		<WwwRoot Condition=" '$(EmbedWwwRoot)' != 'true' ">wwwroot\</WwwRoot>
 		<WwwRoot Condition=" '$(EmbedWwwRoot)' == 'true' ">Resources\wwwroot\</WwwRoot>
 	</PropertyGroup>
@@ -69,6 +69,7 @@
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
 		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
 		<Exec WorkingDirectory="$(UiRoot)" Command="npm install" />
+		<Exec WorkingDirectory="$(UiRoot)" Command="npm run generate-licenses" />
 		<Exec WorkingDirectory="$(UiRoot)" Command="npm run build" />
 		
 		<ItemGroup>
