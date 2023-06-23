@@ -32,7 +32,7 @@ public class CommandOpenInExplorer : ICommand
         
         Process openExplorerProcess = new Process();
         openExplorerProcess.StartInfo.FileName = cmd;
-        openExplorerProcess.StartInfo.Arguments = "\"" + path + "\"";
+        openExplorerProcess.StartInfo.Arguments = $@"""{path}""";
         openExplorerProcess.StartInfo.UseShellExecute = false;
         openExplorerProcess.StartInfo.CreateNoWindow = true;
         openExplorerProcess.Start();

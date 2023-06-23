@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -14,14 +15,9 @@ public class SettingsManager
 
     private SettingsManager()
     {
-        Console.WriteLine("[SettingsManager] Initializing");
+        Debug.WriteLine("[SettingsManager] Initializing");
         
         string appFolder = GetAppFolder();
-
-        if (!Directory.Exists(appFolder))
-        {
-            Directory.CreateDirectory(appFolder);
-        }
 
         _settingsFilePath = Path.Combine(appFolder, "settings.json");
 
@@ -103,6 +99,11 @@ public class SettingsManager
     {
         string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         string appFolder = Path.Combine(folder, "SpinShare");
+
+        if (!Directory.Exists(appFolder))
+        {
+            Directory.CreateDirectory(appFolder);
+        }
 
         return appFolder;
     }

@@ -10,14 +10,18 @@
                 />
                 <SpinButton
                     icon="plus"
+                    @click="handleOpenBackup"
                 />
                 <SpinButton
                     icon="refresh"
                     @click="handleRebuildCache"
                 />
             </SpinHeader>
-            <SpinLoader v-if="loadingLibrary" />
+            <SpinLoader
+                v-if="loadingLibrary"
+            />
             <LibraryChartList
+                v-if="!loadingLibrary"
                 :charts="library"
             />
         </section>
@@ -45,6 +49,13 @@ const handleOpenLibrary = () => {
     }));
 };
 
+const handleOpenBackup = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "library-open-and-install-backup",
+        data: "",
+    }));
+};
+
 const loadLibrary = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-get",
@@ -62,6 +73,10 @@ const handleRebuildCache = () => {
 emitter.on('library-get-response', (response) => {
     loadingLibrary.value = false;
     library.value = response;
+});
+
+emitter.on('library-open-and-install-backup-response', () => {
+    loadLibrary();
 });
 </script>
 

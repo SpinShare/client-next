@@ -125,7 +125,7 @@ const handleClearQueue = () => {
     right: 0;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(5px);
-    z-index: 10;
+    z-index: 100;
     cursor: pointer;
     
     & .download-queue {
