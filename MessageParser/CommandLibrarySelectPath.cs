@@ -32,8 +32,6 @@ public class CommandLibrarySelectPath : ICommand
             response.Data = result.Path;
         }
         
-        Console.WriteLine(result);
-        
         await Task.Yield();
 
         MessageHandler.SendResponse(sender, response);
