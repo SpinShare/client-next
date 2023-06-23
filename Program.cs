@@ -28,6 +28,7 @@ internal static class Program
         AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         if (!IsSingleInstance())
         {
+            // TODO: Error Dialog
             return;
         }
         
@@ -35,15 +36,13 @@ internal static class Program
             .CreateStaticFileServer(args, out string baseUrl)
             .RunAsync();
 
-        string windowTitle = "SpinShare";
+        MessageHandler messageHandler = new MessageHandler();
+        SettingsManager settingsManager = SettingsManager.GetInstance();
         
         Debug.WriteLine("[MAIN] Creating Window");
-
-        MessageHandler messageHandler = new MessageHandler();
-
         var window = new PhotinoWindow()
             .SetLogVerbosity(2)
-            .SetTitle(windowTitle)
+            .SetTitle("SpinShare")
             .SetSize(1100, 750)
             .SetUseOsDefaultSize(false)
             .Center()
@@ -51,18 +50,15 @@ internal static class Program
             // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {
-                var window = (PhotinoWindow?)sender;
+                var senderWindow = (PhotinoWindow?)sender;
                 
-                if (size.Width < 800) window?.SetWidth(800);
-                if (size.Height < 650) window?.SetHeight(650);
+                if (size.Width < 800) senderWindow?.SetWidth(800);
+                if (size.Height < 650) senderWindow?.SetHeight(650);
             })
             .RegisterWebMessageReceivedHandler(messageHandler.RegisterWebMessageReceivedHandler);
 
+        // Check if Setup is needed
         var initPage = "#/";
-
-        SettingsManager settingsManager = SettingsManager.GetInstance();
-        
-        // Setup if there are no settings
         if (!SettingsManager.SettingsFileExists())
         {
             initPage = "#/setup/step-0";
