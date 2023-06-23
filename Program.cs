@@ -48,22 +48,14 @@ internal static class Program
             .SetUseOsDefaultSize(false)
             .Center()
             .SetResizable(true)
-            /* FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
+            // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {
                 var window = (PhotinoWindow?)sender;
                 
-                if (size.Width < 600)
-                {
-                    Console.WriteLine("Window Width Too Small");
-                    window?.SetWidth(600);
-                }
-                if (size.Height < 400)
-                {
-                    Console.WriteLine("Window Height Too Small");
-                    window?.SetHeight(400);
-                }
-            }) */
+                if (size.Width < 800) window?.SetWidth(800);
+                if (size.Height < 650) window?.SetHeight(650);
+            })
             .RegisterWebMessageReceivedHandler(messageHandler.RegisterWebMessageReceivedHandler);
 
         var initPage = "#/";
