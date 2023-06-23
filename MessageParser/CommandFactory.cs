@@ -18,6 +18,8 @@ public class CommandFactory
                 return new CommandLibraryGetPath();
             case "library-open-in-explorer":
                 return new CommandLibraryOpenInExplorer();
+            case "library-open-and-install-backup":
+                return new CommandOpenAndInstallBackup();
             case "library-build-cache":
                 return new CommandLibraryBuildCache();
             case "library-get":

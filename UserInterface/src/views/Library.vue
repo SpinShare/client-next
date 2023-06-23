@@ -10,6 +10,7 @@
                 />
                 <SpinButton
                     icon="plus"
+                    @click="handleOpenBackup"
                 />
                 <SpinButton
                     icon="refresh"
@@ -45,6 +46,13 @@ const handleOpenLibrary = () => {
     }));
 };
 
+const handleOpenBackup = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "library-open-and-install-backup",
+        data: "",
+    }));
+};
+
 const loadLibrary = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-get",
@@ -62,6 +70,10 @@ const handleRebuildCache = () => {
 emitter.on('library-get-response', (response) => {
     loadingLibrary.value = false;
     library.value = response;
+});
+
+emitter.on('library-open-and-install-backup', (response) => {
+    console.log(response);
 });
 </script>
 
