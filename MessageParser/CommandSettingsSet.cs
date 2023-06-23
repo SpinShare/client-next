@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using PhotinoNET;
@@ -26,7 +27,7 @@ public class CommandSettingsSet : ICommand
             
             if (key != null && value != null)
             {
-                Console.WriteLine("[SettingsSetCommand] Writing Setting: " + key);
+                Debug.WriteLine($"[SettingsSetCommand] Writing Setting: {key}");
             
                 _settingsManager.Set(key, value);
             }

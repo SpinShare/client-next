@@ -32,7 +32,7 @@ defineProps({
     
     & .chart-item {
         opacity: 0;
-        animation: chartEntrance 0.2s ease-in-out forwards;
+        animation: listEntrance 0.2s ease-in-out forwards;
     }
 }
 
@@ -51,15 +51,6 @@ defineProps({
 @media screen and (max-width: 1000px) {
     .chart-list {
         grid-template-columns: 1fr;
-    }
-}
-
-@keyframes chartEntrance {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
     }
 }
 </style>

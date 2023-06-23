@@ -28,4 +28,6 @@ cd UserInterface && npm run build
 ```
 
 #### Building the application
-*TODO*
+```sh
+dotnet build --configuration Release
+```

@@ -1,4 +1,5 @@
-﻿using PhotinoNET;
+﻿using System.Diagnostics;
+using PhotinoNET;
 using PhotinoNET.Server;
 using Sentry;
 
@@ -27,6 +28,7 @@ internal static class Program
         AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         if (!IsSingleInstance())
         {
+            // TODO: Error Dialog
             return;
         }
         
@@ -34,42 +36,29 @@ internal static class Program
             .CreateStaticFileServer(args, out string baseUrl)
             .RunAsync();
 
-        string windowTitle = "SpinShare";
-        
-        Console.WriteLine("[MAIN] Creating Window");
-
         MessageHandler messageHandler = new MessageHandler();
-
+        SettingsManager settingsManager = SettingsManager.GetInstance();
+        
+        Debug.WriteLine("[MAIN] Creating Window");
         var window = new PhotinoWindow()
             .SetLogVerbosity(2)
-            .SetTitle(windowTitle)
+            .SetTitle("SpinShare")
             .SetSize(1100, 750)
             .SetUseOsDefaultSize(false)
             .Center()
             .SetResizable(true)
-            /* FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
+            // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {
-                var window = (PhotinoWindow?)sender;
+                var senderWindow = (PhotinoWindow?)sender;
                 
-                if (size.Width < 600)
-                {
-                    Console.WriteLine("Window Width Too Small");
-                    window?.SetWidth(600);
-                }
-                if (size.Height < 400)
-                {
-                    Console.WriteLine("Window Height Too Small");
-                    window?.SetHeight(400);
-                }
-            }) */
+                if (size.Width < 800) senderWindow?.SetWidth(800);
+                if (size.Height < 650) senderWindow?.SetHeight(650);
+            })
             .RegisterWebMessageReceivedHandler(messageHandler.RegisterWebMessageReceivedHandler);
 
+        // Check if Setup is needed
         var initPage = "#/";
-
-        SettingsManager settingsManager = SettingsManager.GetInstance();
-        
-        // Setup if there are no settings
         if (!SettingsManager.SettingsFileExists())
         {
             initPage = "#/setup/step-0";
@@ -94,7 +83,7 @@ internal static class Program
 
 #if DEBUG
         window.SetDevToolsEnabled(true);
-        window.Load(new Uri("http://localhost:5173/" + initPage));
+        window.Load(new Uri($"http://localhost:5173/{initPage}"));
 #else
         window.Load($"{baseUrl}/index.html" + initPage);
 #endif

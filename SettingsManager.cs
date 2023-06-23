@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -14,7 +15,7 @@ public class SettingsManager
 
     private SettingsManager()
     {
-        Console.WriteLine("[SettingsManager] Initializing");
+        Debug.WriteLine("[SettingsManager] Initializing");
         
         string appFolder = GetAppFolder();
 

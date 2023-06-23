@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview --port 4173",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "generate-licenses": "generate-license-file --input package.json --output src/assets/third-party-licenses.md --overwrite"
   },
   "dependencies": {
     "@imengyu/vue3-context-menu": "^1.2.10",
@@ -24,7 +25,9 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
+    "generate-license-file": "^2.0.0",
     "prettier": "^2.7.1",
-    "vite": "^3.0.9"
+    "vite": "^3.0.9",
+    "vite-plugin-markdown": "^2.1.0"
   }
 }

@@ -6,12 +6,13 @@
             >
                 <SpinButton
                     @click="openSettingsFolder"
-                    label="Open Settings Folder"
+                    icon="folder"
+                    v-tooltip="'Open settings folder'"
                 />
                 <SpinButton
                     icon="content-save"
                     label="Save"
-                    color="bright"
+                    :color="settingsDirty ? 'bright' : 'default'"
                     @click="handleSave"
                 />
             </SpinHeader>
@@ -39,11 +40,13 @@
             </SpinInput>
             <SpinInput
                 label="Language"
+                hint="Translation by SpinShare"
                 type="horizontal"
             >
                 <div class="select">
                     <select
                         v-model="settingLanguage"
+                        @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
                         <option value="en-US">English</option>
@@ -56,13 +59,14 @@
             </SpinInput>
             <SpinInput
                 label="Theme"
+                hint="Save to apply your theme"
                 type="horizontal"
             >
                 <div class="select">
                     <select
                         v-model="settingTheme"
+                        @change="settingsDirty = true"
                         :disabled="savingSettings"
-                        @change="changeTheme"
                     >
                         <option value="dark">Dark</option>
                         <option value="light">Light</option>
@@ -77,6 +81,7 @@
             >
                 <SpinSwitch
                     v-model="settingSilentQueue"
+                    @change="settingsDirty = true"
                     :disabled="savingSettings"
                 />
             </SpinInput>
@@ -94,6 +99,16 @@
                     @click="checkForUpdates"
                 />
             </SpinInput> -->
+            <SpinInput
+                label="Third Party licenses"
+                hint="This project was created with third party libraries."
+                type="horizontal"
+            >
+                <SpinButton
+                    label="See licenses"
+                    @click="openLicenses"
+                />
+            </SpinInput>
         </section>
     </AppLayout>
 </template>
@@ -102,6 +117,7 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import SpinInput from "@/components/Common/SpinInput.vue";
 import { ref, inject, onMounted } from 'vue';
+import router from "@/router";
 const emitter = inject('emitter');
 
 const settingLibraryPath = ref('');
@@ -109,6 +125,7 @@ const settingLanguage = ref('en-US');
 const settingTheme = ref('dark');
 const settingSilentQueue = ref(false);
 const savingSettings = ref(false);
+const settingsDirty = ref(false);
 //const checkingForUpdates = ref(false);
 
 onMounted(() => {
@@ -119,7 +136,8 @@ onMounted(() => {
 });
 
 emitter.on('library-get-path-response', (path) => {
-    console.log(path);
+    settingsDirty.value = true;
+    
     if(path !== '') {
         settingLibraryPath.value = path;
     }
@@ -127,6 +145,7 @@ emitter.on('library-get-path-response', (path) => {
 
 emitter.on('settings-set-response', (settings) => {
     savingSettings.value = false;
+    settingsDirty.value = false;
     setSettings(settings);
 });
 
@@ -158,6 +177,12 @@ const getLibraryPathAutomatically = () => {
     checkingForUpdates.value = true;
 }; */
 
+const openLicenses = () => {
+    router.push({
+        path: '/licenses',
+    });
+};
+
 const handleSave = () => {
     window.external.sendMessage(JSON.stringify({
         command: "settings-set",
@@ -186,10 +211,6 @@ const setSettings = (settings) => {
     settingLibraryPath.value = settings['library.path'];
 
     emitter.emit('update-theme', settings['app.theme']);
-};
-
-const changeTheme = () => {
-    emitter.emit('update-theme', settingTheme.value);
 };
 </script>
 
