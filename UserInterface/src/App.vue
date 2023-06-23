@@ -69,48 +69,4 @@ router.beforeEach((to, from) => {
         overflow-y: scroll;
     }
 }
-
-.setup-enter-active {
-    transition: all 0.2s ease-out;
-}
-.setup-leave-active {
-    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.setup-enter-from,
-.setup-leave-to {
-    transform: translateX(20px);
-    opacity: 0;
-}
-
-.queue-enter-active {
-    transition: all 0.15s ease-out;
-}
-.queue-leave-active {
-    transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.queue-enter-from,
-.queue-leave-to {
-    opacity: 0;
-}
-
-.default-enter-active {
-    transition: all 0.15s ease-out;
-}
-.default-leave-active {
-    transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.default-enter-from,
-.default-leave-to {
-    transform: scale(0.975);
-    opacity: 0;
-}
-
-@keyframes loadingLoop {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
 </style>
