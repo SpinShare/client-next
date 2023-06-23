@@ -17,8 +17,11 @@
                     @click="handleRebuildCache"
                 />
             </SpinHeader>
-            <SpinLoader v-if="loadingLibrary" />
+            <SpinLoader
+                v-if="loadingLibrary"
+            />
             <LibraryChartList
+                v-if="!loadingLibrary"
                 :charts="library"
             />
         </section>
@@ -72,8 +75,8 @@ emitter.on('library-get-response', (response) => {
     library.value = response;
 });
 
-emitter.on('library-open-and-install-backup', (response) => {
-    console.log(response);
+emitter.on('library-open-and-install-backup-response', () => {
+    loadLibrary();
 });
 </script>
 

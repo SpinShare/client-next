@@ -4,9 +4,12 @@ using PhotinoNET;
 namespace SpinShareClient.MessageParser;
 
 using LibraryCache;
+using DownloadQueue;
 
 public class CommandOpenAndInstallBackup : ICommand
 {
+    private DownloadQueue? _downloadQueue;
+    
     public static readonly (string Name, string[] Extensions)[] Filters = new[]
     {
         ("Spin Rhythm XD Backup", new string[] { ".zip" })
@@ -14,6 +17,8 @@ public class CommandOpenAndInstallBackup : ICommand
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        _downloadQueue = DownloadQueue.GetInstance();
+        
         Debug.WriteLine("[CommandOpenAndInstallBackup] Opening Picker");
         
         string defaultLibraryPath = LibraryCache.GetLibraryPath() ?? "";
@@ -30,15 +35,7 @@ public class CommandOpenAndInstallBackup : ICommand
         {
             Debug.WriteLine($"[CommandOpenAndInstallBackup] Installing backup: {resultPath[0]}");
             
-            // TODO: Extracting Backup to Library
-            // TODO: Cache
-
-            Message response = new() {
-                Command = "library-open-and-install-backup-response",
-                Data = resultPath[0]
-            };
-
-            MessageHandler.SendResponse(sender, response);
+            await _downloadQueue.AddLocalBackup(sender, resultPath[0]);
         }
     }
 }

@@ -115,7 +115,8 @@ public class DownloadQueue
         item.State = DownloadState.Copying;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await MoveFilesAsync(extractedFilePath, _libraryPath);
-        await CleanupAsync(zipFilePath, extractedFilePath);
+        await CleanupAsync(zipFilePath);
+        await CleanupAsync(extractedFilePath);
         
         Debug.WriteLine($"[DownloadQueue] #{item.ID} > Caching");
         item.State = DownloadState.Caching;
@@ -136,6 +137,42 @@ public class DownloadQueue
         {
             await WorkQueue(sender);
         }
+    }
+
+    public async Task AddLocalBackup(PhotinoWindow? sender, string filePath)
+    {
+        if (_libraryPath == null) return;
+        
+        Debug.WriteLine($"[DownloadQueue] Adding local backup: {filePath}");
+
+        string tempFolder = Path.GetTempPath();
+        string fileName = Path.GetFileNameWithoutExtension(filePath);
+        string extractedFilePath = Path.Combine(tempFolder, fileName);
+        
+        Debug.WriteLine($"[DownloadQueue] {fileName} > Extracing to Temp");
+        await UnzipAsync(filePath, extractedFilePath);
+
+        Debug.WriteLine($"[DownloadQueue] {fileName} > Copying to Library");
+        string[] srtbFilePaths = Directory.GetFiles(extractedFilePath, "*.srtb");
+        await MoveFilesAsync(extractedFilePath, _libraryPath);
+        await CleanupAsync(extractedFilePath);
+        
+        Debug.WriteLine($"[DownloadQueue] {fileName} > Caching");
+        foreach (string srtbFilePath in srtbFilePaths)
+        {
+            string srtbFileName = Path.GetFileName(srtbFilePath);
+            string srtbFullFilePath = Path.Combine(_libraryPath, srtbFileName);
+            
+            Debug.WriteLine($"[DownloadQueue] {fileName} > Caching .srtb: {srtbFullFilePath}");
+            
+            LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
+            await libraryCache.AddToCache(srtbFullFilePath);
+            await libraryCache.SaveCache();
+        }
+
+        Debug.WriteLine($"[DownloadQueue] {fileName} > Finished");
+        
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "library-open-and-install-backup-response", Data = "" });
     }
 
     private async Task DownloadFileAsync(string url, string filePath)
@@ -177,34 +214,24 @@ public class DownloadQueue
         });
     }
     
-    private async Task CleanupAsync(string zipFilePath, string extractPath)
+    private async Task CleanupAsync(string path)
     {
         await Task.Run(() =>
         {
-            // Delete the zip file
-            if (File.Exists(zipFilePath))
+            try
             {
-                try
+                if (File.Exists(path))
                 {
-                    File.Delete(zipFilePath);
+                    File.Delete(path);
                 }
-                catch (Exception ex)
+                if (Directory.Exists(path))
                 {
-                    Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
+                    Directory.Delete(path, true);
                 }
             }
-
-            // Delete the extracted files
-            if (Directory.Exists(extractPath))
+            catch (Exception ex)
             {
-                try
-                {
-                    Directory.Delete(extractPath, true);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
-                }
+                Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
             }
         });
     }
