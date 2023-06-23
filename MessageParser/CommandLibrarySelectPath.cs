@@ -19,7 +19,7 @@ public class CommandLibrarySelectPath : ICommand
         
         await Task.Yield();
 
-        if (Directory.Exists(resultPath?[0]))
+        if (resultPath?.Length == 1 && Directory.Exists(resultPath[0]))
         {
             Message response = new() {
                 Command = "library-get-path-response",

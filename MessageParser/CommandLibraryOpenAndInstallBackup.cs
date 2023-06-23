@@ -26,7 +26,7 @@ public class CommandOpenAndInstallBackup : ICommand
         
         await Task.Yield();
 
-        if (File.Exists(resultPath?[0]))
+        if (resultPath?.Length == 1 && File.Exists(resultPath[0]))
         {
             Debug.WriteLine($"[CommandOpenAndInstallBackup] Installing backup: {resultPath[0]}");
             
