@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PhotinoNET;
+using SpinShareClient.MessageParser;
 
 namespace SpinShareClient.LibraryCache;
 
@@ -20,7 +22,7 @@ public class LibraryCache
 
     private LibraryCache()
     {
-        Console.WriteLine("[ChartLibrary] Initializing");
+        Debug.WriteLine("[ChartLibrary] Initializing");
 
         _settingsManager = SettingsManager.GetInstance();
         _libraryPath = _settingsManager.Get<string>("library.path");
@@ -47,9 +49,9 @@ public class LibraryCache
         return _instance;
     }
 
-    public async Task RebuildCache()
+    public async Task RebuildCache(PhotinoWindow? sender)
     {
-        Console.WriteLine("[LibraryCache] Rebuilding cache");
+        Debug.WriteLine("[LibraryCache] Rebuilding cache");
         
         if (!Directory.Exists(_libraryPath))
         {
@@ -70,23 +72,44 @@ public class LibraryCache
             await AddToCache(filePaths[i]);
         
             itemWatch.Stop();
-            Console.WriteLine("[LibraryCache] Finished " + i + " of " + filePaths.Length + " (in " + itemWatch.Elapsed.ToString("mm\\:ss\\.ff") + ")");
+            Debug.WriteLine($"[LibraryCache] Finished {i + 1} of {filePaths.Length} (in {itemWatch.Elapsed:mm\\:ss\\.ff})");
+            
+            if(sender != null) {
+                MessageHandler.SendResponse(sender, new Message {
+                    Command = "library-build-cache-progress-response",
+                    Data = new
+                    {
+                        Current = i + 1,
+                        Total = filePaths.Length,
+                        Percentage = ((i + 1f) / filePaths.Length * 100f).ToString("F1")
+                    }
+                });
+            }
         }
 
         fullWatch.Stop();
-        Console.WriteLine("[LibraryCache] Finished rebuilding cache in " + fullWatch.Elapsed.ToString("mm\\:ss\\.ff") + ".");
+        Debug.WriteLine($"[LibraryCache] Finished rebuilding cache in {fullWatch.Elapsed:mm\\:ss\\.ff}.");
         
         await SaveCache();
     }
 
     public async Task AddToCache(string filePath)
     {
-        Console.WriteLine("[LibraryCache] Adding to Cache: " + Path.GetFileName(filePath));
-        
-        LibraryItem libraryItem = new();
-            
         string fileName = Path.GetFileName(filePath);
         string spinshareReference = Path.GetFileNameWithoutExtension(filePath);
+
+        LibraryItem? existingItem = Library.Find(x => x.FileName == fileName || x.SpinShareReference == spinshareReference);
+
+        if (existingItem == null)
+        {
+            Debug.WriteLine($"[LibraryCache] Adding new: {Path.GetFileName(filePath)}");
+        }
+        else
+        {
+            Debug.WriteLine($"[LibraryCache] Updating existing: {Path.GetFileName(filePath)}");
+        }
+        
+        LibraryItem libraryItem = existingItem ?? new();
 
         string srtbJson = await File.ReadAllTextAsync(filePath);
         UnityScriptableObject? srtbData = JsonConvert.DeserializeObject<UnityScriptableObject>(srtbJson) ?? null;
@@ -104,7 +127,7 @@ public class LibraryCache
             libraryItem.UpdateHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
             
-        Library.Add(libraryItem);
+        if(existingItem == null) Library.Add(libraryItem);
     }
 
     private void LoadCache()

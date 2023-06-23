@@ -13,7 +13,7 @@ public class CommandLibraryBuildCache : ICommand
     {
         _libraryCache = LibraryCache.GetInstance();
         
-        await _libraryCache.RebuildCache();
+        await _libraryCache.RebuildCache(sender);
 
         Message response = new() {
             Command = "library-build-cache-response",
