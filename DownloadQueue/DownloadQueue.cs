@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -16,7 +17,6 @@ public class DownloadQueue
     private static DownloadQueue? _instance;
     private static readonly object _lock = new();
     private readonly string? _libraryPath;
-    // TODO: Rework to List
     public List<DownloadItem> Queue = new();
     public bool IsRunning = false;
     
@@ -24,7 +24,7 @@ public class DownloadQueue
 
     private DownloadQueue()
     {
-        Console.WriteLine("[DownloadQueue] Initializing");
+        Debug.WriteLine("[DownloadQueue] Initializing");
 
         _settingsManager = SettingsManager.GetInstance();
         _libraryPath = _settingsManager.Get<string>("library.path");
@@ -95,29 +95,29 @@ public class DownloadQueue
         
         DownloadItem item = Queue.First(x => x.State == DownloadState.Queued);
 
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Starting");
+        Debug.WriteLine("[DownloadQueue] #" + item.ID + " > Starting");
 
         string tempFolder = Path.GetTempPath();
         string zipFilePath = Path.Combine(tempFolder, item.FileReference + ".zip");
         string extractedFilePath = Path.Combine(tempFolder, item.FileReference ?? "");
 
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Downloading to Temp");
+        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Downloading to Temp");
         item.State = DownloadState.Downloading;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await DownloadFileAsync("https://spinsha.re/api/song/" + item.ID + "/download", zipFilePath);
         
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Extracing to Temp");
+        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Extracing to Temp");
         item.State = DownloadState.Extracting;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await UnzipAsync(zipFilePath, extractedFilePath);
 
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Copying to Library");
+        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Copying to Library");
         item.State = DownloadState.Copying;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await MoveFilesAsync(extractedFilePath, _libraryPath);
         await CleanupAsync(zipFilePath, extractedFilePath);
         
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Caching");
+        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Caching");
         item.State = DownloadState.Caching;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         string srtbFilePath = Path.Combine(_libraryPath ?? "", item.FileReference + ".srtb");
@@ -125,7 +125,7 @@ public class DownloadQueue
         await libraryCache.AddToCache(srtbFilePath);
         await libraryCache.SaveCache();
         
-        Console.WriteLine("[DownloadQueue] #" + item.ID + " > Finished");
+        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Finished");
         item.State = DownloadState.Done;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
@@ -190,7 +190,7 @@ public class DownloadQueue
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
+                    Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
                 }
             }
 
@@ -203,7 +203,7 @@ public class DownloadQueue
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
+                    Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
                 }
             }
         });

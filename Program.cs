@@ -1,4 +1,5 @@
-﻿using PhotinoNET;
+﻿using System.Diagnostics;
+using PhotinoNET;
 using PhotinoNET.Server;
 using Sentry;
 
@@ -36,7 +37,7 @@ internal static class Program
 
         string windowTitle = "SpinShare";
         
-        Console.WriteLine("[MAIN] Creating Window");
+        Debug.WriteLine("[MAIN] Creating Window");
 
         MessageHandler messageHandler = new MessageHandler();
 
@@ -94,7 +95,7 @@ internal static class Program
 
 #if DEBUG
         window.SetDevToolsEnabled(true);
-        window.Load(new Uri("http://localhost:5173/" + initPage));
+        window.Load(new Uri($"http://localhost:5173/{initPage}"));
 #else
         window.Load($"{baseUrl}/index.html" + initPage);
 #endif
