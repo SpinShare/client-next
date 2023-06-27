@@ -165,7 +165,7 @@ public class LibraryCache
     {
         string? libraryPath = "";
 
-        switch (GetPlatform())
+        switch (Environment.OSVersion.Platform)
         {
             case PlatformID.Unix:
                 libraryPath = Path.Combine(
@@ -196,6 +196,4 @@ public class LibraryCache
 
         return libraryPath;
     }
-    
-    public static Func<PlatformID> GetPlatform = () => Environment.OSVersion.Platform;
 }
