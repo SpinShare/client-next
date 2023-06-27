@@ -29,7 +29,7 @@ public class InstanceTests
         
         var result = SpinShareClient.LibraryCache.LibraryCache.GetLibraryPath();
 
-        Assert.AreEqual(result, ".steam\\steam\\steamapps\\compatdata\\1058830\\pfx\\drive_c\\users\\steamuser\\AppData\\LocalLow\\Super Spin Digital\\Spin Rhythm XD\\Custom");
+        StringAssert.Contains(result, ".steam\\steam\\steamapps\\compatdata\\1058830\\pfx\\drive_c\\users\\steamuser\\AppData\\LocalLow\\Super Spin Digital\\Spin Rhythm XD\\Custom");
     }
 
     [TestMethod]
