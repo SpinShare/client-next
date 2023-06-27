@@ -16,6 +16,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    animation: 0.3s loadingEntry linear forwards;
     
     & .icon {
         width: 48px;
@@ -25,6 +27,18 @@
         justify-content: center;
         font-size: 42px;
         animation: loadingLoop 0.4s linear infinite;
+    }
+}
+
+@keyframes loadingEntry {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 </style>

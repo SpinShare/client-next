@@ -26,7 +26,7 @@ jobs:
       - name: Create Folder Structure for Archive
         run: |
           mkdir -p artifacts/${{ matrix.os }}
-          cp -r bin/Release/net7.0/* artifacts/${{ matrix.os }}/
+          cp -r SpinShareClient/bin/Release/net7.0/* artifacts/${{ matrix.os }}/
           ls -lp artifacts/${{ matrix.os }}
       - name: Archive build artifacts
         uses: vimtor/action-zip@v1
