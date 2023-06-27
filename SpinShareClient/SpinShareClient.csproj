@@ -40,20 +40,21 @@
 	<ItemGroup>
 		<!-- Don't publish the UI source files, but do show them in the project files list -->
 		<Content Remove="$(UiRoot)**" />
-		<Content Include=".github\ISSUE_TEMPLATE\bug_report.md" />
-		<Content Include=".github\workflows\dotnet-desktop.yml" />
 		<None Remove="$(UiRoot)**" />
 		<None Include="$(UiRoot)**" Exclude="$(UiRoot)node_modules\**" />
 		<None Remove="obj\**" />
+		<None Remove=".github\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\**" Condition=" '$(GenerateEmbeddedFilesManifest)' == 'true' " />
 		<EmbeddedResource Remove="obj\**" />
+		<EmbeddedResource Remove=".github\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Remove="obj\**" />
+	  <Compile Remove=".github\**" />
 	</ItemGroup>
 
 	<Target Name="EnsureNodeEnv" BeforeTargets="BuildUserInterface" Condition=" !Exists('$(UiRoot)node_modules') ">

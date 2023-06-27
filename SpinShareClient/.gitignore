@@ -116,3 +116,9 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Project ignore
+/UserInterface/node_modules/
+/wwwroot/assets/
+/wwwroot/favicon.ico
+/wwwroot/index.html
