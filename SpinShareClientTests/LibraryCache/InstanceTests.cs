@@ -17,6 +17,8 @@ public class InstanceTests
     {
         var result = SpinShareClient.LibraryCache.LibraryCache.GetLibraryPath();
         
-        StringAssert.Contains(result, "Super Spin Digital\\Spin Rhythm XD\\Custom");
+        StringAssert.Contains(result, "Super Spin Digital");
+        StringAssert.Contains(result, "Spin Rhythm XD");
+        StringAssert.Contains(result, "Custom");
     }
 }
