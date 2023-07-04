@@ -208,7 +208,7 @@ emitter.on('settings-get-full-response', (settings) => {
 });
 
 emitter.on('game-detect-dlcs-response', (dlcs) => {
-    detectedDlcs.value = Object.keys(dlcs);
+    if(dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
     isDetectingDlcs.value = false;
 });
 
@@ -293,7 +293,7 @@ const setSettings = (settings) => {
 
     emitter.emit('update-theme', settings['app.theme']);
     
-    detectedDlcs.value = Object.keys(settings['dlcs']);
+    if(settings['dlcs']) detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
     isDetectingDlcs.value = false;
 };
 </script>

@@ -46,14 +46,14 @@ public class DlcManager
             {
                 if (_dlcs.TryGetValue(dlcName, out var dlc))
                 {
-                    string fileMD5 = await GenerateMD5(filePath);
+                    string fileMd5 = await GenerateMd5(filePath);
                              
-                    if(!dlc.Exists(x => x == fileMD5))
-                        dlc.Add(fileMD5);
+                    if(!dlc.Exists(x => x == fileMd5))
+                        dlc.Add(fileMd5);
                 }
                 else
                 {
-                    _dlcs.Add(dlcName, new List<string>() { await GenerateMD5(filePath) });
+                    _dlcs.Add(dlcName, new List<string>() { await GenerateMd5(filePath) });
                 }
             }
         }
@@ -65,14 +65,14 @@ public class DlcManager
         return _dlcs;
     }
 
-    private async Task<string> GenerateMD5(string filePath)
+    public async Task<string> GenerateMd5(string filePath)
     {
         byte[] fileData = await File.ReadAllBytesAsync(filePath);
         
         using (var md5 = MD5.Create())
         {
             var hash = md5.ComputeHash(fileData);
-            return BitConverter.ToString(hash);
+            return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
     }
 }
