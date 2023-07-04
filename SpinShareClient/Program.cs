@@ -65,7 +65,7 @@ internal static class Program
         }
         else
         {
-            if (!settingsManager.Exists("library.path") || !settingsManager.Exists("app.silentQueue") ||
+            if (!settingsManager.Exists("library.path") || !settingsManager.Exists("game.path") ||
                 !settingsManager.Exists("app.language") || !settingsManager.Exists("app.setup.done"))
             {
                 initPage = "#/setup/step-0";

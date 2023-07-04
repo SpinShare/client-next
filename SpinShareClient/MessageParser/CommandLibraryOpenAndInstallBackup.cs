@@ -3,7 +3,6 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
 using DownloadQueue;
 
 public class CommandOpenAndInstallBackup : ICommand
@@ -21,7 +20,7 @@ public class CommandOpenAndInstallBackup : ICommand
         
         Debug.WriteLine("[CommandOpenAndInstallBackup] Opening Picker");
         
-        string defaultLibraryPath = LibraryCache.GetLibraryPath() ?? "";
+        string defaultLibraryPath = SettingsManager.GetLibraryPath() ?? "";
         string[]? resultPath = sender?.ShowOpenFile(
             "Open backup file",
             Directory.Exists(defaultLibraryPath) ? defaultLibraryPath : null,

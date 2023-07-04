@@ -40,7 +40,7 @@ defineProps({
         gap: 50px;
         align-items: center;
     }
-    &.type-library-path {
+    &.type-path {
         & .input {
             grid-template-columns: 1fr auto auto;
         }

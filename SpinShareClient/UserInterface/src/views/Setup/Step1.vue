@@ -8,8 +8,32 @@
         :can-back="!savingSettings"
     >
         <SpinInput
+            label="Game path"
+            type="path"
+            hint="This is where your game installation is located"
+        >
+            <input
+                type="text"
+                disabled
+                v-model="gamePath"
+            />
+            <SpinButton
+                icon="folder-outline"
+                :disabled="savingSettings"
+                @click="selectGamePathManually"
+                v-tooltip="'Browse manually'"
+            />
+            <SpinButton
+                icon="brain"
+                :disabled="savingSettings"
+                @click="getGamePathAutomatically"
+                v-tooltip="'Detect automatically'"
+            />
+        </SpinInput>
+        <SpinInput
             label="Customs folder path"
-            type="library-path"
+            type="path"
+            hint="This is where your custom charts are located. Don't forget to setup the 'custom_path [FULLPATH]' launch option if you want your library to be somewhere else."
         >
             <input
                     type="text"
@@ -36,11 +60,25 @@
 import { ref, onMounted, inject } from 'vue';
 import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
+import SpinInput from "@/components/Common/SpinInput.vue";
 const emitter = inject('emitter');
 
+const gamePath = ref("");
 const libraryPath = ref("");
 const savingSettings = ref(false);
 
+const selectGamePathManually = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "game-select-path",
+        data: [],
+    }));
+};
+const getGamePathAutomatically = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "game-get-path",
+        data: [],
+    }));
+};
 const selectLibraryPathManually = () => {
     window.external.sendMessage(JSON.stringify({
         command: "library-select-path",
@@ -55,7 +93,14 @@ const getLibraryPathAutomatically = () => {
 };
 
 onMounted(() => {
+    getGamePathAutomatically();
     getLibraryPathAutomatically();
+});
+
+emitter.on('game-get-path-response', (path) => {
+    if(path !== '') {
+        gamePath.value = path;
+    }
 });
 
 emitter.on('library-get-path-response', (path) => {
@@ -76,6 +121,9 @@ const handleContinue = () => {
     window.external.sendMessage(JSON.stringify({
         command: "settings-set",
         data: [{
+            key: 'game.path',
+            value: gamePath.value,
+        },{
             key: 'library.path',
             value: libraryPath.value,
         }],

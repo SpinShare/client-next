@@ -1,17 +1,14 @@
-using System.Threading.Tasks;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
-
-public class CommandLibraryGetPath : ICommand
+public class CommandGameGetPath : ICommand
 {
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
         Message response = new() {
-            Command = "library-get-path-response",
-            Data = SettingsManager.GetLibraryPath()
+            Command = "game-get-path-response",
+            Data = SettingsManager.GetGamePath()
         };
 
         await Task.Yield();
