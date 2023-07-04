@@ -1,8 +1,10 @@
+using System.IO;
+using System.Threading.Tasks;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-public class CommandLibrarySelectPath : ICommand
+public class CommandGameSelectPath : ICommand
 {
     private SettingsManager? _settingsManager;
     
@@ -10,10 +12,10 @@ public class CommandLibrarySelectPath : ICommand
     {
         _settingsManager = SettingsManager.GetInstance();
         
-        string defaultLibraryPath = _settingsManager.Get<string>("library.path") ?? SettingsManager.GetLibraryPath() ?? "";
+        string defaultGamePath = _settingsManager.Get<string>("game.path") ?? SettingsManager.GetGamePath() ?? "";
         string[]? resultPath = sender?.ShowOpenFolder(
-            "Spin Rhythm XD library location",
-            Directory.Exists(defaultLibraryPath) ? defaultLibraryPath : null, 
+            "Spin Rhythm XD game location",
+            Directory.Exists(defaultGamePath) ? defaultGamePath : null, 
             false
         );
         
@@ -22,7 +24,7 @@ public class CommandLibrarySelectPath : ICommand
         if (resultPath?.Length == 1 && Directory.Exists(resultPath[0]))
         {
             Message response = new() {
-                Command = "library-get-path-response",
+                Command = "game-get-path-response",
                 Data = resultPath[0]
             };
             

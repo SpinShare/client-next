@@ -104,4 +104,72 @@ public class SettingsManager
 
         return appFolder;
     }
+
+    public static string? GetLibraryPath()
+    {
+        string? libraryPath = "";
+
+        switch (Environment.OSVersion.Platform)
+        {
+            case PlatformID.Unix:
+                libraryPath = Path.Combine(
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
+                    ".steam", "steam", "steamapps", "compatdata", "1058830", "pfx", "drive_c", "users", "steamuser", "AppData", "LocalLow", "Super Spin Digital", "Spin Rhythm XD", "Custom"
+                );
+                break;
+
+            case PlatformID.Win32NT:
+                libraryPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low",
+                    "Super Spin Digital", "Spin Rhythm XD", "Custom"
+                );
+                break;
+
+            case PlatformID.MacOSX:
+                libraryPath = Path.Combine(
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
+                    "Library", "Application Support", "Steam", "steamapps", "common", "Spin Rhythm", "Custom"
+                );
+                break;
+
+            default:
+                throw new Exception("Unknown platform");
+        }
+
+        return Directory.Exists(libraryPath) ? libraryPath : null;
+    }
+
+    public static string? GetGamePath()
+    {
+        string? gamePath = "";
+
+        switch (Environment.OSVersion.Platform)
+        {
+            case PlatformID.Unix:
+                gamePath = Path.Combine(
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
+                    ".steam", "steam", "steamapps", "common", "Spin Rhythm"
+                );
+                break;
+
+            case PlatformID.Win32NT:
+                gamePath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                    "Steam", "steamapps", "common", "Spin Rhythm"
+                );
+                break;
+
+            case PlatformID.MacOSX:
+                gamePath = Path.Combine(
+                    Environment.GetEnvironmentVariable("HOME") ?? "",
+                    "Library", "Application Support", "Steam", "steamapps", "common", "Spin Rhythm"
+                );
+                break;
+
+            default:
+                throw new Exception("Unknown platform");
+        }
+
+        return Directory.Exists(gamePath) ? gamePath : null;
+    }
 }

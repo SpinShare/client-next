@@ -17,8 +17,32 @@
                 />
             </SpinHeader>
             <SpinInput
+                label="Game path"
+                type="path"
+                hint="This is where your game installation is located"
+            >
+                <input
+                    type="text"
+                    disabled
+                    v-model="settingGamePath"
+                />
+                <SpinButton
+                    icon="folder-outline"
+                    :disabled="savingSettings"
+                    @click="selectGamePathManually"
+                    v-tooltip="'Browse manually'"
+                />
+                <SpinButton
+                    icon="brain"
+                    :disabled="savingSettings"
+                    @click="getGamePathAutomatically"
+                    v-tooltip="'Detect automatically'"
+                />
+            </SpinInput>
+            <SpinInput
                 label="Customs folder path"
-                type="library-path"
+                type="path"
+                hint="This is where your custom charts are located. Don't forget to setup the 'custom_path [FULLPATH]' launch option if you want your library to be somewhere else."
             >
                 <input
                     type="text"
@@ -75,6 +99,26 @@
                 </div>
             </SpinInput>
             <SpinInput
+                label="Detect DLCs"
+                hint="By analyzing your game installation, we can confirm which DLCs you have bought. This will enable access to DLC charts."
+                type="horizontal"
+            >
+                <SpinButton
+                    label="Detect"
+                    :disabled="isDetectingDlcs"
+                    :loading="isDetectingDlcs"
+                    @click="detectDLCs"
+                />
+            </SpinInput>
+            <SpinInput
+                label="Detected DLCs"
+                type="horizontal"
+                :hint="detectedDlcs.join(', ')"
+                v-if="detectedDlcs.length > 0 && !isDetectingDlcs"
+            >
+            </SpinInput>
+            <!--
+            <SpinInput
                 label="Silent Queue"
                 hint="Disables the automatic reveal of the download sidebar when adding new charts to the queue"
                 type="horizontal"
@@ -84,7 +128,7 @@
                     @change="settingsDirty = true"
                     :disabled="savingSettings"
                 />
-            </SpinInput>
+            </SpinInput> -->
             <!--
             <SpinInput
                 label="Software Updates"
@@ -121,11 +165,13 @@ import router from "@/router";
 const emitter = inject('emitter');
 
 const settingLibraryPath = ref('');
+const settingGamePath = ref('');
 const settingLanguage = ref('en-US');
 const settingTheme = ref('dark');
-const settingSilentQueue = ref(false);
 const savingSettings = ref(false);
 const settingsDirty = ref(false);
+const isDetectingDlcs = ref(false);
+const detectedDlcs = ref([]);
 //const checkingForUpdates = ref(false);
 
 onMounted(() => {
@@ -143,6 +189,14 @@ emitter.on('library-get-path-response', (path) => {
     }
 });
 
+emitter.on('game-get-path-response', (path) => {
+    settingsDirty.value = true;
+
+    if(path !== '') {
+        settingGamePath.value = path;
+    }
+});
+
 emitter.on('settings-set-response', (settings) => {
     savingSettings.value = false;
     settingsDirty.value = false;
@@ -151,6 +205,11 @@ emitter.on('settings-set-response', (settings) => {
 
 emitter.on('settings-get-full-response', (settings) => {
     setSettings(settings);
+});
+
+emitter.on('game-detect-dlcs-response', (dlcs) => {
+    if(dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
+    isDetectingDlcs.value = false;
 });
 
 const openSettingsFolder = () => {
@@ -173,6 +232,28 @@ const getLibraryPathAutomatically = () => {
     }));
 };
 
+const selectGamePathManually = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "game-select-path",
+        data: [],
+    }));
+};
+const getGamePathAutomatically = () => {
+    window.external.sendMessage(JSON.stringify({
+        command: "game-get-path",
+        data: [],
+    }));
+};
+
+const detectDLCs = () => {
+    isDetectingDlcs.value = true;
+    
+    window.external.sendMessage(JSON.stringify({
+        command: "game-detect-dlcs",
+        data: [],
+    }));
+};
+
 /* const checkForUpdates = () => {
     checkingForUpdates.value = true;
 }; */
@@ -187,6 +268,9 @@ const handleSave = () => {
     window.external.sendMessage(JSON.stringify({
         command: "settings-set",
         data: [{
+            key: 'game.path',
+            value: settingGamePath.value,
+        },{
             key: 'library.path',
             value: settingLibraryPath.value,
         },{
@@ -195,10 +279,7 @@ const handleSave = () => {
         },{
             key: 'app.theme',
             value: settingTheme.value,
-        },{
-            key: 'app.silentQueue',
-            value: settingSilentQueue.value,
-        }],
+        },],
     }));
 
     savingSettings.value = true;
@@ -206,11 +287,14 @@ const handleSave = () => {
 
 const setSettings = (settings) => {
     settingLanguage.value = settings['app.language'];
-    settingSilentQueue.value = settings['app.silentQueue'];
     settingTheme.value = settings['app.theme'];
     settingLibraryPath.value = settings['library.path'];
+    settingGamePath.value = settings['game.path'];
 
     emitter.emit('update-theme', settings['app.theme']);
+    
+    if(settings['dlcs']) detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
+    isDetectingDlcs.value = false;
 };
 </script>
 

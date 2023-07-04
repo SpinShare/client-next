@@ -12,6 +12,12 @@ public class CommandFactory
                 return new CommandOpenInBrowser();
             case "open-in-explorer":
                 return new CommandOpenInExplorer();
+            case "game-select-path":
+                return new CommandGameSelectPath();
+            case "game-get-path":
+                return new CommandGameGetPath();
+            case "game-detect-dlcs":
+                return new CommandGameDetectDLCs();
             case "library-select-path":
                 return new CommandLibrarySelectPath();
             case "library-get-path":

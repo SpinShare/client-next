@@ -38,6 +38,7 @@
                 <span class="mdi mdi-chevron-down"></span>
             </div>
         </SpinInput>
+        <!--
         <SpinInput
             label="Silent Queue"
             hint="Disables the automatic reveal of the download sidebar when adding new charts to the queue"
@@ -47,7 +48,7 @@
                 v-model="settingSilentQueue"
                 :disabled="savingSettings"
             />
-        </SpinInput>
+        </SpinInput> -->
     </SetupLayout>
 </template>
 
@@ -60,7 +61,6 @@ const emitter = inject('emitter');
 
 const settingLanguage = ref('en-US');
 const settingTheme = ref('dark');
-const settingSilentQueue = ref(false);
 const savingSettings = ref(false);
 
 emitter.on('settings-set-response', (settings) => {
@@ -80,10 +80,7 @@ const handleContinue = () => {
         },{
             key: 'app.theme',
             value: settingTheme.value,
-        },{
-            key: 'app.silentQueue',
-            value: settingSilentQueue.value,
-        }],
+        },],
     }));
 
     savingSettings.value = true;

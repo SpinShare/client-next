@@ -21,7 +21,7 @@ public class LibraryItem
 
     public async Task Load(UnityScriptableObject data)
     {
-        string? libraryPath = LibraryCache.GetLibraryPath();
+        string? libraryPath = SettingsManager.GetLibraryPath();
         if (libraryPath == null) return;
         
         string? trackInfoJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains("TrackInfo"))?.val ?? null;
