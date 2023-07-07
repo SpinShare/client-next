@@ -5,6 +5,9 @@ namespace SpinShareClient.MessageParser;
 
 using LibraryCache;
 
+/// <summary>
+/// A command that starts a full rebuild of the <see cref="LibraryCache.Library"/>
+/// </summary>
 public class CommandLibraryBuildCache : ICommand
 {
     private LibraryCache? _libraryCache;

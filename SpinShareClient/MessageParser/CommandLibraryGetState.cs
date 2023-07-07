@@ -6,6 +6,9 @@ namespace SpinShareClient.MessageParser;
 
 using LibraryCache;
 
+/// <summary>
+/// A command that returns the state of a <see cref="LibraryItem"/> given a <c>fileReference</c> and <c>updateHash</c>
+/// </summary>
 public class CommandLibraryGetState : ICommand
 {
     private LibraryCache? _libraryCache;

@@ -4,6 +4,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that opens an <c>url</c> in the OS default browser
+/// </summary>
 public class CommandOpenInBrowser : ICommand
 {
     public async Task Execute(PhotinoWindow? sender, object? data)

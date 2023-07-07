@@ -93,18 +93,34 @@ internal static class Program
 
     private static void OnProcessExit(object? sender, EventArgs e)
     {
-        _lockFile?.Close();
+        if (_lockFile is null) return;
+        
+        _lockFile.Close();
         _lockFile = null;
     }
-
+    
     static bool IsSingleInstance()
     {
-        string lockFileName = Path.Combine(SettingsManager.GetAppFolder(), "app.lock");
+        string appFolder = SettingsManager.GetAppFolder();
+
+        if (string.IsNullOrEmpty(appFolder) || !Directory.Exists(appFolder))
+        {
+            throw new InvalidOperationException("[IsSingleInstance] Application folder not found.");
+        }
+
+        string lockFileName = Path.Combine(appFolder, "app.lock");
 
         try
         {
-            _lockFile = new FileStream(lockFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            return true;
+            using(_lockFile = new FileStream(
+                lockFileName,
+                FileMode.OpenOrCreate,
+                FileAccess.ReadWrite,
+                FileShare.None
+            )) 
+            {
+                return true;
+            }
         }
         catch (IOException)
         {

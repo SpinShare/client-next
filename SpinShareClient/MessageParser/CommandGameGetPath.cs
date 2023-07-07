@@ -2,6 +2,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that returns the default path of a Spin Rhythm XD installation
+/// </summary>
 public class CommandGameGetPath : ICommand
 {
     public async Task Execute(PhotinoWindow? sender, object? data)

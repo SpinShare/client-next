@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
-
+/// <summary>
+/// A command that returns the default Spin Rhythm XD library path
+/// </summary>
 public class CommandLibraryGetPath : ICommand
 {
     public async Task Execute(PhotinoWindow? sender, object? data)

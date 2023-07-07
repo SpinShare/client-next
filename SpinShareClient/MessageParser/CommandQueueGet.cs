@@ -4,6 +4,9 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
+/// <summary>
+/// A command that returns the <see cref="DownloadQueue.Queue"/>
+/// </summary>
 public class CommandQueueGet : ICommand
 {
     private DownloadQueue? _downloadQueue;

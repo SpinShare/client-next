@@ -5,6 +5,9 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
+/// <summary>
+/// A command that returns the count of the <see cref="DownloadQueue.Queue"/>
+/// </summary>
 public class CommandQueueGetCount : ICommand
 {
     private DownloadQueue? _downloadQueue;

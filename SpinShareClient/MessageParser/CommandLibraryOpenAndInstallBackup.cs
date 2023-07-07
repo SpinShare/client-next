@@ -5,6 +5,9 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
+/// <summary>
+/// A command that opens an OS file picker for a Spin Rhythm XD Backup.zip and installs it
+/// </summary>
 public class CommandOpenAndInstallBackup : ICommand
 {
     private DownloadQueue? _downloadQueue;

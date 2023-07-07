@@ -3,6 +3,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that returns the value of a setting given a <c>key</c>
+/// </summary>
 public class CommandSettingsGet : ICommand
 {
     private SettingsManager? _settingsManager;

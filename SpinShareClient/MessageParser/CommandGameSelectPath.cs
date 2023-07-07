@@ -4,6 +4,12 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that opens an OS folder picker to select the Spin Rhythm XD game location
+/// </summary>
+/// <remarks>
+/// By default, the picker starts in the saved path or, if not available, in the default install location of Spin Rhythm XD
+/// </remarks>
 public class CommandGameSelectPath : ICommand
 {
     private SettingsManager? _settingsManager;

@@ -6,8 +6,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
-using LibraryCache;
-
+/// <summary>
+/// A command that sets a setting given a <c>key</c> and <c>value</c>
+/// </summary>
 public class CommandSettingsSet : ICommand
 {
     private SettingsManager? _settingsManager;

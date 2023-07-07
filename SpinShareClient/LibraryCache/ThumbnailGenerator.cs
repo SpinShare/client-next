@@ -9,6 +9,16 @@ using SixLabors.ImageSharp.Processing;
 
 public static class ThumbnailGenerator
 {
+    /// <summary>
+    /// Generates a base64 thumbnail given a <c>imagePath</c>
+    /// </summary>
+    /// <remarks>
+    /// The thumbnail will be a 96x96 jpeg
+    /// </remarks>
+    /// <param name="imagePath">Path as <see cref="String"/></param>
+    /// <returns>base64 thumbnail as <see cref="String"/></returns>
+    /// <exception cref="ArgumentException"><c>imagePath</c> is not given</exception>
+    /// <exception cref="FileNotFoundException"><c>imagePath</c> is not a valid file</exception>
     public static async Task<string> ToBase64(string imagePath)
     {
         if (string.IsNullOrEmpty(imagePath))

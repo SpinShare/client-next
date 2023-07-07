@@ -5,6 +5,9 @@ namespace SpinShareClient.MessageParser;
 
 using LibraryCache;
 
+/// <summary>
+/// A command that returns a users full <see cref="LibraryCache.Library"/>
+/// </summary>
 public class CommandLibraryGet : ICommand
 {
     private LibraryCache? _libraryCache;

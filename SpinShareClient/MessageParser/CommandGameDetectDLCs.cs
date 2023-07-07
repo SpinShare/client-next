@@ -3,6 +3,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that detects the users bought DLCs and saves them as a setting
+/// </summary>
 public class CommandGameDetectDLCs : ICommand
 {
     private SettingsManager? _settingsManager;

@@ -2,6 +2,9 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that returns all settings as an object
+/// </summary>
 public class CommandSettingsGetFull : ICommand
 {
     private SettingsManager? _settingsManager;

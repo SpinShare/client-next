@@ -2,6 +2,12 @@ using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that opens an OS folder picker to select the Spin Rhythm XD library location
+/// </summary>
+/// <remarks>
+/// By default, the picker starts in the saved path or, if not available, in the default location of a Spin Rhythm XD library
+/// </remarks>
 public class CommandLibrarySelectPath : ICommand
 {
     private SettingsManager? _settingsManager;

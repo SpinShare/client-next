@@ -30,6 +30,10 @@ public class LibraryCache
         }
     }
 
+    /// <summary>
+    /// Returns an instance of <see cref="LibraryCache"/>
+    /// </summary>
+    /// <returns><see cref="LibraryCache"/> Instance</returns>
     public static LibraryCache GetInstance()
     {
         if (_instance == null)
@@ -45,6 +49,14 @@ public class LibraryCache
         return _instance;
     }
 
+    /// <summary>
+    /// Rebuilds the <see cref="LibraryCache.Library"/>
+    /// </summary>
+    /// <remarks>
+    /// Depending on the size of a library, this may take a while
+    /// </remarks>
+    /// <param name="sender">(optional) <see cref="PhotinoWindow"/></param>
+    /// <exception cref="Exception">The library path does not exist</exception>
     public async Task RebuildCache(PhotinoWindow? sender)
     {
         Debug.WriteLine("[LibraryCache] Rebuilding cache");
@@ -89,6 +101,10 @@ public class LibraryCache
         await SaveCache();
     }
 
+    /// <summary>
+    /// Parses and adds or updates a .SRTB file to the cache
+    /// </summary>
+    /// <param name="filePath">.srtb path as <see cref="String"/></param>
     public async Task AddToCache(string filePath)
     {
         string fileName = Path.GetFileName(filePath);
@@ -126,29 +142,51 @@ public class LibraryCache
         if(existingItem == null) Library.Add(libraryItem);
     }
 
+    /// <summary>
+    /// Loads the <see cref="LibraryCache.Library"/> from the persistent cache file.
+    /// </summary>
     private void LoadCache()
     {
         string json = File.ReadAllText(_libraryCacheFilePath);
         Library = JsonConvert.DeserializeObject<List<LibraryItem>>(json) ?? new List<LibraryItem>();
     }
 
+    /// <summary>
+    /// Clears the <see cref="LibraryCache.Library"/> and saves.
+    /// </summary>
     public async Task ClearCache()
     {
         Library.Clear();
         await SaveCache();
     }
 
+    /// <summary>
+    /// Saves the <see cref="LibraryCache.Library"/> to the persistent cache file.
+    /// </summary>
     public async Task SaveCache()
     {
         string json = JsonConvert.SerializeObject(Library, Formatting.Indented);
         await File.WriteAllTextAsync(_libraryCacheFilePath, json);
     }
 
+    /// <summary>
+    /// Returns the <see cref="LibraryCache.Library"/> as a <see cref="List{T}"/> of <see cref="LibraryItem"/>
+    /// </summary>
+    /// <returns><see cref="List{T}"/> of <see cref="LibraryItem"/></returns>
     public List<LibraryItem> GetLibrary()
     {
         return Library;
     }
 
+    /// <summary>
+    /// Returns the state of a <see cref="LibraryCache.LibraryItem"/> given a <c>fileReference</c> and <c>currentUpdateHash</c><br /><br />
+    /// <b>spinshareReference</b> - A reference to the SpinSha.re item<br />
+    /// <b>installed</b> - Whether the chart is in the cache (installed)<br />
+    /// <b>updated</b> - Whether the local item has the same <c>updateHash</c>
+    /// </summary>
+    /// <param name="fileReference">SpinShare FileReference as <see cref="String"/></param>
+    /// <param name="currentUpdateHash">.SRTB MD5 hash as <see cref="String"/></param>
+    /// <returns><see cref="Dictionary{TKey,TValue}"/></returns>
     public Dictionary<string, object> GetState(string fileReference, string currentUpdateHash)
     {
         Dictionary<string, object> response = new();

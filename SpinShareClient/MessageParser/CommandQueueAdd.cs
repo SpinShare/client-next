@@ -6,6 +6,9 @@ namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
+/// <summary>
+/// A command that adds a <see cref="DownloadItem"/> to the <see cref="DownloadQueue.Queue"/> 
+/// </summary>
 public class CommandQueueAdd : ICommand
 {
     private DownloadQueue? _downloadQueue;
