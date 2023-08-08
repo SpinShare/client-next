@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PhotinoNET;
 using SpinShareClient.MessageParser;
@@ -9,6 +11,8 @@ namespace SpinShareClient.LibraryCache;
 
 public class LibraryCache
 {
+    private readonly ILogger<LibraryCache> _logger;
+    
     private SettingsManager? _settingsManager;
     private static LibraryCache? _instance;
     private static readonly object _lock = new();
@@ -16,9 +20,16 @@ public class LibraryCache
     private readonly string? _libraryPath;
     public List<LibraryItem> Library = new();
 
-    private LibraryCache()
+    public LibraryCache()
     {
-        Debug.WriteLine("[ChartLibrary] Initializing");
+        using var serviceProvider = new ServiceCollection()
+            .AddLogging(configure => configure.AddConsole())
+            .AddLogging(configure => configure.AddDebug())
+            .BuildServiceProvider();
+        
+        _logger = serviceProvider.GetRequiredService<ILogger<LibraryCache>>();
+        
+        _logger.LogInformation("Initializing");
 
         _settingsManager = SettingsManager.GetInstance();
         _libraryPath = _settingsManager.Get<string>("library.path");
@@ -59,7 +70,7 @@ public class LibraryCache
     /// <exception cref="Exception">The library path does not exist</exception>
     public async Task RebuildCache(PhotinoWindow? sender)
     {
-        Debug.WriteLine("[LibraryCache] Rebuilding cache");
+        _logger.LogInformation("Rebuilding cache");
         
         if (!Directory.Exists(_libraryPath))
         {
@@ -80,7 +91,7 @@ public class LibraryCache
             await AddToCache(filePaths[i]);
         
             itemWatch.Stop();
-            Debug.WriteLine($"[LibraryCache] Finished {i + 1} of {filePaths.Length} (in {itemWatch.Elapsed:mm\\:ss\\.ff})");
+            _logger.LogInformation("Finished {I} of {FilePathsLength} (in {ItemWatchElapsed})", i + 1, filePaths.Length, itemWatch.Elapsed);
             
             if(sender != null) {
                 MessageHandler.SendResponse(sender, new Message {
@@ -96,7 +107,7 @@ public class LibraryCache
         }
 
         fullWatch.Stop();
-        Debug.WriteLine($"[LibraryCache] Finished rebuilding cache in {fullWatch.Elapsed:mm\\:ss\\.ff}.");
+        _logger.LogInformation("Finished rebuilding cache in {FullWatchElapsed}", fullWatch.Elapsed);
         
         await SaveCache();
     }
@@ -114,11 +125,11 @@ public class LibraryCache
 
         if (existingItem == null)
         {
-            Debug.WriteLine($"[LibraryCache] Adding new: {Path.GetFileName(filePath)}");
+            _logger.LogInformation("Adding new: {FileName}", Path.GetFileName(filePath));
         }
         else
         {
-            Debug.WriteLine($"[LibraryCache] Updating existing: {Path.GetFileName(filePath)}");
+            _logger.LogInformation("Updating existing: {FileName}", Path.GetFileName(filePath));
         }
         
         LibraryItem libraryItem = existingItem ?? new();
@@ -179,7 +190,7 @@ public class LibraryCache
     }
 
     /// <summary>
-    /// Returns the state of a <see cref="LibraryCache.LibraryItem"/> given a <c>fileReference</c> and <c>currentUpdateHash</c><br /><br />
+    /// Returns the state of a <see cref="LibraryItem"/> given a <c>fileReference</c> and <c>currentUpdateHash</c><br /><br />
     /// <b>spinshareReference</b> - A reference to the SpinSha.re item<br />
     /// <b>installed</b> - Whether the chart is in the cache (installed)<br />
     /// <b>updated</b> - Whether the local item has the same <c>updateHash</c>

@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -13,6 +15,13 @@ namespace SpinShareClient.MessageParser;
 /// </remarks>
 public class CommandOpenInExplorer : ICommand
 {
+    private readonly ILogger<CommandOpenInExplorer> _logger;
+
+    public CommandOpenInExplorer(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandOpenInExplorer>>();
+    }
+    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
         if (data == null) return;

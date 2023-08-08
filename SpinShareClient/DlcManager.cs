@@ -1,14 +1,28 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace SpinShareClient;
 
 public class DlcManager
 {
+    private readonly ILogger<DlcManager> _logger;
+
     private static DlcManager? _instance;
     private static readonly object _lock = new();
     private Dictionary<string, List<string>> _dlcs = new();
+
+    public DlcManager()
+    {
+        using var serviceProvider = new ServiceCollection()
+            .AddLogging(configure => configure.AddConsole())
+            .AddLogging(configure => configure.AddDebug())
+            .BuildServiceProvider();
+        
+        _logger = serviceProvider.GetRequiredService<ILogger<DlcManager>>();
+    }
 
     /// <summary>
     /// Returns an instance of <see cref="DlcManager"/>
@@ -74,7 +88,7 @@ public class DlcManager
         
         await Task.Yield();
 
-        Debug.WriteLine($"[DlcManager] Detected {_dlcs.Count} DLCs.");
+        _logger.LogInformation("Detected {DlcsCount} DLCs", _dlcs.Count);
 
         return _dlcs;
     }

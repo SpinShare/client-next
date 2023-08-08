@@ -6,6 +6,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 using SpinShareClient.MessageParser;
 
@@ -13,6 +15,8 @@ namespace SpinShareClient.DownloadQueue;
 
 public class DownloadQueue
 {
+    private readonly ILogger<DownloadQueue> _logger;
+    
     private SettingsManager? _settingsManager;
     private static DownloadQueue? _instance;
     private static readonly object _lock = new();
@@ -22,9 +26,16 @@ public class DownloadQueue
     
     private readonly HttpClient _client = new();
 
-    private DownloadQueue()
+    public DownloadQueue()
     {
-        Debug.WriteLine("[DownloadQueue] Initializing");
+        using var serviceProvider = new ServiceCollection()
+            .AddLogging(configure => configure.AddConsole())
+            .AddLogging(configure => configure.AddDebug())
+            .BuildServiceProvider();
+        
+        _logger = serviceProvider.GetRequiredService<ILogger<DownloadQueue>>();
+        
+        _logger.LogInformation("Initializing");
 
         _settingsManager = SettingsManager.GetInstance();
         _libraryPath = _settingsManager.Get<string>("library.path");
@@ -132,30 +143,30 @@ public class DownloadQueue
         
         DownloadItem item = Queue.First(x => x.State == DownloadState.Queued);
 
-        Debug.WriteLine("[DownloadQueue] #" + item.ID + " > Starting");
+        _logger.LogInformation("#{ItemID} > Starting", item.ID);
 
         string tempFolder = Path.GetTempPath();
         string zipFilePath = Path.Combine(tempFolder, item.FileReference + ".zip");
         string extractedFilePath = Path.Combine(tempFolder, item.FileReference ?? "");
 
-        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Downloading to Temp");
+        _logger.LogInformation("#{ItemID} > Downloading to Temp", item.ID);
         item.State = DownloadState.Downloading;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await DownloadFileAsync("https://spinsha.re/api/song/" + item.ID + "/download", zipFilePath);
         
-        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Extracing to Temp");
+        _logger.LogInformation("#{ItemID} > Extracting to Temp", item.ID);
         item.State = DownloadState.Extracting;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await UnzipAsync(zipFilePath, extractedFilePath);
-
-        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Copying to Library");
+        
+        _logger.LogInformation("#{ItemID} > Copying to Library", item.ID);
         item.State = DownloadState.Copying;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         await MoveFilesAsync(extractedFilePath, _libraryPath);
         await CleanupAsync(zipFilePath);
         await CleanupAsync(extractedFilePath);
         
-        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Caching");
+        _logger.LogInformation("#{ItemID} > Caching", item.ID);
         item.State = DownloadState.Caching;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         string srtbFilePath = Path.Combine(_libraryPath ?? "", item.FileReference + ".srtb");
@@ -163,7 +174,7 @@ public class DownloadQueue
         await libraryCache.AddToCache(srtbFilePath);
         await libraryCache.SaveCache();
         
-        Debug.WriteLine($"[DownloadQueue] #{item.ID} > Finished");
+        _logger.LogInformation("#{ItemID} > Finished", item.ID);
         item.State = DownloadState.Done;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-get-count-response", Data = GetQueueCount() });
@@ -188,34 +199,34 @@ public class DownloadQueue
     {
         if (_libraryPath == null) return;
         
-        Debug.WriteLine($"[DownloadQueue] Adding local backup: {filePath}");
+        _logger.LogInformation("Adding local backup: {FilePath}", filePath);
 
         string tempFolder = Path.GetTempPath();
         string fileName = Path.GetFileNameWithoutExtension(filePath);
         string extractedFilePath = Path.Combine(tempFolder, fileName);
         
-        Debug.WriteLine($"[DownloadQueue] {fileName} > Extracing to Temp");
+        _logger.LogInformation("{FileName} > Extracing to Temp", fileName);
         await UnzipAsync(filePath, extractedFilePath);
 
-        Debug.WriteLine($"[DownloadQueue] {fileName} > Copying to Library");
+        _logger.LogInformation("{FileName} > Copying to Library", fileName);
         string[] srtbFilePaths = Directory.GetFiles(extractedFilePath, "*.srtb");
         await MoveFilesAsync(extractedFilePath, _libraryPath);
         await CleanupAsync(extractedFilePath);
         
-        Debug.WriteLine($"[DownloadQueue] {fileName} > Caching");
+        _logger.LogInformation("{FileName} > Caching", fileName);
         foreach (string srtbFilePath in srtbFilePaths)
         {
             string srtbFileName = Path.GetFileName(srtbFilePath);
             string srtbFullFilePath = Path.Combine(_libraryPath, srtbFileName);
             
-            Debug.WriteLine($"[DownloadQueue] {fileName} > Caching .srtb: {srtbFullFilePath}");
+            _logger.LogInformation("{FileName} > Caching .srtb: {SrtbFullFilePath}", fileName, srtbFullFilePath);
             
             LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
             await libraryCache.AddToCache(srtbFullFilePath);
             await libraryCache.SaveCache();
         }
 
-        Debug.WriteLine($"[DownloadQueue] {fileName} > Finished");
+        _logger.LogInformation("{FileName} > Finished", fileName);
         
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "library-open-and-install-backup-response", Data = "" });
     }
@@ -298,7 +309,7 @@ public class DownloadQueue
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[DownloadQueue] Cleanup Error: {ex.Message}");
+                _logger.LogError("Cleanup Error: {ExMessage}", ex.Message);
             }
         });
     }

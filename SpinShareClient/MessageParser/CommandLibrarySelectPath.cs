@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -11,6 +13,13 @@ namespace SpinShareClient.MessageParser;
 public class CommandLibrarySelectPath : ICommand
 {
     private SettingsManager? _settingsManager;
+    
+    private readonly ILogger<CommandLibrarySelectPath> _logger;
+
+    public CommandLibrarySelectPath(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandLibrarySelectPath>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

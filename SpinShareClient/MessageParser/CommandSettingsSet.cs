@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using PhotinoNET;
 
@@ -12,6 +14,13 @@ namespace SpinShareClient.MessageParser;
 public class CommandSettingsSet : ICommand
 {
     private SettingsManager? _settingsManager;
+    
+    private readonly ILogger<CommandSettingsSet> _logger;
+
+    public CommandSettingsSet(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandSettingsSet>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
@@ -28,7 +37,7 @@ public class CommandSettingsSet : ICommand
             
             if (key != null && value != null)
             {
-                Debug.WriteLine($"[SettingsSetCommand] Writing Setting: {key}");
+                _logger.LogInformation("Writing Setting: {Key}", key);
             
                 _settingsManager.Set(key, value);
             }

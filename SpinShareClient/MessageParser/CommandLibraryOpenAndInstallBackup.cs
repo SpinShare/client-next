@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -12,6 +14,13 @@ public class CommandOpenAndInstallBackup : ICommand
 {
     private DownloadQueue? _downloadQueue;
     
+    private readonly ILogger<CommandOpenAndInstallBackup> _logger;
+
+    public CommandOpenAndInstallBackup(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandOpenAndInstallBackup>>();
+    }
+    
     public static readonly (string Name, string[] Extensions)[] Filters = new[]
     {
         ("Spin Rhythm XD Backup", new string[] { ".zip" })
@@ -21,7 +30,7 @@ public class CommandOpenAndInstallBackup : ICommand
     {
         _downloadQueue = DownloadQueue.GetInstance();
         
-        Debug.WriteLine("[CommandOpenAndInstallBackup] Opening Picker");
+        _logger.LogInformation("Opening Picker");
         
         string defaultLibraryPath = SettingsManager.GetLibraryPath() ?? "";
         string[]? resultPath = sender?.ShowOpenFile(
@@ -35,7 +44,7 @@ public class CommandOpenAndInstallBackup : ICommand
 
         if (resultPath?.Length == 1 && File.Exists(resultPath[0]))
         {
-            Debug.WriteLine($"[CommandOpenAndInstallBackup] Installing backup: {resultPath[0]}");
+            _logger.LogInformation("Installing backup: {Path}", resultPath[0]);
             
             await _downloadQueue.AddLocalBackup(sender, resultPath[0]);
         }

@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -10,6 +12,12 @@ public class CommandGameDetectDLCs : ICommand
 {
     private SettingsManager? _settingsManager;
     private DlcManager? _dlcManager;
+    private readonly ILogger<CommandGameDetectDLCs> _logger;
+
+    public CommandGameDetectDLCs(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandGameDetectDLCs>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

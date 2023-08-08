@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -13,6 +15,13 @@ using DownloadQueue;
 public class CommandQueueClear : ICommand
 {
     private DownloadQueue? _downloadQueue;
+    
+    private readonly ILogger<CommandQueueClear> _logger;
+
+    public CommandQueueClear(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandQueueClear>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

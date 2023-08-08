@@ -1,5 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -13,6 +15,13 @@ namespace SpinShareClient.MessageParser;
 public class CommandGameSelectPath : ICommand
 {
     private SettingsManager? _settingsManager;
+    
+    private readonly ILogger<CommandGameSelectPath> _logger;
+
+    public CommandGameSelectPath(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandGameSelectPath>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

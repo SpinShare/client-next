@@ -1,18 +1,29 @@
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace SpinShareClient;
 
 public class SettingsManager
 {
+    private readonly ILogger<SettingsManager> _logger;
+
     private static SettingsManager? _instance;
     private static readonly object _lock = new();
     private Dictionary<string, object?> _settings = new();
     private readonly string _settingsFilePath;
 
-    private SettingsManager()
+    public SettingsManager()
     {
-        Debug.WriteLine("[SettingsManager] Initializing");
+        using var serviceProvider = new ServiceCollection()
+            .AddLogging(configure => configure.AddConsole())
+            .AddLogging(configure => configure.AddDebug())
+            .BuildServiceProvider();
+        
+        _logger = serviceProvider.GetRequiredService<ILogger<SettingsManager>>();
+        
+        _logger.LogInformation("Initializing");
         
         string appFolder = GetAppFolder();
 

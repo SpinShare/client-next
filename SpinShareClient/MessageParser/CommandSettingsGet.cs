@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using PhotinoNET;
 
@@ -9,6 +11,13 @@ namespace SpinShareClient.MessageParser;
 public class CommandSettingsGet : ICommand
 {
     private SettingsManager? _settingsManager;
+    
+    private readonly ILogger<CommandSettingsGet> _logger;
+
+    public CommandSettingsGet(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandSettingsGet>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

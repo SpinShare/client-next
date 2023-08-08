@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -11,6 +13,13 @@ using DownloadQueue;
 public class CommandQueueGetCount : ICommand
 {
     private DownloadQueue? _downloadQueue;
+    
+    private readonly ILogger<CommandQueueGetCount> _logger;
+
+    public CommandQueueGetCount(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandQueueGetCount>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

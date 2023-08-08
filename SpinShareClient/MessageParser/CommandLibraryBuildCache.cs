@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -11,6 +13,13 @@ using LibraryCache;
 public class CommandLibraryBuildCache : ICommand
 {
     private LibraryCache? _libraryCache;
+    
+    private readonly ILogger<CommandLibraryBuildCache> _logger;
+
+    public CommandLibraryBuildCache(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandLibraryBuildCache>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

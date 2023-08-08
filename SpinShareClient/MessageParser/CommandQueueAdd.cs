@@ -1,5 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
@@ -12,6 +14,13 @@ using DownloadQueue;
 public class CommandQueueAdd : ICommand
 {
     private DownloadQueue? _downloadQueue;
+    
+    private readonly ILogger<CommandQueueAdd> _logger;
+
+    public CommandQueueAdd(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandQueueAdd>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
