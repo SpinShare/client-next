@@ -27,7 +27,7 @@ public class CommandLibraryRemove : ICommand
     {
         if (data == null) return;
         if (_libraryPath == null) return;  
-        string fileReference = (string)data;
+        var fileReference = (string)data;
         
         _libraryCache = LibraryCache.GetInstance();
         
@@ -38,7 +38,7 @@ public class CommandLibraryRemove : ICommand
             await _libraryCache.RemoveFromCache(libraryItem);
         }
 
-        string srtbFilePath = Path.Combine(_libraryPath, fileReference + ".srtb");
+        var srtbFilePath = Path.Combine(_libraryPath, fileReference + ".srtb");
         if (!File.Exists(srtbFilePath))
         {
             _logger.LogError("{FileReference} > SRTB file does not exist", fileReference);
@@ -55,8 +55,6 @@ public class CommandLibraryRemove : ICommand
             Command = "library-remove-response",
             Data = ""
         };
-        
-        await Task.Yield();
 
         MessageHandler.SendResponse(sender, response);
     }

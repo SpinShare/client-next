@@ -66,6 +66,10 @@ public class CommandFactory
                 return new CommandSettingsGetFull(serviceProvider);
             case "settings-set":
                 return new CommandSettingsSet(serviceProvider);
+            case "update-get-version":
+                return new CommandUpdateGetVersion(serviceProvider);
+            case "update-get-latest":
+                return new CommandUpdateGetLatest(serviceProvider);
             default:
                 throw new Exception($"Unknown command: {command}");
         }

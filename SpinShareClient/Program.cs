@@ -15,7 +15,7 @@ public class Program
     private static FileStream? _lockFile;
     
     [STAThread]
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         // Error Logging
         using var serviceProvider = new ServiceCollection()
@@ -85,13 +85,12 @@ public class Program
                 _logger.LogInformation("Settings are not complete, starting Setup");
                 initPage = "#/setup/step-0";
             }
-        
+
             // Checking for Update
             /*
             if (settingsManager.Exists("app.setup.done"))
             {
                 logger.LogInformation("Update detected");
-                string version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
                 // TODO: API Call for Latest Version Check
                 initPage = "#/update";
             } */

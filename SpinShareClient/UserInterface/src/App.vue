@@ -4,11 +4,14 @@
             <component :is="Component" :key="route.path" />
         </transition>
     </router-view>
+    
+    <UpdateBanner />
 </template>
 
 <script setup>
 import {ref, inject, onMounted, computed} from 'vue';
 import {useRoute, useRouter} from "vue-router";
+import UpdateBanner from "@/components/UpdateBanner.vue";
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -29,7 +32,7 @@ emitter.on('settings-get-response', (setting) => {
 
 emitter.on('update-theme', (newTheme) => {
     setTheme(newTheme);
-})
+});
 
 onMounted(() => {
     window.external.sendMessage(JSON.stringify({

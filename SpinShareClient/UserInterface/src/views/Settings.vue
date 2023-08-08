@@ -129,10 +129,9 @@
                     :disabled="savingSettings"
                 />
             </SpinInput> -->
-            <!--
             <SpinInput
                 label="Software Updates"
-                hint="Version 3.0.0"
+                :hint="currentVersion"
                 type="horizontal"
             >
                 <SpinButton
@@ -142,7 +141,7 @@
                     :disabled="savingSettings || checkingForUpdates"
                     @click="checkForUpdates"
                 />
-            </SpinInput> -->
+            </SpinInput>
             <SpinInput
                 label="Third Party licenses"
                 hint="This project was created with third party libraries."
@@ -172,11 +171,17 @@ const savingSettings = ref(false);
 const settingsDirty = ref(false);
 const isDetectingDlcs = ref(false);
 const detectedDlcs = ref([]);
-//const checkingForUpdates = ref(false);
+const currentVersion = ref("0.0.0");
+const checkingForUpdates = ref(false);
 
 onMounted(() => {
     window.external.sendMessage(JSON.stringify({
         command: "settings-get-full",
+        data: "",
+    }));
+
+    window.external.sendMessage(JSON.stringify({
+        command: "update-get-version",
         data: "",
     }));
 });
@@ -210,6 +215,14 @@ emitter.on('settings-get-full-response', (settings) => {
 emitter.on('game-detect-dlcs-response', (dlcs) => {
     if(dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
     isDetectingDlcs.value = false;
+});
+
+emitter.on('update-get-version-response', (version) => {
+    currentVersion.value = version;
+});
+
+emitter.on('update-get-latest-response', (version) => {
+    checkingForUpdates.value = false;
 });
 
 const openSettingsFolder = () => {
@@ -254,9 +267,14 @@ const detectDLCs = () => {
     }));
 };
 
-/* const checkForUpdates = () => {
+const checkForUpdates = () => {
     checkingForUpdates.value = true;
-}; */
+    
+    window.external.sendMessage(JSON.stringify({
+        command: "update-get-latest",
+        data: "",
+    }));
+};
 
 const openLicenses = () => {
     router.push({
