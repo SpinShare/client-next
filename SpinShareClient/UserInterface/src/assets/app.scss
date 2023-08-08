@@ -101,6 +101,25 @@ a {
     }
 }
 
+/* SCROLLBARS */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--colorBaseText)) rgb(var(--colorBase));
+}
+*::-webkit-scrollbar {
+    width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgb(var(--colorBase));
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--colorBaseText));
+    border-radius: 10px;
+    border: 5px solid rgb(var(--colorBase));
+}
+
 /* TOOLTIPS */
 // TODO: Dark Mode Tooltip Styling
 

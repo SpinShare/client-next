@@ -1,12 +1,27 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
 using DownloadQueue;
 
+/// <summary>
+/// A command that clears the <see cref="DownloadQueue.Queue"/> given a <see cref="DownloadState"/>
+/// </summary>
+/// <remarks>
+/// If no <see cref="DownloadState"/> is set, any <see cref="DownloadState.Queued"/> items will be cleared
+/// </remarks>
 public class CommandQueueClear : ICommand
 {
     private DownloadQueue? _downloadQueue;
+    
+    private readonly ILogger<CommandQueueClear> _logger;
+
+    public CommandQueueClear(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandQueueClear>>();
+    }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {

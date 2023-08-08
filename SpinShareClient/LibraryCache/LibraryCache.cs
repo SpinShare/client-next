@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PhotinoNET;
 using SpinShareClient.MessageParser;
@@ -9,6 +11,8 @@ namespace SpinShareClient.LibraryCache;
 
 public class LibraryCache
 {
+    private readonly ILogger<LibraryCache> _logger;
+    
     private SettingsManager? _settingsManager;
     private static LibraryCache? _instance;
     private static readonly object _lock = new();
@@ -16,9 +20,16 @@ public class LibraryCache
     private readonly string? _libraryPath;
     public List<LibraryItem> Library = new();
 
-    private LibraryCache()
+    public LibraryCache()
     {
-        Debug.WriteLine("[ChartLibrary] Initializing");
+        using var serviceProvider = new ServiceCollection()
+            .AddLogging(configure => configure.AddConsole())
+            .AddLogging(configure => configure.AddDebug())
+            .BuildServiceProvider();
+        
+        _logger = serviceProvider.GetRequiredService<ILogger<LibraryCache>>();
+        
+        _logger.LogInformation("Initializing");
 
         _settingsManager = SettingsManager.GetInstance();
         _libraryPath = _settingsManager.Get<string>("library.path");
@@ -30,6 +41,10 @@ public class LibraryCache
         }
     }
 
+    /// <summary>
+    /// Returns an instance of <see cref="LibraryCache"/>
+    /// </summary>
+    /// <returns><see cref="LibraryCache"/> Instance</returns>
     public static LibraryCache GetInstance()
     {
         if (_instance == null)
@@ -45,9 +60,17 @@ public class LibraryCache
         return _instance;
     }
 
+    /// <summary>
+    /// Rebuilds the <see cref="LibraryCache.Library"/>
+    /// </summary>
+    /// <remarks>
+    /// Depending on the size of a library, this may take a while
+    /// </remarks>
+    /// <param name="sender">(optional) <see cref="PhotinoWindow"/></param>
+    /// <exception cref="Exception">The library path does not exist</exception>
     public async Task RebuildCache(PhotinoWindow? sender)
     {
-        Debug.WriteLine("[LibraryCache] Rebuilding cache");
+        _logger.LogInformation("Rebuilding cache");
         
         if (!Directory.Exists(_libraryPath))
         {
@@ -68,7 +91,7 @@ public class LibraryCache
             await AddToCache(filePaths[i]);
         
             itemWatch.Stop();
-            Debug.WriteLine($"[LibraryCache] Finished {i + 1} of {filePaths.Length} (in {itemWatch.Elapsed:mm\\:ss\\.ff})");
+            _logger.LogInformation("Finished {I} of {FilePathsLength} (in {ItemWatchElapsed})", i + 1, filePaths.Length, itemWatch.Elapsed);
             
             if(sender != null) {
                 MessageHandler.SendResponse(sender, new Message {
@@ -84,11 +107,15 @@ public class LibraryCache
         }
 
         fullWatch.Stop();
-        Debug.WriteLine($"[LibraryCache] Finished rebuilding cache in {fullWatch.Elapsed:mm\\:ss\\.ff}.");
+        _logger.LogInformation("Finished rebuilding cache in {FullWatchElapsed}", fullWatch.Elapsed);
         
         await SaveCache();
     }
 
+    /// <summary>
+    /// Parses and adds or updates a .SRTB file to the cache
+    /// </summary>
+    /// <param name="filePath">.srtb path as <see cref="String"/></param>
     public async Task AddToCache(string filePath)
     {
         string fileName = Path.GetFileName(filePath);
@@ -98,11 +125,11 @@ public class LibraryCache
 
         if (existingItem == null)
         {
-            Debug.WriteLine($"[LibraryCache] Adding new: {Path.GetFileName(filePath)}");
+            _logger.LogInformation("Adding new: {FileName}", Path.GetFileName(filePath));
         }
         else
         {
-            Debug.WriteLine($"[LibraryCache] Updating existing: {Path.GetFileName(filePath)}");
+            _logger.LogInformation("Updating existing: {FileName}", Path.GetFileName(filePath));
         }
         
         LibraryItem libraryItem = existingItem ?? new();
@@ -126,29 +153,69 @@ public class LibraryCache
         if(existingItem == null) Library.Add(libraryItem);
     }
 
+    /// <summary>
+    /// Removes a LibraryItem from the cache
+    /// </summary>
+    /// <param name="libraryItem"><see cref="LibraryItem"/></param>
+    public async Task RemoveFromCache(LibraryItem libraryItem)
+    {
+        var existingItem = Library.Find(x => x == libraryItem);
+
+        if (existingItem == null)
+        {
+            _logger.LogInformation("{FileName} does not exist", libraryItem.FileName);
+            return;
+        }
+
+        Library.Remove(libraryItem);
+        await SaveCache();
+    }
+
+    /// <summary>
+    /// Loads the <see cref="LibraryCache.Library"/> from the persistent cache file.
+    /// </summary>
     private void LoadCache()
     {
         string json = File.ReadAllText(_libraryCacheFilePath);
         Library = JsonConvert.DeserializeObject<List<LibraryItem>>(json) ?? new List<LibraryItem>();
     }
 
+    /// <summary>
+    /// Clears the <see cref="LibraryCache.Library"/> and saves.
+    /// </summary>
     public async Task ClearCache()
     {
         Library.Clear();
         await SaveCache();
     }
 
+    /// <summary>
+    /// Saves the <see cref="LibraryCache.Library"/> to the persistent cache file.
+    /// </summary>
     public async Task SaveCache()
     {
         string json = JsonConvert.SerializeObject(Library, Formatting.Indented);
         await File.WriteAllTextAsync(_libraryCacheFilePath, json);
     }
 
+    /// <summary>
+    /// Returns the <see cref="LibraryCache.Library"/> as a <see cref="List{T}"/> of <see cref="LibraryItem"/>
+    /// </summary>
+    /// <returns><see cref="List{T}"/> of <see cref="LibraryItem"/></returns>
     public List<LibraryItem> GetLibrary()
     {
         return Library;
     }
 
+    /// <summary>
+    /// Returns the state of a <see cref="LibraryItem"/> given a <c>fileReference</c> and <c>currentUpdateHash</c><br /><br />
+    /// <b>spinshareReference</b> - A reference to the SpinSha.re item<br />
+    /// <b>installed</b> - Whether the chart is in the cache (installed)<br />
+    /// <b>updated</b> - Whether the local item has the same <c>updateHash</c>
+    /// </summary>
+    /// <param name="fileReference">SpinShare FileReference as <see cref="String"/></param>
+    /// <param name="currentUpdateHash">.SRTB MD5 hash as <see cref="String"/></param>
+    /// <returns><see cref="Dictionary{TKey,TValue}"/></returns>
     public Dictionary<string, object> GetState(string fileReference, string currentUpdateHash)
     {
         Dictionary<string, object> response = new();
@@ -159,41 +226,5 @@ public class LibraryCache
         response.Add("updated", item?.UpdateHash == currentUpdateHash);
 
         return response;
-    }
-
-    public static string? GetLibraryPath()
-    {
-        string? libraryPath = "";
-
-        switch (Environment.OSVersion.Platform)
-        {
-            case PlatformID.Unix:
-                libraryPath = Path.Combine(
-                    Environment.GetEnvironmentVariable("HOME") ?? "",
-                    ".steam", "steam", "steamapps", "compatdata", "1058830", "pfx", "drive_c", "users", "steamuser", "AppData", "LocalLow", "Super Spin Digital", "Spin Rhythm XD", "Custom"
-                );
-                break;
-
-            case PlatformID.Win32NT:
-                libraryPath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low",
-                    "Super Spin Digital", "Spin Rhythm XD", "Custom"
-                );
-                break;
-
-            case PlatformID.MacOSX:
-                libraryPath = Path.Combine(
-                    Environment.GetEnvironmentVariable("HOME") ?? "",
-                    "Library", "Application Support", "Steam", "steamapps", "common", "Spin Rhythm", "Custom"
-                );
-                break;
-
-            default:
-                throw new Exception("Unknown platform");
-        }
-        
-        // TODO: Check if folder exists and throw error if not
-
-        return libraryPath;
     }
 }

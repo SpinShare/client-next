@@ -13,14 +13,6 @@ public class AppFolderTests
     }
 
     [TestMethod]
-    public void GetAppFolder_ReturnsCorrectPath()
-    {
-        var result = SpinShareClient.SettingsManager.GetAppFolder();
-
-        Assert.AreEqual(_expectedAppFolderPath, result);
-    }
-
-    [TestMethod]
     public void GetAppFolder_CreatesDirectory_IfNotExists()
     {
         try

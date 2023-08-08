@@ -40,12 +40,14 @@
                                     icon="trash-can-outline"
                                     color="danger"
                                     label="Remove"
+                                    @click="handleRemove"
                                 />
                                 <SpinButton
                                     v-else
                                     icon="update"
                                     color="success"
                                     label="Update"
+                                    @click="handleAddToQueue"
                                 />
                                 <SpinButton
                                     icon="controller"
@@ -147,6 +149,10 @@ onMounted(async () => {
     checkLibraryState();
 });
 
+emitter.on('library-remove-response', (state) => {
+    checkLibraryState();
+});
+
 emitter.on('library-get-state-response', (state) => {
     if(state.spinshareReference === chart.value.fileReference) {
         libraryState.value = state;
@@ -200,6 +206,15 @@ const handleAddToQueue = () => {
             cover: chart.value.cover,
             fileReference: chart.value.fileReference,
         },
+    }));
+};
+
+const handleRemove = () => {
+    libraryState.value = null;
+    
+    window.external.sendMessage(JSON.stringify({
+        command: "library-remove",
+        data: chart.value.fileReference
     }));
 };
 

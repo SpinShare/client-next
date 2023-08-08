@@ -1,18 +1,33 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotinoNET;
 
 namespace SpinShareClient.MessageParser;
 
+/// <summary>
+/// A command that opens a <c>path</c> in the OS explorer/finder
+/// </summary>
+/// <remarks>
+/// Does nothing if the <c>path</c> does not exist.
+/// </remarks>
 public class CommandOpenInExplorer : ICommand
 {
+    private readonly ILogger<CommandOpenInExplorer> _logger;
+
+    public CommandOpenInExplorer(ServiceProvider serviceProvider)
+    {
+        _logger = serviceProvider.GetRequiredService<ILogger<CommandOpenInExplorer>>();
+    }
+    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
         if (data == null) return;
         var path = data.ToString();
         
-        if (!System.IO.Directory.Exists(path)) return;
+        if (!Directory.Exists(path)) return;
 
         string cmd;
         switch (Environment.OSVersion.Platform)

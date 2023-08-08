@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace SpinShareClient.LibraryCache;
 
+/// <summary>
+/// An item of the <see cref="LibraryCache"/>
+/// </summary>
 public class LibraryItem
 {
     public string? FileName;
@@ -19,9 +22,13 @@ public class LibraryItem
     public string? UpdateHash;
     public string? SpinShareReference;
 
+    /// <summary>
+    /// Loads a <see cref="UnityScriptableObject"/> into a <see cref="LibraryItem"/>
+    /// </summary>
+    /// <param name="data"><see cref="UnityScriptableObject"/></param>
     public async Task Load(UnityScriptableObject data)
     {
-        string? libraryPath = LibraryCache.GetLibraryPath();
+        string? libraryPath = SettingsManager.GetLibraryPath();
         if (libraryPath == null) return;
         
         string? trackInfoJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains("TrackInfo"))?.val ?? null;

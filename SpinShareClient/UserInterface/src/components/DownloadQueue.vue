@@ -1,7 +1,7 @@
 <template>
     <transition name="queue">
         <section
-            class="download-queue-shade"
+            class="download-queue-backdrop"
             v-if="isActive"
             @click.self="changeState(false)"
         >
@@ -117,7 +117,7 @@ const handleClearQueue = () => {
 </script>
 
 <style lang="scss">
-.download-queue-shade {
+.download-queue-backdrop {
     position: absolute;
     left: 60px;
     bottom: 0;
