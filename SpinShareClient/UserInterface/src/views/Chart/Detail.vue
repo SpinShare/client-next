@@ -149,6 +149,10 @@ onMounted(async () => {
     checkLibraryState();
 });
 
+emitter.on('library-remove-response', (state) => {
+    checkLibraryState();
+});
+
 emitter.on('library-get-state-response', (state) => {
     if(state.spinshareReference === chart.value.fileReference) {
         libraryState.value = state;
@@ -206,6 +210,8 @@ const handleAddToQueue = () => {
 };
 
 const handleRemove = () => {
+    libraryState.value = null;
+    
     window.external.sendMessage(JSON.stringify({
         command: "library-remove",
         data: chart.value.fileReference

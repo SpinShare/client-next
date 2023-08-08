@@ -12,26 +12,48 @@ using LibraryCache;
 /// </summary>
 public class CommandLibraryRemove : ICommand
 {
-    private LibraryCache? _libraryCache;
     private readonly ILogger<CommandLibraryRemove> _logger;
+    
+    private LibraryCache? _libraryCache;
+    private readonly string? _libraryPath;
 
     public CommandLibraryRemove(ServiceProvider serviceProvider)
     {
         _logger = serviceProvider.GetRequiredService<ILogger<CommandLibraryRemove>>();
+        _libraryPath = SettingsManager.GetLibraryPath();
     }
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        if (data == null) return;        
+        if (data == null) return;
+        if (_libraryPath == null) return;  
         string fileReference = (string)data;
         
         _libraryCache = LibraryCache.GetInstance();
         
-        _logger.LogInformation("Test: {FileRef}", fileReference);
+        _logger.LogInformation("{FileReference} > Removing Cache Item", fileReference);
+        var libraryItem = _libraryCache.Library.Find(x => x.SpinShareReference == fileReference);
+        if (libraryItem != null)
+        {
+            await _libraryCache.RemoveFromCache(libraryItem);
+        }
+
+        string srtbFilePath = Path.Combine(_libraryPath, fileReference + ".srtb");
+        if (!File.Exists(srtbFilePath))
+        {
+            _logger.LogError("{FileReference} > SRTB file does not exist", fileReference);
+        }
+        else
+        {
+            _logger.LogInformation("{FileReference} > Removing SRTB file", fileReference);
+            File.Delete(srtbFilePath);
+        }
+        
+        // TODO: Remove Audio/AlbumArt
 
         Message response = new() {
             Command = "library-remove-response",
-            Data = true
+            Data = ""
         };
         
         await Task.Yield();

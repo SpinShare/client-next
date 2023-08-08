@@ -169,7 +169,7 @@ public class DownloadQueue
         _logger.LogInformation("#{ItemID} > Caching", item.ID);
         item.State = DownloadState.Caching;
         if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "queue-item-update-response", Data = item });
-        string srtbFilePath = Path.Combine(_libraryPath ?? "", item.FileReference + ".srtb");
+        string srtbFilePath = Path.Combine(_libraryPath, item.FileReference + ".srtb");
         LibraryCache.LibraryCache libraryCache = LibraryCache.LibraryCache.GetInstance();
         await libraryCache.AddToCache(srtbFilePath);
         await libraryCache.SaveCache();

@@ -154,6 +154,24 @@ public class LibraryCache
     }
 
     /// <summary>
+    /// Removes a LibraryItem from the cache
+    /// </summary>
+    /// <param name="libraryItem"><see cref="LibraryItem"/></param>
+    public async Task RemoveFromCache(LibraryItem libraryItem)
+    {
+        var existingItem = Library.Find(x => x == libraryItem);
+
+        if (existingItem == null)
+        {
+            _logger.LogInformation("{FileName} does not exist", libraryItem.FileName);
+            return;
+        }
+
+        Library.Remove(libraryItem);
+        await SaveCache();
+    }
+
+    /// <summary>
     /// Loads the <see cref="LibraryCache.Library"/> from the persistent cache file.
     /// </summary>
     private void LoadCache()
