@@ -1,6 +1,7 @@
 <template>
     <div
         class="chart-item"
+        :class="{'explicit': isExplicit}"
         @click.left="handleClick"
         @click.middle="handleAddToQueue"
         @mousedown.middle.prevent.stop
@@ -91,6 +92,10 @@ const props = defineProps({
     },
     cover: {
         type: [String, Boolean],
+        default: false,
+    },
+    isExplicit: {
+        type: Boolean,
         default: false,
     },
     hasEasyDifficulty: {
@@ -202,6 +207,7 @@ const handleAddToQueue = (event) => {
 
 <style lang="scss" scoped>
 .chart-item {
+    position: relative;
     height: 85px;
     background: rgba(var(--colorBaseText),0.07);
     border-radius: 6px;
@@ -279,6 +285,33 @@ const handleAddToQueue = (event) => {
                     cursor: not-allowed;
                 }
             }
+        }
+    }
+    
+    &.explicit {
+        & > * {
+            transition: 0.2s ease-in-out all;
+        }
+        &:not(:hover) > * {
+            filter: blur(5px);
+            opacity: 0.4;
+        }
+        &::after {
+            content: "Explicit - Hover to reveal";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(var(--colorBaseText), 0.6);
+            transition: 0.2s ease-in-out opacity;
+            pointer-events: none;
+        }
+        &:hover::after {
+            opacity: 0;
         }
     }
     
