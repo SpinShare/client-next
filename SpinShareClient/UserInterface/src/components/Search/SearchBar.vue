@@ -48,7 +48,9 @@ defineProps({
 
 const searchInputType = ref("charts");
 const searchInputQuery = ref("");
-const searchInputFilters = ref(null);
+const searchInputFilters = ref({
+    showExplicit: true,
+});
 
 const handleSearch = () => {
     emit('search', {
