@@ -26,27 +26,30 @@ jobs:
         run: dotnet restore
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
       - name: Publish
         run: |
-          mkdir -p publish/${{ matrix.os }}
+          mkdir -p build/${{ matrix.os }}
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            dotnet publish --configuration Release --runtime win-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
+            dotnet publish SpinShareClient.csproj --no-restore --configuration Release --runtime win-x64 --output ../build/${{ matrix.os }} /p:PublishSingleFile=true
           elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            dotnet publish --configuration Release --runtime osx-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
+            dotnet publish SpinShareClient.csproj --no-restore --configuration Release --runtime osx-x64 --output ../build/${{ matrix.os }} /p:PublishSingleFile=true
           elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            dotnet publish --configuration Release --runtime linux-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
+            dotnet publish SpinShareClient.csproj --no-restore --configuration Release --runtime linux-x64 --output ../build/${{ matrix.os }} /p:PublishSingleFile=true
           fi
         shell: bash
       - name: List Files
         run: |
-          ls -lp publish/
+          ls -lp build/${{ matrix.os }}
+      - name: Zip artifacts
+        uses: actions/create-zip@v1
+        with:
+          dir: publish/${{ matrix.os }}
+          zipname: publish/${{ matrix.os }}/spinshare-${{ matrix.os }}.zip
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}-artifact
-          path: publish/${{ matrix.os }}/*
+          path: build/${{ matrix.os }}/spinshare-${{ matrix.os }}.zip
   release:
     needs: build
     permissions: write-all
