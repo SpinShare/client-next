@@ -32,11 +32,11 @@ jobs:
         run: |
           mkdir -p publish/${{ matrix.os }}
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            dotnet publish --configuration Release --runtime win-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true
+            dotnet publish --configuration Release --runtime win-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
           elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            dotnet publish --configuration Release --runtime osx-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true
+            dotnet publish --configuration Release --runtime osx-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
           elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            dotnet publish --configuration Release --runtime linux-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true
+            dotnet publish --configuration Release --runtime linux-x64 --output publish/${{ matrix.os }} /p:PublishSingleFile=true /p:UseAppHost=true
           fi
         shell: bash
       - name: List Files
