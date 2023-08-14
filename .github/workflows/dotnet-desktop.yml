@@ -31,13 +31,17 @@ jobs:
       - name: Publish
         run: |
           mkdir -p publish/${{ matrix.os }}
-          if [ "${{ matrix.os }}" == "windows-latest" ]; then
-            dotnet publish --configuration Release --runtime win-x64 --self-contained false --output publish/${{ matrix.os }}
-          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-            dotnet publish --configuration Release --runtime osx-x64 --self-contained false --output publish/${{ matrix.os }}
-          elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            dotnet publish --configuration Release --runtime linux-x64 --self-contained false --output publish/${{ matrix.os }}
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            dotnet publish --configuration Release --runtime win-x64 --self-contained true --output publish/${{ matrix.os }} /p:PublishSingleFile=true
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            dotnet publish --configuration Release --runtime osx-x64 --self-contained true --output publish/${{ matrix.os }} /p:PublishSingleFile=true
+          elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            dotnet publish --configuration Release --runtime linux-x64 --self-contained true --output publish/${{ matrix.os }} /p:PublishSingleFile=true
           fi
+        shell: bash
+      - name: List Files
+        run: |
+          ls -lp publish/
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
