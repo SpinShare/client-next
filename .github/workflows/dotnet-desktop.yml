@@ -17,7 +17,11 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
@@ -30,7 +34,7 @@ jobs:
         run: |
           mkdir -p build/${{ matrix.os }}
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime win-x64 --output ./build/${{ matrix.os }} /p:PublishSingleFile=true
+            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime win-x64 --output ./build/${{ matrix.os }} //p:PublishSingleFile=true
           elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
             dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime osx-x64 --output ./build/${{ matrix.os }} /p:PublishSingleFile=true
           elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
