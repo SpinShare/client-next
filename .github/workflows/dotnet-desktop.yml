@@ -41,19 +41,20 @@ jobs:
             dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime linux-x64 --output ./build/${{ matrix.os }} /p:PublishSingleFile=true
           fi
         shell: bash
-      - name: List Files
-        run: |
-          ls -lp build/${{ matrix.os }}
-      - name: Zip artifacts
+      - name: Archive build artifacts
         uses: vimtor/action-zip@v1
         with:
           files: build/${{ matrix.os }}
-          dest: build/${{ matrix.os }}/spinshare-${{ matrix.os }}.zip
-      - name: Archive build artifacts
+          dest: build/${{ matrix.os }}.zip
+      - name: List Files
+        run: |
+          ls -lp build
+      - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.os }}-artifact
-          path: build/${{ matrix.os }}/spinshare-${{ matrix.os }}.zip
+          path: build/${{ matrix.os }}.zip
+          name: ${{ matrix.os }}.zip
+          retention-days: 1
   release:
     needs: build
     permissions: write-all
@@ -62,14 +63,17 @@ jobs:
       - name: Retrieve Release Artifacts
         uses: actions/download-artifact@v2
         with:
-          path: artifacts
+          path: build
       - name: List Files
         run: |
-          ls -lp artifacts/
+          ls -lp build
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          files: artifacts/*
+          files: |
+            build/macos-latest.zip/macos-latest.zip
+            build/ubuntu-latest.zip/ubuntu-latest.zip
+            build/windows-latest.zip/windows-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
