@@ -28,25 +28,21 @@ jobs:
         run: dotnet test --no-restore --verbosity normal
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Create Folder Structure for Archive
+      - name: Publish
         run: |
-          mkdir -p artifacts/${{ matrix.os }}
-          cp -r SpinShareClient/bin/Release/net7.0/* artifacts/${{ matrix.os }}/
-          ls -lp artifacts/${{ matrix.os }}
+          mkdir -p publish/${{ matrix.os }}
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            dotnet publish --configuration Release --runtime win-x64 --self-contained false --output publish/${{ matrix.os }}
+          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
+            dotnet publish --configuration Release --runtime osx-x64 --self-contained false --output publish/${{ matrix.os }}
+          elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+            dotnet publish --configuration Release --runtime linux-x64 --self-contained false --output publish/${{ matrix.os }}
+          fi
       - name: Archive build artifacts
-        uses: vimtor/action-zip@v1
-        with:
-          files: artifacts/${{ matrix.os }}
-          dest: artifacts/${{ matrix.os }}.zip
-      - name: List Files
-        run: |
-          ls -lp artifacts
-      - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: artifacts/${{ matrix.os }}.zip
-          name: ${{ matrix.os }}.zip
-          retention-days: 1
+          name: ${{ matrix.os }}-artifact
+          path: publish/${{ matrix.os }}/*
   release:
     needs: build
     permissions: write-all
@@ -58,16 +54,11 @@ jobs:
           path: artifacts
       - name: List Files
         run: |
-          ls -lp artifacts/macos-latest.zip/macos-latest.zip
-          ls -lp artifacts/ubuntu-latest.zip/ubuntu-latest.zip
-          ls -lp artifacts/windows-latest.zip/windows-latest.zip
+          ls -lp artifacts/
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            artifacts/macos-latest.zip/macos-latest.zip
-            artifacts/ubuntu-latest.zip/ubuntu-latest.zip
-            artifacts/windows-latest.zip/windows-latest.zip
+          files: artifacts/*
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}
