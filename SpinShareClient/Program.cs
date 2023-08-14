@@ -11,7 +11,7 @@ using MessageParser;
 
 public class Program
 {
-    private static ILogger<Program> _logger;
+    private static ILogger<Program>? _logger;
     private static FileStream? _lockFile;
     
     [STAThread]

@@ -25,6 +25,7 @@ public class CommandUpdateGetLatest : ICommand
     
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
+        if (_updateManager == null) return;
         _logger.LogInformation("Getting latest Version");
 
         var releases = await _updateManager.LoadReleases();
