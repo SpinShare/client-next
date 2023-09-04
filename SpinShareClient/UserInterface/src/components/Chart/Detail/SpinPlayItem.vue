@@ -63,6 +63,7 @@ const handleClick = () => {
     & .thumbnail {
         width: 100%;
         aspect-ratio: 16 / 9;
+        background-color: rgba(var(--colorBaseText, 0.07));
         background-size: cover;
         background-position: center;
     }

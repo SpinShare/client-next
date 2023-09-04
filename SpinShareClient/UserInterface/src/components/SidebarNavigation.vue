@@ -33,7 +33,7 @@
                 @click="toggleDownloadQueue"
             >
                 <span class="mdi mdi-download-box-outline"></span>
-                <div class="badge">{{ downloadQueueCount }}</div>
+                <div class="badge" v-if="downloadQueueCount !== 0">{{ downloadQueueCount }}</div>
             </div>
             <router-link to="/settings" class="item" v-tooltip.right="'Settings'">
                 <span class="mdi mdi-cog-outline"></span>
