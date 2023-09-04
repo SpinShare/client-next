@@ -27,7 +27,7 @@ public class CommandFactory
             case "open-in-browser":
                 return new CommandOpenInBrowser(serviceProvider);
             case "open-in-explorer":
-                return new CommandOpenInExplorer(serviceProvider);
+                return new CommandOpenInExplorer();
             case "game-select-path":
                 return new CommandGameSelectPath(serviceProvider);
             case "game-get-path":
@@ -39,7 +39,7 @@ public class CommandFactory
             case "library-get-path":
                 return new CommandLibraryGetPath(serviceProvider);
             case "library-open-in-explorer":
-                return new CommandLibraryOpenInExplorer(serviceProvider);
+                return new CommandLibraryOpenInExplorer();
             case "library-open-and-install-backup":
                 return new CommandOpenAndInstallBackup(serviceProvider);
             case "library-build-cache":
@@ -59,7 +59,7 @@ public class CommandFactory
             case "queue-clear":
                 return new CommandQueueClear(serviceProvider);
             case "settings-open-in-explorer":
-                return new CommandSettingsOpenInExplorer(serviceProvider);
+                return new CommandSettingsOpenInExplorer();
             case "settings-get":
                 return new CommandSettingsGet(serviceProvider);
             case "settings-get-full":

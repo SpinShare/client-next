@@ -60,7 +60,7 @@ import SpinInput from "@/components/Common/SpinInput.vue";
 const emitter = inject('emitter');
 
 const settingLanguage = ref('en-US');
-const settingTheme = ref('dark');
+const settingTheme = ref(window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light');
 const savingSettings = ref(false);
 
 emitter.on('settings-set-response', (settings) => {

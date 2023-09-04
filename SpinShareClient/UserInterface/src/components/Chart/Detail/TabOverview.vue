@@ -7,6 +7,7 @@
             <div
                 v-for="tag in tags"
                 class="item"
+                @click="router.push({ path: '/search', query: { type: 'charts', query: tag }})"
             >
                 #{{ tag }}
             </div>
@@ -52,6 +53,7 @@ import {computed, onMounted, ref} from 'vue';
 import moment from 'moment';
 import {getUser} from "@/api/api";
 import UserItem from "@/components/Common/UserItem.vue";
+import router from "@/router";
 
 const props = defineProps({
     description: {

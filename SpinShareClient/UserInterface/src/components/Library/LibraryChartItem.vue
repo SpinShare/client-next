@@ -115,7 +115,15 @@ const handleClick = () => {
         display: grid;
         gap: 3px;
 
+        & .title, & .subtitle {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         & .artist {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: rgba(var(--colorBaseText),0.4);
             font-size: 0.9rem;
         }
@@ -139,7 +147,6 @@ const handleClick = () => {
 
                 &:not(.active) {
                     opacity: 0.4;
-                    cursor: not-allowed;
                 }
             }
         }

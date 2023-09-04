@@ -17,7 +17,11 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
@@ -26,25 +30,29 @@ jobs:
         run: dotnet restore
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Create Folder Structure for Archive
+      - name: Build & Publish
         run: |
-          mkdir -p artifacts/${{ matrix.os }}
-          cp -r SpinShareClient/bin/Release/net7.0/* artifacts/${{ matrix.os }}/
-          ls -lp artifacts/${{ matrix.os }}
+          mkdir -p build/${{ matrix.os }}
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime win-x64 --output ./build/${{ matrix.os }} //p:PublishSingleFile=true
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime osx-x64 --output ./build/${{ matrix.os }} /p:PublishSingleFile=true
+          elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime linux-x64 --output ./build/${{ matrix.os }} /p:PublishSingleFile=true
+          fi
+        shell: bash
       - name: Archive build artifacts
         uses: vimtor/action-zip@v1
         with:
-          files: artifacts/${{ matrix.os }}
-          dest: artifacts/${{ matrix.os }}.zip
+          files: build/${{ matrix.os }}
+          dest: build/${{ matrix.os }}.zip
       - name: List Files
         run: |
-          ls -lp artifacts
+          ls -lp build
       - name: Save Release Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: artifacts/${{ matrix.os }}.zip
+          path: build/${{ matrix.os }}.zip
           name: ${{ matrix.os }}.zip
           retention-days: 1
   release:
@@ -55,19 +63,17 @@ jobs:
       - name: Retrieve Release Artifacts
         uses: actions/download-artifact@v2
         with:
-          path: artifacts
+          path: build
       - name: List Files
         run: |
-          ls -lp artifacts/macos-latest.zip/macos-latest.zip
-          ls -lp artifacts/ubuntu-latest.zip/ubuntu-latest.zip
-          ls -lp artifacts/windows-latest.zip/windows-latest.zip
+          ls -lp build
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/macos-latest.zip/macos-latest.zip
-            artifacts/ubuntu-latest.zip/ubuntu-latest.zip
-            artifacts/windows-latest.zip/windows-latest.zip
+            build/macos-latest.zip/macos-latest.zip
+            build/ubuntu-latest.zip/ubuntu-latest.zip
+            build/windows-latest.zip/windows-latest.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
           name: Release ${{ github.event.repository.updated_at }}

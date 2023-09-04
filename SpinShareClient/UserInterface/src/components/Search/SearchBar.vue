@@ -39,7 +39,10 @@ import SearchFilters from "@/components/Search/SearchFilters.vue";
 
 const emit = defineEmits(['search']);
 
-defineProps({
+const props = defineProps({
+    query: {
+        type: String,
+    },
     isSearching: {
         type: Boolean,
         default: false,
@@ -47,8 +50,10 @@ defineProps({
 });
 
 const searchInputType = ref("charts");
-const searchInputQuery = ref("");
-const searchInputFilters = ref(null);
+const searchInputQuery = ref(props.query ?? "");
+const searchInputFilters = ref({
+    showExplicit: true,
+});
 
 const handleSearch = () => {
     emit('search', {

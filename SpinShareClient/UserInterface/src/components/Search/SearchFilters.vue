@@ -39,11 +39,11 @@
                     <div class="header">Difficulty Rating</div>
                     <label class="filter">
                         <span>Lowest Rating</span>
-                        <input type="number" v-model="diffRatingFrom" />
+                        <input type="number" v-model="diffRatingFrom" @change="roundDiffRatingFrom" />
                     </label>
                     <label class="filter">
                         <span>Highest Rating</span>
-                        <input type="number" v-model="diffRatingTo" />
+                        <input type="number" v-model="diffRatingTo" @change="roundDiffRatingTo" />
                     </label>
                 </div>
                 <div class="group">
@@ -124,6 +124,14 @@ const handleApply = () => {
         showExplicit: showExplicit.value
     };
     emit('update:modelValue', newValue);
+};
+
+const roundDiffRatingFrom = () => {
+    diffRatingFrom.value = Math.round(diffRatingFrom.value);
+};
+
+const roundDiffRatingTo = () => {
+    diffRatingTo.value = Math.round(diffRatingTo.value);
 };
 
 watch(

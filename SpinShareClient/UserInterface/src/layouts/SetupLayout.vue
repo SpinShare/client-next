@@ -136,7 +136,7 @@ const handleContinue = () => { emit('continue'); };
             }
             & p {
                 color: rgba(var(--colorBaseText),0.6);
-                line-height: 1.25rem;
+                line-height: 1.5rem;
             }
         }
         & > .actions {
