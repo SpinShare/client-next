@@ -73,7 +73,13 @@ const handlePromoClick = (buttonData) => {
             });
             break;
         case BUTTON_TYPE_SEARCHQUERY:
-            // TODO
+            router.push({
+                path: '/search',
+                query: {
+                    type: 'charts',
+                    query: buttonData.data
+                }
+            });
             break;
         default:
         case BUTTON_TYPE_EXTERNALURL:

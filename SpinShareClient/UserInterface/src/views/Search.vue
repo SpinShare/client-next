@@ -3,6 +3,7 @@
         <section class="view-search">
             <SearchBar
                 :is-searching="isSearching"
+                :query="route.query?.query"
                 @search="handleSearch"
             />
             <section class="search-loading" v-if="isSearching">
@@ -30,8 +31,9 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router';
 import AppLayout from "@/layouts/AppLayout.vue";
-import {ref} from "vue";
+import {ref, onMounted } from "vue";
 import {searchCharts, searchUsers, searchPlaylists} from "@/api/api";
 import SearchIntro from "@/components/Search/SearchIntro.vue";
 import SearchBar from "@/components/Search/SearchBar.vue";
@@ -42,6 +44,8 @@ import PlaylistList from "@/components/Common/PlaylistList.vue";
 const isSearching = ref(false);
 const searchResultsType = ref(null);
 const searchResults = ref(null);
+
+const route = useRoute();
 
 const handleSearch = async (parameters) => {
     isSearching.value = true;
@@ -63,6 +67,18 @@ const handleSearch = async (parameters) => {
     
     isSearching.value = false;
 };
+
+onMounted(() => {
+    if(route.query.type && route.query.query) {
+        handleSearch({
+            type: route.query.type,
+            query: route.query.query,
+            filters: {
+                showExplicit: true,
+            }
+        });
+    }
+});
 </script>
 
 <style lang="scss" scoped>
