@@ -59,10 +59,13 @@ public class DlcManager
     /// <returns><see cref="Dictionary{TKey,TValue}"/> of DLC key and <see cref="List{T}"/> of MD5 hashes</returns>
     public async Task<Dictionary<string, List<string>>> DetectDlcs(string gameFolderPath)
     {
-        // The game has both OSX and Windows folders regardless of platform, we're checking both
+        // The game has both OSX and Windows folders regardless of platform (if you have any DLC), we're checking both
+        var osxPath = Path.Combine(gameFolderPath, "dlc", "OSX");
+        var winPath = Path.Combine(gameFolderPath, "dlc", "Windows");
+        
         List<string> dlcFiles = new();
-        dlcFiles.AddRange(Directory.GetFiles(Path.Combine(gameFolderPath, "dlc", "OSX"), "t_dlc_*"));
-        dlcFiles.AddRange(Directory.GetFiles(Path.Combine(gameFolderPath, "dlc", "Windows"), "t_dlc_*"));
+        if(Path.Exists(osxPath)) dlcFiles.AddRange(Directory.GetFiles(osxPath, "t_dlc_*"));
+        if(Path.Exists(winPath)) dlcFiles.AddRange(Directory.GetFiles(winPath, "t_dlc_*"));
 
         foreach (string filePath in dlcFiles)
         {
