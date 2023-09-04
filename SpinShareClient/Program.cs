@@ -79,8 +79,7 @@ public class Program
         }
         else
         {
-            if (!settingsManager.Exists("library.path") || !settingsManager.Exists("game.path") ||
-                !settingsManager.Exists("app.language") || !settingsManager.Exists("app.setup.done"))
+            if (!settingsManager.Exists("app.setup.done"))
             {
                 _logger.LogInformation("Settings are not complete, starting Setup");
                 initPage = "#/setup/step-0";
