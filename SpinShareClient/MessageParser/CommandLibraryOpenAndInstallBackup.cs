@@ -45,8 +45,21 @@ public class CommandOpenAndInstallBackup : ICommand
         if (resultPath?.Length == 1 && File.Exists(resultPath[0]))
         {
             _logger.LogInformation("Installing backup: {Path}", resultPath[0]);
-            
-            await _downloadQueue.AddLocalBackup(sender, resultPath[0]);
+
+            try
+            {
+                await _downloadQueue.AddLocalBackup(sender, resultPath[0]);
+            }
+            catch (LocalBackupHasNoChartsException localBackupHasNoChartsException)
+            {
+                MessageHandler.SendResponse(
+                    sender,
+                    new Message
+                    {
+                        Command = "library-open-and-install-backup-response",
+                        Data = "local-backup-has-no-charts-exception"
+                    });
+            }
         }
     }
 }

@@ -207,14 +207,21 @@ public class DownloadQueue
         
         _logger.LogInformation("{FileName} > Extracing to Temp", fileName);
         await UnzipAsync(filePath, extractedFilePath);
+        
+        // If a backup has no .srtb files, expect it's not a backup
+        string[] srtbFilePathsInTemp = Directory.GetFiles(extractedFilePath, "*.srtb");
+        if (srtbFilePathsInTemp.Length == 0)
+        {
+            throw new LocalBackupHasNoChartsException();
+        }
 
         _logger.LogInformation("{FileName} > Copying to Library", fileName);
-        string[] srtbFilePaths = Directory.GetFiles(extractedFilePath, "*.srtb");
+        string[] srtbFilePathsInLibrary = Directory.GetFiles(extractedFilePath, "*.srtb");
         await MoveFilesAsync(extractedFilePath, _libraryPath);
         await CleanupAsync(extractedFilePath);
         
         _logger.LogInformation("{FileName} > Caching", fileName);
-        foreach (string srtbFilePath in srtbFilePaths)
+        foreach (string srtbFilePath in srtbFilePathsInLibrary)
         {
             string srtbFileName = Path.GetFileName(srtbFilePath);
             string srtbFullFilePath = Path.Combine(_libraryPath, srtbFileName);
@@ -228,7 +235,7 @@ public class DownloadQueue
 
         _logger.LogInformation("{FileName} > Finished", fileName);
         
-        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "library-open-and-install-backup-response", Data = "" });
+        if(sender != null) MessageHandler.SendResponse(sender, new Message { Command = "library-open-and-install-backup-response", Data = true });
     }
 
     /// <summary>
