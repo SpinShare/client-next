@@ -6,12 +6,14 @@
     </router-view>
     
     <UpdateBanner />
+    <AlertMessage />
 </template>
 
 <script setup>
 import {ref, inject, onMounted, computed} from 'vue';
 import {useRoute, useRouter} from "vue-router";
 import UpdateBanner from "@/components/UpdateBanner.vue";
+import AlertMessage from "@/components/Common/AlertMessage.vue";
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -42,7 +44,8 @@ onMounted(() => {
 });
 
 const setTheme = (newTheme) => {
-    theme.value = newTheme ?? 'light';
+    let osTheme = window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light';
+    theme.value = newTheme ?? osTheme;
     document.documentElement.dataset.theme = theme.value;
 };
 
