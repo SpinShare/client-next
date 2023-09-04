@@ -9,18 +9,9 @@ namespace SpinShareClient.MessageParser;
 /// </summary>
 public class CommandLibraryOpenInExplorer : ICommand
 {
-    private readonly ILogger<CommandLibraryOpenInExplorer> _logger;
-    private readonly ServiceProvider _serviceProvider;
-
-    public CommandLibraryOpenInExplorer(ServiceProvider serviceProvider)
-    {
-        _logger = serviceProvider.GetRequiredService<ILogger<CommandLibraryOpenInExplorer>>();
-        _serviceProvider = serviceProvider;
-    }
-    
     public async Task Execute(PhotinoWindow? sender, object? data)
     {
-        CommandOpenInExplorer command = new(_serviceProvider);
+        CommandOpenInExplorer command = new();
         await command.Execute(sender, SettingsManager.GetLibraryPath());
     }
 }
