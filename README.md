@@ -31,3 +31,9 @@ cd UserInterface && npm run build
 ```sh
 dotnet build --configuration Release
 ```
+
+### Update translations
+- Go to the translation sheet on Google Spreadsheets
+- Open Export Sheet Data
+- Export as JSON, place the JSON file in `/SpinShareClient/UserInterface/src/i18n/`
+- Run the `npm run generate-i18n` command to generate the correct translation files
