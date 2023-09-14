@@ -2,16 +2,18 @@
     <AppLayout>
         <section class="view-error">
             <div class="error-box">
-                <h1>Yikes!</h1>
-                <p>Well this is embarrasing! Something somewhere went wrong, so we have to show you this funky looking error page!</p>
+                <h1>{{ t('general.error.title') }}</h1>
+                <p>{{ t('general.error.message') }}</p>
             </div>
         </section>
-        I am Error
     </AppLayout>
 </template>
 
 <script setup>
 import AppLayout from "@/layouts/AppLayout.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>

@@ -39,26 +39,26 @@
                                     v-if="libraryState.updated"
                                     icon="trash-can-outline"
                                     color="danger"
-                                    label="Remove"
+                                    :label="t('chart.detail.actions.remove')"
                                     @click="handleRemove"
                                 />
                                 <SpinButton
                                     v-else
                                     icon="update"
                                     color="success"
-                                    label="Update"
+                                    :label="t('chart.detail.actions.update')"
                                     @click="handleAddToQueue"
                                 />
                                 <SpinButton
                                     icon="controller"
-                                    label="Play"
+                                    :label="t('chart.detail.actions.play')"
                                 />
                             </template>
                             <template v-else>
                                 <SpinButton
                                     icon="download"
                                     color="primary"
-                                    label="Add to queue"
+                                    :label="t('general.addToQueue')"
                                     @click="handleAddToQueue"
                                 />
                             </template>
@@ -66,32 +66,32 @@
                         <template v-else-if="queueState">
                             <SpinButton
                                 loading
-                                :label="queueState === 0 ? 'Queued' : 'Downloading'"
+                                :label="queueState === 0 ? t('chart.detail.actions.queued') : t('chart.detail.actions.downloading')"
                                 disabled
                             />
                         </template>
                         <template v-else>
                             <SpinButton
                                 loading
-                                label="Loading"
+                                :label="t('general.loading')"
                                 disabled
                             />
                         </template>
                         <SpinButton
                             icon="open-in-new"
-                            v-tooltip="'Open on SpinSha.re'"
+                            v-tooltip="t('general.openOnSpinShare')"
                             @click="handleOpenInBrowser"
                         />
                         <SpinButton
                             icon="flag-outline"
-                            v-tooltip="'Report'"
+                            v-tooltip="t('general.report')"
                             @click="handleReport"
                         />
                     </div>
                 </div>
             </header>
             <SpinTabBar
-                :tabs="['Overview', 'Reviews', 'SpinPlays', 'Playlists']"
+                :tabs="[t('chart.detail.tabBar.overview'), t('chart.detail.tabBar.reviews'), t('chart.detail.tabBar.spinPlays'), t('chart.detail.tabBar.playlists')]"
                 @change="handleTabChange"
             />
             <TabOverview
@@ -132,6 +132,9 @@ import { ref, onMounted, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import {getChart} from "@/api/api";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 import AppLayout from "../../layouts/AppLayout.vue";
 import TabOverview from "@/components/Chart/Detail/TabOverview.vue";

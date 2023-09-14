@@ -2,11 +2,11 @@
     <AppLayout>
         <section class="view-licenses">
             <SpinHeader
-                label="Third party licenses"
+                :label="t('settings.thirdPartyLicenses.label')"
             >
                 <SpinButton
                     icon="arrow-left"
-                    label="Back"
+                    :label="t('general.back')"
                     @click="handleBack"
                 />
             </SpinHeader>
@@ -22,6 +22,9 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import { VueComponent } from "@/assets/third-party-licenses.md";
 import router from "@/router";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const handleBack = () => {
     router.push({

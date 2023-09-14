@@ -10,7 +10,7 @@
             
             <header>
                 <img src="@/assets/icon.svg" />
-                <div class="subheader">First time configuration</div>
+                <div class="subheader">{{ t('setup.title') }}</div>
                 <div class="step-title">{{ title }}</div>
             </header>
 
@@ -38,6 +38,9 @@
 
 <script setup>
 const emit = defineEmits(['back', 'continue']);
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 defineProps({
     step: {

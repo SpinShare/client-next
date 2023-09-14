@@ -10,21 +10,21 @@
             <template v-if="libraryState">
                 <span
                     v-if="queueState === null && libraryState.installed && !libraryState.updated"
-                    v-tooltip="'Update Available'"
+                    v-tooltip="t('chart.state.updateAvailable')"
                     class="tag tag-installed"
                 >
                     <span class="mdi mdi-update"></span>
                 </span>
                 <span
                     v-if="queueState === null && libraryState.installed && libraryState.updated"
-                    v-tooltip="'Installed & up to date'"
+                    v-tooltip="t('chart.state.updated')"
                     class="tag tag-updated"
                 >
                     <span class="mdi mdi-check"></span>
                 </span>
                 <span
                     v-if="queueState !== null && queueState !== STATE_DONE"
-                    v-tooltip="'Downloading'"
+                    v-tooltip="t('chart.state.downloading')"
                     class="tag tag-downloading"
                 >
                     <span class="mdi mdi-loading"></span>
@@ -64,6 +64,9 @@
 import { ref, onMounted, inject } from 'vue';
 import router from "@/router";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     id: {
@@ -262,7 +265,7 @@ const handleAddToQueue = (event) => {
     }
     & .meta {
         display: grid;
-        gap: 3px;
+        gap: 5px;
         
         & .title, & .subtitle {
             white-space: nowrap;

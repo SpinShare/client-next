@@ -1,12 +1,12 @@
 <template>
     <SetupLayout
         :step="2"
-        title="Library Cache"
+        :title="t('setup.step2.title')"
         @back="handleBack"
         @continue="handleContinue"
         :can-continue="libraryCacheIsReady"
     >
-        <p>Next, let's strike up the band on the library cache. The cache keeps an up-to-the-minute record of all your installed charts and their versions. This way, SpinShare can quickly confirm if you've got a chart installed or if there's a new version waiting in the wings.</p>
+        <p>{{ t('setup.step2.text') }}</p>
         
         <SpinButton
             :color="libraryCacheIsReady ? 'success' : 'default'"
@@ -23,6 +23,9 @@ import {ref, inject, computed} from 'vue';
 import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const libraryCacheIsAnalyzing = ref(false);
 const libraryCacheIsReady = ref(false);
@@ -59,11 +62,11 @@ const handleContinue = () => {
 
 const analyzeButtonLabel = computed(() => {
     if(libraryCacheIsReady.value)
-        return `Analyzed ${libraryCacheProgressTotal.value} charts.`;
+        return t('setup.step2.libraryCache.analyzationDone', [libraryCacheProgressTotal.value]);
     
     if(libraryCacheIsAnalyzing.value)
-        return `Analyzing library (${libraryCacheProgressPercentage.value}%)`
+        return t('setup.step2.libraryCache.analyzing', [libraryCacheProgressPercentage.value])
     
-    return 'Analyze library';
+    return t('setup.step2.libraryCache.analyze');
 });
 </script>

@@ -2,7 +2,7 @@
     <AppLayout>
         <SpinTabBar
             :selected="currentTab"
-            :tabs="['New', 'Updated', 'Hot this week', 'Hot this month']"
+            :tabs="[t('discover.tabBar.new'), t('discover.tabBar.updated'), t('discover.tabBar.hotThisWeek'), t('discover.tabBar.hotThisMonth')]"
             @change="handleTabChange"
         />
         <transition name="default">
@@ -22,7 +22,7 @@
                             @click="navigatePrevious"
                         />
                         <SpinButton
-                            :label="`Page #${currentPage}`"
+                            :label="t('general.pagination.page', [(parseInt(currentPage) + 1)])"
                             :disabled="true"
                             color="transparent"
                         />
@@ -53,6 +53,9 @@ import router from "@/router";
 import {useRoute} from "vue-router";
 import SpinButton from "@/components/Common/SpinButton.vue";
 import SpinTabBar from "@/components/Common/SpinTabBar.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const getTabIndex = (tabName) => {
     if (tabName === 'new') return 0;

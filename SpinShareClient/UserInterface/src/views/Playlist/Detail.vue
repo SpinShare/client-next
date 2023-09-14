@@ -17,15 +17,15 @@
                                     class="charts-count"
                                 >
                                     <span class="mdi mdi-playlist-music"></span>
-                                    <span>{{ playlist.songs.length }} Charts</span>
+                                    <span>{{ t('playlist.count', [playlist.songs.length]) }}</span>
                                 </div>
                                 <span
                                     class="tag-official"
                                     v-if="playlist.isOfficial"
-                                    v-tooltip="'This is a playlist by the SpinShare team.'"
+                                    v-tooltip="t('playlist.official.tooltip')"
                                 >
                                     <span class="mdi mdi-check"></span>
-                                    <span>Official</span>
+                                    <span>{{ t('playlist.official.tag') }}</span>
                                 </span>
                             </div>
                         </div>
@@ -33,12 +33,12 @@
                             <SpinButton
                                 icon="download"
                                 color="primary"
-                                label="Add to queue"
+                                :label="t('general.addToQueue')"
                                 @click="handleAddToQueue"
                             />
                             <SpinButton
                                 icon="open-in-new"
-                                v-tooltip="'Open on SpinSha.re'"
+                                v-tooltip="t('general.openOnSpinShare')"
                                 @click="handleOpenInBrowser"
                             />
                         </div>
@@ -76,6 +76,9 @@ import { ref, onMounted, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import {getPlaylist} from "@/api/api";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 import AppLayout from "../../layouts/AppLayout.vue";
 import ChartList from "@/components/Common/ChartList.vue";
@@ -169,6 +172,9 @@ const handleOpenInBrowser = () => {
                             padding: 5px 10px;
                             border-radius: 100px;
                             font-size: 0.75rem;
+                            display: flex;
+                            gap: 5px;
+                            align-items: center;
                             background: rgba(var(--colorSuccess), 0.2);
                             color: rgba(var(--colorSuccess));
                         }

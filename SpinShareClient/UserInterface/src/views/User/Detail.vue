@@ -12,22 +12,22 @@
                     <div class="tags" v-if="user.isPatreon || user.isVerified">
                         <span class="tag tag-verified" v-if="user.isVerified">
                             <span class="mdi mdi-check"></span>
-                            <span>Verified</span>
+                            <span>{{ t('user.verified') }}</span>
                         </span>
                         <span class="tag tag-supporter" v-if="user.isPatreon">
                             <span class="mdi mdi-heart"></span>
-                            <span>Supporter</span>
+                            <span>{{ t('user.supporter') }}</span>
                         </span>
                     </div>
                     <div class="actions">
                         <SpinButton
                             icon="open-in-new"
-                            v-tooltip="'Open on SpinSha.re'"
+                            v-tooltip="t('general.openOnSpinShare')"
                             @click="handleOpenInBrowser"
                         />
                         <SpinButton
                             icon="flag-outline"
-                            v-tooltip="'Report'"
+                            v-tooltip="t('general.report')"
                             @click="handleReport"
                         />
                     </div>
@@ -35,11 +35,11 @@
             </header>
             <SpinTabBar
                 :tabs="[
-                    'Overview',
-                    'Charts (' + user.songs + ')',
-                    'Playlists (' + user.playlists + ')',
-                    'Reviews (' + user.reviews + ')',
-                    'SpinPlays (' + user.spinplays + ')'
+                    t('user.detail.tabBar.overview'),
+                    t('user.detail.tabBar.charts', [user.songs]),
+                    t('user.detail.tabBar.playlists', [user.playlists]),
+                    t('user.detail.tabBar.reviews', [user.reviews]),
+                    t('user.detail.tabBar.spinPlays', [user.spinplays]),
                 ]"
                 @change="handleTabChange"
             />
@@ -83,6 +83,9 @@ import TabCharts from "@/components/User/Detail/TabCharts.vue";
 import TabPlaylists from "@/components/User/Detail/TabPlaylists.vue";
 import TabReviews from "@/components/User/Detail/TabReviews.vue";
 import TabSpinPlays from "@/components/User/Detail/TabSpinPlays.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const route = useRoute();
 const user = ref(null);

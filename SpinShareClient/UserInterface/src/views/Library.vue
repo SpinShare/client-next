@@ -2,23 +2,23 @@
     <AppLayout>
         <section class="view-library">
             <SpinHeader
-                label="Library"
+                :label="t('library.title')"
             >
                 <SpinButton
                     icon="folder"
-                    v-tooltip="'Browse Files'"
+                    v-tooltip="t('library.browseFiles')"
                     @click="handleOpenLibrary"
                 />
                 <SpinButton
                     icon="plus"
-                    v-tooltip="'Import Backup'"
+                    v-tooltip="t('library.importBackup')"
                     :disabled="importingChart"
                     :loading="importingChart"
                     @click="handleOpenBackup"
                 />
                 <SpinButton
                     icon="refresh"
-                    v-tooltip="'Rebuild Cache'"
+                    v-tooltip="t('library.rebuildCache')"
                     @click="handleRebuildCache"
                 />
             </SpinHeader>
@@ -40,6 +40,9 @@ import LibraryChartList from "@/components/Library/LibraryChartList.vue";
 import router from "@/router";
 import SpinButton from "@/components/Common/SpinButton.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const importingChart = ref(false);
 const loadingLibrary = ref(false);
@@ -90,8 +93,8 @@ emitter.on('library-open-and-install-backup-response', (response) => {
         loadLibrary();
     } else if(response === 'local-backup-has-no-charts-exception') {
         emitter.emit('alert-show', {
-            title: 'Local Backup Invalid',
-            message: 'Could not add local backup to libary as it does not contain a valid Spin Rhythm XD chart.'
+            title: t('library.importBackupError.localBackupHasNoCharts.title'),
+            message: t('library.importBackupError.localBackupHasNoCharts.message')
         });
     }
 });

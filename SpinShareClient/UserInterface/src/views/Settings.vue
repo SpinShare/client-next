@@ -2,24 +2,24 @@
     <AppLayout>
         <section class="view-settings">
             <SpinHeader
-                label="Settings"
+                :label="t('settings.title')"
             >
                 <SpinButton
                     @click="openSettingsFolder"
                     icon="folder"
-                    v-tooltip="'Open settings folder'"
+                    v-tooltip="t('settings.openSettings')"
                 />
                 <SpinButton
                     icon="content-save"
-                    label="Save"
+                    :label="t('general.save')"
                     :color="settingsDirty ? 'bright' : 'default'"
                     @click="handleSave"
                 />
             </SpinHeader>
             <SpinInput
-                label="Game path"
+                :label="t('settings.gamePath.label')"
                 type="path"
-                hint="This is where your game installation is located"
+                :hint="t('settings.gamePath.hint')"
             >
                 <input
                     type="text"
@@ -30,19 +30,19 @@
                     icon="folder-outline"
                     :disabled="savingSettings"
                     @click="selectGamePathManually"
-                    v-tooltip="'Browse manually'"
+                    v-tooltip="t('settings.gamePath.browseManually')"
                 />
                 <SpinButton
                     icon="brain"
                     :disabled="savingSettings"
                     @click="getGamePathAutomatically"
-                    v-tooltip="'Detect automatically'"
+                    v-tooltip="t('settings.gamePath.detectAutomatically')"
                 />
             </SpinInput>
             <SpinInput
-                label="Customs folder path"
+                :label="t('settings.customsPath.label')"
                 type="path"
-                hint="This is where your custom charts are located. Don't forget to setup the 'custom_path [FULLPATH]' launch option if you want your library to be somewhere else."
+                :hint="t('settings.customsPath.hint')"
             >
                 <input
                     type="text"
@@ -53,18 +53,18 @@
                     icon="folder-outline"
                     :disabled="savingSettings"
                     @click="selectLibraryPathManually"
-                    v-tooltip="'Browse manually'"
+                    v-tooltip="t('settings.gamePath.browseManually')"
                 />
                 <SpinButton
                     icon="brain"
                     :disabled="savingSettings"
                     @click="getLibraryPathAutomatically"
-                    v-tooltip="'Detect automatically'"
+                    v-tooltip="t('settings.gamePath.detectAutomatically')"
                 />
             </SpinInput>
             <SpinInput
-                label="Language"
-                hint="Translation by SpinShare"
+                :label="t('settings.language.label')"
+                :hint="t('settings.language.credits')"
                 type="horizontal"
             >
                 <div class="select">
@@ -82,8 +82,8 @@
                 </div>
             </SpinInput>
             <SpinInput
-                label="Theme"
-                hint="Save to apply your theme"
+                :label="t('settings.theme.label')"
+                :hint="t('settings.theme.hint')"
                 type="horizontal"
             >
                 <div class="select">
@@ -92,26 +92,26 @@
                         @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
-                        <option value="dark">Dark</option>
-                        <option value="light">Light</option>
+                        <option value="dark">{{ t('settings.theme.dark') }}</option>
+                        <option value="light">{{ t('settings.theme.light') }}</option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
                 </div>
             </SpinInput>
             <SpinInput
-                label="Detect DLCs"
-                hint="By analyzing your game installation, we can confirm which DLCs you have bought. This will enable access to DLC charts."
+                :label="t('settings.detectDLCs.label')"
+                :hint="t('settings.detectDLCs.hint')"
                 type="horizontal"
             >
                 <SpinButton
-                    label="Detect"
+                    :label="t('settings.detectDLCs.detect')"
                     :disabled="isDetectingDlcs"
                     :loading="isDetectingDlcs"
                     @click="detectDLCs"
                 />
             </SpinInput>
             <SpinInput
-                label="Detected DLCs"
+                :label="t('settings.detectDLCs.detectedDLCs')"
                 type="horizontal"
                 :hint="detectedDlcs.join(', ')"
                 v-if="detectedDlcs.length > 0 && !isDetectingDlcs"
@@ -130,25 +130,25 @@
                 />
             </SpinInput> -->
             <SpinInput
-                label="Software Updates"
+                :label="t('settings.updates.label')"
                 :hint="currentVersion"
                 type="horizontal"
             >
                 <SpinButton
                     icon="update"
-                    label="Check for updates"
+                    :label="t('settings.updates.check')"
                     :loading="checkingForUpdates"
                     :disabled="savingSettings || checkingForUpdates"
                     @click="checkForUpdates"
                 />
             </SpinInput>
             <SpinInput
-                label="Third Party licenses"
-                hint="This project was created with third party libraries."
+                :label="t('settings.thirdPartyLicenses.label')"
+                :hint="t('settings.thirdPartyLicenses.hint')"
                 type="horizontal"
             >
                 <SpinButton
-                    label="See licenses"
+                    :label="t('settings.thirdPartyLicenses.seeLicenses')"
                     @click="openLicenses"
                 />
             </SpinInput>
@@ -162,6 +162,9 @@ import SpinInput from "@/components/Common/SpinInput.vue";
 import { ref, inject, onMounted } from 'vue';
 import router from "@/router";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const settingLibraryPath = ref('');
 const settingGamePath = ref('');

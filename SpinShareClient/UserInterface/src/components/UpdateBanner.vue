@@ -8,20 +8,20 @@
                 </div>
                 
                 <div class="text">
-                    <h1>New client update available</h1>
-                    <p>We've made some improvements to SpinShare.<br />Update your client to get the latest version.</p>
+                    <h1>{{ t('general.updateBanner.title') }}</h1>
+                    <p>{{ t('general.updateBanner.textAvailable') }}<br />{{ t('general.updateBanner.textPrompt') }}</p>
                 </div>
 
                 <div class="actions">
                     <SpinButton
                         icon="open-in-new"
-                        label="Update"
+                        :label="t('general.updateBanner.update')"
                         @click="openUpdate"
                         color="primary"
                     />
                     <SpinButton
                         icon="update"
-                        label="Maybe Later"
+                        :label="t('general.updateBanner.maybeLater')"
                         @click="closeBanner"
                     />
                 </div>
@@ -33,6 +33,9 @@
 <script setup>
 import {ref, inject, onMounted} from 'vue';
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const currentVersion = ref("0.0.0");
 const latestRelease = ref(null);

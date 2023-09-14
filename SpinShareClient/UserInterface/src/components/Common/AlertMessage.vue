@@ -6,7 +6,7 @@
         
         <div class="actions">
             <SpinButton
-                label="Close"
+                :label="t('general.close')"
                 @click="close"
             />
         </div>
@@ -16,6 +16,9 @@
 <script setup>
 import { ref, inject } from 'vue';
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const dialogRef = ref();
 
@@ -52,7 +55,7 @@ dialog {
     
     & p {
         color: rgba(var(--colorBaseText),0.6);
-        line-height: 1.25rem;
+        line-height: 1.5rem;
     }
     
     & .actions {

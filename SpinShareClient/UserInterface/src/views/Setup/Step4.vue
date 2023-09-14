@@ -1,13 +1,13 @@
 <template>
     <SetupLayout
         :step="4"
-        title="You're done!"
+        :title="t('setup.step4.title')"
         @back="handleBack"
         @continue="handleContinue"
         :can-continue="!savingSettings"
     >
         <img src="@/assets/setup_finish.svg" />
-        <p>Congratulations, you've tuned up everything perfectly! Your setup is complete and now you're all set to explore and install new charts. Your Spin Rhythm XD journey is about to hit a new high note with SpinShare. Let's start spinning and sharing the rhythm!</p>
+        <p>{{ t('setup.step4.text') }}</p>
     </SetupLayout>
 </template>
 
@@ -16,6 +16,9 @@ import { ref, inject } from 'vue';
 import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const savingSettings = ref(false);
 

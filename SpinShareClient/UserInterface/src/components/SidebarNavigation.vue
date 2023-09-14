@@ -5,37 +5,37 @@
         </div>
         
         <nav>
-            <router-link to="/" class="item" v-tooltip.right="'Discover & Featured'">
+            <router-link to="/" class="item" v-tooltip.right="t('general.sidebar.frontpage')">
                 <span class="mdi mdi-view-dashboard-outline"></span>
             </router-link>
-            <router-link to="/search" class="item" v-tooltip.right="'Search'">
+            <router-link to="/search" class="item" v-tooltip.right="t('general.sidebar.search')">
                 <span class="mdi mdi-magnify"></span>
             </router-link>
-            <router-link to="/discover/new/0" class="item" v-tooltip.right="'New'">
+            <router-link to="/discover/new/0" class="item" v-tooltip.right="t('general.sidebar.new')">
                 <span class="mdi mdi-new-box"></span>
             </router-link>
-            <router-link to="/discover/updated/0" class="item" v-tooltip.right="'Updated'">
+            <router-link to="/discover/updated/0" class="item" v-tooltip.right="t('general.sidebar.updated')">
                 <span class="mdi mdi-update"></span>
             </router-link>
-            <router-link to="/discover/hotThisWeek/0" class="item" v-tooltip.right="'Trending'">
+            <router-link to="/discover/hotThisWeek/0" class="item" v-tooltip.right="t('general.sidebar.trending')">
                 <span class="mdi mdi-fire"></span>
             </router-link>
         </nav>
         
         <nav>
-            <router-link to="/library" class="item" v-tooltip.right="'Your Library'">
+            <router-link to="/library" class="item" v-tooltip.right="t('general.sidebar.library')">
                 <span class="mdi mdi-archive-music-outline"></span>
             </router-link>
             <div
                 class="item"
                 :class="{'active': downloadQueueActive}"
-                v-tooltip.right="'Downloads'"
+                v-tooltip.right="t('general.sidebar.downloads')"
                 @click="toggleDownloadQueue"
             >
                 <span class="mdi mdi-download-box-outline"></span>
                 <div class="badge" v-if="downloadQueueCount !== 0">{{ downloadQueueCount }}</div>
             </div>
-            <router-link to="/settings" class="item" v-tooltip.right="'Settings'">
+            <router-link to="/settings" class="item" v-tooltip.right="t('general.sidebar.settings')">
                 <span class="mdi mdi-cog-outline"></span>
             </router-link>
         </nav>
@@ -48,6 +48,9 @@
 import { ref, inject, onMounted } from 'vue';
 import DownloadQueue from "@/components/DownloadQueue.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const downloadQueueCount = ref(0);
 const downloadQueueActive = ref(false);

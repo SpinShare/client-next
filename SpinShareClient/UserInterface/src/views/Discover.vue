@@ -3,7 +3,7 @@
         <section class="view-discover">
             <section>
                 <SpinHeader
-                    label="Discover"
+                    :label="t('frontpage.title')"
                 />
                 <PromoGrid
                     :promos="promos"
@@ -11,11 +11,11 @@
             </section>
             <section>
                 <SpinHeader
-                    label="Featured"
+                    :label="t('frontpage.featured.title')"
                 >
                     <SpinButton
                         icon="playlist-music"
-                        label="See more"
+                        :label="t('frontpage.featured.seeMore')"
                         @click="handleOpenFeaturedPlaylist"
                     />
                 </SpinHeader>
@@ -32,6 +32,9 @@ import {FEATURED_PLAYLIST_ID, getPromos} from "@/api/api";
 import FeaturedGrid from "@/components/Discover/FeaturedGrid.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import router from "@/router";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const promos = ref([]);
 

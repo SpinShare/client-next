@@ -16,27 +16,27 @@
             <div class="item">
                 <span class="mdi mdi-eye"></span>
                 <div class="value">{{ views }}</div>
-                <div class="label">Views</div>
+                <div class="label">{{ t('chart.detail.overview.views.label') }}</div>
             </div>
             <div class="item">
                 <span class="mdi mdi-download"></span>
                 <div class="value">{{ downloads }}</div>
-                <div class="label">Downloads</div>
+                <div class="label">{{ t('chart.detail.overview.downloads.label') }}</div>
             </div>
             <div class="item">
                 <span class="mdi mdi-police-badge"></span>
-                <div class="value">{{ isExplicit ? 'Explicit content' : 'No explicit content' }}</div>
-                <div class="label">Explicit</div>
+                <div class="value">{{ isExplicit ? t('chart.detail.overview.explicit.explicitContent') : t('chart.detail.overview.explicit.noExplicitContent') }}</div>
+                <div class="label">{{ t('chart.detail.overview.explicit.label') }}</div>
             </div>
             <div class="item">
                 <span class="mdi mdi-calendar-clock-outline"></span>
                 <div class="value">{{ relativeUploadDate }}</div>
-                <div class="label">Uploaded</div>
+                <div class="label">{{ t('chart.detail.overview.uploaded.label') }}</div>
             </div>
             <div class="item">
                 <span class="mdi mdi-update"></span>
                 <div class="value">{{ relativeUpdateDate }}</div>
-                <div class="label">Last update</div>
+                <div class="label">{{ t('chart.detail.overview.lastUpdate.label') }}</div>
             </div>
         </div>
         <div
@@ -54,6 +54,9 @@ import moment from 'moment';
 import {getUser} from "@/api/api";
 import UserItem from "@/components/Common/UserItem.vue";
 import router from "@/router";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     description: {

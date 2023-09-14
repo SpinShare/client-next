@@ -1,14 +1,14 @@
 <template>
     <SetupLayout
         :step="3"
-        title="Client Settings"
+        :title="t('setup.step3.title')"
         @back="handleBack"
         @continue="handleContinue"
         :can-continue="!savingSettings"
         :can-back="!savingSettings"
     >
         <SpinInput
-                label="Language"
+            :label="t('settings.language.label')"
         >
             <div class="select">
                 <select
@@ -24,7 +24,7 @@
             </div>
         </SpinInput>
         <SpinInput
-            label="Theme"
+            :label="t('settings.theme.label')"
         >
             <div class="select">
                 <select
@@ -32,8 +32,8 @@
                     :disabled="savingSettings"
                     @change="changeTheme"
                 >
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
+                    <option value="dark">{{ t('settings.theme.dark') }}</option>
+                    <option value="light">{{ t('settings.theme.light') }}</option>
                 </select>
                 <span class="mdi mdi-chevron-down"></span>
             </div>
@@ -58,6 +58,9 @@ import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
 import SpinInput from "@/components/Common/SpinInput.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const settingLanguage = ref('en-US');
 const settingTheme = ref(window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light');

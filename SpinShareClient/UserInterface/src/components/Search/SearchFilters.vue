@@ -2,7 +2,7 @@
     <div>
     <SpinButton
         icon="filter-variant"
-        label="Filter"
+        :label="t('search.filters.button.label')"
         :disabled="disabled"
         @click="toggleModal"
     />
@@ -13,53 +13,53 @@
         >
             <div class="filters">
                 <div class="group">
-                    <div class="header">Included Difficulties</div>
+                    <div class="header">{{ t('search.filters.difficulties.label') }}</div>
                     <label class="filter">
-                        <span>Easy</span>
+                        <span>{{ t('search.filters.difficulties.easy') }}</span>
                         <SpinSwitch v-model="diffEasy" />
                     </label>
                     <label class="filter">
-                        <span>Normal</span>
+                        <span>{{ t('search.filters.difficulties.normal') }}</span>
                         <SpinSwitch v-model="diffNormal" />
                     </label>
                     <label class="filter">
-                        <span>Hard</span>
+                        <span>{{ t('search.filters.difficulties.hard') }}</span>
                         <SpinSwitch v-model="diffHard" />
                     </label>
                     <label class="filter">
-                        <span>Expert</span>
+                        <span>{{ t('search.filters.difficulties.expert') }}</span>
                         <SpinSwitch v-model="diffExpert" />
                     </label>
                     <label class="filter">
-                        <span>XD</span>
+                        <span>{{ t('search.filters.difficulties.XD') }}</span>
                         <SpinSwitch v-model="diffXD" />
                     </label>
                 </div>
                 <div class="group">
-                    <div class="header">Difficulty Rating</div>
+                    <div class="header">{{ t('search.filters.difficultyRatings.label') }}</div>
                     <label class="filter">
-                        <span>Lowest Rating</span>
+                        <span>{{ t('search.filters.difficultyRatings.lowest') }}</span>
                         <input type="number" v-model="diffRatingFrom" @change="roundDiffRatingFrom" />
                     </label>
                     <label class="filter">
-                        <span>Highest Rating</span>
+                        <span>{{ t('search.filters.difficultyRatings.highest') }}</span>
                         <input type="number" v-model="diffRatingTo" @change="roundDiffRatingTo" />
                     </label>
                 </div>
                 <div class="group">
                     <label class="filter">
-                        <span>Show Explicit</span>
+                        <span>{{ t('search.filters.showExplicit') }}</span>
                         <SpinSwitch v-model="showExplicit" />
                     </label>
                 </div>
                 
                 <div class="actions">
                     <SpinButton
-                        label="Cancel"
+                        :label="t('general.cancel')"
                         @click="handleCancel"
                     />
                     <SpinButton
-                        label="Apply"
+                        :label="t('general.apply')"
                         color="primary"
                         @click="handleApply"
                     />
@@ -72,6 +72,9 @@
 
 <script setup>
 import {ref, watch} from 'vue';
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     modelValue: Object,

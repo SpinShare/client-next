@@ -4,14 +4,14 @@
             :disabled="isSearching"
             v-model="searchInputType"
             :options="[
-                { value: 'charts', icon: 'album', label: 'Charts' },
-                { value: 'playlists', icon: 'playlist-music', label: 'Playlists' },
-                { value: 'users', icon: 'account-circle', label: 'Users' },
+                { value: 'charts', icon: 'album', label: t('search.bar.type.charts') },
+                { value: 'playlists', icon: 'playlist-music', label: t('search.bar.type.playlists') },
+                { value: 'users', icon: 'account-circle', label: t('search.bar.type.users') },
             ]"
         />
         <input
             type="search"
-            placeholder="Search query..."
+            :placeholder="t('search.bar.placeholder')"
             v-model="searchInputQuery"
             @keyup.enter="handleSearch"
             :disabled="isSearching"
@@ -25,7 +25,7 @@
         </transition>
         <SpinButton
             icon="magnify"
-            label="Search"
+            :label="t('search.bar.search')"
             color="primary"
             :disabled="isSearching || !canSearch"
             @click="handleSearch"
@@ -36,6 +36,9 @@
 <script setup>
 import {computed, ref} from "vue";
 import SearchFilters from "@/components/Search/SearchFilters.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const emit = defineEmits(['search']);
 

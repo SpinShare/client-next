@@ -8,7 +8,7 @@
             </div>
             <SpinButton
                 :icon="getButtonIcon(promo.button)"
-                label="Open"
+                :label="t('general.open')"
                 @click="handlePromoClick(promo.button)"
             />
         </div>
@@ -20,6 +20,9 @@
 
 <script setup>
 import router from "@/router";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const BUTTON_TYPE_CHART = 0;
 const BUTTON_TYPE_PLAYLIST = 1;

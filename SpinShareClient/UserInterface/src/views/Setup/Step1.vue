@@ -1,16 +1,16 @@
 <template>
     <SetupLayout
         :step="1"
-        title="Game Paths"
+        :title="t('setup.step1.title')"
         @back="handleBack"
         @continue="handleContinue"
         :can-continue="libraryPath !== '' && !savingSettings"
         :can-back="!savingSettings"
     >
         <SpinInput
-            label="Game path"
+            :label="t('settings.gamePath.label')"
             type="path"
-            hint="This is where your game installation is located"
+            :hint="t('settings.gamePath.hint')"
         >
             <input
                 type="text"
@@ -21,36 +21,36 @@
                 icon="folder-outline"
                 :disabled="savingSettings"
                 @click="selectGamePathManually"
-                v-tooltip="'Browse manually'"
+                v-tooltip="t('settings.gamePath.browseManually')"
             />
             <SpinButton
                 icon="brain"
                 :disabled="savingSettings"
                 @click="getGamePathAutomatically"
-                v-tooltip="'Detect automatically'"
+                v-tooltip="t('settings.gamePath.detectAutomatically')"
             />
         </SpinInput>
         <SpinInput
-            label="Customs folder path"
+            :label="t('settings.customsPath.label')"
             type="path"
-            hint="This is where your custom charts are located. Don't forget to setup the 'custom_path [FULLPATH]' launch option if you want your library to be somewhere else."
+            :hint="t('settings.customsPath.hint')"
         >
             <input
-                    type="text"
-                    disabled
-                    v-model="libraryPath"
+                type="text"
+                disabled
+                v-model="libraryPath"
             />
             <SpinButton
-                    icon="folder-outline"
-                    :disabled="savingSettings"
-                    @click="selectLibraryPathManually"
-                    v-tooltip="'Browse manually'"
+                icon="folder-outline"
+                :disabled="savingSettings"
+                @click="selectLibraryPathManually"
+                v-tooltip="t('settings.gamePath.browseManually')"
             />
             <SpinButton
-                    icon="brain"
-                    :disabled="savingSettings"
-                    @click="getLibraryPathAutomatically"
-                    v-tooltip="'Detect automatically'"
+                icon="brain"
+                :disabled="savingSettings"
+                @click="getLibraryPathAutomatically"
+                v-tooltip="t('settings.gamePath.detectAutomatically')"
             />
         </SpinInput>
     </SetupLayout>
@@ -62,6 +62,9 @@ import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
 import SpinInput from "@/components/Common/SpinInput.vue";
 const emitter = inject('emitter');
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const gamePath = ref("");
 const libraryPath = ref("");

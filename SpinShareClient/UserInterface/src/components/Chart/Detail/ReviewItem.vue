@@ -8,11 +8,11 @@
                 <div class="tags" v-if="user.isPatreon || user.isVerified">
                     <span class="tag tag-verified" v-if="user.isVerified">
                         <span class="mdi mdi-check"></span>
-                        <span>Verified</span>
+                        <span>{{ t('user.verified') }}</span>
                     </span>
                     <span class="tag tag-supporter" v-if="user.isPatreon">
                         <span class="mdi mdi-heart"></span>
-                        <span>Supporter</span>
+                        <span>{{ t('user.supporter') }}</span>
                     </span>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         
         <div class="meta">
             <div class="tag-recommended" v-if="recommended">
-                Recommended
+                {{ t('user.review.recommended') }}
             </div>
             <div class="review-date">
                 <span class="mdi mdi-calendar-clock-outline"></span>
@@ -35,6 +35,9 @@
 <script setup>
 import { computed } from 'vue';
 import moment from 'moment';
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     user: {

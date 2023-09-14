@@ -60,6 +60,11 @@
 	  <Compile Remove=".github\**" />
 	</ItemGroup>
 
+
+
+
+
+
 	<Target Name="EnsureNodeEnv" BeforeTargets="BuildUserInterface" Condition=" !Exists('$(UiRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
 		<Exec Command="node --version" ContinueOnError="true">

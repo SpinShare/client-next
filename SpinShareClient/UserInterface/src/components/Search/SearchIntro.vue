@@ -2,13 +2,15 @@
     <section class="search-intro">
         <div class="content">
             <span class="mdi mdi-card-search"></span>
-            <h1>Chart, Playlist & User Search</h1>
-            <p>Select whether you want to find charts, playlists, or users, type in your query, and apply filters for precise results. Your rhythm journey begins here!</p>
+            <h1>{{ t('search.intro.title') }}</h1>
+            <p>{{ t('search.intro.text') }}</p>
         </div>
     </section>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>

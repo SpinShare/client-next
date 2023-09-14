@@ -7,12 +7,12 @@
         >
             <section class="download-queue">
                 <SpinHeader
-                    label="Download Queue"
+                    :label="t('general.downloadQueue.title')"
                     type="small"
                 >
                     <SpinButton
                         icon="notification-clear-all"
-                        label="Clear"
+                        :label="t('general.downloadQueue.clear')"
                         @click="handleClearQueue"
                     />
                 </SpinHeader>
@@ -46,6 +46,9 @@
 import { ref, inject } from 'vue';
 const emitter = inject('emitter');
 const emit = defineEmits(['change-active']);
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const isActive = ref(false);
 const queue = ref([]);

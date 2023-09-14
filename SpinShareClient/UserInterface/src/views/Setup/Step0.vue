@@ -1,17 +1,20 @@
 <template>
     <SetupLayout
         :step="0"
-        title="Welcome!"
+        :title="t('setup.step0.title')"
         @continue="handleContinue"
     >
         <img src="@/assets/setup_start.svg" />
-        <p>Welcome to SpinShare! Before we dive into the exhilarating world of Spin Rhythm XD charts, we'll need to set up a few things first. This includes designating your game paths, initializing a library cache, and tweaking other settings.</p>
+        <p>{{ t('setup.step0.text') }}</p>
     </SetupLayout>
 </template>
 
 <script setup>
 import router from "@/router";
 import SetupLayout from "@/layouts/SetupLayout.vue";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const handleContinue = () => {
     router.push({ path: '/setup/step-1' });
