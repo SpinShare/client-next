@@ -18,6 +18,7 @@ const emitter = inject('emitter');
 
 const router = useRouter();
 const route = useRoute();
+const language = ref('en');
 const theme = ref('dark');
 const transitionName = ref('default');
 
@@ -29,6 +30,9 @@ window.external.receiveMessage((rawResponse) => {
 emitter.on('settings-get-response', (setting) => {
     if(setting.key === "app.theme") {
         setTheme(setting.data);
+    }
+    if(setting.key === "app.language") {
+        setLanguage(setting.data);
     }
 });
 
@@ -47,6 +51,11 @@ const setTheme = (newTheme) => {
     let osTheme = window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light';
     theme.value = newTheme ?? osTheme;
     document.documentElement.dataset.theme = theme.value;
+};
+
+const setLanguage = (newLanguage) => {
+    let osLanguage = window.navigator.language?.substring(0, 2) ?? 'en';
+    language.value = newLanguage ?? osLanguage;
 };
 
 router.beforeEach((to, from) => {

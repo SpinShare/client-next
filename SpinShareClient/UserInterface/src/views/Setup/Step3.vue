@@ -15,10 +15,9 @@
                     v-model="settingLanguage"
                     :disabled="savingSettings"
                 >
-                    <option value="en-US">English</option>
-                    <option value="de-DE">German</option>
-                    <option value="nl-NL">Dutch</option>
-                    <option value="spn-SPN">Speen</option>
+                    <option value="en">English</option>
+                    <option value="de">German</option>
+                    <option value="speen">Speen</option>
                 </select>
                 <span class="mdi mdi-chevron-down"></span>
             </div>
@@ -62,7 +61,7 @@ const emitter = inject('emitter');
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
-const settingLanguage = ref('en-US');
+const settingLanguage = ref(window.navigator.language?.substring(0, 2) ?? 'en');
 const settingTheme = ref(window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light');
 const savingSettings = ref(false);
 

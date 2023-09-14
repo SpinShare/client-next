@@ -23,17 +23,34 @@ app.use(Router);
 // i18n
 import en from './i18n/en.json';
 import de from './i18n/de.json';
+import speen from './i18n/speen.json';
 
 const i18n = createI18n({
-    locale: 'de',
+    locale: 'en',
     fallbackLocale: 'en',
     allowComposition: true,
     messages: {
         en: en,
         de: de,
+        speen: speen,
     }
 });
 app.use(i18n);
+
+window.external.sendMessage(JSON.stringify({
+    command: "settings-get",
+    data: "app.language",
+}));
+
+window.external.receiveMessage((rawResponse) => {
+    const response = JSON.parse(rawResponse);
+    if (response.Command === 'settings-get-response') {
+        if(response.Data.key === 'app.language') {
+            let osLanguage = window.navigator.language?.substring(0, 2) ?? 'en';
+            i18n.global.locale = response.Data.data ?? osLanguage;
+        }
+    }
+});
 
 // Components
 import SpinButton from "@/components/Common/SpinButton.vue";

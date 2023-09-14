@@ -73,10 +73,9 @@
                         @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
-                        <option value="en-US">English</option>
-                        <option value="de-DE">German</option>
-                        <option value="nl-NL">Dutch</option>
-                        <option value="spn-SPN">Speen</option>
+                        <option value="en">English</option>
+                        <option value="de">German</option>
+                        <option value="speen">Speen</option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
                 </div>
@@ -168,7 +167,7 @@ const { t } = useI18n();
 
 const settingLibraryPath = ref('');
 const settingGamePath = ref('');
-const settingLanguage = ref('en-US');
+const settingLanguage = ref('en');
 const settingTheme = ref('dark');
 const savingSettings = ref(false);
 const settingsDirty = ref(false);
@@ -301,6 +300,11 @@ const handleSave = () => {
             key: 'app.theme',
             value: settingTheme.value,
         },],
+    }));
+    
+    window.external.sendMessage(JSON.stringify({
+        command: "settings-get",
+        data: "app.language",
     }));
 
     savingSettings.value = true;
