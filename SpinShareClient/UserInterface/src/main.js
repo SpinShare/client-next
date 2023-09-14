@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { createI18n } from 'vue-i18n';
 import App from './App.vue';
 import Router from "@/router";
 
@@ -19,6 +20,22 @@ app.provide('emitter', new mitt());
 app.use(FloatingVue);
 app.use(Router);
 
+// i18n
+import en from './i18n/en.json';
+import de from './i18n/de.json';
+
+const i18n = createI18n({
+    locale: 'de',
+    fallbackLocale: 'en',
+    allowComposition: true,
+    messages: {
+        en: en,
+        de: de,
+    }
+});
+app.use(i18n);
+
+// Components
 import SpinButton from "@/components/Common/SpinButton.vue";
 import SpinLoader from "@/components/Common/SpinLoader.vue";
 import SpinSwitch from "@/components/Common/SpinSwitch.vue";
