@@ -6,6 +6,7 @@
     "build": "vite build --emptyOutDir",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "generate-i18n": "node ./tools/formatTranslations.mjs",
     "generate-licenses": "generate-license-file --input package.json --output src/assets/third-party-licenses.md --overwrite"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "moment": "^2.29.4",
     "sass": "^1.62.1",
     "vue": "^3.2.38",
+    "vue-i18n": "^9.4.1",
     "vue-router": "^4.2.0"
   },
   "devDependencies": {
