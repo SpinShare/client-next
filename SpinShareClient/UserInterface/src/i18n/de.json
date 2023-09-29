@@ -1,1 +1,234 @@
-{"general":{"open":"Öffnen","save":"Speichern","close":"Schließen","download":"Herunterladen","back":"Zurück","continue":"Weiter","cancel":"Abbrechen","apply":"Anwenden","addToQueue":"Zur Warteliste","openOnSpinShare":"Auf SpinSha.re öffnen","report":"Melden","loading":"Laden","pagination":{"page":"Seite #{0}"},"sidebar":{"frontpage":"Entdecken & Vorgestellt","search":"Suche","new":"Neu","updated":"Geupdatet","trending":"Trends","library":"Sammlung","downloads":"Downloads","settings":"Einstellungen"},"downloadQueue":{"title":"Download-Warteliste","clear":"Leeren"},"error":{"title":"Upsi!","message":"Nun, das ist unangenehm! Irgendwo ist irgendetwas falsch gegangen, weswegen wir dir jetzt diese tolle Fehlerseite anzeigen müssen!"},"updateBanner":{"title":"Neues Client-Update verfügbar","textAvailable":"Wir haben SpinShare ein wenig verbessert.","textPrompt":"Update deinen Client um die neueste Version zu erhalten.","update":"Updaten","maybeLater":"Vielleicht später"}},"setup":{"title":"Erst-Konfiguration","step0":{"title":"Willkommen!","text":"Willkommen bei SpinShare! Bevor wir uns in die wunderbare Welt von Spin Rhythm XD Charts stürzen, müssen wir noch einige Anpassungen machen. Dazu gehört das auswählen des Spiele-Ordners, das erstellen eines Caches und weitere Einstellungen."},"step1":{"title":"Spiele-Ordner"},"step2":{"title":"Sammlungs-Cache","text":"Als nächstes erstellen wir deinen Sammlungs-Cache. Dieser Cache speichert einige Informationen zu deinen installierten Charts. Damit kann SpinShare in Millisekunden erkennen, ob du eine Chart bereits installiert hast oder ob eine neue Version verfügbar ist.","libraryCache":{"analyze":"Sammlung analysieren","analyzing":"Analysiere Sammlung ({0}%)","analyzationDone":"{0} Charts analysiert."}},"step3":{"title":"Client-Einstellungen"},"step4":{"title":"Du bist durch!","text":"Glückwunsch, wir sind mit der Einrichtung fertig! Das Setup ist nun vollständig und du bist bereit, um neue Charts zu finden und zu installieren. Dein Spin Rhythm XD Abenteuer fängt gerade erst an. Und jetzt, ab in die Rhythmus-Dimension!"}},"frontpage":{"title":"Entdecken","featured":{"title":"Vorgestellt","seeMore":"Mehr sehen"}},"search":{"bar":{"placeholder":"Suchbegriff eingeben...","type":{"charts":"Charts","playlists":"Playlisten","users":"Benutzer"},"search":"Suchen"},"filters":{"button":{"label":"Filtern"},"difficulties":{"label":"Schwierigkeitsgrade","easy":"Einfach","normal":"Normal","hard":"Hart","expert":"Experte","XD":"XD"},"difficultyRatings":{"label":"Schwierigkeitsrating","lowest":"Niedrigste","highest":"Höhste"},"showExplicit":"Explizite Inhalte anzeigen"},"intro":{"title":"Chart-, Playlisten- & Benutzer-Suche","text":"Wähle aus, ob du Charts, Playlisten oder Benutzer suchen möchtest und gib einen Suchbetriff ein. Du kannst deine Suche auch mit Filtern verfeiern. Dein Rhythmus-Adventure beginnt hier!"}},"discover":{"tabBar":{"new":"Neu","updated":"Geupdatet","hotThisWeek":"Trends dieser Woche","hotThisMonth":"Trends dieses Monats"}},"library":{"title":"Sammlung","browseFiles":"Ordner öffnen","importBackup":"Backup importieren","rebuildCache":"Cache erneuern","importBackupError":{"localBackupHasNoCharts":{"title":"Lokales Backup invalide","message":"Konnte lokales Backup nicht zur Sammlung hinzufügen, da es keine valide Spin Rhythm XD Chart beinhält."}}},"settings":{"title":"Einstellungen","openSettings":"Einstellungs-Ordner öffnen","gamePath":{"label":"Spiele-Ordner","hint":"Dies ist der Ordner, in dem du das Spiel installiert hast.","browseManually":"Manuell auswählen","detectAutomatically":"Automatisch auswählen"},"customsPath":{"label":"Customs-Ordner","hint":"Hier werden deine Customs gelagert. Vergiss nicht, dass du deine Sammlung mit der Startoption 'custom_path [VOLLERPFAD]' wo anders speichern kannst."},"language":{"label":"Sprache","credits":"Übersetzung von SpinShare"},"theme":{"label":"Design","hint":"Speichere um das Design zu ändern","dark":"Dunkel","light":"Hell"},"detectDLCs":{"label":"Installierte DLCs erkennen","hint":"Wir können erkennen, welche DLCs du besitzt, indem wir deinen Spiele-Ordner analysieren. Dies erlaubt dir Charts von DLC-Songs herunterzuladen.","detect":"Erkennen","detectedDLCs":"Installierte DLCs"},"updates":{"label":"Software-Updates","check":"Auf Updates überprüfen"},"thirdPartyLicenses":{"label":"Drittanbieter-Lizenzen","hint":"Dieses Projekt wurde mit externer Software entwickelt.","seeLicenses":"Lizenzen ansehen"}},"chart":{"state":{"updateAvailable":"Update verfügbar","updated":"Installiert & Up-To-Date","downloading":"Am herunterladen"},"detail":{"actions":{"remove":"Löschen","update":"Updaten","play":"Spielen","queued":"In der Warteliste","downloading":"Am herunterladen"},"tabBar":{"overview":"Übersicht","reviews":"Reviews","spinPlays":"SpinPlays","playlists":"Playlisten"},"overview":{"views":{"label":"Aufrufe"},"downloads":{"label":"Downloads"},"explicit":{"label":"Explizite Inhalte","noExplicitContent":"Keine explizite Inhalte","explicitContent":"Enthält explizite Inhalte"},"uploaded":{"label":"Hochgeladen"},"lastUpdate":{"label":"Letztes Update"}}}},"playlist":{"count":"{0} Charts","official":{"tag":"Offiziell","tooltip":"Dies ist eine Playlist des SpinShare Teams."}},"user":{"verified":"Verifiziert","supporter":"Supporter","review":{"recommended":"Empfohlen"},"detail":{"tabBar":{"overview":"Übersicht","charts":"Charts ({0})","playlists":"Playlisten ({0})","reviews":"Reviews ({0})","spinPlays":"SpinPlays ({0})"}}}}
+{
+    "general": {
+        "open": "Öffnen",
+        "save": "Speichern",
+        "close": "Schließen",
+        "download": "Herunterladen",
+        "back": "Zurück",
+        "continue": "Weiter",
+        "cancel": "Abbrechen",
+        "apply": "Anwenden",
+        "addToQueue": "Zur Warteliste",
+        "openOnSpinShare": "Auf SpinSha.re öffnen",
+        "report": "Melden",
+        "loading": "Laden",
+        "pagination": {
+            "page": "Seite #{0}"
+        },
+        "sidebar": {
+            "frontpage": "Entdecken & Vorgestellt",
+            "search": "Suche",
+            "new": "Neu",
+            "updated": "Geupdatet",
+            "trending": "Trends",
+            "library": "Sammlung",
+            "downloads": "Downloads",
+            "settings": "Einstellungen"
+        },
+        "downloadQueue": {
+            "title": "Download-Warteliste",
+            "clear": "Leeren"
+        },
+        "error": {
+            "title": "Upsi!",
+            "message": "Nun, das ist unangenehm! Irgendwo ist irgendetwas falsch gegangen, weswegen wir dir jetzt diese tolle Fehlerseite anzeigen müssen!"
+        },
+        "updateBanner": {
+            "title": "Neues Client-Update verfügbar",
+            "textAvailable": "Wir haben SpinShare ein wenig verbessert.",
+            "textPrompt": "Update deinen Client um die neueste Version zu erhalten.",
+            "update": "Updaten",
+            "maybeLater": "Vielleicht später"
+        }
+    },
+    "setup": {
+        "title": "Erst-Konfiguration",
+        "step0": {
+            "title": "Willkommen!",
+            "text": "Willkommen bei SpinShare! Bevor wir uns in die wunderbare Welt von Spin Rhythm XD Charts stürzen, müssen wir noch einige Anpassungen machen. Dazu gehört das auswählen des Spiele-Ordners, das erstellen eines Caches und weitere Einstellungen."
+        },
+        "step1": {
+            "title": "Spiele-Ordner"
+        },
+        "step2": {
+            "title": "Sammlungs-Cache",
+            "text": "Als nächstes erstellen wir deinen Sammlungs-Cache. Dieser Cache speichert einige Informationen zu deinen installierten Charts. Damit kann SpinShare in Millisekunden erkennen, ob du eine Chart bereits installiert hast oder ob eine neue Version verfügbar ist.",
+            "libraryCache": {
+                "analyze": "Sammlung analysieren",
+                "analyzing": "Analysiere Sammlung ({0}%)",
+                "analyzationDone": "{0} Charts analysiert."
+            }
+        },
+        "step3": {
+            "title": "Client-Einstellungen"
+        },
+        "step4": {
+            "title": "Du bist durch!",
+            "text": "Glückwunsch, wir sind mit der Einrichtung fertig! Das Setup ist nun vollständig und du bist bereit, um neue Charts zu finden und zu installieren. Dein Spin Rhythm XD Abenteuer fängt gerade erst an. Und jetzt, ab in die Rhythmus-Dimension!"
+        }
+    },
+    "frontpage": {
+        "title": "Entdecken",
+        "featured": {
+            "title": "Vorgestellt",
+            "seeMore": "Mehr sehen"
+        }
+    },
+    "search": {
+        "bar": {
+            "placeholder": "Suchbegriff eingeben...",
+            "type": {
+                "charts": "Charts",
+                "playlists": "Playlisten",
+                "users": "Benutzer"
+            },
+            "search": "Suchen"
+        },
+        "filters": {
+            "button": {
+                "label": "Filtern"
+            },
+            "difficulties": {
+                "label": "Schwierigkeitsgrade",
+                "easy": "Einfach",
+                "normal": "Normal",
+                "hard": "Hart",
+                "expert": "Experte",
+                "XD": "XD"
+            },
+            "difficultyRatings": {
+                "label": "Schwierigkeitsrating",
+                "lowest": "Niedrigste",
+                "highest": "Höhste"
+            },
+            "showExplicit": "Explizite Inhalte anzeigen"
+        },
+        "intro": {
+            "title": "Chart-, Playlisten- & Benutzer-Suche",
+            "text": "Wähle aus, ob du Charts, Playlisten oder Benutzer suchen möchtest und gib einen Suchbetriff ein. Du kannst deine Suche auch mit Filtern verfeiern. Dein Rhythmus-Adventure beginnt hier!"
+        }
+    },
+    "discover": {
+        "tabBar": {
+            "new": "Neu",
+            "updated": "Geupdatet",
+            "hotThisWeek": "Trends dieser Woche",
+            "hotThisMonth": "Trends dieses Monats"
+        }
+    },
+    "library": {
+        "title": "Sammlung",
+        "browseFiles": "Ordner öffnen",
+        "importBackup": "Backup importieren",
+        "rebuildCache": "Cache erneuern",
+        "importBackupError": {
+            "localBackupHasNoCharts": {
+                "title": "Lokales Backup invalide",
+                "message": "Konnte lokales Backup nicht zur Sammlung hinzufügen, da es keine valide Spin Rhythm XD Chart beinhält."
+            }
+        }
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "openSettings": "Einstellungs-Ordner öffnen",
+        "gamePath": {
+            "label": "Spiele-Ordner",
+            "hint": "Dies ist der Ordner, in dem du das Spiel installiert hast.",
+            "browseManually": "Manuell auswählen",
+            "detectAutomatically": "Automatisch auswählen"
+        },
+        "customsPath": {
+            "label": "Customs-Ordner",
+            "hint": "Hier werden deine Customs gelagert. Vergiss nicht, dass du deine Sammlung mit der Startoption 'custom_path [VOLLERPFAD]' wo anders speichern kannst."
+        },
+        "language": {
+            "label": "Sprache",
+            "credits": "Übersetzung von SpinShare"
+        },
+        "theme": {
+            "label": "Design",
+            "hint": "Speichere um das Design zu ändern",
+            "dark": "Dunkel",
+            "light": "Hell"
+        },
+        "detectDLCs": {
+            "label": "Installierte DLCs erkennen",
+            "hint": "Wir können erkennen, welche DLCs du besitzt, indem wir deinen Spiele-Ordner analysieren. Dies erlaubt dir Charts von DLC-Songs herunterzuladen.",
+            "detect": "Erkennen",
+            "detectedDLCs": "Installierte DLCs"
+        },
+        "updates": {
+            "label": "Software-Updates",
+            "check": "Auf Updates überprüfen"
+        },
+        "thirdPartyLicenses": {
+            "label": "Drittanbieter-Lizenzen",
+            "hint": "Dieses Projekt wurde mit externer Software entwickelt.",
+            "seeLicenses": "Lizenzen ansehen"
+        }
+    },
+    "chart": {
+        "state": {
+            "updateAvailable": "Update verfügbar",
+            "updated": "Installiert & Up-To-Date",
+            "downloading": "Am herunterladen"
+        },
+        "detail": {
+            "actions": {
+                "remove": "Löschen",
+                "update": "Updaten",
+                "play": "Spielen",
+                "queued": "In der Warteliste",
+                "downloading": "Am herunterladen"
+            },
+            "tabBar": {
+                "overview": "Übersicht",
+                "reviews": "Reviews",
+                "spinPlays": "SpinPlays",
+                "playlists": "Playlisten"
+            },
+            "overview": {
+                "views": {
+                    "label": "Aufrufe"
+                },
+                "downloads": {
+                    "label": "Downloads"
+                },
+                "explicit": {
+                    "label": "Explizite Inhalte",
+                    "noExplicitContent": "Keine explizite Inhalte",
+                    "explicitContent": "Enthält explizite Inhalte"
+                },
+                "uploaded": {
+                    "label": "Hochgeladen"
+                },
+                "lastUpdate": {
+                    "label": "Letztes Update"
+                }
+            }
+        }
+    },
+    "playlist": {
+        "count": "{0} Charts",
+        "official": {
+            "tag": "Offiziell",
+            "tooltip": "Dies ist eine Playlist des SpinShare Teams."
+        }
+    },
+    "user": {
+        "verified": "Verifiziert",
+        "supporter": "Supporter",
+        "review": {
+            "recommended": "Empfohlen"
+        },
+        "detail": {
+            "tabBar": {
+                "overview": "Übersicht",
+                "charts": "Charts ({0})",
+                "playlists": "Playlisten ({0})",
+                "reviews": "Reviews ({0})",
+                "spinPlays": "SpinPlays ({0})"
+            }
+        }
+    }
+}
