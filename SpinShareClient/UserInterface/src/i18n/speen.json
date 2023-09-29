@@ -1,1 +1,234 @@
-{"general":{"open":"Speen","save":"Speen","close":"Speen","download":"Speen","back":"Speen","continue":"Speen","cancel":"Speen","apply":"Speen","addToQueue":"Speen speen","openOnSpinShare":"Speen speen SpinSha.re","report":"Speen","loading":"Speen","pagination":{"page":"Speen #{0}"},"sidebar":{"frontpage":"Speen & Speen","search":"Speen","new":"Speen","updated":"Speen","trending":"Speen","library":"Speen","downloads":"Speen","settings":"Speen"},"downloadQueue":{"title":"Speen","clear":"Speen"},"error":{"title":"Speen","message":"Speen speen speen speen speen! Speen speen speen, Speen speen speen Speen speen speen! Speen speen."},"updateBanner":{"title":"Speen speen speen","textAvailable":"Speen speen speen Speen speen.","textPrompt":"Speen speen speen speen.","update":"Speen","maybeLater":"Speen"}},"setup":{"title":"Speen speen speen","step0":{"title":"Speen!","text":"Speen speen SpinShare! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen."},"step1":{"title":"Speen speen"},"step2":{"title":"Speen speen","text":"Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen.","libraryCache":{"analyze":"Speen speen","analyzing":"Speen speen ({0}%)","analyzationDone":"{0} Speen speen."}},"step3":{"title":"Speen speen"},"step4":{"title":"Speen!","text":"Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen."}},"frontpage":{"title":"Speen","featured":{"title":"Speen","seeMore":"Speen speen"}},"search":{"bar":{"placeholder":"Speen speen...","type":{"charts":"Speen","playlists":"Speen","users":"Speen"},"search":"Speen"},"filters":{"button":{"label":"Speen"},"difficulties":{"label":"Speen speen","easy":"Speen","normal":"Speen","hard":"Speen","expert":"Speen","XD":"Speen"},"difficultyRatings":{"label":"Speen speen","lowest":"Speen speen","highest":"Speen speen"},"showExplicit":"Speen speen"},"intro":{"title":"Speen, Speen & Speen speen","text":"Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen."}},"discover":{"tabBar":{"new":"Speen","updated":"Speen","hotThisWeek":"Speen speen Speen","hotThisMonth":"Speen speen Speen"}},"library":{"title":"Speen","browseFiles":"Speen Speen","importBackup":"Speen Speen","rebuildCache":"Speen Speen","importBackupError":{"localBackupHasNoCharts":{"title":"Speen speen speen","message":"Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen."}}},"settings":{"title":"Speen","openSettings":"Speen speen speen","gamePath":{"label":"Speen speen","hint":"Speen speen Speen speen! Speen speen speen.","browseManually":"Speen speen","detectAutomatically":"Speen speen"},"customsPath":{"label":"Speen speen speen","hint":"Speen speen Speen speen! Speen speen speen speen speen speen  'custom_path [SPEEN]'  speen speen speen. Speen speen speen speen speen."},"language":{"label":"Speen","credits":"Speen speen SpinShare"},"theme":{"label":"Speen","hint":"Speen speen speen","dark":"Speen","light":"Speen"},"detectDLCs":{"label":"Speen speen speen","hint":"Speen speen Speen speen! Speen speen speen Speen speen speen. Speen speen speen Speen speen speen. Speen speen speen.","detect":"Speen","detectedDLCs":"Speen speen"},"updates":{"label":"Speen Speen","check":"Speen Speen"},"thirdPartyLicenses":{"label":"Speen speen Speen","hint":"Speen speen speen. Speen speen speen.","seeLicenses":"Speen speen"}},"chart":{"state":{"updateAvailable":"Speen speen","updated":"Speen & speen speen","downloading":"Speen"},"detail":{"actions":{"remove":"Speen","update":"Speen","play":"Speen","queued":"Speen","downloading":"Speen"},"tabBar":{"overview":"Speen","reviews":"Speen","spinPlays":"Speen","playlists":"Speen"},"overview":{"views":{"label":"Speen"},"downloads":{"label":"Speen"},"explicit":{"label":"Speen","noExplicitContent":"Speen speen","explicitContent":"Speen speen"},"uploaded":{"label":"Speen"},"lastUpdate":{"label":"Speen speen"}}}},"playlist":{"count":"{0} Speen","official":{"tag":"Speen","tooltip":"Speen speen speen speen SpinShare Speen."}},"user":{"verified":"Speen","supporter":"Speen","review":{"recommended":"Speen"},"detail":{"tabBar":{"overview":"Speen","charts":"Speen ({0})","playlists":"Speen ({0})","reviews":"Speen ({0})","spinPlays":"Speen ({0})"}}}}
+{
+    "general": {
+        "open": "Open",
+        "save": "Save",
+        "close": "Close",
+        "download": "Download",
+        "back": "Back",
+        "continue": "Continue",
+        "cancel": "Cancel",
+        "apply": "Apply",
+        "addToQueue": "Add to Queue",
+        "openOnSpinShare": "Open on SpinSha.re",
+        "report": "Report",
+        "loading": "Loading",
+        "pagination": {
+            "page": "Page #{0}"
+        },
+        "sidebar": {
+            "frontpage": "Discover & Featured",
+            "search": "Search",
+            "new": "New",
+            "updated": "Updated",
+            "trending": "Trending",
+            "library": "Library",
+            "downloads": "Downloads",
+            "settings": "Settings"
+        },
+        "downloadQueue": {
+            "title": "Download Queue",
+            "clear": "Clear"
+        },
+        "error": {
+            "title": "Yikes!",
+            "message": "Well this is embarrasing! Something somewhere went wrong, so we have to show you this funky looking error page!"
+        },
+        "updateBanner": {
+            "title": "New client update available",
+            "textAvailable": "We've made some improvements to SpinShare.",
+            "textPrompt": "Update your client to get the latest version.",
+            "update": "Update",
+            "maybeLater": "Maybe Later"
+        }
+    },
+    "setup": {
+        "title": "First time configuration",
+        "step0": {
+            "title": "Welcome!",
+            "text": "Welcome to SpinShare! Before we dive into the exhilarating world of Spin Rhythm XD charts, we'll need to set up a few things first. This includes designating your game paths, initializing a library cache, and tweaking other settings."
+        },
+        "step1": {
+            "title": "Game Paths"
+        },
+        "step2": {
+            "title": "Library Cache",
+            "text": "Next, let's strike up the band on the library cache. The cache keeps an up-to-the-minute record of all your installed charts and their versions. This way, SpinShare can quickly confirm if you've got a chart installed or if there's a new version waiting in the wings.",
+            "libraryCache": {
+                "analyze": "Analyze library",
+                "analyzing": "Analyzing library ({0}%)",
+                "analyzationDone": "Analyzed {0} charts."
+            }
+        },
+        "step3": {
+            "title": "Client Settings"
+        },
+        "step4": {
+            "title": "You're done!",
+            "text": "Congratulations, you've tuned up everything perfectly! Your setup is complete and now you're all set to explore and install new charts. Your Spin Rhythm XD journey is about to hit a new high note with SpinShare. Let's start spinning and sharing the rhythm!"
+        }
+    },
+    "frontpage": {
+        "title": "Discover",
+        "featured": {
+            "title": "Featured",
+            "seeMore": "See more"
+        }
+    },
+    "search": {
+        "bar": {
+            "placeholder": "Search query...",
+            "type": {
+                "charts": "Charts",
+                "playlists": "Playlists",
+                "users": "Users"
+            },
+            "search": "Search"
+        },
+        "filters": {
+            "button": {
+                "label": "Filter"
+            },
+            "difficulties": {
+                "label": "Included Difficulties",
+                "easy": "Easy",
+                "normal": "Normal",
+                "hard": "Hard",
+                "expert": "Expert",
+                "XD": "XD"
+            },
+            "difficultyRatings": {
+                "label": "Difficulty Rating",
+                "lowest": "Lowest Rating",
+                "highest": "Highest Rating"
+            },
+            "showExplicit": "Show Explicit"
+        },
+        "intro": {
+            "title": "Chart, Playlist & User Search",
+            "text": "Select whether you want to find charts, playlists, or users, type in your query, and apply filters for precise results. Your rhythm journey begins here!"
+        }
+    },
+    "discover": {
+        "tabBar": {
+            "new": "New",
+            "updated": "Updated",
+            "hotThisWeek": "Hot this week",
+            "hotThisMonth": "Hot this month"
+        }
+    },
+    "library": {
+        "title": "Library",
+        "browseFiles": "Browse Files",
+        "importBackup": "Import Backup",
+        "rebuildCache": "Rebuild Cache",
+        "importBackupError": {
+            "localBackupHasNoCharts": {
+                "title": "Local Backup Invalid",
+                "message": "Could not add local backup to library as it does not contain a valid Spin Rhythm XD chart."
+            }
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "openSettings": "Open settings folder",
+        "gamePath": {
+            "label": "Game path",
+            "hint": "This is where your game installation is located",
+            "browseManually": "Browse manually",
+            "detectAutomatically": "Detect automatically"
+        },
+        "customsPath": {
+            "label": "Customs folder path",
+            "hint": "This is where your custom charts are located. Don't forget to setup the 'custom_path [FULLPATH]' launch option if you want your library to be somewhere else."
+        },
+        "language": {
+            "label": "Language",
+            "credits": "Translation by SpinShare"
+        },
+        "theme": {
+            "label": "Theme",
+            "hint": "Save to apply your theme",
+            "dark": "Dark",
+            "light": "Light"
+        },
+        "detectDLCs": {
+            "label": "Detect installed DLCs",
+            "hint": "By analyzing your game installation, we can confirm which DLCs you have bought. This will enable access to charts based on DLC songs.",
+            "detect": "Detect",
+            "detectedDLCs": "Detected installed DLCs"
+        },
+        "updates": {
+            "label": "Software Updates",
+            "check": "Check for Updates"
+        },
+        "thirdPartyLicenses": {
+            "label": "Third Party licenses",
+            "hint": "This project was created with third party libraries.",
+            "seeLicenses": "See licenses"
+        }
+    },
+    "chart": {
+        "state": {
+            "updateAvailable": "Update Available",
+            "updated": "Installed & up to date",
+            "downloading": "Downloading"
+        },
+        "detail": {
+            "actions": {
+                "remove": "Remove",
+                "update": "Update",
+                "play": "Play",
+                "queued": "Queued",
+                "downloading": "Downloading"
+            },
+            "tabBar": {
+                "overview": "Overview",
+                "reviews": "Reviews",
+                "spinPlays": "SpinPlays",
+                "playlists": "Playlists"
+            },
+            "overview": {
+                "views": {
+                    "label": "Views"
+                },
+                "downloads": {
+                    "label": "Downloads"
+                },
+                "explicit": {
+                    "label": "Explicit",
+                    "noExplicitContent": "No explicit content",
+                    "explicitContent": "Explicit content"
+                },
+                "uploaded": {
+                    "label": "Uploaded"
+                },
+                "lastUpdate": {
+                    "label": "Last update"
+                }
+            }
+        }
+    },
+    "playlist": {
+        "count": "{0} Charts",
+        "official": {
+            "tag": "Official",
+            "tooltip": "This is a playlist by the SpinShare team."
+        }
+    },
+    "user": {
+        "verified": "Verified",
+        "supporter": "Supporter",
+        "review": {
+            "recommended": "Recommended"
+        },
+        "detail": {
+            "tabBar": {
+                "overview": "Overview",
+                "charts": "Charts ({0})",
+                "playlists": "Playlists ({0})",
+                "reviews": "Reviews ({0})",
+                "spinPlays": "SpinPlays ({0})"
+            }
+        }
+    }
+}
