@@ -84,16 +84,9 @@ public class Program
                 _logger.LogInformation("Settings are not complete, starting Setup");
                 initPage = "#/setup/step-0";
             }
-
-            // Checking for Update
-            /*
-            if (settingsManager.Exists("app.setup.done"))
-            {
-                logger.LogInformation("Update detected");
-                // TODO: API Call for Latest Version Check
-                initPage = "#/update";
-            } */
         }
+        
+        _logger.LogInformation("BaseUrl: {BaseUrl}", baseUrl);
 
 #if DEBUG
         _logger.LogInformation("Debug Mode, starting dev site");
