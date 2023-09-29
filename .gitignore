@@ -116,3 +116,6 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Build UI
+SpinShareClient/Resources/wwwroot/

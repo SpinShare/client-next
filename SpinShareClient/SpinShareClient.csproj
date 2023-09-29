@@ -15,7 +15,7 @@
 		This will change the output directory of the Vue build output from
 		the `./wwwroot` folder to `./Resources/wwwroot`.
 		-->
-		<EmbedWwwRoot>false</EmbedWwwRoot>
+		<EmbedWwwRoot>true</EmbedWwwRoot>
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
 		<PublishSingleFile>true</PublishSingleFile>
 		<SelfContained>true</SelfContained>
