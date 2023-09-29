@@ -56,7 +56,7 @@ public class UpdateManager
             client.DefaultRequestHeaders.UserAgent.Add(new("SpinShareClient", CurrentVersion));
 
             var rawResponse =
-                await client.GetStringAsync("https://api.github.com/repos/LauraWebdev/client-next/releases");
+                await client.GetStringAsync("https://api.github.com/repos/SpinShare/client-next/releases");
             var releases = JsonConvert.DeserializeObject<List<GithubRelease>>(rawResponse);
             _logger.LogInformation("Found {ReleaseCount} Releases", releases?.Count ?? 0);
 

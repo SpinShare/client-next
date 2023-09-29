@@ -77,7 +77,7 @@ const isVersionOutdated = (localVersion, latestVersion) => {
 const openUpdate = () => {
     window.external.sendMessage(JSON.stringify({
         command: "open-in-browser",
-        data: "https://github.com/LauraWebdev/client-next/releases/latest",
+        data: "https://github.com/SpinShare/client-next/releases/latest",
     }));
 };
 
