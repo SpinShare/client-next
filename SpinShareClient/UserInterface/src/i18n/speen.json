@@ -1,233 +1,233 @@
 {
     "general": {
-        "open": "Speen",
-        "save": "Speen",
-        "close": "Speen",
-        "download": "Speen",
-        "back": "Speen",
-        "continue": "Speen",
-        "cancel": "Speen",
-        "apply": "Speen",
-        "addToQueue": "Speen speen",
-        "openOnSpinShare": "Speen speen SpinSha.re",
-        "report": "Speen",
-        "loading": "Speen",
+        "open": "",
+        "save": "",
+        "close": "",
+        "download": "",
+        "back": "",
+        "continue": "",
+        "cancel": "",
+        "apply": "",
+        "addToQueue": "",
+        "openOnSpinShare": "",
+        "report": "",
+        "loading": "",
         "pagination": {
-            "page": "Speen #{0}"
+            "page": ""
         },
         "sidebar": {
-            "frontpage": "Speen & Speen",
-            "search": "Speen",
-            "new": "Speen",
-            "updated": "Speen",
-            "trending": "Speen",
-            "library": "Speen",
-            "downloads": "Speen",
-            "settings": "Speen"
+            "frontpage": "",
+            "search": "",
+            "new": "",
+            "updated": "",
+            "trending": "",
+            "library": "",
+            "downloads": "",
+            "settings": ""
         },
         "downloadQueue": {
-            "title": "Speen",
-            "clear": "Speen"
+            "title": "",
+            "clear": ""
         },
         "error": {
-            "title": "Speen",
-            "message": "Speen speen speen speen speen! Speen speen speen, Speen speen speen Speen speen speen! Speen speen."
+            "title": "",
+            "message": ""
         },
         "updateBanner": {
-            "title": "Speen speen speen",
-            "textAvailable": "Speen speen speen Speen speen.",
-            "textPrompt": "Speen speen speen speen.",
-            "update": "Speen",
-            "maybeLater": "Speen"
+            "title": "",
+            "textAvailable": "",
+            "textPrompt": "",
+            "update": "",
+            "maybeLater": ""
         }
     },
     "setup": {
-        "title": "Speen speen speen",
+        "title": "",
         "step0": {
-            "title": "Speen!",
-            "text": "Speen speen SpinShare! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen."
+            "title": "",
+            "text": ""
         },
         "step1": {
-            "title": "Speen speen"
+            "title": ""
         },
         "step2": {
-            "title": "Speen speen",
-            "text": "Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen.",
+            "title": "",
+            "text": "",
             "libraryCache": {
-                "analyze": "Speen speen",
-                "analyzing": "Speen speen ({0}%)",
-                "analyzationDone": "{0} Speen speen."
+                "analyze": "",
+                "analyzing": "",
+                "analyzationDone": ""
             }
         },
         "step3": {
-            "title": "Speen speen"
+            "title": ""
         },
         "step4": {
-            "title": "Speen!",
-            "text": "Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen. Speen speen speen. Speen speen speen speen speen speen speen speen speen."
+            "title": "",
+            "text": ""
         }
     },
     "frontpage": {
-        "title": "Speen",
+        "title": "",
         "featured": {
-            "title": "Speen",
-            "seeMore": "Speen speen"
+            "title": "",
+            "seeMore": ""
         }
     },
     "search": {
         "bar": {
-            "placeholder": "Speen speen...",
+            "placeholder": "",
             "type": {
-                "charts": "Speen",
-                "playlists": "Speen",
-                "users": "Speen"
+                "charts": "",
+                "playlists": "",
+                "users": ""
             },
-            "search": "Speen"
+            "search": ""
         },
         "filters": {
             "button": {
-                "label": "Speen"
+                "label": ""
             },
             "difficulties": {
-                "label": "Speen speen",
-                "easy": "Speen",
-                "normal": "Speen",
-                "hard": "Speen",
-                "expert": "Speen",
-                "XD": "Speen"
+                "label": "",
+                "easy": "",
+                "normal": "",
+                "hard": "",
+                "expert": "",
+                "XD": ""
             },
             "difficultyRatings": {
-                "label": "Speen speen",
-                "lowest": "Speen speen",
-                "highest": "Speen speen"
+                "label": "",
+                "lowest": "",
+                "highest": ""
             },
-            "showExplicit": "Speen speen"
+            "showExplicit": ""
         },
         "intro": {
-            "title": "Speen, Speen & Speen speen",
-            "text": "Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen."
+            "title": "",
+            "text": ""
         }
     },
     "discover": {
         "tabBar": {
-            "new": "Speen",
-            "updated": "Speen",
-            "hotThisWeek": "Speen speen Speen",
-            "hotThisMonth": "Speen speen Speen"
+            "new": "",
+            "updated": "",
+            "hotThisWeek": "",
+            "hotThisMonth": ""
         }
     },
     "library": {
-        "title": "Speen",
-        "browseFiles": "Speen Speen",
-        "importBackup": "Speen Speen",
-        "rebuildCache": "Speen Speen",
+        "title": "",
+        "browseFiles": "",
+        "importBackup": "",
+        "rebuildCache": "",
         "importBackupError": {
             "localBackupHasNoCharts": {
-                "title": "Speen speen speen",
-                "message": "Speen speen Speen speen! Speen speen speen speen speen speen speen speen speen."
+                "title": "",
+                "message": ""
             }
         }
     },
     "settings": {
-        "title": "Speen",
-        "openSettings": "Speen speen speen",
+        "title": "",
+        "openSettings": "",
         "gamePath": {
-            "label": "Speen speen",
-            "hint": "Speen speen Speen speen! Speen speen speen.",
-            "browseManually": "Speen speen",
-            "detectAutomatically": "Speen speen"
+            "label": "",
+            "hint": "",
+            "browseManually": "",
+            "detectAutomatically": ""
         },
         "customsPath": {
-            "label": "Speen speen speen",
-            "hint": "Speen speen Speen speen! Speen speen speen speen speen speen  'custom_path [SPEEN]'  speen speen speen. Speen speen speen speen speen."
+            "label": "",
+            "hint": ""
         },
         "language": {
-            "label": "Speen",
-            "credits": "Speen speen SpinShare"
+            "label": "",
+            "credits": ""
         },
         "theme": {
-            "label": "Speen",
-            "hint": "Speen speen speen",
-            "dark": "Speen",
-            "light": "Speen"
+            "label": "",
+            "hint": "",
+            "dark": "",
+            "light": ""
         },
         "detectDLCs": {
-            "label": "Speen speen speen",
-            "hint": "Speen speen Speen speen! Speen speen speen Speen speen speen. Speen speen speen Speen speen speen. Speen speen speen.",
-            "detect": "Speen",
-            "detectedDLCs": "Speen speen"
+            "label": "",
+            "hint": "",
+            "detect": "",
+            "detectedDLCs": ""
         },
         "updates": {
-            "label": "Speen Speen",
-            "check": "Speen Speen"
+            "label": "",
+            "check": ""
         },
         "thirdPartyLicenses": {
-            "label": "Speen speen Speen",
-            "hint": "Speen speen speen. Speen speen speen.",
-            "seeLicenses": "Speen speen"
+            "label": "",
+            "hint": "",
+            "seeLicenses": ""
         }
     },
     "chart": {
         "state": {
-            "updateAvailable": "Speen speen",
-            "updated": "Speen & speen speen",
-            "downloading": "Speen"
+            "updateAvailable": "",
+            "updated": "",
+            "downloading": ""
         },
         "detail": {
             "actions": {
-                "remove": "Speen",
-                "update": "Speen",
-                "play": "Speen",
-                "queued": "Speen",
-                "downloading": "Speen"
+                "remove": "",
+                "update": "",
+                "play": "",
+                "queued": "",
+                "downloading": ""
             },
             "tabBar": {
-                "overview": "Speen",
-                "reviews": "Speen",
-                "spinPlays": "Speen",
-                "playlists": "Speen"
+                "overview": "",
+                "reviews": "",
+                "spinPlays": "",
+                "playlists": ""
             },
             "overview": {
                 "views": {
-                    "label": "Speen"
+                    "label": ""
                 },
                 "downloads": {
-                    "label": "Speen"
+                    "label": ""
                 },
                 "explicit": {
-                    "label": "Speen",
-                    "noExplicitContent": "Speen speen",
-                    "explicitContent": "Speen speen"
+                    "label": "",
+                    "noExplicitContent": "",
+                    "explicitContent": ""
                 },
                 "uploaded": {
-                    "label": "Speen"
+                    "label": ""
                 },
                 "lastUpdate": {
-                    "label": "Speen speen"
+                    "label": ""
                 }
             }
         }
     },
     "playlist": {
-        "count": "{0} Speen",
+        "count": "",
         "official": {
-            "tag": "Speen",
-            "tooltip": "Speen speen speen speen SpinShare Speen."
+            "tag": "",
+            "tooltip": ""
         }
     },
     "user": {
-        "verified": "Speen",
-        "supporter": "Speen",
+        "verified": "",
+        "supporter": "",
         "review": {
-            "recommended": "Speen"
+            "recommended": ""
         },
         "detail": {
             "tabBar": {
-                "overview": "Speen",
-                "charts": "Speen ({0})",
-                "playlists": "Speen ({0})",
-                "reviews": "Speen ({0})",
-                "spinPlays": "Speen ({0})"
+                "overview": "",
+                "charts": "",
+                "playlists": "",
+                "reviews": "",
+                "spinPlays": ""
             }
         }
     }
