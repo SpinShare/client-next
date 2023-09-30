@@ -1,0 +1,234 @@
+{
+    "general": {
+        "open": "",
+        "save": "",
+        "close": "",
+        "download": "",
+        "back": "",
+        "continue": "",
+        "cancel": "",
+        "apply": "",
+        "addToQueue": "",
+        "openOnSpinShare": "",
+        "report": "",
+        "loading": "",
+        "pagination": {
+            "page": ""
+        },
+        "sidebar": {
+            "frontpage": "",
+            "search": "",
+            "new": "",
+            "updated": "",
+            "trending": "",
+            "library": "",
+            "downloads": "",
+            "settings": ""
+        },
+        "downloadQueue": {
+            "title": "",
+            "clear": ""
+        },
+        "error": {
+            "title": "",
+            "message": ""
+        },
+        "updateBanner": {
+            "title": "",
+            "textAvailable": "",
+            "textPrompt": "",
+            "update": "",
+            "maybeLater": ""
+        }
+    },
+    "setup": {
+        "title": "",
+        "step0": {
+            "title": "",
+            "text": ""
+        },
+        "step1": {
+            "title": ""
+        },
+        "step2": {
+            "title": "",
+            "text": "",
+            "libraryCache": {
+                "analyze": "",
+                "analyzing": "",
+                "analyzationDone": ""
+            }
+        },
+        "step3": {
+            "title": ""
+        },
+        "step4": {
+            "title": "",
+            "text": ""
+        }
+    },
+    "frontpage": {
+        "title": "",
+        "featured": {
+            "title": "",
+            "seeMore": ""
+        }
+    },
+    "search": {
+        "bar": {
+            "placeholder": "",
+            "type": {
+                "charts": "",
+                "playlists": "",
+                "users": ""
+            },
+            "search": ""
+        },
+        "filters": {
+            "button": {
+                "label": ""
+            },
+            "difficulties": {
+                "label": "",
+                "easy": "",
+                "normal": "",
+                "hard": "",
+                "expert": "",
+                "XD": ""
+            },
+            "difficultyRatings": {
+                "label": "",
+                "lowest": "",
+                "highest": ""
+            },
+            "showExplicit": ""
+        },
+        "intro": {
+            "title": "",
+            "text": ""
+        }
+    },
+    "discover": {
+        "tabBar": {
+            "new": "",
+            "updated": "",
+            "hotThisWeek": "",
+            "hotThisMonth": ""
+        }
+    },
+    "library": {
+        "title": "",
+        "browseFiles": "",
+        "importBackup": "",
+        "rebuildCache": "",
+        "importBackupError": {
+            "localBackupHasNoCharts": {
+                "title": "",
+                "message": ""
+            }
+        }
+    },
+    "settings": {
+        "title": "",
+        "openSettings": "",
+        "gamePath": {
+            "label": "",
+            "hint": "",
+            "browseManually": "",
+            "detectAutomatically": ""
+        },
+        "customsPath": {
+            "label": "",
+            "hint": ""
+        },
+        "language": {
+            "label": "",
+            "credits": ""
+        },
+        "theme": {
+            "label": "",
+            "hint": "",
+            "dark": "",
+            "light": ""
+        },
+        "detectDLCs": {
+            "label": "",
+            "hint": "",
+            "detect": "",
+            "detectedDLCs": ""
+        },
+        "updates": {
+            "label": "",
+            "check": ""
+        },
+        "thirdPartyLicenses": {
+            "label": "",
+            "hint": "",
+            "seeLicenses": ""
+        }
+    },
+    "chart": {
+        "state": {
+            "updateAvailable": "",
+            "updated": "",
+            "downloading": ""
+        },
+        "detail": {
+            "actions": {
+                "remove": "",
+                "update": "",
+                "play": "",
+                "queued": "",
+                "downloading": ""
+            },
+            "tabBar": {
+                "overview": "",
+                "reviews": "",
+                "spinPlays": "",
+                "playlists": ""
+            },
+            "overview": {
+                "views": {
+                    "label": ""
+                },
+                "downloads": {
+                    "label": ""
+                },
+                "explicit": {
+                    "label": "",
+                    "noExplicitContent": "",
+                    "explicitContent": ""
+                },
+                "uploaded": {
+                    "label": ""
+                },
+                "lastUpdate": {
+                    "label": ""
+                }
+            }
+        }
+    },
+    "playlist": {
+        "count": "",
+        "official": {
+            "tag": "",
+            "tooltip": ""
+        }
+    },
+    "user": {
+        "verified": "",
+        "supporter": "",
+        "review": {
+            "recommended": ""
+        },
+        "detail": {
+            "tabBar": {
+                "overview": "",
+                "charts": "",
+                "playlists": "",
+                "reviews": "",
+                "spinPlays": ""
+            }
+        }
+    }
+}
