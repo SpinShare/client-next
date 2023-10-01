@@ -50,7 +50,7 @@ public class CommandOpenAndInstallBackup : ICommand
             {
                 await _downloadQueue.AddLocalBackup(sender, resultPath[0]);
             }
-            catch (LocalBackupHasNoChartsException localBackupHasNoChartsException)
+            catch (LocalBackupHasNoChartsException)
             {
                 MessageHandler.SendResponse(
                     sender,

@@ -1,5 +1,3 @@
-using System.IO;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace SpinShareClient.LibraryCache;
@@ -28,31 +26,31 @@ public class LibraryItem
     /// <param name="data"><see cref="UnityScriptableObject"/></param>
     public async Task Load(UnityScriptableObject data)
     {
-        string? libraryPath = SettingsManager.GetLibraryPath();
+        var libraryPath = SettingsManager.GetLibraryPath();
         if (libraryPath == null) return;
         
-        string? trackInfoJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains("TrackInfo"))?.val ?? null;
+        var trackInfoJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains("TrackInfo"))?.val ?? null;
         if (trackInfoJson == null) return;
 
-        SRTBTrackInfo? trackInfo = JsonConvert.DeserializeObject<SRTBTrackInfo>(trackInfoJson) ?? null;
+        var trackInfo = JsonConvert.DeserializeObject<SRTBTrackInfo>(trackInfoJson) ?? null;
         if (trackInfo == null) return;
 
         Title = trackInfo.title;
         Artist = trackInfo.artistName;
         Charter = trackInfo.charter;
 
-        foreach (SRTBTrackInfoDifficulty difficulty in trackInfo.difficulties)
+        foreach (var difficulty in trackInfo.difficulties)
         {
             // Skip over inactive difficulties
             if (difficulty._active != true) continue;
 
-            string? trackDataJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains(difficulty.assetName))?.val ?? null;
+            var trackDataJson = data.largeStringValuesContainer?.values.Find(x => x.key != null && x.key.Contains(difficulty.assetName))?.val ?? null;
             if (trackDataJson == null) continue; // Skip over missing trackdata
 
-            SRTBTrackData? trackData = JsonConvert.DeserializeObject<SRTBTrackData>(trackDataJson) ?? null;
+            var trackData = JsonConvert.DeserializeObject<SRTBTrackData>(trackDataJson) ?? null;
             if (trackData == null) continue; // Skip over broken trackdata
 
-            SRTBTrackData.DifficultyType difficultyType = difficulty._difficulty;
+            var difficultyType = difficulty._difficulty;
 
             if (trackData.difficultyType != SRTBTrackData.DifficultyType.Unknown) {
                 difficultyType = trackData.difficultyType ?? SRTBTrackData.DifficultyType.Unknown;
@@ -79,7 +77,7 @@ public class LibraryItem
         }
         
         // Cover Thumbnail Generation
-        string albumArtPath = Path.Combine(libraryPath, "AlbumArt", trackInfo.albumArtReference?.assetName + ".png");
+        var albumArtPath = Path.Combine(libraryPath, "AlbumArt", trackInfo.albumArtReference?.assetName + ".png");
         if (File.Exists(albumArtPath))
         {
             Cover = await ThumbnailGenerator.ToBase64(albumArtPath);
