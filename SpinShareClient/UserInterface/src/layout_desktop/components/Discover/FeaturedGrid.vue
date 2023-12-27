@@ -3,15 +3,13 @@
         v-if="featuredPlaylist"
         :charts="featuredPlaylist"
     />
-    <SpinLoader
-        v-if="!featuredPlaylist"
-    />
+    <SpinLoader v-if="!featuredPlaylist" />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import {FEATURED_PLAYLIST_ID, getPlaylist} from "@/api/api";
-import ChartList from "@/layout_desktop/components/Common/ChartList.vue";
+import { FEATURED_PLAYLIST_ID, getPlaylist } from '@/api/api';
+import ChartList from '@/layout_desktop/components/Common/ChartList.vue';
 
 const featuredPlaylist = ref(null);
 
@@ -21,5 +19,4 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

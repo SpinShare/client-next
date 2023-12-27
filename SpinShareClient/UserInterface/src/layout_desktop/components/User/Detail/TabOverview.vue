@@ -1,7 +1,8 @@
 <template>
     <section class="user-detail-tab-overview">
         <div
-            v-for="card in cards"
+            v-for="(card, i) in cards"
+            :key="i"
             class="card"
         >
             <img :src="card.icon" />
@@ -18,10 +19,9 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
-import moment from "moment/moment";
+import moment from 'moment/moment';
 
-const props = defineProps({
+defineProps({
     cards: {
         type: Array,
         default: () => [],
@@ -29,7 +29,7 @@ const props = defineProps({
 });
 
 const getRelativeDate = (date) => {
-    return moment(date).startOf("minute").fromNow();
+    return moment(date).startOf('minute').fromNow();
 };
 
 const parseDescription = (description) => {
@@ -43,16 +43,16 @@ const parseDescription = (description) => {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    
+
     & .card {
-        border: 1px solid rgba(var(--colorBaseText),0.07);
+        border: 1px solid rgba(var(--colorBaseText), 0.07);
         padding: 15px;
         border-radius: 6px;
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 15px;
         align-items: center;
-        
+
         & img {
             width: 100px;
             height: 100px;
@@ -61,12 +61,12 @@ const parseDescription = (description) => {
             display: flex;
             flex-direction: column;
             gap: 5px;
-            
+
             & h1 {
                 font-size: 1rem;
             }
             & p {
-                color: rgba(var(--colorBaseText),0.6);
+                color: rgba(var(--colorBaseText), 0.6);
                 line-height: 1.15rem;
                 font-size: 0.9rem;
             }
@@ -75,7 +75,7 @@ const parseDescription = (description) => {
                 display: flex;
                 gap: 5px;
                 align-items: center;
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
 
                 & > span:nth-child(2) {
                     font-size: 0.75rem;

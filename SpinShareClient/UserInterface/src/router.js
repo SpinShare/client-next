@@ -75,8 +75,8 @@ const routes = [
         component: ViewLicenses,
     },
     {
-        path: "/:pathMatch(.*)*",
-        component: ViewError
+        path: '/:pathMatch(.*)*',
+        component: ViewError,
     },
 ];
 

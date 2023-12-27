@@ -5,31 +5,51 @@
             v-if="chart"
         >
             <header>
-                <div class="cover" :style="`background-image: url(${ chart.paths.cover })`"></div>
+                <div
+                    class="cover"
+                    :style="`background-image: url(${chart.paths.cover})`"
+                ></div>
                 <div class="meta">
                     <div class="title">{{ chart.title }}</div>
-                    <div class="subtitle" v-if="chart.subtitle">{{ chart.subtitle }}</div>
-                    <div class="artist">{{ chart.artist }} &bull; {{ chart.charter }}</div>
+                    <div
+                        class="subtitle"
+                        v-if="chart.subtitle"
+                    >
+                        {{ chart.subtitle }}
+                    </div>
+                    <div class="artist">
+                        {{ chart.artist }} &bull; {{ chart.charter }}
+                    </div>
                     <div class="difficulties">
-                        <span :class="{ 'active': chart.hasEasyDifficulty }">
+                        <span :class="{ active: chart.hasEasyDifficulty }">
                             <span>E</span>
-                            <span v-if="chart.hasEasyDifficulty">{{ chart.easyDifficulty }}</span>
+                            <span v-if="chart.hasEasyDifficulty">{{
+                                chart.easyDifficulty
+                            }}</span>
                         </span>
-                        <span :class="{ 'active': chart.hasNormalDifficulty }">
+                        <span :class="{ active: chart.hasNormalDifficulty }">
                             <span>N</span>
-                            <span v-if="chart.hasNormalDifficulty">{{ chart.normalDifficulty }}</span>
+                            <span v-if="chart.hasNormalDifficulty">{{
+                                chart.normalDifficulty
+                            }}</span>
                         </span>
-                        <span :class="{ 'active': chart.hasHardDifficulty }">
+                        <span :class="{ active: chart.hasHardDifficulty }">
                             <span>H</span>
-                            <span v-if="chart.hasHardDifficulty">{{ chart.hardDifficulty }}</span>
+                            <span v-if="chart.hasHardDifficulty">{{
+                                chart.hardDifficulty
+                            }}</span>
                         </span>
-                        <span :class="{ 'active': chart.hasExtremeDifficulty }">
+                        <span :class="{ active: chart.hasExtremeDifficulty }">
                             <span>EX</span>
-                            <span v-if="chart.hasExtremeDifficulty">{{ chart.expertDifficulty }}</span>
+                            <span v-if="chart.hasExtremeDifficulty">{{
+                                chart.expertDifficulty
+                            }}</span>
                         </span>
-                        <span :class="{ 'active': chart.hasXDDifficulty }">
+                        <span :class="{ active: chart.hasXDDifficulty }">
                             <span>XD</span>
-                            <span v-if="chart.hasXDDifficulty">{{ chart.XDDifficulty }}</span>
+                            <span v-if="chart.hasXDDifficulty">{{
+                                chart.XDDifficulty
+                            }}</span>
                         </span>
                     </div>
                     <div class="actions">
@@ -66,7 +86,11 @@
                         <template v-else-if="queueState">
                             <SpinButton
                                 loading
-                                :label="queueState === 0 ? t('chart.detail.actions.queued') : t('chart.detail.actions.downloading')"
+                                :label="
+                                    queueState === 0
+                                        ? t('chart.detail.actions.queued')
+                                        : t('chart.detail.actions.downloading')
+                                "
                                 disabled
                             />
                         </template>
@@ -91,7 +115,12 @@
                 </div>
             </header>
             <SpinTabBar
-                :tabs="[t('chart.detail.tabBar.overview'), t('chart.detail.tabBar.reviews'), t('chart.detail.tabBar.spinPlays'), t('chart.detail.tabBar.playlists')]"
+                :tabs="[
+                    t('chart.detail.tabBar.overview'),
+                    t('chart.detail.tabBar.reviews'),
+                    t('chart.detail.tabBar.spinPlays'),
+                    t('chart.detail.tabBar.playlists'),
+                ]"
                 @change="handleTabChange"
             />
             <TabOverview
@@ -130,17 +159,17 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue';
 import { useRoute } from 'vue-router';
-import {getChart} from "@/api/api";
+import { getChart } from '@/api/api';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
-import AppLayout from "../../layouts/AppLayout.vue";
-import TabOverview from "@/layout_desktop/components/Chart/Detail/TabOverview.vue";
-import TabReviews from "@/layout_desktop/components/Chart/Detail/TabReviews.vue";
-import TabSpinPlays from "@/layout_desktop/components/Chart/Detail/TabSpinPlays.vue";
-import TabPlaylists from "@/layout_desktop/components/Chart/Detail/TabPlaylists.vue";
+import AppLayout from '../../layouts/AppLayout.vue';
+import TabOverview from '@/layout_desktop/components/Chart/Detail/TabOverview.vue';
+import TabReviews from '@/layout_desktop/components/Chart/Detail/TabReviews.vue';
+import TabSpinPlays from '@/layout_desktop/components/Chart/Detail/TabSpinPlays.vue';
+import TabPlaylists from '@/layout_desktop/components/Chart/Detail/TabPlaylists.vue';
 
 const route = useRoute();
 const chart = ref(null);
@@ -152,18 +181,18 @@ onMounted(async () => {
     checkLibraryState();
 });
 
-emitter.on('library-remove-response', (state) => {
+emitter.on('library-remove-response', () => {
     checkLibraryState();
 });
 
 emitter.on('library-get-state-response', (state) => {
-    if(state.spinshareReference === chart.value.fileReference) {
+    if (state.spinshareReference === chart.value.fileReference) {
         libraryState.value = state;
     }
 });
 
 emitter.on('queue-item-update-response', (item) => {
-    if(chart.value.id === item.ID) {
+    if (chart.value.id === item.ID) {
         queueState.value = item.State;
 
         // Done
@@ -175,50 +204,60 @@ emitter.on('queue-item-update-response', (item) => {
 });
 
 const checkLibraryState = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-get-state",
-        data: {
-            fileReference: chart.value.fileReference,
-            updateHash: chart.value.updateHash,
-        },
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-get-state',
+            data: {
+                fileReference: chart.value.fileReference,
+                updateHash: chart.value.updateHash,
+            },
+        }),
+    );
 };
 
 const handleOpenInBrowser = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/song/" + chart.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/song/' + chart.value.id,
+        }),
+    );
 };
 
 const handleReport = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/report/song/" + chart.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/report/song/' + chart.value.id,
+        }),
+    );
 };
 
 const handleAddToQueue = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "queue-add",
-        data: {
-            id: chart.value.id,
-            title: chart.value.title,
-            artist: chart.value.artist,
-            charter: chart.value.charter,
-            cover: chart.value.cover,
-            fileReference: chart.value.fileReference,
-        },
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'queue-add',
+            data: {
+                id: chart.value.id,
+                title: chart.value.title,
+                artist: chart.value.artist,
+                charter: chart.value.charter,
+                cover: chart.value.cover,
+                fileReference: chart.value.fileReference,
+            },
+        }),
+    );
 };
 
 const handleRemove = () => {
     libraryState.value = null;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "library-remove",
-        data: chart.value.fileReference
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-remove',
+            data: chart.value.fileReference,
+        }),
+    );
 };
 
 const currentTab = ref(0);
@@ -266,11 +305,11 @@ const handleTabChange = (i) => {
                 font-size: 1.15rem;
             }
             & .subtitle {
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
                 margin-bottom: 5px;
             }
             & .artist {
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
                 font-size: 0.9rem;
             }
             & .difficulties {

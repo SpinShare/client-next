@@ -5,16 +5,33 @@
             v-if="user"
         >
             <header>
-                <img :src="user.avatar" alt="User Avatar" />
+                <img
+                    :src="user.avatar"
+                    alt="User Avatar"
+                />
                 <div class="meta">
                     <div class="username">{{ user.username }}</div>
-                    <div class="pronouns" v-if="user.pronouns">{{ user.pronouns }}</div>
-                    <div class="tags" v-if="user.isPatreon || user.isVerified">
-                        <span class="tag tag-verified" v-if="user.isVerified">
+                    <div
+                        class="pronouns"
+                        v-if="user.pronouns"
+                    >
+                        {{ user.pronouns }}
+                    </div>
+                    <div
+                        class="tags"
+                        v-if="user.isPatreon || user.isVerified"
+                    >
+                        <span
+                            class="tag tag-verified"
+                            v-if="user.isVerified"
+                        >
                             <span class="mdi mdi-check"></span>
                             <span>{{ t('user.verified') }}</span>
                         </span>
-                        <span class="tag tag-supporter" v-if="user.isPatreon">
+                        <span
+                            class="tag tag-supporter"
+                            v-if="user.isPatreon"
+                        >
                             <span class="mdi mdi-heart"></span>
                             <span>{{ t('user.supporter') }}</span>
                         </span>
@@ -75,14 +92,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AppLayout from "@/layout_desktop/layouts/AppLayout.vue";
+import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
 import { useRoute } from 'vue-router';
-import {getUser} from "@/api/api";
-import TabOverview from "@/layout_desktop/components/User/Detail/TabOverview.vue";
-import TabCharts from "@/layout_desktop/components/User/Detail/TabCharts.vue";
-import TabPlaylists from "@/layout_desktop/components/User/Detail/TabPlaylists.vue";
-import TabReviews from "@/layout_desktop/components/User/Detail/TabReviews.vue";
-import TabSpinPlays from "@/layout_desktop/components/User/Detail/TabSpinPlays.vue";
+import { getUser } from '@/api/api';
+import TabOverview from '@/layout_desktop/components/User/Detail/TabOverview.vue';
+import TabCharts from '@/layout_desktop/components/User/Detail/TabCharts.vue';
+import TabPlaylists from '@/layout_desktop/components/User/Detail/TabPlaylists.vue';
+import TabReviews from '@/layout_desktop/components/User/Detail/TabReviews.vue';
+import TabSpinPlays from '@/layout_desktop/components/User/Detail/TabSpinPlays.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -95,17 +112,21 @@ onMounted(async () => {
 });
 
 const handleReport = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/report/user/" + user.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/report/user/' + user.value.id,
+        }),
+    );
 };
 
 const handleOpenInBrowser = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/user/" + user.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/user/' + user.value.id,
+        }),
+    );
 };
 
 const currentTab = ref(0);
@@ -155,7 +176,7 @@ const handleTabChange = (i) => {
             }
             & .pronouns {
                 font-size: 0.75rem;
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
             }
             & .tags {
                 margin-top: 2px;

@@ -1,9 +1,7 @@
 <template>
     <AppLayout>
         <section class="view-settings">
-            <SpinHeader
-                :label="t('settings.title')"
-            >
+            <SpinHeader :label="t('settings.title')">
                 <SpinButton
                     @click="openSettingsFolder"
                     icon="folder"
@@ -91,8 +89,12 @@
                         @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
-                        <option value="dark">{{ t('settings.theme.dark') }}</option>
-                        <option value="light">{{ t('settings.theme.light') }}</option>
+                        <option value="dark">
+                            {{ t('settings.theme.dark') }}
+                        </option>
+                        <option value="light">
+                            {{ t('settings.theme.light') }}
+                        </option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
                 </div>
@@ -156,10 +158,10 @@
 </template>
 
 <script setup>
-import AppLayout from "@/layout_desktop/layouts/AppLayout.vue";
-import SpinInput from "@/layout_desktop/components/Common/SpinInput.vue";
+import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
+import SpinInput from '@/layout_desktop/components/Common/SpinInput.vue';
 import { ref, inject, onMounted } from 'vue';
-import router from "@/router";
+import router from '@/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -173,25 +175,29 @@ const savingSettings = ref(false);
 const settingsDirty = ref(false);
 const isDetectingDlcs = ref(false);
 const detectedDlcs = ref([]);
-const currentVersion = ref("0.0.0");
+const currentVersion = ref('0.0.0');
 const checkingForUpdates = ref(false);
 
 onMounted(() => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-get-full",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-get-full',
+            data: '',
+        }),
+    );
 
-    window.external.sendMessage(JSON.stringify({
-        command: "update-get-version",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'update-get-version',
+            data: '',
+        }),
+    );
 });
 
 emitter.on('library-get-path-response', (path) => {
     settingsDirty.value = true;
-    
-    if(path !== '') {
+
+    if (path !== '') {
         settingLibraryPath.value = path;
     }
 });
@@ -199,7 +205,7 @@ emitter.on('library-get-path-response', (path) => {
 emitter.on('game-get-path-response', (path) => {
     settingsDirty.value = true;
 
-    if(path !== '') {
+    if (path !== '') {
         settingGamePath.value = path;
     }
 });
@@ -215,7 +221,7 @@ emitter.on('settings-get-full-response', (settings) => {
 });
 
 emitter.on('game-detect-dlcs-response', (dlcs) => {
-    if(dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
+    if (dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
     isDetectingDlcs.value = false;
 });
 
@@ -223,59 +229,73 @@ emitter.on('update-get-version-response', (version) => {
     currentVersion.value = version;
 });
 
-emitter.on('update-get-latest-response', (version) => {
+emitter.on('update-get-latest-response', () => {
     checkingForUpdates.value = false;
 });
 
 const openSettingsFolder = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-open-in-explorer",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-open-in-explorer',
+            data: '',
+        }),
+    );
 };
 
 const selectLibraryPathManually = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-select-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-select-path',
+            data: [],
+        }),
+    );
 };
 const getLibraryPathAutomatically = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-get-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-get-path',
+            data: [],
+        }),
+    );
 };
 
 const selectGamePathManually = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "game-select-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-select-path',
+            data: [],
+        }),
+    );
 };
 const getGamePathAutomatically = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "game-get-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-get-path',
+            data: [],
+        }),
+    );
 };
 
 const detectDLCs = () => {
     isDetectingDlcs.value = true;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "game-detect-dlcs",
-        data: [],
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-detect-dlcs',
+            data: [],
+        }),
+    );
 };
 
 const checkForUpdates = () => {
     checkingForUpdates.value = true;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "update-get-latest",
-        data: "",
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'update-get-latest',
+            data: '',
+        }),
+    );
 };
 
 const openLicenses = () => {
@@ -285,27 +305,36 @@ const openLicenses = () => {
 };
 
 const handleSave = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-set",
-        data: [{
-            key: 'game.path',
-            value: settingGamePath.value,
-        },{
-            key: 'library.path',
-            value: settingLibraryPath.value,
-        },{
-            key: 'app.language',
-            value: settingLanguage.value,
-        },{
-            key: 'app.theme',
-            value: settingTheme.value,
-        },],
-    }));
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-get",
-        data: "app.language",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-set',
+            data: [
+                {
+                    key: 'game.path',
+                    value: settingGamePath.value,
+                },
+                {
+                    key: 'library.path',
+                    value: settingLibraryPath.value,
+                },
+                {
+                    key: 'app.language',
+                    value: settingLanguage.value,
+                },
+                {
+                    key: 'app.theme',
+                    value: settingTheme.value,
+                },
+            ],
+        }),
+    );
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-get',
+            data: 'app.language',
+        }),
+    );
 
     savingSettings.value = true;
 };
@@ -317,8 +346,9 @@ const setSettings = (settings) => {
     settingGamePath.value = settings['game.path'];
 
     emitter.emit('update-theme', settings['app.theme']);
-    
-    if(settings['dlcs']) detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
+
+    if (settings['dlcs'])
+        detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
     isDetectingDlcs.value = false;
 };
 </script>

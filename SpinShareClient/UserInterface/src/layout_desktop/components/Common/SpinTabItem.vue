@@ -2,7 +2,7 @@
     <div
         @click="emit('click')"
         class="spin-tab-item"
-        :class="{'active': active}"
+        :class="{ active: active }"
     >
         <slot />
     </div>
@@ -14,7 +14,7 @@ defineProps({
     active: {
         type: Boolean,
         default: false,
-    }
+    },
 });
 </script>
 
@@ -25,16 +25,16 @@ defineProps({
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    color: rgba(var(--colorBaseText),0.6);
+    color: rgba(var(--colorBaseText), 0.6);
     transition: 0.15s ease-in-out background, 0.15s ease-in-out color;
     overflow: hidden;
-    
+
     &:hover {
         background: rgba(var(--colorBaseText), 0.07);
         cursor: pointer;
     }
     &::after {
-        content: "";
+        content: '';
         display: block;
         width: 50%;
         min-width: 50px;
@@ -45,7 +45,7 @@ defineProps({
         transform: translateY(4px);
     }
     &.active {
-        color: rgba(var(--colorBaseText),1);
+        color: rgba(var(--colorBaseText), 1);
 
         &::after {
             background: rgb(var(--colorPrimary));

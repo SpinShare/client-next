@@ -1,6 +1,9 @@
 <template>
     <section class="chart-detail-tab-reviews">
-        <div class="reviews-list" v-if="reviews">
+        <div
+            class="reviews-list"
+            v-if="reviews"
+        >
             <ReviewItem
                 v-for="review in reviews.reviews"
                 :key="review.id"
@@ -13,8 +16,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getChartReviews } from "@/api/api";
-import ReviewItem from "@/layout_desktop/components/Chart/Detail/ReviewItem.vue";
+import { getChartReviews } from '@/api/api';
+import ReviewItem from '@/layout_desktop/components/Chart/Detail/ReviewItem.vue';
 
 const props = defineProps({
     id: {
@@ -36,7 +39,7 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    
+
     & .reviews-list {
         display: grid;
         gap: 15px;

@@ -1,9 +1,7 @@
 <template>
     <AppLayout>
         <section class="view-library">
-            <SpinHeader
-                :label="t('library.title')"
-            >
+            <SpinHeader :label="t('library.title')">
                 <SpinButton
                     icon="folder"
                     v-tooltip="t('library.browseFiles')"
@@ -22,9 +20,7 @@
                     @click="handleRebuildCache"
                 />
             </SpinHeader>
-            <SpinLoader
-                v-if="loadingLibrary"
-            />
+            <SpinLoader v-if="loadingLibrary" />
             <LibraryChartList
                 v-if="!loadingLibrary"
                 :charts="library"
@@ -35,10 +31,10 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue';
-import AppLayout from "@/layout_desktop/layouts/AppLayout.vue";
-import LibraryChartList from "@/layout_desktop/components/Library/LibraryChartList.vue";
-import router from "@/router";
-import SpinButton from "@/layout_desktop/components/Common/SpinButton.vue";
+import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
+import LibraryChartList from '@/layout_desktop/components/Library/LibraryChartList.vue';
+import router from '@/router';
+import SpinButton from '@/layout_desktop/components/Common/SpinButton.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -53,33 +49,39 @@ onMounted(() => {
 });
 
 const handleOpenLibrary = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-open-in-explorer",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-open-in-explorer',
+            data: '',
+        }),
+    );
 };
 
 const handleOpenBackup = () => {
     importingChart.value = true;
-    window.external.sendMessage(JSON.stringify({
-        command: "library-open-and-install-backup",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-open-and-install-backup',
+            data: '',
+        }),
+    );
 };
 
 const loadLibrary = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-get",
-        data: "",
-    }));
-    
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-get',
+            data: '',
+        }),
+    );
+
     loadingLibrary.value = true;
 };
 
 const handleRebuildCache = () => {
     // TODO: Custom Page
     router.push({ path: '/setup/step-2' });
-}
+};
 
 emitter.on('library-get-response', (response) => {
     loadingLibrary.value = false;
@@ -88,13 +90,15 @@ emitter.on('library-get-response', (response) => {
 
 emitter.on('library-open-and-install-backup-response', (response) => {
     importingChart.value = false;
-    
-    if(response === true) {
+
+    if (response === true) {
         loadLibrary();
-    } else if(response === 'local-backup-has-no-charts-exception') {
+    } else if (response === 'local-backup-has-no-charts-exception') {
         emitter.emit('alert-show', {
             title: t('library.importBackupError.localBackupHasNoCharts.title'),
-            message: t('library.importBackupError.localBackupHasNoCharts.message')
+            message: t(
+                'library.importBackupError.localBackupHasNoCharts.message',
+            ),
         });
     }
 });

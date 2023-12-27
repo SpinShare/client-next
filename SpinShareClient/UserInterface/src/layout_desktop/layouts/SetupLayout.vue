@@ -2,12 +2,24 @@
     <section class="layout-setup">
         <main>
             <div class="stepper">
-                <div class="step" :class="{ 'active': step >= 1}"></div>
-                <div class="step" :class="{ 'active': step >= 2}"></div>
-                <div class="step" :class="{ 'active': step >= 3}"></div>
-                <div class="step" :class="{ 'active': step >= 4}"></div>
+                <div
+                    class="step"
+                    :class="{ active: step >= 1 }"
+                ></div>
+                <div
+                    class="step"
+                    :class="{ active: step >= 2 }"
+                ></div>
+                <div
+                    class="step"
+                    :class="{ active: step >= 3 }"
+                ></div>
+                <div
+                    class="step"
+                    :class="{ active: step >= 4 }"
+                ></div>
             </div>
-            
+
             <header>
                 <img src="../../assets/icon.svg" />
                 <div class="subheader">{{ t('setup.title') }}</div>
@@ -17,7 +29,7 @@
             <section class="content">
                 <slot />
             </section>
-            
+
             <section class="actions">
                 <SpinButton
                     color="transparent"
@@ -61,8 +73,12 @@ defineProps({
     },
 });
 
-const handleBack = () => { emit('back'); };
-const handleContinue = () => { emit('continue'); };
+const handleBack = () => {
+    emit('back');
+};
+const handleContinue = () => {
+    emit('continue');
+};
 </script>
 
 <style lang="scss">
@@ -73,7 +89,7 @@ const handleContinue = () => { emit('continue'); };
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     & main {
         max-width: 500px;
         min-height: 300px;
@@ -82,16 +98,16 @@ const handleContinue = () => { emit('continue'); };
         display: flex;
         flex-direction: column;
         gap: 25px;
-        
+
         & > .stepper {
             width: 100%;
             display: flex;
             justify-content: stretch;
-            
+
             & .step {
                 width: 100%;
                 height: 3px;
-                background: rgba(var(--colorBaseText),0.15);
+                background: rgba(var(--colorBaseText), 0.15);
 
                 &:first-child {
                     border-top-left-radius: 5px;
@@ -113,14 +129,14 @@ const handleContinue = () => { emit('continue'); };
             grid-template-columns: 24px 1fr;
             gap: 5px 15px;
             align-items: center;
-            
+
             & img {
                 width: 24px;
                 height: 24px;
                 grid-row: 1 / span 2;
             }
             & .subheader {
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
                 font-size: 0.9rem;
             }
             & .step-title {
@@ -131,14 +147,14 @@ const handleContinue = () => { emit('continue'); };
         & > .content {
             display: grid;
             gap: 25px;
-            
+
             & img {
                 max-width: 200px;
                 max-height: 200px;
                 margin: 0 auto;
             }
             & p {
-                color: rgba(var(--colorBaseText),0.6);
+                color: rgba(var(--colorBaseText), 0.6);
                 line-height: 1.5rem;
             }
         }

@@ -13,8 +13,8 @@
 
 <script setup>
 import { ref, inject } from 'vue';
-import router from "@/router";
-import SetupLayout from "@/layout_desktop/layouts/SetupLayout.vue";
+import router from '@/router';
+import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -26,19 +26,23 @@ const handleBack = () => {
     router.push({ path: '/setup/step-3' });
 };
 
-emitter.on('settings-set-response', (settings) => {
+emitter.on('settings-set-response', () => {
     savingSettings.value = false;
     router.push({ path: '/' });
 });
 
 const handleContinue = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-set",
-        data: [{
-            key: 'app.setup.done',
-            value: true,
-        }],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-set',
+            data: [
+                {
+                    key: 'app.setup.done',
+                    value: true,
+                },
+            ],
+        }),
+    );
 
     savingSettings.value = true;
 };

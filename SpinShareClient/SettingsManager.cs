@@ -238,4 +238,9 @@ public class SettingsManager
 
         return Directory.Exists(gamePath) ? gamePath : null;
     }
+
+    public static bool GetIsSteamDeck()
+    {
+        return Environment.OSVersion.VersionString.Contains("SteamOS");
+    }
 }

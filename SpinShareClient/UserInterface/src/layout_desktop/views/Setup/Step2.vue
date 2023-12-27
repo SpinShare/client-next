@@ -7,7 +7,7 @@
         :can-continue="libraryCacheIsReady"
     >
         <p>{{ t('setup.step2.text') }}</p>
-        
+
         <SpinButton
             :color="libraryCacheIsReady ? 'success' : 'default'"
             :disabled="libraryCacheIsAnalyzing || libraryCacheIsReady"
@@ -19,9 +19,9 @@
 </template>
 
 <script setup>
-import {ref, inject, computed} from 'vue';
-import router from "@/router";
-import SetupLayout from "@/layout_desktop/layouts/SetupLayout.vue";
+import { ref, inject, computed } from 'vue';
+import router from '@/router';
+import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -35,11 +35,13 @@ const libraryCacheProgressPercentage = ref(0.0);
 
 const buildLibraryCache = () => {
     libraryCacheIsAnalyzing.value = true;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "library-build-cache",
-        data: [],
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-build-cache',
+            data: [],
+        }),
+    );
 };
 
 emitter.on('library-build-cache-response', (status) => {
@@ -61,12 +63,16 @@ const handleContinue = () => {
 };
 
 const analyzeButtonLabel = computed(() => {
-    if(libraryCacheIsReady.value)
-        return t('setup.step2.libraryCache.analyzationDone', [libraryCacheProgressTotal.value]);
-    
-    if(libraryCacheIsAnalyzing.value)
-        return t('setup.step2.libraryCache.analyzing', [libraryCacheProgressPercentage.value])
-    
+    if (libraryCacheIsReady.value)
+        return t('setup.step2.libraryCache.analyzationDone', [
+            libraryCacheProgressTotal.value,
+        ]);
+
+    if (libraryCacheIsAnalyzing.value)
+        return t('setup.step2.libraryCache.analyzing', [
+            libraryCacheProgressPercentage.value,
+        ]);
+
     return t('setup.step2.libraryCache.analyze');
 });
 </script>

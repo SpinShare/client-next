@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PhotinoNET;
@@ -56,10 +57,18 @@ public class Program
         var window = new PhotinoWindow()
             .SetLogVerbosity(2)
             .SetTitle("SpinShare")
-            .SetSize(1100, 750)
+            .SetSize(1280, 800)
             .SetUseOsDefaultSize(false)
             .Center()
             .SetResizable(true)
+            .RegisterCustomSchemeHandler("app", (object sender, string scheme, string url, out string contentType) =>
+            {
+                contentType = "text/javascript";
+                // TODO: Make this use the setting
+                return new MemoryStream(Encoding.UTF8.GetBytes($@"
+                    const CONFIG_ISCONSOLE = '{SettingsManager.GetIsSteamDeck()}';
+                "));
+            })
             // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
             .RegisterSizeChangedHandler((sender, size) =>
             {

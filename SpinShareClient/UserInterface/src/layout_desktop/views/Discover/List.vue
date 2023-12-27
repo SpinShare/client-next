@@ -2,7 +2,12 @@
     <AppLayout>
         <SpinTabBar
             :selected="currentTab"
-            :tabs="[t('discover.tabBar.new'), t('discover.tabBar.updated'), t('discover.tabBar.hotThisWeek'), t('discover.tabBar.hotThisMonth')]"
+            :tabs="[
+                t('discover.tabBar.new'),
+                t('discover.tabBar.updated'),
+                t('discover.tabBar.hotThisWeek'),
+                t('discover.tabBar.hotThisMonth'),
+            ]"
             @change="handleTabChange"
         />
         <transition name="default">
@@ -11,10 +16,8 @@
                 class="view-discover-new"
             >
                 <section>
-                    <ChartList
-                        :charts="charts"
-                    />
-                    
+                    <ChartList :charts="charts" />
+
                     <SpinHeader>
                         <SpinButton
                             icon="arrow-left"
@@ -22,7 +25,11 @@
                             @click="navigatePrevious"
                         />
                         <SpinButton
-                            :label="t('general.pagination.page', [(parseInt(currentPage) + 1)])"
+                            :label="
+                                t('general.pagination.page', [
+                                    parseInt(currentPage) + 1,
+                                ])
+                            "
                             :disabled="true"
                             color="transparent"
                         />
@@ -46,13 +53,18 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AppLayout from "@/layout_desktop/layouts/AppLayout.vue";
-import ChartList from "@/layout_desktop/components/Common/ChartList.vue";
-import {getHotThisMonthCharts, getHotThisWeekCharts, getNewCharts, getUpdatedCharts} from "@/api/api";
-import router from "@/router";
-import {useRoute} from "vue-router";
-import SpinButton from "@/layout_desktop/components/Common/SpinButton.vue";
-import SpinTabBar from "@/layout_desktop/components/Common/SpinTabBar.vue";
+import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
+import ChartList from '@/layout_desktop/components/Common/ChartList.vue';
+import {
+    getHotThisMonthCharts,
+    getHotThisWeekCharts,
+    getNewCharts,
+    getUpdatedCharts,
+} from '@/api/api';
+import router from '@/router';
+import { useRoute } from 'vue-router';
+import SpinButton from '@/layout_desktop/components/Common/SpinButton.vue';
+import SpinTabBar from '@/layout_desktop/components/Common/SpinTabBar.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -81,10 +93,14 @@ const currentTab = ref(getTabIndex(route.params.tab));
 const currentPage = ref(route.params.page);
 
 onMounted(async () => {
-    if(currentTab.value === 0) charts.value = await getNewCharts(currentPage.value);
-    if(currentTab.value === 1) charts.value = await getUpdatedCharts(currentPage.value);;
-    if(currentTab.value === 2) charts.value = await getHotThisWeekCharts(currentPage.value);
-    if(currentTab.value === 3) charts.value = await getHotThisMonthCharts(currentPage.value);
+    if (currentTab.value === 0)
+        charts.value = await getNewCharts(currentPage.value);
+    if (currentTab.value === 1)
+        charts.value = await getUpdatedCharts(currentPage.value);
+    if (currentTab.value === 2)
+        charts.value = await getHotThisWeekCharts(currentPage.value);
+    if (currentTab.value === 3)
+        charts.value = await getHotThisMonthCharts(currentPage.value);
 });
 
 const handleTabChange = (tabIndex) => {
@@ -94,21 +110,29 @@ const handleTabChange = (tabIndex) => {
 };
 
 const navigatePrevious = () => {
-    if(currentPage.value < 1) return;
-    
+    if (currentPage.value < 1) return;
+
     currentPage.value--;
     router.push({
-        path: '/discover/' + getTabName(currentTab.value) + '/' + currentPage.value,
+        path:
+            '/discover/' +
+            getTabName(currentTab.value) +
+            '/' +
+            currentPage.value,
     });
-}
+};
 const navigateNext = () => {
-    if(charts.value.length < 12) return;
+    if (charts.value.length < 12) return;
 
     currentPage.value++;
     router.push({
-        path: '/discover/' + getTabName(currentTab.value) + '/' + currentPage.value,
+        path:
+            '/discover/' +
+            getTabName(currentTab.value) +
+            '/' +
+            currentPage.value,
     });
-}
+};
 </script>
 
 <style lang="scss" scoped>

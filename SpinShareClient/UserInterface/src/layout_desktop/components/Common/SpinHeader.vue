@@ -1,7 +1,5 @@
 <template>
-    <header
-        :class="`type-${type}`"
-    >
+    <header :class="`type-${type}`">
         <h1 v-if="label">{{ label }}</h1>
         <div class="actions">
             <slot />
@@ -18,7 +16,7 @@ defineProps({
     type: {
         type: String,
         default: 'default',
-    }
+    },
 });
 </script>
 
@@ -28,7 +26,7 @@ header {
     gap: 25px;
     align-items: center;
     justify-content: center;
-    
+
     & h1 {
         font-size: 1.5rem;
         font-weight: 700;
@@ -38,7 +36,7 @@ header {
         display: flex;
         gap: 5px;
     }
-    
+
     &.type-small {
         & h1 {
             font-size: 1.15rem;

@@ -1,9 +1,12 @@
 <template>
     <dialog ref="dialogRef">
-        <SpinHeader :label="dialogTitle" v-if="dialogTitle" />
-        
+        <SpinHeader
+            :label="dialogTitle"
+            v-if="dialogTitle"
+        />
+
         <p v-if="dialogMessage">{{ dialogMessage }}</p>
-        
+
         <div class="actions">
             <SpinButton
                 :label="t('general.close')"
@@ -52,25 +55,25 @@ dialog {
     max-width: 500px;
     flex-direction: column;
     gap: 10px;
-    
+
     & p {
-        color: rgba(var(--colorBaseText),0.6);
+        color: rgba(var(--colorBaseText), 0.6);
         line-height: 1.5rem;
     }
-    
+
     & .actions {
         margin-top: 20px;
         display: flex;
         gap: 10px;
         justify-content: flex-end;
     }
-    
+
     &[open] {
         display: flex;
     }
     &::backdrop {
         backdrop-filter: blur(5px);
-        background: rgba(0,0,0,0.4);
+        background: rgba(0, 0, 0, 0.4);
     }
 }
 </style>

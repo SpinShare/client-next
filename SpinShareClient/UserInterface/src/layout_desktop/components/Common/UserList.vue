@@ -13,13 +13,13 @@
 </template>
 
 <script setup>
-import UserItem from "@/layout_desktop/components/Common/UserItem.vue";
+import UserItem from '@/layout_desktop/components/Common/UserItem.vue';
 
 defineProps({
     users: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 </script>
 

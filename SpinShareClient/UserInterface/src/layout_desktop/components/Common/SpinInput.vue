@@ -5,7 +5,12 @@
     >
         <div class="text">
             <div class="label">{{ label }}</div>
-            <div class="hint" v-if="hint">{{ hint }}</div>
+            <div
+                class="hint"
+                v-if="hint"
+            >
+                {{ hint }}
+            </div>
         </div>
         <div class="input">
             <slot />
@@ -50,12 +55,12 @@ defineProps({
         display: flex;
         flex-direction: column;
         gap: 10px;
-        
+
         & .label {
             font-size: 0.9rem;
         }
         & .hint {
-            color: rgba(var(--colorBaseText),0.4);
+            color: rgba(var(--colorBaseText), 0.4);
             line-height: 1.25rem;
         }
     }
@@ -63,7 +68,7 @@ defineProps({
         display: grid;
         gap: 5px;
 
-        & input[type=text] {
+        & input[type='text'] {
             background: rgba(var(--colorBaseText), 0.07);
             border: 0;
             color: rgb(var(--colorBaseText));
@@ -85,7 +90,7 @@ defineProps({
         & .select {
             position: relative;
             cursor: pointer;
-            
+
             & select {
                 width: 100%;
                 appearance: none;

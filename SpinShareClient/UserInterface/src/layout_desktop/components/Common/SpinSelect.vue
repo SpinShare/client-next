@@ -6,18 +6,34 @@
         class="spin-select"
         :class="`${disabled ? 'disabled' : ''}`"
     >
-        <div @click="toggleDropdown" class="button">
-            <span :class="`mdi mdi-${options.find(x => x.value === modelValue)?.icon}`"></span>
-            <span class="value">{{ options.find(x => x.value === modelValue)?.label || 'Select' }}</span>
-            <span :class="`mdi mdi-menu-${showDropdown ? 'up' : 'down' }`"></span>
+        <div
+            @click="toggleDropdown"
+            class="button"
+        >
+            <span
+                :class="`mdi mdi-${
+                    options.find((x) => x.value === modelValue)?.icon
+                }`"
+            ></span>
+            <span class="value">{{
+                options.find((x) => x.value === modelValue)?.label || 'Select'
+            }}</span>
+            <span
+                :class="`mdi mdi-menu-${showDropdown ? 'up' : 'down'}`"
+            ></span>
         </div>
         <transition name="default">
-            <div v-show="showDropdown" class="options">
+            <div
+                v-show="showDropdown"
+                class="options"
+            >
                 <div
                     v-for="option in options"
                     :key="option.value"
                     @click="selectOption(option.value)"
-                    :class="`option ${modelValue === option.value ? 'selected' : ''}`"
+                    :class="`option ${
+                        modelValue === option.value ? 'selected' : ''
+                    }`"
                 >
                     <span :class="`mdi mdi-${option.icon}`"></span>
                     <span class="label">{{ option.label }}</span>
@@ -28,7 +44,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     modelValue: String,
@@ -48,12 +64,12 @@ const selectedValue = ref(props.modelValue);
 const emit = defineEmits(['update:modelValue']);
 
 const toggleDropdown = () => {
-    if(props.disabled) return;
+    if (props.disabled) return;
     showDropdown.value = !showDropdown.value;
 };
 
 const selectOption = (value) => {
-    if(props.disabled) return;
+    if (props.disabled) return;
     selectedValue.value = value;
     emit('update:modelValue', value);
     showDropdown.value = false;
@@ -69,7 +85,7 @@ const closeDropdown = () => {
     position: relative;
     min-width: 175px;
     transition: 0.15s ease-in-out all;
-    
+
     & .button {
         cursor: pointer;
         background: rgba(var(--colorBaseText), 0.07);
@@ -84,13 +100,13 @@ const closeDropdown = () => {
         position: relative;
         overflow: hidden;
         transition: 0.15s ease-in-out all;
-        
+
         & .value {
             flex-grow: 1;
             font-family: 'Work Sans', sans-serif;
             font-size: 1rem;
         }
-        
+
         & .mdi {
             width: 24px;
             height: 24px;
@@ -124,7 +140,7 @@ const closeDropdown = () => {
             transition: 0.15s ease-in-out all;
             padding: 0 15px;
             height: 40px;
-            
+
             & .mdi {
                 width: 24px;
                 height: 24px;
@@ -133,7 +149,7 @@ const closeDropdown = () => {
                 align-items: center;
                 font-size: 20px;
             }
-            
+
             &.selected {
                 background: rgb(var(--colorBase3));
             }
@@ -145,7 +161,7 @@ const closeDropdown = () => {
 
     &.disabled {
         opacity: 0.3;
-        
+
         & .button {
             cursor: not-allowed;
         }
@@ -154,7 +170,7 @@ const closeDropdown = () => {
         & .button {
             &:hover {
                 cursor: pointer;
-                background: rgba(var(--colorBaseText),0.14);
+                background: rgba(var(--colorBaseText), 0.14);
             }
         }
     }

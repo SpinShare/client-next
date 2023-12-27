@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
-import {getUserCharts} from "@/api/api";
-import ChartList from "@/layout_desktop/components/Common/ChartList.vue";
+import { onMounted, ref } from 'vue';
+import { getUserCharts } from '@/api/api';
+import ChartList from '@/layout_desktop/components/Common/ChartList.vue';
 
 const props = defineProps({
     id: {

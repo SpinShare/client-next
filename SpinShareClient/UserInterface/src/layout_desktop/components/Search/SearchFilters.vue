@@ -1,77 +1,103 @@
 <template>
     <div>
-    <SpinButton
-        icon="filter-variant"
-        :label="t('search.filters.button.label')"
-        :disabled="disabled"
-        @click="toggleModal"
-    />
-    <transition name="queue">
-        <div
-            v-if="showModal"
-            class="modal"
-        >
-            <div class="filters">
-                <div class="group">
-                    <div class="header">{{ t('search.filters.difficulties.label') }}</div>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficulties.easy') }}</span>
-                        <SpinSwitch v-model="diffEasy" />
-                    </label>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficulties.normal') }}</span>
-                        <SpinSwitch v-model="diffNormal" />
-                    </label>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficulties.hard') }}</span>
-                        <SpinSwitch v-model="diffHard" />
-                    </label>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficulties.expert') }}</span>
-                        <SpinSwitch v-model="diffExpert" />
-                    </label>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficulties.XD') }}</span>
-                        <SpinSwitch v-model="diffXD" />
-                    </label>
-                </div>
-                <div class="group">
-                    <div class="header">{{ t('search.filters.difficultyRatings.label') }}</div>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficultyRatings.lowest') }}</span>
-                        <input type="number" v-model="diffRatingFrom" @change="roundDiffRatingFrom" />
-                    </label>
-                    <label class="filter">
-                        <span>{{ t('search.filters.difficultyRatings.highest') }}</span>
-                        <input type="number" v-model="diffRatingTo" @change="roundDiffRatingTo" />
-                    </label>
-                </div>
-                <div class="group">
-                    <label class="filter">
-                        <span>{{ t('search.filters.showExplicit') }}</span>
-                        <SpinSwitch v-model="showExplicit" />
-                    </label>
-                </div>
-                
-                <div class="actions">
-                    <SpinButton
-                        :label="t('general.cancel')"
-                        @click="handleCancel"
-                    />
-                    <SpinButton
-                        :label="t('general.apply')"
-                        color="primary"
-                        @click="handleApply"
-                    />
+        <SpinButton
+            icon="filter-variant"
+            :label="t('search.filters.button.label')"
+            :disabled="disabled"
+            @click="toggleModal"
+        />
+        <transition name="queue">
+            <div
+                v-if="showModal"
+                class="modal"
+            >
+                <div class="filters">
+                    <div class="group">
+                        <div class="header">
+                            {{ t('search.filters.difficulties.label') }}
+                        </div>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficulties.easy')
+                            }}</span>
+                            <SpinSwitch v-model="diffEasy" />
+                        </label>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficulties.normal')
+                            }}</span>
+                            <SpinSwitch v-model="diffNormal" />
+                        </label>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficulties.hard')
+                            }}</span>
+                            <SpinSwitch v-model="diffHard" />
+                        </label>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficulties.expert')
+                            }}</span>
+                            <SpinSwitch v-model="diffExpert" />
+                        </label>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficulties.XD')
+                            }}</span>
+                            <SpinSwitch v-model="diffXD" />
+                        </label>
+                    </div>
+                    <div class="group">
+                        <div class="header">
+                            {{ t('search.filters.difficultyRatings.label') }}
+                        </div>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficultyRatings.lowest')
+                            }}</span>
+                            <input
+                                type="number"
+                                v-model="diffRatingFrom"
+                                @change="roundDiffRatingFrom"
+                            />
+                        </label>
+                        <label class="filter">
+                            <span>{{
+                                t('search.filters.difficultyRatings.highest')
+                            }}</span>
+                            <input
+                                type="number"
+                                v-model="diffRatingTo"
+                                @change="roundDiffRatingTo"
+                            />
+                        </label>
+                    </div>
+                    <div class="group">
+                        <label class="filter">
+                            <span>{{ t('search.filters.showExplicit') }}</span>
+                            <SpinSwitch v-model="showExplicit" />
+                        </label>
+                    </div>
+
+                    <div class="actions">
+                        <SpinButton
+                            :label="t('general.cancel')"
+                            @click="handleCancel"
+                        />
+                        <SpinButton
+                            :label="t('general.apply')"
+                            color="primary"
+                            @click="handleApply"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    </transition>
+        </transition>
     </div>
 </template>
 
 <script setup>
-import {ref, watch} from 'vue';
+import { ref, watch } from 'vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -98,13 +124,13 @@ const diffRatingTo = ref(val.value?.diffRatingTo ?? null);
 const showExplicit = ref(val.value?.showExplicit ?? true);
 
 const toggleModal = () => {
-    if(props.disabled) return;
+    if (props.disabled) return;
     showModal.value = !showModal.value;
 };
 
 const handleCancel = () => {
     showModal.value = false;
-    
+
     diffEasy.value = val.value?.diffEasy ?? true;
     diffNormal.value = val.value?.diffNormal ?? true;
     diffHard.value = val.value?.diffHard ?? true;
@@ -124,7 +150,7 @@ const handleApply = () => {
         diffXD: diffXD.value,
         diffRatingFrom: diffRatingFrom.value,
         diffRatingTo: diffRatingTo.value,
-        showExplicit: showExplicit.value
+        showExplicit: showExplicit.value,
     };
     emit('update:modelValue', newValue);
 };
@@ -148,7 +174,7 @@ watch(
 
 <style lang="scss" scoped>
 .modal {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     position: fixed;
     top: 0;
@@ -170,7 +196,7 @@ watch(
         flex-direction: column;
         padding: 20px;
         border-radius: 4px;
-        
+
         & .group {
             border: 1px solid rgba(var(--colorBaseText), 0.07);
             padding: 20px;
@@ -178,7 +204,7 @@ watch(
             display: flex;
             flex-direction: column;
             gap: 10px;
-            
+
             & .header {
                 color: rgb(var(--colorPrimary));
                 font-weight: bold;
@@ -189,8 +215,8 @@ watch(
                 grid-template-columns: 1fr auto;
                 gap: 10px;
                 align-items: center;
-                
-                & input[type=number] {
+
+                & input[type='number'] {
                     max-width: 100px;
                     background: rgba(var(--colorBaseText), 0.07);
                     border: 0;

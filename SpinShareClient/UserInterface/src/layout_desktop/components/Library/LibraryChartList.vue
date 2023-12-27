@@ -13,13 +13,13 @@
 </template>
 
 <script setup>
-import LibraryChartItem from "@/layout_desktop/components/Library/LibraryChartItem.vue";
+import LibraryChartItem from '@/layout_desktop/components/Library/LibraryChartItem.vue';
 
 defineProps({
     charts: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 </script>
 

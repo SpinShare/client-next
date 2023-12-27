@@ -6,8 +6,7 @@
     </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .loading-circle {
@@ -18,7 +17,7 @@
     justify-content: center;
     opacity: 0;
     animation: 0.3s loadingEntry linear forwards;
-    
+
     & .icon {
         width: 48px;
         height: 48px;

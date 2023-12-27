@@ -1,7 +1,7 @@
 <template>
     <section class="layout-app">
         <SidebarNavigation />
-    
+
         <main>
             <slot />
         </main>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import SidebarNavigation from "@/layout_desktop/components/SidebarNavigation.vue";
+import SidebarNavigation from '@/layout_desktop/components/SidebarNavigation.vue';
 </script>
 
 <style lang="scss" scoped>

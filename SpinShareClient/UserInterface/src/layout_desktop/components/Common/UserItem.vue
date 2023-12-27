@@ -3,16 +3,33 @@
         class="user-item"
         @click.left="handleClick"
     >
-        <img :src="avatar" alt="User Avatar" />
+        <img
+            :src="avatar"
+            alt="User Avatar"
+        />
         <div class="meta">
             <div class="username">{{ username }}</div>
-            <div class="pronouns" v-if="pronouns">{{ pronouns }}</div>
-            <div class="tags" v-if="isPatreon || isVerified">
-                <span class="tag tag-verified" v-if="isVerified">
+            <div
+                class="pronouns"
+                v-if="pronouns"
+            >
+                {{ pronouns }}
+            </div>
+            <div
+                class="tags"
+                v-if="isPatreon || isVerified"
+            >
+                <span
+                    class="tag tag-verified"
+                    v-if="isVerified"
+                >
                     <span class="mdi mdi-check"></span>
                     <span>{{ t('user.verified') }}</span>
                 </span>
-                <span class="tag tag-supporter" v-if="isPatreon">
+                <span
+                    class="tag tag-supporter"
+                    v-if="isPatreon"
+                >
                     <span class="mdi mdi-heart"></span>
                     <span>{{ t('user.supporter') }}</span>
                 </span>
@@ -22,7 +39,7 @@
 </template>
 
 <script setup>
-import router from "@/router";
+import router from '@/router';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -63,7 +80,7 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .user-item {
-    background: rgba(var(--colorBaseText),0.07);
+    background: rgba(var(--colorBaseText), 0.07);
     border-radius: 6px;
     padding: 10px;
     display: grid;
@@ -89,7 +106,7 @@ const handleClick = () => {
         }
         & .pronouns {
             font-size: 0.75rem;
-            color: rgba(var(--colorBaseText),0.4);
+            color: rgba(var(--colorBaseText), 0.4);
         }
         & .tags {
             margin-top: 2px;
@@ -123,7 +140,7 @@ const handleClick = () => {
     }
 
     &:hover {
-        background: rgba(var(--colorBaseText),0.14);
+        background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
     }
 }

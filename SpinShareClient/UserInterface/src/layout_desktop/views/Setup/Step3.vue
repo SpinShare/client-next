@@ -7,9 +7,7 @@
         :can-continue="!savingSettings"
         :can-back="!savingSettings"
     >
-        <SpinInput
-            :label="t('settings.language.label')"
-        >
+        <SpinInput :label="t('settings.language.label')">
             <div class="select">
                 <select
                     v-model="settingLanguage"
@@ -22,9 +20,7 @@
                 <span class="mdi mdi-chevron-down"></span>
             </div>
         </SpinInput>
-        <SpinInput
-            :label="t('settings.theme.label')"
-        >
+        <SpinInput :label="t('settings.theme.label')">
             <div class="select">
                 <select
                     v-model="settingTheme"
@@ -32,7 +28,9 @@
                     @change="changeTheme"
                 >
                     <option value="dark">{{ t('settings.theme.dark') }}</option>
-                    <option value="light">{{ t('settings.theme.light') }}</option>
+                    <option value="light">
+                        {{ t('settings.theme.light') }}
+                    </option>
                 </select>
                 <span class="mdi mdi-chevron-down"></span>
             </div>
@@ -53,19 +51,21 @@
 
 <script setup>
 import { ref, inject } from 'vue';
-import router from "@/router";
-import SetupLayout from "@/layout_desktop/layouts/SetupLayout.vue";
-import SpinInput from "@/layout_desktop/components/Common/SpinInput.vue";
+import router from '@/router';
+import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
+import SpinInput from '@/layout_desktop/components/Common/SpinInput.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 const settingLanguage = ref(window.navigator.language?.substring(0, 2) ?? 'en');
-const settingTheme = ref(window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light');
+const settingTheme = ref(
+    window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light',
+);
 const savingSettings = ref(false);
 
-emitter.on('settings-set-response', (settings) => {
+emitter.on('settings-set-response', () => {
     savingSettings.value = false;
     router.push({ path: '/setup/step-4' });
 });
@@ -74,16 +74,21 @@ const handleBack = () => {
     router.push({ path: '/setup/step-2' });
 };
 const handleContinue = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-set",
-        data: [{
-            key: 'app.language',
-            value: settingLanguage.value,
-        },{
-            key: 'app.theme',
-            value: settingTheme.value,
-        },],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-set',
+            data: [
+                {
+                    key: 'app.language',
+                    value: settingLanguage.value,
+                },
+                {
+                    key: 'app.theme',
+                    value: settingTheme.value,
+                },
+            ],
+        }),
+    );
 
     savingSettings.value = true;
 };

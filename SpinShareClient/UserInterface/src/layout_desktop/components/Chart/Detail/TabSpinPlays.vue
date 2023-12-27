@@ -1,6 +1,9 @@
 <template>
     <section class="chart-detail-tab-spinplays">
-        <div class="spinplays-list" v-if="spinplays">
+        <div
+            class="spinplays-list"
+            v-if="spinplays"
+        >
             <SpinPlayItem
                 v-for="spinplay in spinplays.spinPlays"
                 :key="spinplay.id"
@@ -13,8 +16,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getChartSpinPlays } from "@/api/api";
-import SpinPlayItem from "@/layout_desktop/components/Chart/Detail/SpinPlayItem.vue";
+import { getChartSpinPlays } from '@/api/api';
+import SpinPlayItem from '@/layout_desktop/components/Chart/Detail/SpinPlayItem.vue';
 
 const props = defineProps({
     id: {

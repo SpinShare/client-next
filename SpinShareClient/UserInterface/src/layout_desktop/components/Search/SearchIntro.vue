@@ -32,7 +32,7 @@ const { t } = useI18n();
             font-size: 1.5rem;
         }
         & p {
-            color: rgba(var(--colorBaseText),0.6);
+            color: rgba(var(--colorBaseText), 0.6);
             max-width: 400px;
             line-height: 1.5rem;
             text-align: center;

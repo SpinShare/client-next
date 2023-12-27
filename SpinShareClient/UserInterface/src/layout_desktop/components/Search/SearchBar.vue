@@ -4,9 +4,21 @@
             :disabled="isSearching"
             v-model="searchInputType"
             :options="[
-                { value: 'charts', icon: 'album', label: t('search.bar.type.charts') },
-                { value: 'playlists', icon: 'playlist-music', label: t('search.bar.type.playlists') },
-                { value: 'users', icon: 'account-circle', label: t('search.bar.type.users') },
+                {
+                    value: 'charts',
+                    icon: 'album',
+                    label: t('search.bar.type.charts'),
+                },
+                {
+                    value: 'playlists',
+                    icon: 'playlist-music',
+                    label: t('search.bar.type.playlists'),
+                },
+                {
+                    value: 'users',
+                    icon: 'account-circle',
+                    label: t('search.bar.type.users'),
+                },
             ]"
         />
         <input
@@ -34,8 +46,8 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
-import SearchFilters from "@/layout_desktop/components/Search/SearchFilters.vue";
+import { computed, ref } from 'vue';
+import SearchFilters from '@/layout_desktop/components/Search/SearchFilters.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -49,11 +61,11 @@ const props = defineProps({
     isSearching: {
         type: Boolean,
         default: false,
-    }
+    },
 });
 
-const searchInputType = ref("charts");
-const searchInputQuery = ref(props.query ?? "");
+const searchInputType = ref('charts');
+const searchInputQuery = ref(props.query ?? '');
 const searchInputFilters = ref({
     showExplicit: true,
 });
@@ -67,7 +79,7 @@ const handleSearch = () => {
 };
 
 const canSearch = computed(() => {
-    return searchInputQuery.value.length > 2
+    return searchInputQuery.value.length > 2;
 });
 </script>
 
@@ -77,9 +89,9 @@ const canSearch = computed(() => {
     gap: 10px;
     align-items: center;
     padding: 20px 40px;
-    border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
+    border-bottom: 1px solid rgba(var(--colorBaseText), 0.07);
 
-    & input[type="search"] {
+    & input[type='search'] {
         flex-grow: 1;
         background: rgba(var(--colorBaseText), 0.07);
         border: 0;

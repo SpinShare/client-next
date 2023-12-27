@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import router from "@/router";
-import SetupLayout from "@/layout_desktop/layouts/SetupLayout.vue";
+import router from '@/router';
+import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

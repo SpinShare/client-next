@@ -11,9 +11,7 @@
                 <div class="content">
                     <h1>{{ title }}</h1>
                     <div class="meta">
-                        <div
-                            class="charts-count"
-                        >
+                        <div class="charts-count">
                             <span class="mdi mdi-playlist-music"></span>
                             <span>{{ t('playlist.count', [songs]) }}</span>
                         </div>
@@ -33,7 +31,7 @@
 </template>
 
 <script setup>
-import router from "@/router";
+import router from '@/router';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -70,11 +68,11 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .playlist-item {
-    background-color: rgba(var(--colorBaseText),0.07);
+    background-color: rgba(var(--colorBaseText), 0.07);
     border-radius: 6px;
     transition: 0.15s ease-in-out all;
     overflow: hidden;
-    
+
     & .cover {
         height: 150px;
         background-position: center;
@@ -84,7 +82,11 @@ const handleClick = () => {
 
         & .shade {
             padding: 15px;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(0, 0, 0, 0.8)
+            );
             width: 100%;
 
             & .content {
@@ -129,7 +131,7 @@ const handleClick = () => {
     }
 
     &:hover {
-        background: rgba(var(--colorBaseText),0.14);
+        background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
         opacity: 0.4;
     }

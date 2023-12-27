@@ -11,7 +11,7 @@ public class CommandIsSteamdeck : ICommand
     {
         Message response = new() {
             Command = "is-steamdeck-response",
-            Data = Environment.OSVersion.VersionString.Contains("SteamOS")
+            Data = SettingsManager.GetIsSteamDeck()
         };
 
         MessageHandler.SendResponse(sender, response);

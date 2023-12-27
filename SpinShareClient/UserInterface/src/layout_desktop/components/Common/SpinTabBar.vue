@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="spin-tab-bar"
-    >
+    <div class="spin-tab-bar">
         <SpinTabItem
             v-for="(item, i) in tabs"
             :key="i"
@@ -14,7 +12,7 @@
 </template>
 
 <script setup>
-import {ref, watch} from 'vue';
+import { ref, watch } from 'vue';
 
 const emit = defineEmits(['change']);
 const props = defineProps({
@@ -25,7 +23,7 @@ const props = defineProps({
     tabs: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 
 const activeTab = ref(props.selected);
@@ -33,12 +31,15 @@ const activeTab = ref(props.selected);
 const handleTabChange = (i) => {
     activeTab.value = i;
     emit('change', i);
-}
+};
 
-watch(() => props.selected, (oldSelected, newSelected) => {
-    console.log("change " + oldSelected + "," + newSelected)
-    activeTab.value = newSelected;
-});
+watch(
+    () => props.selected,
+    (oldSelected, newSelected) => {
+        console.log('change ' + oldSelected + ',' + newSelected);
+        activeTab.value = newSelected;
+    },
+);
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +51,7 @@ watch(() => props.selected, (oldSelected, newSelected) => {
     right: 0;
     top: 0;
     display: flex;
-    border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
+    border-bottom: 1px solid rgba(var(--colorBaseText), 0.07);
     padding: 0 25px;
     gap: 10px;
 }

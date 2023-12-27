@@ -1,23 +1,29 @@
 <template>
     <router-view v-slot="{ Component, route }">
-        <transition :name="transitionName" mode="out-in">
-            <component :is="Component" :key="route.path" />
+        <transition
+            :name="transitionName"
+            mode="out-in"
+        >
+            <component
+                :is="Component"
+                :key="route.path"
+            />
         </transition>
     </router-view>
-    
+
     <UpdateBanner />
     <AlertMessage />
 </template>
 
 <script setup>
-import {ref, inject, onMounted, computed} from 'vue';
-import {useRoute, useRouter} from "vue-router";
-import UpdateBanner from "@/layout_desktop/components/UpdateBanner.vue";
-import AlertMessage from "@/layout_desktop/components/Common/AlertMessage.vue";
+import './layout_desktop/assets/app.scss';
+import { ref, inject, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import UpdateBanner from '@/layout_desktop/components/UpdateBanner.vue';
+import AlertMessage from '@/layout_desktop/components/Common/AlertMessage.vue';
 const emitter = inject('emitter');
 
 const router = useRouter();
-const route = useRoute();
 const language = ref('en');
 const theme = ref('dark');
 const transitionName = ref('default');
@@ -28,10 +34,10 @@ window.external.receiveMessage((rawResponse) => {
 });
 
 emitter.on('settings-get-response', (setting) => {
-    if(setting.key === "app.theme") {
+    if (setting.key === 'app.theme') {
         setTheme(setting.data);
     }
-    if(setting.key === "app.language") {
+    if (setting.key === 'app.language') {
         setLanguage(setting.data);
     }
 });
@@ -41,14 +47,18 @@ emitter.on('update-theme', (newTheme) => {
 });
 
 onMounted(() => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-get",
-        data: "app.theme",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-get',
+            data: 'app.theme',
+        }),
+    );
 });
 
 const setTheme = (newTheme) => {
-    let osTheme = window.matchMedia('(prefers-color-scheme: dark').matches ? 'dark' : 'light';
+    let osTheme = window.matchMedia('(prefers-color-scheme: dark').matches
+        ? 'dark'
+        : 'light';
     theme.value = newTheme ?? osTheme;
     document.documentElement.dataset.theme = theme.value;
 };
@@ -61,14 +71,27 @@ const setLanguage = (newLanguage) => {
 router.beforeEach((to, from) => {
     let newTransitionName = 'default';
 
-    if(to.path.includes('setup')) newTransitionName = 'setup';
-    
+    if (to.path.includes('setup')) newTransitionName = 'setup';
+
     // No transition for pagination in discover lists
-    if(to.path.includes('discover/new') && from.path.includes('discover/new')) newTransitionName = 'none';
-    if(to.path.includes('discover/updated') && from.path.includes('discover/updated')) newTransitionName = 'none';
-    if(to.path.includes('discover/hotThisWeek') && from.path.includes('discover/hotThisWeek')) newTransitionName = 'none';
-    if(to.path.includes('discover/hotThisMonth') && from.path.includes('discover/hotThisMonth')) newTransitionName = 'none';
-    
+    if (to.path.includes('discover/new') && from.path.includes('discover/new'))
+        newTransitionName = 'none';
+    if (
+        to.path.includes('discover/updated') &&
+        from.path.includes('discover/updated')
+    )
+        newTransitionName = 'none';
+    if (
+        to.path.includes('discover/hotThisWeek') &&
+        from.path.includes('discover/hotThisWeek')
+    )
+        newTransitionName = 'none';
+    if (
+        to.path.includes('discover/hotThisMonth') &&
+        from.path.includes('discover/hotThisMonth')
+    )
+        newTransitionName = 'none';
+
     transitionName.value = newTransitionName;
 });
 </script>

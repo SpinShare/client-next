@@ -1,27 +1,52 @@
 <template>
     <div class="review-item">
         <div class="user">
-            <img :src="user.avatar" alt="User Avatar" />
+            <img
+                :src="user.avatar"
+                alt="User Avatar"
+            />
             <div class="meta">
                 <div class="username">{{ user.username }}</div>
-                <div class="pronouns" v-if="user.pronouns">{{ user.pronouns }}</div>
-                <div class="tags" v-if="user.isPatreon || user.isVerified">
-                    <span class="tag tag-verified" v-if="user.isVerified">
+                <div
+                    class="pronouns"
+                    v-if="user.pronouns"
+                >
+                    {{ user.pronouns }}
+                </div>
+                <div
+                    class="tags"
+                    v-if="user.isPatreon || user.isVerified"
+                >
+                    <span
+                        class="tag tag-verified"
+                        v-if="user.isVerified"
+                    >
                         <span class="mdi mdi-check"></span>
                         <span>{{ t('user.verified') }}</span>
                     </span>
-                    <span class="tag tag-supporter" v-if="user.isPatreon">
+                    <span
+                        class="tag tag-supporter"
+                        v-if="user.isPatreon"
+                    >
                         <span class="mdi mdi-heart"></span>
                         <span>{{ t('user.supporter') }}</span>
                     </span>
                 </div>
             </div>
         </div>
-        
-        <p v-if="comment" class="comment">{{ comment }}</p>
-        
+
+        <p
+            v-if="comment"
+            class="comment"
+        >
+            {{ comment }}
+        </p>
+
         <div class="meta">
-            <div class="tag-recommended" v-if="recommended">
+            <div
+                class="tag-recommended"
+                v-if="recommended"
+            >
                 {{ t('user.review.recommended') }}
             </div>
             <div class="review-date">
@@ -58,23 +83,25 @@ const props = defineProps({
     },
 });
 
-const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf("minute").fromNow());
+const relativeReviewDate = computed(() =>
+    moment(props.reviewDate.date).startOf('minute').fromNow(),
+);
 </script>
 
 <style lang="scss" scoped>
 .review-item {
-    border: 1px solid rgba(var(--colorBaseText),0.07);
+    border: 1px solid rgba(var(--colorBaseText), 0.07);
     padding: 15px;
     border-radius: 6px;
     display: grid;
     gap: 15px;
-    
+
     & .user {
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 15px;
         align-items: center;
-        
+
         & img {
             width: 48px;
             height: 48px;
@@ -84,7 +111,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             display: flex;
             flex-direction: column;
             gap: 3px;
-            
+
             & .username {
                 align-items: center;
                 display: flex;
@@ -92,14 +119,14 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             }
             & .pronouns {
                 font-size: 0.75rem;
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
             }
             & .tags {
                 margin-top: 2px;
                 align-items: center;
                 display: flex;
                 gap: 5px;
-                
+
                 & .tag {
                     background: rgba(var(--colorBaseText), 0.07);
                     display: flex;
@@ -125,7 +152,7 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
             }
         }
     }
-    
+
     & .comment {
         line-height: 1.5rem;
         -webkit-user-select: text;
@@ -133,23 +160,23 @@ const relativeReviewDate = computed(() => moment(props.reviewDate.date).startOf(
         user-select: text;
         cursor: text;
     }
-    
+
     & > .meta {
         display: flex;
         gap: 10px;
         align-items: center;
-        
+
         & .review-date {
             display: flex;
             gap: 5px;
             align-items: center;
-            color: rgba(var(--colorBaseText),0.4);
-            
+            color: rgba(var(--colorBaseText), 0.4);
+
             & > span:nth-child(2) {
                 font-size: 0.75rem;
             }
         }
-        
+
         & .tag-recommended {
             padding: 5px 10px;
             border-radius: 100px;
