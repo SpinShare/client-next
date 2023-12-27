@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import './layout_desktop/assets/app.scss';
+import './assets/app.scss';
 import { ref, inject, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import UpdateBanner from '@/layout_desktop/components/UpdateBanner.vue';
