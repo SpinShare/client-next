@@ -1,21 +1,21 @@
 import * as VueRouter from 'vue-router';
 
-import ViewSetupStep0 from './views/Setup/Step0.vue';
-import ViewSetupStep1 from './views/Setup/Step1.vue';
-import ViewSetupStep2 from './views/Setup/Step2.vue';
-import ViewSetupStep3 from './views/Setup/Step3.vue';
-import ViewSetupStep4 from './views/Setup/Step4.vue';
+import ViewSetupStep0 from './layout_desktop/views/Setup/Step0.vue';
+import ViewSetupStep1 from './layout_desktop/views/Setup/Step1.vue';
+import ViewSetupStep2 from './layout_desktop/views/Setup/Step2.vue';
+import ViewSetupStep3 from './layout_desktop/views/Setup/Step3.vue';
+import ViewSetupStep4 from './layout_desktop/views/Setup/Step4.vue';
 
-import ViewDiscover from './views/Discover.vue';
-import ViewDiscoverList from './views/Discover/List.vue';
-import ViewSearch from './views/Search.vue';
-import ViewLibrary from './views/Library.vue';
-import ViewChartDetail from './views/Chart/Detail.vue';
-import ViewPlaylistDetail from './views/Playlist/Detail.vue';
-import ViewUserDetail from './views/User/Detail.vue';
-import ViewSettings from './views/Settings.vue';
-import ViewLicenses from './views/Licenses.vue';
-import ViewError from './views/Error.vue';
+import ViewDiscover from './layout_desktop/views/Discover.vue';
+import ViewDiscoverList from './layout_desktop/views/Discover/List.vue';
+import ViewSearch from './layout_desktop/views/Search.vue';
+import ViewLibrary from './layout_desktop/views/Library.vue';
+import ViewChartDetail from './layout_desktop/views/Chart/Detail.vue';
+import ViewPlaylistDetail from './layout_desktop/views/Playlist/Detail.vue';
+import ViewUserDetail from './layout_desktop/views/User/Detail.vue';
+import ViewSettings from './layout_desktop/views/Settings.vue';
+import ViewLicenses from './layout_desktop/views/Licenses.vue';
+import ViewError from './layout_desktop/views/Error.vue';
 
 const routes = [
     {
