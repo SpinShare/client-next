@@ -29,7 +29,7 @@ const language = ref(SETTINGS.Language);
 // eslint-disable-next-line no-undef
 const theme = ref(SETTINGS.Theme);
 const transitionName = ref('default');
-const isMenuOpen = ref(false);
+const isConsole = ref(SETTINGS.IsConsole);
 
 window.external.receiveMessage((rawResponse) => {
     const response = JSON.parse(rawResponse);
