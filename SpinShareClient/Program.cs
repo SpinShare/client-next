@@ -74,7 +74,7 @@ public class Program
                 };
 
                 var settingsJson = JsonConvert.SerializeObject(settings);
-                var script = $"const SETTINGS = {settingsJson};";
+                var script = $"window.spinshare = window.spinshare || {{}}; window.spinshare.settings = {settingsJson};";
                 
                 return new MemoryStream(Encoding.UTF8.GetBytes(script));
             })

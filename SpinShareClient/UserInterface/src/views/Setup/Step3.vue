@@ -97,3 +97,9 @@ const changeTheme = () => {
     emitter.emit('update-theme', settingTheme.value);
 };
 </script>
+
+<style lang="scss" v-if="window.spinshare.settings.IsConsole">
+.select {
+    width: 600px;
+}
+</style>

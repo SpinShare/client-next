@@ -53,3 +53,10 @@ defineProps({
     }
 }
 </style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+.chart-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+</style>

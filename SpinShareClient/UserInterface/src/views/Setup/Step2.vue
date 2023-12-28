@@ -9,6 +9,7 @@
         <p>{{ t('setup.step2.text') }}</p>
 
         <SpinButton
+            v-if="!window.spinshare.settings.IsConsole"
             :color="libraryCacheIsReady ? 'success' : 'default'"
             :disabled="libraryCacheIsAnalyzing || libraryCacheIsReady"
             :loading="libraryCacheIsAnalyzing"
@@ -19,12 +20,14 @@
 </template>
 
 <script setup>
-import { ref, inject, computed } from 'vue';
+import { ref, inject, computed, onMounted } from 'vue';
 import router from '@/router';
 import SetupLayout from '@/layouts/SetupLayout.vue';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons } from '@/modules/useGamepad';
+import { InterfaceSounds } from '@/modules/useInterfaceAudio';
 const { t } = useI18n();
 
 const libraryCacheIsAnalyzing = ref(false);
@@ -42,11 +45,15 @@ const buildLibraryCache = () => {
             data: [],
         }),
     );
+
+    updateControllerHints();
 };
 
 emitter.on('library-build-cache-response', (status) => {
     libraryCacheIsAnalyzing.value = false;
     libraryCacheIsReady.value = status === 'ready';
+
+    updateControllerHints();
 });
 
 emitter.on('library-build-cache-progress-response', (progress) => {
@@ -63,16 +70,55 @@ const handleContinue = () => {
 };
 
 const analyzeButtonLabel = computed(() => {
-    if (libraryCacheIsReady.value)
+    if (libraryCacheIsReady.value) {
         return t('setup.step2.libraryCache.analyzationDone', [
             libraryCacheProgressTotal.value,
         ]);
+    }
 
-    if (libraryCacheIsAnalyzing.value)
+    if (libraryCacheIsAnalyzing.value) {
         return t('setup.step2.libraryCache.analyzing', [
             libraryCacheProgressPercentage.value,
         ]);
+    }
 
     return t('setup.step2.libraryCache.analyze');
 });
+
+onMounted(() => {
+    updateControllerHints();
+});
+
+const updateControllerHints = () => {
+    if (window.spinshare.settings.IsConsole) {
+        let controllerHintItems = [];
+
+        if (!libraryCacheIsAnalyzing.value) {
+            if (!libraryCacheIsReady.value) {
+                controllerHintItems.push({
+                    sound: InterfaceSounds.BIG_CLICK,
+                    input: Buttons.A,
+                    label: t('setup.step2.libraryCache.analyze'),
+                    onclick: buildLibraryCache,
+                });
+            } else {
+                controllerHintItems.push({
+                    input: Buttons.X,
+                    label: t('general.continue'),
+                    onclick: handleContinue,
+                });
+            }
+            controllerHintItems.push({
+                input: Buttons.B,
+                label: t('general.back'),
+                onclick: handleBack,
+            });
+        }
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: false,
+            items: controllerHintItems,
+        });
+    }
+};
 </script>

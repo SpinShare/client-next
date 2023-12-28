@@ -9,7 +9,6 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css';
 import './assets/reset.scss';
 import '@mdi/font/scss/materialdesignicons.scss';
 
-// TODO: Make this use the config
 import App from './App.vue';
 import Router from '@/router';
 

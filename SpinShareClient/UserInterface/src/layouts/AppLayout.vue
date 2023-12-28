@@ -1,6 +1,6 @@
 <template>
     <section class="layout-app">
-        <SidebarNavigation />
+        <SidebarNavigation v-if="!window.spinshare.settings.IsConsole" />
 
         <main>
             <slot />
@@ -10,6 +10,17 @@
 
 <script setup>
 import SidebarNavigation from '@/components/SidebarNavigation.vue';
+import { inject, onMounted } from 'vue';
+const emitter = inject('emitter');
+
+onMounted(() => {
+    if (window.spinshare.settings.IsConsole) {
+        emitter.emit('console-update-controller-hints', {
+            showMenu: false,
+            items: [],
+        });
+    }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -23,5 +34,11 @@ import SidebarNavigation from '@/components/SidebarNavigation.vue';
     & > main {
         overflow-y: auto;
     }
+}
+</style>
+
+<style lang="scss" scoped v-if="settings.IsConsole">
+.layout-app {
+    grid-template-columns: 1fr;
 }
 </style>

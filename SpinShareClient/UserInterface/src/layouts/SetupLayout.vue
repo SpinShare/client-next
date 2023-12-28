@@ -33,7 +33,10 @@
                 <slot />
             </section>
 
-            <section class="actions">
+            <section
+                class="actions"
+                v-if="!window.spinshare.settings.IsConsole"
+            >
                 <SpinButton
                     color="transparent"
                     icon="arrow-left"
@@ -52,12 +55,17 @@
 </template>
 
 <script setup>
+import { inject, onMounted } from 'vue';
+
 const emit = defineEmits(['back', 'continue']);
+const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons } from '@/modules/useGamepad';
+import { InterfaceSounds } from '@/modules/useInterfaceAudio';
 const { t } = useI18n();
 
-defineProps({
+const props = defineProps({
     step: {
         type: Number,
         default: 0,
@@ -82,6 +90,36 @@ const handleBack = () => {
 const handleContinue = () => {
     emit('continue');
 };
+
+onMounted(() => {
+    if (window.spinshare.settings.IsConsole) {
+        let controllerHintItems = [];
+
+        if (props.step !== 2) {
+            controllerHintItems.push({
+                sound:
+                    props.step === 4
+                        ? InterfaceSounds.HERO
+                        : InterfaceSounds.CLICK,
+                input: Buttons.X,
+                label: t('general.continue'),
+                onclick: handleContinue,
+            });
+        }
+        if (props.step !== 0 && props.step !== 4) {
+            controllerHintItems.push({
+                input: Buttons.B,
+                label: t('general.back'),
+                onclick: handleBack,
+            });
+        }
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: false,
+            items: controllerHintItems,
+        });
+    }
+});
 </script>
 
 <style lang="scss">
@@ -165,6 +203,29 @@ const handleContinue = () => {
             display: flex;
             gap: 10px;
             justify-content: flex-end;
+        }
+    }
+}
+</style>
+
+<style lang="scss" v-if="window.spinshare.settings.IsConsole">
+.layout-setup {
+    padding: 20px 40px;
+    align-items: unset;
+
+    & main {
+        max-width: unset;
+        max-height: unset;
+        margin: unset;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        align-items: center;
+        width: 100%;
+
+        & > .content {
+            justify-self: center;
+            max-width: 600px;
+            gap: 50px;
         }
     }
 }

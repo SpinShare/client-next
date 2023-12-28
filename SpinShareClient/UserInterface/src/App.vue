@@ -11,7 +11,7 @@
         </transition>
     </router-view>
 
-    <ControllerHintsFooter v-if="isConsole" />
+    <ControllerHintsFooter v-if="window.spinshare.settings.IsConsole" />
 
     <UpdateBanner />
     <AlertMessage />
@@ -23,16 +23,15 @@ import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import UpdateBanner from '@/components/UpdateBanner.vue';
 import AlertMessage from '@/components/Common/AlertMessage.vue';
-import ControllerHintsFooter from '@/components/Console/ControllerHintsFooter.vue';
+import ControllerHintsFooter from '@/components/Console/ControllerHintsFooter/ControllerHintsFooter.vue';
 const emitter = inject('emitter');
 
 const router = useRouter();
 // eslint-disable-next-line no-undef
-const language = ref(SETTINGS.Language);
+const language = ref(window.spinshare.settings.Language);
 // eslint-disable-next-line no-undef
-const theme = ref(SETTINGS.Theme);
+const theme = ref(window.spinshare.settings.Theme);
 const transitionName = ref('default');
-const isConsole = ref(SETTINGS.IsConsole);
 
 window.external.receiveMessage((rawResponse) => {
     const response = JSON.parse(rawResponse);
@@ -102,7 +101,10 @@ router.beforeEach((to, from) => {
 }
 </style>
 
-<style lang="scss" v-if="isConsole">
+<style lang="scss" v-if="window.spinshare.settings.IsConsole">
+:root {
+    font-size: 18px;
+}
 #app {
     height: calc(100% - 60px);
 }

@@ -20,20 +20,55 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, inject } from 'vue';
 import PromoGrid from '@/components/Discover/PromoGrid.vue';
 import { FEATURED_PLAYLIST_ID, getPromos } from '@/api/api';
 import FeaturedGrid from '@/components/Discover/FeaturedGrid.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import router from '@/router';
 
+const emitter = inject('emitter');
 import { useI18n } from 'vue-i18n';
+import { Buttons } from '@/modules/useGamepad';
 const { t } = useI18n();
 
 const promos = ref([]);
 
 onMounted(async () => {
     promos.value = await getPromos();
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const focusableElements =
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const firstFocusableElement =
+            document.body.querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleOpenFeaturedPlaylist = () => {

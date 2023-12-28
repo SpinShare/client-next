@@ -7,6 +7,12 @@
             class="item"
             v-for="(promo, i) in promos"
             :key="i"
+            @click="
+                window.spinshare.settings.IsConsole
+                    ? handlePromoClick(promo.button)
+                    : null
+            "
+            :tabindex="window.spinshare.settings.IsConsole ? 0 : -1"
         >
             <div
                 class="cover"
@@ -19,6 +25,7 @@
                 </div>
             </div>
             <SpinButton
+                v-if="!window.spinshare.settings.IsConsole"
                 :icon="getButtonIcon(promo.button)"
                 :label="t('general.open')"
                 @click="handlePromoClick(promo.button)"
@@ -149,6 +156,36 @@ const handlePromoClick = (buttonData) => {
 @media screen and (max-width: 1000px) {
     .promo-grid {
         grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+.promo-grid {
+    & .item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        background: rgba(var(--colorBaseText), 0.07);
+        border-radius: 5px;
+        overflow: hidden;
+        gap: 0;
+
+        & .cover {
+            border-radius: 0;
+        }
+        & .meta {
+            display: grid;
+            gap: 8px;
+            padding: 20px;
+
+            & .type {
+                letter-spacing: 0.1rem;
+            }
+        }
+
+        &:focus {
+            outline: 3px solid silver;
+        }
     }
 }
 </style>

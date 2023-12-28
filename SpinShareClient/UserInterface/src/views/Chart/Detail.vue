@@ -179,6 +179,14 @@ const queueState = ref(null);
 onMounted(async () => {
     chart.value = await getChart(route.params.chartId);
     checkLibraryState();
+
+    if (window.spinshare.settings.IsConsole) {
+        emitter.emit('console-update-controller-hints', {
+            showMenu: false,
+            showBack: true,
+            items: [],
+        });
+    }
 });
 
 emitter.on('library-remove-response', () => {

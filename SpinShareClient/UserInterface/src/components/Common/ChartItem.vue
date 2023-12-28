@@ -3,8 +3,10 @@
         class="chart-item"
         :class="{ explicit: isExplicit }"
         @click.left="handleClick"
+        @keydown.enter="handleClick"
         @click.middle="handleAddToQueue"
         @mousedown.middle.prevent.stop
+        tabindex="0"
     >
         <div
             class="cover"
@@ -330,7 +332,7 @@ const handleAddToQueue = (event) => {
         & > * {
             transition: 0.2s ease-in-out all;
         }
-        &:not(:hover) > * {
+        &:not(:hover):not(:focus) > * {
             opacity: 0.4;
 
             &.cover::before {
@@ -354,14 +356,58 @@ const handleAddToQueue = (event) => {
             transition: 0.2s ease-in-out opacity;
             pointer-events: none;
         }
-        &:hover::after {
+        &:hover::after,
+        &:focus::after {
             opacity: 0;
         }
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
+    }
+}
+</style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+.chart-item {
+    height: 120px;
+    border-radius: 4px;
+    gap: 15px;
+
+    & .cover {
+        width: 100px;
+        height: 100px;
+
+        & .tag {
+            height: 30px;
+            width: 30px;
+            font-size: 1.15rem;
+        }
+    }
+    & .meta {
+        gap: 5px;
+
+        & .title {
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+
+        & .difficulties {
+            gap: 10px;
+            margin-top: 10px;
+
+            & > span {
+                padding: 6px 14px;
+                border-radius: 3px;
+                font-size: 0.75rem;
+            }
+        }
+    }
+
+    &:focus {
+        outline: 3px solid silver;
     }
 }
 </style>

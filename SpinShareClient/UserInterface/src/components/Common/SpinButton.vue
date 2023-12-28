@@ -3,6 +3,7 @@
         @click="emit('click')"
         :disabled="disabled"
         :class="`color-${color} ${reversed ? 'reversed' : ''}`"
+        tabindex="0"
     >
         <span
             v-if="loading"
@@ -150,6 +151,22 @@ button {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+</style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+button {
+    padding: 0 20px;
+    height: 55px;
+
+    & .mdi {
+        width: 32px;
+        height: 32px;
+        font-size: 24px;
+    }
+    &:focus {
+        outline: 3px solid silver;
     }
 }
 </style>
