@@ -33,7 +33,7 @@
 import { ref, onMounted, inject } from 'vue';
 import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
 import LibraryChartList from '@/layout_desktop/components/Library/LibraryChartList.vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 import SpinButton from '@/layout_desktop/components/Common/SpinButton.vue';
 const emitter = inject('emitter');
 

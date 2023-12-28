@@ -1,21 +1,9 @@
 <template>
     <router-view v-slot="{ Component, route }">
-        <transition
-            :name="transitionName"
-            mode="out-in"
-        >
-            <component
-                :is="Component"
-                :key="route.path"
-            />
+        <transition :name="transitionName" mode="out-in">
+            <component :is="Component" :key="route.path" />
         </transition>
     </router-view>
-
-    <ConsoleMenu
-        :open="isMenuOpen"
-        @close-menu="isMenuOpen = false"
-    />
-    <ConsoleHints @toggle-menu="isMenuOpen = !isMenuOpen" />
 
     <UpdateBanner />
     <AlertMessage />
@@ -27,8 +15,6 @@ import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import UpdateBanner from '@/layout_desktop/components/UpdateBanner.vue';
 import AlertMessage from '@/layout_desktop/components/Common/AlertMessage.vue';
-import ConsoleHints from '@/layout_console/components/ConsoleHints/ConsoleHints.vue';
-import ConsoleMenu from '@/layout_console/components/ConsoleMenu/ConsoleMenu.vue';
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -37,12 +23,12 @@ const language = ref(SETTINGS.Language);
 // eslint-disable-next-line no-undef
 const theme = ref(SETTINGS.Theme);
 const transitionName = ref('default');
-const isMenuOpen = ref(false);
 
 window.external.receiveMessage((rawResponse) => {
     const response = JSON.parse(rawResponse);
     emitter.emit(response.Command, response.Data);
 });
+
 emitter.on('settings-get-response', (setting) => {
     if (setting.key === 'app.theme') {
         setTheme(setting.data);
@@ -51,9 +37,11 @@ emitter.on('settings-get-response', (setting) => {
         setLanguage(setting.data);
     }
 });
+
 emitter.on('update-theme', (newTheme) => {
     setTheme(newTheme);
 });
+
 const setTheme = (newTheme) => {
     let osTheme = window.matchMedia('(prefers-color-scheme: dark').matches
         ? 'dark'
@@ -61,10 +49,12 @@ const setTheme = (newTheme) => {
     theme.value = newTheme ?? osTheme;
     document.documentElement.dataset.theme = theme.value;
 };
+
 const setLanguage = (newLanguage) => {
     let osLanguage = window.navigator.language?.substring(0, 2) ?? 'en';
     language.value = newLanguage ?? osLanguage;
 };
+
 router.beforeEach((to, from) => {
     let newTransitionName = 'default';
 
@@ -98,7 +88,6 @@ router.beforeEach((to, from) => {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 1fr auto;
     overflow: hidden;
 
     & > main {

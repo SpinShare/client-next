@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
-import Router from '@/router';
 
 import mitt from 'mitt';
 import FloatingVue from 'floating-vue';
@@ -11,21 +10,24 @@ import './assets/reset.scss';
 import '@mdi/font/scss/materialdesignicons.scss';
 
 // TODO: Make this use the config
-import AppDesktop from './layout_desktop/App.vue';
-import AppConsole from './layout_desktop/App.vue';
+import App from './layout_desktop/App.vue';
+import RoutesDesktop from '@/layout_desktop/router';
+import RoutesConsole from '@/layout_console/router';
 
-let app;
+let app = createApp(App);
+
 // eslint-disable-next-line no-undef
-if (CONFIG_ISCONSOLE) {
-    app = createApp(AppConsole);
+if (SETTINGS.IsConsole) {
+    app.use(RoutesConsole);
 } else {
-    app = createApp(AppDesktop);
+    app.use(RoutesDesktop);
 }
+
+
 
 app.config.globalProperties.window = window;
 app.provide('emitter', new mitt());
 app.use(FloatingVue);
-app.use(Router);
 
 // i18n
 import en from './i18n/en.json';

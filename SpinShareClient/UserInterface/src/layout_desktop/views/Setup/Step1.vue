@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
 import SpinInput from '@/layout_desktop/components/Common/SpinInput.vue';
 const emitter = inject('emitter');

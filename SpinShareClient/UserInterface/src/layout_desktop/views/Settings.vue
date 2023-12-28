@@ -161,7 +161,7 @@
 import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
 import SpinInput from '@/layout_desktop/components/Common/SpinInput.vue';
 import { ref, inject, onMounted } from 'vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';

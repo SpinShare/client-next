@@ -79,7 +79,7 @@ import { computed, onMounted, ref } from 'vue';
 import moment from 'moment';
 import { getUser } from '@/api/api';
 import UserItem from '@/layout_desktop/components/Common/UserItem.vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

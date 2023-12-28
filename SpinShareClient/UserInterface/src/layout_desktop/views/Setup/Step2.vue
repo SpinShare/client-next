@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref, inject, computed } from 'vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 import SetupLayout from '@/layout_desktop/layouts/SetupLayout.vue';
 const emitter = inject('emitter');
 

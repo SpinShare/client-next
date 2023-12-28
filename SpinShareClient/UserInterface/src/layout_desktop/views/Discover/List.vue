@@ -61,7 +61,7 @@ import {
     getNewCharts,
     getUpdatedCharts,
 } from '@/api/api';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 import { useRoute } from 'vue-router';
 import SpinButton from '@/layout_desktop/components/Common/SpinButton.vue';
 import SpinTabBar from '@/layout_desktop/components/Common/SpinTabBar.vue';

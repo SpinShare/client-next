@@ -39,7 +39,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 
 const props = defineProps({
     SpinShareReference: {

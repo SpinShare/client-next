@@ -24,8 +24,8 @@ import { ref, onMounted } from 'vue';
 import PromoGrid from '@/layout_desktop/components/Discover/PromoGrid.vue';
 import { FEATURED_PLAYLIST_ID, getPromos } from '@/api/api';
 import FeaturedGrid from '@/layout_desktop/components/Discover/FeaturedGrid.vue';
-import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
-import router from '@/layout_desktop/router';
+import AppLayout from '@/layout_console/layouts/AppLayout.vue';
+import router from '@/layout_console/router';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

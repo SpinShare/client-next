@@ -77,7 +77,7 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';

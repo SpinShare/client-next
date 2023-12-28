@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap');
+
+:root {
+  font-size: 14px;
+
+  --colorBase: 17, 17, 17;
+  --colorBase2: 34, 34, 34;
+  --colorBase3: 51, 51, 51;
+  --colorBaseText: 255,255,255;
+  --colorPrimary: 232, 77, 177;
+  --colorSecondary: 113, 79, 172;
+  --colorError: 255, 56, 99;
+  --colorSuccess: 61, 251, 132;
+}
+
+:root[data-theme='light'] {
+  --colorBase: 255, 255, 255;
+  --colorBase2: 238, 238, 238;
+  --colorBase3: 221, 221, 221;
+  --colorBaseText: 17, 17, 17;
+  --colorPrimary: 232, 77, 177;
+  --colorSuccess: 21, 211, 92;
+  --colorError: 255, 56, 99;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1rem;
+  background: rgb(var(--colorBase));
+  color: rgb(var(--colorBaseText));
+  overflow: hidden;
+}
+a {
+  color: rgb(var(--colorBaseText));
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* SCROLLBARS */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--colorBaseText)) rgb(var(--colorBase));
+}
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(var(--colorBase));
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--colorBaseText));
+  border-radius: 10px;
+  border: 5px solid rgb(var(--colorBase));
+}
+
+/* TRANSITIONS */
+.setup-enter-active {
+  transition: all 0.2s ease-out;
+}
+.setup-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.setup-enter-from,
+.setup-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.queue-enter-active {
+  transition: all 0.15s ease-out;
+}
+.queue-leave-active {
+  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.queue-enter-from,
+.queue-leave-to {
+  opacity: 0;
+}
+
+.default-enter-active {
+  transition: all 0.15s ease-out;
+}
+.default-leave-active {
+  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.default-enter-from,
+.default-leave-to {
+  transform: scale(0.975);
+  opacity: 0;
+}
+
+/* ANIMATIONS */
+@keyframes loadingLoop {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes listEntrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

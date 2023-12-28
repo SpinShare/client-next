@@ -19,7 +19,7 @@
 <script setup>
 import AppLayout from '@/layout_desktop/layouts/AppLayout.vue';
 import { VueComponent } from '@/assets/third-party-licenses.md';
-import router from '@/router';
+import router from '@/layout_desktop/router';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
