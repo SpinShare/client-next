@@ -10,24 +10,15 @@ import './assets/reset.scss';
 import '@mdi/font/scss/materialdesignicons.scss';
 
 // TODO: Make this use the config
-import App from './layout_desktop/App.vue';
-import RoutesDesktop from '@/layout_desktop/router';
-import RoutesConsole from '@/layout_console/router';
+import App from './App.vue';
+import Router from '@/router';
 
 let app = createApp(App);
-
-// eslint-disable-next-line no-undef
-if (SETTINGS.IsConsole) {
-    app.use(RoutesConsole);
-} else {
-    app.use(RoutesDesktop);
-}
-
-
 
 app.config.globalProperties.window = window;
 app.provide('emitter', new mitt());
 app.use(FloatingVue);
+app.use(Router);
 
 // i18n
 import en from './i18n/en.json';
@@ -64,14 +55,14 @@ window.external.receiveMessage((rawResponse) => {
 });
 
 // Components
-import SpinButton from '@/layout_desktop/components/Common/SpinButton.vue';
-import SpinLoader from '@/layout_desktop/components/Common/SpinLoader.vue';
-import SpinSwitch from '@/layout_desktop/components/Common/SpinSwitch.vue';
-import SpinHeader from '@/layout_desktop/components/Common/SpinHeader.vue';
-import SpinTabBar from '@/layout_desktop/components/Common/SpinTabBar.vue';
-import SpinTabItem from '@/layout_desktop/components/Common/SpinTabItem.vue';
-import SpinInput from '@/layout_desktop/components/Common/SpinInput.vue';
-import SpinSelect from '@/layout_desktop/components/Common/SpinSelect.vue';
+import SpinButton from '@/components/Common/SpinButton.vue';
+import SpinLoader from '@/components/Common/SpinLoader.vue';
+import SpinSwitch from '@/components/Common/SpinSwitch.vue';
+import SpinHeader from '@/components/Common/SpinHeader.vue';
+import SpinTabBar from '@/components/Common/SpinTabBar.vue';
+import SpinTabItem from '@/components/Common/SpinTabItem.vue';
+import SpinInput from '@/components/Common/SpinInput.vue';
+import SpinSelect from '@/components/Common/SpinSelect.vue';
 
 app.component('SpinButton', SpinButton);
 app.component('SpinLoader', SpinLoader);
