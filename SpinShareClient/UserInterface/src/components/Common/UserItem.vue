@@ -2,6 +2,7 @@
     <div
         class="user-item"
         @click.left="handleClick"
+        tabindex="0"
     >
         <img
             :src="avatar"
@@ -142,6 +143,22 @@ const handleClick = () => {
     &:hover {
         background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
+    }
+}
+</style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+.user-item {
+    & img {
+        width: 64px;
+        height: 64px;
+    }
+    & .meta {
+        gap: 6px;
+    }
+
+    &:focus {
+        outline: 3px solid silver;
     }
 }
 </style>
