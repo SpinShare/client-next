@@ -74,6 +74,16 @@ emitter.on('console-update-controller-hints', (hints) => {
     }
 });
 
+emitter.on('console-add-controller-hint', (hint) => {
+    // Don't add if ID already exists
+    if (items.value.some((item) => item.id === hint.id)) return;
+    items.value.unshift(hint);
+});
+
+emitter.on('console-remove-controller-hint', (hintId) => {
+    items.value = items.value.filter((item) => item.id !== hintId);
+});
+
 const gamepad = useGamepad();
 gamepad.on('buttonReleased', (buttonIndex) => {
     items.value.forEach((item) => {

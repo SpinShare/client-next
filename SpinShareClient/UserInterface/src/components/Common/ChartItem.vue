@@ -7,6 +7,24 @@
         @click.middle="handleAddToQueue"
         @mousedown.middle.prevent.stop
         tabindex="0"
+        @focus="
+            (event) => {
+                emitter.emit('console-add-controller-hint', {
+                    id: 'chart-item',
+                    sound: InterfaceSounds.BIG_CLICK,
+                    input: Buttons.X,
+                    label: t('general.addToQueue'),
+                    onclick: () => {
+                        handleAddToQueue(event);
+                    },
+                });
+            }
+        "
+        @blur="
+            () => {
+                emitter.emit('console-remove-controller-hint', 'chart-item');
+            }
+        "
     >
         <div
             class="cover"
@@ -83,6 +101,8 @@ import router from '@/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons } from '@/modules/useGamepad';
+import { InterfaceSounds } from '@/modules/useInterfaceAudio';
 const { t } = useI18n();
 
 const props = defineProps({

@@ -1,6 +1,9 @@
 import mitt from 'mitt';
 import { onMounted, onUnmounted, ref } from 'vue';
 
+export const focusableElements =
+    'button:not([tabindex="-1"]):not([disabled]), [href]:not([tabindex="-1"]):not([hidden]), input:not([tabindex="-1"]):not([disabled]), select:not([tabindex="-1"]):not([disabled]), textarea:not([tabindex="-1"]):not([disabled]), [tabindex]:not([tabindex="-1"]):not([hidden])';
+
 /**
  * Button Mapping for Xbox Controllers
  * @type {Readonly<{A: number, B: number, RIGHT_BUMPER: number, LEFT_STICK: number, RIGHT_TRIGGER: number, VIEW: number, RIGHT_STICK: number, LEFT_BUMPER: number, DPAD_UP: number, DPAD_DOWN: number, DPAD_RIGHT: number, X: number, Y: number, LEFT_TRIGGER: number, XBOX: number, MENU: number, DPAD_LEFT: number}>}

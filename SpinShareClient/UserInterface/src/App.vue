@@ -19,11 +19,15 @@
 
 <script setup>
 import './assets/app.scss';
-import { ref, inject } from 'vue';
+import { ref, inject, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import UpdateBanner from '@/components/UpdateBanner.vue';
 import AlertMessage from '@/components/Common/AlertMessage.vue';
 import ControllerHintsFooter from '@/components/Console/ControllerHintsFooter/ControllerHintsFooter.vue';
+import useGamepad, { Buttons, focusableElements } from '@/modules/useGamepad';
+import useInterfaceAudio, {
+    InterfaceSounds,
+} from '@/modules/useInterfaceAudio';
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -85,6 +89,102 @@ router.beforeEach((to, from) => {
 
     transitionName.value = newTransitionName;
 });
+
+if (window.spinshare.settings.IsConsole) {
+    const gamepad = useGamepad();
+    gamepad.on('buttonReleased', async (buttonIndex) => {
+        await nextTick();
+
+        let currentFocussedElement = document.body.querySelector('*:focus');
+        // Focus first element if focus is null
+        if (!currentFocussedElement) {
+            currentFocussedElement =
+                document.body.querySelector(focusableElements);
+        }
+
+        switch (buttonIndex) {
+            case Buttons.DPAD_UP:
+                moveFocus(currentFocussedElement, 'up');
+                break;
+            case Buttons.DPAD_DOWN:
+                moveFocus(currentFocussedElement, 'down');
+                break;
+            case Buttons.DPAD_LEFT:
+                moveFocus(currentFocussedElement, 'left');
+                break;
+            case Buttons.DPAD_RIGHT:
+                moveFocus(currentFocussedElement, 'right');
+                break;
+        }
+    });
+
+    /**
+     * Focusses the closest element in a direction
+     *
+     * @param currentElement
+     * @param direction
+     */
+    const moveFocus = (currentElement, direction) => {
+        const allFocussableElements = Array.from(
+            document.body.querySelectorAll(focusableElements),
+        ).filter((el) => {
+            return !!(
+                el.offsetWidth ||
+                el.offsetHeight ||
+                el.getClientRects().length
+            );
+        });
+
+        let closest;
+        let closestDistance = Infinity;
+        const currentRect = currentElement.getBoundingClientRect();
+
+        allFocussableElements.forEach((el) => {
+            if (el === currentElement) return;
+            let elRect = el.getBoundingClientRect();
+
+            // exclude elements outside of direction of focus
+            if (
+                (direction === 'up' && elRect.bottom > currentRect.top) ||
+                (direction === 'down' && elRect.top < currentRect.bottom) ||
+                (direction === 'left' && elRect.right > currentRect.left) ||
+                (direction === 'right' && elRect.left < currentRect.right)
+            ) {
+                return;
+            }
+
+            let distance;
+
+            switch (direction) {
+                case 'up':
+                    distance = currentRect.top - elRect.bottom;
+                    break;
+                case 'down':
+                    distance = elRect.top - currentRect.bottom;
+                    break;
+                case 'left':
+                    distance = currentRect.left - elRect.right;
+                    break;
+                case 'right':
+                    distance = elRect.left - currentRect.right;
+                    break;
+            }
+
+            if (distance < closestDistance) {
+                closest = el;
+                closestDistance = distance;
+            }
+        });
+
+        if (closest) {
+            currentElement.blur();
+            closest.focus();
+
+            const audio = useInterfaceAudio(InterfaceSounds.BUMP);
+            audio.playAudio();
+        }
+    };
+}
 </script>
 
 <style lang="scss">
