@@ -46,24 +46,41 @@ export default function useGamepad() {
     const emitter = mitt();
     let animationFrameId = null;
     let gamepad = null;
-
-    const isPressed = ref([]); // an array of boolean indicating whether each button is pressed
+    const isPressed = ref([]);
+    const pressTime = new Array(17).fill(0); // for holding press time of each button
+    const holdInterval = 0.2; // duration for button hold event timer in seconds
 
     const pollGamepad = () => {
         gamepad = navigator.getGamepads()[0];
         if (gamepad) {
+            let currentTime = performance.now(); // fetch current time
+
             for (let i = 0; i < gamepad.buttons.length; i++) {
-                isPressed[i] = isPressed[i] || false; // if undefined, initialize to false
+                isPressed[i] = isPressed[i] || false;
 
                 const button = gamepad.buttons[i];
+
                 if (button.pressed && !isPressed[i]) {
-                    // the button is pressed and it was not pressed before: emit buttonPressed event
                     emitter.emit('buttonPressed', i);
                     isPressed[i] = true;
-                } else if (!button.pressed && isPressed[i]) {
-                    // the button is not pressed and it was pressed before: emit buttonReleased event
+                    pressTime[i] = currentTime; // store button press time
+                }
+
+                if (
+                    button.pressed &&
+                    isPressed[i] &&
+                    currentTime - pressTime[i] > 500 &&
+                    (currentTime - pressTime[i]) % (holdInterval * 1000) < 10
+                ) {
+                    // the button has been held down for longer than declared holdInterval
+                    // fire 'buttonReleased' event every 'holdInterval' seconds
+                    emitter.emit('buttonReleased', i);
+                }
+
+                if (!button.pressed && isPressed[i]) {
                     emitter.emit('buttonReleased', i);
                     isPressed[i] = false;
+                    pressTime[i] = 0; // reset button press time
                 }
             }
         }
