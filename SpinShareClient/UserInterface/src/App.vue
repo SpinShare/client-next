@@ -11,6 +11,8 @@
         </transition>
     </router-view>
 
+    <ControllerHintsFooter v-if="isConsole" />
+
     <UpdateBanner />
     <AlertMessage />
 </template>
@@ -21,6 +23,7 @@ import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import UpdateBanner from '@/components/UpdateBanner.vue';
 import AlertMessage from '@/components/Common/AlertMessage.vue';
+import ControllerHintsFooter from '@/components/Console/ControllerHintsFooter.vue';
 const emitter = inject('emitter');
 
 const router = useRouter();
@@ -96,5 +99,11 @@ router.beforeEach((to, from) => {
     & > main {
         overflow-y: scroll;
     }
+}
+</style>
+
+<style lang="scss" v-if="isConsole">
+#app {
+    height: calc(100% - 60px);
 }
 </style>
