@@ -119,3 +119,4 @@ fabric.properties
 
 # Build UI
 SpinShareClient/Resources/wwwroot/
+ConsoleUI_References/**
