@@ -157,7 +157,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import { getChart } from '@/api/api';
 const emitter = inject('emitter');
@@ -170,6 +170,7 @@ import TabOverview from '@/components/Chart/Detail/TabOverview.vue';
 import TabReviews from '@/components/Chart/Detail/TabReviews.vue';
 import TabSpinPlays from '@/components/Chart/Detail/TabSpinPlays.vue';
 import TabPlaylists from '@/components/Chart/Detail/TabPlaylists.vue';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 
 const route = useRoute();
 const chart = ref(null);
@@ -181,10 +182,34 @@ onMounted(async () => {
     checkLibraryState();
 
     if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-chart-detail')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
         emitter.emit('console-update-controller-hints', {
-            showMenu: false,
+            showMenu: true,
             showBack: true,
-            items: [],
+            items: controllerHintItems,
         });
     }
 });
