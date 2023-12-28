@@ -119,4 +119,6 @@ fabric.properties
 
 # Build UI
 SpinShareClient/Resources/wwwroot/
-ConsoleUI_References/**
+ConsoleUI_References/
+
+.flatpak-builder/
