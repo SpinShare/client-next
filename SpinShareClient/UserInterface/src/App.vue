@@ -154,7 +154,6 @@ if (window.spinshare.settings.IsConsole) {
             }
 
             let distance;
-
             switch (direction) {
                 case 'up':
                     distance = currentRect.top - elRect.bottom;

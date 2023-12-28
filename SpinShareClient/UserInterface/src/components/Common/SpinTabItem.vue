@@ -3,6 +3,7 @@
         @click="emit('click')"
         class="spin-tab-item"
         :class="{ active: active }"
+        tabindex="0"
     >
         <slot />
     </div>
@@ -51,6 +52,31 @@ defineProps({
             background: rgb(var(--colorPrimary));
             transform: translateY(0);
         }
+    }
+}
+</style>
+
+<style lang="scss" scoped v-if="window.spinshare.settings.IsConsole">
+.spin-tab-item {
+    padding: 12px 25px;
+    border-radius: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &::after {
+        all: unset;
+    }
+
+    &:hover {
+        background: rgba(var(--colorBaseText), 0.07);
+    }
+    &.active {
+        background: #fff;
+        color: #000;
+    }
+    &:focus {
+        background: #fff;
+        color: #000;
     }
 }
 </style>

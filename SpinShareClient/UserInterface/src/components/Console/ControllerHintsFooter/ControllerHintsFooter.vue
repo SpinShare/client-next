@@ -3,7 +3,7 @@
         <main>
             <ControllerHint
                 v-if="showMenu"
-                inputLabel="STEAM"
+                inputLabel="+"
                 actionLabel="MENU"
             />
         </main>
