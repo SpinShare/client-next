@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, inject } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { useRoute } from 'vue-router';
 import { getUser } from '@/api/api';
@@ -101,7 +101,9 @@ import TabPlaylists from '@/components/User/Detail/TabPlaylists.vue';
 import TabReviews from '@/components/User/Detail/TabReviews.vue';
 import TabSpinPlays from '@/components/User/Detail/TabSpinPlays.vue';
 
+const emitter = inject('emitter');
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 const { t } = useI18n();
 
 const route = useRoute();
@@ -109,6 +111,38 @@ const user = ref(null);
 
 onMounted(async () => {
     user.value = await getUser(route.params.userId);
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-user-detail')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleReport = () => {

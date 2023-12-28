@@ -40,8 +40,9 @@ onMounted(async () => {
     if (window.spinshare.settings.IsConsole) {
         // Select first Element
         await nextTick();
-        const firstFocusableElement =
-            document.body.querySelector(focusableElements);
+        const firstFocusableElement = document.body
+            .querySelector('.view-discover')
+            .querySelector(focusableElements);
 
         if (firstFocusableElement) {
             firstFocusableElement.focus();

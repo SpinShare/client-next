@@ -79,22 +79,56 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { getPlaylist } from '@/api/api';
 
+const emitter = inject('emitter');
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 import AppLayout from '@/layouts/AppLayout.vue';
 import ChartList from '@/components/Common/ChartList.vue';
 import UserItem from '@/components/Common/UserItem.vue';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 
 const route = useRoute();
 const playlist = ref(null);
 
 onMounted(async () => {
     playlist.value = await getPlaylist(route.params.playlistId);
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-playlist-detail')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleAddToQueue = () => {
