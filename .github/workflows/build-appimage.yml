@@ -41,14 +41,14 @@ jobs:
           for file in $dependencies; do
               sudo cp $file SpinShare.AppDir/usr/lib
           done
-          
-          sudo chmod a+x -R *.*
       - name: Publish with .NET
         run: dotnet publish --configuration Release --runtime linux-x64 --self-contained true
       - name: Copy build to AppDir
         run: |
           sudo cp -r .build/appimage/* SpinShare.AppDir/
           sudo cp ./SpinShareClient/bin/Release/net7.0/linux-x64/publish/* SpinShare.AppDir/
+          
+          sudo chmod a+x -R *.*
       - name: Create AppImage
         run: ./appimagetool-x86_64.AppImage SpinShare.AppDir
       - name: Upload AppImage as artifact
