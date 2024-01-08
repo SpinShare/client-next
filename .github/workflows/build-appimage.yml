@@ -1,0 +1,54 @@
+name: Build AppImage
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'release/*'
+    paths:
+      - 'SpinShareClient/**'
+
+jobs:
+  build-appimage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
+      - name: Install appimagetool
+        run: |
+          wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+          chmod a+x appimagetool-x86_64.AppImage
+      - name: Install libwebkit2gtk, dependencies and copy to AppDir
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.0-37
+          
+          mkdir -p SpinShare.AppDir/usr/lib
+          
+          sudo cp /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.0.so.37 SpinShare.AppDir/usr/lib
+          dependencies=$(ldd /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.0.so.37 | grep "=> /" | awk '{print $3}')
+          for file in $dependencies; do
+              sudo cp $file SpinShare.AppDir/usr/lib
+          done
+      - name: Publish with .NET
+        run: dotnet publish --configuration Release --runtime linux-x64 --self-contained true
+      - name: Copy build to AppDir
+        run: |
+          cp -r .build/appimage/* SpinShare.AppDir/
+          cp ./SpinShareClient/bin/Release/net7.0/linux-x64/publish/* SpinShare.AppDir/
+      - name: Create AppImage
+        run: ./appimagetool-x86_64.AppImage SpinShare.AppDir
+      - name: Upload AppImage as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: SpinShare.AppImage
+          path: ./SpinShare*.AppImage
