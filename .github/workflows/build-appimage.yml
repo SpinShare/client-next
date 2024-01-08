@@ -29,8 +29,10 @@ jobs:
           chmod a+x appimagetool-x86_64.AppImage
       - name: Install libwebkit2gtk, dependencies and copy to AppDir
         run: |
+          sudo add-apt-repository universe
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.0-37
+          sudo apt install libfuse2
           
           mkdir -p SpinShare.AppDir/usr/lib
           
