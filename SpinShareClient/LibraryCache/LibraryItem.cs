@@ -80,7 +80,11 @@ public class LibraryItem
         var albumArtPath = Path.Combine(libraryPath, "AlbumArt", trackInfo.albumArtReference?.assetName + ".png");
         if (File.Exists(albumArtPath))
         {
-            Cover = await ThumbnailGenerator.ToBase64(albumArtPath);
+            // Generate Thumbnail or fail silently
+            try
+            {
+                Cover = await ThumbnailGenerator.ToBase64(albumArtPath);
+            } catch(Exception) {}
         }
     }
 }
