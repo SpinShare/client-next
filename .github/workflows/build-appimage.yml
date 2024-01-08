@@ -50,6 +50,8 @@ jobs:
           sudo cp .build/appimage/SpinShare.png SpinShare.AppDir/usr/share/icons
           sudo cp -r .build/appimage/* SpinShare.AppDir/
           sudo cp ./SpinShareClient/bin/Release/net7.0/linux-x64/publish/* SpinShare.AppDir/
+          
+          sudo chmod a+x -R **.*
       - name: Create AppImage
         run: |
           ARCH=x86_64 ./appimagetool-x86_64.AppImage -n SpinShare.AppDir
