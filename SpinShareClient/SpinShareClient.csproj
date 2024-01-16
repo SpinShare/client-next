@@ -4,8 +4,6 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net7.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<Version>3.0.11-preview</Version>
    		<!-- Generate embedded file manifest when using the Photino.NET StaticFileServer -->
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
@@ -19,6 +17,11 @@
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
 		<PublisherName>SpinSha.re</PublisherName>
 		<UseAppRoot>true</UseAppRoot>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PublishSingleFile>true</PublishSingleFile>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -31,7 +34,7 @@
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.9" Condition=" '$(GenerateEmbeddedFilesManifest)' == 'true' " />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Photino.NET" Version="2.4.0" />
+		<PackageReference Include="Photino.NET" Version="2.6.0" />
 		<PackageReference Include="Photino.NET.Server" Version="1.0.0" />
 		<PackageReference Include="Sentry" Version="3.33.0" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
@@ -98,4 +101,26 @@
 		<RemoveDir Directories="$(UiRoot)$(UiBuildOutput)" />
 	</Target>
 
+	<ItemGroup>
+		<Content
+			Include="lib/osx/*"
+			Link="%(Filename)%(Extension)"
+			CopyToOutputDirectory="PreserveNewest"
+			CopyToPublishDirectory="PreserveNewest"
+			Condition="$(RuntimeIdentifier.StartsWith('osx'))"/>
+
+		<Content
+			Include="lib/win/*"
+			Link="%(Filename)%(Extension)"
+			CopyToOutputDirectory="PreserveNewest"
+			CopyToPublishDirectory="PreserveNewest"
+			Condition="$(RuntimeIdentifier.StartsWith('win'))" />
+
+		<Content
+			Include="lib/linux/*"
+			Link="%(Filename)%(Extension)"
+			CopyToOutputDirectory="PreserveNewest"
+			CopyToPublishDirectory="PreserveNewest"
+			Condition="$(RuntimeIdentifier.StartsWith('linux'))" />
+	</ItemGroup>
 </Project>
