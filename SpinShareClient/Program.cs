@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,13 @@ public class Program
             options.EnableTracing = true;
         });
         
+        // Setting working directory
+        var entryAssemblyLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        if (entryAssemblyLocation != null)
+        {
+            Directory.SetCurrentDirectory(entryAssemblyLocation);
+        }
+
         // Single Instance Lock
         AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         if (!IsSingleInstance())
