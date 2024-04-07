@@ -1,240 +1,240 @@
 {
   "general": {
-    "open": "",
-    "save": "",
-    "close": "",
-    "download": "",
+    "open": "Apri",
+    "save": "Salva",
+    "close": "Chiudi",
+    "download": "Download",
     "select": "",
-    "back": "",
-    "continue": "",
-    "cancel": "",
-    "apply": "",
-    "addToQueue": "",
-    "openOnSpinShare": "",
-    "report": "",
-    "loading": "",
+    "back": "Indietro",
+    "continue": "Continua",
+    "cancel": "Annulla",
+    "apply": "Applica",
+    "addToQueue": "Aggiungi in coda",
+    "openOnSpinShare": "Apri su SpinSha.re",
+    "report": "Segnala",
+    "loading": "Caricamento",
     "pagination": {
-      "page": ""
+      "page": "Pagina #{0}"
     },
     "sidebar": {
-      "frontpage": "",
-      "search": "",
-      "new": "",
-      "updated": "",
-      "trending": "",
-      "library": "",
-      "downloads": "",
-      "settings": ""
+      "frontpage": "Scopri & In Evidenza",
+      "search": "Cerca",
+      "new": "Nuovo",
+      "updated": "Aggiornati",
+      "trending": "In tendenza",
+      "library": "Libreria",
+      "downloads": "Download",
+      "settings": "Impostazioni"
     },
     "downloadQueue": {
-      "title": "",
-      "clear": ""
+      "title": "Coda",
+      "clear": "Rimuovi tutti"
     },
     "error": {
-      "title": "",
-      "message": ""
+      "title": "Accidenti!",
+      "message": "Beh, questo è imbarazzante! Qualcosa da qualche parte è andato storto, quindi dobbiamo mostrarti questa innocua pagina di errore!"
     },
     "updateBanner": {
-      "title": "",
-      "textAvailable": "",
-      "textPrompt": "",
-      "update": "",
-      "maybeLater": ""
+      "title": "Nuovo aggiornamento del client disponibile",
+      "textAvailable": "Abbiamo apportato alcuni miglioramenti a SpinShare.",
+      "textPrompt": "Aggiorna il tuo client per ottenere l'ultima versione.",
+      "update": "Aggiorna",
+      "maybeLater": "Più tardi"
     }
   },
   "setup": {
-    "title": "",
+    "title": "Prima configurazione",
     "step0": {
-      "title": "",
-      "text": ""
+      "title": "Benvenuto!",
+      "text": "Benvenuto su SpinShare! Prima d'immergerci nell'esilarante mondo dei chart per Spin Rhythm XD, bisogna prima impostare alcune cose. Questo include l'impostazione delle cartelle del gioco, l'inizializzazione di una cache della libreria e la modifica di altre impostazioni."
     },
     "step1": {
-      "title": ""
+      "title": "Cartelle del gioco"
     },
     "step2": {
-      "title": "",
-      "text": "",
+      "title": "Cache della libreria",
+      "text": "Ora, inizializziamo la cache della libreria. La cache mantiene una base dati di tutti i chart installati e delle loro versioni. In questo modo, SpinShare può confermare rapidamente se hai installato un chart o se c'è una nuova versione in attesa.",
       "libraryCache": {
-        "analyze": "",
-        "analyzing": "",
-        "analyzationDone": ""
+        "analyze": "Analizza la libreria",
+        "analyzing": "Analisi libreria ({0}%)",
+        "analyzationDone": "{0} chart analizzati."
       }
     },
     "step3": {
-      "title": ""
+      "title": "Impostazioni Client"
     },
     "step4": {
-      "title": "",
-      "text": ""
+      "title": "Hai finito!",
+      "text": "Congratulazioni, hai concluso l'impostazione! La tua configurazione è completa e ora sei pronto per esplorare e installare qualche nuovo chart. Il tuo viaggio in Spin Rhythm XD sta per salire di livello con SpinShare!"
     }
   },
   "frontpage": {
-    "title": "",
+    "title": "Scopri",
     "featured": {
-      "title": "",
-      "seeMore": ""
+      "title": "In evidenza",
+      "seeMore": "Vedi altro"
     }
   },
   "search": {
     "bar": {
-      "placeholder": "",
+      "placeholder": "Cerca...",
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Chart",
+        "playlists": "Playlist",
+        "users": "Utenti"
       },
-      "search": ""
+      "search": "Cerca"
     },
     "filters": {
       "button": {
-        "label": ""
+        "label": "Filtro"
       },
       "difficulties": {
-        "label": "",
-        "easy": "",
-        "normal": "",
-        "hard": "",
-        "expert": "",
-        "XD": ""
+        "label": "Difficoltà incluse",
+        "easy": "Facile",
+        "normal": "Normale",
+        "hard": "Difficile",
+        "expert": "Esperto",
+        "XD": "XD"
       },
       "difficultyRatings": {
-        "label": "",
-        "lowest": "",
-        "highest": ""
+        "label": "Livello difficoltà",
+        "lowest": "Livello più basso",
+        "highest": "Livello più alto"
       },
-      "showExplicit": ""
+      "showExplicit": "Mostra canzoni esplicite"
     },
     "intro": {
-      "title": "",
-      "text": ""
+      "title": "Chart, playlist e ricerca utenti",
+      "text": "Seleziona se vuoi trovare chart, playlist o utenti, digita la tua ricerca e applica filtri per ottenere risultati precisi. Il tuo viaggio ritmico inizia qui!"
     }
   },
   "discover": {
     "tabBar": {
-      "new": "",
-      "updated": "",
-      "hotThisWeek": "",
-      "hotThisMonth": ""
+      "new": "Nuovi",
+      "updated": "Aggiornati",
+      "hotThisWeek": "Di tendenza questa settimana",
+      "hotThisMonth": "Di tendenza questo mese"
     }
   },
   "library": {
-    "title": "",
-    "browseFiles": "",
-    "importBackup": "",
-    "rebuildCache": "",
+    "title": "Libreria",
+    "browseFiles": "Esplora file",
+    "importBackup": "Importa backup",
+    "rebuildCache": "Ricostruisci la cache",
     "importBackupError": {
       "localBackupHasNoCharts": {
-        "title": "",
-        "message": ""
+        "title": "Backup locale non valido",
+        "message": "Impossibile aggiungere il backup locale alla libreria in quanto non contiene un chart di Spin Rhythm XD valido."
       }
     }
   },
   "settings": {
-    "title": "",
-    "openSettings": "",
+    "title": "Impostazioni",
+    "openSettings": "Apri cartella impostazioni",
     "updates": {
-      "label": "",
-      "check": ""
+      "label": "Aggiornamenti software",
+      "check": "Controlla per aggiornamenti"
     },
     "gamePath": {
-      "label": "",
-      "hint": "",
-      "browseManually": "",
-      "detectAutomatically": ""
+      "label": "Percorso del gioco",
+      "hint": "Questo è il percorso dell'installazione del gioco",
+      "browseManually": "Esplora manualmente",
+      "detectAutomatically": "Rileva automaticamente"
     },
     "customsPath": {
-      "label": "",
-      "hint": ""
+      "label": "Percorso cartella custom",
+      "hint": "Questa è la cartella dove i tuoi custom chart si trovano. Non dimenticare d'impostare l'opzione di lancio 'custom_path [FULLPATH]' se vuoi che la tua libreria sia da qualche altra parte."
     },
     "language": {
-      "label": "",
-      "credits": ""
+      "label": "Lingua",
+      "credits": "Tradotto da Edge"
     },
     "theme": {
-      "label": "",
-      "hint": "",
-      "dark": "",
-      "light": ""
+      "label": "Tema",
+      "hint": "Salva per applicare il tuo tema",
+      "dark": "Scuro",
+      "light": "Chiaro"
     },
     "detectDLCs": {
-      "label": "",
-      "hint": "",
-      "detect": "",
-      "detectedDLCs": ""
+      "label": "Rileva DLC installati",
+      "hint": "Analizzando la tua installazione di gioco, possiamo confermare quali DLC hai acquistato. Questo consentirà l'accesso a chart basati su canzoni DLC.",
+      "detect": "Rileva",
+      "detectedDLCs": "DLC installati rilevati"
     },
     "consoleEnabled": {
       "label": "",
       "hint": ""
     },
     "thirdPartyLicenses": {
-      "label": "",
-      "hint": "",
-      "seeLicenses": ""
+      "label": "Licenze di terze parti",
+      "hint": "Questo progetto è stato creato con librerie di terze parti.",
+      "seeLicenses": "Vedi licenze"
     }
   },
   "chart": {
     "state": {
-      "updateAvailable": "",
-      "updated": "",
-      "downloading": ""
+      "updateAvailable": "Aggiornamento disponibile",
+      "updated": "Installato e aggiornato",
+      "downloading": "Download in corso"
     },
     "detail": {
       "actions": {
-        "remove": "",
-        "update": "",
-        "play": "",
-        "queued": "",
-        "downloading": "",
+        "remove": "Rimuovi",
+        "update": "Aggiorna",
+        "play": "Gioca",
+        "queued": "In coda",
+        "downloading": "Download in corso",
         "playPreview": "",
         "stopPreview": ""
       },
       "tabBar": {
-        "overview": "",
-        "reviews": "",
-        "spinPlays": "",
-        "playlists": ""
+        "overview": "Descrizione",
+        "reviews": "Recensioni",
+        "spinPlays": "SpinPlays",
+        "playlists": "Playlist"
       },
       "overview": {
         "views": {
-          "label": ""
+          "label": "Visualizzazioni"
         },
         "downloads": {
-          "label": ""
+          "label": "Download"
         },
         "explicit": {
-          "label": "",
-          "noExplicitContent": "",
-          "explicitContent": ""
+          "label": "Esplicito",
+          "noExplicitContent": "Nessun contenuto esplicito",
+          "explicitContent": "Contenuto esplicito"
         },
         "uploaded": {
-          "label": ""
+          "label": "Pubblicato"
         },
         "lastUpdate": {
-          "label": ""
+          "label": "Ultimo aggiornamento"
         }
       }
     }
   },
   "playlist": {
-    "count": "",
+    "count": "{0} chart",
     "official": {
-      "tag": "",
-      "tooltip": ""
+      "tag": "Ufficiale",
+      "tooltip": "Questa è una playlist del team SpinShare."
     }
   },
   "user": {
-    "verified": "",
-    "supporter": "",
+    "verified": "Verificato",
+    "supporter": "Sostenitore",
     "review": {
-      "recommended": ""
+      "recommended": "Consigliato"
     },
     "detail": {
       "tabBar": {
-        "overview": "",
-        "charts": "",
-        "playlists": "",
-        "reviews": "",
-        "spinPlays": ""
+        "overview": "Descrizione",
+        "charts": "Chart ({0})",
+        "playlists": "Playlist ({0})",
+        "reviews": "Recensioni ({0})",
+        "spinPlays": "SpinPlays ({0})"
       }
     }
   }
