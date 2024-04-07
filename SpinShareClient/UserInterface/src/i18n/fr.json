@@ -164,7 +164,7 @@
     },
     "consoleEnabled": {
       "label": "Interface de la console",
-      "hint": "Interface Gamepad (ne fonctionne pas encore sur SteamDeck). Nécessite un redémarrage complet."
+      "hint": "Interface Gamepad (ne fonctionne pas encore sur Steam Deck). Nécessite un redémarrage complet."
     },
     "thirdPartyLicenses": {
       "label": "Licences tierces",
@@ -185,8 +185,8 @@
         "play": "Jouer",
         "queued": "En file d'attente",
         "downloading": "Téléchargement en cours",
-        "playPreview": "",
-        "stopPreview": ""
+        "playPreview": "Lire l'aperçu",
+        "stopPreview": "Arrêter l'aperçu"
       },
       "tabBar": {
         "overview": "Aperçu",
