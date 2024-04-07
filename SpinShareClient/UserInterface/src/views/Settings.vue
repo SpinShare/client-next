@@ -1,21 +1,34 @@
 <template>
     <AppLayout>
         <section class="view-settings">
-            <SpinHeader
-                :label="t('settings.title')"
-            >
+            <SpinHeader :label="t('settings.title')">
                 <SpinButton
                     @click="openSettingsFolder"
                     icon="folder"
+                    v-if="!window.spinshare.settings.IsConsole"
                     v-tooltip="t('settings.openSettings')"
                 />
                 <SpinButton
                     icon="content-save"
                     :label="t('general.save')"
+                    v-if="!window.spinshare.settings.IsConsole"
                     :color="settingsDirty ? 'bright' : 'default'"
                     @click="handleSave"
                 />
             </SpinHeader>
+            <SpinInput
+                :label="t('settings.updates.label')"
+                :hint="currentVersion"
+                type="horizontal"
+            >
+                <SpinButton
+                    icon="update"
+                    :label="t('settings.updates.check')"
+                    :loading="checkingForUpdates"
+                    :disabled="savingSettings || checkingForUpdates"
+                    @click="checkForUpdates"
+                />
+            </SpinInput>
             <SpinInput
                 :label="t('settings.gamePath.label')"
                 type="path"
@@ -75,6 +88,8 @@
                     >
                         <option value="en">English</option>
                         <option value="de">German</option>
+                        <option value="nl">Dutch</option>
+                        <option value="es">Spanish</option>
                         <option value="speen">Speen</option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
@@ -91,8 +106,12 @@
                         @change="settingsDirty = true"
                         :disabled="savingSettings"
                     >
-                        <option value="dark">{{ t('settings.theme.dark') }}</option>
-                        <option value="light">{{ t('settings.theme.light') }}</option>
+                        <option value="dark">
+                            {{ t('settings.theme.dark') }}
+                        </option>
+                        <option value="light">
+                            {{ t('settings.theme.light') }}
+                        </option>
                     </select>
                     <span class="mdi mdi-chevron-down"></span>
                 </div>
@@ -116,29 +135,15 @@
                 v-if="detectedDlcs.length > 0 && !isDetectingDlcs"
             >
             </SpinInput>
-            <!--
             <SpinInput
-                label="Silent Queue"
-                hint="Disables the automatic reveal of the download sidebar when adding new charts to the queue"
+                :label="t('settings.consoleEnabled.label')"
+                :hint="t('settings.consoleEnabled.hint')"
                 type="horizontal"
             >
                 <SpinSwitch
-                    v-model="settingSilentQueue"
+                    v-model="settingConsoleEnabled"
                     @change="settingsDirty = true"
                     :disabled="savingSettings"
-                />
-            </SpinInput> -->
-            <SpinInput
-                :label="t('settings.updates.label')"
-                :hint="currentVersion"
-                type="horizontal"
-            >
-                <SpinButton
-                    icon="update"
-                    :label="t('settings.updates.check')"
-                    :loading="checkingForUpdates"
-                    :disabled="savingSettings || checkingForUpdates"
-                    @click="checkForUpdates"
                 />
             </SpinInput>
             <SpinInput
@@ -156,42 +161,96 @@
 </template>
 
 <script setup>
-import AppLayout from "@/layouts/AppLayout.vue";
-import SpinInput from "@/components/Common/SpinInput.vue";
-import { ref, inject, onMounted } from 'vue';
-import router from "@/router";
+import AppLayout from '@/layouts/AppLayout.vue';
+import SpinInput from '@/components/Common/SpinInput.vue';
+import { ref, inject, onMounted, nextTick } from 'vue';
+import router from '@/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 const { t } = useI18n();
 
 const settingLibraryPath = ref('');
 const settingGamePath = ref('');
 const settingLanguage = ref('en');
 const settingTheme = ref('dark');
+const settingConsoleEnabled = ref(false);
 const savingSettings = ref(false);
 const settingsDirty = ref(false);
 const isDetectingDlcs = ref(false);
 const detectedDlcs = ref([]);
-const currentVersion = ref("0.0.0");
+const currentVersion = ref('0.0.0');
 const checkingForUpdates = ref(false);
 
-onMounted(() => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-get-full",
-        data: "",
-    }));
+onMounted(async () => {
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-get-full',
+            data: '',
+        }),
+    );
 
-    window.external.sendMessage(JSON.stringify({
-        command: "update-get-version",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'update-get-version',
+            data: '',
+        }),
+    );
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-settings')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.Y,
+            label: t('settings.openSettings'),
+            onclick: () => {
+                openSettingsFolder();
+            },
+        });
+
+        controllerHintItems.push({
+            input: Buttons.X,
+            label: t('general.save'),
+            onclick: () => {
+                handleSave();
+            },
+        });
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 emitter.on('library-get-path-response', (path) => {
     settingsDirty.value = true;
-    
-    if(path !== '') {
+
+    if (path !== '') {
         settingLibraryPath.value = path;
     }
 });
@@ -199,7 +258,7 @@ emitter.on('library-get-path-response', (path) => {
 emitter.on('game-get-path-response', (path) => {
     settingsDirty.value = true;
 
-    if(path !== '') {
+    if (path !== '') {
         settingGamePath.value = path;
     }
 });
@@ -215,7 +274,7 @@ emitter.on('settings-get-full-response', (settings) => {
 });
 
 emitter.on('game-detect-dlcs-response', (dlcs) => {
-    if(dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
+    if (dlcs) detectedDlcs.value = Object.keys(dlcs) ?? [];
     isDetectingDlcs.value = false;
 });
 
@@ -223,59 +282,73 @@ emitter.on('update-get-version-response', (version) => {
     currentVersion.value = version;
 });
 
-emitter.on('update-get-latest-response', (version) => {
+emitter.on('update-get-latest-response', () => {
     checkingForUpdates.value = false;
 });
 
 const openSettingsFolder = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-open-in-explorer",
-        data: "",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-open-in-explorer',
+            data: '',
+        }),
+    );
 };
 
 const selectLibraryPathManually = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-select-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-select-path',
+            data: [],
+        }),
+    );
 };
 const getLibraryPathAutomatically = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-get-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-get-path',
+            data: [],
+        }),
+    );
 };
 
 const selectGamePathManually = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "game-select-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-select-path',
+            data: [],
+        }),
+    );
 };
 const getGamePathAutomatically = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "game-get-path",
-        data: [],
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-get-path',
+            data: [],
+        }),
+    );
 };
 
 const detectDLCs = () => {
     isDetectingDlcs.value = true;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "game-detect-dlcs",
-        data: [],
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'game-detect-dlcs',
+            data: [],
+        }),
+    );
 };
 
 const checkForUpdates = () => {
     checkingForUpdates.value = true;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "update-get-latest",
-        data: "",
-    }));
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'update-get-latest',
+            data: '',
+        }),
+    );
 };
 
 const openLicenses = () => {
@@ -285,27 +358,40 @@ const openLicenses = () => {
 };
 
 const handleSave = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-set",
-        data: [{
-            key: 'game.path',
-            value: settingGamePath.value,
-        },{
-            key: 'library.path',
-            value: settingLibraryPath.value,
-        },{
-            key: 'app.language',
-            value: settingLanguage.value,
-        },{
-            key: 'app.theme',
-            value: settingTheme.value,
-        },],
-    }));
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "settings-get",
-        data: "app.language",
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-set',
+            data: [
+                {
+                    key: 'game.path',
+                    value: settingGamePath.value,
+                },
+                {
+                    key: 'library.path',
+                    value: settingLibraryPath.value,
+                },
+                {
+                    key: 'app.language',
+                    value: settingLanguage.value,
+                },
+                {
+                    key: 'app.theme',
+                    value: settingTheme.value,
+                },
+                {
+                    key: 'app.console.enabled',
+                    value: settingConsoleEnabled.value,
+                },
+            ],
+        }),
+    );
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'settings-get',
+            data: 'app.language',
+        }),
+    );
 
     savingSettings.value = true;
 };
@@ -315,10 +401,12 @@ const setSettings = (settings) => {
     settingTheme.value = settings['app.theme'];
     settingLibraryPath.value = settings['library.path'];
     settingGamePath.value = settings['game.path'];
+    settingConsoleEnabled.value = settings['app.console.enabled'];
 
     emitter.emit('update-theme', settings['app.theme']);
-    
-    if(settings['dlcs']) detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
+
+    if (settings['dlcs'])
+        detectedDlcs.value = Object.keys(settings['dlcs']) ?? [];
     isDetectingDlcs.value = false;
 };
 </script>

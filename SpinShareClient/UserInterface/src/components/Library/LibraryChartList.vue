@@ -13,13 +13,13 @@
 </template>
 
 <script setup>
-import LibraryChartItem from "@/components/Library/LibraryChartItem.vue";
+import LibraryChartItem from '@/components/Library/LibraryChartItem.vue';
 
 defineProps({
     charts: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 </script>
 
@@ -51,5 +51,10 @@ defineProps({
     .chart-list {
         grid-template-columns: 1fr;
     }
+}
+
+.ui-console .chart-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
 }
 </style>

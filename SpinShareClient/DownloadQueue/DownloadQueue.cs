@@ -105,6 +105,18 @@ public class DownloadQueue
         return Queue.Count(x => x.State != DownloadState.Done);
     }
 
+    public async Task RemoveFromQueue(PhotinoWindow? sender, int queueId)
+    {
+        var queueItem = Queue.Find(x => x.ID == queueId);
+
+        if (queueItem.State == DownloadState.Queued)
+        {
+            Queue.Remove(queueItem);
+        }
+
+        return;
+    }
+
     /// <summary>
     /// Adds a <see cref="DownloadItem"/> to the <see cref="DownloadQueue.Queue"/>
     /// </summary>

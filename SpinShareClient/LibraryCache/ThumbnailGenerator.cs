@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Sentry;
 
 namespace SpinShareClient.LibraryCache;
 
@@ -21,25 +22,40 @@ public static class ThumbnailGenerator
     /// <exception cref="FileNotFoundException"><c>imagePath</c> is not a valid file</exception>
     public static async Task<string> ToBase64(string imagePath)
     {
-        if (string.IsNullOrEmpty(imagePath))
+        try
         {
-            throw new ArgumentException("Image path must be provided.", nameof(imagePath));
-        }
+            if (string.IsNullOrEmpty(imagePath))
+            {
+                throw new ArgumentException("Image path must be provided.", nameof(imagePath));
+            }
 
-        if (!File.Exists(imagePath))
+            if (!File.Exists(imagePath))
+            {
+                throw new FileNotFoundException($"No image found at {imagePath}");
+            }
+
+            using var image = await Image.LoadAsync(imagePath);
+            image.Mutate(x => x.Resize(96, 96));
+
+            using var memoryStream = new MemoryStream();
+            await image.SaveAsJpegAsync(memoryStream);
+
+            var base64String = Convert.ToBase64String(memoryStream.ToArray());
+
+            // Return Data URL
+            return $"data:image/jpeg;base64,{base64String}";
+        }
+        catch (UnknownImageFormatException)
         {
-            throw new FileNotFoundException($"No image found at {imagePath}");
+            // Transparent 1x1 png as fallback
+            return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
         }
-
-        using var image = await Image.LoadAsync(imagePath);
-        image.Mutate(x => x.Resize(96, 96));
-
-        using var memoryStream = new MemoryStream();
-        await image.SaveAsJpegAsync(memoryStream);
-
-        var base64String = Convert.ToBase64String(memoryStream.ToArray());
-
-        // Return Data URL
-        return $"data:image/jpeg;base64,{base64String}";
+        catch (Exception ex)
+        {
+            SentrySdk.CaptureException(ex);
+            
+            // Transparent 1x1 png as fallback
+            return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+        }
     }
 }

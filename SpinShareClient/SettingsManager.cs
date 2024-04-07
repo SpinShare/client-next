@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -62,16 +61,17 @@ public class SettingsManager
     /// Returns a value by key
     /// </summary>
     /// <param name="key">Settings key</param>
+    /// <param name="defaultValue">Optional default return value if the setting does not exist</param>
     /// <typeparam name="T">Type of the value</typeparam>
     /// <returns>Value or the default value for the type</returns>
-    public T? Get<T>(string key)
+    public T? Get<T>(string key, T? defaultValue = default)
     {
         if (_settings.TryGetValue(key, out var value))
         {
             return (T)Convert.ChangeType(value, typeof(T))!;
         }
 
-        return default;
+        return defaultValue;
     }
 
     /// <summary>
@@ -212,10 +212,18 @@ public class SettingsManager
         switch (Environment.OSVersion.Platform)
         {
             case PlatformID.Unix:
-                gamePath = Path.Combine(
+                var defaultLinuxLocation = Path.Combine(
                     Environment.GetEnvironmentVariable("HOME") ?? "",
                     ".steam", "steam", "steamapps", "common", "Spin Rhythm"
                 );
+                if (Directory.Exists(defaultLinuxLocation)) gamePath = defaultLinuxLocation;
+                
+                // The game may be installed on an SD card on SteamDeck, which will be installed in /run/media instead
+                var steamdeckSdCardLinuxLocation = "/" + Path.Combine(
+                "run", "media", "deck", "SteamDeck SD Car", "steamapps", "common", "Spin Rhythm"
+                );
+                if (Directory.Exists(steamdeckSdCardLinuxLocation)) gamePath = steamdeckSdCardLinuxLocation;
+                
                 break;
 
             case PlatformID.Win32NT:
@@ -237,5 +245,10 @@ public class SettingsManager
         }
 
         return Directory.Exists(gamePath) ? gamePath : null;
+    }
+
+    public static bool GetIsSteamDeck()
+    {
+        return Environment.OSVersion.VersionString.Contains("SteamOS");
     }
 }

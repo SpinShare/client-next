@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.Net.Mime;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -38,7 +40,7 @@ public class CommandSettingsSet : ICommand
             if (key != null && value != null)
             {
                 _logger.LogInformation("Writing Setting: {Key}", key);
-            
+
                 _settingsManager.Set(key, value);
             }
         }

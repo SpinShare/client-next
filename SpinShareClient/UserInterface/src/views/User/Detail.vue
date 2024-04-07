@@ -5,16 +5,33 @@
             v-if="user"
         >
             <header>
-                <img :src="user.avatar" alt="User Avatar" />
+                <img
+                    :src="user.avatar"
+                    alt="User Avatar"
+                />
                 <div class="meta">
                     <div class="username">{{ user.username }}</div>
-                    <div class="pronouns" v-if="user.pronouns">{{ user.pronouns }}</div>
-                    <div class="tags" v-if="user.isPatreon || user.isVerified">
-                        <span class="tag tag-verified" v-if="user.isVerified">
+                    <div
+                        class="pronouns"
+                        v-if="user.pronouns"
+                    >
+                        {{ user.pronouns }}
+                    </div>
+                    <div
+                        class="tags"
+                        v-if="user.isPatreon || user.isVerified"
+                    >
+                        <span
+                            class="tag tag-verified"
+                            v-if="user.isVerified"
+                        >
                             <span class="mdi mdi-check"></span>
                             <span>{{ t('user.verified') }}</span>
                         </span>
-                        <span class="tag tag-supporter" v-if="user.isPatreon">
+                        <span
+                            class="tag tag-supporter"
+                            v-if="user.isPatreon"
+                        >
                             <span class="mdi mdi-heart"></span>
                             <span>{{ t('user.supporter') }}</span>
                         </span>
@@ -74,17 +91,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import AppLayout from "@/layouts/AppLayout.vue";
+import { ref, onMounted, nextTick, inject } from 'vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import { useRoute } from 'vue-router';
-import {getUser} from "@/api/api";
-import TabOverview from "@/components/User/Detail/TabOverview.vue";
-import TabCharts from "@/components/User/Detail/TabCharts.vue";
-import TabPlaylists from "@/components/User/Detail/TabPlaylists.vue";
-import TabReviews from "@/components/User/Detail/TabReviews.vue";
-import TabSpinPlays from "@/components/User/Detail/TabSpinPlays.vue";
+import { getUser } from '@/api/api';
+import TabOverview from '@/components/User/Detail/TabOverview.vue';
+import TabCharts from '@/components/User/Detail/TabCharts.vue';
+import TabPlaylists from '@/components/User/Detail/TabPlaylists.vue';
+import TabReviews from '@/components/User/Detail/TabReviews.vue';
+import TabSpinPlays from '@/components/User/Detail/TabSpinPlays.vue';
 
+const emitter = inject('emitter');
 import { useI18n } from 'vue-i18n';
+import { Buttons, focusableElements } from '@/modules/useGamepad';
 const { t } = useI18n();
 
 const route = useRoute();
@@ -92,20 +111,56 @@ const user = ref(null);
 
 onMounted(async () => {
     user.value = await getUser(route.params.userId);
+
+    if (window.spinshare.settings.IsConsole) {
+        // Select first Element
+        await nextTick();
+        const firstFocusableElement = document.body
+            .querySelector('.view-user-detail')
+            .querySelector(focusableElements);
+
+        if (firstFocusableElement) {
+            firstFocusableElement.focus();
+        }
+
+        // Controller Hints
+        let controllerHintItems = [];
+
+        controllerHintItems.push({
+            input: Buttons.A,
+            label: t('general.select'),
+            onclick: () => {
+                const focussedElement = document.body.querySelector('*:focus');
+                if (focussedElement) {
+                    focussedElement.click();
+                }
+            },
+        });
+
+        emitter.emit('console-update-controller-hints', {
+            showMenu: true,
+            showBack: true,
+            items: controllerHintItems,
+        });
+    }
 });
 
 const handleReport = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/report/user/" + user.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/report/user/' + user.value.id,
+        }),
+    );
 };
 
 const handleOpenInBrowser = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: "https://spinsha.re/user/" + user.value.id,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: 'https://spinsha.re/user/' + user.value.id,
+        }),
+    );
 };
 
 const currentTab = ref(0);
@@ -155,7 +210,7 @@ const handleTabChange = (i) => {
             }
             & .pronouns {
                 font-size: 0.75rem;
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
             }
             & .tags {
                 margin-top: 2px;

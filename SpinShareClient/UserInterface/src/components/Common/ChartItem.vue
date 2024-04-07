@@ -1,22 +1,53 @@
 <template>
     <div
         class="chart-item"
-        :class="{'explicit': isExplicit}"
+        :class="{ explicit: isExplicit }"
         @click.left="handleClick"
+        @keydown.enter="handleClick"
         @click.middle="handleAddToQueue"
         @mousedown.middle.prevent.stop
+        tabindex="0"
+        @focus="
+            (event) => {
+                emitter.emit('console-add-controller-hint', {
+                    id: 'chart-item',
+                    sound: InterfaceSounds.BIG_CLICK,
+                    input: Buttons.X,
+                    label: t('general.addToQueue'),
+                    onclick: () => {
+                        handleAddToQueue(event);
+                    },
+                });
+            }
+        "
+        @blur="
+            () => {
+                emitter.emit('console-remove-controller-hint', 'chart-item');
+            }
+        "
     >
-        <div class="cover" :style="`background-image: url(${ cover })`">
+        <div
+            class="cover"
+            :style="`background-image: url(${cover})`"
+        >
             <template v-if="libraryState">
                 <span
-                    v-if="queueState === null && libraryState.installed && !libraryState.updated"
+                    v-if="
+                        queueState === null &&
+                        libraryState.installed &&
+                        !libraryState.updated
+                    "
                     v-tooltip="t('chart.state.updateAvailable')"
                     class="tag tag-installed"
                 >
                     <span class="mdi mdi-update"></span>
                 </span>
                 <span
-                    v-if="queueState === null && libraryState.installed && libraryState.updated"
+                    v-if="
+                        queueState === null &&
+                        libraryState.installed &&
+                        libraryState.updated
+                    "
                     v-tooltip="t('chart.state.updated')"
                     class="tag tag-updated"
                 >
@@ -35,23 +66,27 @@
             <div class="title">{{ title }}</div>
             <div class="artist">{{ artist }} &bull; {{ charter }}</div>
             <div class="difficulties">
-                <span :class="{ 'active': hasEasyDifficulty }">
+                <span :class="{ active: hasEasyDifficulty }">
                     <span>E</span>
                     <span v-if="hasEasyDifficulty">{{ easyDifficulty }}</span>
                 </span>
-                <span :class="{ 'active': hasNormalDifficulty }">
+                <span :class="{ active: hasNormalDifficulty }">
                     <span>N</span>
-                    <span v-if="hasNormalDifficulty">{{ normalDifficulty }}</span>
+                    <span v-if="hasNormalDifficulty">{{
+                        normalDifficulty
+                    }}</span>
                 </span>
-                <span :class="{ 'active': hasHardDifficulty }">
+                <span :class="{ active: hasHardDifficulty }">
                     <span>H</span>
                     <span v-if="hasHardDifficulty">{{ hardDifficulty }}</span>
                 </span>
-                <span :class="{ 'active': hasExtremeDifficulty }">
+                <span :class="{ active: hasExtremeDifficulty }">
                     <span>EX</span>
-                    <span v-if="hasExtremeDifficulty">{{ expertDifficulty }}</span>
+                    <span v-if="hasExtremeDifficulty">{{
+                        expertDifficulty
+                    }}</span>
                 </span>
-                <span :class="{ 'active': hasXDDifficulty }">
+                <span :class="{ active: hasXDDifficulty }">
                     <span>XD</span>
                     <span v-if="hasXDDifficulty">{{ XDDifficulty }}</span>
                 </span>
@@ -61,11 +96,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue';
-import router from "@/router";
+import { ref, onMounted, inject, onUnmounted } from 'vue';
+import router from '@/router';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
+import { Buttons } from '@/modules/useGamepad';
+import { InterfaceSounds } from '@/modules/useInterfaceAudio';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -143,42 +180,51 @@ const props = defineProps({
     },
 });
 
+/* eslint-disable no-unused-vars */
 const STATE_QUEUED = 0;
 const STATE_DOWNLOADING = 1;
 const STATE_EXTRACTING = 2;
 const STATE_COPYING = 3;
 const STATE_CACHING = 4;
 const STATE_DONE = 5;
+/* eslint-enable no-unused-vars */
 
 const libraryState = ref(null);
 const queueState = ref(null);
 
 onMounted(() => {
-    window.external.sendMessage(JSON.stringify({
-        command: "library-get-state",
-        data: {
-            fileReference: props.fileReference,
-            updateHash: props.updateHash,
-        },
-    }));
-});
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'library-get-state',
+            data: {
+                fileReference: props.fileReference,
+                updateHash: props.updateHash,
+            },
+        }),
+    );
 
-emitter.on('library-get-state-response', (state) => {
-    if(state.spinshareReference === props.fileReference) {
-        libraryState.value = state;
-    }
-});
-
-emitter.on('queue-item-update-response', (queueItem) => {
-    if(queueItem.FileReference === props.fileReference) {
-        queueState.value = queueItem.State;
-        
-        if(queueItem.State === STATE_DONE) {
-            libraryState.value.installed = true;
-            libraryState.value.updated = true;
-            queueState.value = null;
+    emitter.on('library-get-state-response', (state) => {
+        if (state.spinshareReference === props.fileReference) {
+            libraryState.value = state;
         }
-    }
+    });
+
+    emitter.on('queue-item-update-response', (queueItem) => {
+        if (queueItem.FileReference === props.fileReference) {
+            queueState.value = queueItem.State;
+
+            if (queueItem.State === STATE_DONE) {
+                libraryState.value.installed = true;
+                libraryState.value.updated = true;
+                queueState.value = null;
+            }
+        }
+    });
+});
+
+onUnmounted(() => {
+    emitter.off('library-get-state-response');
+    emitter.off('queue-item-update-response');
 });
 
 const handleClick = () => {
@@ -189,21 +235,23 @@ const handleClick = () => {
 
 const handleAddToQueue = (event) => {
     event.preventDefault();
-    
-    if(queueState.value !== null) return;
-    
-    window.external.sendMessage(JSON.stringify({
-        command: "queue-add",
-        data: {
-            id: props.id,
-            title: props.title,
-            artist: props.artist,
-            charter: props.charter,
-            cover: props.cover,
-            fileReference: props.fileReference,
-        },
-    }));
-    
+
+    if (queueState.value !== null) return;
+
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'queue-add',
+            data: {
+                id: props.id,
+                title: props.title,
+                artist: props.artist,
+                charter: props.charter,
+                cover: props.cover,
+                fileReference: props.fileReference,
+            },
+        }),
+    );
+
     queueState.value = 0;
 };
 </script>
@@ -212,7 +260,7 @@ const handleAddToQueue = (event) => {
 .chart-item {
     position: relative;
     height: 85px;
-    background: rgba(var(--colorBaseText),0.07);
+    background: rgba(var(--colorBaseText), 0.07);
     border-radius: 6px;
     padding: 10px;
     display: grid;
@@ -220,7 +268,7 @@ const handleAddToQueue = (event) => {
     gap: 10px;
     align-items: center;
     transition: 0.15s ease-in-out all;
-    
+
     & .cover {
         width: 65px;
         height: 65px;
@@ -229,9 +277,9 @@ const handleAddToQueue = (event) => {
         background-size: cover;
         position: relative;
         overflow: hidden;
-        
+
         &::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
@@ -241,12 +289,12 @@ const handleAddToQueue = (event) => {
             z-index: 2;
             transition: 0.2s ease-in-out all;
         }
-        
+
         & .tag {
             position: absolute;
             bottom: 5px;
             right: 5px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             color: rgb(255, 255, 255);
             height: 20px;
             width: 20px;
@@ -255,7 +303,7 @@ const handleAddToQueue = (event) => {
             justify-content: center;
             align-items: center;
             z-index: 3;
-            
+
             &.tag-downloading {
                 & .mdi {
                     animation: loadingLoop 0.4s linear infinite;
@@ -266,8 +314,9 @@ const handleAddToQueue = (event) => {
     & .meta {
         display: grid;
         gap: 5px;
-        
-        & .title, & .subtitle {
+
+        & .title,
+        & .subtitle {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -276,7 +325,7 @@ const handleAddToQueue = (event) => {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            color: rgba(var(--colorBaseText),0.4);
+            color: rgba(var(--colorBaseText), 0.4);
             font-size: 0.9rem;
         }
         & .difficulties {
@@ -286,7 +335,7 @@ const handleAddToQueue = (event) => {
 
             & > span {
                 padding: 3px 7px;
-                background: rgba(var(--colorBaseText),0.07);
+                background: rgba(var(--colorBaseText), 0.07);
                 border-radius: 2px;
                 font-size: 0.6rem;
 
@@ -303,14 +352,14 @@ const handleAddToQueue = (event) => {
             }
         }
     }
-    
+
     &.explicit {
         & > * {
             transition: 0.2s ease-in-out all;
         }
-        &:not(:hover) > * {
+        &:not(:hover):not(:focus) > * {
             opacity: 0.4;
-            
+
             &.cover::before {
                 backdrop-filter: blur(5px);
             }
@@ -319,7 +368,7 @@ const handleAddToQueue = (event) => {
             }
         }
         &::after {
-            content: "Explicit - Hover to reveal";
+            content: 'Explicit - Hover to reveal';
             position: absolute;
             top: 0;
             left: 0;
@@ -332,14 +381,55 @@ const handleAddToQueue = (event) => {
             transition: 0.2s ease-in-out opacity;
             pointer-events: none;
         }
-        &:hover::after {
+        &:hover::after,
+        &:focus::after {
             opacity: 0;
         }
     }
-    
-    &:hover {
-        background: rgba(var(--colorBaseText),0.14);
+
+    &:hover,
+    &:focus {
+        background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
+    }
+}
+.ui-console .chart-item {
+    height: 120px;
+    border-radius: 4px;
+    gap: 15px;
+
+    & .cover {
+        width: 100px;
+        height: 100px;
+
+        & .tag {
+            height: 30px;
+            width: 30px;
+            font-size: 1.15rem;
+        }
+    }
+    & .meta {
+        gap: 5px;
+
+        & .title {
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+
+        & .difficulties {
+            gap: 10px;
+            margin-top: 10px;
+
+            & > span {
+                padding: 6px 14px;
+                border-radius: 3px;
+                font-size: 0.75rem;
+            }
+        }
+    }
+
+    &:focus {
+        outline: 3px solid silver;
     }
 }
 </style>

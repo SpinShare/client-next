@@ -4,6 +4,8 @@
             class="download-queue-backdrop"
             v-if="isActive"
             @click.self="changeState(false)"
+            role="dialog"
+            aria-modal="true"
         >
             <section class="download-queue">
                 <SpinHeader
@@ -18,21 +20,38 @@
                 </SpinHeader>
                 <div
                     class="item"
-                    v-for="item in queue"
+                    v-for="(item, i) in queue"
                     :class="'state-' + item.State"
+                    :key="i"
                 >
-                    <div class="cover" :style="`background-image: url(${ item.Cover })`"></div>
+                    <div
+                        class="cover"
+                        :style="`background-image: url(${item.Cover})`"
+                    ></div>
                     <div class="meta">
                         <div class="title">{{ item.Title }}</div>
-                        <div class="artist">{{ item.Artist }} &bull; {{ item.Charter }}</div>
+                        <div class="artist">
+                            {{ item.Artist }} &bull; {{ item.Charter }}
+                        </div>
                     </div>
                     <div class="actions">
                         <SpinButton
                             v-if="item.State === STATE_QUEUED"
                             icon="trash-can-outline"
                             color="danger"
+                            @click="() => handleRemoveFromQueue(item.ID)"
                         />
-                        <div class="loading" v-if="[STATE_DOWNLOADING, STATE_EXTRACTING, STATE_COPYING, STATE_CACHING].includes(item.State)">
+                        <div
+                            class="loading"
+                            v-if="
+                                [
+                                    STATE_DOWNLOADING,
+                                    STATE_EXTRACTING,
+                                    STATE_COPYING,
+                                    STATE_CACHING,
+                                ].includes(item.State)
+                            "
+                        >
                             <span class="mdi mdi-loading"></span>
                         </div>
                     </div>
@@ -70,9 +89,11 @@ emitter.on('download-queue-close', () => {
     changeState(false);
 });
 emitter.on('queue-item-update-response', (downloadItem) => {
-    let existingItemIndex = queue.value.findIndex(x => x.ID === downloadItem.ID);
-    
-    if(existingItemIndex !== -1) {
+    let existingItemIndex = queue.value.findIndex(
+        (x) => x.ID === downloadItem.ID,
+    );
+
+    if (existingItemIndex !== -1) {
         queue.value[existingItemIndex] = downloadItem;
     } else {
         queue.value.push(downloadItem);
@@ -85,37 +106,33 @@ emitter.on('queue-get-response', (newQueue) => {
 const changeState = (newState) => {
     isActive.value = newState;
     emit('change-active', isActive.value);
-    
-    if(newState) {
-        window.external.sendMessage(JSON.stringify({
-            command: "queue-get",
-            data: "",
-        }));
-    }
-}
 
-const getCurrentState = (stateId) => {
-    switch(stateId) {
-        case STATE_QUEUED:
-            return 'queued';
-        case STATE_DOWNLOADING:
-            return 'downloading';
-        case STATE_EXTRACTING:
-            return 'extracting';
-        case STATE_COPYING:
-            return 'copying';
-        case STATE_CACHING:
-            return 'caching';
-        case STATE_DONE:
-            return 'done';
+    if (newState) {
+        window.external.sendMessage(
+            JSON.stringify({
+                command: 'queue-get',
+                data: '',
+            }),
+        );
     }
 };
 
 const handleClearQueue = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "queue-clear",
-        data: STATE_DONE,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'queue-clear',
+            data: STATE_DONE,
+        }),
+    );
+};
+
+const handleRemoveFromQueue = (queueId) => {
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'queue-remove',
+            data: queueId,
+        }),
+    );
 };
 </script>
 
@@ -126,32 +143,32 @@ const handleClearQueue = () => {
     bottom: 0;
     top: 0;
     right: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     z-index: 100;
     cursor: pointer;
-    
+
     & .download-queue {
         cursor: default;
         width: 400px;
         height: 100%;
         overflow-y: scroll;
         background: rgb(var(--colorBase));
-        border-right: 1px solid rgba(var(--colorBaseText),0.07);
+        border-right: 1px solid rgba(var(--colorBaseText), 0.07);
         display: flex;
         flex-direction: column;
-        
+
         & header {
             padding: 10px 20px;
         }
-        
+
         & .item {
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 10px;
             padding: 15px;
-            border-bottom: 1px solid rgba(var(--colorBaseText),0.07);
+            border-bottom: 1px solid rgba(var(--colorBaseText), 0.07);
 
             & .cover {
                 width: 48px;
@@ -165,7 +182,7 @@ const handleClearQueue = () => {
                 gap: 3px;
 
                 & .artist {
-                    color: rgba(var(--colorBaseText),0.4);
+                    color: rgba(var(--colorBaseText), 0.4);
                     font-size: 0.9rem;
                 }
             }
@@ -180,14 +197,22 @@ const handleClearQueue = () => {
                     animation: loadingLoop 0.4s linear infinite;
                 }
             }
-            
+
             &.state-0 {
-                opacity: 0.3;
+                opacity: 0.6;
             }
             &.state-5 {
                 background: rgba(var(--colorSuccess), 0.14);
             }
         }
+    }
+}
+
+.ui-console .download-queue-backdrop {
+    left: 400px;
+
+    & .download-queue {
+        width: 600px;
     }
 }
 </style>

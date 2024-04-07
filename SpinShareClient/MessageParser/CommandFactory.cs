@@ -56,6 +56,8 @@ public class CommandFactory
                 return new CommandQueueGetCount(serviceProvider);
             case "queue-get":
                 return new CommandQueueGet(serviceProvider);
+            case "queue-remove":
+                return new CommandQueueRemove(serviceProvider);
             case "queue-clear":
                 return new CommandQueueClear(serviceProvider);
             case "settings-open-in-explorer":
@@ -70,6 +72,8 @@ public class CommandFactory
                 return new CommandUpdateGetVersion(serviceProvider);
             case "update-get-latest":
                 return new CommandUpdateGetLatest(serviceProvider);
+            case "is-steamdeck":
+                return new CommandIsSteamdeck();
             default:
                 throw new Exception($"Unknown command: {command}");
         }

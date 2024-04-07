@@ -2,20 +2,42 @@
     <div
         class="spinplay-item"
         @click="handleClick"
+        @keydown.enter="handleClick"
+        tabindex="0"
     >
-        <div class="thumbnail" :style="`background-image: url('${videoThumbnail}');`"></div>
-        
+        <div
+            class="thumbnail"
+            :style="`background-image: url('${videoThumbnail}');`"
+        ></div>
+
         <div class="user">
-            <img :src="user.avatar" alt="User Avatar" />
+            <img
+                :src="user.avatar"
+                alt="User Avatar"
+            />
             <div class="meta">
                 <div class="username">{{ user.username }}</div>
-                <div class="pronouns" v-if="user.pronouns">{{ user.pronouns }}</div>
-                <div class="tags" v-if="user.isPatreon || user.isVerified">
-                    <span class="tag tag-verified" v-if="user.isVerified">
+                <div
+                    class="pronouns"
+                    v-if="user.pronouns"
+                >
+                    {{ user.pronouns }}
+                </div>
+                <div
+                    class="tags"
+                    v-if="user.isPatreon || user.isVerified"
+                >
+                    <span
+                        class="tag tag-verified"
+                        v-if="user.isVerified"
+                    >
                         <span class="mdi mdi-check"></span>
                         <span>{{ t('user.verified') }}</span>
                     </span>
-                    <span class="tag tag-supporter" v-if="user.isPatreon">
+                    <span
+                        class="tag tag-supporter"
+                        v-if="user.isPatreon"
+                    >
                         <span class="mdi mdi-heart"></span>
                         <span>{{ t('user.supporter') }}</span>
                     </span>
@@ -45,10 +67,12 @@ const props = defineProps({
 });
 
 const handleClick = () => {
-    window.external.sendMessage(JSON.stringify({
-        command: "open-in-browser",
-        data: props.videoUrl,
-    }));
+    window.external.sendMessage(
+        JSON.stringify({
+            command: 'open-in-browser',
+            data: props.videoUrl,
+        }),
+    );
 };
 </script>
 
@@ -59,11 +83,11 @@ const handleClick = () => {
     display: grid;
     overflow: hidden;
     transition: 0.15s ease-in-out all;
-    
+
     & .thumbnail {
         width: 100%;
         aspect-ratio: 16 / 9;
-        background-color: rgba(var(--colorBaseText, 0.07));
+        background-color: rgba(var(--colorBaseText), 0.07);
         background-size: cover;
         background-position: center;
     }
@@ -92,7 +116,7 @@ const handleClick = () => {
             }
             & .pronouns {
                 font-size: 0.75rem;
-                color: rgba(var(--colorBaseText),0.4);
+                color: rgba(var(--colorBaseText), 0.4);
             }
             & .tags {
                 margin-top: 2px;
@@ -125,10 +149,17 @@ const handleClick = () => {
             }
         }
     }
-    
+
     &:hover {
-        background: rgba(var(--colorBaseText),0.14);
+        background: rgba(var(--colorBaseText), 0.14);
         cursor: pointer;
+    }
+}
+
+.ui-console .spinplay-item {
+    &:focus {
+        background: rgba(var(--colorBaseText), 0.14);
+        outline: 3px solid silver;
     }
 }
 </style>

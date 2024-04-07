@@ -1,6 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using PhotinoNET;
 using PhotinoNET.Server;
 using Sentry;
@@ -35,6 +39,13 @@ public class Program
             options.EnableTracing = true;
         });
         
+        // Setting working directory
+        var entryAssemblyLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        if (entryAssemblyLocation != null)
+        {
+            Directory.SetCurrentDirectory(entryAssemblyLocation);
+        }
+
         // Single Instance Lock
         AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         if (!IsSingleInstance())
@@ -49,26 +60,11 @@ public class Program
             .CreateStaticFileServer(args, out string baseUrl)
             .RunAsync();
 
-        MessageHandler messageHandler = new MessageHandler();
-        SettingsManager settingsManager = SettingsManager.GetInstance();
+        var messageHandler = new MessageHandler();
+        var settingsManager = SettingsManager.GetInstance();
         
         _logger.LogInformation("Creating Window");
-        var window = new PhotinoWindow()
-            .SetLogVerbosity(2)
-            .SetTitle("SpinShare")
-            .SetSize(1100, 750)
-            .SetUseOsDefaultSize(false)
-            .Center()
-            .SetResizable(true)
-            // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
-            .RegisterSizeChangedHandler((sender, size) =>
-            {
-                var senderWindow = (PhotinoWindow?)sender;
-                
-                if (size.Width < 800) senderWindow?.SetWidth(800);
-                if (size.Height < 650) senderWindow?.SetHeight(650);
-            })
-            .RegisterWebMessageReceivedHandler(messageHandler.RegisterWebMessageReceivedHandler);
+        var window = GetWindow();
 
         // Check if Setup is needed
         var initPage = "#/";
@@ -107,6 +103,46 @@ public class Program
         
         _lockFile.Close();
         _lockFile = null;
+    }
+
+    public static PhotinoWindow GetWindow()
+    {
+        var messageHandler = new MessageHandler();
+        var settingsManager = SettingsManager.GetInstance();
+        
+        return new PhotinoWindow()
+            .SetLogVerbosity(2)
+            .SetTitle("SpinShare")
+            .SetMinSize(Convert.ToInt32(650 * ScreenScaleFactor.Get()), Convert.ToInt32(400 * ScreenScaleFactor.Get()))
+            .SetSize(Convert.ToInt32(1280 * ScreenScaleFactor.Get()), Convert.ToInt32(800 * ScreenScaleFactor.Get()))
+            .SetUseOsDefaultSize(false)
+            .Center()
+            .SetResizable(true)
+            .RegisterCustomSchemeHandler("app", (object sender, string scheme, string url, out string contentType) =>
+            {
+                contentType = "text/javascript";
+
+                var settings = new
+                {
+                    Language = settingsManager.Get<string>("app.language", "en"),
+                    Theme = settingsManager.Get<string>("app.theme", "dark"),
+                    IsConsole = settingsManager.Get<bool>("app.console.enabled", SettingsManager.GetIsSteamDeck()),
+                };
+
+                var settingsJson = JsonConvert.SerializeObject(settings);
+                var script = $"window.spinshare = window.spinshare || {{}}; window.spinshare.settings = {settingsJson};";
+                
+                return new MemoryStream(Encoding.UTF8.GetBytes(script));
+            })
+            // LINUX FIXME: https://github.com/tryphotino/photino.NET/issues/83#issuecomment-1554395461
+            .RegisterSizeChangedHandler((sender, size) =>
+            {
+                var senderWindow = (PhotinoWindow?)sender;
+                
+                if (size.Width < 800) senderWindow?.SetWidth(800);
+                if (size.Height < 650) senderWindow?.SetHeight(650);
+            })
+            .RegisterWebMessageReceivedHandler(messageHandler.RegisterWebMessageReceivedHandler);
     }
     
     static bool IsSingleInstance()

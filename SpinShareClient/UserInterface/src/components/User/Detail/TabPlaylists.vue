@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
-import PlaylistList from "@/components/Common/PlaylistList.vue";
-import {getUserPlaylists} from "@/api/api";
+import { onMounted, ref } from 'vue';
+import PlaylistList from '@/components/Common/PlaylistList.vue';
+import { getUserPlaylists } from '@/api/api';
 
 const props = defineProps({
     id: {

@@ -17,6 +17,7 @@ import ViewSettings from './views/Settings.vue';
 import ViewLicenses from './views/Licenses.vue';
 import ViewError from './views/Error.vue';
 
+// Make sure to replicate these routes in layout_console/router.js
 const routes = [
     {
         path: '/setup/step-0',
@@ -75,8 +76,8 @@ const routes = [
         component: ViewLicenses,
     },
     {
-        path: "/:pathMatch(.*)*",
-        component: ViewError
+        path: '/:pathMatch(.*)*',
+        component: ViewError,
     },
 ];
 

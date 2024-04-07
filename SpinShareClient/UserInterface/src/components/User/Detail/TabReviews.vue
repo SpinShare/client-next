@@ -1,10 +1,15 @@
 <template>
     <section class="user-detail-tab-reviews">
-        <div class="reviews-list" v-if="reviews">
+        <div
+            class="reviews-list"
+            v-if="reviews"
+        >
             <ReviewItem
                 v-for="review in reviews"
                 :key="review.id"
                 v-bind="review"
+                :show-user="false"
+                :show-chart="true"
             />
         </div>
         <SpinLoader v-else />
@@ -13,8 +18,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import {getUserReviews} from "@/api/api";
-import ReviewItem from "@/components/Chart/Detail/ReviewItem.vue";
+import { getUserReviews } from '@/api/api';
+import ReviewItem from '@/components/Chart/Detail/ReviewItem.vue';
 
 const props = defineProps({
     id: {

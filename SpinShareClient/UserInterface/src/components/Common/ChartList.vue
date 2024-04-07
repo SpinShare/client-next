@@ -13,14 +13,13 @@
 </template>
 
 <script setup>
-import ChartItem from "@/components/Common/ChartItem.vue";
-import {onMounted, ref} from "vue";
+import ChartItem from '@/components/Common/ChartItem.vue';
 
 defineProps({
     charts: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 </script>
 
@@ -29,7 +28,7 @@ defineProps({
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr;
-    
+
     & .chart-item {
         opacity: 0;
         animation: listEntrance 0.2s ease-in-out forwards;
@@ -52,5 +51,10 @@ defineProps({
     .chart-list {
         grid-template-columns: 1fr;
     }
+}
+
+.ui-console .chart-list {
+  grid-template-columns: 1fr;
+  gap: 15px;
 }
 </style>

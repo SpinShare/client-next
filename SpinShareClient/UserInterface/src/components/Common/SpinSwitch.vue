@@ -1,6 +1,11 @@
 <template>
-    <label :class="`i-switch ${disabled ? 'disabled' : ''}`">
-        <input type="checkbox" v-model="val" :disabled="disabled" @input="handleInput" />
+    <label :class="`spin-switch ${disabled ? 'disabled' : ''}`">
+        <input
+            type="checkbox"
+            v-model="val"
+            :disabled="disabled"
+            @input="handleInput"
+        />
         <span class="background"></span>
     </label>
 </template>
@@ -34,7 +39,7 @@ const handleInput = () => emit('update:modelValue', !val.value);
 </script>
 
 <style lang="scss" scoped>
-.i-switch {
+.spin-switch {
     height: 20px;
     width: 40px;
     display: block;
@@ -83,6 +88,22 @@ const handleInput = () => emit('update:modelValue', !val.value);
         }
         & input:checked + .background {
             background: rgba(var(--colorPrimary), 0.75);
+        }
+    }
+}
+
+.ui-console .spin-switch {
+    height: 40px;
+    width: 80px;
+
+    input {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        margin-left: 10px;
+
+        &:checked {
+            margin-left: 50px;
         }
     }
 }

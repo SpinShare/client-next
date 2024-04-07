@@ -10,73 +10,54 @@ on:
 
 jobs:
   build:
-    name: build-${{ matrix.os }}
+    name: build-and-publish
     permissions: write-all
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 20.x
+          node-version: 21.x
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Restore NuGet packages
         run: dotnet restore
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
+      - name: Install flatpak dependencies
+        run: |
+          sudo apt update
+          sudo apt install flatpak flatpak-builder
+          sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          sudo flatpak install org.gnome.Sdk/x86_64/45 -y
+          sudo flatpak install org.gnome.Platform/x86_64/45 -y
+        shell: bash
+      - name: List Files
+        run: |
+          ls -lp ./publish
+        shell: bash
       - name: Build & Publish
         run: |
-          mkdir -p build/${{ matrix.os }}
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime win-x64 --output ./build/${{ matrix.os }}
-          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime osx-x64 --output ./build/${{ matrix.os }}
-          elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            dotnet publish ./SpinShareClient/SpinShareClient.csproj --no-restore --configuration Release --runtime linux-x64 --output ./build/${{ matrix.os }}
-          fi
+          cd ./publish
+          git update-index --chmod=+x publish.sh
+          ./publish.sh "win-x64 linux-x64" "3.0.0-preview"
         shell: bash
-      - name: Archive build artifacts
-        uses: vimtor/action-zip@v1
-        with:
-          files: build/${{ matrix.os }}
-          dest: build/${{ matrix.os }}.zip
       - name: List Files
         run: |
-          ls -lp build
-      - name: Save Release Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          path: build/${{ matrix.os }}.zip
-          name: ${{ matrix.os }}.zip
-          retention-days: 1
-  release:
-    needs: build
-    permissions: write-all
-    runs-on: ubuntu-latest
-    steps:
-      - name: Retrieve Release Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: build
-      - name: List Files
-        run: |
-          ls -lp build
+          ls -lp ./publish/output
+        shell: bash
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/macos-latest.zip/macos-latest.zip
-            build/ubuntu-latest.zip/ubuntu-latest.zip
-            build/windows-latest.zip/windows-latest.zip
+            publish/output/spinshare.3.0.0-preview.win-x64.zip
+            publish/output/spinshare.3.0.0-preview.linux-x64.flatpak
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
-          name: Release ${{ github.event.repository.updated_at }}
+          name: 3.0.0 Preview ${{ github.event.repository.updated_at }}
           draft: true
           prerelease: true
     

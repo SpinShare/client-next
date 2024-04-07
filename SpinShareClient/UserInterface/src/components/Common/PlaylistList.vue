@@ -9,14 +9,13 @@
 </template>
 
 <script setup>
-import PlaylistItem from "@/components/Common/PlaylistItem.vue";
-import UserItem from "@/components/Common/UserItem.vue";
+import PlaylistItem from '@/components/Common/PlaylistItem.vue';
 
 defineProps({
     playlists: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 </script>
 
