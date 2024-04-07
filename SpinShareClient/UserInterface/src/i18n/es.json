@@ -1,240 +1,240 @@
 {
   "general": {
-    "open": "",
-    "save": "",
-    "close": "",
-    "download": "",
+    "open": "Abrir",
+    "save": "Guardar",
+    "close": "Cerrar",
+    "download": "Descargar",
     "select": "",
-    "back": "",
-    "continue": "",
-    "cancel": "",
-    "apply": "",
-    "addToQueue": "",
-    "openOnSpinShare": "",
-    "report": "",
-    "loading": "",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "cancel": "Cancelar",
+    "apply": "Aplicar",
+    "addToQueue": "Añadir a la cola",
+    "openOnSpinShare": "Abrir en SpinSha.re",
+    "report": "Reportar",
+    "loading": "Cargando",
     "pagination": {
-      "page": ""
+      "page": "Página #{0}"
     },
     "sidebar": {
-      "frontpage": "",
-      "search": "",
-      "new": "",
-      "updated": "",
-      "trending": "",
-      "library": "",
-      "downloads": "",
-      "settings": ""
+      "frontpage": "Descubrir y Destacados",
+      "search": "Buscar",
+      "new": "Nuevo",
+      "updated": "Actualizado",
+      "trending": "En tendencia",
+      "library": "Biblioteca",
+      "downloads": "Descargas",
+      "settings": "Configuración"
     },
     "downloadQueue": {
-      "title": "",
-      "clear": ""
+      "title": "Cola de descargas",
+      "clear": "Vaciar"
     },
     "error": {
-      "title": "",
-      "message": ""
+      "title": "¡Vaya!",
+      "message": "Esto es vergonzoso. Algo ha ido mal, ¡así que tenemos que mostrarte esta página de error!"
     },
     "updateBanner": {
-      "title": "",
-      "textAvailable": "",
-      "textPrompt": "",
-      "update": "",
-      "maybeLater": ""
+      "title": "Nueva actualización del cliente disponible",
+      "textAvailable": "Hemos realizado algunas optimizaciones en SpinShare.",
+      "textPrompt": "Actualice su cliente para obtener la versión más reciente.",
+      "update": "Actualiza",
+      "maybeLater": "Más tarde"
     }
   },
   "setup": {
-    "title": "",
+    "title": "Primera configuración",
     "step0": {
-      "title": "",
-      "text": ""
+      "title": "¡Bienvenido!",
+      "text": "¡Bienvenido a SpinShare! Antes de sumergirnos en el apasionante mundo de las canciones de Spin Rhythm XD, tendremos que configurar algunas cosas primero. Esto incluye designar tus directorios del juego, inicializar una caché de tu biblioteca de canciones y ajustar otras configuraciones."
     },
     "step1": {
-      "title": ""
+      "title": "Directorios del juego"
     },
     "step2": {
-      "title": "",
-      "text": "",
+      "title": "Caché de biblioteca de canciones",
+      "text": "A continuación, vamos a poner en marcha la caché de tu biblioteca de canciones. La caché mantiene un registro actualizado de todas tus canciones instaladas y sus versiones. De este modo, SpinShare puede confirmar rápidamente si tienes una canción instalada o si hay una nueva versión esperando entre bastidores.",
       "libraryCache": {
-        "analyze": "",
-        "analyzing": "",
-        "analyzationDone": ""
+        "analyze": "Analizar biblioteca",
+        "analyzing": "Analizando biblioteca ({0}%)",
+        "analyzationDone": "{0} canciones analizadas."
       }
     },
     "step3": {
-      "title": ""
+      "title": "Configuración del cliente"
     },
     "step4": {
-      "title": "",
-      "text": ""
+      "title": "¡Listo!",
+      "text": "Felicidades, ¡lo ha ajustado todo perfectamente! Su configuración está completa y ahora estás todo listo para explorar e instalar nuevas canciones. Su viaje en Spin Rhythm XD está a punto de alcanzar una nueva altura con SpinShare. ¡Empecemos a girar y a compartir el ritmo!"
     }
   },
   "frontpage": {
-    "title": "",
+    "title": "Descubrir",
     "featured": {
-      "title": "",
-      "seeMore": ""
+      "title": "Destacados",
+      "seeMore": "Ver más"
     }
   },
   "search": {
     "bar": {
-      "placeholder": "",
+      "placeholder": "Consulta de búsqueda...",
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Canciones",
+        "playlists": "Listas de reproducción",
+        "users": "Usuarios"
       },
-      "search": ""
+      "search": "Buscar"
     },
     "filters": {
       "button": {
-        "label": ""
+        "label": "Filtrar"
       },
       "difficulties": {
-        "label": "",
-        "easy": "",
-        "normal": "",
-        "hard": "",
-        "expert": "",
-        "XD": ""
+        "label": "Dificultades incluidas",
+        "easy": "Fácil",
+        "normal": "Normal",
+        "hard": "Difícil",
+        "expert": "Experto",
+        "XD": "XD"
       },
       "difficultyRatings": {
-        "label": "",
-        "lowest": "",
-        "highest": ""
+        "label": "Nivel de dificultad",
+        "lowest": "Nivel más bajo",
+        "highest": "Nivel más alto"
       },
-      "showExplicit": ""
+      "showExplicit": "Mostrar explícito"
     },
     "intro": {
-      "title": "",
-      "text": ""
+      "title": "Búsqueda de canciones, listas de reproducción y usuarios",
+      "text": "Selecciona si quieres buscar canciones, listas de reproducción o usuarios, escribe tu consulta y aplica filtros para obtener resultados precisos. ¡Tu aventura rítmica empieza aquí!"
     }
   },
   "discover": {
     "tabBar": {
-      "new": "",
-      "updated": "",
-      "hotThisWeek": "",
-      "hotThisMonth": ""
+      "new": "Nuevo",
+      "updated": "Actualizado",
+      "hotThisWeek": "De moda esta semana",
+      "hotThisMonth": "De moda este mes"
     }
   },
   "library": {
-    "title": "",
-    "browseFiles": "",
-    "importBackup": "",
-    "rebuildCache": "",
+    "title": "Biblioteca",
+    "browseFiles": "Explorar archivos",
+    "importBackup": "Importar Backup",
+    "rebuildCache": "Reconstruir caché",
     "importBackupError": {
       "localBackupHasNoCharts": {
-        "title": "",
-        "message": ""
+        "title": "Backup local inválido",
+        "message": "No se ha podido añadir el backup local a la biblioteca porque no contiene una canción jugable en Spin Rhythm XD."
       }
     }
   },
   "settings": {
-    "title": "",
-    "openSettings": "",
+    "title": "Configuración",
+    "openSettings": "Abrir carpeta de configuración",
     "updates": {
-      "label": "",
-      "check": ""
+      "label": "Actualizaciones de software",
+      "check": "Detectar actualizaciones"
     },
     "gamePath": {
-      "label": "",
-      "hint": "",
-      "browseManually": "",
-      "detectAutomatically": ""
+      "label": "Directorio del juego",
+      "hint": "Aquí se encuentra la instalación del juego",
+      "browseManually": "Explorar manualmente",
+      "detectAutomatically": "Detectar automáticamente"
     },
     "customsPath": {
-      "label": "",
-      "hint": ""
+      "label": "Directorio de canciones",
+      "hint": "Aquí es donde se encuentran tus canciones jugables en Spin Rhythm XD. No olvides configurar el parámetro de lanzamiento 'custom_path [FULLPATH]' en Steam si quieres que tu biblioteca esté en otro lugar."
     },
     "language": {
-      "label": "",
-      "credits": ""
+      "label": "Idioma",
+      "credits": "Traducción por TheWay123"
     },
     "theme": {
-      "label": "",
-      "hint": "",
-      "dark": "",
-      "light": ""
+      "label": "Tema",
+      "hint": "Guardar para aplicar su tema",
+      "dark": "Oscuro",
+      "light": "Claro"
     },
     "detectDLCs": {
-      "label": "",
-      "hint": "",
-      "detect": "",
-      "detectedDLCs": ""
+      "label": "Detectar DLCs instalados",
+      "hint": "Al analizar la instalación de tu juego, podemos confirmar qué DLCs has comprado. Esto habilitará acceso a niveles basados en canciones DLC.",
+      "detect": "Detectar",
+      "detectedDLCs": "DLCs instalados detectados"
     },
     "consoleEnabled": {
       "label": "",
       "hint": ""
     },
     "thirdPartyLicenses": {
-      "label": "",
-      "hint": "",
-      "seeLicenses": ""
+      "label": "Licencias de terceros",
+      "hint": "Este proyecto se ha creado con bibliotecas de terceros.",
+      "seeLicenses": "Ver licencias"
     }
   },
   "chart": {
     "state": {
-      "updateAvailable": "",
-      "updated": "",
-      "downloading": ""
+      "updateAvailable": "Actualización disponible",
+      "updated": "Instalado y actualizado",
+      "downloading": "Descargando"
     },
     "detail": {
       "actions": {
-        "remove": "",
-        "update": "",
-        "play": "",
-        "queued": "",
-        "downloading": "",
+        "remove": "Eliminar",
+        "update": "Actualizar",
+        "play": "Jugar",
+        "queued": "En cola",
+        "downloading": "Descargando",
         "playPreview": "",
         "stopPreview": ""
       },
       "tabBar": {
-        "overview": "",
-        "reviews": "",
-        "spinPlays": "",
-        "playlists": ""
+        "overview": "Resumen",
+        "reviews": "Reseñas",
+        "spinPlays": "SpinPlays",
+        "playlists": "Listas de reproducción"
       },
       "overview": {
         "views": {
-          "label": ""
+          "label": "Vistas"
         },
         "downloads": {
-          "label": ""
+          "label": "Descargas"
         },
         "explicit": {
-          "label": "",
-          "noExplicitContent": "",
-          "explicitContent": ""
+          "label": "Explícito",
+          "noExplicitContent": "Sin contenido explícito",
+          "explicitContent": "Contenido explícito"
         },
         "uploaded": {
-          "label": ""
+          "label": "Subido"
         },
         "lastUpdate": {
-          "label": ""
+          "label": "Última actualización"
         }
       }
     }
   },
   "playlist": {
-    "count": "",
+    "count": "{0} Canciones",
     "official": {
-      "tag": "",
-      "tooltip": ""
+      "tag": "Oficial",
+      "tooltip": "Esta es una lista de reproducción del equipo de SpinShare."
     }
   },
   "user": {
-    "verified": "",
-    "supporter": "",
+    "verified": "Verificado",
+    "supporter": "Donador",
     "review": {
-      "recommended": ""
+      "recommended": "Recomendado"
     },
     "detail": {
       "tabBar": {
-        "overview": "",
-        "charts": "",
-        "playlists": "",
-        "reviews": "",
-        "spinPlays": ""
+        "overview": "Resumen",
+        "charts": "Canciones ({0})",
+        "playlists": "Listas de reproducción ({0})",
+        "reviews": "Reseñas ({0})",
+        "spinPlays": "SpinPlays ({0})"
       }
     }
   }
