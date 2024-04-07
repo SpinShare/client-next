@@ -4,7 +4,7 @@
     "save": "Enregistrer",
     "close": "Fermer",
     "download": "Télécharger",
-    "select": "",
+    "select": "Sélectionner",
     "back": "Retour",
     "continue": "Continuer",
     "cancel": "Abandonner",
@@ -163,8 +163,8 @@
       "detectedDLCs": "DLC installés détectés"
     },
     "consoleEnabled": {
-      "label": "",
-      "hint": ""
+      "label": "Interface de la console",
+      "hint": "Interface Gamepad (ne fonctionne pas encore sur SteamDeck). Nécessite un redémarrage complet."
     },
     "thirdPartyLicenses": {
       "label": "Licences tierces",
