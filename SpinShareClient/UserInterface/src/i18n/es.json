@@ -4,7 +4,7 @@
     "save": "Guardar",
     "close": "Cerrar",
     "download": "Descargar",
-    "select": "",
+    "select": "Seleccionar",
     "back": "Atrás",
     "continue": "Continuar",
     "cancel": "Cancelar",
@@ -163,8 +163,8 @@
       "detectedDLCs": "DLCs instalados detectados"
     },
     "consoleEnabled": {
-      "label": "",
-      "hint": ""
+      "label": "Interfaz de consola",
+      "hint": "Interfaz de usuario amigable para el Gamepad (aún no funciona en SteamDeck). Requiere un reinicio completo."
     },
     "thirdPartyLicenses": {
       "label": "Licencias de terceros",
@@ -185,8 +185,8 @@
         "play": "Jugar",
         "queued": "En cola",
         "downloading": "Descargando",
-        "playPreview": "",
-        "stopPreview": ""
+        "playPreview": "Reproducir vista previa",
+        "stopPreview": "Detener vista previa"
       },
       "tabBar": {
         "overview": "Resumen",
