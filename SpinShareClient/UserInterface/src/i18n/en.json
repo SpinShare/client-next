@@ -166,10 +166,6 @@
       "label": "Console UI",
       "hint": "Gamepad friendly user interface (does not work on SteamDeck yet). Requires a full restart."
     },
-    "alwaysShowExplicit": {
-      "label": "Always show explicit",
-      "hint": "Never blurs the cover art and metadata of explicit charts. Requires a full restart."
-    },
     "thirdPartyLicenses": {
       "label": "Third Party licenses",
       "hint": "This project was created with third party libraries.",
@@ -216,6 +212,15 @@
         "lastUpdate": {
           "label": "Last update"
         }
+      },
+      "reviews": {
+        "noContent": ""
+      },
+      "spinPlays": {
+        "noContent": ""
+      },
+      "playlists": {
+        "noContent": ""
       }
     }
   },
