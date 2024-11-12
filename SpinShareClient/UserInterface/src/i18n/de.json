@@ -11,8 +11,8 @@
     "apply": "Anwenden",
     "addToQueue": "Zur Warteliste",
     "openOnSpinShare": "Auf SpinSha.re öffnen",
-    "copyLink": "",
-    "copyId": "",
+    "copyLink": "Link kopieren",
+    "copyId": "Id kopieren",
     "report": "Melden",
     "loading": "Laden",
     "pagination": {
@@ -169,8 +169,8 @@
       "hint": "Gamepad-freundliche Benutzeroberfläche (Funktioniert noch nicht auf SteamDeck). Erfordert einen vollständigen Neustart."
     },
     "alwaysShowExplicit": {
-      "label": "",
-      "hint": ""
+      "label": "Explizite Inhalte immer anzeigen",
+      "hint": "Versteckt niemals das Bild und die Metadaten von Charts mit expliziten Inhalten. Erfordert einen vollständigen Neustart."
     },
     "thirdPartyLicenses": {
       "label": "Drittanbieter-Lizenzen",
@@ -220,13 +220,13 @@
         }
       },
       "reviews": {
-        "noContent": ""
+        "noContent": "Diese Chart hat noch keine Reviews."
       },
       "spinPlays": {
-        "noContent": ""
+        "noContent": "Diese Chart hat noch keine SpinPlays."
       },
       "playlists": {
-        "noContent": ""
+        "noContent": "Diese Chart ist noch in keiner Playlist."
       }
     }
   },
