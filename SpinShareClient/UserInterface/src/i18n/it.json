@@ -11,6 +11,8 @@
     "apply": "Applica",
     "addToQueue": "Aggiungi in coda",
     "openOnSpinShare": "Apri su SpinSha.re",
+    "copyLink": "",
+    "copyId": "",
     "report": "Segnala",
     "loading": "Caricamento",
     "pagination": {
@@ -163,6 +165,10 @@
       "detectedDLCs": "DLC installati rilevati"
     },
     "consoleEnabled": {
+      "label": "",
+      "hint": ""
+    },
+    "alwaysShowExplicit": {
       "label": "",
       "hint": ""
     },
