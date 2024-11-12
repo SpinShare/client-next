@@ -11,6 +11,8 @@
     "apply": "",
     "addToQueue": "",
     "openOnSpinShare": "",
+    "copyLink": "",
+    "copyId": "",
     "report": "",
     "loading": "",
     "pagination": {
@@ -163,6 +165,10 @@
       "detectedDLCs": ""
     },
     "consoleEnabled": {
+      "label": "",
+      "hint": ""
+    },
+    "alwaysShowExplicit": {
       "label": "",
       "hint": ""
     },
