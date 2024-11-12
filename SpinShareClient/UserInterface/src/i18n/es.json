@@ -11,6 +11,8 @@
     "apply": "Aplicar",
     "addToQueue": "Añadir a la cola",
     "openOnSpinShare": "Abrir en SpinSha.re",
+    "copyLink": "",
+    "copyId": "",
     "report": "Reportar",
     "loading": "Cargando",
     "pagination": {
@@ -165,6 +167,10 @@
     "consoleEnabled": {
       "label": "Interfaz de consola",
       "hint": "Interfaz de usuario amigable para el Gamepad (aún no funciona en SteamDeck). Requiere un reinicio completo."
+    },
+    "alwaysShowExplicit": {
+      "label": "",
+      "hint": ""
     },
     "thirdPartyLicenses": {
       "label": "Licencias de terceros",
