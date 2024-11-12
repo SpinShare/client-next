@@ -11,6 +11,8 @@
     "apply": "Anwenden",
     "addToQueue": "Zur Warteliste",
     "openOnSpinShare": "Auf SpinSha.re öffnen",
+    "copyLink": "",
+    "copyId": "",
     "report": "Melden",
     "loading": "Laden",
     "pagination": {
@@ -165,6 +167,10 @@
     "consoleEnabled": {
       "label": "Konsolen UI",
       "hint": "Gamepad-freundliche Benutzeroberfläche (Funktioniert noch nicht auf SteamDeck). Erfordert einen vollständigen Neustart."
+    },
+    "alwaysShowExplicit": {
+      "label": "",
+      "hint": ""
     },
     "thirdPartyLicenses": {
       "label": "Drittanbieter-Lizenzen",
