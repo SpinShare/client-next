@@ -11,8 +11,8 @@
     "apply": "Speen",
     "addToQueue": "Speen speen",
     "openOnSpinShare": "Speen speen SpinSha.re",
-    "copyLink": "",
-    "copyId": "",
+    "copyLink": "Speen speen",
+    "copyId": "Speen speen",
     "report": "Speen",
     "loading": "Speen",
     "pagination": {
@@ -169,8 +169,8 @@
       "hint": "Speen speen speen speen (speen speen speen speen speen). Speen speen speen."
     },
     "alwaysShowExplicit": {
-      "label": "",
-      "hint": ""
+      "label": "Speen speen speen",
+      "hint": "Speen speen speen speen speen speen. Speen speen speen."
     },
     "thirdPartyLicenses": {
       "label": "Speen speen Speen",
@@ -220,13 +220,13 @@
         }
       },
       "reviews": {
-        "noContent": ""
+        "noContent": "Speen speen speen speen speen speen."
       },
       "spinPlays": {
-        "noContent": ""
+        "noContent": "Speen speen speen speen speen speen."
       },
       "playlists": {
-        "noContent": ""
+        "noContent": "Speen speen speen speen speen speen."
       }
     }
   },
