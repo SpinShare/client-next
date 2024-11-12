@@ -212,6 +212,15 @@
         "lastUpdate": {
           "label": "Dernière mise à jour"
         }
+      },
+      "reviews": {
+        "noContent": ""
+      },
+      "spinPlays": {
+        "noContent": ""
+      },
+      "playlists": {
+        "noContent": ""
       }
     }
   },
