@@ -11,6 +11,8 @@
     "apply": "Speen",
     "addToQueue": "Speen speen",
     "openOnSpinShare": "Speen speen SpinSha.re",
+    "copyLink": "",
+    "copyId": "",
     "report": "Speen",
     "loading": "Speen",
     "pagination": {
@@ -165,6 +167,10 @@
     "consoleEnabled": {
       "label": "Speen speen",
       "hint": "Speen speen speen speen (speen speen speen speen speen). Speen speen speen."
+    },
+    "alwaysShowExplicit": {
+      "label": "",
+      "hint": ""
     },
     "thirdPartyLicenses": {
       "label": "Speen speen Speen",
