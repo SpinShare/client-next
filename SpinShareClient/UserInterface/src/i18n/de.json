@@ -166,10 +166,6 @@
       "label": "Konsolen UI",
       "hint": "Gamepad-freundliche Benutzeroberfläche (Funktioniert noch nicht auf SteamDeck). Erfordert einen vollständigen Neustart."
     },
-    "alwaysShowExplicit": {
-      "label": "Explizite Inhalte immer anzeigen",
-      "hint": "Versteckt niemals das Bild und die Metadaten von Charts mit expliziten Inhalten. Erfordert einen vollständigen Neustart."
-    },
     "thirdPartyLicenses": {
       "label": "Drittanbieter-Lizenzen",
       "hint": "Dieses Projekt wurde mit externer Software entwickelt.",
@@ -216,6 +212,15 @@
         "lastUpdate": {
           "label": "Letztes Update"
         }
+      },
+      "reviews": {
+        "noContent": ""
+      },
+      "spinPlays": {
+        "noContent": ""
+      },
+      "playlists": {
+        "noContent": ""
       }
     }
   },
