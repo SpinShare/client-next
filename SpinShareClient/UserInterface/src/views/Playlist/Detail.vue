@@ -45,6 +45,11 @@
                                 v-tooltip="t('general.openOnSpinShare')"
                                 @click="handleOpenInBrowser"
                             />
+                            <SpinButton
+                                icon="link"
+                                v-tooltip="t('general.copyLink')"
+                                @click="handleCopyLink"
+                            />
                         </div>
                     </div>
                 </div>
@@ -150,6 +155,10 @@ const handleAddToQueue = () => {
         );
     });
 };
+
+const handleCopyLink = () => {
+    navigator.clipboard.writeText('https://spinsha.re/playlist/' + playlist.value.id);
+}
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(

@@ -119,6 +119,11 @@
                             @click="handleOpenInBrowser"
                         />
                         <SpinButton
+                            icon="link"
+                            v-tooltip="t('general.copyLink')"
+                            @click="handleCopyLink"
+                        />
+                        <SpinButton
                             icon="flag-outline"
                             v-tooltip="t('general.report')"
                             @click="handleReport"
@@ -278,6 +283,10 @@ const handleReport = () => {
         }),
     );
 };
+
+const handleCopyLink = () => {
+    navigator.clipboard.writeText('https://spinsha.re/song/' + chart.value.id);
+}
 
 const handleAddToQueue = () => {
     window.external.sendMessage(
