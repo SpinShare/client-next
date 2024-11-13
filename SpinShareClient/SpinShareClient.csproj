@@ -35,8 +35,8 @@
 		<PackageReference Include="Photino.NET" Version="2.6.0" />
 		<PackageReference Include="Photino.NET.Server" Version="1.0.0" />
 		<PackageReference Include="Sentry" Version="4.6.2" />
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
-		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.3" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
 	</ItemGroup>
 
 	<PropertyGroup>
