@@ -36,7 +36,7 @@ public class Program
             options.Debug = true;
             options.AutoSessionTracking = true;
             options.IsGlobalModeEnabled = true;
-            options.EnableTracing = true;
+            options.AttachStacktrace = true;
         });
         
         // Setting working directory
