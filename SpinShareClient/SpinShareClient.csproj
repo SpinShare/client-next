@@ -32,8 +32,8 @@
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.5" Condition=" '$(GenerateEmbeddedFilesManifest)' == 'true' " />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Photino.NET" Version="2.6.0" />
-		<PackageReference Include="Photino.NET.Server" Version="1.0.0" />
+		<PackageReference Include="Photino.NET" Version="4.0.16" />
+		<PackageReference Include="Photino.NET.Server" Version="4.0.12" />
 		<PackageReference Include="Sentry" Version="5.1.0" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
 		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />

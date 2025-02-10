@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PhotinoNET;
+using Photino.NET;
 
 namespace SpinShareClient.MessageParser;
 

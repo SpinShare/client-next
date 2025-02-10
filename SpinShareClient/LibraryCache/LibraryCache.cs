@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PhotinoNET;
+using Photino.NET;
 using SpinShareClient.MessageParser;
 
 namespace SpinShareClient.LibraryCache;

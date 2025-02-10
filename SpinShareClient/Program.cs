@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PhotinoNET;
-using PhotinoNET.Server;
+using Photino.NET;
+using Photino.NET.Server;
 using Sentry;
 
 namespace SpinShareClient;
