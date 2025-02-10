@@ -54,7 +54,7 @@ defineProps({
 }
 
 .ui-console .chart-list {
-  grid-template-columns: 1fr;
-  gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 15px;
 }
 </style>

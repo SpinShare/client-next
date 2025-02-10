@@ -122,41 +122,41 @@ defineProps({
 }
 
 .ui-console .setup-input {
-  gap: 15px;
+    gap: 15px;
 
-  & .text {
-    & .label {
-      font-size: 1.25rem;
-      font-weight: bold;
+    & .text {
+        & .label {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        & .hint {
+            color: rgba(var(--colorBaseText), 0.4);
+            line-height: 1.25rem;
+            font-size: 0.9rem;
+        }
     }
-    & .hint {
-      color: rgba(var(--colorBaseText), 0.4);
-      line-height: 1.25rem;
-      font-size: 0.9rem;
-    }
-  }
-  & .input {
-    gap: 10px;
+    & .input {
+        gap: 10px;
 
-    & input[type='text'] {
-      padding: 0 20px;
-      height: 55px;
-    }
-    & .select {
-      & select {
-        padding: 0 20px;
-        height: 55px;
-        margin-right: 30px;
-      }
+        & input[type='text'] {
+            padding: 0 20px;
+            height: 55px;
+        }
+        & .select {
+            & select {
+                padding: 0 20px;
+                height: 55px;
+                margin-right: 30px;
+            }
 
-      & .mdi {
-        pointer-events: none;
-        position: absolute;
-        right: 15px;
-        top: 16px;
-        font-size: 24px;
-      }
+            & .mdi {
+                pointer-events: none;
+                position: absolute;
+                right: 15px;
+                top: 16px;
+                font-size: 24px;
+            }
+        }
     }
-  }
 }
 </style>

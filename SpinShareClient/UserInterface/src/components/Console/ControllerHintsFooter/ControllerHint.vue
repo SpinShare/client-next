@@ -1,8 +1,6 @@
 <template>
     <button tabindex="-1">
-        <div
-            class="input"
-        >
+        <div class="input">
             <img
                 :src="inputImage"
                 alt="Input"

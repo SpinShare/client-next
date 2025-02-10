@@ -1,7 +1,13 @@
 <template>
     <div class="review-item">
-        <UserItem v-if="showUser" v-bind="user" />
-        <ChartItem v-if="showChart" v-bind="song" />
+        <UserItem
+            v-if="showUser"
+            v-bind="user"
+        />
+        <ChartItem
+            v-if="showChart"
+            v-bind="song"
+        />
 
         <p
             v-if="comment"

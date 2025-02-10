@@ -157,8 +157,10 @@ const handleAddToQueue = () => {
 };
 
 const handleCopyLink = () => {
-    navigator.clipboard.writeText('https://spinsha.re/playlist/' + playlist.value.id);
-}
+    navigator.clipboard.writeText(
+        'https://spinsha.re/playlist/' + playlist.value.id,
+    );
+};
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(
