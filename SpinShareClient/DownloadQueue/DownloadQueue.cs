@@ -108,13 +108,14 @@ public class DownloadQueue
     public async Task RemoveFromQueue(PhotinoWindow? sender, int queueId)
     {
         var queueItem = Queue.Find(x => x.ID == queueId);
-
+        if (queueItem == null) return;
+        
         if (queueItem.State == DownloadState.Queued)
         {
             Queue.Remove(queueItem);
         }
 
-        return;
+        await Task.Yield();
     }
 
     /// <summary>
