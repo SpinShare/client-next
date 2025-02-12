@@ -160,30 +160,30 @@ const handlePromoClick = (buttonData) => {
 }
 
 .ui-console .promo-grid {
-  & .item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    background: rgba(var(--colorBaseText), 0.07);
-    border-radius: 5px;
-    overflow: hidden;
-    gap: 0;
+    & .item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        background: rgba(var(--colorBaseText), 0.07);
+        border-radius: 5px;
+        overflow: hidden;
+        gap: 0;
 
-    & .cover {
-      border-radius: 0;
-    }
-    & .meta {
-      display: grid;
-      gap: 8px;
-      padding: 20px;
+        & .cover {
+            border-radius: 0;
+        }
+        & .meta {
+            display: grid;
+            gap: 8px;
+            padding: 20px;
 
-      & .type {
-        letter-spacing: 0.1rem;
-      }
-    }
+            & .type {
+                letter-spacing: 0.1rem;
+            }
+        }
 
-    &:focus {
-      outline: 3px solid rgba(var(--colorBaseText), 1);
+        &:focus {
+            outline: 3px solid rgba(var(--colorBaseText), 1);
+        }
     }
-  }
 }
 </style>

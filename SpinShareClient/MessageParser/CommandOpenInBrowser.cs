@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PhotinoNET;
+using Photino.NET;
 
 namespace SpinShareClient.MessageParser;
 

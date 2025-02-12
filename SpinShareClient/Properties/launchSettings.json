@@ -1,7 +1,10 @@
 {
   "profiles": {
     "SpinShareClient": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "__NV_DISABLE_EXPLICIT_SYNC": "1"
+      }
     }
   }
 }

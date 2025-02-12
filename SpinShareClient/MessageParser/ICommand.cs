@@ -1,4 +1,4 @@
-using PhotinoNET;
+using Photino.NET;
 
 namespace SpinShareClient.MessageParser;
 using System.Threading.Tasks;

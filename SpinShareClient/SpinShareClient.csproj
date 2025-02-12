@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
 		<Version>3.0.0-preview</Version>
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
@@ -20,6 +20,7 @@
 		<DebugType>embedded</DebugType>
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 		<EmbedWwwRoot>true</EmbedWwwRoot>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -32,11 +33,11 @@
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.5" Condition=" '$(GenerateEmbeddedFilesManifest)' == 'true' " />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Photino.NET" Version="2.6.0" />
-		<PackageReference Include="Photino.NET.Server" Version="1.0.0" />
-		<PackageReference Include="Sentry" Version="4.6.2" />
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
-		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
+		<PackageReference Include="Photino.NET" Version="4.0.16" />
+		<PackageReference Include="Photino.NET.Server" Version="4.0.12" />
+		<PackageReference Include="Sentry" Version="5.1.0" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />
 	</ItemGroup>
 
 	<PropertyGroup>

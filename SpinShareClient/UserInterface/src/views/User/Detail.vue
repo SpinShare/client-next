@@ -161,7 +161,7 @@ const handleReport = () => {
 
 const handleCopyLink = () => {
     navigator.clipboard.writeText('https://spinsha.re/user/' + user.value.id);
-}
+};
 
 const handleOpenInBrowser = () => {
     window.external.sendMessage(

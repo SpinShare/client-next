@@ -18,11 +18,11 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 21.x
+          node-version: 22.x
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 9.0.x
       - name: Restore NuGet packages
         run: dotnet restore
       - name: Run tests

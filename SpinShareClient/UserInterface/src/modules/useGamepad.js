@@ -35,7 +35,9 @@ export const Buttons = Object.freeze({
  * @returns {string}
  */
 export const buttonIndexToString = (index) => {
-    return Object.keys(Buttons).find((key) => Buttons[key] === index).toLowerCase();
+    return Object.keys(Buttons)
+        .find((key) => Buttons[key] === index)
+        .toLowerCase();
 };
 
 /**

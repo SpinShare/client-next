@@ -154,17 +154,16 @@ button {
     }
 }
 .ui-console button {
-  padding: 0 20px;
-  height: 55px;
+    padding: 0 20px;
+    height: 55px;
 
-  & .mdi {
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-  }
-  &:focus {
-    outline: 3px solid rgba(var(--colorBaseText), 1);
-  }
+    & .mdi {
+        width: 32px;
+        height: 32px;
+        font-size: 24px;
+    }
+    &:focus {
+        outline: 3px solid rgba(var(--colorBaseText), 1);
+    }
 }
 </style>
-

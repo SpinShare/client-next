@@ -286,7 +286,7 @@ const handleReport = () => {
 
 const handleCopyLink = () => {
     navigator.clipboard.writeText('https://spinsha.re/song/' + chart.value.id);
-}
+};
 
 const handleAddToQueue = () => {
     window.external.sendMessage(

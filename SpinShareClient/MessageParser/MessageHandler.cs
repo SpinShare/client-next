@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using PhotinoNET;
+using Photino.NET;
 using Sentry;
 
 namespace SpinShareClient.MessageParser;

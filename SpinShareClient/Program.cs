@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PhotinoNET;
-using PhotinoNET.Server;
+using Photino.NET;
+using Photino.NET.Server;
 using Sentry;
 
 namespace SpinShareClient;
@@ -36,7 +36,7 @@ public class Program
             options.Debug = true;
             options.AutoSessionTracking = true;
             options.IsGlobalModeEnabled = true;
-            options.EnableTracing = true;
+            options.AttachStacktrace = true;
         });
         
         // Setting working directory
