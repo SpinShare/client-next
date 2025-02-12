@@ -32,8 +32,8 @@ jobs:
           sudo apt update
           sudo apt install flatpak flatpak-builder
           sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          sudo flatpak install org.gnome.Sdk/x86_64/45 -y
-          sudo flatpak install org.gnome.Platform/x86_64/45 -y
+          sudo flatpak install org.gnome.Sdk/x86_64/46 -y
+          sudo flatpak install org.gnome.Platform/x86_64/46 -y
         shell: bash
       - name: List Files
         run: |
