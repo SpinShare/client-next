@@ -22,7 +22,7 @@
 
             <header>
                 <img
-                    src="../assets/icon.svg"
+                    :src="SpinShareIcon"
                     alt="SpinShare Icon"
                 />
                 <div class="subheader">{{ t('setup.title') }}</div>
@@ -42,7 +42,7 @@
                     icon="arrow-left"
                     v-if="step !== 0 && step !== 4"
                     @click="handleBack"
-                    :disabled="!canContinue"
+                    :disabled="!canBack"
                 />
                 <SpinButton
                     :icon="step !== 4 ? 'arrow-right' : 'check'"
@@ -56,6 +56,7 @@
 
 <script setup>
 import { inject, onMounted } from 'vue';
+import SpinShareIcon from '@/assets/icon.svg?url';
 
 const emit = defineEmits(['back', 'continue']);
 const emitter = inject('emitter');

@@ -9,7 +9,7 @@
         >
             <aside>
                 <div class="brand">
-                    <img src="../../assets/logo.svg" />
+                    <SpinShareLogo />
                 </div>
                 <nav>
                     <router-link
@@ -104,6 +104,7 @@
 import useGamepad, { Buttons, focusableElements } from '@/modules/useGamepad';
 import { ref, inject, onMounted, onUnmounted, nextTick } from 'vue';
 import DownloadQueue from '@/components/DownloadQueue.vue';
+import SpinShareLogo from '@/assets/logo.svg?component';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';
@@ -214,7 +215,7 @@ onUnmounted(() => {
             justify-content: center;
             align-items: center;
 
-            & img {
+            & svg {
                 height: 45px;
             }
         }

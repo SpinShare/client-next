@@ -129,6 +129,7 @@ const handlePromoClick = (buttonData) => {
     & .item {
         display: grid;
         grid-template-columns: 1fr auto;
+        align-items: center;
         gap: 10px;
 
         & .cover {

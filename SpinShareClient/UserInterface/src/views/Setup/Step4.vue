@@ -7,7 +7,7 @@
         :can-continue="!savingSettings"
     >
         <img
-            src="@/assets/setup_finish.svg"
+            :src="setupFinishSvg"
             alt="SpinShare Setup Illustration"
         />
         <p>{{ t('setup.step4.text') }}</p>
@@ -18,6 +18,7 @@
 import { ref, inject } from 'vue';
 import router from '@/router';
 import SetupLayout from '@/layouts/SetupLayout.vue';
+import setupFinishSvg from '@/assets/setup_finish.svg?url';
 const emitter = inject('emitter');
 
 import { useI18n } from 'vue-i18n';

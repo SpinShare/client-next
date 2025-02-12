@@ -51,7 +51,7 @@ export default function useGamepad() {
     const isPressed = ref([]);
     const pressTime = new Array(17).fill(0); // for holding press time of each button
     const holdInterval = 0.2; // duration for button hold event timer in seconds
-
+    
     const pollGamepad = () => {
         gamepad = navigator.getGamepads()[0];
         if (gamepad) {
@@ -63,6 +63,7 @@ export default function useGamepad() {
                 const button = gamepad.buttons[i];
 
                 if (button.pressed && !isPressed[i]) {
+                    console.log(button);
                     emitter.emit('buttonPressed', i);
                     isPressed[i] = true;
                     pressTime[i] = currentTime; // store button press time

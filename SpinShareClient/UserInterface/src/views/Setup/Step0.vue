@@ -5,7 +5,7 @@
         @continue="handleContinue"
     >
         <img
-            src="@/assets/setup_start.svg"
+            :src="setupStartSvg"
             alt="SpinShare Setup Illustration"
         />
         <p>{{ t('setup.step0.text') }}</p>
@@ -15,6 +15,7 @@
 <script setup>
 import router from '@/router';
 import SetupLayout from '@/layouts/SetupLayout.vue';
+import setupStartSvg from '@/assets/setup_start.svg?url';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
