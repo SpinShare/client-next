@@ -1,6 +1,6 @@
 {
   "name": "spinshare-ui",
-  "version": "3.0.19",
+  "version": "3.0.20",
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir",
