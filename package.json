@@ -1,8 +1,8 @@
 {
   "name": "spinshare-client-next",
-  "productName": "spinshare-client-next",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "productName": "SpinShare",
+  "version": "3.1.0",
+  "description": "A cross-platform Spin Rhythm XD client",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -13,10 +13,10 @@
   },
   "keywords": [],
   "author": {
-    "name": "Laura Sofia Heimann",
-    "email": "hello@laura.media"
+    "name": "SpinShare",
+    "email": "wearespinshare@gmail.com"
   },
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "@electron-forge/cli": "^7.7.0",
     "@electron-forge/maker-flatpak": "^7.7.0",
