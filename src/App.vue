@@ -1,8 +1,16 @@
-<script setup>
-console.log('👋 This message is being logged by "App.vue", included via Vite');
-</script>
-
 <template>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <router-view v-slot="{ Component, route }">
+        <transition
+            :name="transitionName"
+            mode="out-in"
+        >
+            <component
+                :is="Component"
+                :key="route.path"
+            />
+        </transition>
+    </router-view>
 </template>
+
+<script setup>
+</script>

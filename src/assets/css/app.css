@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('./transitions.css');
 
 @theme {
     --font-sans: "Outfit Variable", sans-serif;
