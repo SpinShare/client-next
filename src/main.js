@@ -16,7 +16,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    backgroundColor: "#222",
+    backgroundColor: "#1e1f24",
     autoHideMenuBar: true,
   });
 

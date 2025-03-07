@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Outfit Variable", sans-serif;
+
+    --color-base: oklch(54.428% 0.02688 275);
+    --color-base-50: oklch(91.925% 0.0055 274.96);
+    --color-base-100: oklch(88.628% 0.00824 278.62);
+    --color-base-200: oklch(82.114% 0.01135 274.86);
+    --color-base-300: oklch(75.295% 0.01723 278.41);
+    --color-base-400: oklch(68.501% 0.02075 276.2);
+    --color-base-500: oklch(61.241% 0.02606 275.1);
+    --color-base-600: oklch(54.428% 0.02688 275);
+    --color-base-700: oklch(44.801% 0.02156 275.22);
+    --color-base-800: oklch(35.006% 0.01584 275.63);
+    --color-base-900: oklch(24.037% 0.00963 276.67);
+    --color-base-950: oklch(18.356% 0.00607 285.79);
+
+    --color-brand: oklch(54.528% 0.15925 1.3546);
+    --color-brand-50: oklch(92.782% 0.02369 354.3);
+    --color-brand-100: oklch(88.883% 0.03637 353.72);
+    --color-brand-200: oklch(81.692% 0.0623 355.07);
+    --color-brand-300: oklch(74.598% 0.08965 356.41);
+    --color-brand-400: oklch(67.421% 0.1184 357.35);
+    --color-brand-500: oklch(60.904% 0.14594 359.53);
+    --color-brand-600: oklch(54.528% 0.15925 1.3546);
+    --color-brand-700: oklch(45.461% 0.12972 1.1346);
+    --color-brand-800: oklch(35.755% 0.09719 0.34376);
+    --color-brand-900: oklch(25.343% 0.06088 0.33446);
+    --color-brand-950: oklch(19.613% 0.04273 358.09);
+
+    --ease-default: ease-in-out;
+    --ease-snappy: cubic-bezier(0,1,0,1);
+}
