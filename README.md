@@ -8,10 +8,19 @@ A modern cross-platform desktop client for SpinShare
 
 ### Setup
 #### Installing all dependencies
-TODO
+```
+npm install
+```
+
+#### Run in dev
+```
+npm run start
+```
 
 ### Building
-TODO
+```
+npm run package
+```
 
 ### Update translations
 TODO

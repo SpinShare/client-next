@@ -33,3 +33,10 @@
     --ease-default: ease-in-out;
     --ease-snappy: cubic-bezier(0,1,0,1);
 }
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+}
