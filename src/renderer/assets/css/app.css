@@ -1,8 +1,8 @@
-@import "tailwindcss";
-@import url('./transitions.css');
+@import url('transitions.css');
+@import 'tailwindcss';
 
 @theme {
-    --font-sans: "Outfit Variable", sans-serif;
+    --font-sans: 'Outfit Variable', sans-serif;
 
     --color-base: oklch(54.428% 0.02688 275);
     --color-base-50: oklch(91.925% 0.0055 274.96);
@@ -31,10 +31,11 @@
     --color-brand-950: oklch(19.613% 0.04273 358.09);
 
     --ease-default: ease-in-out;
-    --ease-snappy: cubic-bezier(0,1,0,1);
+    --ease-snappy: cubic-bezier(0, 1, 0, 1);
 }
 
-html, body {
+html,
+body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;

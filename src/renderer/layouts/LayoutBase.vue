@@ -1,14 +1,19 @@
 <template>
     <Sidebar :expanded="isExpanded" />
-    <main>
-        <button @click="isExpanded = !isExpanded">E</button>
-        <slot />
-    </main>
+    <transition
+        name="default"
+        mode="out-in"
+    >
+        <main>
+            <button @click="isExpanded = !isExpanded">E</button>
+            <slot />
+        </main>
+    </transition>
 </template>
 
 <script setup>
-import Sidebar from "@components/Sidebar/Sidebar.vue";
-import {ref} from "vue";
+import Sidebar from '@/renderer/components/Sidebar/Sidebar.vue';
+import { ref } from 'vue';
 
 const isExpanded = ref(false);
 </script>

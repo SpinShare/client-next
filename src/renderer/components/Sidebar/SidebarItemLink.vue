@@ -1,23 +1,30 @@
 <template>
-    <RouterLink :class="`item-link ${ expanded ? 'expanded' : 'mini' }`" :to="to">
-        <Remixicon :icon="icon" size="xl" :filled="isExactActive" />
+    <RouterLink
+        :class="`item-link ${expanded ? 'expanded' : 'mini'}`"
+        :to="to"
+    >
+        <Remixicon
+            :icon="icon"
+            size="xl"
+            :filled="isExactActive"
+        />
         <span class="label">{{ label }}</span>
     </RouterLink>
 </template>
 
 <script setup>
-import Remixicon from "@components/Remixicon.vue";
-import {useLink, useRoute} from "vue-router";
-import {computed} from "vue";
+import Remixicon from '@/renderer/components/Remixicon.vue';
+import { useLink, useRoute } from 'vue-router';
+import { computed } from 'vue';
 
 const props = defineProps({
     to: {},
-    label: "",
-    icon: "",
+    label: '',
+    icon: '',
     expanded: {
         type: Boolean,
         default: true,
-    }
+    },
 });
 
 const { isExactActive } = useLink(props);

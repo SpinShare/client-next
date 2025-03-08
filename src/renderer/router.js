@@ -1,6 +1,5 @@
 import * as VueRouter from 'vue-router';
-import ViewDiscover from "./views/ViewDiscover.vue";
-
+import ViewDiscover from './views/ViewDiscover.vue';
 
 const routes = [
     {

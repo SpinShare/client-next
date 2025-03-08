@@ -34,13 +34,13 @@
 <script setup lang="ts">
 import SpinShareIcon from '@images/logo_icon.svg?component';
 import SpinShareLogo from '@images/logo_full.svg?component';
-import SidebarItemLink from "@components/Sidebar/SidebarItemLink.vue";
+import SidebarItemLink from '@components/Sidebar/SidebarItemLink.vue';
 
 defineProps({
     expanded: {
         type: Boolean,
         default: true,
-    }
+    },
 });
 </script>
 

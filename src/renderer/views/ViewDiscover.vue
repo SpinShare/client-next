@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import LayoutBase from '@layouts/LayoutBase.vue';
+import LayoutBase from '@/renderer/layouts/LayoutBase.vue';
 </script>
 
 <style>
