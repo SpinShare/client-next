@@ -5,9 +5,9 @@
 </template>
 
 <script setup>
-import LayoutSetup from '@/renderer/layouts/LayoutSetup.vue';
+import LayoutSetup from '@/layouts/LayoutSetup.vue';
 </script>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 </style>

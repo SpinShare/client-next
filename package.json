@@ -37,6 +37,7 @@
     },
     "dependencies": {
         "@fontsource-variable/outfit": "^5.2.5",
+        "@spinshare/api-js": "^2.1.2",
         "@tailwindcss/vite": "^4.0.11",
         "@vue/eslint-config-prettier": "^10.2.0",
         "electron-squirrel-startup": "^1.0.1",

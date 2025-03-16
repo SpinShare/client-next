@@ -7,7 +7,7 @@
 <script setup></script>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 
 main {
     @apply bg-base-850;

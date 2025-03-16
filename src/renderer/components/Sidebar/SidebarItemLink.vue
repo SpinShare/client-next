@@ -13,14 +13,19 @@
 </template>
 
 <script setup>
-import Remixicon from '@/renderer/components/Remixicon.vue';
-import { useLink, useRoute } from 'vue-router';
-import { computed } from 'vue';
+import Remixicon from '@/components/Remixicon.vue';
+import { useLink } from 'vue-router';
 
 const props = defineProps({
     to: {},
-    label: '',
-    icon: '',
+    label: {
+        type: String,
+        default: '',
+    },
+    icon: {
+        type: String,
+        default: '',
+    },
     expanded: {
         type: Boolean,
         default: true,
@@ -31,7 +36,7 @@ const { isExactActive } = useLink(props);
 </script>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 
 .item-link {
     @apply h-[45px] transition-all rounded flex items-center;

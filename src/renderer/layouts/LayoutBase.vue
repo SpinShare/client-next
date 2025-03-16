@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import Sidebar from '@/renderer/components/Sidebar/Sidebar.vue';
+import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import { ref } from 'vue';
 
 const isExpanded = ref(false);
@@ -25,7 +25,7 @@ const isExpanded = ref(false);
 </style>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 
 main {
     @apply flex flex-col overflow-y-scroll;

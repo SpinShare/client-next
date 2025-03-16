@@ -40,5 +40,5 @@ defineProps({
 </script>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 </style>

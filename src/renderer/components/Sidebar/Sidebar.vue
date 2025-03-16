@@ -31,10 +31,10 @@
     </aside>
 </template>
 
-<script setup lang="ts">
-import SpinShareIcon from '@images/logo_icon.svg?component';
-import SpinShareLogo from '@images/logo_full.svg?component';
-import SidebarItemLink from '@components/Sidebar/SidebarItemLink.vue';
+<script setup>
+import SpinShareIcon from '@/assets/images/logo_icon.svg?component';
+import SpinShareLogo from '@/assets/images/logo_full.svg?component';
+import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
 
 defineProps({
     expanded: {
@@ -45,7 +45,7 @@ defineProps({
 </script>
 
 <style scoped>
-@reference "@css/app.css";
+@reference "@/assets/css/app.css";
 
 aside {
     @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[auto_1fr_auto] gap-2 transition-all ease-snappy;
