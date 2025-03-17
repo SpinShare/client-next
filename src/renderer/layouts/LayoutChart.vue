@@ -1,28 +1,24 @@
 <template>
     <LayoutBase>
         <header>
-            Chart Header
+            {{ chart }}
         </header>
         <nav>
             <TabList>
                 <TabItemLink
                     :to="`/chart/${chartId}`"
-                    icon="settings-2"
                     label="Detail"
                 />
                 <TabItemLink
                     :to="`/chart/${chartId}/reviews`"
-                    icon="settings-2"
                     label="Reviews"
                 />
                 <TabItemLink
                     :to="`/chart/${chartId}/playlists`"
-                    icon="settings-2"
                     label="Playlists"
                 />
                 <TabItemLink
                     :to="`/chart/${chartId}/spinplays`"
-                    icon="settings-2"
                     label="SpinPlays"
                 />
             </TabList>
@@ -36,14 +32,17 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import TabList from "@/components/Tabs/TabList.vue";
 import TabItemLink from "@/components/Tabs/TabItemLink.vue";
 
+const api = inject('api');
 const route = useRoute();
 const chartId = route.params.chartId;
+const chart = ref(null);
 
-onMounted(() => {
+onMounted(async () => {
+    chart.value = await api.getChart(chartId);
 });
 </script>
 

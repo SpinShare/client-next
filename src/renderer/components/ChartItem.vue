@@ -2,7 +2,6 @@
     <RouterLink
         :to="`/chart/${id}`"
         :class="`chart-item ${isExplicit ? 'explicit' : ''}`"
-        @click="handleClick"
     >
         <div
             class="cover"
@@ -117,11 +116,6 @@ const props = defineProps({
         default: false,
     },
 });
-
-function handleClick() {
-    // TODO: Handle Click
-    console.log('TODO');
-}
 </script>
 
 <style scoped>
