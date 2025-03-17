@@ -41,3 +41,6 @@ body {
     overflow: hidden;
     display: flex;
 }
+#app {
+    @apply grid grow overflow-hidden;
+}

@@ -13,14 +13,27 @@
                 :expanded="expanded"
             />
             <SidebarItemLink
-                to="/setup"
-                label="Test"
-                icon="settings-2"
+                to="/discover/search"
+                label="Search"
+                icon="search"
+                :expanded="expanded"
+            />
+            <SidebarItemLink
+                to="/discover/new/0"
+                label="Newest Charts"
+                icon="shapes"
+                :expanded="expanded"
+            />
+            <SidebarItemLink
+                to="/library"
+                label="Library"
+                icon="archive"
                 :expanded="expanded"
             />
         </nav>
 
         <nav>
+            <SidebarExpandedToggle :expanded="expanded" />
             <SidebarItemLink
                 to="/settings"
                 label="Settings"
@@ -35,6 +48,7 @@
 import SpinShareIcon from '@/assets/images/logo_icon.svg?component';
 import SpinShareLogo from '@/assets/images/logo_full.svg?component';
 import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
+import SidebarExpandedToggle from '@/components/Sidebar/SidebarExpandedToggle.vue';
 
 defineProps({
     expanded: {

@@ -1,7 +1,9 @@
 <template>
-    <main>
-        <slot />
-    </main>
+    <div class="layout-setup">
+        <main>
+            <slot />
+        </main>
+    </div>
 </template>
 
 <script setup></script>
@@ -9,7 +11,10 @@
 <style scoped>
 @reference "@/assets/css/app.css";
 
+.layout-setup {
+    @apply flex items-center justify-center grow overflow-hidden;
+}
 main {
-    @apply bg-base-850;
+    @apply bg-base-800 rounded p-4;
 }
 </style>

@@ -1,6 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+import { SpinShareClient } from '@spinshare/api-js';
+import { setupApiHandlers } from './main/api';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -38,6 +40,9 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow();
+
+    const apiClient = new SpinShareClient();
+    setupApiHandlers(apiClient);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
