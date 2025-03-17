@@ -1,5 +1,6 @@
 <template>
-    <button
+    <RouterLink
+        :to="`/chart/${id}`"
         :class="`chart-item ${isExplicit ? 'explicit' : ''}`"
         @click="handleClick"
     >
@@ -42,7 +43,7 @@
             </div>
         </div>
         <div class="explicit-label" v-if="isExplicit">Explicit Content &ndash; Hover to reveal</div>
-    </button>
+    </RouterLink>
 </template>
 
 <script setup>
