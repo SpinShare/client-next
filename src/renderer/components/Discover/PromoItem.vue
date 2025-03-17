@@ -53,7 +53,7 @@ function handleClick() {
 }
 </script>
 
-<style>
+<style scoped>
 @reference "@/assets/css/app.css";
 
 .promo-item {

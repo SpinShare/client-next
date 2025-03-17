@@ -1,13 +1,10 @@
 <template>
-    <LayoutBase>
-        <h1>Chart Reviews</h1>
-    </LayoutBase>
+    <h1>Chart Reviews</h1>
 </template>
 
 <script setup>
-import LayoutBase from '@/layouts/LayoutBase.vue';
 </script>
 
-<style>
+<style scoped>
 @reference "@/assets/css/app.css";
 </style>

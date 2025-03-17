@@ -6,7 +6,7 @@
 
 <script setup></script>
 
-<style>
+<style scoped>
 @reference "@/assets/css/app.css";
 
 .chart-grid {

@@ -60,7 +60,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 @reference "@/assets/css/app.css";
 
 .page-discover {

@@ -19,6 +19,7 @@ import ViewSettings from '@/views/ViewSettings.vue';
 import ViewLibrary from '@/views/Library/ViewLibrary.vue';
 import ViewLibraryCleanup from '@/views/Library/ViewLibraryCleanup.vue';
 import ViewSetupGeneral from '@/views/Setup/ViewSetupGeneral.vue';
+import LayoutChart from "@/layouts/LayoutChart.vue";
 
 const routes = [
     {
@@ -51,19 +52,25 @@ const routes = [
     },
     {
         path: '/chart/:chartId',
-        component: ViewChartDetail,
-    },
-    {
-        path: '/chart/:chartId/playlists',
-        component: ViewChartPlaylists,
-    },
-    {
-        path: '/chart/:chartId/reviews',
-        component: ViewChartReviews,
-    },
-    {
-        path: '/chart/:chartId/spinplays',
-        component: ViewChartSpinPlays,
+        component: LayoutChart,
+        children: [
+            {
+                path: '',
+                component: ViewChartDetail,
+            },
+            {
+                path: 'playlists',
+                component: ViewChartPlaylists,
+            },
+            {
+                path: 'reviews',
+                component: ViewChartReviews,
+            },
+            {
+                path: 'spinplays',
+                component: ViewChartSpinPlays,
+            },
+        ]
     },
     {
         path: '/playlist/:playlistId',
