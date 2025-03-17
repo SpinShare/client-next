@@ -4,7 +4,13 @@
         @click="toggleExpanded"
     >
         <Remixicon
-            icon="expand"
+            v-if="!expanded"
+            icon="sidebar-unfold"
+            size="xl"
+        />
+        <Remixicon
+            v-if="expanded"
+            icon="sidebar-fold"
             size="xl"
         />
         <span class="label">Toggle Sidebar</span>

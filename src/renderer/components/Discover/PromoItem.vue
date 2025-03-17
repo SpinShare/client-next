@@ -1,5 +1,8 @@
 <template>
-    <section class="promo-item">
+    <button
+        class="promo-item"
+        @click="handleClick"
+    >
         <div
             class="banner"
             :style="`background-image: url('${image_path}')`"
@@ -8,7 +11,7 @@
             <h5>{{ type }}</h5>
             <h1>{{ strippedTitle }}</h1>
         </div>
-    </section>
+    </button>
 </template>
 
 <script setup>
@@ -43,13 +46,18 @@ function stripHtml(html) {
     return doc.body.textContent || '';
 }
 const strippedTitle = computed(() => stripHtml(props.title));
+
+function handleClick() {
+    // TODO: Handle Click
+    console.log('TODO');
+}
 </script>
 
 <style>
 @reference "@/assets/css/app.css";
 
 .promo-item {
-    @apply bg-base-800 rounded overflow-hidden transition-all cursor-pointer;
+    @apply bg-base-800 rounded-md overflow-hidden transition-all cursor-pointer text-left;
 
     & .banner {
         @apply bg-cover bg-center;

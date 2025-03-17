@@ -5,4 +5,5 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('api', {
     getPromos: async () => ipcRenderer.invoke('get-promos'),
+    getPlaylist: async (playlistId) => ipcRenderer.invoke('get-playlist', playlistId),
 });

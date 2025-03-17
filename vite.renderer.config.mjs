@@ -11,9 +11,7 @@ export default defineConfig({
         alias: [
             {
                 find: '@',
-                replacement: fileURLToPath(
-                    new URL('./src/renderer', import.meta.url),
-                ),
+                replacement: fileURLToPath(new URL('./src/renderer', import.meta.url)),
             },
         ],
     },

@@ -1,7 +1,5 @@
 <template>
-    <span
-        :class="`icon ri-${icon}-${filled ? 'fill' : 'line'} ${sizes[size]}`"
-    ></span>
+    <span :class="`icon ri-${icon}-${filled ? 'fill' : 'line'} ${sizes[size]}`"></span>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-    <section class="promo-grid">
+    <section class="chart-grid">
         <slot />
     </section>
 </template>
@@ -9,11 +9,11 @@
 <style>
 @reference "@/assets/css/app.css";
 
-.promo-grid {
+.chart-grid {
     @apply grid grid-cols-1 gap-5 px-10;
 }
 @media screen and (min-width: 1100px) {
-    .promo-grid {
+    .chart-grid {
         @apply grid-cols-2;
     }
 }

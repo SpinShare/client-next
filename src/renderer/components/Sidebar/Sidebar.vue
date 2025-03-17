@@ -21,13 +21,13 @@
             <SidebarItemLink
                 to="/discover/new/0"
                 label="Newest Charts"
-                icon="shapes"
+                icon="compass-discover"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/library"
                 label="Library"
-                icon="archive"
+                icon="book-shelf"
                 :expanded="expanded"
             />
         </nav>
