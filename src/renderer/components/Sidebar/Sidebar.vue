@@ -8,7 +8,7 @@
         <nav>
             <SidebarItemLink
                 to="/"
-                label="Discover"
+                label="Frontpage"
                 icon="dashboard"
                 :expanded="expanded"
             />
@@ -20,7 +20,7 @@
             />
             <SidebarItemLink
                 to="/discover/new/0"
-                label="Newest Charts"
+                label="Discover"
                 icon="compass-discover"
                 :expanded="expanded"
             />
@@ -38,6 +38,12 @@
                 to="/settings"
                 label="Settings"
                 icon="settings-2"
+                :expanded="expanded"
+            />
+            <SidebarItemLink
+                to="/login"
+                label="Login"
+                icon="key"
                 :expanded="expanded"
             />
         </nav>
