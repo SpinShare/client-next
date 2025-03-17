@@ -10,7 +10,7 @@
 @reference "@/assets/css/app.css";
 
 .chart-grid {
-    @apply grid grid-cols-1 gap-5 px-10;
+    @apply grid grid-cols-1 gap-3;
 }
 @media screen and (min-width: 1100px) {
     .chart-grid {

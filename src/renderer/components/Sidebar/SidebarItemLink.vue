@@ -42,10 +42,10 @@ const { isExactActive } = useLink(props);
     @apply h-[45px] transition-all rounded flex items-center;
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-900 cursor-pointer;
     }
     &.router-link-exact-active {
-        @apply bg-base-800;
+        @apply bg-brand-800 text-brand-50;
     }
 
     &.expanded {

@@ -57,7 +57,7 @@ function handleClick() {
 @reference "@/assets/css/app.css";
 
 .promo-item {
-    @apply bg-base-800 rounded-md overflow-hidden transition-all cursor-pointer text-left;
+    @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
 
     & .banner {
         @apply bg-cover bg-center;
@@ -75,7 +75,7 @@ function handleClick() {
     }
 
     &:hover {
-        @apply bg-base-700;
+        @apply bg-base-800;
 
         & .content {
             & h5 {

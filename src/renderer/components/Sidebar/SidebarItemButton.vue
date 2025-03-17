@@ -1,47 +1,50 @@
 <template>
     <button
-        :class="`item-expanded-toggle ${expanded ? 'expanded' : 'mini'}`"
-        @click="toggleExpanded"
+        :class="`item-button ${expanded ? 'expanded' : 'mini'}`"
     >
         <Remixicon
-            v-if="!expanded"
-            icon="sidebar-unfold"
+            :icon="icon"
             size="xl"
+            :filled="active"
         />
-        <Remixicon
-            v-if="expanded"
-            icon="sidebar-fold"
-            size="xl"
-        />
-        <span class="label">Toggle Sidebar</span>
+        <span class="label">{{ label }}</span>
     </button>
 </template>
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import { inject } from 'vue';
 
-const mitt = inject('mitt');
 const props = defineProps({
+    label: {
+        type: String,
+        default: '',
+    },
+    icon: {
+        type: String,
+        default: '',
+    },
     expanded: {
         type: Boolean,
         default: true,
     },
+    active: {
+        type: Boolean,
+        default: false,
+    },
 });
-
-function toggleExpanded() {
-    mitt.emit('toggle-sidebar-expanded', !props.expanded);
-}
 </script>
 
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.item-expanded-toggle {
+.item-button {
     @apply h-[45px] transition-all rounded flex items-center;
 
     &:hover {
         @apply bg-base-900 cursor-pointer;
+    }
+    &.active {
+        @apply bg-brand-800 text-brand-50;
     }
 
     &.expanded {

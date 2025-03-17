@@ -127,7 +127,7 @@ function handleClick() {
 @reference "@/assets/css/app.css";
 
 .chart-item {
-    @apply bg-base-800 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
+    @apply bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
 
     &.explicit {
         & .explicit-label {
@@ -144,7 +144,7 @@ function handleClick() {
     }
 
     & .cover {
-        @apply aspect-square w-[80px] rounded;
+        @apply aspect-square w-[80px] rounded bg-center bg-cover;
     }
     & .content {
         @apply flex flex-col gap-3;
@@ -183,7 +183,7 @@ function handleClick() {
                         @apply font-bold;
                     }
                     &.active {
-                        @apply opacity-100 bg-base-900;
+                        @apply opacity-100 bg-base-950;
                     }
                 }
             }
@@ -191,7 +191,7 @@ function handleClick() {
     }
 
     &:hover {
-        @apply bg-base-700;
+        @apply bg-base-800;
     }
 }
 </style>

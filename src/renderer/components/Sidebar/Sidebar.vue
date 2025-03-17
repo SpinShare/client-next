@@ -34,6 +34,11 @@
 
         <nav>
             <SidebarExpandedToggle :expanded="expanded" />
+            <SidebarItemButton
+                label="Downloads"
+                icon="download"
+                :expanded="expanded"
+            />
             <SidebarItemLink
                 to="/settings"
                 label="Settings"
@@ -55,6 +60,7 @@ import SpinShareIcon from '@/assets/images/logo_icon.svg?component';
 import SpinShareLogo from '@/assets/images/logo_full.svg?component';
 import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
 import SidebarExpandedToggle from '@/components/Sidebar/SidebarExpandedToggle.vue';
+import SidebarItemButton from "@/components/Sidebar/SidebarItemButton.vue";
 
 defineProps({
     expanded: {
