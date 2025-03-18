@@ -10,9 +10,9 @@
         <div class="content">
             <div class="meta">
                 <h2>{{ title }}</h2>
-                <p>{{ artist }}</p>
+                <p>{{ artist }} &bull; {{ charter }}</p>
             </div>
-            <div class="actions">
+            <div class="info">
                 <!--
                     <div class="installation-status installed">Installed</div>
                     <div class="installation-status update">Update</div>
@@ -151,10 +151,10 @@ const props = defineProps({
                 @apply text-lg mb-[-3px] line-clamp-1;
             }
             & p {
-                @apply text-base-300 line-clamp-1;
+                @apply text-base-400 line-clamp-1;
             }
         }
-        & .actions {
+        & .info {
             @apply flex flex-wrap gap-2;
 
             & .installation-status {
