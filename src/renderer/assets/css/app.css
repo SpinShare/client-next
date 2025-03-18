@@ -75,4 +75,15 @@ body {
     &:disabled, &.disabled {
         @apply cursor-not-allowed opacity-60;
     }
+
+    &.brand {
+        @apply bg-brand-800 text-brand-50;
+
+        &:not(:disabled):not(.disabled):hover {
+            @apply bg-brand-700;
+        }
+    }
+    &.ghost {
+        @apply bg-transparent;
+    }
 }

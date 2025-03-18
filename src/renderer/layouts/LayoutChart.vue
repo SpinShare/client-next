@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="button">
+                        <button class="button brand">
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
                         </button>
