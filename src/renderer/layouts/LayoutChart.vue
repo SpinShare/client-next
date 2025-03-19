@@ -81,7 +81,7 @@
                 </TabList>
             </nav>
             <main>
-                <router-view />
+                <router-view :chart="chart" />
             </main>
         </template>
     </LayoutBase>
