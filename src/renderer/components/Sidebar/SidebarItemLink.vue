@@ -1,12 +1,12 @@
 <template>
     <RouterLink
-        :class="`item-link ${expanded ? 'expanded' : 'mini'}`"
+        :class="`item-link ${expanded ? 'expanded' : 'mini'} ${active ? 'active' : ''}`"
         :to="to"
     >
         <Remixicon
             :icon="icon"
             size="xl"
-            :filled="isExactActive"
+            :filled="active || isExactActive"
         />
         <span class="label">{{ label }}</span>
     </RouterLink>
@@ -26,6 +26,10 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    active: {
+        type: Boolean,
+        default: false,
+    },
     expanded: {
         type: Boolean,
         default: true,
@@ -44,7 +48,8 @@ const { isExactActive } = useLink(props);
     &:hover {
         @apply bg-base-900 cursor-pointer;
     }
-    &.router-link-exact-active {
+    &.router-link-exact-active,
+    &.active {
         @apply bg-brand-800 text-brand-50;
     }
 

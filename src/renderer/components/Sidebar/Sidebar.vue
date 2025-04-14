@@ -11,24 +11,28 @@
                 to="/discover/new/0"
                 label="Newest"
                 icon="history"
+                :active="route.fullPath.includes('new/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/updated/0"
                 label="Updated"
                 icon="loop-left"
+                :active="route.fullPath.includes('updated/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/hotThisWeek/0"
                 label="Hot this week"
                 icon="fire"
+                :active="route.fullPath.includes('hotThisWeek/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/hotThisMonth/0"
                 label="Hot this month"
                 icon="fire"
+                :active="route.fullPath.includes('hotThisMonth/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
@@ -60,6 +64,7 @@
 import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
 import SidebarExpandedToggle from '@/components/Sidebar/SidebarExpandedToggle.vue';
 import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
+import { useRoute } from 'vue-router';
 
 defineProps({
     expanded: {
@@ -67,6 +72,8 @@ defineProps({
         default: true,
     },
 });
+
+const route = useRoute();
 </script>
 
 <style scoped>

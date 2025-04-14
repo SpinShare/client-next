@@ -1,6 +1,6 @@
 <template>
     <RouterLink
-        :class="`item-link`"
+        :class="`item-link ${active ? 'active' : ''}`"
         :to="to"
     >
         <span class="label">{{ label }}</span>
@@ -16,6 +16,10 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    active: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const { isExactActive } = useLink(props);
@@ -30,7 +34,8 @@ const { isExactActive } = useLink(props);
     &:hover {
         @apply cursor-pointer border-b-base-400 text-base-50;
     }
-    &.router-link-exact-active {
+    &.router-link-exact-active,
+    &.active {
         @apply text-brand-500 border-b-brand-500;
     }
 }

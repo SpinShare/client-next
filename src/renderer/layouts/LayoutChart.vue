@@ -1,8 +1,6 @@
 <template>
     <LayoutBase>
-        <template v-if="!chart">
-            Loading
-        </template>
+        <template v-if="!chart"> Loading </template>
         <template v-else>
             <header>
                 <div
@@ -49,13 +47,22 @@
                             <span>Add to queue</span>
                         </button>
                         <button class="button">
-                            <Remixicon icon="play" filled />
+                            <Remixicon
+                                icon="play"
+                                filled
+                            />
                         </button>
                         <button class="button">
-                            <Remixicon icon="external-link" filled />
+                            <Remixicon
+                                icon="external-link"
+                                filled
+                            />
                         </button>
                         <button class="button">
-                            <Remixicon icon="flag-2" filled />
+                            <Remixicon
+                                icon="flag-2"
+                                filled
+                            />
                         </button>
                     </div>
                 </div>
@@ -89,11 +96,11 @@
 
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
-import {useRoute} from "vue-router";
-import {inject, onMounted, ref} from "vue";
-import TabList from "@/components/Tabs/TabList.vue";
-import TabItemLink from "@/components/Tabs/TabItemLink.vue";
-import Remixicon from "@/components/Remixicon.vue";
+import { useRoute } from 'vue-router';
+import { inject, onMounted, ref } from 'vue';
+import TabList from '@/components/Tabs/TabList.vue';
+import TabItemLink from '@/components/Tabs/TabItemLink.vue';
+import Remixicon from '@/components/Remixicon.vue';
 
 const api = inject('api');
 const route = useRoute();
@@ -101,7 +108,7 @@ const chartId = route.params.chartId;
 const chart = ref(null);
 
 onMounted(async () => {
-    chart.value = await api.getChart(chartId);
+    chart.value = await api.getChartDetail(chartId);
 });
 </script>
 
@@ -110,7 +117,6 @@ onMounted(async () => {
 
 header {
     @apply p-10 grid grid-cols-[auto_1fr] gap-4 items-center;
-
 
     & .cover {
         @apply aspect-square w-[172px] rounded bg-center bg-cover;

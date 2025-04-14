@@ -20,6 +20,7 @@ import ViewLibrary from '@/views/Library/ViewLibrary.vue';
 import ViewLibraryCleanup from '@/views/Library/ViewLibraryCleanup.vue';
 import ViewSetupGeneral from '@/views/Setup/ViewSetupGeneral.vue';
 import LayoutChart from '@/layouts/LayoutChart.vue';
+import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
 
 const routes = [
     {
@@ -35,20 +36,26 @@ const routes = [
         component: ViewDiscoverStaffpicks,
     },
     {
-        path: '/discover/new/:page',
-        component: ViewDiscoverNew,
-    },
-    {
-        path: '/discover/updated/:page',
-        component: ViewDiscoverUpdated,
-    },
-    {
-        path: '/discover/hotThisWeek/:page',
-        component: ViewDiscoverHotThisWeek,
-    },
-    {
-        path: '/discover/hotThisMonth/:page',
-        component: ViewDiscoverHotThisMonth,
+        path: '/discover',
+        component: LayoutDiscover,
+        children: [
+            {
+                path: 'new/:page',
+                component: ViewDiscoverNew,
+            },
+            {
+                path: 'updated/:page',
+                component: ViewDiscoverUpdated,
+            },
+            {
+                path: 'hotThisWeek/:page',
+                component: ViewDiscoverHotThisWeek,
+            },
+            {
+                path: 'hotThisMonth/:page',
+                component: ViewDiscoverHotThisMonth,
+            },
+        ],
     },
     {
         path: '/chart/:chartId',

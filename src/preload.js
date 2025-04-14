@@ -4,7 +4,16 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('api', {
+    getClientLatestVersion: async () => ipcRenderer.invoke('get-client-latest-version'),
     getPromos: async () => ipcRenderer.invoke('get-promos'),
-    getChart: async (chartIdOrReference) => ipcRenderer.invoke('get-chart', chartIdOrReference),
+    getChartDetail: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-detail', chartIdOrReference),
+    getChartReviews: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-reviews', chartIdOrReference),
+    getChartPlaylists: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-playlists', chartIdOrReference),
+    getChartSpinPlays: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-spinplays', chartIdOrReference),
+    getChartDownload: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-download', chartIdOrReference),
     getPlaylist: async (playlistId) => ipcRenderer.invoke('get-playlist', playlistId),
+    getNewCharts: async (page) => ipcRenderer.invoke('get-new-charts', page),
+    getUpdatedCharts: async (page) => ipcRenderer.invoke('get-updated-charts', page),
+    getHotThisWeekCharts: async (page) => ipcRenderer.invoke('get-hot-this-week-charts', page),
+    getHotThisMonthCharts: async (page) => ipcRenderer.invoke('get-hot-this-month-charts', page),
 });
