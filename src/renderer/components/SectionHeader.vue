@@ -12,7 +12,7 @@ defineProps({
     title: {
         type: String,
         required: true,
-    }
+    },
 });
 </script>
 
@@ -23,7 +23,7 @@ header {
     @apply flex gap-2 items-center;
 
     & h1 {
-        @apply grow text-3xl font-bold;
+        @apply grow text-2xl font-bold;
     }
     & .actions {
         @apply flex items-center gap-1;

@@ -1,10 +1,5 @@
 <template>
     <aside :class="`${expanded ? 'expanded' : 'mini'}`">
-        <div class="brand">
-            <SpinShareIcon class="icon" />
-            <SpinShareLogo class="full" />
-        </div>
-
         <nav>
             <SidebarItemLink
                 to="/"
@@ -13,15 +8,27 @@
                 :expanded="expanded"
             />
             <SidebarItemLink
-                to="/discover/search"
-                label="Search"
-                icon="search"
+                to="/discover/new/0"
+                label="Newest"
+                icon="history"
                 :expanded="expanded"
             />
             <SidebarItemLink
-                to="/discover/new/0"
-                label="Discover"
-                icon="compass-discover"
+                to="/discover/updated/0"
+                label="Updated"
+                icon="loop-left"
+                :expanded="expanded"
+            />
+            <SidebarItemLink
+                to="/discover/hotThisWeek/0"
+                label="Hot this week"
+                icon="fire"
+                :expanded="expanded"
+            />
+            <SidebarItemLink
+                to="/discover/hotThisMonth/0"
+                label="Hot this month"
+                icon="fire"
                 :expanded="expanded"
             />
             <SidebarItemLink
@@ -45,22 +52,14 @@
                 icon="settings-2"
                 :expanded="expanded"
             />
-            <SidebarItemLink
-                to="/login"
-                label="Login"
-                icon="key"
-                :expanded="expanded"
-            />
         </nav>
     </aside>
 </template>
 
 <script setup>
-import SpinShareIcon from '@/assets/images/logo_icon.svg?component';
-import SpinShareLogo from '@/assets/images/logo_full.svg?component';
 import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
 import SidebarExpandedToggle from '@/components/Sidebar/SidebarExpandedToggle.vue';
-import SidebarItemButton from "@/components/Sidebar/SidebarItemButton.vue";
+import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
 
 defineProps({
     expanded: {
@@ -74,48 +73,17 @@ defineProps({
 @reference "@/assets/css/app.css";
 
 aside {
-    @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[auto_1fr_auto] gap-2 transition-all ease-snappy;
-
-    & .brand {
-        @apply flex items-center justify-center;
-
-        & .icon {
-            @apply h-[30px];
-        }
-        & .full {
-            @apply h-[30px];
-        }
-    }
+    @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy;
 
     & nav {
-        @apply flex justify-center gap-2 flex-col;
+        @apply flex gap-2 flex-col;
     }
 
     &.expanded {
         @apply w-[275px] p-4;
-
-        & .brand {
-            & .icon {
-                @apply hidden;
-            }
-            & .full {
-                @apply block;
-            }
-        }
     }
     &.mini {
         @apply justify-center;
-
-        & .brand {
-            @apply justify-center;
-
-            & .icon {
-                @apply block;
-            }
-            & .full {
-                @apply hidden;
-            }
-        }
 
         & nav {
             @apply items-center;

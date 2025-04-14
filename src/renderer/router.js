@@ -19,7 +19,7 @@ import ViewSettings from '@/views/ViewSettings.vue';
 import ViewLibrary from '@/views/Library/ViewLibrary.vue';
 import ViewLibraryCleanup from '@/views/Library/ViewLibraryCleanup.vue';
 import ViewSetupGeneral from '@/views/Setup/ViewSetupGeneral.vue';
-import LayoutChart from "@/layouts/LayoutChart.vue";
+import LayoutChart from '@/layouts/LayoutChart.vue';
 
 const routes = [
     {
@@ -70,7 +70,7 @@ const routes = [
                 path: 'spinplays',
                 component: ViewChartSpinPlays,
             },
-        ]
+        ],
     },
     {
         path: '/playlist/:playlistId',
@@ -113,6 +113,11 @@ const routes = [
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
     routes,
+});
+
+router.beforeEach((_to, from, next) => {
+    router.from = from;
+    next();
 });
 
 export default router;

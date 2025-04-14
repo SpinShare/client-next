@@ -41,7 +41,12 @@
                 </div>
             </div>
         </div>
-        <div class="explicit-label" v-if="isExplicit">Explicit Content &ndash; Hover to reveal</div>
+        <div
+            class="explicit-label"
+            v-if="isExplicit"
+        >
+            Explicit Content &ndash; Hover to reveal
+        </div>
     </RouterLink>
 </template>
 
@@ -148,7 +153,7 @@ const props = defineProps({
             @apply flex flex-col;
 
             & h2 {
-                @apply text-lg mb-[-3px] line-clamp-1;
+                @apply mb-[-3px] line-clamp-1;
             }
             & p {
                 @apply text-base-400 line-clamp-1;

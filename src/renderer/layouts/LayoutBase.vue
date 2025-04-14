@@ -1,5 +1,6 @@
 <template>
     <div class="layout-base">
+        <Header />
         <Sidebar :expanded="isExpanded" />
         <transition
             name="default"
@@ -15,9 +16,11 @@
 <script setup>
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
+import Header from '@/components/Header/Header.vue';
+import { useStorage } from '@vueuse/core';
 
 const mitt = inject('mitt');
-const isExpanded = ref(false);
+const isExpanded = useStorage('sidebar-extended', false);
 
 onMounted(() => {
     mitt.on('toggle-sidebar-expanded', (expanded) => {
@@ -34,7 +37,7 @@ onUnmounted(() => {
 @reference "@/assets/css/app.css";
 
 .layout-base {
-    @apply grid grid-cols-[auto_1fr] grow overflow-hidden;
+    @apply grid grid-rows-[auto_1fr] grid-cols-[auto_1fr] grow overflow-hidden;
 }
 main {
     @apply flex flex-col overflow-y-scroll;
