@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { SpinShareClient } from '@spinshare/api-js';
@@ -49,5 +49,25 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
+    }
+});
+
+ipcMain.handle('open-url', async (event, url) => {
+    try {
+        await shell.openExternal(url);
+        return { success: true };
+    } catch (error) {
+        console.error('Error opening URL:', error);
+        return { success: false, error: error.message };
+    }
+});
+
+ipcMain.handle('open-folder', async (event, folderPath) => {
+    try {
+        await shell.openPath(folderPath);
+        return { success: true };
+    } catch (error) {
+        console.error('Error opening folder:', error);
+        return { success: false, error: error.message };
     }
 });

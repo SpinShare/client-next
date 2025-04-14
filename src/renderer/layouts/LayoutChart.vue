@@ -2,6 +2,11 @@
     <LayoutBase>
         <template v-if="!chart"> Loading </template>
         <template v-else>
+            <audio
+                ref="chartPreview"
+                :src="chart.paths.ogg"
+            />
+
             <header>
                 <div
                     class="cover"
@@ -46,19 +51,41 @@
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
                         </button>
-                        <button class="button">
-                            <Remixicon
-                                icon="play"
-                                filled
-                            />
-                        </button>
-                        <button class="button">
+                        <template v-if="chartPreview">
+                            <button
+                                class="button"
+                                v-if="!isPreviewPlaying"
+                                @click="playPreview"
+                            >
+                                <Remixicon
+                                    icon="play"
+                                    filled
+                                />
+                            </button>
+                            <button
+                                class="button"
+                                v-if="isPreviewPlaying"
+                                @click="stopPreview"
+                            >
+                                <Remixicon
+                                    icon="stop"
+                                    filled
+                                />
+                            </button>
+                        </template>
+                        <button
+                            class="button"
+                            @click="handleOpenUrl"
+                        >
                             <Remixicon
                                 icon="external-link"
                                 filled
                             />
                         </button>
-                        <button class="button">
+                        <button
+                            class="button"
+                            @click="handleOpenReport"
+                        >
                             <Remixicon
                                 icon="flag-2"
                                 filled
@@ -97,19 +124,58 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import { inject, onMounted, ref } from 'vue';
+import { inject, onMounted, onUnmounted, ref } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
 
 const api = inject('api');
+const externalApi = inject('externalApi');
 const route = useRoute();
 const chartId = route.params.chartId;
 const chart = ref(null);
 
+const chartPreview = ref(null);
+const chartPreviewTimeout = ref(null);
+const isPreviewPlaying = ref(false);
+
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId);
 });
+
+onUnmounted(() => {
+    stopPreview();
+});
+
+function handleOpenUrl() {
+    externalApi.openUrl(`https://spinsha.re/song/${chart.value.id}`);
+}
+
+function handleOpenReport() {
+    externalApi.openUrl(`https://spinsha.re/report/song/${chart.value.id}`);
+}
+
+function playPreview() {
+    if (chartPreview.value) {
+        chartPreview.value.currentTime = 0;
+        chartPreview.value.volume = 0.5;
+        chartPreview.value.play();
+        isPreviewPlaying.value = true;
+
+        chartPreviewTimeout.value = setTimeout(() => {
+            stopPreview();
+        }, 30 * 1000);
+    }
+}
+
+function stopPreview() {
+    if (chartPreview.value) {
+        chartPreview.value.pause();
+        chartPreview.value.currentTime = 0;
+        isPreviewPlaying.value = false;
+        clearTimeout(chartPreviewTimeout.value);
+    }
+}
 </script>
 
 <style scoped>

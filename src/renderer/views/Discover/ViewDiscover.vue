@@ -2,9 +2,7 @@
     <LayoutBase>
         <section class="page-discover">
             <div>
-                <SectionHeader
-                    title="Discover"
-                />
+                <SectionHeader title="Discover" />
                 <PromoGrid>
                     <PromoItem
                         v-for="promo in promos"
@@ -15,25 +13,29 @@
             </div>
 
             <div>
-                <SectionHeader
-                    title="Featured"
-                >
+                <SectionHeader title="Featured">
                     <RouterLink
                         class="button"
                         to="/playlist/144"
                     >
-                        <Remixicon
-                            icon="disc"
-                        />
+                        <Remixicon icon="disc" />
                         <span>See more</span>
                     </RouterLink>
                 </SectionHeader>
                 <ChartGrid>
-                    <ChartItem
-                        v-for="chart in staffpicks"
-                        :key="chart.id"
-                        v-bind="chart"
-                    />
+                    <template v-if="staffpicks.length === 0">
+                        <ChartItemPlaceholder
+                            v-for="n in 10"
+                            :key="n"
+                        />
+                    </template>
+                    <template v-else>
+                        <ChartItem
+                            v-for="chart in staffpicks"
+                            :key="chart.id"
+                            v-bind="chart"
+                        />
+                    </template>
                 </ChartGrid>
             </div>
         </section>
@@ -47,8 +49,9 @@ import PromoGrid from '@/components/Discover/PromoGrid.vue';
 import PromoItem from '@/components/Discover/PromoItem.vue';
 import ChartGrid from '@/components/ChartGrid.vue';
 import ChartItem from '@/components/ChartItem.vue';
-import SectionHeader from "@/components/SectionHeader.vue";
-import Remixicon from "@/components/Remixicon.vue";
+import SectionHeader from '@/components/SectionHeader.vue';
+import Remixicon from '@/components/Remixicon.vue';
+import ChartItemPlaceholder from '@/components/ChartItemPlaceholder.vue';
 
 const promos = ref([]);
 const staffpicks = ref([]);

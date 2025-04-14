@@ -17,3 +17,8 @@ contextBridge.exposeInMainWorld('api', {
     getHotThisWeekCharts: async (page) => ipcRenderer.invoke('get-hot-this-week-charts', page),
     getHotThisMonthCharts: async (page) => ipcRenderer.invoke('get-hot-this-month-charts', page),
 });
+
+contextBridge.exposeInMainWorld('externalApi', {
+    openUrl: async (url) => ipcRenderer.invoke('open-url', url),
+    openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
+});

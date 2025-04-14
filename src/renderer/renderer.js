@@ -8,6 +8,7 @@ import mitt from 'mitt';
 
 const app = createApp(App);
 
+app.provide('externalApi', window.externalApi);
 app.provide('api', window.api);
 app.provide('mitt', mitt());
 
