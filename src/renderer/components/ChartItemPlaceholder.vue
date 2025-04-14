@@ -18,12 +18,6 @@
                 <div class="difficulties"></div>
             </div>
         </div>
-        <div
-            class="explicit-label"
-            v-if="isExplicit"
-        >
-            Explicit Content &ndash; Hover to reveal
-        </div>
     </div>
 </template>
 
