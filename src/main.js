@@ -31,6 +31,18 @@ const createWindow = () => {
     if (process.env.NODE_ENV === 'development') {
         mainWindow.webContents.openDevTools();
     }
+
+    // Open external urls in browser
+    mainWindow.webContents.on('will-navigate', (event, url) => {
+        if (!url.startsWith('http://localhost') && !url.startsWith('https://localhost')) {
+            event.preventDefault();
+            shell.openExternal(url);
+        }
+    });
+    // Disable middle click
+    mainWindow.webContents.setWindowOpenHandler(() => {
+        return { action: 'deny' };
+    });
 };
 
 app.whenReady().then(() => {
