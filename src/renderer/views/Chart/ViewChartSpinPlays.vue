@@ -1,10 +1,49 @@
 <template>
-    <h1>Chart SpinPlays</h1>
+    <section class="page-chart-spin-plays">
+        <SpinPlayItem
+            v-for="spinPlay in spinPlays"
+            :key="spinPlay.id"
+            v-bind="spinPlay"
+        />
+    </section>
 </template>
 
 <script setup>
+import { inject, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import SpinPlayItem from '@/components/SpinPlayItem.vue';
+
+const api = inject('api');
+const externalApi = inject('externalApi');
+const route = useRoute();
+const chartId = route.params.chartId;
+const spinPlays = ref([]);
+
+onMounted(async () => {
+    spinPlays.value = (await api.getChartSpinPlays(chartId))?.spinPlays || [];
+});
 </script>
 
 <style scoped>
 @reference "@/assets/css/app.css";
+
+.page-chart-spin-plays {
+    @apply p-10 grid grid-cols-1 gap-2.5;
+}
+
+@media screen and (min-width: 1100px) {
+    .page-chart-spin-plays {
+        @apply grid-cols-2;
+    }
+}
+@media screen and (min-width: 1300px) {
+    .page-chart-spin-plays {
+        @apply grid-cols-3;
+    }
+}
+@media screen and (min-width: 1800px) {
+    .page-chart-spin-plays {
+        @apply grid-cols-4;
+    }
+}
 </style>

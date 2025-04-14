@@ -6,6 +6,13 @@
 
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
+import { onMounted, ref } from 'vue';
+
+const spinPlays = ref([]);
+
+onMounted(() => {
+    spinPlays.value = [];
+});
 </script>
 
 <style scoped>

@@ -3,6 +3,11 @@ import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { SpinShareClient } from '@spinshare/api-js';
 import { setupApiHandlers } from './main/api';
+import * as Sentry from '@sentry/electron';
+
+Sentry.init({
+    dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
+});
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {

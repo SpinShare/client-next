@@ -65,8 +65,7 @@ const description = computed(() => {
         linkify: true,
         breaks: true,
     });
-    let rendered = converter.render(props.chart.description + ' ![image](https://picsum.photos/200/300)');
-    console.log(rendered);
+    let rendered = converter.render(props.chart.description);
     return DOMPurify.sanitize(rendered, {
         ALLOWED_TAGS: ['br', 'em', 'p', 'b', 'strong', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a'],
         ALLOWED_ATTR: ['href'],
