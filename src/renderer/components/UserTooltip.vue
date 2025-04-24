@@ -88,7 +88,7 @@ a {
     @apply font-bold;
 }
 .user-info {
-    @apply grid grid-cols-[64px_1fr] gap-2 items-center drop-shadow-lg;
+    @apply grid grid-cols-[64px_1fr] gap-2 items-center;
 
     & .avatar {
         @apply w-[64px] h-[64px] rounded-full bg-center bg-cover;
@@ -97,10 +97,10 @@ a {
         @apply flex flex-col;
 
         & .username {
-            @apply font-bold;
+            @apply font-bold line-clamp-1;
         }
         & .pronouns {
-            @apply text-sm text-base-400 mt-[-5px];
+            @apply text-sm text-base-400 mt-[-5px] line-clamp-1;
         }
         & .statistics {
             @apply flex gap-2 items-center;

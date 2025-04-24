@@ -153,7 +153,7 @@ const updateDateAbsolute = computed(() => {
         @apply flex flex-col gap-5;
 
         & .item {
-            @apply flex flex-col gap-1 bg-base-900 rounded p-5;
+            @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
 
             & .label {
                 @apply text-base-400;
