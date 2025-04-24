@@ -21,6 +21,7 @@ import ViewLibraryCleanup from '@/views/Library/ViewLibraryCleanup.vue';
 import ViewSetupGeneral from '@/views/Setup/ViewSetupGeneral.vue';
 import LayoutChart from '@/layouts/LayoutChart.vue';
 import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
+import LayoutUser from '@/layouts/LayoutUser.vue';
 
 const routes = [
     {
@@ -85,19 +86,25 @@ const routes = [
     },
     {
         path: '/user/:userId',
-        component: ViewUserDetail,
-    },
-    {
-        path: '/user/:userId/playlists',
-        component: ViewUserPlaylists,
-    },
-    {
-        path: '/user/:userId/reviews',
-        component: ViewUserReviews,
-    },
-    {
-        path: '/user/:userId/spinplays',
-        component: ViewUserSpinPlays,
+        component: LayoutUser,
+        children: [
+            {
+                path: '',
+                component: ViewUserDetail,
+            },
+            {
+                path: 'playlists',
+                component: ViewUserPlaylists,
+            },
+            {
+                path: 'reviews',
+                component: ViewUserReviews,
+            },
+            {
+                path: 'spinplays',
+                component: ViewUserSpinPlays,
+            },
+        ],
     },
     {
         path: '/settings',

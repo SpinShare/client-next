@@ -1,11 +1,7 @@
 <template>
-    <LayoutBase>
-        <h1>User Playlists</h1>
-    </LayoutBase>
+    <h1>User Playlists</h1>
 </template>
 
-<script setup>
-import LayoutBase from '@/layouts/LayoutBase.vue';
-</script>
+<script setup></script>
 
 <style scoped></style>

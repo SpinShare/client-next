@@ -1,11 +1,8 @@
 <template>
-    <LayoutBase>
-        <h1>User SpinPlays</h1>
-    </LayoutBase>
+    <h1>User SpinPlays</h1>
 </template>
 
 <script setup>
-import LayoutBase from '@/layouts/LayoutBase.vue';
 import { onMounted, ref } from 'vue';
 
 const spinPlays = ref([]);
