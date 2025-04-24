@@ -15,7 +15,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const externalApi = inject('externalApi');
 
 const props = defineProps({
     id: {
@@ -48,8 +52,29 @@ function stripHtml(html) {
 const strippedTitle = computed(() => stripHtml(props.title));
 
 function handleClick() {
-    // TODO: Handle Click
-    console.log('TODO');
+    let id = 0;
+    if (props.button.type === 0 || props.button.type === 1) {
+        id = parseInt(props.button.data);
+    }
+
+    switch (props.button.type) {
+        case 0:
+            // Chart Deeplink
+            router.push(`/chart/${id}`);
+            break;
+        case 1:
+            // Playlist Deeplink
+            router.push(`/playlist/${id}`);
+            break;
+        case 2:
+            // Search Deeplink
+            // TODO
+            break;
+        case 3:
+            // External
+            externalApi.openUrl(props.button.data);
+            break;
+    }
 }
 </script>
 
