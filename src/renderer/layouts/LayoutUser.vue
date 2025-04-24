@@ -77,16 +77,20 @@
                         label="Detail"
                     />
                     <TabItemLink
+                        :to="`/user/${userId}/charts`"
+                        :label="`Charts (${user.songs})`"
+                    />
+                    <TabItemLink
                         :to="`/user/${userId}/reviews`"
-                        label="Reviews"
+                        :label="`Reviews (${user.reviews})`"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/playlists`"
-                        label="Playlists"
+                        :label="`Playlists (${user.playlists})`"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/spinplays`"
-                        label="SpinPlays"
+                        :label="`SpinPlays (${user.spinplays})`"
                     />
                 </TabList>
             </nav>

@@ -22,6 +22,7 @@ import ViewSetupGeneral from '@/views/Setup/ViewSetupGeneral.vue';
 import LayoutChart from '@/layouts/LayoutChart.vue';
 import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
 import LayoutUser from '@/layouts/LayoutUser.vue';
+import ViewUserCharts from '@/views/User/ViewUserCharts.vue';
 
 const routes = [
     {
@@ -91,6 +92,10 @@ const routes = [
             {
                 path: '',
                 component: ViewUserDetail,
+            },
+            {
+                path: 'charts',
+                component: ViewUserCharts,
             },
             {
                 path: 'playlists',
