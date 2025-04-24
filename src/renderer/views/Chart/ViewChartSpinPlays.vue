@@ -1,5 +1,14 @@
 <template>
-    <section class="page-chart-spin-plays">
+    <section
+        class="section-center py-30"
+        v-if="!spinPlays"
+    >
+        <Loader />
+    </section>
+    <section
+        class="page-chart-spin-plays"
+        v-else
+    >
         <SpinPlayItem
             v-for="spinPlay in spinPlays"
             :key="spinPlay.id"
@@ -12,12 +21,13 @@
 import { inject, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import SpinPlayItem from '@/components/SpinPlayItem.vue';
+import Loader from '@/components/Loader.vue';
 
 const api = inject('api');
 const externalApi = inject('externalApi');
 const route = useRoute();
 const chartId = route.params.chartId;
-const spinPlays = ref([]);
+const spinPlays = ref(null);
 
 onMounted(async () => {
     spinPlays.value = (await api.getChartSpinPlays(chartId))?.spinPlays || [];

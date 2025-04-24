@@ -1,11 +1,20 @@
 <template>
-    <section class="page-user-charts">
+    <section
+        class="section-center py-30"
+        v-if="!charts"
+    >
+        <Loader />
+    </section>
+    <section
+        class="page-user-charts"
+        v-else
+    >
         <div
             class="no-charts"
             v-if="charts.length === 0"
         >
             <Remixicon
-                icon="award"
+                icon="music-2"
                 size="3xl"
                 filled
             />
@@ -27,11 +36,12 @@ import ChartGrid from '@/components/ChartGrid.vue';
 import ChartItem from '@/components/ChartItem.vue';
 import { onMounted, ref, inject } from 'vue';
 import { useRoute } from 'vue-router';
+import Loader from '@/components/Loader.vue';
 
 const api = inject('api');
 const route = useRoute();
 const userId = route.params.userId;
-const charts = ref([]);
+const charts = ref(null);
 
 const props = defineProps({
     user: {
