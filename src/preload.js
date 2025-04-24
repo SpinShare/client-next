@@ -21,6 +21,9 @@ contextBridge.exposeInMainWorld('api', {
     getUserReviews: async (userId) => ipcRenderer.invoke('get-user-reviews', userId),
     getUserPlaylists: async (userId) => ipcRenderer.invoke('get-user-playlists', userId),
     getUserSpinPlays: async (userId) => ipcRenderer.invoke('get-user-spinplays', userId),
+    getQueueHasItems: async () => ipcRenderer.invoke('get-queue-hasitems'),
+    addQueueItem: async (item) => ipcRenderer.invoke('add-queue-item', item),
+    removeQueueItem: async (itemId) => ipcRenderer.invoke('remove-queue-item', itemId),
 });
 
 contextBridge.exposeInMainWorld('externalApi', {
