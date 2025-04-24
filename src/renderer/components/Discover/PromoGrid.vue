@@ -7,8 +7,6 @@
 <script setup></script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .promo-grid {
     @apply grid grid-cols-1 gap-3;
 }

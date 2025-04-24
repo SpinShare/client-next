@@ -2,9 +2,6 @@
     <h1>Chart Playlists</h1>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>
+<style scoped></style>

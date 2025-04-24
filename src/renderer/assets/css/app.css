@@ -87,3 +87,7 @@ body {
         @apply bg-transparent;
     }
 }
+
+.section-center {
+    @apply flex justify-center items-center h-full;
+}

@@ -16,6 +16,7 @@ contextBridge.exposeInMainWorld('api', {
     getUpdatedCharts: async (page) => ipcRenderer.invoke('get-updated-charts', page),
     getHotThisWeekCharts: async (page) => ipcRenderer.invoke('get-hot-this-week-charts', page),
     getHotThisMonthCharts: async (page) => ipcRenderer.invoke('get-hot-this-month-charts', page),
+    getUser: async (userId) => ipcRenderer.invoke('get-user', userId),
 });
 
 contextBridge.exposeInMainWorld('externalApi', {

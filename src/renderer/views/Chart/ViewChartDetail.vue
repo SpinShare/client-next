@@ -101,7 +101,6 @@ const updateDateAbsolute = computed(() => {
 </script>
 
 <style>
-@reference "@/assets/css/app.css";
 .page-chart-detail .meta .description h1 {
     @apply text-3xl font-bold mt-5;
 }
@@ -129,8 +128,6 @@ const updateDateAbsolute = computed(() => {
 </style>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .page-chart-detail {
     @apply p-10 grid grid-cols-[1fr_350px] gap-10;
 

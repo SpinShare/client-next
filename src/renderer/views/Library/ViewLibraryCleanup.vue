@@ -8,6 +8,4 @@
 import LayoutBase from '@/layouts/LayoutBase.vue';
 </script>
 
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>
+<style scoped></style>

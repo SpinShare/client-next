@@ -1,6 +1,10 @@
 <template>
     <LayoutBase>
-        <template v-if="!chart"> Loading </template>
+        <template v-if="!chart">
+            <section class="section-center">
+                <Loader />
+            </section>
+        </template>
         <template v-else>
             <audio
                 ref="chartPreview"
@@ -128,6 +132,7 @@ import { inject, onMounted, onUnmounted, ref } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
+import Loader from '@/components/Loader.vue';
 
 const api = inject('api');
 const externalApi = inject('externalApi');
@@ -179,8 +184,6 @@ function stopPreview() {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 header {
     @apply p-10 grid grid-cols-[auto_1fr] gap-4 items-center;
 

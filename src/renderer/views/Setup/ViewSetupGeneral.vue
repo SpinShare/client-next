@@ -8,6 +8,4 @@
 import LayoutSetup from '@/layouts/LayoutSetup.vue';
 </script>
 
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>
+<style scoped></style>

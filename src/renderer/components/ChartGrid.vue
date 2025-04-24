@@ -1,19 +1,24 @@
 <template>
-    <section class="chart-grid">
+    <section :class="`chart-grid ${singleColumn ? 'single-column' : ''}`">
         <slot />
     </section>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+    singleColumn: {
+        type: Boolean,
+        default: false,
+    },
+});
+</script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .chart-grid {
     @apply grid grid-cols-1 gap-3;
 }
 @media screen and (min-width: 1100px) {
-    .chart-grid {
+    .chart-grid:not(.single-column) {
         @apply grid-cols-2;
     }
 }

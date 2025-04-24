@@ -124,8 +124,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .chart-item {
     @apply bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
 

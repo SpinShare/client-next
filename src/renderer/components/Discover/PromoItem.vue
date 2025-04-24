@@ -54,8 +54,6 @@ function handleClick() {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .promo-item {
     @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
 

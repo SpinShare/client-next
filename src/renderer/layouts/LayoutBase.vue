@@ -34,8 +34,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .layout-base {
     @apply grid grid-rows-[auto_1fr] grid-cols-[auto_1fr] grow overflow-hidden;
 }

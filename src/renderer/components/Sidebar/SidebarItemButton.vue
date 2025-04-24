@@ -1,7 +1,5 @@
 <template>
-    <button
-        :class="`item-button ${expanded ? 'expanded' : 'mini'}`"
-    >
+    <button :class="`item-button ${expanded ? 'expanded' : 'mini'}`">
         <Remixicon
             :icon="icon"
             size="xl"
@@ -35,8 +33,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .item-button {
     @apply h-[45px] transition-all rounded flex items-center;
 

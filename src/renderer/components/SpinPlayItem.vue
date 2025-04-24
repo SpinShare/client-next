@@ -36,8 +36,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .spin-play-item {
     @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer;
 

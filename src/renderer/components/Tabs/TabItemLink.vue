@@ -26,8 +26,6 @@ const { isExactActive } = useLink(props);
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .item-link {
     @apply transition-all px-5 h-[45px] text-base-400 flex items-center gap-2 border-b-2 border-b-transparent;
 

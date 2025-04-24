@@ -35,8 +35,6 @@ function toggleExpanded() {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .item-expanded-toggle {
     @apply h-[45px] transition-all rounded flex items-center;
 

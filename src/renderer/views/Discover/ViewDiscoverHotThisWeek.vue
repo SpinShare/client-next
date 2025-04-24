@@ -66,8 +66,6 @@ function handleNext() {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .page-discover-new {
     @apply p-10 flex flex-col gap-10;
 

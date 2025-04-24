@@ -40,8 +40,6 @@ const { isExactActive } = useLink(props);
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .item-link {
     @apply h-[45px] transition-all rounded flex items-center;
 

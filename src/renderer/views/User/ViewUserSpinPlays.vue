@@ -15,6 +15,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>
+<style scoped></style>

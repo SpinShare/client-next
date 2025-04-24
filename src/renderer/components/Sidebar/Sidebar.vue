@@ -77,8 +77,6 @@ const route = useRoute();
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 aside {
     @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy;
 

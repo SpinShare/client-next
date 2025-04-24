@@ -9,8 +9,6 @@
 <script setup></script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .layout-setup {
     @apply flex items-center justify-center grow overflow-hidden;
 }

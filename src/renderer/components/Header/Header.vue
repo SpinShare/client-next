@@ -50,8 +50,6 @@ const hasHistory = computed(() => {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 header {
     grid-column: 1 / -1;
     @apply grid grid-cols-[auto_1fr_auto] gap-2 items-center h-[60px] pl-3.25 pr-5 border-b border-base-800 justify-between;

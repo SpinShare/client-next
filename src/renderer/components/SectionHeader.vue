@@ -17,8 +17,6 @@ defineProps({
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 header {
     @apply flex gap-2 items-center;
 

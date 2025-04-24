@@ -40,8 +40,6 @@ const route = useRoute();
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 header {
     @apply p-10 grid grid-cols-[auto_1fr] gap-4 items-center;
 }

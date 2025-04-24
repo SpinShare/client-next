@@ -25,8 +25,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-@reference "@/assets/css/app.css";
-
 .page-chart-spin-plays {
     @apply p-10 grid grid-cols-1 gap-2.5;
 }
