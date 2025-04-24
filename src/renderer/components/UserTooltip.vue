@@ -26,7 +26,7 @@
                         :style="`background-image: url(${userInfo.avatar})`"
                     ></div>
                     <div class="meta">
-                        <div class="username">{{ userInfo.username }}</div>
+                        <div class="username">@{{ userInfo.username }}</div>
                         <div
                             class="pronouns"
                             v-if="userInfo.pronouns"
@@ -100,7 +100,7 @@ a {
             @apply font-bold line-clamp-1;
         }
         & .pronouns {
-            @apply text-sm text-base-400 mt-[-5px] line-clamp-1;
+            @apply text-sm text-base-400 mt-[-3px] line-clamp-1;
         }
         & .statistics {
             @apply flex gap-2 items-center;

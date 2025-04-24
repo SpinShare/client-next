@@ -50,7 +50,7 @@
                                 v-for="charter in allCharters"
                                 :key="charter[0]"
                                 :userId="charter[0]"
-                                :label="`@${charter[1]}`"
+                                :label="charter[1]"
                             />
                         </div>
                     </div>
@@ -132,7 +132,7 @@ main {
                 @apply text-base-400 mt-4;
             }
             & .charters {
-                @apply flex flex-wrap gap-1 mt-2;
+                @apply flex flex-wrap gap-2 mt-2;
             }
         }
 

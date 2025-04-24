@@ -9,7 +9,7 @@
         ></div>
         <div class="content">
             <div class="username">
-                <span>{{ username }}</span>
+                <span>@{{ username }}</span>
             </div>
             <div
                 class="pronouns"
@@ -91,7 +91,7 @@ const props = defineProps({
             }
         }
         & .pronouns {
-            @apply text-sm text-base-400 mt-[-5px] line-clamp-1;
+            @apply text-sm text-base-400 mt-[-3px] line-clamp-1;
         }
     }
 
