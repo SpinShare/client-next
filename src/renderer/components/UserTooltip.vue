@@ -79,7 +79,7 @@ const userInfo = ref(null);
 
 async function tryGetUserInfo() {
     if (userInfo.value !== null) return;
-    userInfo.value = await api.getUser(props.userId);
+    userInfo.value = await api.getUserDetail(props.userId);
 }
 </script>
 
