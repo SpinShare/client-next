@@ -128,6 +128,14 @@ const props = defineProps({
     @apply bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
 
     &.explicit {
+        @apply transition-all;
+        & *:not(.explicit-label) {
+            @apply blur-none transition-all;
+        }
+        & .explicit-label {
+            @apply opacity-0 transition-all;
+        }
+
         & .explicit-label {
             @apply absolute inset-0 flex items-center justify-center pointer-events-none opacity-0;
         }

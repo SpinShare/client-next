@@ -116,7 +116,7 @@ main {
         @apply flex flex-col gap-5;
 
         & .item {
-            @apply flex flex-col gap-1 border border-base-800 rounded-md p-5 self-start;
+            @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
 
             & h1 {
                 @apply grow text-2xl font-bold;
