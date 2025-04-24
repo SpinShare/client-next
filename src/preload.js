@@ -17,6 +17,10 @@ contextBridge.exposeInMainWorld('api', {
     getHotThisWeekCharts: async (page) => ipcRenderer.invoke('get-hot-this-week-charts', page),
     getHotThisMonthCharts: async (page) => ipcRenderer.invoke('get-hot-this-month-charts', page),
     getUserDetail: async (userId) => ipcRenderer.invoke('get-user-detail', userId),
+    getUserCharts: async (userId) => ipcRenderer.invoke('get-user-charts', userId),
+    getUserReviews: async (userId) => ipcRenderer.invoke('get-user-reviews', userId),
+    getUserPlaylists: async (userId) => ipcRenderer.invoke('get-user-playlists', userId),
+    getUserSpinPlays: async (userId) => ipcRenderer.invoke('get-user-spinplays', userId),
 });
 
 contextBridge.exposeInMainWorld('externalApi', {
