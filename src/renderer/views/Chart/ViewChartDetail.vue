@@ -3,8 +3,18 @@
         <div class="meta">
             <div
                 class="description"
+                v-if="description"
                 v-html="description"
             ></div>
+            <div v-else>
+                <div class="no-description">
+                    <Remixicon
+                        icon="quill-pen"
+                        size="3xl"
+                    />
+                    <span>No description yet.</span>
+                </div>
+            </div>
             <div class="tags">
                 <RouterLink
                     to="/search"
@@ -54,6 +64,7 @@ import { formatDistanceToNow } from 'date-fns';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 import UserItem from '@/components/UserItem.vue';
+import Remixicon from '@/components/Remixicon.vue';
 
 const props = defineProps({
     chart: {
@@ -70,6 +81,8 @@ onMounted(async () => {
 });
 
 const description = computed(() => {
+    if (props.chart.description === null) return null;
+
     const converter = new MarkdownIt({
         html: false,
         linkify: true,
@@ -144,6 +157,9 @@ const updateDateAbsolute = computed(() => {
     & .meta {
         & .description {
             @apply leading-6;
+        }
+        & .no-description {
+            @apply flex flex-col items-center gap-1 py-5 text-base-400 border border-base-800 rounded-md;
         }
 
         & .tags {
