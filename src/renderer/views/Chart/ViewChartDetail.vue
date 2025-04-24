@@ -18,6 +18,8 @@
         </div>
 
         <div class="statistics">
+            <UserItem v-bind="uploaderUser" />
+
             <div class="split">
                 <div class="item">
                     <span class="label">Views</span>
@@ -46,17 +48,25 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 import { TZDate } from '@date-fns/tz';
 import { formatDistanceToNow } from 'date-fns';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
+import UserItem from '@/components/UserItem.vue';
 
 const props = defineProps({
     chart: {
         type: Object,
         default: null,
     },
+});
+
+const uploaderUser = ref(null);
+const api = inject('api');
+
+onMounted(async () => {
+    uploaderUser.value = await api.getUserDetail(props.chart.uploader);
 });
 
 const description = computed(() => {
@@ -150,7 +160,7 @@ const updateDateAbsolute = computed(() => {
     }
 
     & .statistics {
-        @apply flex flex-col gap-5;
+        @apply flex flex-col gap-2.5;
 
         & .item {
             @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
