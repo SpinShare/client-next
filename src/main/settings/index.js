@@ -1,0 +1,78 @@
+import { app } from 'electron';
+import fs from 'node:fs';
+import path from 'node:path';
+import { homedir } from 'node:os';
+
+export class SettingsManager {
+    constructor() {
+        this.defaults = {
+            theme: 'dark',
+            language: 'en',
+            notifications: false,
+            openDownloadsSidebar: false,
+            connectToken: false,
+            pathCustoms: SettingsManager.getDefaultCustomsPath(),
+        };
+        this.settings = { ...this.defaults };
+
+        this.settingsPath = path.join(app.getPath('userData'), 'SpinShare', 'settings.json');
+        if (!fs.existsSync(this.settingsPath)) {
+            fs.mkdirSync(path.dirname(this.settingsPath), { recursive: true });
+            this.save();
+        }
+
+        this.load();
+    }
+
+    updateOrInsert(key, value) {
+        this.settings[key] = value;
+        this.save();
+    }
+
+    get(key) {
+        return this.settings[key] || this.defaults[key];
+    }
+
+    delete(key) {
+        delete this.settings[key];
+    }
+
+    reset(key) {
+        this.settings[key] = this.defaults[key];
+    }
+
+    resetAll() {
+        this.settings = { ...this.defaults };
+    }
+
+    save() {
+        fs.writeFileSync(this.settingsPath, JSON.stringify(this.settings), 'utf-8');
+    }
+
+    load() {
+        const loadedSettings = JSON.parse(fs.readFileSync(this.settingsPath, 'utf-8'));
+        this.settings = { ...this.defaults, ...loadedSettings };
+    }
+
+    static getSystem() {
+        // eslint-disable-next-line no-undef
+        return process.platform;
+    }
+
+    static getDefaultCustomsPath() {
+        const system = this.getSystem();
+
+        if (system === 'win32') {
+            return path.join(app.getPath('userData'), '../..', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD');
+        }
+        if (system === 'darwin') {
+            return path.join(app.getPath('appData'), 'Super Spin Digital', 'Spin Rhythm XD');
+        }
+        if (system === 'linux') {
+            const linuxHomedir = homedir();
+            return path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD');
+
+            // TODO: Native Linux build path
+        }
+    }
+}

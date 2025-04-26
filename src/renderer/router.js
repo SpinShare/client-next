@@ -23,6 +23,7 @@ import LayoutChart from '@/layouts/LayoutChart.vue';
 import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
 import LayoutUser from '@/layouts/LayoutUser.vue';
 import ViewUserCharts from '@/views/User/ViewUserCharts.vue';
+import ViewConnectLogin from '@/views/Connect/ViewConnectLogin.vue';
 
 const routes = [
     {
@@ -126,6 +127,10 @@ const routes = [
     {
         path: '/setup',
         component: ViewSetupGeneral,
+    },
+    {
+        path: '/connect/login',
+        component: ViewConnectLogin,
     },
 ];
 

@@ -21,13 +21,7 @@
             </div>
         </div>
         <nav>
-            <RouterLink
-                to="/login"
-                class="button"
-            >
-                <Remixicon icon="key" />
-                <span>Login</span>
-            </RouterLink>
+            <AuthArea />
         </nav>
     </header>
 </template>
@@ -37,6 +31,7 @@ import { useRouter } from 'vue-router';
 import SpinShareLogo from '@/assets/images/logo_full.svg';
 import Remixicon from '@/components/Remixicon.vue';
 import { computed } from 'vue';
+import AuthArea from '@/components/Header/AuthArea.vue';
 
 const router = useRouter();
 

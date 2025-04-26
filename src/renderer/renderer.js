@@ -13,8 +13,10 @@ Sentry.init({
 
 const app = createApp(App);
 
-app.provide('externalApi', window.externalApi);
-app.provide('api', window.api);
+app.provide('externalApi', window.spshExternalApi);
+app.provide('api', window.spshApi);
+app.provide('settings', window.spshSettings);
+app.provide('connect', window.spshConnect);
 app.provide('mitt', mitt());
 
 app.use(Router);

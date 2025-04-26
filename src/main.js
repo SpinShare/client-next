@@ -5,6 +5,8 @@ import { SpinShareClient } from '@spinshare/api-js';
 import { setupApiHandlers } from './main/api';
 import * as Sentry from '@sentry/electron/main';
 import { DownloadQueue } from './main/queue';
+import { SettingsManager } from './main/settings';
+import { AuthManager } from './main/auth';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -15,6 +17,7 @@ if (started) {
     app.quit();
 }
 
+const settingsManager = new SettingsManager();
 const downloadQueue = new DownloadQueue();
 
 const createWindow = () => {
@@ -62,8 +65,10 @@ app.whenReady().then(() => {
     createWindow();
 
     const apiClient = new SpinShareClient();
+    const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
 
+    /* Queue */
     ipcMain.handle('get-queue-hasitems', async (event) => {
         return downloadQueue.hasPendingItems();
     });
@@ -74,6 +79,7 @@ app.whenReady().then(() => {
         return downloadQueue.removeItem(itemId);
     });
 
+    /* External */
     ipcMain.handle('open-url', async (event, url) => {
         try {
             await shell.openExternal(url);
@@ -91,6 +97,46 @@ app.whenReady().then(() => {
             console.error('Error opening folder:', error);
             return { success: false, error: error.message };
         }
+    });
+
+    /* SettingsManager */
+    ipcMain.handle('get-settings-all', async (event) => {
+        return settingsManager.settings;
+    });
+    ipcMain.handle('get-settings', async (event, key) => {
+        return settingsManager.get(key);
+    });
+    ipcMain.handle('set-settings', async (event, key, value) => {
+        return settingsManager.updateOrInsert(key, value);
+    });
+    ipcMain.handle('reset-settings-all', async (event) => {
+        return settingsManager.resetAll();
+    });
+    ipcMain.handle('reset-settings', async (event, key) => {
+        return settingsManager.reset(key);
+    });
+    ipcMain.handle('save-settings', async (event) => {
+        return settingsManager.save();
+    });
+    ipcMain.handle('load-settings', async (event) => {
+        return settingsManager.load();
+    });
+
+    /* Auth */
+    ipcMain.handle('connect-validate-token', async (event) => {
+        return await authManager.validateToken();
+    });
+    ipcMain.handle('connect-login', async (event, connectCode) => {
+        return await authManager.login(connectCode);
+    });
+    ipcMain.handle('connect-logout', async (event) => {
+        return authManager.logout();
+    });
+    ipcMain.handle('connect-get-profile', async (event) => {
+        return await authManager.getProfile();
+    });
+    ipcMain.handle('connect-is-logged-in', (event) => {
+        return authManager.isLoggedIn;
     });
 
     app.on('activate', () => {

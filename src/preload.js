@@ -3,7 +3,7 @@
 
 import { contextBridge, ipcRenderer } from 'electron';
 
-contextBridge.exposeInMainWorld('api', {
+contextBridge.exposeInMainWorld('spshApi', {
     getClientLatestVersion: async () => ipcRenderer.invoke('get-client-latest-version'),
     getPromos: async () => ipcRenderer.invoke('get-promos'),
     getChartDetail: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-detail', chartIdOrReference),
@@ -26,7 +26,25 @@ contextBridge.exposeInMainWorld('api', {
     removeQueueItem: async (itemId) => ipcRenderer.invoke('remove-queue-item', itemId),
 });
 
-contextBridge.exposeInMainWorld('externalApi', {
+contextBridge.exposeInMainWorld('spshSettings', {
+    getSettingsAll: async () => ipcRenderer.invoke('get-settings-all'),
+    getSettings: async (key) => ipcRenderer.invoke('get-settings', key),
+    setSettings: async (key, value) => ipcRenderer.invoke('set-settings', key, value),
+    resetSettingsAll: async () => ipcRenderer.invoke('reset-settings-all'),
+    resetSettings: async (key) => ipcRenderer.invoke('reset-settings', key),
+    saveSettings: async () => ipcRenderer.invoke('save-settings'),
+    loadSettings: async () => ipcRenderer.invoke('load-settings'),
+});
+
+contextBridge.exposeInMainWorld('spshConnect', {
+    validateToken: async () => ipcRenderer.invoke('connect-validate-token'),
+    isLoggedIn: () => ipcRenderer.invoke('connect-is-logged-in'),
+    getProfile: async () => ipcRenderer.invoke('connect-get-profile'),
+    login: async (connectCode) => ipcRenderer.invoke('connect-login', connectCode),
+    logout: async () => ipcRenderer.invoke('connect-logout'),
+});
+
+contextBridge.exposeInMainWorld('spshExternalApi', {
     openUrl: async (url) => ipcRenderer.invoke('open-url', url),
     openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
 });
