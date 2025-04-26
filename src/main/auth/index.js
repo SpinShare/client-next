@@ -78,9 +78,9 @@ export class AuthManager {
         }
 
         try {
-            const response = await this.#apiClient.connectGetProfile(this.connectToken);
-            return response;
+            return await this.#apiClient.connectGetProfile(this.connectToken);
         } catch (e) {
+            console.error(e.message);
             this.logout();
             return null;
         }
