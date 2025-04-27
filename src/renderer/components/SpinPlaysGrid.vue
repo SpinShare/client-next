@@ -8,7 +8,7 @@
 
 <style scoped>
 .spinplays-grid {
-    @apply p-10 grid grid-cols-1 gap-2.5;
+    @apply grid grid-cols-1 gap-2.5;
 }
 
 @media screen and (min-width: 1100px) {

@@ -42,4 +42,8 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.page-user-spin-plays {
+    @apply p-10;
+}
+</style>
