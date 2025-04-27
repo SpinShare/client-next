@@ -9,7 +9,12 @@
         class="page-chart-playlists"
         v-else
     >
-        <PlaylistGrid>
+        <EmptyState
+            v-if="playlists.length === 0"
+            label="No playlists yet."
+            icon="album"
+        />
+        <PlaylistGrid v-else>
             <PlaylistItem
                 v-for="playlist in playlists"
                 :key="playlist.id"
@@ -25,6 +30,8 @@ import PlaylistGrid from '@/components/Playlists/PlaylistGrid.vue';
 import PlaylistItem from '@/components/Playlists/PlaylistItem.vue';
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import Remixicon from '@/components/Remixicon.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const api = inject('api');
 const route = useRoute();

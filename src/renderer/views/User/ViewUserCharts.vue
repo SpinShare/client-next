@@ -9,17 +9,11 @@
         class="page-user-charts"
         v-else
     >
-        <div
-            class="no-charts"
+        <EmptyState
             v-if="charts.length === 0"
-        >
-            <Remixicon
-                icon="music-2"
-                size="3xl"
-                filled
-            />
-            <span>No charts yet.</span>
-        </div>
+            label="No charts yet."
+            icon="music-2"
+        />
         <ChartGrid>
             <ChartItem
                 v-for="chart in charts"
@@ -31,12 +25,12 @@
 </template>
 
 <script setup>
-import Remixicon from '@/components/Remixicon.vue';
 import ChartGrid from '@/components/Charts/ChartGrid.vue';
 import ChartItem from '@/components/Charts/ChartItem.vue';
 import { onMounted, ref, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import Loader from '@/components/Loader.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const api = inject('api');
 const route = useRoute();
@@ -58,9 +52,5 @@ onMounted(async () => {
 <style scoped>
 .page-user-charts {
     @apply p-10;
-
-    & .no-charts {
-        @apply flex flex-col items-center gap-1 py-5 text-base-400 border border-base-800 rounded-md;
-    }
 }
 </style>

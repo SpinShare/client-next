@@ -7,13 +7,10 @@
                 v-html="description"
             ></div>
             <div v-else>
-                <div class="no-description">
-                    <Remixicon
-                        icon="quill-pen"
-                        size="3xl"
-                    />
-                    <span>No description yet.</span>
-                </div>
+                <EmptyState
+                    label="No description yet."
+                    icon="quill-pen"
+                />
             </div>
             <div class="tags">
                 <RouterLink
@@ -64,7 +61,7 @@ import { formatDistanceToNow } from 'date-fns';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 import UserItem from '@/components/UserItem.vue';
-import Remixicon from '@/components/Remixicon.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const props = defineProps({
     chart: {
@@ -157,9 +154,6 @@ const updateDateAbsolute = computed(() => {
     & .meta {
         & .description {
             @apply leading-6;
-        }
-        & .no-description {
-            @apply flex flex-col items-center gap-1 py-5 text-base-400 border border-base-800 rounded-md;
         }
 
         & .tags {

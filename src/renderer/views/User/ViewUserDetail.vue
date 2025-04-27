@@ -1,16 +1,10 @@
 <template>
     <section class="page-user-detail">
-        <div
-            class="no-cards"
+        <EmptyState
             v-if="user.cards.length === 0"
-        >
-            <Remixicon
-                icon="award"
-                size="3xl"
-                filled
-            />
-            <span>No cards yet.</span>
-        </div>
+            label="No card yet."
+            icon="award"
+        />
         <div
             class="cards-list"
             v-else
@@ -24,8 +18,8 @@
 </template>
 
 <script setup>
-import Remixicon from '@/components/Remixicon.vue';
 import CardItem from '@/components/Charts/CardItem.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const props = defineProps({
     user: {
@@ -39,9 +33,6 @@ const props = defineProps({
 .page-user-detail {
     @apply p-10;
 
-    & .no-cards {
-        @apply flex flex-col items-center gap-1 py-5 text-base-400 border border-base-800 rounded-md;
-    }
     & .cards-list {
         @apply grid grid-cols-1 gap-2.5;
     }

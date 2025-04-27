@@ -9,17 +9,11 @@
         class="page-chart-reviews"
         v-else
     >
-        <div
-            class="no-reviews"
+        <EmptyState
             v-if="reviews.length === 0"
-        >
-            <Remixicon
-                icon="chat-smile-2"
-                size="3xl"
-                filled
-            />
-            <span>No reviews yet.</span>
-        </div>
+            label="No reviews yet."
+            icon="chat-smile-2"
+        />
         <ReviewGrid v-else>
             <ReviewItem
                 v-for="review in reviews"
@@ -38,6 +32,7 @@ import { useRoute } from 'vue-router';
 import ReviewGrid from '@/components/Reviews/ReviewGrid.vue';
 import ReviewItem from '@/components/Reviews/ReviewItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const api = inject('api');
 const route = useRoute();
@@ -55,9 +50,5 @@ onMounted(async () => {
 <style scoped>
 .page-chart-reviews {
     @apply p-10;
-
-    & .no-reviews {
-        @apply flex flex-col items-center gap-1 py-5 text-base-400 border border-base-800 rounded-md;
-    }
 }
 </style>
