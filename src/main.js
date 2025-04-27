@@ -100,26 +100,29 @@ app.whenReady().then(() => {
     });
 
     /* SettingsManager */
-    ipcMain.handle('get-settings-all', async (event) => {
+    ipcMain.handle('get-settings-all', (event) => {
         return settingsManager.settings;
     });
-    ipcMain.handle('get-settings', async (event, key) => {
+    ipcMain.handle('get-settings', (event, key) => {
         return settingsManager.get(key);
     });
-    ipcMain.handle('set-settings', async (event, key, value) => {
+    ipcMain.handle('set-settings', (event, key, value) => {
         return settingsManager.updateOrInsert(key, value);
     });
-    ipcMain.handle('reset-settings-all', async (event) => {
+    ipcMain.handle('reset-settings-all', (event) => {
         return settingsManager.resetAll();
     });
-    ipcMain.handle('reset-settings', async (event, key) => {
+    ipcMain.handle('reset-settings', (event, key) => {
         return settingsManager.reset(key);
     });
-    ipcMain.handle('save-settings', async (event) => {
+    ipcMain.handle('save-settings', (event) => {
         return settingsManager.save();
     });
-    ipcMain.handle('load-settings', async (event) => {
+    ipcMain.handle('load-settings', (event) => {
         return settingsManager.load();
+    });
+    ipcMain.handle('get-default-customs-path', (event) => {
+        return SettingsManager.getDefaultCustomsPath();
     });
 
     /* Auth */

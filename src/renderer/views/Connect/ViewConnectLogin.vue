@@ -14,10 +14,11 @@
                 <p>Enter your connect code below and click on <strong>Log into your account</strong>.</p>
 
                 <div
-                    class="input"
+                    class="inputs"
                     v-if="!isLoading"
                 >
                     <input
+                        class="input"
                         type="text"
                         min="6"
                         max="6"
@@ -25,7 +26,7 @@
                         v-model="connectCode"
                     />
                     <button
-                        class="button brand"
+                        class="button brand shrink-0"
                         @click="handleLogin"
                         :disabled="connectCode.length !== 6"
                     >
@@ -37,8 +38,8 @@
                     v-else
                 >
                     <Loader
-                        size="24"
-                        border-width="4"
+                        :size="24"
+                        :border-width="4"
                     />
                 </section>
                 <div
@@ -108,12 +109,8 @@ async function handleLogin() {
                 @apply no-underline;
             }
         }
-        & .input {
+        & .inputs {
             @apply mt-4 flex gap-2;
-
-            & input {
-                @apply grow h-[40px] border rounded border-base-800 px-4;
-            }
         }
 
         & .error {

@@ -133,26 +133,37 @@
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import { inject, onMounted, ref } from 'vue';
+import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Loader from '@/components/Loader.vue';
 
+const mitt = inject('mitt');
 const connect = inject('connect');
 const isLoggedIn = ref(false);
 const profile = ref(null);
 const connectPopupOpen = ref(false);
 
 onMounted(async () => {
+    mitt.on('auth-updated', onAuthUpdated);
+    await onAuthUpdated();
+});
+
+onUnmounted(() => {
+    mitt.off('auth-updated');
+});
+
+async function onAuthUpdated() {
     isLoggedIn.value = await connect.isLoggedIn();
 
     if (isLoggedIn.value) {
         profile.value = await connect.getProfile();
+    } else {
+        profile.value = null;
     }
-});
+}
 
 function handleLogout() {
     connect.logout();
-    isLoggedIn.value = false;
-    profile.value = null;
+    mitt.emit('auth-updated');
 }
 </script>
 

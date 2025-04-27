@@ -8,10 +8,12 @@ export class SettingsManager {
         this.defaults = {
             theme: 'dark',
             language: 'en',
-            notifications: false,
+            downloadNotifications: false,
             openDownloadsSidebar: false,
             connectToken: false,
+            showExplicit: false,
             pathCustoms: SettingsManager.getDefaultCustomsPath(),
+            pathGame: '',
         };
         this.settings = { ...this.defaults };
 
@@ -42,14 +44,17 @@ export class SettingsManager {
     }
 
     resetAll() {
+        console.log(`[SettingsManager] Resetting settings`);
         this.settings = { ...this.defaults };
     }
 
     save() {
+        console.log(`[SettingsManager] Saving settings`);
         fs.writeFileSync(this.settingsPath, JSON.stringify(this.settings), 'utf-8');
     }
 
     load() {
+        console.log(`[SettingsManager] Loading settings`);
         const loadedSettings = JSON.parse(fs.readFileSync(this.settingsPath, 'utf-8'));
         this.settings = { ...this.defaults, ...loadedSettings };
     }

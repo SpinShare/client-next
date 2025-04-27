@@ -27,13 +27,14 @@ contextBridge.exposeInMainWorld('spshApi', {
 });
 
 contextBridge.exposeInMainWorld('spshSettings', {
-    getSettingsAll: async () => ipcRenderer.invoke('get-settings-all'),
-    getSettings: async (key) => ipcRenderer.invoke('get-settings', key),
-    setSettings: async (key, value) => ipcRenderer.invoke('set-settings', key, value),
-    resetSettingsAll: async () => ipcRenderer.invoke('reset-settings-all'),
-    resetSettings: async (key) => ipcRenderer.invoke('reset-settings', key),
-    saveSettings: async () => ipcRenderer.invoke('save-settings'),
-    loadSettings: async () => ipcRenderer.invoke('load-settings'),
+    getAll: () => ipcRenderer.invoke('get-settings-all'),
+    get: (key) => ipcRenderer.invoke('get-settings', key),
+    set: (key, value) => ipcRenderer.invoke('set-settings', key, value),
+    resetAll: () => ipcRenderer.invoke('reset-settings-all'),
+    reset: (key) => ipcRenderer.invoke('reset-settings', key),
+    save: () => ipcRenderer.invoke('save-settings'),
+    load: () => ipcRenderer.invoke('load-settings'),
+    getDefaultCustomsPath: () => ipcRenderer.invoke('get-default-customs-path'),
 });
 
 contextBridge.exposeInMainWorld('spshConnect', {
