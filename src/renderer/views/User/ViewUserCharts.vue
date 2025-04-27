@@ -32,8 +32,8 @@
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import ChartGrid from '@/components/ChartGrid.vue';
-import ChartItem from '@/components/ChartItem.vue';
+import ChartGrid from '@/components/Charts/ChartGrid.vue';
+import ChartItem from '@/components/Charts/ChartItem.vue';
 import { onMounted, ref, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import Loader from '@/components/Loader.vue';

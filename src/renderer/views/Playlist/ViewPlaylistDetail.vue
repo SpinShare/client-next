@@ -72,8 +72,8 @@ import { computed, inject, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import Loader from '@/components/Loader.vue';
-import ChartGrid from '@/components/ChartGrid.vue';
-import ChartItem from '@/components/ChartItem.vue';
+import ChartGrid from '@/components/Charts/ChartGrid.vue';
+import ChartItem from '@/components/Charts/ChartItem.vue';
 import UserTooltip from '@/components/UserTooltip.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import UserItem from '@/components/UserItem.vue';
@@ -123,10 +123,6 @@ main {
             }
             & .badge-official {
                 @apply text-sm px-2 py-0.25 rounded-full bg-emerald-700 text-emerald-50 self-start flex gap-1 items-center;
-
-                & span {
-                    @apply font-bold;
-                }
             }
             & p {
                 @apply text-base-400 mt-4;

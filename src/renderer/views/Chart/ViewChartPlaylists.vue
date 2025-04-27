@@ -21,8 +21,8 @@
 
 <script setup>
 import Loader from '@/components/Loader.vue';
-import PlaylistGrid from '@/components/PlaylistGrid.vue';
-import PlaylistItem from '@/components/PlaylistItem.vue';
+import PlaylistGrid from '@/components/Playlists/PlaylistGrid.vue';
+import PlaylistItem from '@/components/Playlists/PlaylistItem.vue';
 import { inject, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 

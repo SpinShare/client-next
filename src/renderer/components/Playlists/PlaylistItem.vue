@@ -90,10 +90,6 @@ const props = defineProps({
             }
             & .badge-official {
                 @apply text-sm px-2 py-0.25 rounded-full bg-emerald-700 text-emerald-50 self-start flex gap-1 items-center;
-
-                & span {
-                    @apply font-bold;
-                }
             }
         }
         & .additionals {

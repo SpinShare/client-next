@@ -1,7 +1,7 @@
 <template>
     <RouterLink
         :to="`/chart/${id}`"
-        :class="`chart-item ${isExplicit ? 'explicit' : ''}`"
+        :class="`chart-item ${isExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
     >
         <div
             class="cover"
@@ -12,7 +12,10 @@
                 <h2>{{ title }}</h2>
                 <p>{{ artist }} &bull; {{ charter }}</p>
             </div>
-            <div class="info">
+            <div
+                class="info"
+                v-if="!mini"
+            >
                 <!--
                     <div class="installation-status installed">Installed</div>
                     <div class="installation-status update">Update</div>
@@ -55,6 +58,10 @@ const props = defineProps({
     id: {
         type: Number,
         required: true,
+    },
+    mini: {
+        type: Boolean,
+        default: false,
     },
     title: {
         type: String,
@@ -198,6 +205,14 @@ const props = defineProps({
 
     &:hover {
         @apply bg-base-800;
+    }
+
+    &.mini {
+        @apply p-2 py-1 gap-2;
+
+        & .cover {
+            @apply w-[40px];
+        }
     }
 }
 </style>

@@ -25,7 +25,7 @@
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import CardItem from '@/components/CardItem.vue';
+import CardItem from '@/components/Charts/CardItem.vue';
 
 const props = defineProps({
     user: {

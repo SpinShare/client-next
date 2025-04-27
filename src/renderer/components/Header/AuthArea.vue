@@ -22,105 +22,110 @@
                     :style="`background-image: url('${profile.avatar}')`"
                     @click="connectPopupOpen = !connectPopupOpen"
                 ></button>
-                <div :class="`connect-popup ${connectPopupOpen ? 'active' : ''}`">
-                    <header>
-                        <div class="content">
-                            <div class="username">
-                                <span>@{{ profile.username }}</span>
+                <transition name="popup">
+                    <div
+                        v-if="connectPopupOpen"
+                        :class="`connect-popup`"
+                    >
+                        <header>
+                            <div class="content">
+                                <div class="username">
+                                    <span>@{{ profile.username }}</span>
+                                </div>
+                                <div
+                                    class="pronouns"
+                                    v-if="profile.pronouns"
+                                >
+                                    {{ profile.pronouns }}
+                                </div>
                             </div>
-                            <div
-                                class="pronouns"
-                                v-if="profile.pronouns"
-                            >
-                                {{ profile.pronouns }}
+                            <div class="flags">
+                                <div
+                                    class="badge-supporter"
+                                    v-if="profile.isPatreon"
+                                >
+                                    <Remixicon
+                                        icon="heart"
+                                        size="sm"
+                                    />
+                                </div>
+                                <div
+                                    class="badge-verified"
+                                    v-if="profile.isVerified"
+                                >
+                                    <Remixicon
+                                        icon="check"
+                                        size="sm"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div class="flags">
-                            <div
-                                class="badge-supporter"
-                                v-if="profile.isPatreon"
+                        </header>
+                        <nav>
+                            <RouterLink
+                                :to="`/user/${profile.id}`"
+                                class="item"
                             >
                                 <Remixicon
-                                    icon="heart"
-                                    size="sm"
+                                    icon="user"
+                                    size="xl"
                                 />
-                            </div>
-                            <div
-                                class="badge-verified"
-                                v-if="profile.isVerified"
+                                <span>Profile</span>
+                            </RouterLink>
+                            <RouterLink
+                                :to="`/user/${profile.id}/charts`"
+                                class="item"
                             >
                                 <Remixicon
-                                    icon="check"
-                                    size="sm"
+                                    icon="music-2"
+                                    size="xl"
                                 />
-                            </div>
-                        </div>
-                    </header>
-                    <nav>
-                        <RouterLink
-                            :to="`/user/${profile.id}`"
-                            class="item"
-                        >
-                            <Remixicon
-                                icon="user"
-                                size="xl"
-                            />
-                            <span>Profile</span>
-                        </RouterLink>
-                        <RouterLink
-                            :to="`/user/${profile.id}/charts`"
-                            class="item"
-                        >
-                            <Remixicon
-                                icon="music-2"
-                                size="xl"
-                            />
-                            <span>Charts</span>
-                        </RouterLink>
-                        <RouterLink
-                            :to="`/user/${profile.id}/reviews`"
-                            class="item"
-                        >
-                            <Remixicon
-                                icon="award"
-                                size="xl"
-                            />
-                            <span>Reviews</span>
-                        </RouterLink>
-                        <RouterLink
-                            :to="`/user/${profile.id}/playlists`"
-                            class="item"
-                        >
-                            <Remixicon
-                                icon="album"
-                                size="xl"
-                            />
-                            <span>Playlists</span>
-                        </RouterLink>
-                        <RouterLink
-                            :to="`/user/${profile.id}/spinplays`"
-                            class="item"
-                        >
-                            <Remixicon
-                                icon="youtube"
-                                size="xl"
-                            />
-                            <span>SpinPlays</span>
-                        </RouterLink>
-                    </nav>
-                    <nav>
-                        <button
-                            class="item"
-                            @click="handleLogout"
-                        >
-                            <Remixicon
-                                icon="door-open"
-                                size="xl"
-                            />
-                            <span>Logout</span>
-                        </button>
-                    </nav>
-                </div>
+                                <span>Charts</span>
+                            </RouterLink>
+                            <RouterLink
+                                :to="`/user/${profile.id}/reviews`"
+                                class="item"
+                            >
+                                <Remixicon
+                                    icon="award"
+                                    size="xl"
+                                />
+                                <span>Reviews</span>
+                            </RouterLink>
+                            <RouterLink
+                                :to="`/user/${profile.id}/playlists`"
+                                class="item"
+                            >
+                                <Remixicon
+                                    icon="album"
+                                    size="xl"
+                                />
+                                <span>Playlists</span>
+                            </RouterLink>
+                            <RouterLink
+                                :to="`/user/${profile.id}/spinplays`"
+                                class="item"
+                            >
+                                <Remixicon
+                                    icon="youtube"
+                                    size="xl"
+                                />
+                                <span>SpinPlays</span>
+                            </RouterLink>
+                        </nav>
+                        <nav>
+                            <button
+                                class="item"
+                                @click="handleLogout"
+                            >
+                                <Remixicon
+                                    icon="door-open"
+                                    size="xl"
+                                />
+                                <span>Logout</span>
+                            </button>
+                        </nav>
+                    </div>
+                </transition>
             </template>
         </template>
     </div>
@@ -163,11 +168,7 @@ function handleLogout() {
         }
     }
     & .connect-popup {
-        @apply absolute top-10 right-0 z-10 w-[300px] bg-base-900 rounded-md shadow-2xl hidden;
-
-        &.active {
-            @apply block;
-        }
+        @apply absolute top-10 right-0 z-10 w-[300px] bg-base-900 rounded-md shadow-2xl block overflow-hidden;
 
         & header {
             @apply flex items-center px-4 py-2;

@@ -1,7 +1,7 @@
 <template>
     <RouterLink
         :to="`/user/${id}`"
-        :class="`user-item`"
+        :class="`user-item ${mini ? 'mini' : ''}`"
     >
         <div
             class="avatar"
@@ -48,6 +48,10 @@ const props = defineProps({
     id: {
         type: Number,
         required: true,
+    },
+    mini: {
+        type: Boolean,
+        default: false,
     },
     username: {
         type: String,
@@ -108,6 +112,14 @@ const props = defineProps({
 
     &:hover {
         @apply bg-base-800;
+    }
+
+    &.mini {
+        @apply gap-2 grid-cols-[32px_1fr_auto] p-2 py-1;
+
+        & .avatar {
+            @apply w-[32px] h-[32px];
+        }
     }
 }
 </style>

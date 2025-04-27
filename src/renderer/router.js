@@ -5,7 +5,6 @@ import ViewDiscoverNew from '@/views/Discover/ViewDiscoverNew.vue';
 import ViewDiscoverUpdated from '@/views/Discover/ViewDiscoverUpdated.vue';
 import ViewDiscoverHotThisWeek from '@/views/Discover/ViewDiscoverHotThisWeek.vue';
 import ViewDiscoverHotThisMonth from '@/views/Discover/ViewDiscoverHotThisMonth.vue';
-import ViewDiscoverStaffpicks from '@/views/Discover/ViewDiscoverStaffpicks.vue';
 import ViewChartDetail from '@/views/Chart/ViewChartDetail.vue';
 import ViewChartPlaylists from '@/views/Chart/ViewChartPlaylists.vue';
 import ViewChartReviews from '@/views/Chart/ViewChartReviews.vue';
@@ -33,10 +32,6 @@ const routes = [
     {
         path: '/discover/search',
         component: ViewSearch,
-    },
-    {
-        path: '/discover/staffpicks/:page',
-        component: ViewDiscoverStaffpicks,
     },
     {
         path: '/discover',

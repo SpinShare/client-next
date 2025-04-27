@@ -37,12 +37,12 @@
 </template>
 
 <script setup>
-import ChartGrid from '@/components/ChartGrid.vue';
-import ChartItem from '@/components/ChartItem.vue';
+import ChartGrid from '@/components/Charts/ChartGrid.vue';
+import ChartItem from '@/components/Charts/ChartItem.vue';
 import { inject, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Remixicon from '@/components/Remixicon.vue';
-import ChartItemPlaceholder from '@/components/ChartItemPlaceholder.vue';
+import ChartItemPlaceholder from '@/components/Charts/ChartItemPlaceholder.vue';
 
 const route = useRoute();
 const router = useRouter();
