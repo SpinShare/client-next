@@ -27,10 +27,10 @@
 <script setup>
 import { inject, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import SpinPlayItem from '@/components/SpinPlayItem.vue';
+import SpinPlayItem from '@/components/SpinPlays/SpinPlayItem.vue';
 import Loader from '@/components/Loader.vue';
 import EmptyState from '@/components/EmptyState.vue';
-import SpinPlaysGrid from '@/components/SpinPlaysGrid.vue';
+import SpinPlaysGrid from '@/components/SpinPlays/SpinPlaysGrid.vue';
 
 const api = inject('api');
 const route = useRoute();

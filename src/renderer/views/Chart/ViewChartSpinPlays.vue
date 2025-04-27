@@ -19,6 +19,7 @@
                 v-for="spinPlay in spinPlays"
                 :key="spinPlay.id"
                 v-bind="spinPlay"
+                :show-user="true"
             />
         </SpinPlaysGrid>
     </section>
@@ -27,9 +28,9 @@
 <script setup>
 import { inject, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import SpinPlayItem from '@/components/SpinPlayItem.vue';
+import SpinPlayItem from '@/components/SpinPlays/SpinPlayItem.vue';
 import Loader from '@/components/Loader.vue';
-import SpinPlaysGrid from '@/components/SpinPlaysGrid.vue';
+import SpinPlaysGrid from '@/components/SpinPlays/SpinPlaysGrid.vue';
 import EmptyState from '@/components/EmptyState.vue';
 
 const api = inject('api');

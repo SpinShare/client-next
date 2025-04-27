@@ -16,7 +16,11 @@
             </div>
         </div>
 
-        <UserItem v-bind="user" />
+        <UserItem
+            v-bind="user"
+            v-if="showUser"
+            :mini="true"
+        />
     </a>
 </template>
 
@@ -29,7 +33,15 @@ const props = defineProps({
         type: Number,
         required: true,
     },
+    showUser: {
+        type: Boolean,
+        default: false,
+    },
     user: {
+        type: Object,
+        required: true,
+    },
+    song: {
         type: Object,
         required: true,
     },
