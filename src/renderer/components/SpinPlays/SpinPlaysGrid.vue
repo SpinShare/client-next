@@ -8,22 +8,22 @@
 
 <style scoped>
 .spinplays-grid {
-    @apply grid grid-cols-1 gap-2.5;
+    @apply flex flex-col gap-2.5;
 }
 
 @media screen and (min-width: 1100px) {
     .spinplays-grid {
-        @apply grid-cols-2;
+        @apply grid grid-cols-2;
     }
 }
 @media screen and (min-width: 1300px) {
     .spinplays-grid {
-        @apply grid-cols-3;
+        @apply grid grid-cols-3;
     }
 }
 @media screen and (min-width: 1800px) {
     .spinplays-grid {
-        @apply grid-cols-4;
+        @apply grid grid-cols-4;
     }
 }
 </style>

@@ -8,11 +8,11 @@
 
 <style scoped>
 .promo-grid {
-    @apply grid grid-cols-1 gap-3;
+    @apply flex flex-col gap-3;
 }
 @media screen and (min-width: 1100px) {
     .promo-grid {
-        @apply grid-cols-2;
+        @apply grid grid-cols-2;
     }
 }
 </style>
