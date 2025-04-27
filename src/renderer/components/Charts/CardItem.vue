@@ -7,14 +7,13 @@
         />
         <div class="meta">
             <h1>{{ title }}</h1>
-            <p>{{ description }}</p>
+            <p>{{ cleanDescription }}</p>
             <div class="given-date">{{ givenDateAbsolute }}</div>
         </div>
     </div>
 </template>
 
 <script setup>
-import Remixicon from '@/components/Remixicon.vue';
 import { computed } from 'vue';
 import { TZDate } from '@date-fns/tz';
 
@@ -54,6 +53,10 @@ const parseDateWithTimezone = ({ date, timezone }) => {
 const givenDateAbsolute = computed(() => {
     let date = parseDateWithTimezone(props.givenDate);
     return `${date.toLocaleDateString()} - ${date.toLocaleTimeString()}`;
+});
+
+const cleanDescription = computed(() => {
+    return props.description.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
 });
 </script>
 
