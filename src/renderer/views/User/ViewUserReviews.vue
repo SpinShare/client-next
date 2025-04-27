@@ -29,7 +29,6 @@
 import Loader from '@/components/Loader.vue';
 import { ref, inject, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import Remixicon from '@/components/Remixicon.vue';
 import ReviewGrid from '@/components/Reviews/ReviewGrid.vue';
 import ReviewItem from '@/components/Reviews/ReviewItem.vue';
 import EmptyState from '@/components/EmptyState.vue';
@@ -47,7 +46,8 @@ const props = defineProps({
 });
 
 onMounted(async () => {
-    reviews.value = await api.getUserReviews(userId);
+    const response = await api.getUserReviews(userId);
+    reviews.value = response || [];
 });
 </script>
 
