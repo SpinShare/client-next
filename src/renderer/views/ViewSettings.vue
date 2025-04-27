@@ -89,8 +89,8 @@
                         <span>Select</span>
                     </button>
                     <button class="button">
-                        <Remixicon icon="refresh" />
-                        <span>Reset</span>
+                        <Remixicon icon="brain" />
+                        <span>Detect</span>
                     </button>
                 </SettingsItem>
                 <SettingsItem
@@ -107,8 +107,8 @@
                         <span>Select</span>
                     </button>
                     <button class="button">
-                        <Remixicon icon="refresh" />
-                        <span>Reset</span>
+                        <Remixicon icon="brain" />
+                        <span>Detect</span>
                     </button>
                 </SettingsItem>
             </SettingsSection>
