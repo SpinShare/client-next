@@ -86,6 +86,9 @@ body {
     &.ghost {
         @apply bg-transparent;
     }
+    &.square {
+        @apply w-[40px] px-0 justify-center;
+    }
 }
 
 .input {

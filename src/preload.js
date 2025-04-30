@@ -21,9 +21,34 @@ contextBridge.exposeInMainWorld('spshApi', {
     getUserReviews: async (userId) => ipcRenderer.invoke('get-user-reviews', userId),
     getUserPlaylists: async (userId) => ipcRenderer.invoke('get-user-playlists', userId),
     getUserSpinPlays: async (userId) => ipcRenderer.invoke('get-user-spinplays', userId),
-    getQueueHasItems: async () => ipcRenderer.invoke('get-queue-hasitems'),
+});
+
+contextBridge.exposeInMainWorld('spshQueue', {
     addQueueItem: async (item) => ipcRenderer.invoke('add-queue-item', item),
     removeQueueItem: async (itemId) => ipcRenderer.invoke('remove-queue-item', itemId),
+    clearQueueDone: async () => ipcRenderer.invoke('clear-queue-done'),
+    getQueueItems: async () => ipcRenderer.invoke('get-queue-items'),
+    getQueueCount: async () => ipcRenderer.invoke('get-queue-count'),
+    onQueueChange: (callback) => {
+        const listener = (_, queueItems) => callback(queueItems);
+        ipcRenderer.on('queue-change', listener);
+        return () => ipcRenderer.removeListener('queue-change', listener);
+    },
+    onQueueCountChange: (callback) => {
+        const listener = (_, queueCount) => callback(queueCount);
+        ipcRenderer.on('queue-count-change', listener);
+        return () => ipcRenderer.removeListener('queue-count-change', listener);
+    },
+    onItemChange: (callback) => {
+        const listener = (_, queueItem) => callback(queueItem);
+        ipcRenderer.on('item-change', listener);
+        return () => ipcRenderer.removeListener('item-change', listener);
+    },
+    onQueueDone: (callback) => {
+        const listener = () => callback();
+        ipcRenderer.on('queue-done', listener);
+        return () => ipcRenderer.removeListener('queue-done', listener);
+    },
 });
 
 contextBridge.exposeInMainWorld('spshSettings', {

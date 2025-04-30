@@ -1,11 +1,16 @@
 <template>
-    <button :class="`item-button ${expanded ? 'expanded' : 'mini'}`">
+    <button :class="`item-button ${active ? 'active' : ''} ${expanded ? 'expanded' : 'mini'}`">
         <Remixicon
             :icon="icon"
             size="xl"
             :filled="active"
         />
         <span class="label">{{ label }}</span>
+        <span
+            class="badge"
+            v-if="badge"
+            >{{ badge }}</span
+        >
     </button>
 </template>
 
@@ -21,6 +26,10 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    badge: {
+        type: [String, Number, Boolean],
+        default: false,
+    },
     expanded: {
         type: Boolean,
         default: true,
@@ -34,7 +43,7 @@ const props = defineProps({
 
 <style scoped>
 .item-button {
-    @apply h-[45px] transition-all rounded flex items-center;
+    @apply h-[45px] transition-all rounded flex items-center relative;
 
     &:hover {
         @apply bg-base-900 cursor-pointer;
@@ -43,11 +52,15 @@ const props = defineProps({
         @apply bg-brand-800 text-brand-50;
     }
 
+    & .badge {
+        @apply bg-brand-700 text-brand-50 rounded-md text-xs font-bold px-1.5 py-0.5;
+    }
+
     &.expanded {
         @apply gap-2 px-4;
 
         & .label {
-            @apply block;
+            @apply block grow text-left line-clamp-1;
         }
     }
     &.mini {
@@ -55,6 +68,9 @@ const props = defineProps({
 
         & .label {
             @apply hidden;
+        }
+        & .badge {
+            @apply absolute bottom-0 right-0;
         }
     }
 }

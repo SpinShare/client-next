@@ -51,7 +51,10 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="button brand">
+                        <button
+                            class="button brand"
+                            @click="handleAddToQueue"
+                        >
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
                         </button>
@@ -133,9 +136,11 @@ import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
+import { DownloadItem } from '../../main/queue/downloadQueueItem';
 
 const api = inject('api');
 const externalApi = inject('externalApi');
+const queue = inject('queue');
 const route = useRoute();
 const chartId = route.params.chartId;
 const chart = ref(null);
@@ -151,6 +156,11 @@ onMounted(async () => {
 onUnmounted(() => {
     stopPreview();
 });
+
+async function handleAddToQueue() {
+    const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter);
+    await queue.addQueueItem(newDownloadItem);
+}
 
 function handleOpenUrl() {
     externalApi.openUrl(`https://spinsha.re/song/${chart.value.id}`);

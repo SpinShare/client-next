@@ -45,11 +45,7 @@
 
         <nav>
             <SidebarExpandedToggle :expanded="expanded" />
-            <SidebarItemButton
-                label="Downloads"
-                icon="download"
-                :expanded="expanded"
-            />
+            <SidebarDownloadQueue :expanded="expanded" />
             <SidebarItemLink
                 to="/settings"
                 label="Settings"
@@ -63,8 +59,8 @@
 <script setup>
 import SidebarItemLink from '@/components/Sidebar/SidebarItemLink.vue';
 import SidebarExpandedToggle from '@/components/Sidebar/SidebarExpandedToggle.vue';
-import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
 import { useRoute } from 'vue-router';
+import SidebarDownloadQueue from '@/components/Sidebar/SidebarDownloadQueue.vue';
 
 defineProps({
     expanded: {
@@ -78,7 +74,7 @@ const route = useRoute();
 
 <style scoped>
 aside {
-    @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy;
+    @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy relative z-100;
 
     & nav {
         @apply flex gap-2 flex-col;

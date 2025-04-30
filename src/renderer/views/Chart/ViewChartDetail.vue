@@ -25,7 +25,10 @@
         </div>
 
         <div class="statistics">
-            <UserItem v-bind="uploaderUser" />
+            <UserItem
+                v-if="uploaderUser"
+                v-bind="uploaderUser"
+            />
 
             <div class="split">
                 <div class="item">

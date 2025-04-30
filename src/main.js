@@ -18,7 +18,6 @@ if (started) {
 }
 
 const settingsManager = new SettingsManager();
-const downloadQueue = new DownloadQueue();
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -45,7 +44,9 @@ const createWindow = () => {
 
     // eslint-disable-next-line no-undef
     if (process.env.NODE_ENV === 'development') {
-        mainWindow.webContents.openDevTools();
+        mainWindow.on('ready-to-show', () => {
+            mainWindow.webContents.openDevTools();
+        });
     }
 
     // Open external urls in browser
@@ -59,24 +60,45 @@ const createWindow = () => {
     mainWindow.webContents.setWindowOpenHandler(() => {
         return { action: 'deny' };
     });
+
+    return mainWindow;
 };
 
 app.whenReady().then(() => {
-    createWindow();
+    const mainWindow = createWindow();
 
     const apiClient = new SpinShareClient();
     const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
 
     /* Queue */
-    ipcMain.handle('get-queue-hasitems', async (event) => {
-        return downloadQueue.hasPendingItems();
+    const downloadQueue = new DownloadQueue(apiClient, settingsManager, app.getPath('temp'));
+    downloadQueue.on('queue-change', (queueItems) => {
+        mainWindow.webContents.send('queue-change', queueItems);
+    });
+    downloadQueue.on('queue-count-change', (queueCount) => {
+        mainWindow.webContents.send('queue-count-change', queueCount);
+    });
+    downloadQueue.on('item-change', (queueItem) => {
+        mainWindow.webContents.send('item-change', queueItem);
+    });
+    downloadQueue.on('queue-done', () => {
+        mainWindow.webContents.send('queue-done');
     });
     ipcMain.handle('add-queue-item', async (event, item) => {
         return downloadQueue.addItem(item);
     });
     ipcMain.handle('remove-queue-item', async (event, itemId) => {
         return downloadQueue.removeItem(itemId);
+    });
+    ipcMain.handle('get-queue-items', async (event) => {
+        return downloadQueue.items;
+    });
+    ipcMain.handle('get-queue-count', async (event) => {
+        return downloadQueue.pendingItemsCount();
+    });
+    ipcMain.handle('clear-queue-done', async (event) => {
+        return downloadQueue.clearDone();
     });
 
     /* External */

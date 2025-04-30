@@ -12,12 +12,27 @@ Sentry.init({
 });
 
 const app = createApp(App);
+const mittInstance = mitt();
+
+window.spshQueue.onQueueChange((queueItems) => {
+    mittInstance.emit('queue-change', queueItems);
+});
+window.spshQueue.onQueueCountChange((queueCount) => {
+    mittInstance.emit('queue-count-change', queueCount);
+});
+window.spshQueue.onItemChange((queueItem) => {
+    mittInstance.emit('item-change', queueItem);
+});
+window.spshQueue.onQueueDone(() => {
+    mittInstance.emit('queue-done');
+});
 
 app.provide('externalApi', window.spshExternalApi);
 app.provide('api', window.spshApi);
 app.provide('settingsManager', window.spshSettings);
+app.provide('queue', window.spshQueue);
 app.provide('connect', window.spshConnect);
-app.provide('mitt', mitt());
+app.provide('mitt', mittInstance);
 
 app.use(Router);
 app.mount('#app');
