@@ -2,6 +2,7 @@
     <RouterLink
         :to="`/chart/${id}`"
         :class="`chart-item ${isExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
+        @click.middle.prevent="handleAddToQueue"
     >
         <div
             class="cover"
@@ -54,6 +55,9 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
+import { DownloadItem } from '../../../main/queue/downloadQueueItem';
+
 const props = defineProps({
     id: {
         type: Number,
@@ -128,6 +132,13 @@ const props = defineProps({
         default: false,
     },
 });
+
+const queue = inject('queue');
+
+async function handleAddToQueue() {
+    const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter);
+    await queue.addQueueItem(newDownloadItem);
+}
 </script>
 
 <style scoped>
