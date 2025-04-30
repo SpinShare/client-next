@@ -68,14 +68,14 @@ export class SettingsManager {
         const system = this.getSystem();
 
         if (system === 'win32') {
-            return path.join(app.getPath('userData'), '../..', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD');
+            return path.join(app.getPath('userData'), '../..', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
         }
         if (system === 'darwin') {
-            return path.join(app.getPath('appData'), 'Super Spin Digital', 'Spin Rhythm XD');
+            return path.join(app.getPath('appData'), 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
         }
         if (system === 'linux') {
             const linuxHomedir = homedir();
-            return path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD');
+            return path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
 
             // TODO: Native Linux build path
         }
