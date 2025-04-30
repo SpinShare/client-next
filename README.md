@@ -1,6 +1,6 @@
 # SpinShare - Client3
 
-A modern cross-platform desktop client for SpinShare
+A modern cross-platform desktop client for [SpinShare](http://spinsha.re)
 
 ## Overview
 
