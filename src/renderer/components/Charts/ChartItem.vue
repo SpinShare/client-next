@@ -177,10 +177,10 @@ async function handleAddToQueue() {
         @apply aspect-square w-[80px] rounded bg-center bg-cover;
     }
     & .content {
-        @apply flex flex-col gap-3;
+        @apply flex flex-col gap-3 overflow-hidden;
 
         & .meta {
-            @apply flex flex-col;
+            @apply flex flex-col overflow-hidden;
 
             & h2 {
                 @apply mb-[-3px] line-clamp-1;
