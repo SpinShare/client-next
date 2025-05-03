@@ -1,7 +1,7 @@
 <template>
     <RouterLink
         :to="`/chart/${id}`"
-        :class="`chart-item ${isExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
+        :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
         @click.middle.prevent="handleAddToQueue"
     >
         <div
@@ -47,7 +47,7 @@
         </div>
         <div
             class="explicit-label"
-            v-if="isExplicit"
+            v-if="isExplicit && !settingShowExplicit"
         >
             Explicit Content &ndash; Hover to reveal
         </div>
@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const props = defineProps({
@@ -134,6 +134,12 @@ const props = defineProps({
 });
 
 const queue = inject('queue');
+const settingsManager = inject('settingsManager');
+const settingShowExplicit = ref(false);
+
+onMounted(async () => {
+    settingShowExplicit.value = await settingsManager.get('showExplicit');
+});
 
 async function handleAddToQueue() {
     const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter);
