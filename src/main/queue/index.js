@@ -1,3 +1,4 @@
+import { Notification } from 'electron';
 import { EventEmitter } from 'events';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -85,6 +86,8 @@ export class DownloadQueue extends EventEmitter {
             return;
         }
 
+        const showNotifications = this.settingsManager.get('downloadNotifications');
+
         while (this.hasPendingItems()) {
             this.workerActive = true;
             const nextItem = this.items.find((item) => item.state === STATE_PENDING);
@@ -127,10 +130,24 @@ export class DownloadQueue extends EventEmitter {
 
                 nextItem.state = STATE_DONE;
                 this.emit('item-change', nextItem);
+
+                if (showNotifications) {
+                    new Notification({
+                        title: `${nextItem.title}`,
+                        body: 'Download complete',
+                    }).show();
+                }
             } catch (e) {
                 console.error(e.message);
                 nextItem.state = STATE_ERROR;
                 this.emit('item-change', nextItem);
+
+                if (showNotifications) {
+                    new Notification({
+                        title: `${nextItem.title}`,
+                        body: 'Download failed',
+                    }).show();
+                }
             }
 
             console.log('--------------------');
@@ -141,6 +158,13 @@ export class DownloadQueue extends EventEmitter {
         this.emit('queue-done');
         this.emit('queue-count-change', this.pendingItemsCount());
         this.emit('queue-change', this.items);
+
+        if (showNotifications) {
+            new Notification({
+                title: `Queue finished`,
+                body: 'All charts were downloaded or failed.',
+            }).show();
+        }
     }
 
     clearDone() {
