@@ -60,7 +60,6 @@ export class SettingsManager {
     }
 
     static getSystem() {
-        // eslint-disable-next-line no-undef
         return process.platform;
     }
 

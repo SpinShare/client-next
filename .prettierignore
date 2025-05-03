@@ -2,4 +2,4 @@
 **/dist/**
 **/build/**
 **/out/**
-.vite/**
+**/.vite/**

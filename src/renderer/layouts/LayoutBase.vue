@@ -6,7 +6,7 @@
             name="default"
             mode="out-in"
         >
-            <main>
+            <main v-show="true">
                 <slot />
             </main>
         </transition>

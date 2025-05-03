@@ -26,23 +26,18 @@ const createWindow = () => {
         minWidth: 750,
         minHeight: 600,
         webPreferences: {
-            // eslint-disable-next-line no-undef
             preload: path.join(__dirname, 'preload.js'),
         },
         backgroundColor: '#1e1f24',
         autoHideMenuBar: true,
     });
 
-    // eslint-disable-next-line no-undef
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-        // eslint-disable-next-line no-undef
         mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     } else {
-        // eslint-disable-next-line no-undef
         mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
 
-    // eslint-disable-next-line no-undef
     if (process.env.NODE_ENV === 'development') {
         mainWindow.on('ready-to-show', () => {
             mainWindow.webContents.openDevTools();
@@ -173,7 +168,6 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-    // eslint-disable-next-line no-undef
     if (process.platform !== 'darwin') {
         app.quit();
     }

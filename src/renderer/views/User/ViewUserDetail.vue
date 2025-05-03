@@ -12,6 +12,7 @@
             <CardItem
                 v-for="card in user.cards"
                 v-bind="card"
+                :key="card.id"
             />
         </div>
     </section>
