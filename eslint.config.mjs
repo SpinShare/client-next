@@ -5,18 +5,14 @@ import prettierConfig from '@vue/eslint-config-prettier';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-    {
-        files: ['**/*.{js,mjs,cjs,vue}'],
-    },
-    {
-        languageOptions: { globals: globals.browser },
-    },
     pluginJs.configs.recommended,
     ...pluginVue.configs['flat/essential'],
     prettierConfig,
     {
+        ignores: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/out/**', '.vite/**'],
+        files: ['**/*.{js,mjs,cjs,vue}'],
+        languageOptions: { globals: globals.browser },
         rules: {
-            // Migrate Vue and Prettier rules from the old config
             'vue/multi-word-component-names': 'off',
             'prettier/prettier': ['error', { endOfLine: 'auto' }],
         },
