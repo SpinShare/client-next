@@ -170,7 +170,10 @@ async function handleCustomsDetect() {
 
 async function handleSave() {
     mitt.emit('save-settings', settings.value);
-    await settingsManager.save();
+
+    // Required to lose the reference to the vue reactive state for ipc
+    const serializedSettings = JSON.parse(JSON.stringify(settings.value));
+    await settingsManager.saveAll(serializedSettings);
 }
 </script>
 

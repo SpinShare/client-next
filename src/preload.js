@@ -57,7 +57,7 @@ contextBridge.exposeInMainWorld('spshSettings', {
     set: (key, value) => ipcRenderer.invoke('set-settings', key, value),
     resetAll: () => ipcRenderer.invoke('reset-settings-all'),
     reset: (key) => ipcRenderer.invoke('reset-settings', key),
-    save: () => ipcRenderer.invoke('save-settings'),
+    saveAll: (settings) => ipcRenderer.invoke('save-settings-all', settings),
     load: () => ipcRenderer.invoke('load-settings'),
     getDefaultCustomsPath: () => ipcRenderer.invoke('get-default-customs-path'),
 });
