@@ -8,7 +8,6 @@ export class DownloadItem {
      * @param {string} title
      * @param {string} artist
      * @param {string} charter
-     * @param {number} state
      */
     constructor(id, cover, title, artist, charter) {
         this.id = id;

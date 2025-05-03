@@ -137,7 +137,8 @@ app.whenReady().then(() => {
     ipcMain.handle('reset-settings', (event, key) => {
         return settingsManager.reset(key);
     });
-    ipcMain.handle('save-settings', (event) => {
+    ipcMain.handle('save-settings-all', (event, settings) => {
+        settingsManager.settings = settings;
         return settingsManager.save();
     });
     ipcMain.handle('load-settings', (event) => {

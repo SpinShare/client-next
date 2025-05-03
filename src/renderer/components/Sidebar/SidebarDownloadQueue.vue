@@ -28,7 +28,7 @@
 
         <div
             class="list"
-            v-if="queueItemCount > 0"
+            v-if="queueItemsList.length > 0"
         >
             <DownloadQueueItem
                 v-for="item in queueItemsList"
