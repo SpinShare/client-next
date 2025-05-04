@@ -62,6 +62,33 @@ contextBridge.exposeInMainWorld('spshSettings', {
     getDefaultCustomsPath: () => ipcRenderer.invoke('get-default-customs-path'),
 });
 
+contextBridge.exposeInMainWorld('spshLibrary', {
+    rebuild: () => ipcRenderer.invoke('rebuild-library'),
+    getAll: () => ipcRenderer.invoke('get-library-all'),
+    get: (fileReference) => ipcRenderer.invoke('get-library', fileReference),
+    getThumbnail: (fileReference) => ipcRenderer.invoke('get-library-thumbnail', fileReference),
+    onCacheChange: (callback) => {
+        const listener = (_, items) => callback(items);
+        ipcRenderer.on('cache-change', listener);
+        return () => ipcRenderer.removeListener('cache-change', listener);
+    },
+    onCacheRebuildStart: (callback) => {
+        const listener = (_) => callback();
+        ipcRenderer.on('cache-rebuild-start', listener);
+        return () => ipcRenderer.removeListener('cache-rebuild-start', listener);
+    },
+    onCacheRebuildProgress: (callback) => {
+        const listener = (_, status) => callback(status);
+        ipcRenderer.on('cache-rebuild-progress', listener);
+        return () => ipcRenderer.removeListener('cache-rebuild-progress', listener);
+    },
+    onCacheRebuildDone: (callback) => {
+        const listener = () => callback();
+        ipcRenderer.on('cache-rebuild-done', listener);
+        return () => ipcRenderer.removeListener('cache-rebuild-done', listener);
+    },
+});
+
 contextBridge.exposeInMainWorld('spshConnect', {
     validateToken: async () => ipcRenderer.invoke('connect-validate-token'),
     isLoggedIn: () => ipcRenderer.invoke('connect-is-logged-in'),

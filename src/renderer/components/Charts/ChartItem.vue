@@ -1,12 +1,18 @@
 <template>
     <RouterLink
-        :to="`/chart/${id}`"
+        :to="`/chart/${id || fileReference}`"
         :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
         @click.middle.prevent="handleAddToQueue"
     >
         <div
+            v-if="!isLocal"
             class="cover"
             :style="`background-image: url('${cover}')`"
+        ></div>
+        <div
+            v-else
+            class="cover"
+            :style="`background-image: url('data:image/png;base64,${localCoverCache}')`"
         ></div>
         <div class="content">
             <div class="meta">
@@ -60,8 +66,12 @@ import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const props = defineProps({
     id: {
-        type: Number,
-        required: true,
+        type: [Number, Boolean],
+        default: false,
+    },
+    isLocal: {
+        type: Boolean,
+        default: false,
     },
     mini: {
         type: Boolean,
@@ -127,6 +137,14 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    updateHash: {
+        type: String,
+        default: '',
+    },
+    fileReference: {
+        type: String,
+        required: true,
+    },
     cover: {
         type: [String, Boolean],
         default: false,
@@ -135,14 +153,20 @@ const props = defineProps({
 
 const queue = inject('queue');
 const settingsManager = inject('settingsManager');
+const libraryManager = inject('libraryManager');
 const settingShowExplicit = ref(false);
+const localCoverCache = ref(null);
 
 onMounted(async () => {
     settingShowExplicit.value = await settingsManager.get('showExplicit');
+
+    if (props.isLocal) {
+        localCoverCache.value = await libraryManager.getThumbnail(props.fileReference);
+    }
 });
 
 async function handleAddToQueue() {
-    const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter);
+    const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter, props.fileReference);
     await queue.addQueueItem(newDownloadItem);
 }
 </script>

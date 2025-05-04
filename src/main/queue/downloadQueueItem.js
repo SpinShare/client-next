@@ -8,13 +8,15 @@ export class DownloadItem {
      * @param {string} title
      * @param {string} artist
      * @param {string} charter
+     * @param {string} fileReference
      */
-    constructor(id, cover, title, artist, charter) {
+    constructor(id, cover, title, artist, charter, fileReference) {
         this.id = id;
         this.cover = cover;
         this.title = title;
         this.artist = artist;
         this.charter = charter;
+        this.fileReference = fileReference;
         this.state = 0;
     }
 }

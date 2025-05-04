@@ -26,10 +26,23 @@ window.spshQueue.onItemChange((queueItem) => {
 window.spshQueue.onQueueDone(() => {
     mittInstance.emit('queue-done');
 });
+window.spshLibrary.onCacheChange((cacheItems) => {
+    mittInstance.emit('cache-change', cacheItems);
+});
+window.spshLibrary.onCacheRebuildStart(() => {
+    mittInstance.emit('cache-rebuild-start');
+});
+window.spshLibrary.onCacheRebuildProgress((status) => {
+    mittInstance.emit('cache-rebuild-progress', status);
+});
+window.spshLibrary.onCacheRebuildDone(() => {
+    mittInstance.emit('cache-rebuild-done');
+});
 
 app.provide('externalApi', window.spshExternalApi);
 app.provide('api', window.spshApi);
 app.provide('settingsManager', window.spshSettings);
+app.provide('libraryManager', window.spshLibrary);
 app.provide('queue', window.spshQueue);
 app.provide('connect', window.spshConnect);
 app.provide('mitt', mittInstance);

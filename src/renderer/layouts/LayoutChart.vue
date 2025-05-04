@@ -158,7 +158,7 @@ onUnmounted(() => {
 });
 
 async function handleAddToQueue() {
-    const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter);
+    const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter, chart.value.fileReference);
     await queue.addQueueItem(newDownloadItem);
 }
 

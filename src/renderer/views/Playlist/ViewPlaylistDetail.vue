@@ -107,7 +107,7 @@ const allCharters = computed(() => {
 
 function handleAddToQueue() {
     playlist.value.songs.forEach((chart) => {
-        const newDownloadItem = new DownloadItem(chart.id, chart.cover, chart.title, chart.artist, chart.charter);
+        const newDownloadItem = new DownloadItem(chart.id, chart.cover, chart.title, chart.artist, chart.charter, chart.fileReference);
         queue.addQueueItem(newDownloadItem);
     });
 }

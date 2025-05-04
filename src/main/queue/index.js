@@ -16,24 +16,30 @@ export const STATE_ERROR = 4;
 export class DownloadQueue extends EventEmitter {
     /**
      * @param apiClient
-     * @param settingsManager
+     * @param {SettingsManager} settingsManager
+     * @param {LibraryManager} libraryManager
      * @param tempFolderPath
+     *
+     * @return {void}
      */
-    constructor(apiClient, settingsManager, tempFolderPath) {
+    constructor(apiClient, settingsManager, libraryManager, tempFolderPath) {
         super();
-
-        console.log('[DownloadQueue] Ready.');
         this.items = [];
         this.workerActive = false;
         this.apiClient = apiClient;
         this.settingsManager = settingsManager;
+        this.libraryManager = libraryManager;
         this.tempFolderPath = path.join(tempFolderPath, 'SpinShare');
 
         fs.mkdirSync(this.tempFolderPath, { recursive: true });
+
+        console.log('[DownloadQueue] Ready.');
     }
 
     /**
      * @param {DownloadItem} item
+     *
+     * @return {void}
      */
     addItem(item) {
         if (!this.isInQueue(item.id)) {
@@ -59,6 +65,8 @@ export class DownloadQueue extends EventEmitter {
 
     /**
      * @param {string} id
+     *
+     * @return {void}
      */
     removeItem(id) {
         this.items = this.items.filter((item) => item.id !== id);
@@ -126,7 +134,7 @@ export class DownloadQueue extends EventEmitter {
 
                 // TODO: Cache
                 console.log(`[DownloadQueue] Cache: (${nextItem.id}) ${nextItem.title}`);
-                await this.delay(1000);
+                await this.libraryManager.add(path.join(chartDestinationPath, `${nextItem.fileReference}.srtb`));
 
                 nextItem.state = STATE_DONE;
                 this.emit('item-change', nextItem);

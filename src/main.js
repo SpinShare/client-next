@@ -7,6 +7,7 @@ import * as Sentry from '@sentry/electron/main';
 import { DownloadQueue } from './main/queue';
 import { SettingsManager } from './main/settings';
 import { AuthManager } from './main/auth';
+import { LibraryManager } from './main/library';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -66,8 +67,35 @@ app.whenReady().then(() => {
     const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
 
+    /* Library */
+    const library = new LibraryManager(apiClient, settingsManager);
+    library.on('cache-change', () => {
+        mainWindow.webContents.send('cache-change', library.items);
+    });
+    library.on('cache-rebuild-start', () => {
+        mainWindow.webContents.send('cache-rebuild-start');
+    });
+    library.on('cache-rebuild-progress', (status) => {
+        mainWindow.webContents.send('cache-rebuild-progress', status);
+    });
+    library.on('cache-rebuild-done', () => {
+        mainWindow.webContents.send('cache-rebuild-done');
+    });
+    ipcMain.handle('get-library-all', async (event) => {
+        return library.items;
+    });
+    ipcMain.handle('get-library', async (event, fileReference) => {
+        return library.get(fileReference);
+    });
+    ipcMain.handle('get-library-thumbnail', async (event, fileReference) => {
+        return await library.getThumbnailAsBase64(fileReference);
+    });
+    ipcMain.handle('rebuild-library', async (event) => {
+        await library.rebuild();
+    });
+
     /* Queue */
-    const downloadQueue = new DownloadQueue(apiClient, settingsManager, app.getPath('temp'));
+    const downloadQueue = new DownloadQueue(apiClient, settingsManager, library, app.getPath('temp'));
     downloadQueue.on('queue-change', (queueItems) => {
         mainWindow.webContents.send('queue-change', queueItems);
     });
