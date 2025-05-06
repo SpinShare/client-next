@@ -45,7 +45,7 @@
 
             <SettingsSection label="Interface">
                 <SettingsItem
-                    label="Show Explicit"
+                    label="Show explicit"
                     description="Automatically unblur explicit charts metadata"
                 >
                     <Switch
@@ -54,7 +54,7 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Download Notifications"
+                    label="Download notifications"
                     description="Notify when a chart was downloaded or the queue finished"
                 >
                     <Switch
@@ -63,11 +63,29 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Open Download Queue"
+                    label="Open download queue"
                     description="Automatically open the download queue whenever a new chart has been added to the queue"
                 >
                     <Switch
                         v-model="settings.openDownloadsSidebar"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    label="Sound effects enabled"
+                    description="Plays UI sound effects"
+                >
+                    <Switch
+                        v-model="settings.sfxEnabled"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    label="Menu music enabled"
+                    description="Plays menu music"
+                >
+                    <Switch
+                        v-model="settings.sfxEnabled"
                         @change="handleSave"
                     />
                 </SettingsItem>

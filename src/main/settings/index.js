@@ -12,6 +12,8 @@ export class SettingsManager {
             openDownloadsSidebar: false,
             connectToken: false,
             showExplicit: false,
+            sfxEnabled: true,
+            musicEnabled: true,
             pathCustoms: SettingsManager.getDefaultCustomsPath(),
             pathGame: '',
         };
