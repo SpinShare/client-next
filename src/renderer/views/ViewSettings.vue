@@ -20,6 +20,7 @@
                         class="select"
                         v-model="settings.theme"
                         @change="handleSave"
+                        v-interactable
                     >
                         <option value="dark">Dark Mode</option>
                         <option value="light">Light Mode</option>
@@ -33,6 +34,7 @@
                         class="select"
                         v-model="settings.language"
                         @change="handleSave"
+                        v-interactable
                     >
                         <option value="en">English</option>
                         <option value="de">German</option>
@@ -85,7 +87,7 @@
                     description="Plays menu music"
                 >
                     <Switch
-                        v-model="settings.sfxEnabled"
+                        v-model="settings.musicEnabled"
                         @change="handleSave"
                     />
                 </SettingsItem>

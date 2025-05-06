@@ -28,7 +28,10 @@ export function createHoverDirective() {
         }
     }
 
-    const playHoverSound = () => {
+    const playHoverSound = async () => {
+        if(!await window.spshSettings.get('sfxEnabled')) {
+            return;
+        }
         if (!audioHover) {
             createAudioHover();
         }
@@ -45,7 +48,10 @@ export function createHoverDirective() {
         }
     }
 
-    const playClickSound = () => {
+    const playClickSound = async () => {
+        if(!await window.spshSettings.get('sfxEnabled')) {
+            return;
+        }
         if (!audioClick) {
             createAudioClick();
         }

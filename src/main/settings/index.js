@@ -34,7 +34,7 @@ export class SettingsManager {
     }
 
     get(key) {
-        return this.settings[key] || this.defaults[key];
+        return this.settings[key] !== undefined ? this.settings[key] : this.defaults[key];
     }
 
     delete(key) {

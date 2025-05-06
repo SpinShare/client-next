@@ -23,6 +23,13 @@ onMounted(() => {
     bgmDefault.value.loop = true;
     bgmDefault.value.volume = 0.5;
     bgmDefault.value.play();
+    mitt.on('save-settings', (newSettings) => {
+        if(newSettings.musicEnabled) {
+            bgmDefault.value.play();
+        } else {
+            bgmDefault.value.pause();
+        }
+    });
 
     sfxQueueDone.value = new Audio(queueDoneFile);
     sfxQueueDone.value.addEventListener('error', (e) => {
@@ -43,6 +50,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     bgmDefault.value.pause();
+    mitt.off('save-settings');
 
     mitt.off('sfx-queue-done');
     mitt.off('sfx-success');
