@@ -17,13 +17,11 @@
         "email": "wearespinshare@gmail.com"
     },
     "license": "AGPL-3.0-only",
-    "dont_commit": {
-        "@electron-forge/maker-flatpak": "^7.7.0"
-    },
     "devDependencies": {
         "@electron-forge/cli": "^7.7.0",
         "@electron-forge/maker-squirrel": "^7.7.0",
         "@electron-forge/maker-zip": "^7.7.0",
+        "@electron-forge/maker-flatpak": "^7.7.0",
         "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
         "@electron-forge/plugin-fuses": "^7.7.0",
         "@electron-forge/plugin-vite": "^7.7.0",
