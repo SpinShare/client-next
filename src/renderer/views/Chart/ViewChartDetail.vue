@@ -14,6 +14,7 @@
             </div>
             <div class="tags">
                 <RouterLink
+                    v-interactable
                     to="/search"
                     class="tag"
                     v-for="tag in chart.tags"

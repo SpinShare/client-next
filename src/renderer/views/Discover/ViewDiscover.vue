@@ -21,6 +21,7 @@
             <div>
                 <SectionHeader title="Featured">
                     <RouterLink
+                        v-interactable
                         class="button"
                         to="/playlist/144"
                     >

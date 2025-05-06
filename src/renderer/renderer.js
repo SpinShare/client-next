@@ -6,6 +6,7 @@ import '@/assets/css/app.css';
 import Router from './router';
 import mitt from 'mitt';
 import * as Sentry from '@sentry/electron/renderer';
+import {createHoverDirective} from "@/modules/hoverDirective";
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -46,6 +47,9 @@ app.provide('libraryManager', window.spshLibrary);
 app.provide('queue', window.spshQueue);
 app.provide('connect', window.spshConnect);
 app.provide('mitt', mittInstance);
+
+/* SOUND EFFECTS */
+app.directive('interactable', createHoverDirective());
 
 app.use(Router);
 app.mount('#app');

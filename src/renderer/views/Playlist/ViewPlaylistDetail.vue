@@ -29,6 +29,7 @@
                         <button
                             class="button brand"
                             @click="handleAddToQueue"
+                            v-interactable
                         >
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
@@ -36,6 +37,7 @@
                         <button
                             class="button"
                             @click="handleOpenUrl"
+                            v-interactable
                         >
                             <Remixicon
                                 icon="external-link"

@@ -54,6 +54,7 @@
                         <button
                             class="button brand"
                             @click="handleAddToQueue"
+                            v-interactable
                         >
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
@@ -63,6 +64,7 @@
                                 class="button"
                                 v-if="!isPreviewPlaying"
                                 @click="playPreview"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="play"
@@ -73,6 +75,7 @@
                                 class="button"
                                 v-if="isPreviewPlaying"
                                 @click="stopPreview"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="stop"
@@ -83,6 +86,7 @@
                         <button
                             class="button"
                             @click="handleOpenUrl"
+                            v-interactable
                         >
                             <Remixicon
                                 icon="external-link"
@@ -92,6 +96,7 @@
                         <button
                             class="button"
                             @click="handleOpenReport"
+                            v-interactable
                         >
                             <Remixicon
                                 icon="flag-2"

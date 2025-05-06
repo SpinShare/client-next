@@ -2,6 +2,7 @@
     <RouterLink
         :class="`item-link ${expanded ? 'expanded' : 'mini'} ${active ? 'active' : ''}`"
         :to="to"
+        v-interactable
     >
         <Remixicon
             :icon="icon"

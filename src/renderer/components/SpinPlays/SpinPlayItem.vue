@@ -2,6 +2,7 @@
     <a
         :href="videoUrl"
         class="spin-play-item"
+        v-interactable
     >
         <div
             class="thumbnail"

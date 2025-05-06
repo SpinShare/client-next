@@ -3,11 +3,11 @@
         <section class="page-connect-login">
             <div class="box">
                 <h1>Log into your account</h1>
-                <p>Go to <a href="https://spinsha.re">spinsha.re</a> and log into your account.</p>
+                <p>Go to <a href="https://spinsha.re" v-interactable>spinsha.re</a> and log into your account.</p>
             </div>
             <div class="box">
                 <h1>Find your connect code</h1>
-                <p>Click <a href="https://spinsha.re/settings/connect">here</a> or click on your profile picture in the top right and go to <strong>Settings</strong>. Go to the <strong>Connect</strong> tab and find your connect code.</p>
+                <p>Click <a href="https://spinsha.re/settings/connect" v-interactable>here</a> or click on your profile picture in the top right and go to <strong>Settings</strong>. Go to the <strong>Connect</strong> tab and find your connect code.</p>
             </div>
             <div class="box">
                 <h1>Enter your connect code</h1>
@@ -18,6 +18,7 @@
                     v-if="!isLoading"
                 >
                     <input
+                        v-interactable
                         class="input"
                         type="text"
                         min="6"
@@ -29,6 +30,7 @@
                         class="button brand shrink-0"
                         @click="handleLogin"
                         :disabled="connectCode.length !== 6"
+                        v-interactable
                     >
                         Log into your account
                     </button>

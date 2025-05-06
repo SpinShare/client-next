@@ -2,6 +2,7 @@
     <button
         class="promo-item"
         @click="handleClick"
+        v-interactable
     >
         <div
             class="banner"

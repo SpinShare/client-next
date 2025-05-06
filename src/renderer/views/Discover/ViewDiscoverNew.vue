@@ -21,6 +21,7 @@
                 class="button"
                 :disabled="currentPage === 0"
                 @click="handlePrevious"
+                v-interactable
             >
                 <Remixicon icon="arrow-left" />
                 <span>Previous page</span>
@@ -28,6 +29,7 @@
             <button
                 class="button"
                 @click="handleNext"
+                v-interactable
             >
                 <span>Next page</span>
                 <Remixicon icon="arrow-right" />

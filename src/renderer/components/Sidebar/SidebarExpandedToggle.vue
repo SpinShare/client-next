@@ -2,6 +2,7 @@
     <button
         :class="`item-expanded-toggle ${expanded ? 'expanded' : 'mini'}`"
         @click="toggleExpanded"
+        v-interactable
     >
         <Remixicon
             v-if="!expanded"

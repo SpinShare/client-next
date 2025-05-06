@@ -2,6 +2,7 @@
     <RouterLink
         :class="`item-link ${active ? 'active' : ''}`"
         :to="to"
+        v-interactable
     >
         <span class="label">{{ label }}</span>
     </RouterLink>

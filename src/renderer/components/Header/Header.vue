@@ -5,16 +5,21 @@
                 class="button ghost"
                 @click="handleBack"
                 v-if="hasHistory"
+                v-interactable
             >
                 <Remixicon icon="arrow-left" />
             </button>
-            <RouterLink to="/">
+            <RouterLink
+                to="/"
+                v-interactable
+            >
                 <SpinShareLogo class="brand" />
             </RouterLink>
         </div>
         <div class="search">
             <div class="search-box">
                 <input
+                    v-interactable
                     type="search"
                     placeholder="Search for a chart, charter, or playlist..."
                 />

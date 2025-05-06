@@ -2,6 +2,7 @@
     <RouterLink
         :to="`/user/${id}`"
         :class="`user-item ${mini ? 'mini' : ''}`"
+        v-interactable
     >
         <div
             class="avatar"

@@ -2,6 +2,7 @@
     <RouterLink
         :to="`/chart/${id}`"
         :class="`review-item`"
+        v-interactable
     >
         <div class="review">
             <p v-if="comment">{{ comment }}</p>

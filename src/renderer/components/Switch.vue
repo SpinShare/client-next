@@ -1,10 +1,14 @@
 <template>
-    <label :class="`spin-switch ${disabled ? 'disabled' : ''}`">
+    <label
+        :class="`spin-switch ${disabled ? 'disabled' : ''}`"
+        v-interactable
+    >
         <input
             type="checkbox"
             v-model="val"
             :disabled="disabled"
             @input="handleInput"
+            v-interactable
         />
         <span class="background"></span>
     </label>

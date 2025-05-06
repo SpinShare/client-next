@@ -9,6 +9,7 @@
                     <button
                         class="button"
                         @click="handleUpdate"
+                        v-interactable
                     >
                         <Remixicon icon="refresh" />
                         <span>Check for updates</span>
@@ -83,6 +84,7 @@
                     <button
                         class="button"
                         @click="handleLogout"
+                        v-interactable
                     >
                         <Remixicon icon="door-open" />
                         <span>Logout</span>
@@ -96,6 +98,7 @@
                     description="Path to your custom charts folder"
                 >
                     <input
+                        v-interactable
                         class="input"
                         type="text"
                         placeholder="Not set"
@@ -105,6 +108,7 @@
                     <button
                         class="button"
                         @click="handleCustomsSelect"
+                        v-interactable
                     >
                         <Remixicon icon="folder-open" />
                         <span>Select</span>
@@ -112,6 +116,7 @@
                     <button
                         class="button"
                         @click="handleCustomsDetect"
+                        v-interactable
                     >
                         <Remixicon icon="brain" />
                         <span>Detect</span>

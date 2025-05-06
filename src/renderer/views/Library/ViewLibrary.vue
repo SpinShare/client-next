@@ -11,6 +11,7 @@
                     <button
                         class="button"
                         @click="handleOpen"
+                        v-interactable
                     >
                         <Remixicon icon="folder-open" />
                         <span>Open</span>
@@ -18,6 +19,7 @@
                     <button
                         class="button"
                         @click="handleRebuild"
+                        v-interactable
                     >
                         <Remixicon icon="refresh" />
                         <span>Rebuild</span>

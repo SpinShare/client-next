@@ -6,6 +6,7 @@
         :active="isActive"
         :badge="queueItemCount > 0 ? queueItemCount : false"
         @click="handleToggleQueue"
+        v-interactable
     />
     <div
         :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
@@ -15,12 +16,14 @@
             <button
                 class="button ghost"
                 @click="handleClearDone"
+                v-interactable
             >
                 <Remixicon icon="delete-bin" />
             </button>
             <button
                 class="button ghost"
                 @click="handleRestartFailed"
+                v-interactable
             >
                 <Remixicon icon="refresh" />
             </button>
@@ -87,7 +90,7 @@ onMounted(async () => {
         queueItemCount.value = queueCount;
     });
     mitt.on('queue-done', () => {
-        console.log('queue done');
+        mitt.emit('sfx-queue-done');
     });
     mitt.on('item-change', (queueItem) => {
         const index = queueItemsList.value.findIndex((item) => item.id === queueItem.id);

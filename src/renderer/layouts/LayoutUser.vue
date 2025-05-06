@@ -52,6 +52,7 @@
                         <button
                             class="button"
                             @click="handleOpenUrl"
+                            v-interactable
                         >
                             <Remixicon
                                 icon="external-link"
@@ -61,6 +62,7 @@
                         <button
                             class="button"
                             @click="handleOpenReport"
+                            v-interactable
                         >
                             <Remixicon
                                 icon="flag-2"

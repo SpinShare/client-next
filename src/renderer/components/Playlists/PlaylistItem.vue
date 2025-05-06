@@ -2,6 +2,7 @@
     <RouterLink
         :to="`/playlist/${id}`"
         :class="`playlist-item`"
+        v-interactable
     >
         <div
             class="cover"

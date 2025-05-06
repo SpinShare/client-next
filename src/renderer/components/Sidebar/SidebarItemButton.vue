@@ -1,5 +1,8 @@
 <template>
-    <button :class="`item-button ${active ? 'active' : ''} ${expanded ? 'expanded' : 'mini'}`">
+    <button
+        :class="`item-button ${active ? 'active' : ''} ${expanded ? 'expanded' : 'mini'}`"
+        v-interactable
+    >
         <Remixicon
             :icon="icon"
             size="xl"

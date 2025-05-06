@@ -5,6 +5,7 @@
                 :to="`/user/${userId}`"
                 class="user-tooltip-link"
                 @mouseover="tryGetUserInfo"
+                v-interactable
             >
                 {{ label }}
             </RouterLink>

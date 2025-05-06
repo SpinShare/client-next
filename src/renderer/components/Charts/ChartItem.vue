@@ -3,6 +3,7 @@
         :to="`/chart/${id || fileReference}`"
         :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
         @click.middle.prevent="handleAddToQueue"
+        v-interactable
     >
         <div
             v-if="!isLocal"

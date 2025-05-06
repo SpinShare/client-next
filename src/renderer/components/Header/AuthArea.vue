@@ -4,6 +4,7 @@
             to="/connect/login"
             class="button ghost"
             v-if="!isLoggedIn"
+            v-interactable
         >
             <Remixicon icon="key" />
             <span>Login</span>
@@ -21,6 +22,7 @@
                     class="button profile-button"
                     :style="`background-image: url('${profile.avatar}')`"
                     @click="connectPopupOpen = !connectPopupOpen"
+                    v-interactable
                 ></button>
                 <transition name="popup">
                     <div
@@ -64,6 +66,7 @@
                             <RouterLink
                                 :to="`/user/${profile.id}`"
                                 class="item"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="user"
@@ -74,6 +77,7 @@
                             <RouterLink
                                 :to="`/user/${profile.id}/charts`"
                                 class="item"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="music-2"
@@ -84,6 +88,7 @@
                             <RouterLink
                                 :to="`/user/${profile.id}/reviews`"
                                 class="item"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="award"
@@ -94,6 +99,7 @@
                             <RouterLink
                                 :to="`/user/${profile.id}/playlists`"
                                 class="item"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="album"
@@ -104,6 +110,7 @@
                             <RouterLink
                                 :to="`/user/${profile.id}/spinplays`"
                                 class="item"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="youtube"
@@ -116,6 +123,7 @@
                             <button
                                 class="item"
                                 @click="handleLogout"
+                                v-interactable
                             >
                                 <Remixicon
                                     icon="door-open"

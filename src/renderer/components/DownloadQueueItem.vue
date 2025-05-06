@@ -14,6 +14,7 @@
             <button
                 class="button square"
                 v-if="state === 0"
+                v-interactable
             >
                 <Remixicon
                     icon="delete-bin"
