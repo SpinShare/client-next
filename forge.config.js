@@ -63,7 +63,20 @@ module.exports = {
         },
         {
             name: '@electron-forge/maker-zip',
-            platforms: ['darwin'],
+            platforms: ['darwin', 'linux'],
+        },
+        {
+            name: '@electron-forge/maker-deb',
+            platforms: ['linux'],
+            config: {
+                options: {
+                    categories: ['Game'],
+                    // Add protocol handler registration for Debian
+                    mimeType: ['x-scheme-handler/spinshare'],
+                    maintainer: 'SpinShare',
+                    homepage: 'https://spinsha.re/',
+                }
+            }
         },
         // {
         //     name: '@electron-forge/maker-flatpak',
