@@ -13,12 +13,9 @@ module.exports = {
             config: {
                 // Register the spinshare:// protocol during installation
                 setupExe: 'SpinShare-Setup.exe',
-                setupIcon: './src/assets/icons/icon.ico',
-                loadingGif: './src/assets/icons/installing.gif',
-                // Add protocol handler registration
+                setupIcon: './src/renderer/assets/images/icon.ico',
                 registryItems: [
                     {
-                        // Register the spinshare:// protocol
                         name: 'spinshare',
                         path: [
                             'SOFTWARE',
@@ -64,6 +61,9 @@ module.exports = {
         {
             name: '@electron-forge/maker-zip',
             platforms: ['darwin', 'linux'],
+            config: {
+                executableName: 'SpinShare'
+            }
         },
         {
             name: '@electron-forge/maker-deb',
@@ -75,7 +75,8 @@ module.exports = {
                     mimeType: ['x-scheme-handler/spinshare'],
                     maintainer: 'SpinShare',
                     homepage: 'https://spinsha.re/',
-                }
+                },
+                executableName: 'SpinShare'
             }
         },
         // {
@@ -92,6 +93,7 @@ module.exports = {
         //                 }
         //             ],
         //         },
+        //         executableName: 'SpinShare'
         //     },
         // },
     ],
