@@ -65,22 +65,22 @@ module.exports = {
             name: '@electron-forge/maker-zip',
             platforms: ['darwin'],
         },
-        {
-            name: '@electron-forge/maker-flatpak',
-            platforms: ['linux'],
-            config: {
-                options: {
-                    categories: ['Game'],
-                    // Add protocol handler registration for Flatpak
-                    protocols: [
-                        {
-                            name: 'spinshare',
-                            schemes: ['spinshare']
-                        }
-                    ],
-                },
-            },
-        },
+        // {
+        //     name: '@electron-forge/maker-flatpak',
+        //     platforms: ['linux'],
+        //     config: {
+        //         options: {
+        //             categories: ['Game'],
+        //             // Add protocol handler registration for Flatpak
+        //             protocols: [
+        //                 {
+        //                     name: 'spinshare',
+        //                     schemes: ['spinshare']
+        //                 }
+        //             ],
+        //         },
+        //     },
+        // },
     ],
     plugins: [
         {

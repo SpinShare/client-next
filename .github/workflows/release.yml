@@ -44,20 +44,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xvfb
-          sudo apt-get install -y flatpak flatpak-builder
+          # sudo apt-get install -y flatpak flatpak-builder
 
       # Add Flatpak maker for Linux builds
-      - name: Add Flatpak maker
-        if: matrix.os == 'ubuntu-latest'
-        run: npm install --save-dev @electron-forge/maker-flatpak
+      # - name: Add Flatpak maker
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: npm install --save-dev @electron-forge/maker-flatpak
 
       # Verify forge.config.js has Flatpak maker
-      - name: Verify forge config
-        if: matrix.os == 'ubuntu-latest'
-        shell: bash
-        run: |
-          echo "Verifying forge.config.js has Flatpak maker"
-          grep -q "@electron-forge/maker-flatpak" forge.config.js || echo "Warning: Flatpak maker not found in forge.config.js"
+      # - name: Verify forge config
+      #   if: matrix.os == 'ubuntu-latest'
+      #   shell: bash
+      #   run: |
+      #     echo "Verifying forge.config.js has Flatpak maker"
+      #     grep -q "@electron-forge/maker-flatpak" forge.config.js || echo "Warning: Flatpak maker not found in forge.config.js"
 
       # Build the application
       - name: Build application
@@ -142,7 +142,7 @@ jobs:
             artifacts/windows-x64/**/*.exe
             artifacts/windows-x64/**/*.msi
             artifacts/windows-x64/**/*.nupkg
-            artifacts/linux-x64/**/*.flatpak
+            # artifacts/linux-x64/**/*.flatpak
             artifacts/linux-x64/**/*.deb
             artifacts/linux-x64/**/*.rpm
             artifacts/linux-x64/**/*.zip
