@@ -4,8 +4,9 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
     packagerConfig: {
         asar: true,
-        executableName: 'SpinShare',
+        executableName: 'spinshare-client-next',
         icon: './src/renderer/assets/images/icon',
+        productName: "SpinShare",
     },
     rebuildConfig: {},
     makers: [
@@ -63,7 +64,7 @@ module.exports = {
             name: '@electron-forge/maker-zip',
             platforms: ['linux'],
             config: {
-                executableName: 'SpinShare'
+                executableName: 'spinshare-client-next',
             }
         },
         {
@@ -78,7 +79,7 @@ module.exports = {
                     maintainer: 'SpinShare',
                     homepage: 'https://spinsha.re/',
                 },
-                executableName: 'SpinShare'
+                executableName: 'spinshare-client-next',
             }
         },
         // {
@@ -95,7 +96,7 @@ module.exports = {
         //                 }
         //             ],
         //         },
-        //         executableName: 'SpinShare'
+        //         executableName: 'spinshare-client-next',
         //     },
         // },
     ],
