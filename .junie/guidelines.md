@@ -65,10 +65,10 @@ describe('YourClass', () => {
   it('should do something specific', () => {
     // Arrange
     const instance = new YourClass();
-    
+
     // Act
     const result = instance.someMethod();
-    
+
     // Assert
     expect(result).toBe(expectedValue);
   });
@@ -90,15 +90,15 @@ describe('YourComponent', () => {
         // Your props here
       }
     });
-    
+
     expect(getByText('Expected Text')).toBeTruthy();
   });
-  
+
   it('should respond to user interaction', async () => {
     const { getByText } = render(YourComponent);
-    
+
     await fireEvent.click(getByText('Click Me'));
-    
+
     // Assert the expected outcome
   });
 });
@@ -144,6 +144,23 @@ The project follows an Electron application structure with Vue.js for the fronte
 - Write tests for new functionality
 - Follow the Arrange-Act-Assert pattern
 - Mock external dependencies
+
+## Documentation Guidelines
+
+### Location
+- All documentation files should be placed in the `docs` folder at the project root
+- Documentation files should use Markdown format with the `.md` extension
+- Link to documentation files from the main README.md when appropriate
+
+### Content
+- Use clear, concise language
+- Include examples where appropriate
+- Structure documents with proper headings and sections
+- Keep documentation up-to-date with code changes
+
+### Naming Conventions
+- Use UPPERCASE for main documentation files (e.g., `README.md`, `LICENSE.md`)
+- Use KEBAB-CASE for specific documentation files (e.g., `protocol-handler.md`, `api-reference.md`)
 
 ## Debugging
 
