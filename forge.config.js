@@ -5,6 +5,7 @@ module.exports = {
     packagerConfig: {
         asar: true,
         executableName: 'SpinShare',
+        icon: './src/renderer/assets/images/icon',
     },
     rebuildConfig: {},
     makers: [
@@ -60,7 +61,7 @@ module.exports = {
         },
         {
             name: '@electron-forge/maker-zip',
-            platforms: ['darwin', 'linux'],
+            platforms: ['linux'],
             config: {
                 executableName: 'SpinShare'
             }
@@ -70,6 +71,7 @@ module.exports = {
             platforms: ['linux'],
             config: {
                 options: {
+                    icon: './src/renderer/assets/images/icon.png',
                     categories: ['Game'],
                     // Add protocol handler registration for Debian
                     mimeType: ['x-scheme-handler/spinshare'],
