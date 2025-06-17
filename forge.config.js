@@ -10,7 +10,56 @@ module.exports = {
     makers: [
         {
             name: '@electron-forge/maker-squirrel',
-            config: {},
+            config: {
+                // Register the spinshare:// protocol during installation
+                setupExe: 'SpinShare-Setup.exe',
+                setupIcon: './src/assets/icons/icon.ico',
+                loadingGif: './src/assets/icons/installing.gif',
+                // Add protocol handler registration
+                registryItems: [
+                    {
+                        // Register the spinshare:// protocol
+                        name: 'spinshare',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare'
+                        ],
+                        value: 'URL:SpinShare Protocol'
+                    },
+                    {
+                        name: 'URL Protocol',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare'
+                        ],
+                        value: ''
+                    },
+                    {
+                        name: 'DefaultIcon',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare',
+                            'DefaultIcon'
+                        ],
+                        value: '"@APPPATH@,1"'
+                    },
+                    {
+                        name: '',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare',
+                            'shell',
+                            'open',
+                            'command'
+                        ],
+                        value: '"@APPPATH@" "%1"'
+                    }
+                ]
+            },
         },
         {
             name: '@electron-forge/maker-zip',
@@ -22,6 +71,13 @@ module.exports = {
             config: {
                 options: {
                     categories: ['Game'],
+                    // Add protocol handler registration for Flatpak
+                    protocols: [
+                        {
+                            name: 'spinshare',
+                            schemes: ['spinshare']
+                        }
+                    ],
                 },
             },
         },

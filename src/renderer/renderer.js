@@ -40,6 +40,12 @@ window.spshLibrary.onCacheRebuildDone(() => {
     mittInstance.emit('cache-rebuild-done');
 });
 
+// Handle deep link navigation
+window.spshDeepLink.onNavigateTo((route) => {
+    console.log(`Deep link navigation to: ${route}`);
+    Router.push(route);
+});
+
 app.provide('externalApi', window.spshExternalApi);
 app.provide('api', window.spshApi);
 app.provide('settingsManager', window.spshSettings);

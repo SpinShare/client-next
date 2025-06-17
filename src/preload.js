@@ -101,3 +101,11 @@ contextBridge.exposeInMainWorld('spshExternalApi', {
     openUrl: async (url) => ipcRenderer.invoke('open-url', url),
     openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
 });
+
+contextBridge.exposeInMainWorld('spshDeepLink', {
+    onNavigateTo: (callback) => {
+        const listener = (_, route) => callback(route);
+        ipcRenderer.on('navigate-to', listener);
+        return () => ipcRenderer.removeListener('navigate-to', listener);
+    },
+});
