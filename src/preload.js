@@ -21,6 +21,9 @@ contextBridge.exposeInMainWorld('spshApi', {
     getUserReviews: async (userId) => ipcRenderer.invoke('get-user-reviews', userId),
     getUserPlaylists: async (userId) => ipcRenderer.invoke('get-user-playlists', userId),
     getUserSpinPlays: async (userId) => ipcRenderer.invoke('get-user-spinplays', userId),
+    searchCharts: async (query, options) => ipcRenderer.invoke('search-charts', query, options),
+    searchPlaylists: async (query) => ipcRenderer.invoke('search-playlists', query),
+    searchUsers: async (query) => ipcRenderer.invoke('search-users', query),
 });
 
 contextBridge.exposeInMainWorld('spshQueue', {

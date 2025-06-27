@@ -30,7 +30,7 @@ const routes = [
         component: ViewDiscover,
     },
     {
-        path: '/discover/search',
+        path: '/discover/search/:type/:query',
         component: ViewSearch,
     },
     {
