@@ -28,7 +28,7 @@ const { isExactActive } = useLink(props);
 
 <style scoped>
 .item-link {
-    @apply transition-all px-5 h-[45px] text-base-400 flex items-center gap-2 border-b-2 border-b-transparent;
+    @apply transition-all px-5 h-[45px] text-base-300 flex items-center gap-2 border-b-2 border-b-transparent;
 
     &:hover {
         @apply cursor-pointer border-b-base-400 text-base-50;

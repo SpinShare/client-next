@@ -11,7 +11,7 @@
                 :src="chart.paths.ogg"
             />
 
-            <header>
+            <header class="chart">
                 <div
                     class="cover"
                     :style="`background-image: url('${chart.cover}')`"
@@ -23,10 +23,8 @@
                         <p>{{ chart.artist }} &bull; {{ chart.charter }}</p>
                     </div>
                     <div class="info">
-                        <!--
-                            <div class="installation-status installed">Installed</div>
-                            <div class="installation-status update">Update</div>
-                        -->
+                        <div class="installation-status installed" v-if="cacheItem?.updateHash === chart.updateHash">Installed</div>
+                        <div class="installation-status update" v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash">Out of date</div>
                         <div class="difficulties">
                             <div :class="`difficulty ${chart.hasEasyDifficulty ? 'active' : ''}`">
                                 <span>E</span>
@@ -53,8 +51,18 @@
                     <div class="actions">
                         <button
                             class="button brand"
+                            @click="handlePlay"
+                            v-interactable
+                            v-if="cacheItem"
+                        >
+                            <Remixicon icon="gamepad" />
+                            <span>Play</span>
+                        </button>
+                        <button
+                            class="button brand"
                             @click="handleAddToQueue"
                             v-interactable
+                            v-if="!cacheItem"
                         >
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
@@ -129,6 +137,72 @@
             <main>
                 <router-view :chart="chart" />
             </main>
+
+            <dialog class="play-dialog" ref="playDialog">
+                <section class="copy">
+                    <SectionHeader title="Play" />
+                    <p>Select a difficulty to start Spin Rhythm XD and immediately play <strong>{{ chart.title }}</strong>.</p>
+                </section>
+
+                <section class="options">
+                    <button
+                        class="button"
+                        :disabled="!chart.hasEasyDifficulty"
+                        @click="() => handlePlayDifficulty(0)"
+                        v-interactable
+                    >
+                        <span>{{ chart.easyDifficulty ?? "n/a" }}</span>
+                        <span>Easy</span>
+                    </button>
+                    <button
+                        class="button"
+                        :disabled="!chart.hasNormalDifficulty"
+                        @click="() => handlePlayDifficulty(1)"
+                        v-interactable
+                    >
+                        <span>{{ chart.normalDifficulty ?? "n/a" }}</span>
+                        <span>Normal</span>
+                    </button>
+                    <button
+                        class="button"
+                        :disabled="!chart.hasHardDifficulty"
+                        @click="() => handlePlayDifficulty(2)"
+                        v-interactable
+                    >
+                        <span>{{ chart.hardDifficulty ?? "n/a" }}</span>
+                        <span>Hard</span>
+                    </button>
+                    <button
+                        class="button"
+                        :disabled="!chart.hasExtremeDifficulty"
+                        @click="() => handlePlayDifficulty(3)"
+                        v-interactable
+                    >
+                        <span>{{ chart.expertDifficulty ?? "n/a" }}</span>
+                        <span>Expert</span>
+                    </button>
+                    <button
+                        class="button"
+                        :disabled="!chart.hasXDDifficulty"
+                        @click="() => handlePlayDifficulty(4)"
+                        v-interactable
+                    >
+                        <span>{{ chart.XDDifficulty ?? "n/a" }}</span>
+                        <span>XD</span>
+                    </button>
+                </section>
+
+                <section class="actions">
+                    <button
+                        class="button brand"
+                        @click="handleClosePlay"
+                        v-interactable
+                    >
+                        <Remixicon icon="close" />
+                        <span>Close</span>
+                    </button>
+                </section>
+            </dialog>
         </template>
     </LayoutBase>
 </template>
@@ -142,25 +216,47 @@ import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
+import SectionHeader from "@/components/SectionHeader.vue";
 
+const mitt = inject('mitt');
 const api = inject('api');
 const externalApi = inject('externalApi');
+const libraryManager = inject('libraryManager');
 const queue = inject('queue');
 const route = useRoute();
 const chartId = route.params.chartId;
 const chart = ref(null);
+const cacheUpdateHash = ref(null);
+const cacheItem = ref(null);
 
 const chartPreview = ref(null);
 const chartPreviewTimeout = ref(null);
 const isPreviewPlaying = ref(false);
 
+const playDialog = ref(null);
+
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId);
+    cacheItem.value = await libraryManager.get(chart.value.fileReference);
+    mitt.on('item-change', async () => {
+        cacheItem.value = await libraryManager.get(chart.value.fileReference);
+    });
 });
 
 onUnmounted(() => {
     stopPreview();
+    mitt.off('item-change');
 });
+
+function handlePlay() {
+    playDialog.value.showModal();
+}
+function handleClosePlay() {
+    playDialog.value.close();
+}
+function handlePlayDifficulty(difficulty) {
+    externalApi.openUrl(`steam://run/1058830//play "${cacheItem.value.srtbPath}" difficulty ${difficulty}`);
+}
 
 async function handleAddToQueue() {
     const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter, chart.value.fileReference);
@@ -199,7 +295,7 @@ function stopPreview() {
 </script>
 
 <style scoped>
-header {
+header.chart {
     @apply p-10 grid grid-cols-[auto_1fr] gap-4 items-center;
 
     & .cover {
@@ -218,7 +314,7 @@ header {
                 @apply text-base-300 line-clamp-1;
             }
             & p {
-                @apply text-base-400 line-clamp-1;
+                @apply text-base-300 line-clamp-1;
             }
         }
         & .info {
@@ -253,6 +349,56 @@ header {
         & .actions {
             @apply flex flex-wrap gap-2 mt-2;
         }
+    }
+}
+
+.play-dialog:open {
+    @apply bg-base-900 text-base-100 w-full max-w-[500px] m-auto rounded-md p-10 flex flex-col gap-4 transition-all;
+
+    @starting-style {
+        @apply opacity-0;
+    }
+
+    &::backdrop {
+        @apply fixed inset-0 p-5 flex flex-col justify-center items-center z-100 backdrop-blur-md backdrop-brightness-75 transition-all;
+
+        @starting-style {
+            @apply opacity-0;
+        }
+    }
+
+    & .copy {
+        @apply flex flex-col gap-2;
+
+        & h1 {
+            @apply text-xl;
+        }
+        & p {
+            @apply text-base-300;
+        }
+    }
+
+    & .options {
+        @apply grid grid-cols-5 gap-2;
+
+        & .button {
+            @apply flex-col h-auto gap-0.5 items-center justify-center py-2 bg-base-800;
+
+            & span:nth-child(1) {
+                @apply text-2xl font-bold;
+            }
+            & span:nth-child(2) {
+                @apply text-base-300;
+            }
+
+            &:not(:disabled):hover {
+                @apply bg-base-700;
+            }
+        }
+    }
+
+    & .actions {
+        @apply flex justify-end;
     }
 }
 </style>

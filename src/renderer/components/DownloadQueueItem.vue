@@ -106,7 +106,7 @@ function handleRemove() {
                 @apply mb-[-3px] line-clamp-1;
             }
             & p {
-                @apply text-base-400 line-clamp-1;
+                @apply text-base-300 line-clamp-1;
             }
         }
     }

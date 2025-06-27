@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="main">
         <div class="brand-and-back">
             <button
                 class="button ghost"
@@ -50,7 +50,7 @@ const hasHistory = computed(() => {
 </script>
 
 <style scoped>
-header {
+header.main {
     grid-column: 1 / -1;
     @apply grid grid-cols-[auto_1fr_auto] gap-2 items-center h-[60px] pl-3.25 pr-5 border-b border-base-800 justify-between;
 

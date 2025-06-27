@@ -97,7 +97,7 @@ const props = defineProps({
             @apply flex gap-2 items-center;
 
             & .badge-charts {
-                @apply flex gap-1 items-center text-base-400;
+                @apply flex gap-1 items-center text-base-300;
             }
         }
     }

@@ -139,7 +139,7 @@ main {
                 @apply text-sm px-2 py-0.25 rounded-full bg-emerald-700 text-emerald-50 self-start flex gap-1 items-center;
             }
             & p {
-                @apply text-base-400 mt-4;
+                @apply text-base-300 mt-4;
             }
             & .charters {
                 @apply flex flex-wrap gap-2 mt-2;

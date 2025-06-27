@@ -102,7 +102,7 @@ async function handleLogin() {
             @apply font-bold;
         }
         & p {
-            @apply leading-6 text-base-400;
+            @apply leading-6 text-base-300;
 
             & a {
                 @apply underline text-brand-500;

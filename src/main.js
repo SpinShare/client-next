@@ -87,6 +87,9 @@ app.whenReady().then(() => {
     ipcMain.handle('get-library', async (event, fileReference) => {
         return library.get(fileReference);
     });
+    ipcMain.handle('get-library-update-hash', async (event, fileReference) => {
+        return library.getUpdateHash(fileReference);
+    });
     ipcMain.handle('get-library-thumbnail', async (event, fileReference) => {
         return await library.getThumbnailAsBase64(fileReference);
     });

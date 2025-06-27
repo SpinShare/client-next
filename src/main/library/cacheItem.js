@@ -3,8 +3,6 @@
  */
 export class CacheItem {
     /**
-     * @param {string} id
-     * @param {string} cover
      * @param {string} title
      * @param {string} subtitle
      * @param {string} artist
@@ -21,8 +19,9 @@ export class CacheItem {
      * @param {number} XDDifficulty
      * @param {string} fileReference
      * @param {string} updateHash
+     * @param {string} srtbPath
      */
-    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExtremeDifficulty, hasXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, fileReference, updateHash) {
+    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExtremeDifficulty, hasXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, fileReference, updateHash, srtbPath) {
         this.title = title;
         this.subtitle = subtitle;
         this.artist = artist;
@@ -39,6 +38,7 @@ export class CacheItem {
         this.XDDifficulty = XDDifficulty;
         this.fileReference = fileReference;
         this.updateHash = updateHash;
+        this.srtbPath = srtbPath;
     }
 
     static fromSrtb(srtbJson) {
@@ -81,6 +81,7 @@ export class CacheItem {
         cacheItem.hardDifficulty = 0;
         cacheItem.expertDifficulty = 0;
         cacheItem.XDDifficulty = 0;
+        cacheItem.srtbPath = "";
 
         trackDataContainers.forEach((container) => {
             switch (container.difficultyType) {

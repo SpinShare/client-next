@@ -31,7 +31,7 @@ defineProps({
         @apply flex flex-col;
 
         & p {
-            @apply text-base-400;
+            @apply text-base-300;
         }
     }
     & .content {

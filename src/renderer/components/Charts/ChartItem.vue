@@ -24,10 +24,8 @@
                 class="info"
                 v-if="!mini"
             >
-                <!--
-                    <div class="installation-status installed">Installed</div>
-                    <div class="installation-status update">Update</div>
-                -->
+                <div class="installation-status installed" v-if="cacheUpdateHash === updateHash">Installed</div>
+                <div class="installation-status update" v-if="cacheUpdateHash && cacheUpdateHash !== updateHash">Out of date</div>
                 <div class="difficulties">
                     <div :class="`difficulty ${hasEasyDifficulty ? 'active' : ''}`">
                         <span>E</span>
@@ -62,7 +60,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from 'vue';
+import {inject, onMounted, onUnmounted, ref} from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const props = defineProps({
@@ -152,11 +150,13 @@ const props = defineProps({
     },
 });
 
+const mitt = inject('mitt');
 const queue = inject('queue');
 const settingsManager = inject('settingsManager');
 const libraryManager = inject('libraryManager');
 const settingShowExplicit = ref(false);
 const localCoverCache = ref(null);
+const cacheUpdateHash = ref(null);
 
 onMounted(async () => {
     settingShowExplicit.value = await settingsManager.get('showExplicit');
@@ -164,6 +164,15 @@ onMounted(async () => {
     if (props.isLocal) {
         localCoverCache.value = await libraryManager.getThumbnail(props.fileReference);
     }
+
+    cacheUpdateHash.value = await libraryManager.getUpdateHash(props.fileReference);
+    mitt.on('item-change', async () => {
+        cacheUpdateHash.value = await libraryManager.getUpdateHash(chart.value.fileReference);
+    });
+});
+
+onUnmounted(() => {
+    mitt.off('item-change');
 });
 
 async function handleAddToQueue() {
@@ -211,7 +220,7 @@ async function handleAddToQueue() {
                 @apply mb-[-3px] line-clamp-1;
             }
             & p {
-                @apply text-base-400 line-clamp-1;
+                @apply text-base-300 line-clamp-1;
             }
         }
         & .info {

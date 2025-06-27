@@ -103,7 +103,7 @@ function handleClick() {
 
         & .content {
             & h5 {
-                @apply text-base-400;
+                @apply text-base-300;
             }
         }
     }

@@ -11,16 +11,27 @@ module.exports = {
         {
             name: '@electron-forge/maker-squirrel',
             config: {},
+            platforms: ['win'],
         },
         {
             name: '@electron-forge/maker-zip',
             platforms: ['darwin'],
+            config: {
+                options: {
+                    appName: 'SpinShare',
+                },
+            },
         },
         {
             name: '@electron-forge/maker-flatpak',
             platforms: ['linux'],
             config: {
                 options: {
+                    id: 're.spinsha.client',
+                    productName: 'SpinShare',
+                    genericName: 'SpinShare',
+                    description: 'A modern cross-platform desktop client for SpinShare',
+                    branch: 'dev',
                     categories: ['Game'],
                 },
             },

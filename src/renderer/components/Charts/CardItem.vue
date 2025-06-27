@@ -71,7 +71,7 @@ const cleanDescription = computed(() => {
             @apply font-bold;
         }
         & .given-date {
-            @apply mt-2 text-sm text-base-400;
+            @apply mt-2 text-sm text-base-300;
         }
     }
 }

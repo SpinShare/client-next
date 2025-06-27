@@ -92,7 +92,7 @@ const props = defineProps({
             @apply grow;
 
             &.no-comment {
-                @apply text-base-400;
+                @apply text-base-300;
             }
         }
     }

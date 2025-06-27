@@ -96,7 +96,7 @@ const props = defineProps({
             }
         }
         & .pronouns {
-            @apply text-sm text-base-400 mt-[-3px] line-clamp-1;
+            @apply text-sm text-base-300 mt-[-3px] line-clamp-1;
         }
     }
 

@@ -180,13 +180,13 @@ const updateDateAbsolute = computed(() => {
             @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
 
             & .label {
-                @apply text-base-400;
+                @apply text-base-300;
             }
             & .number {
                 @apply text-3xl font-bold;
             }
             & .time-absolute {
-                @apply text-xs text-base-400 mt-[-4px];
+                @apply text-xs text-base-300 mt-[-4px];
             }
         }
         & .split {

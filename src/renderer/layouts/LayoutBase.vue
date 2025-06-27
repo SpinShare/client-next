@@ -18,7 +18,7 @@
         <Loader />
 
         <p class="mt-8 text-xl font-bold">{{ cacheRebuildStatus.percent }}%</p>
-        <p class="text-base-400">{{ cacheRebuildStatus.current }} / {{ cacheRebuildStatus.total }}</p>
+        <p class="text-base-300">{{ cacheRebuildStatus.current }} / {{ cacheRebuildStatus.total }}</p>
     </div>
 </template>
 

@@ -67,6 +67,7 @@ contextBridge.exposeInMainWorld('spshLibrary', {
     getAll: () => ipcRenderer.invoke('get-library-all'),
     get: (fileReference) => ipcRenderer.invoke('get-library', fileReference),
     getThumbnail: (fileReference) => ipcRenderer.invoke('get-library-thumbnail', fileReference),
+    getUpdateHash: (fileReference) => ipcRenderer.invoke('get-library-update-hash', fileReference),
     onCacheChange: (callback) => {
         const listener = (_, items) => callback(items);
         ipcRenderer.on('cache-change', listener);

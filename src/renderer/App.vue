@@ -11,18 +11,21 @@ import successFile from '@/assets/audio/success.ogg?url';
 import {inject, onMounted, onUnmounted, ref} from "vue";
 
 const mitt = inject('mitt');
+const settingsManager = inject('settingsManager');
 const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxSuccess = ref(null);
 
-onMounted(() => {
+onMounted(async () => {
     bgmDefault.value = new Audio(bgmDefaultFile);
     bgmDefault.value.addEventListener('error', (e) => {
         console.error('Audio loading error:', e);
     });
     bgmDefault.value.loop = true;
     bgmDefault.value.volume = 0.5;
-    bgmDefault.value.play();
+    if(await settingsManager.get('musicEnabled')) {
+        bgmDefault.value.play();
+    }
     mitt.on('save-settings', (newSettings) => {
         if(newSettings.musicEnabled) {
             bgmDefault.value.play();

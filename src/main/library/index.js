@@ -80,6 +80,12 @@ export class LibraryManager extends EventEmitter {
         this.emit('cache-rebuild-done');
     }
 
+    /**
+     * Adds a chart to the cache. Also does necessary caching and creates a thumbnail
+     * @param chartPath
+     * @param autoSave
+     * @returns {Promise<void>}
+     */
     async add(chartPath, autoSave = true) {
         if (!fs.existsSync(chartPath)) {
             return;
@@ -91,9 +97,12 @@ export class LibraryManager extends EventEmitter {
         const chartSrtbJson = JSON.parse(chartSrtbRaw);
         const { cacheItem, albumArtReference } = CacheItem.fromSrtb(chartSrtbJson);
 
+        cacheItem.srtbPath = path.basename(chartPath);
         cacheItem.fileReference = chartId;
+        // Create an update hash in the same way the server does
         cacheItem.updateHash = crypto.createHash('md5').update(chartSrtbRaw).digest('hex');
 
+        // Create thumbnail
         if (albumArtReference) {
             console.log(`[Library] (${chartId}) Generating thumbnail.`);
 
@@ -112,6 +121,7 @@ export class LibraryManager extends EventEmitter {
             }
         }
 
+        // Either update or add chart to cache
         if (this.items.some((item) => item.fileReference === chartId)) {
             console.log(`[Library] (${chartId}) Updating Cache.`);
             this.items = this.items.filter((item) => item.fileReference !== chartId);
@@ -140,6 +150,12 @@ export class LibraryManager extends EventEmitter {
         await image.write(cacheCoverPath);
     }
 
+    /**
+     * Removes a chart from the library cache
+     * @param chartId
+     * @param autoSave
+     * @returns {Promise<void>}
+     */
     async remove(chartId, autoSave = true) {
         await fs.promises.rm(path.join(this.cachePath, `${chartId}.png`));
 
@@ -151,11 +167,17 @@ export class LibraryManager extends EventEmitter {
         }
     }
 
+    /**
+     * Saves the chart library cache
+     */
     save() {
         console.log(`[Library] Saving cache`);
         fs.writeFileSync(this.cacheFilePath, JSON.stringify(this.items), 'utf-8');
     }
 
+    /**
+     * Loads the chart library cache
+     */
     load() {
         console.log(`[Library] Loading cache`);
         const loadedItems = JSON.parse(fs.readFileSync(this.cacheFilePath, 'utf-8'));
@@ -163,10 +185,20 @@ export class LibraryManager extends EventEmitter {
         this.emit('cache-change');
     }
 
+    /**
+     * Returns a chart if in cache
+     * @param fileReference
+     * @returns {*}
+     */
     get(fileReference) {
         return this.items.find((item) => item?.fileReference === fileReference);
     }
 
+    /**
+     * Returns the updateHash of a chart
+     * @param fileReference
+     * @returns {*|null}
+     */
     getUpdateHash(fileReference) {
         const item = this.get(fileReference);
         if (!item) {
@@ -176,6 +208,11 @@ export class LibraryManager extends EventEmitter {
         return item.updateHash;
     }
 
+    /**
+     * Returns a base64 string of a charts thumbnail
+     * @param fileReference
+     * @returns {Promise<string|null>}
+     */
     async getThumbnailAsBase64(fileReference) {
         const cacheCoverPath = path.join(this.cachePath, `${fileReference}.png`);
         if (!fs.existsSync(cacheCoverPath)) {
