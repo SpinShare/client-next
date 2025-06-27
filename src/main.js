@@ -8,6 +8,7 @@ import { DownloadQueue } from './main/queue';
 import { SettingsManager } from './main/settings';
 import { AuthManager } from './main/auth';
 import { LibraryManager } from './main/library';
+import { URL } from 'url';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -18,14 +19,87 @@ if (started) {
     app.quit();
 }
 
+// Register the spinshare:// protocol
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        app.setAsDefaultProtocolClient('spinshare', process.execPath, [path.resolve(process.argv[1])]);
+    }
+} else {
+    app.setAsDefaultProtocolClient('spinshare');
+}
+
+// Only allow a single instance of the app
+const gotTheLock = app.requestSingleInstanceLock();
+let mainWindow = null;
+
+if (!gotTheLock) {
+    app.quit();
+} else {
+    // Someone tried to run a second instance, focus our window instead
+    app.on('second-instance', (event, commandLine, workingDirectory) => {
+        // Handle the protocol URL if it exists
+        const deepLinkUrl = getDeepLinkUrl(commandLine);
+        if (deepLinkUrl) {
+            handleDeepLink(deepLinkUrl);
+        }
+
+        // Focus the main window if it exists
+        if (mainWindow) {
+            if (mainWindow.isMinimized()) mainWindow.restore();
+            mainWindow.focus();
+        }
+    });
+}
+
 const settingsManager = new SettingsManager();
 
+// Function to extract the deep link URL from command line arguments
+function getDeepLinkUrl(argv) {
+    // Check for spinshare:// protocol URLs in the arguments
+    const deepLinkUrl = argv.find(arg => arg.startsWith('spinshare://'));
+    return deepLinkUrl || null;
+}
+
+// Function to handle deep link navigation
+function handleDeepLink(url) {
+    if (!mainWindow) return;
+
+    try {
+        const parsedUrl = new URL(url);
+        const pathname = parsedUrl.pathname.substring(1); // Remove leading slash
+        const segments = pathname.split('/');
+
+        if (segments.length >= 2) {
+            const type = segments[0];
+            const id = segments[1];
+
+            // Navigate to the appropriate route based on the URL
+            switch (type) {
+                case 'chart':
+                    mainWindow.webContents.send('navigate-to', `/chart/${id}`);
+                    break;
+                case 'user':
+                    mainWindow.webContents.send('navigate-to', `/user/${id}`);
+                    break;
+                case 'playlist':
+                    mainWindow.webContents.send('navigate-to', `/playlist/${id}`);
+                    break;
+                default:
+                    console.log(`Unknown deep link type: ${type}`);
+            }
+        }
+    } catch (error) {
+        console.error('Error handling deep link:', error);
+    }
+}
+
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 1400,
         height: 850,
         minWidth: 750,
         minHeight: 600,
+        icon: path.join(__dirname, '../renderer/assets/images/icon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
@@ -60,8 +134,30 @@ const createWindow = () => {
     return mainWindow;
 };
 
+// Handle protocol URLs on macOS
+app.on('open-url', (event, url) => {
+    event.preventDefault();
+
+    if (url.startsWith('spinshare://')) {
+        // If the app is not ready yet, wait until it is
+        if (!app.isReady()) {
+            app.once('ready', () => {
+                handleDeepLink(url);
+            });
+        } else {
+            handleDeepLink(url);
+        }
+    }
+});
+
 app.whenReady().then(() => {
-    const mainWindow = createWindow();
+    mainWindow = createWindow();
+
+    // Handle protocol URLs on Windows/Linux from startup
+    const deepLinkUrl = getDeepLinkUrl(process.argv);
+    if (deepLinkUrl) {
+        handleDeepLink(deepLinkUrl);
+    }
 
     const apiClient = new SpinShareClient();
     const authManager = new AuthManager(settingsManager, apiClient);

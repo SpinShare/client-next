@@ -1,0 +1,151 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - dev
+      - 'release/**'
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            output_dir: out/make/squirrel.windows/x64
+            artifact_name: windows-x64
+          - os: ubuntu-latest
+            output_dir: out/make
+            artifact_name: linux-x64
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      # Install additional dependencies for Linux builds
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xvfb
+          # sudo apt-get install -y flatpak flatpak-builder
+
+      # Add Flatpak maker for Linux builds
+      # - name: Add Flatpak maker
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: npm install --save-dev @electron-forge/maker-flatpak
+
+      # Verify forge.config.js has Flatpak maker
+      # - name: Verify forge config
+      #   if: matrix.os == 'ubuntu-latest'
+      #   shell: bash
+      #   run: |
+      #     echo "Verifying forge.config.js has Flatpak maker"
+      #     grep -q "@electron-forge/maker-flatpak" forge.config.js || echo "Warning: Flatpak maker not found in forge.config.js"
+
+      # Build the application
+      - name: Build application
+        run: npm run make
+
+      # List output directory contents for debugging
+      - name: List output directory
+        shell: bash
+        run: |
+          echo "Listing output directory: ${{ matrix.output_dir }}"
+          ls -la ${{ matrix.output_dir }} || echo "Directory not found"
+
+      # Upload artifacts for each platform
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.output_dir }}
+          retention-days: 5
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Download all artifacts
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      # List downloaded artifacts for debugging
+      - name: List downloaded artifacts
+        shell: bash
+        run: |
+          echo "Listing downloaded artifacts:"
+          find artifacts -type f | sort
+
+      # Determine if this is a nightly or release build
+      - name: Set release type
+        id: release_type
+        shell: bash
+        run: |
+          # Get version from package.json
+          VERSION=$(node -p "require('./package.json').version")
+
+          if [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
+            # For nightly builds, use date and time to ensure uniqueness
+            TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
+            echo "type=nightly" >> $GITHUB_OUTPUT
+            echo "name=SpinShare Nightly Build $TIMESTAMP (v$VERSION)" >> $GITHUB_OUTPUT
+            echo "tag=nightly-$TIMESTAMP" >> $GITHUB_OUTPUT
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          else
+            # For release builds, extract branch name and use version
+            BRANCH_NAME=${GITHUB_REF#refs/heads/release/}
+            echo "type=release" >> $GITHUB_OUTPUT
+            echo "name=SpinShare v$VERSION ($BRANCH_NAME)" >> $GITHUB_OUTPUT
+            echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Output the values for debugging
+          echo "Release type: $(cat $GITHUB_OUTPUT | grep type= | cut -d= -f2)"
+          echo "Release name: $(cat $GITHUB_OUTPUT | grep name= | cut -d= -f2)"
+          echo "Release tag: $(cat $GITHUB_OUTPUT | grep tag= | cut -d= -f2)"
+
+      # Create GitHub Release
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.release_type.outputs.name }}
+          tag_name: ${{ steps.release_type.outputs.tag }}
+          draft: false
+          prerelease: ${{ steps.release_type.outputs.prerelease }}
+          files: |
+            artifacts/windows-x64/**/*.exe
+            artifacts/windows-x64/**/*.msi
+            artifacts/windows-x64/**/*.nupkg
+            # artifacts/linux-x64/**/*.flatpak
+            artifacts/linux-x64/**/*.deb
+            artifacts/linux-x64/**/*.rpm
+            artifacts/linux-x64/**/*.zip
+            artifacts/linux-x64/**/*.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

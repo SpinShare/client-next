@@ -4,38 +4,90 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
     packagerConfig: {
         asar: true,
-        executableName: 'SpinShare',
+        executableName: 'spinshare-client-next',
+        icon: './src/renderer/assets/images/icon',
+        productName: "SpinShare",
     },
     rebuildConfig: {},
     makers: [
         {
             name: '@electron-forge/maker-squirrel',
-            config: {},
-            platforms: ['win'],
-        },
-        {
-            name: '@electron-forge/maker-zip',
-            platforms: ['darwin'],
             config: {
-                options: {
-                    appName: 'SpinShare',
-                },
+                // Register the spinshare:// protocol during installation
+                setupExe: 'SpinShare-Setup.exe',
+                setupIcon: './src/renderer/assets/images/icon.ico',
+                registryItems: [
+                    {
+                        name: 'spinshare',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare'
+                        ],
+                        value: 'URL:SpinShare Protocol'
+                    },
+                    {
+                        name: 'URL Protocol',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare'
+                        ],
+                        value: ''
+                    },
+                    {
+                        name: 'DefaultIcon',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare',
+                            'DefaultIcon'
+                        ],
+                        value: '"@APPPATH@,1"'
+                    },
+                    {
+                        name: '',
+                        path: [
+                            'SOFTWARE',
+                            'Classes',
+                            'spinshare',
+                            'shell',
+                            'open',
+                            'command'
+                        ],
+                        value: '"@APPPATH@" "%1"'
+                    }
+                ]
             },
         },
         {
-            name: '@electron-forge/maker-flatpak',
+            name: '@electron-forge/maker-zip',
+            platforms: ['linux'],
+            config: {
+                executableName: 'spinshare-client-next',
+            }
+        },
+        /*
+        {
+            name: '@electron-forge/maker-deb',
             platforms: ['linux'],
             config: {
                 options: {
+                    icon: './src/renderer/assets/images/icon.png',
                     id: 're.spinsha.client',
                     productName: 'SpinShare',
                     genericName: 'SpinShare',
                     description: 'A modern cross-platform desktop client for SpinShare',
                     branch: 'dev',
                     categories: ['Game'],
+                    // Add protocol handler registration for Debian
+                    mimeType: ['x-scheme-handler/spinshare'],
+                    maintainer: 'SpinShare',
+                    homepage: 'https://spinsha.re/',
                 },
-            },
-        },
+                executableName: 'spinshare-client-next',
+            }
+        }, */
     ],
     plugins: [
         {

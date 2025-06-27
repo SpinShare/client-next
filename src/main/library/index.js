@@ -183,6 +183,7 @@ export class LibraryManager extends EventEmitter {
         const loadedItems = JSON.parse(fs.readFileSync(this.cacheFilePath, 'utf-8'));
         this.items = [...loadedItems];
         this.emit('cache-change');
+        console.log(`[Library] Cache loaded.`);
     }
 
     /**
