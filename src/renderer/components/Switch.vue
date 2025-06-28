@@ -1,6 +1,6 @@
 <template>
     <label
-        :class="`spin-switch ${disabled ? 'disabled' : ''}`"
+        :class="`spin-switch ${disabled ? 'disabled' : ''} ${mini ? 'mini' : ''}`"
         v-interactable
     >
         <input
@@ -23,6 +23,10 @@ const props = defineProps({
         default: false,
     },
     disabled: {
+        type: Boolean,
+        default: false,
+    },
+    mini: {
         type: Boolean,
         default: false,
     },
@@ -70,6 +74,18 @@ const handleInput = () => emit('update:modelValue', !val.value);
         }
         & input:checked + .background {
             @apply bg-brand-400;
+        }
+    }
+
+    &.mini {
+        @apply h-[15px] w-[35px];
+
+        input {
+            @apply w-[9px] h-[9px] mt-[3px] ml-[3px];
+
+            &:checked {
+                @apply ml-[22px];
+            }
         }
     }
 }
