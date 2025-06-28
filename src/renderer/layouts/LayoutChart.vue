@@ -256,6 +256,10 @@ function handleClosePlay() {
 }
 function handlePlayDifficulty(difficulty) {
     externalApi.openUrl(`steam://run/1058830//play "${cacheItem.value.srtbPath}" difficulty ${difficulty}`);
+
+    setTimeout(() => {
+        handleClosePlay();
+    }, 500);
 }
 
 async function handleAddToQueue() {
