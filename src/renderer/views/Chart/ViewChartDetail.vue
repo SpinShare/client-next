@@ -15,7 +15,7 @@
             <div class="tags">
                 <RouterLink
                     v-interactable
-                    to="/search"
+                    :to="`/discover/search/charts/${tag}`"
                     class="tag"
                     v-for="tag in chart.tags"
                     :key="tag"
