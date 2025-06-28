@@ -59,6 +59,8 @@ function handleBack() {
 }
 
 function handleSearch() {
+    // Prevent empty searches
+    if(searchQuery.value === '') return;
     router.push(`/discover/search/${searchType.value}/${searchQuery.value}`);
 }
 
