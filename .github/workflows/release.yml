@@ -132,20 +132,12 @@ jobs:
       # Create GitHub Release
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.release_type.outputs.name }}
           tag_name: ${{ steps.release_type.outputs.tag }}
           draft: false
           prerelease: ${{ steps.release_type.outputs.prerelease }}
           files: |
-            artifacts/windows-x64/**/*.exe
-            artifacts/windows-x64/**/*.msi
-            artifacts/windows-x64/**/*.nupkg
-            # artifacts/linux-x64/**/*.flatpak
-            artifacts/linux-x64/**/*.deb
-            artifacts/linux-x64/**/*.rpm
-            artifacts/linux-x64/**/*.zip
-            artifacts/linux-x64/**/*.AppImage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            artifacts/zip/linux/x64/SpinShare-linux-x64-3.21.0.zip
+            artifacts/SpinShare-Setup.exe
