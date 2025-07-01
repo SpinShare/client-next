@@ -1,18 +1,15 @@
 import {app} from "electron";
+import {EventEmitter} from "events";
 
-export class UpdateManager {
-    updateAvailable = false;
-    githubUser = "SpinShare";
-    githubRepo = "client-next";
-    url = "";
-    settingsManager = null;
-
+export class UpdateManager extends EventEmitter {
     constructor(settingsManager) {
-        this.url = `https://api.github.com/repos/${this.githubUser}/${this.githubRepo}/releases`;
+        super();
+
+        this.url = `https://api.github.com/repos/SpinShare/client-next/releases`;
         this.settingsManager = settingsManager;
     }
 
-    async getLatestRelease() {
+    async checkForUpdates() {
         const response = await fetch(this.url);
         const data = await response.json();
         const latestRelease = data.find(r => r.prerelease === false) || null;
@@ -25,5 +22,9 @@ export class UpdateManager {
         } else {
             console.log(`[UpdateManager] No new update available.`);
         }
+
+        this.emit('update-check-done', hasNewRelease);
+
+        return hasNewRelease;
     }
 }

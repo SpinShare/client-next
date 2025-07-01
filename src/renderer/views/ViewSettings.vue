@@ -4,15 +4,25 @@
             <SettingsSection label="General">
                 <SettingsItem
                     label="SpinShare Client Next"
-                    description="Version 3.20.0"
+                    :description="`Version ${appVersion}`"
                 >
                     <button
                         class="button"
                         @click="handleUpdate"
+                        v-if="!updateAvailable"
                         v-interactable
                     >
                         <Remixicon icon="refresh" />
                         <span>Check for updates</span>
+                    </button>
+                    <button
+                        class="button brand"
+                        @click="handleGetUpdate"
+                        v-if="updateAvailable"
+                        v-interactable
+                    >
+                        <Remixicon icon="refresh" />
+                        <span>Get update</span>
                     </button>
                 </SettingsItem>
                 <SettingsItem label="Theme">
@@ -155,28 +165,43 @@ import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
 import { onMounted, inject, ref, onUnmounted } from 'vue';
 
+const externalApi = inject('externalApi');
 const settingsManager = inject('settingsManager');
+const updateManager = inject('updateManager');
 const settings = ref({});
 const mitt = inject('mitt');
 const connect = inject('connect');
 const isLoggedIn = ref(false);
+const updateAvailable = ref(false);
+const appVersion = ref("0.0.0");
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
+
+    mitt.on('update-check-done', (hasNewRelease) => {
+        updateAvailable.value = hasNewRelease;
+    });
+    appVersion.value = await updateManager.getAppVersion();
+    updateAvailable.value = await updateManager.checkForUpdates();
+
     mitt.on('auth-updated', onAuthUpdated);
     await onAuthUpdated();
 });
 
 onUnmounted(() => {
     mitt.off('auth-updated');
+    mitt.off('update-check-done');
 });
 
 async function onAuthUpdated() {
     isLoggedIn.value = await connect.isLoggedIn();
 }
 
+function handleGetUpdate() {
+    externalApi.openUrl('https://github.com/SpinShare/client-next/releases/latest');
+}
 async function handleUpdate() {
-    // TODO
+    updateManager.checkForUpdates();
 }
 
 async function handleLogout() {

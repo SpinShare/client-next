@@ -15,6 +15,7 @@ import UpdateToast from "@/components/UpdateToast.vue";
 
 const mitt = inject('mitt');
 const settingsManager = inject('settingsManager');
+const updateManager = inject('updateManager');
 const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxSuccess = ref(null);
@@ -36,8 +37,6 @@ onMounted(async () => {
     if(await settingsManager.get('musicEnabled')) {
         bgmDefault.value.play();
     }
-
-    updateAvailable.value = await settingsManager.get('updateAvailable');
 
     mitt.on('save-settings', (newSettings) => {
         if(newSettings.musicEnabled) {
@@ -62,6 +61,11 @@ onMounted(async () => {
     mitt.on('sfx-success', () => {
         sfxSuccess.value.play();
     });
+    mitt.on('update-check-done', (hasNewRelease) => {
+        updateAvailable.value = hasNewRelease;
+    });
+
+    updateManager.checkForUpdates();
 });
 
 onUnmounted(() => {
@@ -70,5 +74,6 @@ onUnmounted(() => {
 
     mitt.off('sfx-queue-done');
     mitt.off('sfx-success');
+    mitt.off('update-check-done');
 });
 </script>

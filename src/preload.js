@@ -93,6 +93,16 @@ contextBridge.exposeInMainWorld('spshLibrary', {
     },
 });
 
+contextBridge.exposeInMainWorld('spshUpdates', {
+    checkForUpdates: async () => ipcRenderer.invoke('check-for-updates'),
+    onUpdateCheckDone: (callback) => {
+        const listener = (_, updates) => callback(updates);
+        ipcRenderer.on('update-check-done', listener);
+        return () => ipcRenderer.removeListener('update-check-done', listener);
+    },
+    getAppVersion: () => ipcRenderer.invoke('get-app-version'),
+});
+
 contextBridge.exposeInMainWorld('spshConnect', {
     validateToken: async () => ipcRenderer.invoke('connect-validate-token'),
     isLoggedIn: () => ipcRenderer.invoke('connect-is-logged-in'),

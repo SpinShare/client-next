@@ -53,10 +53,6 @@ if (!gotTheLock) {
 }
 
 const settingsManager = new SettingsManager();
-const updateManager = new UpdateManager(settingsManager);
-(async () => {
-    const latestRelease = updateManager.getLatestRelease();
-})();
 
 // Function to extract the deep link URL from command line arguments
 function getDeepLinkUrl(argv) {
@@ -167,6 +163,18 @@ app.whenReady().then(() => {
     const apiClient = new SpinShareClient();
     const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
+
+    /* Updates */
+    const updateManager = new UpdateManager(settingsManager);
+    updateManager.on('update-check-done', (hasNewRelease) => {
+        mainWindow.webContents.send('update-check-done', hasNewRelease);
+    });
+    ipcMain.handle('check-for-updates', async (event) => {
+        return await updateManager.checkForUpdates();
+    });
+    ipcMain.handle('get-app-version', (event) => {
+        return `${app.getVersion()}-${process.env.NODE_ENV}`;
+    });
 
     /* Library */
     const library = new LibraryManager(apiClient, settingsManager);

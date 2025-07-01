@@ -39,6 +39,9 @@ window.spshLibrary.onCacheRebuildProgress((status) => {
 window.spshLibrary.onCacheRebuildDone(() => {
     mittInstance.emit('cache-rebuild-done');
 });
+window.spshUpdates.onUpdateCheckDone((hasNewRelease) => {
+    mittInstance.emit('update-check-done', hasNewRelease);
+});
 
 // Handle deep link navigation
 window.spshDeepLink.onNavigateTo((route) => {
@@ -49,6 +52,7 @@ window.spshDeepLink.onNavigateTo((route) => {
 app.provide('externalApi', window.spshExternalApi);
 app.provide('api', window.spshApi);
 app.provide('settingsManager', window.spshSettings);
+app.provide('updateManager', window.spshUpdates);
 app.provide('libraryManager', window.spshLibrary);
 app.provide('queue', window.spshQueue);
 app.provide('connect', window.spshConnect);
