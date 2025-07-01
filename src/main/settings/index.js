@@ -6,6 +6,7 @@ import { homedir } from 'node:os';
 export class SettingsManager {
     constructor() {
         this.defaults = {
+            updateAvailable: false,
             setupCompleted: false,
             theme: 'dark',
             language: 'en',

@@ -9,6 +9,7 @@ import { SettingsManager } from './main/settings';
 import { AuthManager } from './main/auth';
 import { LibraryManager } from './main/library';
 import { URL } from 'url';
+import {UpdateManager} from "./main/updates";
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -52,6 +53,10 @@ if (!gotTheLock) {
 }
 
 const settingsManager = new SettingsManager();
+const updateManager = new UpdateManager(settingsManager);
+(async () => {
+    const latestRelease = updateManager.getLatestRelease();
+})();
 
 // Function to extract the deep link URL from command line arguments
 function getDeepLinkUrl(argv) {

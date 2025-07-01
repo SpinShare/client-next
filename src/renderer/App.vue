@@ -2,6 +2,8 @@
     <router-view v-slot="{ Component }">
         <component :is="Component" />
     </router-view>
+
+    <UpdateToast v-if="updateAvailable" @close="handleDismissUpdate" />
 </template>
 
 <script setup>
@@ -9,12 +11,20 @@ import bgmDefaultFile from "@/assets/audio/bgm_default.ogg?url";
 import queueDoneFile from '@/assets/audio/queue_done.wav?url';
 import successFile from '@/assets/audio/success.ogg?url';
 import {inject, onMounted, onUnmounted, ref} from "vue";
+import UpdateToast from "@/components/UpdateToast.vue";
 
 const mitt = inject('mitt');
 const settingsManager = inject('settingsManager');
 const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxSuccess = ref(null);
+const updateAvailable = ref(false);
+
+function handleDismissUpdate() {
+    console.log("Dismiss update");
+    updateAvailable.value = false;
+    settingsManager.set('updateAvailable', false);
+}
 
 onMounted(async () => {
     bgmDefault.value = new Audio(bgmDefaultFile);
@@ -26,6 +36,9 @@ onMounted(async () => {
     if(await settingsManager.get('musicEnabled')) {
         bgmDefault.value.play();
     }
+
+    updateAvailable.value = await settingsManager.get('updateAvailable');
+
     mitt.on('save-settings', (newSettings) => {
         if(newSettings.musicEnabled) {
             bgmDefault.value.play();
@@ -57,5 +70,5 @@ onUnmounted(() => {
 
     mitt.off('sfx-queue-done');
     mitt.off('sfx-success');
-})
+});
 </script>
