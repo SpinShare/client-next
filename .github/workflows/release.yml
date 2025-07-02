@@ -141,5 +141,5 @@ jobs:
           draft: false
           prerelease: ${{ steps.release_type.outputs.prerelease }}
           files: |
-            artifacts/zip/linux/x64/SpinShare-linux-x64-3.21.0.zip
+            artifacts/zip/linux/x64/*
             artifacts/SpinShare-Setup.exe
