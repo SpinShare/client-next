@@ -81,7 +81,7 @@ function handleRemove() {
 
 <style scoped>
 .download-queue-item {
-    @apply border border-base-800 relative transition-all text-left p-2 py-1 grid grid-cols-[auto_1fr_auto] gap-2 items-center shrink-0;
+    @apply border border-base-300 dark:border-base-800 relative transition-all text-left p-2 py-1 grid grid-cols-[auto_1fr_auto] gap-2 items-center shrink-0;
 
     &:first-of-type {
         @apply rounded-t-md;
@@ -106,7 +106,7 @@ function handleRemove() {
                 @apply mb-[-3px] line-clamp-1;
             }
             & p {
-                @apply text-base-300 line-clamp-1;
+                @apply text-base-500 dark:text-base-300 line-clamp-1;
             }
         }
     }

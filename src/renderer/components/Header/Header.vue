@@ -72,7 +72,7 @@ const hasHistory = computed(() => {
 <style scoped>
 header.main {
     grid-column: 1 / -1;
-    @apply grid grid-cols-[auto_1fr_auto] gap-2 items-center h-[60px] pl-3.25 pr-5 border-b border-base-800 justify-between;
+    @apply grid grid-cols-[auto_1fr_auto] gap-2 items-center h-[60px] pl-3.25 pr-5 border-b border-base-300 dark:border-base-800 justify-between;
 
     & .brand-and-back {
         @apply flex items-center gap-4;
@@ -85,16 +85,20 @@ header.main {
         @apply flex items-center justify-center;
 
         & .search-box {
-            @apply h-[40px] flex gap-0 rounded-md relative min-w-[200px] w-full max-w-[500px] border border-base-800;
+            @apply h-[40px] flex gap-0 rounded-md relative min-w-[200px] w-full max-w-[500px] border border-base-300 dark:border-base-800;
 
             & select {
-                @apply px-2 border-r border-base-800 appearance-none pr-8;
+                @apply px-2 border-r border-base-300 dark:border-base-800 appearance-none pr-8;
 
-                & option {
-                    @apply bg-base-900;
+                &:hover, &:focus {
+                    @apply bg-base-100 dark:bg-base-900 outline-0;
                 }
 
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,255,255,1)'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'%3E%3C/path%3E%3C/svg%3E");
+                & option {
+                    @apply bg-base-200 dark:bg-base-900;
+                }
+
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'%3E%3C/path%3E%3C/svg%3E");
                 background-repeat: no-repeat;
                 background-position: right 4px top 60%;
                 background-size: 24px 24px;
@@ -102,11 +106,8 @@ header.main {
             & input {
                 @apply grow px-4 font-sans bg-none transition-all;
 
-                &:hover {
-                    @apply bg-base-900;
-                }
-                &:focus {
-                    @apply bg-base-900 outline-0;
+                &:hover, &:focus {
+                    @apply bg-base-100 dark:bg-base-900 outline-0;
                 }
             }
         }

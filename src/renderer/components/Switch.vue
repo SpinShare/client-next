@@ -54,26 +54,26 @@ const handleInput = () => emit('update:modelValue', !val.value);
         @apply opacity-40 cursor-not-allowed;
     }
     & .background {
-        @apply absolute z-0 inset-0 bg-base-800 rounded-full transition-all;
+        @apply absolute z-0 inset-0 bg-base-200 dark:bg-base-800 rounded-full transition-all;
     }
 
     input {
-        @apply appearance-none w-[15px] h-[15px] bg-base-200 rounded-full absolute z-10 inset-0 mt-[5px] ml-[5px] cursor-pointer transition-all;
+        @apply appearance-none w-[15px] h-[15px] bg-base-600 dark:bg-base-200 rounded-full absolute z-10 inset-0 mt-[5px] ml-[5px] cursor-pointer transition-all;
 
         &:checked {
-            @apply bg-brand-800 ml-[30px];
+            @apply bg-brand-700 dark:bg-brand-800 ml-[30px];
 
             & + .background {
-                @apply bg-brand-500;
+                @apply bg-brand-400 dark:bg-brand-500;
             }
         }
     }
     &:not(.disabled):hover {
         & .background {
-            @apply bg-base-700;
+            @apply bg-base-300 dark:bg-base-700;
         }
         & input:checked + .background {
-            @apply bg-brand-400;
+            @apply bg-brand-500 dark:bg-brand-400;
         }
     }
 

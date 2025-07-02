@@ -62,7 +62,7 @@ const cleanDescription = computed(() => {
 
 <style scoped>
 .card-item {
-    @apply overflow-hidden transition-all p-5 border border-base-800 rounded-md grid grid-cols-[100px_1fr] gap-5;
+    @apply overflow-hidden transition-all p-5 border border-base-300 dark:border-base-800 rounded-md grid grid-cols-[100px_1fr] gap-5;
 
     & .meta {
         @apply flex flex-col gap-0.5;
@@ -71,7 +71,7 @@ const cleanDescription = computed(() => {
             @apply font-bold;
         }
         & .given-date {
-            @apply mt-2 text-sm text-base-300;
+            @apply mt-2 text-sm text-base-500 dark:text-base-300;
         }
     }
 }

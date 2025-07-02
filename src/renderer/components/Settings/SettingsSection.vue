@@ -26,7 +26,7 @@ defineProps({
     @apply flex flex-col gap-2.5;
 
     & .content {
-        @apply border border-base-800 rounded-md p-5 flex flex-col gap-5;
+        @apply border border-base-300 dark:border-base-800 rounded-md p-5 flex flex-col gap-5;
     }
 }
 </style>

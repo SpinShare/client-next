@@ -8,14 +8,15 @@
     </button>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style scoped>
 .promo-item-placeholder {
-    @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
+    @apply bg-base-200 dark:bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
 
     & .banner {
-        @apply bg-base-800 animate-pulse;
+        @apply bg-base-100 dark:bg-base-800 animate-pulse;
         height: 200px;
     }
     & .content {
@@ -37,7 +38,7 @@
             @apply flex items-center w-full gap-2 mb-1;
 
             & span {
-                @apply h-[16px] bg-base-700;
+                @apply h-[16px] bg-base-400 dark:bg-base-700;
 
                 &:nth-child(1) {
                     @apply w-[80px];
@@ -55,7 +56,7 @@
         }
 
         & span {
-            @apply h-[12px] w-[50px] bg-base-800 rounded-full animate-pulse;
+            @apply h-[12px] w-[50px] bg-base-300 dark:bg-base-800 rounded-full animate-pulse;
         }
     }
 }

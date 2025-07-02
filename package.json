@@ -1,7 +1,7 @@
 {
     "name": "spinshare-client-next",
     "productName": "SpinShare",
-    "version": "3.22.0",
+    "version": "3.23.0",
     "description": "A cross-platform Spin Rhythm XD client",
     "main": ".vite/build/main.js",
     "scripts": {

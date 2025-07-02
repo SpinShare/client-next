@@ -26,6 +26,6 @@ defineProps({
 
 <style scoped>
 .empty-state {
-    @apply flex flex-col items-center gap-1 py-5 text-base-300 border border-base-800 rounded-md;
+    @apply flex flex-col items-center gap-1 py-5 text-base-500 dark:text-base-300 border border-base-300 dark:border-base-800 rounded-md;
 }
 </style>

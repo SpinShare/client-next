@@ -1,5 +1,5 @@
 <template>
-    <div class="settings-item">
+    <div :class="`settings-item ${twoLine ? 'two-line' : ''}`">
         <div class="label">
             <h1>{{ label }}</h1>
             <p v-if="description">{{ description }}</p>
@@ -20,6 +20,10 @@ defineProps({
         type: [String, Boolean],
         default: false,
     },
+    twoLine: {
+        type: Boolean,
+        default: false,
+    }
 });
 </script>
 
@@ -27,11 +31,15 @@ defineProps({
 .settings-item {
     @apply grid grid-cols-1 gap-2.5;
 
+    &.two-line {
+        @apply flex flex-col items-stretch;
+    }
+
     & .label {
         @apply flex flex-col;
 
         & p {
-            @apply text-base-300;
+            @apply text-base-500 dark:text-base-300;
         }
     }
     & .content {

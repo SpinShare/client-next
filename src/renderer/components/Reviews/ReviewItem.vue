@@ -39,7 +39,7 @@
 
 <script setup>
 import ChartItem from '@/components/Charts/ChartItem.vue';
-import UserItem from '@/components/UserItem.vue';
+import UserItem from '@/components/Users/UserItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 
 const props = defineProps({
@@ -80,7 +80,7 @@ const props = defineProps({
 
 <style scoped>
 .review-item {
-    @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer p-2 flex flex-col gap-2;
+    @apply bg-base-200 dark:bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer p-2 flex flex-col gap-2;
 
     & .review {
         @apply grow p-2 flex flex-col gap-2;
@@ -92,7 +92,7 @@ const props = defineProps({
             @apply grow;
 
             &.no-comment {
-                @apply text-base-300;
+                @apply text-base-600 dark:text-base-300;
             }
         }
     }

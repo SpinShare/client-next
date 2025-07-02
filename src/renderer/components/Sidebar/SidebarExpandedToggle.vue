@@ -40,7 +40,7 @@ function toggleExpanded() {
     @apply h-[45px] transition-all rounded flex items-center;
 
     &:hover {
-        @apply bg-base-900 cursor-pointer;
+        @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 cursor-pointer;
     }
 
     &.expanded {

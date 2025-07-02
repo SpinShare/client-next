@@ -74,7 +74,7 @@ const route = useRoute();
 
 <style scoped>
 aside {
-    @apply border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy relative z-100;
+    @apply border-base-300 dark:border-base-800 border-r w-[70px] py-4 grid grid-rows-[1fr_auto] gap-2 transition-all ease-snappy relative z-100;
 
     & nav {
         @apply flex gap-2 flex-col;

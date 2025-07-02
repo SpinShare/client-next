@@ -152,7 +152,7 @@ header {
                 }
             }
             & .pronouns {
-                @apply text-sm text-base-300 mt-[-3px] line-clamp-1;
+                @apply text-sm text-base-500 dark:text-base-300 mt-[-3px] line-clamp-1;
             }
 
             & .flags {

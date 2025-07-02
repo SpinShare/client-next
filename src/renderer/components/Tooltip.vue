@@ -9,7 +9,8 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style scoped>
 .tooltip {
@@ -22,7 +23,7 @@
         @apply block;
     }
     & .content {
-        @apply hidden absolute w-[300px] bg-base-800 p-2 rounded-md z-10 shadow-2xl;
+        @apply hidden absolute w-[300px] bg-base-200 dark:bg-base-800 p-2 rounded-md z-10 shadow-2xl;
         position-anchor: --tooltipTrigger;
         position-area: start center;
     }

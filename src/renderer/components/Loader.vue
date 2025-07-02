@@ -20,6 +20,6 @@ defineProps({
 
 <style scoped>
 .loader {
-    @apply rounded-full border-[6px] border-base-800 border-l-base-50 animate-spin;
+    @apply rounded-full border-[6px] border-base-200 border-l-base-600 dark:border-base-800 dark:border-l-base-50 animate-spin;
 }
 </style>

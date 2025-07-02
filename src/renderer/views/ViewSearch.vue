@@ -137,7 +137,7 @@ import LayoutBase from '@/layouts/LayoutBase.vue';
 import {useRoute} from "vue-router";
 import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
 import Loader from "@/components/Loader.vue";
-import UserItem from "@/components/UserItem.vue";
+import UserItem from "@/components/Users/UserItem.vue";
 import PlaylistGrid from "@/components/Playlists/PlaylistGrid.vue";
 import PlaylistItem from "@/components/Playlists/PlaylistItem.vue";
 import ChartGrid from "@/components/Charts/ChartGrid.vue";
@@ -213,7 +213,7 @@ watch(() => [searchType.value, searchQuery.value], () => {
             @apply relative;
         }
         & .popover {
-            @apply bg-base-900 border border-base-800 p-5 rounded-md absolute top-12 left-0 z-10 w-[280px] flex flex-col gap-2.5;
+            @apply bg-base-900 border border-base-300 dark:border-base-800 p-5 rounded-md absolute top-12 left-0 z-10 w-[280px] flex flex-col gap-2.5;
 
             & > div {
                 @apply flex gap-2.5 items-center;

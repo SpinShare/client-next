@@ -79,7 +79,7 @@ const props = defineProps({
 
 <style scoped>
 .user-item {
-    @apply bg-base-900 relative rounded-md overflow-hidden transition-all cursor-pointer p-2 grid grid-cols-[48px_1fr_auto] gap-4 items-center;
+    @apply bg-base-200 dark:bg-base-900 relative rounded-md overflow-hidden transition-all cursor-pointer p-2 grid grid-cols-[48px_1fr_auto] gap-4 items-center;
 
     & .avatar {
         @apply w-[48px] h-[48px] bg-cover bg-center bg-base-700 rounded-full;
@@ -96,7 +96,7 @@ const props = defineProps({
             }
         }
         & .pronouns {
-            @apply text-sm text-base-300 mt-[-3px] line-clamp-1;
+            @apply text-sm text-base-600 dark:text-base-300 mt-[-3px] line-clamp-1;
         }
     }
 
@@ -112,7 +112,7 @@ const props = defineProps({
     }
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-300 dark:bg-base-800;
     }
 
     &.mini {

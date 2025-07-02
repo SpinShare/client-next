@@ -21,14 +21,15 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style scoped>
 .chart-item {
-    @apply bg-base-900 blur-none relative rounded-md overflow-hidden transition-all text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
+    @apply bg-base-200 dark:bg-base-900 blur-none relative rounded-md overflow-hidden transition-all text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
 
     & .cover {
-        @apply aspect-square w-[80px] rounded bg-base-800 animate-pulse;
+        @apply aspect-square w-[80px] rounded bg-base-300 dark:bg-base-800 animate-pulse;
     }
     & .content {
         @apply flex flex-col gap-3;
@@ -40,7 +41,7 @@
                 @apply mb-[4px] flex items-center w-full gap-2;
 
                 & span {
-                    @apply bg-base-700;
+                    @apply bg-base-400 dark:bg-base-700;
 
                     &:nth-child(1) {
                         @apply w-[35px];
@@ -69,14 +70,14 @@
                 }
             }
             & span {
-                @apply h-[14px] w-[50px] bg-base-800 rounded-full animate-pulse;
+                @apply h-[14px] w-[50px] bg-base-300 dark:bg-base-800 rounded-full animate-pulse;
             }
         }
         & .info {
             @apply flex flex-wrap gap-2;
 
             & .difficulties {
-                @apply flex flex-wrap gap-1 items-center h-[20px] bg-base-800 w-full rounded max-w-[100px] animate-pulse;
+                @apply flex flex-wrap gap-1 items-center h-[20px] bg-base-300 dark:bg-base-800 w-full rounded max-w-[100px] animate-pulse;
             }
         }
     }

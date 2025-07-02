@@ -64,7 +64,7 @@ import { TZDate } from '@date-fns/tz';
 import { formatDistanceToNow } from 'date-fns';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
-import UserItem from '@/components/UserItem.vue';
+import UserItem from '@/components/Users/UserItem.vue';
 import EmptyState from '@/components/EmptyState.vue';
 
 const props = defineProps({
@@ -144,7 +144,7 @@ const updateDateAbsolute = computed(() => {
     @apply font-bold text-xs;
 }
 .page-chart-detail .meta .description a {
-    @apply underline text-brand-500;
+    @apply underline text-brand-700 dark:text-brand-500;
 }
 .page-chart-detail .meta .description a:hover {
     @apply no-underline;
@@ -164,10 +164,10 @@ const updateDateAbsolute = computed(() => {
             @apply mt-5 flex gap-1 flex-wrap;
 
             & .tag {
-                @apply rounded text-sm px-2 py-1 transition-all bg-brand-800 text-brand-50;
+                @apply rounded text-sm px-2 py-1 transition-all bg-brand-400 text-brand-950 dark:bg-brand-800 dark:text-brand-50;
 
                 &:hover {
-                    @apply bg-brand-700;
+                    @apply bg-brand-500 dark:bg-brand-700;
                 }
             }
         }
@@ -177,16 +177,16 @@ const updateDateAbsolute = computed(() => {
         @apply flex flex-col gap-2.5;
 
         & .item {
-            @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
+            @apply flex flex-col gap-1 border border-base-300 dark:border-base-800 rounded-md p-5;
 
             & .label {
-                @apply text-base-300;
+                @apply text-base-500 dark:text-base-300;
             }
             & .number {
                 @apply text-3xl font-bold;
             }
             & .time-absolute {
-                @apply text-xs text-base-300 mt-[-4px];
+                @apply text-xs text-base-500 dark:text-base-300 mt-[-4px];
             }
         }
         & .split {

@@ -81,7 +81,7 @@ function handleClick() {
 
 <style scoped>
 .promo-item {
-    @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
+    @apply bg-base-200 dark:bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer text-left;
 
     & .banner {
         @apply bg-cover bg-center;
@@ -91,7 +91,7 @@ function handleClick() {
         @apply flex flex-col p-4;
 
         & h5 {
-            @apply text-sm font-bold text-base-500;
+            @apply transition-all text-sm font-bold text-base-600 dark:text-base-500;
         }
         & h1 {
             @apply text-xl;
@@ -99,11 +99,11 @@ function handleClick() {
     }
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-300 dark:bg-base-800;
 
         & .content {
             & h5 {
-                @apply text-base-300;
+                @apply text-base-700 dark:text-base-300;
             }
         }
     }

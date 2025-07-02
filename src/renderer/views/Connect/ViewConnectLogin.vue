@@ -96,13 +96,13 @@ async function handleLogin() {
     @apply max-w-xl mx-auto flex flex-col gap-5 py-20;
 
     & .box {
-        @apply border border-base-800 rounded-md p-5 flex flex-col gap-2;
+        @apply border border-base-300 dark:border-base-800 rounded-md p-5 flex flex-col gap-2;
 
         & h1 {
             @apply font-bold;
         }
         & p {
-            @apply leading-6 text-base-300;
+            @apply leading-6 text-base-500 dark:text-base-300;
 
             & a {
                 @apply underline text-brand-500;

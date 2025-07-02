@@ -1,6 +1,8 @@
 @import url('transitions.css');
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
     --font-sans: 'Outfit Variable', sans-serif;
 
@@ -63,24 +65,31 @@ body {
 }
 
 .button {
-    @apply bg-base-900 text-base-50 flex gap-2 h-[40px] items-center rounded px-3 transition-all;
+    @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 flex gap-2 h-[40px] items-center rounded px-3 transition-all;
 
     & .icon {
         @apply text-lg;
     }
 
     &:not(:disabled):not(.disabled):hover {
-        @apply bg-base-800 cursor-pointer;
+        @apply bg-base-300 dark:bg-base-800 cursor-pointer;
     }
     &:disabled, &.disabled {
         @apply cursor-not-allowed opacity-60;
     }
 
     &.brand {
-        @apply bg-brand-800 text-brand-50;
+        @apply bg-brand-400 text-brand-950 dark:bg-brand-800 dark:text-brand-50;
 
         &:not(:disabled):not(.disabled):hover {
-            @apply bg-brand-700;
+            @apply bg-brand-500 dark:bg-brand-700;
+        }
+    }
+    &.success {
+        @apply bg-green-400 text-green-950 dark:bg-green-800 dark:text-green-50;
+
+        &:not(:disabled):not(.disabled):hover {
+            @apply bg-green-500 dark:bg-green-900;
         }
     }
     &.ghost {
@@ -92,21 +101,21 @@ body {
 }
 
 .input {
-    @apply h-[40px] border border-base-800 rounded-md w-full px-3 outline-none transition-all;
+    @apply h-[40px] border border-base-300 dark:border-base-800 rounded-md w-full px-3 outline-none transition-all;
 
     &:hover, &:focus-visible {
-        @apply bg-base-900;
+        @apply bg-base-100 dark:bg-base-900;
     }
 }
 .select {
-    @apply h-[40px] bg-base-900 px-3 rounded transition-all cursor-pointer outline-none appearance-none pr-8;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,255,255,1)'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'%3E%3C/path%3E%3C/svg%3E");
+    @apply h-[40px] bg-base-200 dark:bg-base-900 px-3 rounded transition-all cursor-pointer outline-none appearance-none pr-8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 4px top 50%;
     background-size: 28px 28px;
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-300 dark:bg-base-800;
     }
 }
 

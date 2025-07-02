@@ -34,7 +34,7 @@ function handleLater() {
 
 <style scoped>
 .update-toast {
-    @apply fixed bottom-10 right-10 z-50 p-5 bg-base-950 border border-base-800 rounded-md shadow-lg w-[400px] grid grid-cols-[auto_1fr] gap-5;
+    @apply fixed bottom-10 right-10 z-50 p-5 bg-base-200 dark:bg-base-950 border border-base-300 dark:border-base-800 rounded-md shadow-lg w-[400px] grid grid-cols-[auto_1fr] gap-5;
 
     & .content {
         @apply flex flex-col gap-2;

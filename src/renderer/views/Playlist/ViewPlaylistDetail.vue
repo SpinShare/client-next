@@ -79,9 +79,9 @@ import LayoutBase from '@/layouts/LayoutBase.vue';
 import Loader from '@/components/Loader.vue';
 import ChartGrid from '@/components/Charts/ChartGrid.vue';
 import ChartItem from '@/components/Charts/ChartItem.vue';
-import UserTooltip from '@/components/UserTooltip.vue';
+import UserTooltip from '@/components/Users/UserTooltip.vue';
 import Remixicon from '@/components/Remixicon.vue';
-import UserItem from '@/components/UserItem.vue';
+import UserItem from '@/components/Users/UserItem.vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const api = inject('api');
@@ -130,7 +130,7 @@ main {
         @apply flex flex-col gap-5;
 
         & .item {
-            @apply flex flex-col gap-1 border border-base-800 rounded-md p-5;
+            @apply flex flex-col gap-1 border border-base-300 dark:border-base-800 rounded-md p-5;
 
             & h1 {
                 @apply grow text-2xl font-bold;
@@ -139,7 +139,7 @@ main {
                 @apply text-sm px-2 py-0.25 rounded-full bg-emerald-700 text-emerald-50 self-start flex gap-1 items-center;
             }
             & p {
-                @apply text-base-300 mt-4;
+                @apply text-base-500 dark:text-base-300 mt-4;
             }
             & .charters {
                 @apply flex flex-wrap gap-2 mt-2;

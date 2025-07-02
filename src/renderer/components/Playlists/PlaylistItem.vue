@@ -42,7 +42,7 @@
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import UserTooltip from '@/components/UserTooltip.vue';
+import UserTooltip from '@/components/Users/UserTooltip.vue';
 
 const props = defineProps({
     id: {
@@ -74,7 +74,7 @@ const props = defineProps({
 
 <style scoped>
 .playlist-item {
-    @apply bg-base-900 relative rounded-md overflow-hidden transition-all cursor-pointer flex flex-col;
+    @apply bg-base-200 dark:bg-base-900 relative rounded-md overflow-hidden transition-all cursor-pointer flex flex-col;
 
     & .cover {
         @apply h-[150px] bg-cover bg-center;
@@ -97,13 +97,13 @@ const props = defineProps({
             @apply flex gap-2 items-center;
 
             & .badge-charts {
-                @apply flex gap-1 items-center text-base-300;
+                @apply flex gap-1 items-center text-base-600 dark:text-base-300;
             }
         }
     }
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-300 dark:bg-base-800;
     }
 }
 </style>

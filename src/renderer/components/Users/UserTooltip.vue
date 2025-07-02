@@ -101,7 +101,7 @@ a {
             @apply font-bold line-clamp-1;
         }
         & .pronouns {
-            @apply text-sm text-base-300 mt-[-3px] line-clamp-1;
+            @apply text-sm text-base-600 dark:text-base-300 mt-[-3px] line-clamp-1;
         }
         & .statistics {
             @apply flex gap-2 items-center;

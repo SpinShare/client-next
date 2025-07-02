@@ -128,7 +128,7 @@ async function handleRemoveItem(chartId) {
 
 <style scoped>
 .downloads-queue {
-    @apply fixed top-[60px] bottom-0 overflow-hidden left-[70px] w-[450px] border-base-800 border-r bg-base-950 transition-all ease-snappy z-50 flex flex-col gap-2.5;
+    @apply fixed top-[60px] bottom-0 overflow-hidden left-[70px] w-[450px] border-base-300 dark:border-base-800 border-r bg-base-50 dark:bg-base-950 transition-all ease-snappy z-50 flex flex-col gap-2.5;
 
     &.expanded {
         @apply left-[275px];

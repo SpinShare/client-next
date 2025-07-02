@@ -187,7 +187,7 @@ function handleLogout() {
         }
     }
     & .connect-popup {
-        @apply absolute top-10 right-0 z-10 w-[300px] bg-base-900 rounded-md shadow-2xl block overflow-hidden;
+        @apply absolute top-10 right-0 z-10 w-[300px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
 
         & header {
             @apply flex items-center px-4 py-2;
@@ -203,7 +203,7 @@ function handleLogout() {
                     }
                 }
                 & .pronouns {
-                    @apply text-sm text-base-300 mt-[-3px] line-clamp-1;
+                    @apply text-sm text-base-600 dark:text-base-300 mt-[-3px] line-clamp-1;
                 }
             }
 
@@ -220,13 +220,13 @@ function handleLogout() {
         }
 
         & nav {
-            @apply border-t border-base-800 flex flex-col;
+            @apply border-t border-base-300 dark:border-base-800 flex flex-col;
 
             & .item {
                 @apply h-[45px] transition-all flex items-center gap-2 px-4;
 
                 &:hover {
-                    @apply bg-base-800 cursor-pointer;
+                    @apply bg-base-300 dark:bg-base-800 cursor-pointer;
                 }
             }
         }

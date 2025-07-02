@@ -23,6 +23,11 @@ import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
 import LayoutUser from '@/layouts/LayoutUser.vue';
 import ViewUserCharts from '@/views/User/ViewUserCharts.vue';
 import ViewConnectLogin from '@/views/Connect/ViewConnectLogin.vue';
+import LayoutSetup from "@/layouts/LayoutSetup.vue";
+import ViewSetupIntroduction from "@/views/Setup/ViewSetupIntroduction.vue";
+import ViewSetupGame from "@/views/Setup/ViewSetupGame.vue";
+import ViewSetupDone from "@/views/Setup/ViewSetupDone.vue";
+import ViewSetupCache from "@/views/Setup/ViewSetupCache.vue";
 
 const routes = [
     {
@@ -126,6 +131,32 @@ const routes = [
     {
         path: '/connect/login',
         component: ViewConnectLogin,
+    },
+    {
+        path: '/setup',
+        component: LayoutSetup,
+        children: [
+            {
+                path: 'step/0',
+                component: ViewSetupIntroduction,
+            },
+            {
+                path: 'step/1',
+                component: ViewSetupGeneral,
+            },
+            {
+                path: 'step/2',
+                component: ViewSetupGame,
+            },
+            {
+                path: 'step/3',
+                component: ViewSetupCache,
+            },
+            {
+                path: 'step/4',
+                component: ViewSetupDone,
+            },
+        ],
     },
 ];
 

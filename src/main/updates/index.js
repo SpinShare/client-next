@@ -16,14 +16,13 @@ export class UpdateManager extends EventEmitter {
         const hasNewRelease = latestRelease?.name?.includes(app.getVersion()) || false;
 
         this.settingsManager.updateOrInsert('updateAvailable', hasNewRelease);
+        this.emit('update-check-done', hasNewRelease);
 
         if(hasNewRelease) {
             console.log(`[UpdateManager] New update available: ${latestRelease.name}`);
         } else {
             console.log(`[UpdateManager] No new update available.`);
         }
-
-        this.emit('update-check-done', hasNewRelease);
 
         return hasNewRelease;
     }

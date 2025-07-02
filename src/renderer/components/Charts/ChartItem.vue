@@ -183,7 +183,7 @@ async function handleAddToQueue() {
 
 <style scoped>
 .chart-item {
-    @apply bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
+    @apply bg-base-200 dark:bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
 
     &.explicit {
         @apply transition-all;
@@ -220,7 +220,7 @@ async function handleAddToQueue() {
                 @apply mb-[-3px] line-clamp-1;
             }
             & p {
-                @apply text-base-300 line-clamp-1;
+                @apply text-base-600 dark:text-base-400 line-clamp-1;
             }
         }
         & .info {
@@ -247,7 +247,7 @@ async function handleAddToQueue() {
                         @apply font-bold;
                     }
                     &.active {
-                        @apply opacity-100 bg-base-950;
+                        @apply opacity-100 bg-base-400 dark:bg-base-950;
                     }
                 }
             }
@@ -255,7 +255,7 @@ async function handleAddToQueue() {
     }
 
     &:hover {
-        @apply bg-base-800;
+        @apply bg-base-300 dark:bg-base-800;
     }
 
     &.mini {

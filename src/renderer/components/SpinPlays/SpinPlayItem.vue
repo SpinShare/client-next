@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import UserItem from '@/components/UserItem.vue';
+import UserItem from '@/components/Users/UserItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 
 const props = defineProps({
@@ -59,7 +59,7 @@ const props = defineProps({
 
 <style scoped>
 .spin-play-item {
-    @apply bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer;
+    @apply bg-base-200 dark:bg-base-900 rounded-md overflow-hidden transition-all cursor-pointer;
 
     & .thumbnail {
         @apply bg-cover bg-center aspect-video w-full relative;

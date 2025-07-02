@@ -315,10 +315,10 @@ header.chart {
                 @apply text-lg mb-[-3px] line-clamp-1;
             }
             & h2 {
-                @apply text-base-300 line-clamp-1;
+                @apply text-base-500 dark:text-base-300 line-clamp-1;
             }
             & p {
-                @apply text-base-300 line-clamp-1;
+                @apply text-base-500 dark:text-base-300 line-clamp-1;
             }
         }
         & .info {
@@ -345,7 +345,7 @@ header.chart {
                         @apply font-bold;
                     }
                     &.active {
-                        @apply opacity-100 bg-base-950;
+                        @apply opacity-100 bg-base-200 dark:bg-base-950;
                     }
                 }
             }
@@ -378,7 +378,7 @@ header.chart {
             @apply text-xl;
         }
         & p {
-            @apply text-base-300;
+            @apply text-base-500 dark:text-base-300;
         }
     }
 
@@ -392,7 +392,7 @@ header.chart {
                 @apply text-2xl font-bold;
             }
             & span:nth-child(2) {
-                @apply text-base-300;
+                @apply text-base-500 dark:text-base-300;
             }
 
             &:not(:disabled):hover {
