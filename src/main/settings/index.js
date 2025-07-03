@@ -58,7 +58,7 @@ export class SettingsManager {
     }
 
     load() {
-        console.log(`[SettingsManager] Loading settings`);
+        console.log(`[SettingsManager] Loading settings from: ${this.settingsPath}`);
         const loadedSettings = JSON.parse(fs.readFileSync(this.settingsPath, 'utf-8'));
         this.settings = { ...this.defaults, ...loadedSettings };
     }

@@ -4,7 +4,7 @@
     </router-view>
 
     <UpdateToast v-if="updateAvailable" @close="handleDismissUpdate" />
-    <LibraryRebuildOverlay />
+    <LibraryRebuildOverlay v-if="cacheRebuildActive && cacheRebuildStatus" :status="cacheRebuildStatus" />
 </template>
 
 <script setup>
@@ -21,6 +21,9 @@ const route = useRoute();
 const router = useRouter();
 const settingsManager = inject('settingsManager');
 const updateManager = inject('updateManager');
+const libraryManager = inject('libraryManager');
+const cacheRebuildActive = ref(false);
+const cacheRebuildStatus = ref(null);
 const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxSuccess = ref(null);
@@ -32,6 +35,17 @@ function handleDismissUpdate() {
 }
 
 onMounted(async () => {
+    libraryManager.onCacheRebuildStart(() => {
+        cacheRebuildActive.value = true;
+    });
+    libraryManager.onCacheRebuildProgress((status) => {
+        cacheRebuildStatus.value = status;
+        cacheRebuildActive.value = true;
+    });
+    libraryManager.onCacheRebuildDone(() => {
+        cacheRebuildActive.value = false;
+    });
+
     if(!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes("/setup")) {
         router.push('/setup/step/0');
     }
