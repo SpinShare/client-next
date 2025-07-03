@@ -88,11 +88,15 @@ onMounted(async () => {
         console.error('Audio loading error:', e);
     });
 
-    mitt.on('sfx-queue-done', () => {
-        sfxQueueDone.value.play();
+    mitt.on('sfx-queue-done', async () => {
+        if(!(await settingsManager.get('sfxEnabled'))) return;
+
+        await sfxQueueDone.value.play();
     });
-    mitt.on('sfx-error', () => {
-        sfxError.value.play();
+    mitt.on('sfx-error', async () => {
+        if(!(await settingsManager.get('sfxEnabled'))) return;
+
+        await sfxError.value.play();
     });
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
