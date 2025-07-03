@@ -115,7 +115,7 @@ export class DownloadQueue extends EventEmitter {
                 const chartZipPath = path.join(this.tempFolderPath, `${nextItem.id}.zip`);
                 await fs.promises.writeFile(chartZipPath, chartZip);
 
-                // EXTRACT, IMPORT, CACHE
+                // EXTRACT, IMPORT
                 nextItem.state = STATE_IMPORTING;
                 this.emit('item-change', nextItem);
 
@@ -132,7 +132,7 @@ export class DownloadQueue extends EventEmitter {
                     });
                 });
 
-                // TODO: Cache
+                // CACHE
                 console.log(`[DownloadQueue] Cache: (${nextItem.id}) ${nextItem.title}`);
                 await this.libraryManager.add(path.join(chartDestinationPath, `${nextItem.fileReference}.srtb`));
 
