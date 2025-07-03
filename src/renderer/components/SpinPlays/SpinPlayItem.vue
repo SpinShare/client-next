@@ -42,10 +42,6 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    song: {
-        type: Object,
-        required: true,
-    },
     videoUrl: {
         type: String,
         required: true,
