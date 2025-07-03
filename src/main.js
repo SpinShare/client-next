@@ -296,6 +296,18 @@ app.whenReady().then(() => {
     ipcMain.handle('connect-get-profile', async (event) => {
         return await authManager.getProfile();
     });
+    ipcMain.handle('connect-get-playlists', async (event) => {
+        return await authManager.getPlaylists();
+    });
+    ipcMain.handle('connect-get-notifications', async (event) => {
+        return await authManager.getNotifications();
+    });
+    ipcMain.handle('connect-clear-notification', async (event, notificationId) => {
+        return await authManager.clearNotification(notificationId);
+    });
+    ipcMain.handle('connect-clear-all-notifications', async (event) => {
+        return await authManager.clearAllNotifications();
+    });
     ipcMain.handle('connect-is-logged-in', (event) => {
         return authManager.isLoggedIn;
     });

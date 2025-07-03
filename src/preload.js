@@ -107,6 +107,10 @@ contextBridge.exposeInMainWorld('spshConnect', {
     validateToken: async () => ipcRenderer.invoke('connect-validate-token'),
     isLoggedIn: () => ipcRenderer.invoke('connect-is-logged-in'),
     getProfile: async () => ipcRenderer.invoke('connect-get-profile'),
+    getPlaylists: async () => ipcRenderer.invoke('connect-get-playlists'),
+    getNotifications: async () => ipcRenderer.invoke('connect-get-notifications'),
+    clearNotification: async (notificationId) => ipcRenderer.invoke('connect-clear-notification', notificationId),
+    clearAllNotifications: async () => ipcRenderer.invoke('connect-clear-all-notifications'),
     login: async (connectCode) => ipcRenderer.invoke('connect-login', connectCode),
     logout: async () => ipcRenderer.invoke('connect-logout'),
 });

@@ -93,4 +93,48 @@ export class AuthManager {
         this.profile = await this.fetchProfile();
         return this.profile;
     }
+
+    async getPlaylists() {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectGetPlaylists(this.connectToken);
+        } catch (e) {
+            console.error(e.message);
+            return [];
+        }
+    }
+
+    async getNotifications() {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectGetNotifications(this.connectToken);
+        } catch (e) {
+            console.error(e.message);
+            return [];
+        }
+    }
+
+    async clearNotification(notificationId) {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectClearNotification(this.connectToken, notificationId);
+        } catch (e) {
+            console.error(e.message);
+            return null;
+        }
+    }
+
+    async clearAllNotifications() {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectClearAllNotifications(this.connectToken);
+        } catch (e) {
+            console.error(e.message);
+            return null;
+        }
+    }
 }

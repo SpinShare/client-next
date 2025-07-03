@@ -28,15 +28,79 @@
                 </button>
 
                 <button
+                    class="button"
+                    v-interactable
+                    @click="connectNotificationPopupOpen = !connectNotificationPopupOpen"
+                >
+                    <Remixicon icon="notification" />
+                    <span class="badge" v-if="notifications.length">{{ notifications.length || 0 }}</span>
+                </button>
+                <transition name="popup">
+                    <div
+                        v-if="connectNotificationPopupOpen"
+                        :class="`connect-notification-popup`"
+                    >
+                        <header>
+                            <h1>Notifications</h1>
+
+                            <button
+                                class="button ghost"
+                                v-interactable
+                                @click="handleNotificationClearAll"
+                            >
+                                <Remixicon icon="delete-bin" />
+                            </button>
+                        </header>
+
+                        <div class="notifications">
+                            <EmptyState label="No notifications" icon="notification" class="m-4" v-if="notifications.length === 0" />
+
+                            <button
+                                class="item"
+                                v-interactable
+                                v-for="notification in notifications"
+                                :key="notification.id"
+                                @click="handleNotificationClick(notification)"
+                            >
+                                <template
+                                    v-if="notification.notificationType === NOTIFICATION_TYPE_SYSTEM"
+                                >
+                                    <Remixicon icon="megaphone" />
+                                    <p>{{ notification.notificationData }}</p>
+                                </template>
+                                <template
+                                    v-if="notification.notificationType === NOTIFICATION_TYPE_NEWREVIEW"
+                                >
+                                    <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
+                                    <p>{{ notification.connectedUser.username }} reviewed your chart {{ notification.connectedSong.title }}</p>
+                                </template>
+                                <template
+                                    v-if="notification.notificationType === NOTIFICATION_TYPE_NEWSPINPLAY"
+                                >
+                                    <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
+                                    <p><strong>{{ notification.connectedUser.username }}</strong> added a SpinPlay to your chart <strong>{{ notification.connectedSong.title }}</strong></p>
+                                </template>
+                                <template
+                                    v-if="notification.notificationType === NOTIFICATION_TYPE_RECEIVEDCARD"
+                                >
+                                    <div class="card-icon" :style="`background-image: url(${notification.connectedCard.icon})`"></div>
+                                    <p>You've received the profile card <strong>{{ notification.connectedCard.title }}</strong></p>
+                                </template>
+                            </button>
+                        </div>
+                    </div>
+                </transition>
+
+                <button
                     class="button profile-button"
                     :style="`background-image: url('${profile.avatar}')`"
-                    @click="connectPopupOpen = !connectPopupOpen"
+                    @click="connectProfilePopupOpen = !connectProfilePopupOpen"
                     v-interactable
                 ></button>
                 <transition name="popup">
                     <div
-                        v-if="connectPopupOpen"
-                        :class="`connect-popup`"
+                        v-if="connectProfilePopupOpen"
+                        :class="`connect-profile-popup`"
                     >
                         <header>
                             <div class="content">
@@ -152,13 +216,24 @@
 import Remixicon from '@/components/Remixicon.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Loader from '@/components/Loader.vue';
+import {
+    NOTIFICATION_TYPE_NEWREVIEW,
+    NOTIFICATION_TYPE_NEWSPINPLAY,
+    NOTIFICATION_TYPE_RECEIVEDCARD,
+    NOTIFICATION_TYPE_SYSTEM
+} from "@spinshare/api-js";
+import EmptyState from "@/components/EmptyState.vue";
+import router from "@/router";
 
 const mitt = inject('mitt');
 const connect = inject('connect');
 const externalApi = inject('externalApi');
 const isLoggedIn = ref(false);
 const profile = ref(null);
-const connectPopupOpen = ref(false);
+const notifications = ref([]);
+const connectProfilePopupOpen = ref(false);
+const connectNotificationPopupOpen = ref(false);
+const notificationCheckInterval = ref(null);
 
 onMounted(async () => {
     mitt.on('auth-updated', onAuthUpdated);
@@ -172,10 +247,19 @@ onUnmounted(() => {
 async function onAuthUpdated() {
     isLoggedIn.value = await connect.isLoggedIn();
 
+    if(notificationCheckInterval.value) {
+        clearInterval(notificationCheckInterval.value);
+    }
+
     if (isLoggedIn.value) {
         profile.value = await connect.getProfile();
+        notifications.value = await connect.getNotifications();
+        notificationCheckInterval.value = setInterval(async () => {
+            notifications.value = await connect.getNotifications();
+        }, 10_000);
     } else {
         profile.value = null;
+        notifications.value = [];
     }
 }
 
@@ -187,20 +271,84 @@ function handleLogout() {
     connect.logout();
     mitt.emit('auth-updated');
 }
+
+async function handleNotificationClick(notification) {
+    await connect.clearNotification(notification.id);
+
+    switch(notification.notificationType) {
+        case NOTIFICATION_TYPE_NEWREVIEW:
+            router.push(`/chart/${notification.connectedSong.id}/reviews`);
+            break;
+        case NOTIFICATION_TYPE_NEWSPINPLAY:
+            router.push(`/chart/${notification.connectedSong.id}/spinplays`);
+            break;
+        case NOTIFICATION_TYPE_RECEIVEDCARD:
+            router.push(`/user/${notification.user.id}`);
+            break;
+    }
+
+    notifications.value = await connect.getNotifications();
+    connectNotificationPopupOpen.value = false;
+}
+
+async function handleNotificationClearAll() {
+    await connect.clearAllNotifications();
+    notifications.value = await connect.getNotifications();
+    connectNotificationPopupOpen.value = false;
+}
 </script>
 
 <style scoped>
 .auth-area {
-    @apply relative flex gap-4 items-center;
+    @apply relative flex gap-2 items-center;
 
     & .profile-button {
-        @apply w-8 h-8 rounded-full bg-cover bg-center transition-all cursor-pointer;
+        @apply w-8 h-8 rounded-full bg-cover bg-center transition-all cursor-pointer ml-2;
 
         &:hover {
             @apply opacity-60;
         }
     }
-    & .connect-popup {
+    & .connect-notification-popup {
+        @apply absolute top-10 right-10 z-10 w-[400px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
+
+        & header {
+            @apply flex items-center px-4 py-2;
+
+            & h1 {
+                @apply font-bold grow;
+            }
+        }
+
+        & .notifications {
+            @apply flex flex-col max-h-[500px] overflow-hidden overflow-y-auto;
+
+            & .item {
+                @apply transition-all grid grid-cols-[32px_1fr] align-top gap-4 p-4 border-t border-base-300 dark:border-base-800 text-left;
+
+                & span {
+                    @apply bg-brand-700 text-brand-200 w-[32px] h-[32px] rounded-full flex items-center justify-center;
+                }
+
+                & .chart-icon, & .card-icon {
+                    @apply bg-cover bg-center w-[32px] h-[32px] rounded-sm;
+                }
+
+                & p {
+                    @apply line-clamp-3 text-base-700 dark:text-base-300;
+
+                    & strong {
+                        @apply text-base-900 dark:text-base-50;
+                    }
+                }
+
+                &:hover {
+                    @apply bg-base-300 dark:bg-base-800 cursor-pointer;
+                }
+            }
+        }
+    }
+    & .connect-profile-popup {
         @apply absolute top-10 right-0 z-10 w-[300px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
 
         & header {

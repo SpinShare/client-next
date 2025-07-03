@@ -65,7 +65,7 @@ body {
 }
 
 .button {
-    @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 flex gap-2 h-[40px] items-center rounded px-3 transition-all;
+    @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 flex gap-2 h-[40px] items-center rounded px-3 transition-all relative;
 
     & .icon {
         @apply text-lg;
@@ -97,6 +97,10 @@ body {
     }
     &.square {
         @apply w-[40px] px-0 justify-center;
+    }
+
+    & .badge {
+        @apply bg-brand-300 text-brand-950 dark:bg-brand-700 dark:text-brand-50 rounded-md text-xs font-bold px-1.5 py-0.5 absolute bottom-[-5px] right-[-5px];
     }
 }
 
