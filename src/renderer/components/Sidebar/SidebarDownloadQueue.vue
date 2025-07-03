@@ -99,6 +99,10 @@ onMounted(async () => {
             const updatedItems = [...queueItemsList.value];
             updatedItems[index] = queueItem;
             queueItemsList.value = updatedItems;
+
+            if(updatedItems[index].state === 4) {
+                mitt.emit('sfx-error');
+            }
         }
     });
 });

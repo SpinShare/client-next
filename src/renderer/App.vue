@@ -10,7 +10,7 @@
 <script setup>
 import bgmDefaultFile from "@/assets/audio/bgm_default.ogg?url";
 import queueDoneFile from '@/assets/audio/queue_done.wav?url';
-import successFile from '@/assets/audio/success.ogg?url';
+import errorFile from '@/assets/audio/error.ogg?url';
 import {inject, onMounted, onUnmounted, ref} from "vue";
 import UpdateToast from "@/components/UpdateToast.vue";
 import {useRoute, useRouter} from "vue-router";
@@ -26,7 +26,7 @@ const cacheRebuildActive = ref(false);
 const cacheRebuildStatus = ref(null);
 const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
-const sfxSuccess = ref(null);
+const sfxError = ref(null);
 const updateAvailable = ref(false);
 
 function handleDismissUpdate() {
@@ -83,16 +83,16 @@ onMounted(async () => {
     sfxQueueDone.value.addEventListener('error', (e) => {
         console.error('Audio loading error:', e);
     });
-    sfxSuccess.value = new Audio(successFile);
-    sfxSuccess.value.addEventListener('error', (e) => {
+    sfxError.value = new Audio(errorFile);
+    sfxError.value.addEventListener('error', (e) => {
         console.error('Audio loading error:', e);
     });
 
     mitt.on('sfx-queue-done', () => {
         sfxQueueDone.value.play();
     });
-    mitt.on('sfx-success', () => {
-        sfxSuccess.value.play();
+    mitt.on('sfx-error', () => {
+        sfxError.value.play();
     });
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
@@ -106,7 +106,7 @@ onUnmounted(() => {
     mitt.off('save-settings');
 
     mitt.off('sfx-queue-done');
-    mitt.off('sfx-success');
+    mitt.off('sfx-error');
     mitt.off('update-check-done');
 });
 </script>
