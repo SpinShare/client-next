@@ -12,7 +12,7 @@
         :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
         v-if="isActive"
     >
-        <SectionHeader :title="`Download Queue`">
+        <SectionHeader :title="`Download Queue (${pendingItems})`">
             <button
                 class="button ghost"
                 @click="handleClearDone"
@@ -28,13 +28,6 @@
                 <Remixicon icon="refresh" />
             </button>
         </SectionHeader>
-
-        <p
-            class="text-base-500 dark:text-base-300"
-            v-if="queueItemCount > 0"
-        >
-            {{pendingItems}} of {{queueItemCount}} charts left.
-        </p>
 
         <div
             class="list"
@@ -121,7 +114,7 @@ onUnmounted(() => {
 });
 
 const pendingItems = computed(() => {
-    return queueItemsList.value.filter((item) => item?.state === 0) || 0;
+    return queueItemsList.value.filter((item) => item?.state === 0).length || 0;
 });
 
 function handleToggleQueue() {
