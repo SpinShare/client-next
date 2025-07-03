@@ -60,7 +60,11 @@ export class LibraryManager extends EventEmitter {
         for (const [i, file] of chartFiles.entries()) {
             if (file.endsWith('.srtb')) {
                 const chartPath = path.join(this.chartsPath, file);
-                await this.add(chartPath, false);
+                try {
+                    await this.add(chartPath, false);
+                } catch(e) {
+                    console.error(`[Library] Failed to add chart to cache: ${e.message}`);
+                }
             }
 
             this.emit('cache-rebuild-progress', {
