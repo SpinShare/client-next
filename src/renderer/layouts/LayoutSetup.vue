@@ -40,14 +40,14 @@
 
 <script setup>
 import {useRoute, useRouter} from "vue-router";
-import {computed, inject} from "vue";
+import {computed, inject, onMounted} from "vue";
 import Remixicon from "@/components/Remixicon.vue";
 
 const settingsManager = inject('settingsManager');
 const router = useRouter();
 const route = useRoute();
 const currentStep = computed(() => {
-    return Number(route.fullPath.split('/')[3]);
+    return Number(route.fullPath?.split('/')[3]) || 0;
 });
 
 function isFutureStep(step) {
@@ -60,7 +60,7 @@ function handleBack() {
 async function handleContinue() {
     if(currentStep.value === 4) {
         await settingsManager.set('setupCompleted', true);
-        window.location.replace('/');
+        router.push('/');
     } else {
         router.push(`/setup/step/${currentStep.value + 1}`);
     }
