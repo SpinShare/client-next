@@ -135,7 +135,7 @@
                 </TabList>
             </nav>
             <main>
-                <router-view :chart="chart" />
+                <router-view :key="route.fullPath" :chart="chart" />
             </main>
 
             <dialog class="play-dialog" ref="playDialog">
@@ -210,7 +210,7 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import {inject, onMounted, onUnmounted, ref, watch} from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -224,7 +224,7 @@ const externalApi = inject('externalApi');
 const libraryManager = inject('libraryManager');
 const queue = inject('queue');
 const route = useRoute();
-const chartId = route.params.chartId;
+const chartId = ref(route.params.chartId);
 const chart = ref(null);
 const cacheUpdateHash = ref(null);
 const cacheItem = ref(null);
@@ -236,7 +236,7 @@ const isPreviewPlaying = ref(false);
 const playDialog = ref(null);
 
 onMounted(async () => {
-    chart.value = await api.getChartDetail(chartId);
+    chart.value = await api.getChartDetail(chartId.value);
     cacheItem.value = await libraryManager.get(chart.value.fileReference);
     mitt.on('item-change', async () => {
         cacheItem.value = await libraryManager.get(chart.value.fileReference);
@@ -296,6 +296,12 @@ function stopPreview() {
         clearTimeout(chartPreviewTimeout.value);
     }
 }
+
+watch(() => [route.params.chartId], async () => {
+    chartId.value = route.params.chartId;
+    chart.value = await api.getChartDetail(chartId.value);
+    cacheItem.value = await libraryManager.get(chart.value.fileReference);
+});
 </script>
 
 <style scoped>

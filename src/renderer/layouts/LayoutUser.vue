@@ -97,7 +97,7 @@
                 </TabList>
             </nav>
             <main>
-                <router-view :user="user" />
+                <router-view :key="route.fullPath" :user="user" />
             </main>
         </template>
     </LayoutBase>
@@ -106,7 +106,7 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import { inject, onMounted, ref } from 'vue';
+import {inject, onMounted, ref, watch} from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -115,11 +115,11 @@ import Loader from '@/components/Loader.vue';
 const api = inject('api');
 const externalApi = inject('externalApi');
 const route = useRoute();
-const userId = route.params.userId;
+const userId = ref(route.params.userId);
 const user = ref(null);
 
 onMounted(async () => {
-    user.value = await api.getUserDetail(userId);
+    user.value = await api.getUserDetail(userId.value);
 });
 
 function handleOpenUrl() {
@@ -129,6 +129,11 @@ function handleOpenUrl() {
 function handleOpenReport() {
     externalApi.openUrl(`https://spinsha.re/report/user/${user.value.id}`);
 }
+
+watch(() => [route.params.userId], async () => {
+    userId.value = route.params.userId;
+    user.value = await api.getUserDetail(userId.value);
+});
 </script>
 
 <style scoped>
