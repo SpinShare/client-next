@@ -4,7 +4,7 @@
         icon="download"
         :expanded="expanded"
         :active="isActive"
-        :badge="queueItemCount > 0 ? queueItemCount : false"
+        :badge="pendingItems > 0 ? pendingItems : false"
         @click="handleToggleQueue"
         v-interactable
     />
@@ -12,7 +12,7 @@
         :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
         v-if="isActive"
     >
-        <SectionHeader :title="`Download Queue (${queueItemCount})`">
+        <SectionHeader :title="`Download Queue`">
             <button
                 class="button ghost"
                 @click="handleClearDone"
@@ -28,6 +28,13 @@
                 <Remixicon icon="refresh" />
             </button>
         </SectionHeader>
+
+        <p
+            class="text-base-500 dark:text-base-300"
+            v-if="queueItemCount > 0"
+        >
+            {{pendingItems}} of {{queueItemCount}} charts left.
+        </p>
 
         <div
             class="list"
@@ -56,7 +63,7 @@
 
 <script setup>
 import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import {computed, inject, onMounted, onUnmounted, ref} from 'vue';
 import SectionHeader from '@/components/SectionHeader.vue';
 import DownloadQueueItem from '@/components/DownloadQueueItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -111,6 +118,10 @@ onUnmounted(() => {
     mitt.off('queue-count-change');
     mitt.off('queue-done');
     mitt.off('item-change');
+});
+
+const pendingItems = computed(() => {
+    return queueItemsList.value.filter((item) => item?.state === 0) || 0;
 });
 
 function handleToggleQueue() {
