@@ -19,6 +19,15 @@
             </template>
             <template v-else>
                 <button
+                    class="button brand"
+                    v-interactable
+                    @click="handleUpload"
+                >
+                    <Remixicon icon="upload" />
+                    <span>Upload</span>
+                </button>
+
+                <button
                     class="button profile-button"
                     :style="`background-image: url('${profile.avatar}')`"
                     @click="connectPopupOpen = !connectPopupOpen"
@@ -146,6 +155,7 @@ import Loader from '@/components/Loader.vue';
 
 const mitt = inject('mitt');
 const connect = inject('connect');
+const externalApi = inject('externalApi');
 const isLoggedIn = ref(false);
 const profile = ref(null);
 const connectPopupOpen = ref(false);
@@ -169,6 +179,10 @@ async function onAuthUpdated() {
     }
 }
 
+function handleUpload() {
+    externalApi.openUrl("https://spinsha.re/upload");
+}
+
 function handleLogout() {
     connect.logout();
     mitt.emit('auth-updated');
@@ -177,7 +191,7 @@ function handleLogout() {
 
 <style scoped>
 .auth-area {
-    @apply relative;
+    @apply relative flex gap-4 items-center;
 
     & .profile-button {
         @apply w-8 h-8 rounded-full bg-cover bg-center transition-all cursor-pointer;
