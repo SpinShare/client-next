@@ -350,7 +350,7 @@ header.chart {
                         @apply font-bold;
                     }
                     &.active {
-                        @apply opacity-100 bg-base-200 dark:bg-base-950;
+                        @apply opacity-100 bg-base-200 dark:bg-base-900;
                     }
                 }
             }
