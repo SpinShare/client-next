@@ -1,9 +1,12 @@
 <template>
-    <div class="card-item">
+    <div
+        class="card-item"
+    >
         <img
             :src="icon"
             alt="Card Image"
             class="card-img"
+            ref="cardImage"
         />
         <div class="meta">
             <h1>{{ title }}</h1>
@@ -14,8 +17,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import { TZDate } from '@date-fns/tz';
+import VanillaTilt from 'vanilla-tilt';
 
 const props = defineProps({
     id: {
@@ -40,6 +44,8 @@ const props = defineProps({
     },
 });
 
+const cardImage = ref(null);
+
 const parseDateWithTimezone = ({ date, timezone }) => {
     const [year, month, day, hours, minutes, seconds] = date
         .replace(/\.\d+$/, '') // Remove milliseconds
@@ -57,6 +63,10 @@ const givenDateAbsolute = computed(() => {
 
 const cleanDescription = computed(() => {
     return props.description.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+});
+
+onMounted(() => {
+    VanillaTilt.init(cardImage.value, { max: 20, speed: 400, scale: "1.25", reverse: true, perspective: 1000 });
 });
 </script>
 
