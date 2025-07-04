@@ -67,30 +67,37 @@ function handleDeepLink(url) {
 
     try {
         const parsedUrl = new URL(url);
-        const pathname = parsedUrl.pathname.substring(1); // Remove leading slash
-        const segments = pathname.split('/');
 
-        if (segments.length >= 2) {
-            const type = segments[0];
-            const id = segments[1];
+        // Only handle spinshare:// URLs
+        if (parsedUrl.protocol !== 'spinshare:') {
+            console.log(`Not a spinshare:// URL: ${url}`);
+            return false;
+        }
 
-            // Navigate to the appropriate route based on the URL
-            switch (type) {
-                case 'chart':
-                    mainWindow.webContents.send('navigate-to', `/chart/${id}`);
-                    break;
-                case 'user':
-                    mainWindow.webContents.send('navigate-to', `/user/${id}`);
-                    break;
-                case 'playlist':
-                    mainWindow.webContents.send('navigate-to', `/playlist/${id}`);
-                    break;
-                default:
-                    console.log(`Unknown deep link type: ${type}`);
-            }
+        // Remove leading slash
+        let pathname = parsedUrl.pathname;
+        if(pathname.startsWith("/")) {
+            pathname = pathname.substring(1);
+        }
+        const type = parsedUrl.hostname;
+
+        switch(type) {
+            default:
+                console.error(`[DeepLink] Unknown deep link type: ${url} - ${type} - ${pathname}`);
+                return false;
+            case 'chart':
+                mainWindow.webContents.send('navigate-to', `/chart/${pathname}`);
+                return true;
+            case 'user':
+                mainWindow.webContents.send('navigate-to', `/user/${pathname}`);
+                return true;
+            case 'playlist':
+                mainWindow.webContents.send('navigate-to', `/playlist/${pathname}`);
+                return true;
         }
     } catch (error) {
-        console.error('Error handling deep link:', error);
+        console.error(`Error handling deep link ${url}:`, error);
+        return false;
     }
 }
 

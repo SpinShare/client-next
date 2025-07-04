@@ -32,31 +32,24 @@ function handleDeepLink(url) {
             console.log(`Not a spinshare:// URL: ${url}`);
             return false;
         }
-        
-        const pathname = parsedUrl.pathname.substring(1); // Remove leading slash
-        const segments = pathname.split('/');
-        
-        if (segments.length >= 2) {
-            const type = segments[0];
-            const id = segments[1];
-            
-            console.log(`Type: ${type}, ID: ${id}`);
-            
-            // Navigate to the appropriate route based on the URL
-            switch (type) {
-                case 'chart':
-                    return mockSend('navigate-to', `/chart/${id}`);
-                case 'user':
-                    return mockSend('navigate-to', `/user/${id}`);
-                case 'playlist':
-                    return mockSend('navigate-to', `/playlist/${id}`);
-                default:
-                    console.log(`Unknown deep link type: ${type}`);
-                    return false;
-            }
-        } else {
-            console.log(`Not enough segments in URL: ${url}`);
-            return false;
+
+        // Remove leading slash
+        let pathname = parsedUrl.pathname;
+        if(pathname.startsWith("/")) {
+            pathname = pathname.substring(1);
+        }
+        const type = parsedUrl.hostname;
+
+        switch(type) {
+            default:
+                console.log(`Unknown deep link type: ${type}`);
+                return false;
+            case 'chart':
+                return mockSend('navigate-to', `/chart/${pathname}`);
+            case 'user':
+                return mockSend('navigate-to', `/user/${pathname}`);
+            case 'playlist':
+                return mockSend('navigate-to', `/playlist/${pathname}`);
         }
     } catch (error) {
         console.error(`Error handling deep link: ${error.message}`);
