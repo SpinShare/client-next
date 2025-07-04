@@ -62,7 +62,6 @@
                             class="button brand"
                             @click="handleAddToQueue"
                             v-interactable
-                            v-if="!cacheItem"
                         >
                             <Remixicon icon="download" />
                             <span>Add to queue</span>
