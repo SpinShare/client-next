@@ -153,7 +153,7 @@ const updateDateAbsolute = computed(() => {
 
 <style scoped>
 .page-chart-detail {
-    @apply p-10 grid grid-cols-[1fr_350px] gap-10;
+    @apply p-10 flex flex-col gap-10;
 
     & .meta {
         & .description {
@@ -192,6 +192,12 @@ const updateDateAbsolute = computed(() => {
         & .split {
             @apply grid grid-cols-2 gap-2.5;
         }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .page-chart-detail {
+        @apply grid grid-cols-[1fr_350px];
     }
 }
 </style>

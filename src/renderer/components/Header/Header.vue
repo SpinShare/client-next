@@ -85,10 +85,10 @@ header.main {
         @apply flex items-center justify-center;
 
         & .search-box {
-            @apply h-[40px] flex gap-0 rounded-md relative min-w-[200px] w-full max-w-[500px] border border-base-300 dark:border-base-800;
+            @apply h-[40px] flex gap-0 rounded-md relative w-full max-w-[500px] border border-base-300 dark:border-base-800;
 
             & select {
-                @apply px-2 border-r border-base-300 dark:border-base-800 appearance-none pr-8;
+                @apply px-2 border-r border-base-300 dark:border-base-800 appearance-none pr-8 w-fit;
 
                 &:hover, &:focus {
                     @apply bg-base-100 dark:bg-base-900 outline-0;
@@ -104,7 +104,7 @@ header.main {
                 background-size: 24px 24px;
             }
             & input {
-                @apply grow px-4 font-sans bg-none transition-all;
+                @apply grow px-4 font-sans bg-none transition-all w-full;
 
                 &:hover, &:focus {
                     @apply bg-base-100 dark:bg-base-900 outline-0;

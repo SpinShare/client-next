@@ -176,4 +176,7 @@ header {
         }
     }
 }
+nav {
+    @apply sticky top-0 z-5  bg-base-50 dark:bg-base-950;
+}
 </style>

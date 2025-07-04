@@ -305,7 +305,7 @@ watch(() => [route.params.chartId], async () => {
 
 <style scoped>
 header.chart {
-    @apply p-10 grid grid-cols-[auto_1fr] gap-4 items-center;
+    @apply p-10 flex flex-col gap-4;
 
     & .cover {
         @apply aspect-square w-[172px] rounded bg-center bg-cover;
@@ -408,6 +408,15 @@ header.chart {
 
     & .actions {
         @apply flex justify-end;
+    }
+}
+nav {
+    @apply sticky top-0 z-5  bg-base-50 dark:bg-base-950;
+}
+
+@media screen and (min-width: 1100px) {
+    header.chart {
+        @apply grid grid-cols-[auto_1fr] items-center;
     }
 }
 </style>

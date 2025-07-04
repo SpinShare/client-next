@@ -124,7 +124,7 @@ header {
     @apply bg-cover bg-center bg-no-repeat p-10 pt-[200px];
 }
 main {
-    @apply p-10 grid grid-cols-[350px_1fr] gap-10;
+    @apply p-10 flex flex-col gap-10;
 
     & .meta {
         @apply flex flex-col gap-5;
@@ -153,6 +153,12 @@ main {
                 @apply grow justify-center;
             }
         }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    main {
+        @apply grid grid-cols-[350px_1fr];
     }
 }
 </style>
