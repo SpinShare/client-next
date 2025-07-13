@@ -80,7 +80,11 @@
       "reviews": "Reviews ({count})",
       "playlists": "Playlists ({count})",
       "spinPlays": "SpinPlays ({count})"
-    }
+    },
+    "noCards": "No cards received yet.",
+    "noCharts": "No charts uploaded yet.",
+    "noReviews": "No reviews given yet.",
+    "noSpinPlays": "No SpinPlays uploaded yet."
   },
   "chart": {
     "explicitLabel": "Explicit Content &ndash; Hover to reveal",
@@ -103,11 +107,6 @@
     "playDialog": {
       "header": "Play",
       "body": "Select a difficulty to start Spin Rhythm XD and immediately play <strong>{title}</strong>.",
-      "easy": "Easy",
-      "normal": "Normal",
-      "hard": "Hard",
-      "expert": "Expert",
-      "xd": "XD",
       "close": "Close"
     },
     "statistics": {
@@ -126,6 +125,22 @@
   "review": {
     "noComment": "No comment.",
     "recommended": "Recommended"
+  },
+  "search": {
+    "minimumDifficulty": "Minimum difficulty",
+    "maximumDifficulty": "Maximum difficulty",
+    "explicit": "Explicit",
+    "apply": "Apply",
+    "noChartResults": "No charts found. Try a different search query or adjust the filters above.",
+    "noPlaylistResults": "No playlists found. Try a different search query.",
+    "noUserResults": "No users found. Try a different search query."
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "normal": "Normal",
+    "hard": "Hard",
+    "expert": "Expert",
+    "xd": "XD"
   },
   "library": {
     "header": "Library",

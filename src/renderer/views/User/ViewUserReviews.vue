@@ -11,7 +11,7 @@
     >
         <EmptyState
             v-if="reviews.length === 0"
-            label="No reviews yet."
+            :label="$t('user.noReviews')"
             icon="chat-smile-2"
         />
         <ReviewGrid v-else>

@@ -2,7 +2,7 @@
     <section class="page-user-detail">
         <EmptyState
             v-if="user.cards.length === 0"
-            label="No card yet."
+            :label="$t('user.noCards')"
             icon="award"
         />
         <div

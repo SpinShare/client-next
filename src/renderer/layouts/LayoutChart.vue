@@ -151,7 +151,7 @@
                         v-interactable
                     >
                         <span>{{ chart.easyDifficulty ?? "n/a" }}</span>
-                        <span>{{ $t('chart.playDialog.easy') }}</span>
+                        <span>{{ $t('difficulty.easy') }}</span>
                     </button>
                     <button
                         class="button"
@@ -160,7 +160,7 @@
                         v-interactable
                     >
                         <span>{{ chart.normalDifficulty ?? "n/a" }}</span>
-                        <span>{{ $t('chart.playDialog.normal') }}</span>
+                        <span>{{ $t('difficulty.normal') }}</span>
                     </button>
                     <button
                         class="button"
@@ -169,7 +169,7 @@
                         v-interactable
                     >
                         <span>{{ chart.hardDifficulty ?? "n/a" }}</span>
-                        <span>{{ $t('chart.playDialog.hard') }}</span>
+                        <span>{{ $t('difficulty.hard') }}</span>
                     </button>
                     <button
                         class="button"
@@ -178,7 +178,7 @@
                         v-interactable
                     >
                         <span>{{ chart.expertDifficulty ?? "n/a" }}</span>
-                        <span>{{ $t('chart.playDialog.expert') }}</span>
+                        <span>{{ $t('difficulty.expert') }}</span>
                     </button>
                     <button
                         class="button"
@@ -187,7 +187,7 @@
                         v-interactable
                     >
                         <span>{{ chart.XDDifficulty ?? "n/a" }}</span>
-                        <span>{{ $t('chart.playDialog.xd') }}</span>
+                        <span>{{ $t('difficulty.xd') }}</span>
                     </button>
                 </section>
 

@@ -11,7 +11,7 @@
     >
         <EmptyState
             v-if="charts.length === 0"
-            label="No charts yet."
+            :label="$t('user.noCharts')"
             icon="music-2"
         />
         <ChartGrid>
