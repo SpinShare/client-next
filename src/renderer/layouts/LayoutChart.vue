@@ -56,7 +56,7 @@
                             v-if="cacheItem"
                         >
                             <Remixicon icon="gamepad" />
-                            <span>{{ $t('chart.actions.play') }}</span>
+                            <span>{{ $t('chart.play') }}</span>
                         </button>
                         <button
                             class="button brand"
@@ -64,7 +64,7 @@
                             v-interactable
                         >
                             <Remixicon icon="download" />
-                            <span>{{ $t('chart.actions.addToQueue') }}</span>
+                            <span>{{ $t('chart.addToQueue') }}</span>
                         </button>
                         <template v-if="chartPreview">
                             <button

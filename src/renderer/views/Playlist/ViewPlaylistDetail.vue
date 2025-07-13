@@ -20,7 +20,7 @@
                                 filled
                                 size="sm"
                             />
-                            <span>Official</span>
+                            <span>{{ $t('playlist.official') }}</span>
                         </div>
                         <p>{{ playlist.description }}</p>
                     </div>
@@ -32,7 +32,7 @@
                             v-interactable
                         >
                             <Remixicon icon="download" />
-                            <span>Add to queue</span>
+                            <span>{{ $t('playlist.addToQueue') }}</span>
                         </button>
                         <button
                             class="button"
@@ -49,7 +49,7 @@
                     <UserItem v-bind="playlist.user" />
 
                     <div class="item">
-                        <h1>With charts by</h1>
+                        <h1>{{ $t('playlist.withChartsBy') }}</h1>
                         <div class="charters">
                             <UserTooltip
                                 v-for="charter in allCharters"

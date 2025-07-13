@@ -92,10 +92,8 @@
       "installed": "Installed",
       "outOfDate": "Out of date"
     },
-    "actions": {
-      "play": "Play",
-      "addToQueue": "Add to queue"
-    },
+    "play": "Play",
+    "addToQueue": "Add to queue",
     "tabs": {
       "detail": "Detail",
       "reviews": "Reviews",
@@ -121,11 +119,19 @@
   },
   "playlist": {
     "official": "Official",
-    "count": "{count} charts"
+    "count": "{count} charts",
+    "addToQueue": "Add to queue",
+    "withChartsBy": "With charts by"
   },
   "review": {
     "noComment": "No comment.",
     "recommended": "Recommended"
+  },
+  "library": {
+    "header": "Library",
+    "open": "Open",
+    "rebuild": "Rebuild",
+    "noCharts": "No charts found. Rebuild the cache or download charts."
   },
   "updateToast": {
     "header": "Update available",

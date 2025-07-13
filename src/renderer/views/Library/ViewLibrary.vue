@@ -7,14 +7,14 @@
         </template>
         <template v-else>
             <section class="page-library">
-                <SectionHeader title="Library">
+                <SectionHeader :title="$t('library.header')">
                     <button
                         class="button"
                         @click="handleOpen"
                         v-interactable
                     >
                         <Remixicon icon="folder-open" />
-                        <span>Open</span>
+                        <span>{{ $t('library.open') }}</span>
                     </button>
                     <button
                         class="button"
@@ -22,12 +22,12 @@
                         v-interactable
                     >
                         <Remixicon icon="refresh" />
-                        <span>Rebuild</span>
+                        <span>{{ $t('library.rebuild') }}</span>
                     </button>
                 </SectionHeader>
                 <template v-if="library.length === 0">
                     <EmptyState
-                        label="No charts found. Rebuild the cache or download charts."
+                        :label="$t('library.noCharts')"
                         icon="music-2"
                     />
                 </template>
