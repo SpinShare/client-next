@@ -10,7 +10,8 @@
                 v-else
                 class="no-comment"
             >
-                No comment.
+                <Remixicon icon="chat-off" size="md" />
+                <span>No comment.</span>
             </p>
             <div
                 class="badge-recommended"
@@ -92,7 +93,7 @@ const props = defineProps({
             @apply grow;
 
             &.no-comment {
-                @apply text-base-600 dark:text-base-300;
+                @apply text-base-600 dark:text-base-300 flex gap-1.5 items-center;
             }
         }
     }
