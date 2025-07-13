@@ -54,7 +54,7 @@
             class="explicit-label"
             v-if="isExplicit && !settingShowExplicit"
         >
-            {{ $t('explicitLabel') }}
+            {{ $t('chart.explicitLabel') }}
         </div>
     </RouterLink>
 </template>
