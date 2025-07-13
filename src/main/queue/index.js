@@ -106,6 +106,19 @@ export class DownloadQueue extends EventEmitter {
             }
 
             try {
+                // CHECK IF NEEDS TO BE DOWNLOADED
+                const chartItem = await this.apiClient.getChartDetail(nextItem.id);
+                const cacheItem = this.libraryManager.getUpdateHash(chartItem.fileReference);
+
+                console.log(`[DownloadQueue] Check: (${nextItem.id}) ${nextItem.title}`);
+
+                if (cacheItem === chartItem.updateHash) {
+                    nextItem.state = STATE_DONE;
+                    console.log(`[DownloadQueue] Skip (Up to date): (${nextItem.id}) ${nextItem.title}`);
+                    this.emit('item-change', nextItem);
+                    continue;
+                }
+
                 // DOWNLOAD
                 nextItem.state = STATE_DOWNLOADING;
                 this.emit('item-change', nextItem);
