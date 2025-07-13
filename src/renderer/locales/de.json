@@ -2,243 +2,243 @@
   "header": {
     "search": {
       "type": {
-        "charts": "Charts",
-        "playlists": "Playlisten",
-        "users": "Nutzer"
+        "charts": "",
+        "playlists": "",
+        "users": ""
       },
-      "placeholder": "Suche nach Charts, Nutzer oder Playlisten..."
+      "placeholder": ""
     },
     "auth": {
-      "login": "Einloggen",
-      "logout": "Ausloggen",
-      "upload": "Hochladen",
-      "profile": "Profil",
-      "charts": "Charts",
-      "reviews": "Reviews",
-      "playlists": "Playlisten",
-      "spinPlays": "SpinPlays",
+      "login": "",
+      "logout": "",
+      "upload": "",
+      "profile": "",
+      "charts": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": "",
       "notifications": {
-        "header": "Benachrichtigungen",
-        "noNotifications": "Keine Benachrichtigungen",
-        "newReview": "{username} hat deiner Chart '{title}' eine Review gegeben",
-        "newSpinPlay": "{username} hat deiner Chart '{title}' ein SpinPlay hinzugefügt",
-        "receivedCard": "Du hast die Karte '{card}' für dein Profil erhalten"
+        "header": "",
+        "noNotifications": "",
+        "newReview": "",
+        "newSpinPlay": "",
+        "receivedCard": ""
       }
     }
   },
   "sidebar": {
-    "frontpage": "Startseite",
-    "newest": "Neueste",
-    "updated": "Geupdatet",
-    "hotThisWeek": "Hits diese Woche",
-    "hotThisMonth": "Hits diesen Monat",
-    "library": "Sammlung",
-    "toggleSidebar": "Seitenleiste umschalten",
+    "frontpage": "",
+    "newest": "",
+    "updated": "",
+    "hotThisWeek": "",
+    "hotThisMonth": "",
+    "library": "",
+    "toggleSidebar": "",
     "downloadQueue": {
-      "downloads": "Downloads",
-      "header": "Warteschlange ({count})",
-      "noDownloads": "Keine Downloads in der Warteschlange."
+      "downloads": "",
+      "header": "",
+      "noDownloads": ""
     },
-    "settings": "Einstellungen"
+    "settings": ""
   },
   "connect": {
     "login": {
-      "header": "In den Account einloggen",
-      "body": "Gehe auf {link} und log dich in deinen Account ein."
+      "header": "",
+      "body": ""
     },
     "code": {
-      "header": "Den Connect Code finden",
-      "body": "Klicke {link} oder auf der Seite auf dein Profilbild oben rechts und gehe auf <strong>Settings</strong>. Gehe dann auf den <strong>Connect</strong> tab und kopiere deinen Connect Code.",
-      "link_label": "hier"
+      "header": "",
+      "body": "",
+      "link_label": ""
     },
     "input": {
-      "header": "Connect Code eingeben",
-      "body": "Gebe deinen Connect Code unten ein und klicke auf <strong>Einloggen</strong>.",
-      "placeholder": "Connect Code...",
-      "login": "Einloggen",
-      "errorIncorrect": "Dein Connect Code war nicht korrekt. Versuche es bitte erneut.",
-      "errorServer": "Konnte dich nicht einloggen. Versuche es bitte später erneut."
+      "header": "",
+      "body": "",
+      "placeholder": "",
+      "login": "",
+      "errorIncorrect": "",
+      "errorServer": ""
     }
   },
   "discover": {
     "promos": {
-      "header": "Entdecken"
+      "header": ""
     },
     "featured": {
-      "header": "Vorgestellt",
-      "seeMore": "Mehr anzeigen"
+      "header": "",
+      "seeMore": ""
     },
-    "previousPage": "Vorherige Seite",
-    "nextPage": "Nächste Seite"
+    "previousPage": "",
+    "nextPage": ""
   },
   "user": {
-    "supporter": "Supporter",
-    "verified": "Verifiziert",
+    "supporter": "",
+    "verified": "",
     "tabs": {
-      "detail": "Detail",
-      "charts": "Charts ({count})",
-      "reviews": "Reviews ({count})",
-      "playlists": "Playlisten ({count})",
-      "spinPlays": "SpinPlays ({count})"
+      "detail": "",
+      "charts": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": ""
     },
-    "noCards": "Noch keine Karten erhalten.",
-    "noCharts": "Noch keine Charts hochgeladen.",
-    "noReviews": "Noch keine Reviews abgegeben.",
-    "noSpinPlays": "Noch keine SpinPlays hochgeladen."
+    "noCards": "",
+    "noCharts": "",
+    "noReviews": "",
+    "noSpinPlays": ""
   },
   "chart": {
-    "explicitLabel": "Anstößiger Inhalt – Anzeigen mit Hover",
-    "noDescription": "Keine Beschreibung angegeben.",
-    "noPlaylists": "In noch keiner Playliste.",
-    "noReviews": "Noch keine Reviews abgegeben.",
-    "noSpinPlays": "Noch keine SpinPlays.",
+    "explicitLabel": "",
+    "noDescription": "",
+    "noPlaylists": "",
+    "noReviews": "",
+    "noSpinPlays": "",
     "status": {
-      "installed": "Installiert",
-      "outOfDate": "Veraltet"
+      "installed": "",
+      "outOfDate": ""
     },
-    "play": "Spielen",
-    "addToQueue": "Zur Warteschlange",
+    "play": "",
+    "addToQueue": "",
     "tabs": {
-      "detail": "Detail",
-      "reviews": "Reviews",
-      "playlists": "Playlisten",
-      "spinPlays": "SpinPlays"
+      "detail": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": ""
     },
     "playDialog": {
-      "header": "Spielen",
-      "body": "Wähle eine Schwierigkeit aus, um Spin Rhythm XD zu starten und <strong>{title}</strong> direkt zu spielen.",
-      "close": "Schließen"
+      "header": "",
+      "body": "",
+      "close": ""
     },
     "statistics": {
-      "views": "Aufrufe",
-      "downloads": "Downloads",
-      "uploaded": "Hochgeladen",
-      "updated": "Geupdatet"
+      "views": "",
+      "downloads": "",
+      "uploaded": "",
+      "updated": ""
     }
   },
   "playlist": {
-    "official": "Offiziell",
-    "count": "{count} Charts",
-    "addToQueue": "Zur Warteschlange",
-    "withChartsBy": "Mit Charts von"
+    "official": "",
+    "count": "",
+    "addToQueue": "",
+    "withChartsBy": ""
   },
   "review": {
-    "noComment": "Kein Kommentar abgegeben.",
-    "recommended": "Empfohlen"
+    "noComment": "",
+    "recommended": ""
   },
   "search": {
-    "minimumDifficulty": "Mindeste Schwierigkeit",
-    "maximumDifficulty": "Maximale Schwierigkeit",
-    "explicit": "Anstößige Inhalte",
-    "apply": "Filtern",
-    "noChartResults": "Keine Charts gefunden. Versuche einen anderen Suchbegriff oder verändere die oberen Filter.",
-    "noPlaylistResults": "Keine Playlisten gefunden. Versuche einen anderen Suchbegriff.",
-    "noUserResults": "Keine Nutzer gefunden. Versuche einen anderen Suchbegriff."
+    "minimumDifficulty": "",
+    "maximumDifficulty": "",
+    "explicit": "",
+    "apply": "",
+    "noChartResults": "",
+    "noPlaylistResults": "",
+    "noUserResults": ""
   },
   "difficulty": {
-    "easy": "Einfach",
-    "normal": "Normal",
-    "hard": "Schwer",
-    "expert": "Experte",
-    "xd": "XD"
+    "easy": "",
+    "normal": "",
+    "hard": "",
+    "expert": "",
+    "xd": ""
   },
   "library": {
-    "header": "Sammlung",
-    "open": "Öffnen",
-    "rebuild": "Neu erstellen",
-    "noCharts": "Keine Charts gefunden. Erstelle den Cache neu oder lade dir Charts herunter."
+    "header": "",
+    "open": "",
+    "rebuild": "",
+    "noCharts": ""
   },
   "updateToast": {
-    "header": "Update verfügbar",
-    "body": "Update zur neuesten Version um neue Features und Bugfixes zu erhalten.",
+    "header": "",
+    "body": "",
     "actions": {
-      "get": "Updaten",
-      "later": "Später"
+      "get": "",
+      "later": ""
     }
   },
   "settings": {
     "general": {
-      "header": "Allgemein",
-      "version": "Version {version}",
-      "checkForUpdates": "Nach updates schauen",
-      "getUpdate": "Updaten",
+      "header": "",
+      "version": "",
+      "checkForUpdates": "",
+      "getUpdate": "",
       "theme": {
-        "label": "Theme",
-        "dark": "Dunkler Modus",
-        "light": "Heller Modus"
+        "label": "",
+        "dark": "",
+        "light": ""
       },
       "language": {
-        "label": "Sprache",
-        "description": "Übersetzt von SpinShare"
+        "label": "",
+        "description": ""
       }
     },
     "interface": {
-      "header": "Benutzeroberfläche",
+      "header": "",
       "showExplicit": {
-        "label": "Anstößige Inhalte anzeigen",
-        "description": "Zeigt Charts mit anstößigen Inhalten automatisch ohne Weichzeichner-Filter an"
+        "label": "",
+        "description": ""
       },
       "downloadNotifications": {
-        "label": "Download-Benachrichtigungen",
-        "description": "Benachrichtigt dich, wenn eine Chart heruntergeladen oder die Warteschlange abgearbeitet wurde"
+        "label": "",
+        "description": ""
       },
       "openDownloadQueue": {
-        "label": "Warteschlange Öffnen",
-        "description": "Öffnet automatisch die Download-Warteschlange, wenn eine neue Chart hinzugefügt wurde"
+        "label": "",
+        "description": ""
       },
       "sfxEnabled": {
-        "label": "Soundeffekte Aktiv",
-        "description": "Spielt Soundeffekte in der Benutzeroberfläche ab"
+        "label": "",
+        "description": ""
       },
       "musicEnabled": {
-        "label": "Menü-Musik Aktiv",
-        "description": "Spielt Hintergrundmusik im Menü"
+        "label": "",
+        "description": ""
       }
     },
     "account": {
-      "header": "Account",
+      "header": "",
       "logout": {
-        "label": "Ausloggen",
-        "description": "Nachdem du dich ausgeloggt hast, kannst du auch 'SpinShare Next' auf spinsha.re entfernen",
-        "logout": "Ausloggen"
+        "label": "",
+        "description": "",
+        "logout": ""
       }
     },
     "game": {
-      "header": "Spiel",
+      "header": "",
       "pathCustoms": {
-        "label": "Inhalts-Pfad",
-        "description": "Pfad zu deinen Inhalten (Customs Ordner)",
-        "placeholder": "Noch nicht gesetzt",
-        "select": "Auswählen",
-        "detect": "Erkennen"
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "detect": ""
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": "Vielen Dank für das herunterladen des SpinShare Desktop Client! Bevor du anfangen kannst, Charts von der SpinShare Community herunterzuladen, müssen wir einmal durch das initiale Setup gehen."
+      "body": ""
     },
     "general": {
-      "header": "Allgemeine Einstellungen"
+      "header": ""
     },
     "game": {
-      "header": "Spieleinstellungen",
-      "tip": "Tipp: Um deine Charts in einem anderen Ordner oder Laufwerk zu speichern, kannst du {code} zu deinen Steam Startoptionen hinzufügen."
+      "header": "",
+      "tip": ""
     },
     "cache": {
-      "header": "Sammlungs-Cache",
-      "body": "Um schnell und einfach zu erkennen, ob du eine Chart bereits heruntergeladen hast oder ob sie veraltet ist, müssen wir einen Cache erstellen.",
-      "explanation": "Dieser Cache geht durch deinen Spieleordner und erstellt eine kleine Textdatei mit allen installierten Charts. Er erstellt auch ein kleines Thumbnail des Covers, damit dein Client auch mit vielen Charts schnell und ressourcenschonend bleibt.",
-      "timeNeeded": "Wenn du noch keine Spin Rhythm XD Charts installiert hast, wird dies nicht einmal eine Sekunde benötigen. Wenn du eine größere Sammlung hast, kann dieser Schritt ein bis zwei Minuten dauern.",
-      "tip": "Tipp: Du kannst deine Sammlung jederzeit erneut analysieren.",
-      "analyze": "Sammlung analysieren",
-      "done": "Fertig!"
+      "header": "",
+      "body": "",
+      "explanation": "",
+      "timeNeeded": "",
+      "tip": "",
+      "analyze": "",
+      "done": ""
     },
     "done": {
-      "header": "Wir sind durch!",
-      "body": "Du hast nun den SpinShare Desktop Client eingerichtet. Jetzt bist du nur noch einen Klick davon entfernt, tausende Nutzerinhalte für Spin Rhythm Xd herunterzuladen.",
-      "tip": "Tipp: Klicke oben rechts auf 'Einloggen' um dich in deinen spinsha.re Account einzuloggen. Damit kannst du direkt im Client Charts bewerten, Playlisten verwalten und bald auch eigene Charts hochladen.",
-      "welcome": "Aber fürs erste: Die <strong>rhythm dimension</strong> ruft!"
+      "header": "",
+      "body": "",
+      "tip": "",
+      "welcome": ""
     }
   }
 }
