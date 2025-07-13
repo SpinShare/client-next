@@ -11,7 +11,7 @@
                 class="no-comment"
             >
                 <Remixicon icon="chat-off" size="md" />
-                <span>No comment.</span>
+                <span>{{ $t('review.noComment') }}</span>
             </p>
             <div
                 class="badge-recommended"
@@ -22,7 +22,7 @@
                     filled
                     size="sm"
                 />
-                <span>Recommended</span>
+                <span>{{ $t('review.recommended') }}</span>
             </div>
         </div>
         <UserItem
