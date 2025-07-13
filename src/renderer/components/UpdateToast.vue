@@ -2,15 +2,15 @@
     <div class="update-toast">
         <Remixicon icon="refresh" size="4xl" />
         <div class="content">
-            <h1>Update available</h1>
-            <p>Update to the latest version to receive new features and bugfixes.</p>
+            <h1>{{ $t('updateToast.header') }}</h1>
+            <p>{{ $t('updateToast.body') }}</p>
 
             <div class="actions">
                 <button @click="handleGetUpdate" class="button brand">
-                    <span>Get update</span>
+                    <span>{{ $t('updateToast.actions.get') }}</span>
                 </button>
                 <button @click="handleLater" class="button ghost">
-                    <span>Later</span>
+                    <span>{{ $t('updateToast.actions.later') }}</span>
                 </button>
             </div>
         </div>
