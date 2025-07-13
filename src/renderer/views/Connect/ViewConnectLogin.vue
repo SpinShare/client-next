@@ -2,16 +2,16 @@
     <LayoutBase>
         <section class="page-connect-login">
             <div class="box">
-                <h1>Log into your account</h1>
-                <p>Go to <a href="https://spinsha.re" v-interactable>spinsha.re</a> and log into your account.</p>
+                <h1>{{ $t('connect.login.header') }}</h1>
+                <p v-html="$t('connect.login.body', { link: '<a href=\'https://spinsha.re\' v-interactable>spinsha.re</a>'})" />
             </div>
             <div class="box">
-                <h1>Find your connect code</h1>
-                <p>Click <a href="https://spinsha.re/settings/connect" v-interactable>here</a> or click on your profile picture in the top right and go to <strong>Settings</strong>. Go to the <strong>Connect</strong> tab and find your connect code.</p>
+                <h1>{{ $t('connect.code.header') }}</h1>
+                <p v-html="$t('connect.code.body', { link: '<a href=\'https://spinsha.re/settings/connect\' v-interactable>' + $t('connect.code.link_label') + '</a>'})" />
             </div>
             <div class="box">
-                <h1>Enter your connect code</h1>
-                <p>Enter your connect code below and click on <strong>Log into your account</strong>.</p>
+                <h1>{{ $t('connect.input.header') }}</h1>
+                <p v-html="$t('connect.input.body')" />
 
                 <div
                     class="inputs"
@@ -23,7 +23,7 @@
                         type="text"
                         min="6"
                         max="6"
-                        placeholder="Connect code..."
+                        :placeholder="$t('connect.input.placeholder')"
                         v-model="connectCode"
                     />
                     <button
@@ -32,7 +32,7 @@
                         :disabled="connectCode.length !== 6"
                         v-interactable
                     >
-                        Log into your account
+                        <span>{{ $t('connect.input.login') }}</span>
                     </button>
                 </div>
                 <section
@@ -48,13 +48,13 @@
                     class="error"
                     v-if="errorCodeWrong"
                 >
-                    Your connect code was not correct. Please try again.
+                    {{ $t('connect.input.errorIncorrect') }}
                 </div>
                 <div
                     class="error"
                     v-if="errorServer"
                 >
-                    Couldn't log you in. Please try again later.
+                    {{ $t('connect.input.errorServer') }}
                 </div>
             </div>
         </section>
@@ -91,6 +91,17 @@ async function handleLogin() {
 }
 </script>
 
+<style>
+.page-connect-login {
+    & a {
+        @apply underline text-brand-500;
+    }
+    & a:hover {
+        @apply no-underline;
+    }
+}
+</style>
+
 <style scoped>
 .page-connect-login {
     @apply max-w-xl mx-auto flex flex-col gap-5 py-20;
@@ -103,13 +114,6 @@ async function handleLogin() {
         }
         & p {
             @apply leading-6 text-base-500 dark:text-base-300;
-
-            & a {
-                @apply underline text-brand-500;
-            }
-            & a:hover {
-                @apply no-underline;
-            }
         }
         & .inputs {
             @apply mt-4 flex gap-2;

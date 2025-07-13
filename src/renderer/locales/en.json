@@ -41,6 +41,25 @@
     },
     "settings": "Settings"
   },
+  "connect": {
+    "login": {
+      "header": "Log into your account",
+      "body": "Go to {link} and log into your account."
+    },
+    "code": {
+      "header": "Find your connect code",
+      "body": "Click {link} or click on your profile picture in the top right and go to <strong>Settings</strong>. Go to the <strong>Connect</strong> tab and find your connect code.",
+      "link_label": "here"
+    },
+    "input": {
+      "header": "Enter your connect code",
+      "body": "Enter your connect code below and click on <strong>Log into your account</strong>.",
+      "placeholder": "Connect code...",
+      "login": "Log into your account",
+      "errorIncorrect": "Your connect code was not correct. Please try again.",
+      "errorServer": "Couldn't log you in. Please try again later."
+    }
+  },
   "chart": {
     "explicitLabel": "Explicit Content &ndash; Hover to reveal",
     "noDescription": "No description yet.",
