@@ -30,23 +30,23 @@
                                 @click.stop
                             >
                                 <div>
-                                    <span>Easy</span>
+                                    <span>{{ $t('difficulty.easy') }}</span>
                                     <Switch v-model="searchDifficultyEasy" />
                                 </div>
                                 <div>
-                                    <span>Normal</span>
+                                    <span>{{ $t('difficulty.normal') }}</span>
                                     <Switch v-model="searchDifficultyNormal" />
                                 </div>
                                 <div>
-                                    <span>Hard</span>
+                                    <span>{{ $t('difficulty.hard') }}</span>
                                     <Switch v-model="searchDifficultyHard" />
                                 </div>
                                 <div>
-                                    <span>Expert</span>
+                                    <span>{{ $t('difficulty.expert') }}</span>
                                     <Switch v-model="searchDifficultyExpert" />
                                 </div>
                                 <div>
-                                    <span>XD</span>
+                                    <span>{{ $t('difficulty.xd') }}</span>
                                     <Switch v-model="searchDifficultyXD" />
                                 </div>
                             </div>
@@ -65,11 +65,11 @@
                                 @click.stop
                             >
                                 <div>
-                                    <span>Minimum difficulty</span>
+                                    <span>{{ $t('search.minimumDifficulty') }}</span>
                                     <input type="number" class="input" v-model="searchDifficultyFrom" />
                                 </div>
                                 <div>
-                                    <span>Maximum difficulty</span>
+                                    <span>{{ $t('search.maximumDifficulty') }}</span>
                                     <input type="number" class="input" v-model="searchDifficultyTo" />
                                 </div>
                             </div>
@@ -79,19 +79,19 @@
                             v-interactable
                             @click="searchShowExplicit = !searchShowExplicit"
                         >
-                            <span>Explicit</span>
+                            <span>{{ $t('search.explicit') }}</span>
                             <Switch v-model="searchShowExplicit" style="pointer-events: none" :mini="true" />
                         </button>
                         <button
                             class="button brand"
                             @click="loadResults"
                         >
-                            <span>Apply</span>
+                            <span>{{ $t('search.apply') }}</span>
                         </button>
                     </div>
 
                     <EmptyState
-                        label="No charts found. Try a different search query."
+                        :label="$t('search.noChartResults')"
                         icon="music-2"
                         v-if="results.length === 0"
                     />
@@ -106,7 +106,7 @@
                     class="p-10"
                 >
                     <EmptyState
-                        label="No playlists found. Try a different search query."
+                        :label="$t('search.noPlaylistResults')"
                         icon="album"
                     />
                 </div>
@@ -120,7 +120,7 @@
                     class="p-10"
                 >
                     <EmptyState
-                        label="No users found. Try a different search query."
+                        :label="$t('search.noUserResults')"
                         icon="user-3"
                     />
                 </div>
