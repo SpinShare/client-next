@@ -42,7 +42,17 @@
     "settings": "Settings"
   },
   "chart": {
-    "explicitLabel": "Explicit Content &ndash; Hover to reveal"
+    "explicitLabel": "Explicit Content &ndash; Hover to reveal",
+    "noDescription": "No description yet.",
+    "noPlaylists": "Not in any playlist yet.",
+    "noReviews": "No reviews yet.",
+    "noSpinPlays": "No SpinPlays yet.",
+    "statistics": {
+      "views": "Views",
+      "downloads": "Downloads",
+      "uploaded": "Uploaded",
+      "updated": "Updated"
+    }
   },
   "playlist": {
     "official": "Official",

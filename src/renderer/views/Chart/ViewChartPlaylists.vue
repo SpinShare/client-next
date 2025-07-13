@@ -11,7 +11,7 @@
     >
         <EmptyState
             v-if="playlists.length === 0"
-            label="No playlists yet."
+            :label="$t('chart.noPlaylists')"
             icon="album"
         />
         <PlaylistGrid v-else>

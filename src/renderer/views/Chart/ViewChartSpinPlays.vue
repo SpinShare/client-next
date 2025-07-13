@@ -11,7 +11,7 @@
     >
         <EmptyState
             v-if="spinPlays.length === 0"
-            label="No SpinPlays yet."
+            :label="$t('chart.noSpinPlays')"
             icon="youtube"
         />
         <SpinPlaysGrid v-else>

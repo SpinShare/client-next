@@ -8,7 +8,7 @@
             ></div>
             <div v-else>
                 <EmptyState
-                    label="No description yet."
+                    :label="$t('chart.noDescription')"
                     icon="quill-pen"
                 />
             </div>
@@ -33,16 +33,16 @@
 
             <div class="split">
                 <div class="item">
-                    <span class="label">Views</span>
+                    <span class="label">{{ $t('chart.statistics.views') }}</span>
                     <span class="number">{{ chart.views }}</span>
                 </div>
                 <div class="item">
-                    <span class="label">Downloads</span>
+                    <span class="label">{{ $t('chart.statistics.downloads') }}</span>
                     <span class="number">{{ chart.downloads }}</span>
                 </div>
             </div>
             <div class="item">
-                <span class="label">Uploaded</span>
+                <span class="label">{{ $t('chart.statistics.uploaded') }}</span>
                 <span class="time">{{ uploadDateRelative }}</span>
                 <span class="time-absolute">{{ uploadDateAbsolute }}</span>
             </div>
@@ -50,7 +50,7 @@
                 class="item"
                 v-if="chart.updateDate"
             >
-                <span class="label">Updated</span>
+                <span class="label">{{ $t('chart.statistics.updated') }}</span>
                 <span class="time">{{ updateDateRelative }}</span>
                 <span class="time-absolute">{{ updateDateAbsolute }}</span>
             </div>
