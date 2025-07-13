@@ -24,6 +24,9 @@ window.spshQueue.onQueueCountChange((queueCount) => {
 window.spshQueue.onItemChange((queueItem) => {
     mittInstance.emit('item-change', queueItem);
 });
+window.spshQueue.onItemAdd((queueItem) => {
+    mittInstance.emit('item-add', queueItem);
+});
 window.spshQueue.onQueueDone(() => {
     mittInstance.emit('queue-done');
 });

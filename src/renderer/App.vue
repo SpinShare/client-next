@@ -89,17 +89,22 @@ onMounted(async () => {
     });
 
     mitt.on('sfx-queue-done', async () => {
-        if(!(await settingsManager.get('sfxEnabled'))) return;
+        if(!(await settingsManager.get('downloadNotifications'))) return;
 
         await sfxQueueDone.value.play();
     });
     mitt.on('sfx-error', async () => {
-        if(!(await settingsManager.get('sfxEnabled'))) return;
+        if(!(await settingsManager.get('downloadNotifications'))) return;
 
         await sfxError.value.play();
     });
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
+    });
+    mitt.on('item-add', async () => {
+        if(await settingsManager.get('openDownloadsSidebar')) {
+            mitt.emit('queue-open');
+        }
     });
 
     updateManager.checkForUpdates();
@@ -112,5 +117,6 @@ onUnmounted(() => {
     mitt.off('sfx-queue-done');
     mitt.off('sfx-error');
     mitt.off('update-check-done');
+    mitt.off('item-add');
 });
 </script>

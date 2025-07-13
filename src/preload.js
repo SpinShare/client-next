@@ -47,6 +47,11 @@ contextBridge.exposeInMainWorld('spshQueue', {
         ipcRenderer.on('item-change', listener);
         return () => ipcRenderer.removeListener('item-change', listener);
     },
+    onItemAdd: (callback) => {
+        const listener = (_, queueItem) => callback(queueItem);
+        ipcRenderer.on('item-add', listener);
+        return () => ipcRenderer.removeListener('item-add', listener);
+    },
     onQueueDone: (callback) => {
         const listener = () => callback();
         ipcRenderer.on('queue-done', listener);

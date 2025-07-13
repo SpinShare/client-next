@@ -106,6 +106,8 @@ export class DownloadQueue extends EventEmitter {
             }
 
             try {
+                this.emit('item-add', nextItem);
+
                 // CHECK IF NEEDS TO BE DOWNLOADED
                 const chartItem = await this.apiClient.getChartDetail(nextItem.id);
                 const cacheItem = this.libraryManager.getUpdateHash(chartItem.fileReference);

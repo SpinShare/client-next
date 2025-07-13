@@ -224,6 +224,9 @@ app.whenReady().then(() => {
     downloadQueue.on('item-change', (queueItem) => {
         mainWindow.webContents.send('item-change', queueItem);
     });
+    downloadQueue.on('item-add', (queueItem) => {
+        mainWindow.webContents.send('item-add', queueItem);
+    });
     downloadQueue.on('queue-done', () => {
         mainWindow.webContents.send('queue-done');
     });
