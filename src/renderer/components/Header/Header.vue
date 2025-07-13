@@ -51,8 +51,8 @@ import AuthArea from '@/components/Header/AuthArea.vue';
 const router = useRouter();
 const route = useRoute();
 
-const searchType = ref(route.params.type || 'charts');
-const searchQuery = ref(route.params.query || '');
+const searchType = ref(route.query.type || 'charts');
+const searchQuery = ref(route.query.query || '');
 
 function handleBack() {
     router.go(-1);
@@ -61,7 +61,7 @@ function handleBack() {
 function handleSearch() {
     // Prevent empty searches
     if(searchQuery.value === '') return;
-    router.push(`/discover/search/${searchType.value}/${searchQuery.value}`);
+    router.push(`/discover/search?type=${searchType.value}&query=${encodeURIComponent(searchQuery.value)}`);
 }
 
 const hasHistory = computed(() => {

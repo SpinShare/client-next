@@ -148,8 +148,8 @@ import EmptyState from "@/components/EmptyState.vue";
 
 const api = inject('api');
 const route = useRoute();
-const searchType = computed(() => route.params.type);
-const searchQuery = computed(() => route.params.query);
+const searchType = computed(() => route.query.type);
+const searchQuery = computed(() => route.query.query);
 const searchShowExplicit = ref(true);
 const searchDifficultyEasy = ref(true);
 const searchDifficultyNormal = ref(true);
