@@ -60,6 +60,17 @@
       "errorServer": "Couldn't log you in. Please try again later."
     }
   },
+  "discover": {
+    "promos": {
+      "header": "Discover"
+    },
+    "featured": {
+      "header": "Featured",
+      "seeMore": "See more"
+    },
+    "previousPage": "Previous page",
+    "nextPage": "Next page"
+  },
   "chart": {
     "explicitLabel": "Explicit Content &ndash; Hover to reveal",
     "noDescription": "No description yet.",

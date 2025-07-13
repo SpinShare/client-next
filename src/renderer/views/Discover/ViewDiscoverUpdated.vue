@@ -24,14 +24,14 @@
                 v-interactable
             >
                 <Remixicon icon="arrow-left" />
-                <span>Previous page</span>
+                <span>{{ $t('discover.previousPage') }}</span>
             </button>
             <button
                 class="button"
                 @click="handleNext"
                 v-interactable
             >
-                <span>Next page</span>
+                <span>{{ $t('discover.nextPage') }}</span>
                 <Remixicon icon="arrow-right" />
             </button>
         </div>

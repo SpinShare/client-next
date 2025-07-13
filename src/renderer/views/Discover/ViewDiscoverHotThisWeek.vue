@@ -23,13 +23,13 @@
                 @click="handlePrevious"
             >
                 <Remixicon icon="arrow-left" />
-                <span>Previous page</span>
+                <span>{{ $t('discover.previousPage') }}</span>
             </button>
             <button
                 class="button"
                 @click="handleNext"
             >
-                <span>Next page</span>
+                <span>{{ $t('discover.nextPage') }}</span>
                 <Remixicon icon="arrow-right" />
             </button>
         </div>

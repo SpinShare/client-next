@@ -2,7 +2,7 @@
     <LayoutBase>
         <section class="page-discover">
             <div>
-                <SectionHeader title="Discover" />
+                <SectionHeader :title="$t('discover.promos.header')" />
                 <PromoGrid>
                     <template v-if="promos.length === 0">
                         <PromoItemPlaceholder />
@@ -19,14 +19,14 @@
             </div>
 
             <div>
-                <SectionHeader title="Featured">
+                <SectionHeader :title="$t('discover.featured.header')">
                     <RouterLink
                         v-interactable
                         class="button"
                         to="/playlist/144"
                     >
                         <Remixicon icon="disc" />
-                        <span>See more</span>
+                        <span>{{ $t('discover.featured.seeMore') }}</span>
                     </RouterLink>
                 </SectionHeader>
                 <ChartGrid>
