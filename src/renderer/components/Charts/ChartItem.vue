@@ -54,7 +54,7 @@
             class="explicit-label"
             v-if="isExplicit && !settingShowExplicit"
         >
-            Explicit Content &ndash; Hover to reveal
+            {{ $t('explicitLabel') }}
         </div>
     </RouterLink>
 </template>
