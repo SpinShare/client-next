@@ -164,7 +164,9 @@ import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
 import { onMounted, inject, ref, onUnmounted } from 'vue';
+import {useI18n} from "vue-i18n";
 
+const { locale } = useI18n({ useScope: 'global' });
 const externalApi = inject('externalApi');
 const settingsManager = inject('settingsManager');
 const updateManager = inject('updateManager');
@@ -224,6 +226,10 @@ async function handleCustomsDetect() {
 
 async function handleSave() {
     mitt.emit('save-settings', settings.value);
+
+    if(settings.value.language !== locale.value) {
+        locale.value = settings.value.language;
+    }
 
     // Required to lose the reference to the vue reactive state for ipc
     const serializedSettings = JSON.parse(JSON.stringify(settings.value));
