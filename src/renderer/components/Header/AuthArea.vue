@@ -7,7 +7,7 @@
             v-interactable
         >
             <Remixicon icon="key" />
-            <span>Login</span>
+            <span>{{ $t('header.auth.login') }}</span>
         </RouterLink>
 
         <template v-else>
@@ -24,7 +24,7 @@
                     @click="handleUpload"
                 >
                     <Remixicon icon="upload" />
-                    <span>Upload</span>
+                    <span>{{ $t('header.auth.upload') }}</span>
                 </button>
 
                 <button
@@ -41,7 +41,7 @@
                         :class="`connect-notification-popup`"
                     >
                         <header>
-                            <h1>Notifications</h1>
+                            <h1>{{ $t('header.auth.notifications.header') }}</h1>
 
                             <button
                                 class="button ghost"
@@ -53,7 +53,7 @@
                         </header>
 
                         <div class="notifications">
-                            <EmptyState label="No notifications" icon="notification" class="m-4" v-if="notifications.length === 0" />
+                            <EmptyState :label="$t('header.auth.notifications.noNotifications')" icon="notification" class="m-4" v-if="notifications.length === 0" />
 
                             <button
                                 class="item"
@@ -72,19 +72,19 @@
                                     v-if="notification.notificationType === NOTIFICATION_TYPE_NEWREVIEW"
                                 >
                                     <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
-                                    <p>{{ notification.connectedUser.username }} reviewed your chart {{ notification.connectedSong.title }}</p>
+                                    <p>{{ $t('header.auth.notifications.newReview', { username: notification.connectedUser.username, title: notification.connectedSong.title }) }}</p>
                                 </template>
                                 <template
                                     v-if="notification.notificationType === NOTIFICATION_TYPE_NEWSPINPLAY"
                                 >
                                     <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
-                                    <p><strong>{{ notification.connectedUser.username }}</strong> added a SpinPlay to your chart <strong>{{ notification.connectedSong.title }}</strong></p>
+                                    <p>{{ $t('header.auth.notifications.newSpinPlay', { username: notification.connectedUser.username, title: notification.connectedSong.title }) }}</p>
                                 </template>
                                 <template
                                     v-if="notification.notificationType === NOTIFICATION_TYPE_RECEIVEDCARD"
                                 >
                                     <div class="card-icon" :style="`background-image: url(${notification.connectedCard.icon})`"></div>
-                                    <p>You've received the profile card <strong>{{ notification.connectedCard.title }}</strong></p>
+                                    <p>{{ $t('header.auth.notifications.receivedCard', { card: notification.connectedCard.title }) }}</p>
                                 </template>
                             </button>
                         </div>
@@ -145,7 +145,7 @@
                                     icon="user"
                                     size="xl"
                                 />
-                                <span>Profile</span>
+                                <span>{{ $t('header.auth.profile') }}</span>
                             </RouterLink>
                             <RouterLink
                                 :to="`/user/${profile.id}/charts`"
@@ -156,7 +156,7 @@
                                     icon="music-2"
                                     size="xl"
                                 />
-                                <span>Charts</span>
+                                <span>{{ $t('header.auth.charts') }}</span>
                             </RouterLink>
                             <RouterLink
                                 :to="`/user/${profile.id}/reviews`"
@@ -167,7 +167,7 @@
                                     icon="award"
                                     size="xl"
                                 />
-                                <span>Reviews</span>
+                                <span>{{ $t('header.auth.reviews') }}</span>
                             </RouterLink>
                             <RouterLink
                                 :to="`/user/${profile.id}/playlists`"
@@ -178,7 +178,7 @@
                                     icon="album"
                                     size="xl"
                                 />
-                                <span>Playlists</span>
+                                <span>{{ $t('header.auth.playlists') }}</span>
                             </RouterLink>
                             <RouterLink
                                 :to="`/user/${profile.id}/spinplays`"
@@ -189,7 +189,7 @@
                                     icon="youtube"
                                     size="xl"
                                 />
-                                <span>SpinPlays</span>
+                                <span>{{ $t('header.auth.spinPlays') }}</span>
                             </RouterLink>
                         </nav>
                         <nav>
@@ -202,7 +202,7 @@
                                     icon="door-open"
                                     size="xl"
                                 />
-                                <span>Logout</span>
+                                <span>{{ $t('header.auth.logout') }}</span>
                             </button>
                         </nav>
                     </div>

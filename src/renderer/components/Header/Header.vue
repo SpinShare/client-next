@@ -22,16 +22,16 @@
                     v-interactable
                     v-model="searchType"
                 >
-                    <option value="charts">Charts</option>
-                    <option value="playlists">Playlists</option>
-                    <option value="users">Users</option>
+                    <option value="charts">{{ $t('header.search.type.charts') }}</option>
+                    <option value="playlists">{{ $t('header.search.type.playlists') }}</option>
+                    <option value="users">{{ $t('header.search.type.users') }}</option>
                 </select>
                 <input
                     v-interactable
                     type="search"
                     v-model="searchQuery"
                     @keyup.enter="handleSearch"
-                    placeholder="Search for a chart, charter, or playlist..."
+                    :placeholder="$t('header.search.placeholder')"
                 />
             </div>
         </div>

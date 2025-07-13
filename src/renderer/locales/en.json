@@ -1,4 +1,32 @@
 {
+  "header": {
+    "search": {
+      "type": {
+        "charts": "Charts",
+        "playlists": "Playlists",
+        "users": "Users"
+      },
+      "placeholder": "Search for a chart, charter, or playlist..."
+    },
+    "auth": {
+      "login": "Login",
+      "logout": "Logout",
+      "upload": "Upload",
+      "profile": "Profile",
+      "charts": "Charts",
+      "reviews": "Reviews",
+      "playlists": "Playlists",
+      "spinPlays": "SpinPlays",
+      "notifications": {
+        "header": "Notifications",
+        "noNotifications": "No notifications",
+        "newReview": "{username} reviewed your chart '{title}'",
+        "newSpinPlay": "{username} added a SpinPlay to your chart '{title}'",
+        "receivedCard": "You've received the profile card '{card}'"
+      }
+    }
+  },
+  "explicitLabel": "Explicit Content &ndash; Hover to reveal",
   "updateToast": {
     "header": "Update available",
     "body": "Update to the latest version to receive new features and bugfixes.",
