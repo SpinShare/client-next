@@ -24,8 +24,8 @@
                 class="info"
                 v-if="!mini"
             >
-                <div class="installation-status installed" v-if="cacheUpdateHash === updateHash">Installed</div>
-                <div class="installation-status update" v-if="cacheUpdateHash && cacheUpdateHash !== updateHash">Out of date</div>
+                <div class="installation-status installed" v-if="cacheUpdateHash === updateHash">{{ $t('chart.status.installed') }}</div>
+                <div class="installation-status update" v-if="cacheUpdateHash && cacheUpdateHash !== updateHash">{{ $t('chart.status.outOfDate') }}</div>
                 <div class="difficulties">
                     <div :class="`difficulty ${hasEasyDifficulty ? 'active' : ''}`">
                         <span>E</span>

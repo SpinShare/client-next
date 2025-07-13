@@ -18,7 +18,6 @@ import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Header from '@/components/Header/Header.vue';
 import { useStorage } from '@vueuse/core';
-import Loader from '@/components/Loader.vue';
 
 const mitt = inject('mitt');
 const cacheRebuildActive = ref(false);

@@ -23,8 +23,8 @@
                         <p>{{ chart.artist }} &bull; {{ chart.charter }}</p>
                     </div>
                     <div class="info">
-                        <div class="installation-status installed" v-if="cacheItem?.updateHash === chart.updateHash">Installed</div>
-                        <div class="installation-status update" v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash">Out of date</div>
+                        <div class="installation-status installed" v-if="cacheItem?.updateHash === chart.updateHash">{{ $t('chart.status.installed') }}</div>
+                        <div class="installation-status update" v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash">{{ $t('chart.status.outOfDate') }}</div>
                         <div class="difficulties">
                             <div :class="`difficulty ${chart.hasEasyDifficulty ? 'active' : ''}`">
                                 <span>E</span>
@@ -56,7 +56,7 @@
                             v-if="cacheItem"
                         >
                             <Remixicon icon="gamepad" />
-                            <span>Play</span>
+                            <span>{{ $t('chart.actions.play') }}</span>
                         </button>
                         <button
                             class="button brand"
@@ -64,7 +64,7 @@
                             v-interactable
                         >
                             <Remixicon icon="download" />
-                            <span>Add to queue</span>
+                            <span>{{ $t('chart.actions.addToQueue') }}</span>
                         </button>
                         <template v-if="chartPreview">
                             <button
@@ -117,19 +117,19 @@
                 <TabList>
                     <TabItemLink
                         :to="`/chart/${chartId}`"
-                        label="Detail"
+                        :label="$t('chart.tabs.detail')"
                     />
                     <TabItemLink
                         :to="`/chart/${chartId}/reviews`"
-                        label="Reviews"
+                        :label="$t('chart.tabs.reviews')"
                     />
                     <TabItemLink
                         :to="`/chart/${chartId}/playlists`"
-                        label="Playlists"
+                        :label="$t('chart.tabs.playlists')"
                     />
                     <TabItemLink
                         :to="`/chart/${chartId}/spinplays`"
-                        label="SpinPlays"
+                        :label="$t('chart.tabs.spinPlays')"
                     />
                 </TabList>
             </nav>
@@ -139,8 +139,8 @@
 
             <dialog class="play-dialog" ref="playDialog">
                 <section class="copy">
-                    <SectionHeader title="Play" />
-                    <p>Select a difficulty to start Spin Rhythm XD and immediately play <strong>{{ chart.title }}</strong>.</p>
+                    <SectionHeader :title="$t('chart.playDialog.header')" />
+                    <p v-html="$t('chart.playDialog.body', { title: chart.title })" />
                 </section>
 
                 <section class="options">
@@ -151,7 +151,7 @@
                         v-interactable
                     >
                         <span>{{ chart.easyDifficulty ?? "n/a" }}</span>
-                        <span>Easy</span>
+                        <span>{{ $t('chart.playDialog.easy') }}</span>
                     </button>
                     <button
                         class="button"
@@ -160,7 +160,7 @@
                         v-interactable
                     >
                         <span>{{ chart.normalDifficulty ?? "n/a" }}</span>
-                        <span>Normal</span>
+                        <span>{{ $t('chart.playDialog.normal') }}</span>
                     </button>
                     <button
                         class="button"
@@ -169,7 +169,7 @@
                         v-interactable
                     >
                         <span>{{ chart.hardDifficulty ?? "n/a" }}</span>
-                        <span>Hard</span>
+                        <span>{{ $t('chart.playDialog.hard') }}</span>
                     </button>
                     <button
                         class="button"
@@ -178,7 +178,7 @@
                         v-interactable
                     >
                         <span>{{ chart.expertDifficulty ?? "n/a" }}</span>
-                        <span>Expert</span>
+                        <span>{{ $t('chart.playDialog.expert') }}</span>
                     </button>
                     <button
                         class="button"
@@ -187,7 +187,7 @@
                         v-interactable
                     >
                         <span>{{ chart.XDDifficulty ?? "n/a" }}</span>
-                        <span>XD</span>
+                        <span>{{ $t('chart.playDialog.xd') }}</span>
                     </button>
                 </section>
 
@@ -198,7 +198,7 @@
                         v-interactable
                     >
                         <Remixicon icon="close" />
-                        <span>Close</span>
+                        <span>{{ $t('chart.playDialog.close') }}</span>
                     </button>
                 </section>
             </dialog>
@@ -225,7 +225,6 @@ const queue = inject('queue');
 const route = useRoute();
 const chartId = ref(route.params.chartId);
 const chart = ref(null);
-const cacheUpdateHash = ref(null);
 const cacheItem = ref(null);
 
 const chartPreview = ref(null);

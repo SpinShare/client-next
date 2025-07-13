@@ -4,22 +4,22 @@
             <TabList>
                 <TabItemLink
                     to="/discover/new/0"
-                    label="Newest"
+                    :label="$t('sidebar.newest')"
                     :active="route.fullPath.includes('new/')"
                 />
                 <TabItemLink
                     to="/discover/updated/0"
-                    label="Updated"
+                    :label="$t('sidebar.updated')"
                     :active="route.fullPath.includes('updated/')"
                 />
                 <TabItemLink
                     to="/discover/hotThisWeek/0"
-                    label="Hot this week"
+                    :label="$t('sidebar.hotThisWeek')"
                     :active="route.fullPath.includes('hotThisWeek/')"
                 />
                 <TabItemLink
                     to="/discover/hotThisMonth/0"
-                    label="Hot this month"
+                    :label="$t('sidebar.hotThisMonth')"
                     :active="route.fullPath.includes('hotThisMonth/')"
                 />
             </TabList>

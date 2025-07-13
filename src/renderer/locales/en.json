@@ -71,12 +71,47 @@
     "previousPage": "Previous page",
     "nextPage": "Next page"
   },
+  "user": {
+    "supporter": "Supporter",
+    "verified": "Verified",
+    "tabs": {
+      "detail": "Detail",
+      "charts": "Charts ({count})",
+      "reviews": "Reviews ({count})",
+      "playlists": "Playlists ({count})",
+      "spinPlays": "SpinPlays ({count})"
+    }
+  },
   "chart": {
     "explicitLabel": "Explicit Content &ndash; Hover to reveal",
     "noDescription": "No description yet.",
     "noPlaylists": "Not in any playlist yet.",
     "noReviews": "No reviews yet.",
     "noSpinPlays": "No SpinPlays yet.",
+    "status": {
+      "installed": "Installed",
+      "outOfDate": "Out of date"
+    },
+    "actions": {
+      "play": "Play",
+      "addToQueue": "Add to queue"
+    },
+    "tabs": {
+      "detail": "Detail",
+      "reviews": "Reviews",
+      "playlists": "Playlists",
+      "spinPlays": "SpinPlays"
+    },
+    "playDialog": {
+      "header": "Play",
+      "body": "Select a difficulty to start Spin Rhythm XD and immediately play <strong>{title}</strong>.",
+      "easy": "Easy",
+      "normal": "Normal",
+      "hard": "Hard",
+      "expert": "Expert",
+      "xd": "XD",
+      "close": "Close"
+    },
     "statistics": {
       "views": "Views",
       "downloads": "Downloads",

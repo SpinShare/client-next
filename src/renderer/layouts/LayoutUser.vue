@@ -34,7 +34,7 @@
                                     icon="heart"
                                     size="sm"
                                 />
-                                <span>Supporter</span>
+                                <span>{{ $t('user.supporter') }}</span>
                             </div>
                             <div
                                 class="badge-verified"
@@ -44,7 +44,7 @@
                                     icon="check"
                                     size="sm"
                                 />
-                                <span>Verified</span>
+                                <span>{{ $t('user.verified') }}</span>
                             </div>
                         </div>
                     </div>
@@ -76,23 +76,23 @@
                 <TabList>
                     <TabItemLink
                         :to="`/user/${userId}`"
-                        label="Detail"
+                        :label="$t('user.tabs.detail')"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/charts`"
-                        :label="`Charts (${user.songs})`"
+                        :label="$t('user.tabs.charts', {count: user.songs})"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/reviews`"
-                        :label="`Reviews (${user.reviews})`"
+                        :label="$t('user.tabs.reviews', {count: user.reviews})"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/playlists`"
-                        :label="`Playlists (${user.playlists})`"
+                        :label="$t('user.tabs.playlists', {count: user.playlists})"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/spinplays`"
-                        :label="`SpinPlays (${user.spinplays})`"
+                        :label="$t('user.tabs.spinPlays', {count: user.spinplays})"
                     />
                 </TabList>
             </nav>
