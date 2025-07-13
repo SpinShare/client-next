@@ -1,17 +1,17 @@
 <template>
     <section class="setup-general">
-        <SectionHeader title="General settings" />
+        <SectionHeader :title="$t('setup.game.header')" />
 
         <SettingsItem
-            label="Customs path"
-            description="Path to your custom charts folder"
+            :label="$t('settings.game.pathCustoms.label')"
+            :description="$t('settings.game.pathCustoms.description')"
             :two-line="true"
         >
             <input
                 v-interactable
                 class="input"
                 type="text"
-                placeholder="Not set"
+                :placeholder="$t('settings.game.pathCustoms.placeholder')"
                 v-model="settings.pathCustoms"
                 @change="handleSave"
             />
@@ -21,7 +21,7 @@
                 v-interactable
             >
                 <Remixicon icon="folder-open" />
-                <span>Select</span>
+                <span>{{ $t('settings.game.pathCustoms.select') }}</span>
             </button>
             <button
                 class="button"
@@ -29,11 +29,11 @@
                 v-interactable
             >
                 <Remixicon icon="brain" />
-                <span>Detect</span>
+                <span>{{ $t('settings.game.pathCustoms.detect') }}</span>
             </button>
         </SettingsItem>
 
-        <p class="tip">Tip: To store your custom charts in a different folder or on a different drive, you can add <code>custom_path "C:\YOUR_PATH"</code> to your steam launch options.</p>
+        <p class="tip" v-html="$t('setup.game.tip', {code: '<code>custom_path &quot;C:\\YOUR_PATH\&quot;</code>'})" />
     </section>
 </template>
 
@@ -74,6 +74,15 @@ async function handleCustomsDetect() {
 }
 </script>
 
+<style>
+.setup-general {
+    & code {
+        @apply text-xs font-bold p-1 py-0.5 bg-brand-800 text-brand-100 rounded inline-block;
+        transform: translateY(-2px);
+    }
+}
+</style>
+
 <style scoped>
 .setup-general {
     @apply flex flex-col gap-4;
@@ -84,11 +93,6 @@ async function handleCustomsDetect() {
         &.tip {
             @apply text-brand-700 dark:text-brand-300;
         }
-    }
-
-    & code {
-        @apply text-xs font-bold p-1 py-0.5 bg-brand-800 text-brand-100 rounded inline-block;
-        transform: translateY(-2px);
     }
 }
 </style>

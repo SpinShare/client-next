@@ -1,10 +1,10 @@
 <template>
     <LayoutBase>
         <section class="page-settings">
-            <SettingsSection label="General">
+            <SettingsSection :label="$t('settings.general.header')">
                 <SettingsItem
                     label="SpinShare Client Next"
-                    :description="`Version ${appVersion}`"
+                    :description="$t('settings.general.version', { version: appVersion })"
                 >
                     <button
                         class="button"
@@ -13,7 +13,7 @@
                         v-interactable
                     >
                         <Remixicon icon="refresh" />
-                        <span>Check for updates</span>
+                        <span>{{ $t('settings.general.checkForUpdates') }}</span>
                     </button>
                     <button
                         class="button brand"
@@ -22,23 +22,23 @@
                         v-interactable
                     >
                         <Remixicon icon="refresh" />
-                        <span>Get update</span>
+                        <span>{{ $t('settings.general.getUpdate') }}</span>
                     </button>
                 </SettingsItem>
-                <SettingsItem label="Theme">
+                <SettingsItem :label="$t('settings.general.theme.label')">
                     <select
                         class="select"
                         v-model="settings.theme"
                         @change="handleSave"
                         v-interactable
                     >
-                        <option value="dark">Dark Mode</option>
-                        <option value="light">Light Mode</option>
+                        <option value="dark">{{ $t('settings.general.theme.dark') }}</option>
+                        <option value="light">{{ $t('settings.general.theme.light') }}</option>
                     </select>
                 </SettingsItem>
                 <SettingsItem
-                    label="Language"
-                    description="Translated by SpinShare"
+                    :label="$t('settings.general.language.label')"
+                    :description="$t('settings.general.language.description')"
                 >
                     <select
                         class="select"
@@ -55,10 +55,10 @@
                 </SettingsItem>
             </SettingsSection>
 
-            <SettingsSection label="Interface">
+            <SettingsSection :label="$t('settings.interface.header')">
                 <SettingsItem
-                    label="Show explicit"
-                    description="Automatically unblur explicit charts metadata"
+                    :label="$t('settings.interface.showExplicit.label')"
+                    :description="$t('settings.interface.showExplicit.description')"
                 >
                     <Switch
                         v-model="settings.showExplicit"
@@ -66,8 +66,8 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Download notifications"
-                    description="Notify when a chart was downloaded or the queue finished"
+                    :label="$t('settings.interface.downloadNotifications.label')"
+                    :description="$t('settings.interface.downloadNotifications.description')"
                 >
                     <Switch
                         v-model="settings.downloadNotifications"
@@ -75,8 +75,8 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Open download queue"
-                    description="Automatically open the download queue whenever a new chart has been added to the queue"
+                    :label="$t('settings.interface.openDownloadQueue.label')"
+                    :description="$t('settings.interface.openDownloadQueue.description')"
                 >
                     <Switch
                         v-model="settings.openDownloadsSidebar"
@@ -84,8 +84,8 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Sound effects enabled"
-                    description="Plays UI sound effects"
+                    :label="$t('settings.interface.sfxEnabled.label')"
+                    :description="$t('settings.interface.sfxEnabled.description')"
                 >
                     <Switch
                         v-model="settings.sfxEnabled"
@@ -93,8 +93,8 @@
                     />
                 </SettingsItem>
                 <SettingsItem
-                    label="Menu music enabled"
-                    description="Plays menu music"
+                    :label="$t('settings.interface.musicEnabled.label')"
+                    :description="$t('settings.interface.musicEnabled.description')"
                 >
                     <Switch
                         v-model="settings.musicEnabled"
@@ -104,12 +104,12 @@
             </SettingsSection>
 
             <SettingsSection
-                label="Account"
+                :label="$t('settings.account.header')"
                 v-if="isLoggedIn"
             >
                 <SettingsItem
-                    label="Logout"
-                    description="After logging out, you should also remove access to 'SpinShare Next' on spinsha.re"
+                    :label="$t('settings.account.logout.label')"
+                    :description="$t('settings.account.logout.description')"
                 >
                     <button
                         class="button"
@@ -117,21 +117,21 @@
                         v-interactable
                     >
                         <Remixicon icon="door-open" />
-                        <span>Logout</span>
+                        <span>{{ $t('settings.account.logout.logout') }}</span>
                     </button>
                 </SettingsItem>
             </SettingsSection>
 
-            <SettingsSection label="Game">
+            <SettingsSection :label="$t('settings.game.header')">
                 <SettingsItem
-                    label="Customs path"
-                    description="Path to your custom charts folder"
+                    :label="$t('settings.game.pathCustoms.label')"
+                    :description="$t('settings.game.pathCustoms.description')"
                 >
                     <input
                         v-interactable
                         class="input"
                         type="text"
-                        placeholder="Not set"
+                        :placeholder="$t('settings.game.pathCustoms.placeholder')"
                         v-model="settings.pathCustoms"
                         @change="handleSave"
                     />
@@ -141,7 +141,7 @@
                         v-interactable
                     >
                         <Remixicon icon="folder-open" />
-                        <span>Select</span>
+                        <span>{{ $t('settings.game.pathCustoms.select') }}</span>
                     </button>
                     <button
                         class="button"
@@ -149,7 +149,7 @@
                         v-interactable
                     >
                         <Remixicon icon="brain" />
-                        <span>Detect</span>
+                        <span>{{ $t('settings.game.pathCustoms.detect') }}</span>
                     </button>
                 </SettingsItem>
             </SettingsSection>

@@ -3,7 +3,7 @@
         <div class="logo">
             <SpinShareLogo />
         </div>
-        <p>Thank you for downloading the SpinShare desktop client! Before you can begin downloading charts from the SpinShare community, we need to go through our initial setup.</p>
+        <p>{{ $t('setup.introduction.body') }}</p>
     </section>
 </template>
 

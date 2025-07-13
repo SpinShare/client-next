@@ -1,10 +1,10 @@
 <template>
     <section class="setup-cache">
-        <SectionHeader title="Library cache" />
-        <p>To easily display whether you already have a chart installed and whether an update is available, a cache needs to be build.</p>
-        <p>This cache goes through your games custom charts folder and creates a smaller text file with all existing charts, it also creates a small thumbnail of the album art so your browsing experience is more stable, even with many charts installed.</p>
-        <p>If you did not install any Spin Rhythm XD custom charts yet, this step will be instant. If you have a very large library, it may take up to a minute.</p>
-        <p class="tip">Tip: You can always re-analyze your library on the library tab.</p>
+        <SectionHeader :title="$t('setup.cache.header')" />
+        <p>{{ $t('setup.cache.body') }}</p>
+        <p>{{ $t('setup.cache.explanation') }}</p>
+        <p>{{ $t('setup.cache.timeNeeded') }}</p>
+        <p class="tip">{{ $t('setup.cache.tip') }}</p>
 
         <button
             class="button success"
@@ -12,7 +12,7 @@
             v-if="cacheDone"
         >
             <Remixicon icon="check" />
-            <span>Analyzation done!</span>
+            <span>{{ $t('setup.cache.done') }}</span>
         </button>
         <button
             @click="handleAnalyze"
@@ -20,7 +20,7 @@
             v-else
         >
             <Remixicon icon="refresh" />
-            <span>Analyze your library</span>
+            <span>{{ $t('setup.cache.analyze') }}</span>
         </button>
     </section>
 </template>

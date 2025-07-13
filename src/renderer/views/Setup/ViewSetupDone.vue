@@ -1,9 +1,9 @@
 <template>
     <section class="setup-done">
-        <SectionHeader title="We're done!" />
-        <p>You have now set up the SpinShare desktop client. You're only a click away from a library of thousands of custom created charts for Spin Rhythm XD.</p>
-        <p class="tip">Tip: Click on the top right corner to log into your account. Logging in lets you review charts and add them to playlists comfortably without using the website. In the future, you'll also be able to upload your own custom charts.</p>
-        <p class="mt-4">But for now, let's enter the <strong>rhythm dimension</strong>!</p>
+        <SectionHeader :title="$t('setup.done.header')" />
+        <p>{{ $t('setup.done.body') }}</p>
+        <p class="tip">{{ $t('setup.done.tip') }}</p>
+        <p class="mt-4" v-html="$t('setup.done.welcome')" />
     </section>
 </template>
 

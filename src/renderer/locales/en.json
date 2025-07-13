@@ -155,5 +155,90 @@
       "get": "Get update",
       "later": "Later"
     }
+  },
+  "settings": {
+    "general": {
+      "header": "General",
+      "version": "Version {version}",
+      "checkForUpdates": "Check for updates",
+      "getUpdate": "Get update",
+      "theme": {
+        "label": "Theme",
+        "dark": "Dark Mode",
+        "light": "Light Mode"
+      },
+      "language": {
+        "label": "Language",
+        "description": "Translated by SpinShare"
+      }
+    },
+    "interface": {
+      "header": "Interface",
+      "showExplicit": {
+        "label": "Show explicit",
+        "description": "Automatically unblur explicit charts metadata"
+      },
+      "downloadNotifications": {
+        "label": "Download notifications",
+        "description": "Notify when a chart was downloaded or the queue finished"
+      },
+      "openDownloadQueue": {
+        "label": "Open download queue",
+        "description": "Automatically open the download queue whenever a new chart has been added to the queue"
+      },
+      "sfxEnabled": {
+        "label": "Sound effects enabled",
+        "description": "Plays UI sound effects"
+      },
+      "musicEnabled": {
+        "label": "Menu music enabled",
+        "description": "Plays menu music"
+      }
+    },
+    "account": {
+      "header": "Account",
+      "logout": {
+        "header": "Logout",
+        "description": "After logging out, you should also remove access to 'SpinShare Next' on spinsha.re",
+        "logout": "Logout"
+      }
+    },
+    "game": {
+      "header": "Game",
+      "pathCustoms": {
+        "label": "Customs path",
+        "description": "Path to your custom charts folder",
+        "placeholder": "Not set yet",
+        "select": "Select",
+        "detect": "Detect"
+      }
+    }
+  },
+  "setup": {
+    "introduction": {
+      "body": "Thank you for downloading the SpinShare desktop client! Before you can begin downloading charts from the SpinShare community, we need to go through our initial setup."
+    },
+    "general": {
+      "header": "General settings"
+    },
+    "game": {
+      "header": "Game settings",
+      "tip": "Tip: To store your custom charts in a different folder or on a different drive, you can add {code} to your steam launch options."
+    },
+    "cache": {
+      "header": "Library cache",
+      "body": "To easily display whether you already have a chart installed and whether an update is available, a cache needs to be build.",
+      "explanation": "This cache goes through your games custom charts folder and creates a smaller text file with all existing charts, it also creates a small thumbnail of the album art so your browsing experience is more stable, even with many charts installed.",
+      "timeNeeded": "If you did not install any Spin Rhythm XD custom charts yet, this step will be instant. If you have a very large library, it may take up to a minute.",
+      "tip": "Tip: You can always re-analyze your library on the library tab.",
+      "analyze": "Analyze your library",
+      "done": "Good to go!"
+    },
+    "done": {
+      "header": "We're done!",
+      "body": "You have now set up the SpinShare desktop client. You're only a click away from a library of thousands of custom created charts for Spin Rhythm XD.",
+      "tip": "Tip: Click on the top right corner to log into your account. Logging in lets you review charts and add them to playlists comfortably without using the website. In the future, you'll also be able to upload your own custom charts.",
+      "welcome": "But for now, let's enter the <strong>rhythm dimension</strong>!"
+    }
   }
 }

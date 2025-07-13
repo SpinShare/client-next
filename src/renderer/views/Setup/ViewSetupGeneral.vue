@@ -1,21 +1,21 @@
 <template>
     <section class="setup-general">
-        <SectionHeader title="General settings" />
+        <SectionHeader :title="$t('setup.general.header')" />
 
-        <SettingsItem label="Theme">
+        <SettingsItem :label="$t('settings.general.theme.label')">
             <select
                 class="select"
                 v-model="settings.theme"
                 @change="handleSave"
                 v-interactable
             >
-                <option value="dark">Dark Mode</option>
-                <option value="light">Light Mode</option>
+                <option value="dark">{{ $t('settings.general.theme.dark') }}</option>
+                <option value="light">{{ $t('settings.general.theme.light') }}</option>
             </select>
         </SettingsItem>
         <SettingsItem
-            label="Language"
-            description="Translated by SpinShare"
+            :label="$t('settings.general.language.label')"
+            :description="$t('settings.general.language.description')"
         >
             <select
                 class="select"
@@ -31,8 +31,8 @@
             </select>
         </SettingsItem>
         <SettingsItem
-            label="Show explicit"
-            description="Automatically unblur explicit charts metadata"
+            :label="$t('settings.interface.showExplicit.label')"
+            :description="$t('settings.interface.showExplicit.description')"
         >
             <Switch
                 v-model="settings.showExplicit"
@@ -40,8 +40,8 @@
             />
         </SettingsItem>
         <SettingsItem
-            label="Sound effects enabled"
-            description="Plays UI sound effects"
+            :label="$t('settings.interface.sfxEnabled.label')"
+            :description="$t('settings.interface.sfxEnabled.description')"
         >
             <Switch
                 v-model="settings.sfxEnabled"
@@ -49,8 +49,8 @@
             />
         </SettingsItem>
         <SettingsItem
-            label="Menu music enabled"
-            description="Plays menu music"
+            :label="$t('settings.interface.musicEnabled.label')"
+            :description="$t('settings.interface.musicEnabled.description')"
         >
             <Switch
                 v-model="settings.musicEnabled"
