@@ -69,7 +69,7 @@ function handleClick() {
             break;
         case 2:
             // Search Deeplink
-            // TODO
+            router.push(`/discover/search?type=charts&query=${encodeURIComponent(props.button.data)}`);
             break;
         case 3:
             // External
