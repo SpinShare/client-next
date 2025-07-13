@@ -12,6 +12,12 @@ export class UpdateManager extends EventEmitter {
     async checkForUpdates() {
         const response = await fetch(this.url);
         const data = await response.json();
+
+        // Failsafe if we get rate-limited or Github is down
+        if(!response.ok) {
+            return false;
+        }
+
         const latestRelease = data.find(r => r.prerelease === false) || null;
         const hasNewRelease = latestRelease?.name?.includes(app.getVersion()) || false;
 
