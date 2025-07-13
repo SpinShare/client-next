@@ -26,7 +26,32 @@
       }
     }
   },
-  "explicitLabel": "Explicit Content &ndash; Hover to reveal",
+  "sidebar": {
+    "frontpage": "Frontpage",
+    "newest": "Newest",
+    "updated": "Updated",
+    "hotThisWeek": "Hot this week",
+    "hotThisMonth": "Hot this month",
+    "library": "Library",
+    "toggleSidebar": "Toggle Sidebar",
+    "downloadQueue": {
+      "downloads": "Downloads",
+      "header": "Download Queue ({count})",
+      "noDownloads": "No downloads queued."
+    },
+    "settings": "Settings"
+  },
+  "chart": {
+    "explicitLabel": "Explicit Content &ndash; Hover to reveal"
+  },
+  "playlist": {
+    "official": "Official",
+    "count": "{count} charts"
+  },
+  "review": {
+    "noComment": "No comment.",
+    "recommended": "Recommended"
+  },
   "updateToast": {
     "header": "Update available",
     "body": "Update to the latest version to receive new features and bugfixes.",

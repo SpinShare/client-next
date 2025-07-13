@@ -14,7 +14,7 @@
             icon="sidebar-fold"
             size="xl"
         />
-        <span class="label">Toggle Sidebar</span>
+        <span class="label">{{ $t('sidebar.toggleSidebar') }}</span>
     </button>
 </template>
 

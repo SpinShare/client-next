@@ -1,6 +1,6 @@
 <template>
     <SidebarItemButton
-        label="Downloads"
+        :label="$t('sidebar.downloadQueue.downloads')"
         icon="download"
         :expanded="expanded"
         :active="isActive"
@@ -12,7 +12,7 @@
         :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
         v-if="isActive"
     >
-        <SectionHeader :title="`Download Queue (${pendingItems})`">
+        <SectionHeader :title="$t('sidebar.downloadQueue.header', { count: pendingItems })">
             <button
                 class="button ghost"
                 @click="handleClearDone"
@@ -42,7 +42,7 @@
         </div>
         <EmptyState
             class="m-5 mt-0"
-            label="No downloads queued."
+            :label="$t('sidebar.downloadQueue.noDownloads')"
             icon="music-2"
             v-else
         />

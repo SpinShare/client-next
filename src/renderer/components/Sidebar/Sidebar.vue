@@ -3,41 +3,41 @@
         <nav>
             <SidebarItemLink
                 to="/"
-                label="Frontpage"
+                :label="$t('sidebar.frontpage')"
                 icon="dashboard"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/new/0"
-                label="Newest"
+                :label="$t('sidebar.newest')"
                 icon="history"
                 :active="route.fullPath.includes('new/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/updated/0"
-                label="Updated"
+                :label="$t('sidebar.updated')"
                 icon="loop-left"
                 :active="route.fullPath.includes('updated/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/hotThisWeek/0"
-                label="Hot this week"
+                :label="$t('sidebar.hotThisWeek')"
                 icon="fire"
                 :active="route.fullPath.includes('hotThisWeek/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/discover/hotThisMonth/0"
-                label="Hot this month"
+                :label="$t('sidebar.hotThisMonth')"
                 icon="fire"
                 :active="route.fullPath.includes('hotThisMonth/')"
                 :expanded="expanded"
             />
             <SidebarItemLink
                 to="/library"
-                label="Library"
+                :label="$t('sidebar.library')"
                 icon="book-shelf"
                 :expanded="expanded"
             />
@@ -48,7 +48,7 @@
             <SidebarDownloadQueue :expanded="expanded" />
             <SidebarItemLink
                 to="/settings"
-                label="Settings"
+                :label="$t('sidebar.settings')"
                 icon="settings-2"
                 :expanded="expanded"
             />
