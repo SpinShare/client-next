@@ -118,6 +118,7 @@ contextBridge.exposeInMainWorld('spshConnect', {
 contextBridge.exposeInMainWorld('spshExternalApi', {
     openUrl: async (url) => ipcRenderer.invoke('open-url', url),
     openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
+    selectFolder: async (folderPath) => ipcRenderer.invoke('select-folder', folderPath),
 });
 
 contextBridge.exposeInMainWorld('spshDeepLink', {

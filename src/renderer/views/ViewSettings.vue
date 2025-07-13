@@ -210,7 +210,11 @@ async function handleLogout() {
 }
 
 async function handleCustomsSelect() {
-    // TODO
+    const folderPath = await externalApi.selectFolder(settings.value.pathCustoms);
+    if(folderPath) {
+        settings.value.pathCustoms = folderPath;
+        await handleSave();
+    }
 }
 
 async function handleCustomsDetect() {

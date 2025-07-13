@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { SpinShareClient } from '@spinshare/api-js';
@@ -260,6 +260,21 @@ app.whenReady().then(() => {
         } catch (error) {
             console.error('Error opening folder:', error);
             return { success: false, error: error.message };
+        }
+    });
+    ipcMain.handle('select-folder', async (event, folderPath) => {
+        try {
+            const selectedFolderPath = await dialog.showOpenDialog({
+                properties: ['openDirectory'],
+                defaultPath: folderPath || app.getPath('home'),
+                title: 'Select folder',
+                message: 'Select the folder to open',
+                buttonLabel: 'Open',
+            });
+            return selectedFolderPath.filePaths[0] || null;
+        } catch (error) {
+            console.error('Error selecting folder:', error);
+            return null;
         }
     });
 

@@ -44,6 +44,7 @@ import { onMounted, inject, ref } from 'vue';
 import Remixicon from "@/components/Remixicon.vue";
 
 const settingsManager = inject('settingsManager');
+const externalApi = inject('externalApi');
 const settings = ref({});
 const mitt = inject('mitt');
 
@@ -57,6 +58,19 @@ async function handleSave() {
     // Required to lose the reference to the vue reactive state for ipc
     const serializedSettings = JSON.parse(JSON.stringify(settings.value));
     await settingsManager.saveAll(serializedSettings);
+}
+
+async function handleCustomsSelect() {
+    const folderPath = await externalApi.selectFolder(settings.value.pathCustoms);
+    if(folderPath) {
+        settings.value.pathCustoms = folderPath;
+        await handleSave();
+    }
+}
+
+async function handleCustomsDetect() {
+    settings.value.pathCustoms = await settingsManager.getDefaultCustomsPath();
+    await handleSave();
 }
 </script>
 
