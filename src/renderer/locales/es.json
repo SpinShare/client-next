@@ -1,0 +1,244 @@
+{
+  "header": {
+    "search": {
+      "type": {
+        "charts": "",
+        "playlists": "",
+        "users": ""
+      },
+      "placeholder": ""
+    },
+    "auth": {
+      "login": "",
+      "logout": "",
+      "upload": "",
+      "profile": "",
+      "charts": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": "",
+      "notifications": {
+        "header": "",
+        "noNotifications": "",
+        "newReview": "",
+        "newSpinPlay": "",
+        "receivedCard": ""
+      }
+    }
+  },
+  "sidebar": {
+    "frontpage": "",
+    "newest": "",
+    "updated": "",
+    "hotThisWeek": "",
+    "hotThisMonth": "",
+    "library": "",
+    "toggleSidebar": "",
+    "downloadQueue": {
+      "downloads": "",
+      "header": "",
+      "noDownloads": ""
+    },
+    "settings": ""
+  },
+  "connect": {
+    "login": {
+      "header": "",
+      "body": ""
+    },
+    "code": {
+      "header": "",
+      "body": "",
+      "link_label": ""
+    },
+    "input": {
+      "header": "",
+      "body": "",
+      "placeholder": "",
+      "login": "",
+      "errorIncorrect": "",
+      "errorServer": ""
+    }
+  },
+  "discover": {
+    "promos": {
+      "header": ""
+    },
+    "featured": {
+      "header": "",
+      "seeMore": ""
+    },
+    "previousPage": "",
+    "nextPage": ""
+  },
+  "user": {
+    "supporter": "",
+    "verified": "",
+    "tabs": {
+      "detail": "",
+      "charts": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": ""
+    },
+    "noCards": "",
+    "noCharts": "",
+    "noReviews": "",
+    "noSpinPlays": ""
+  },
+  "chart": {
+    "explicitLabel": "",
+    "noDescription": "",
+    "noPlaylists": "",
+    "noReviews": "",
+    "noSpinPlays": "",
+    "status": {
+      "installed": "",
+      "outOfDate": ""
+    },
+    "play": "",
+    "addToQueue": "",
+    "tabs": {
+      "detail": "",
+      "reviews": "",
+      "playlists": "",
+      "spinPlays": ""
+    },
+    "playDialog": {
+      "header": "",
+      "body": "",
+      "close": ""
+    },
+    "statistics": {
+      "views": "",
+      "downloads": "",
+      "uploaded": "",
+      "updated": ""
+    }
+  },
+  "playlist": {
+    "official": "",
+    "count": "",
+    "addToQueue": "",
+    "withChartsBy": ""
+  },
+  "review": {
+    "noComment": "",
+    "recommended": ""
+  },
+  "search": {
+    "minimumDifficulty": "",
+    "maximumDifficulty": "",
+    "explicit": "",
+    "apply": "",
+    "noChartResults": "",
+    "noPlaylistResults": "",
+    "noUserResults": ""
+  },
+  "difficulty": {
+    "easy": "",
+    "normal": "",
+    "hard": "",
+    "expert": "",
+    "xd": ""
+  },
+  "library": {
+    "header": "",
+    "open": "",
+    "rebuild": "",
+    "noCharts": ""
+  },
+  "updateToast": {
+    "header": "",
+    "body": "",
+    "actions": {
+      "get": "",
+      "later": ""
+    }
+  },
+  "settings": {
+    "general": {
+      "header": "",
+      "version": "",
+      "checkForUpdates": "",
+      "getUpdate": "",
+      "theme": {
+        "label": "",
+        "dark": "",
+        "light": ""
+      },
+      "language": {
+        "label": "",
+        "description": ""
+      }
+    },
+    "interface": {
+      "header": "",
+      "showExplicit": {
+        "label": "",
+        "description": ""
+      },
+      "downloadNotifications": {
+        "label": "",
+        "description": ""
+      },
+      "openDownloadQueue": {
+        "label": "",
+        "description": ""
+      },
+      "sfxEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "musicEnabled": {
+        "label": "",
+        "description": ""
+      }
+    },
+    "account": {
+      "header": "",
+      "logout": {
+        "label": "",
+        "description": "",
+        "logout": ""
+      }
+    },
+    "game": {
+      "header": "",
+      "pathCustoms": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "detect": ""
+      }
+    }
+  },
+  "setup": {
+    "introduction": {
+      "body": ""
+    },
+    "general": {
+      "header": ""
+    },
+    "game": {
+      "header": "",
+      "tip": ""
+    },
+    "cache": {
+      "header": "",
+      "body": "",
+      "explanation": "",
+      "timeNeeded": "",
+      "tip": "",
+      "analyze": "",
+      "done": ""
+    },
+    "done": {
+      "header": "",
+      "body": "",
+      "tip": "",
+      "welcome": ""
+    }
+  }
+}
