@@ -20,7 +20,7 @@
                         filled
                         size="sm"
                     />
-                    <span>Official</span>
+                    <span>{{ $t('playlist.official') }}</span>
                 </div>
             </h1>
             <div class="additionals">
@@ -29,7 +29,7 @@
                         icon="music-2"
                         filled
                     />
-                    <span>{{ songs }} charts</span>
+                    <span>{{ $t('playlist.count', { count: songs }) }}</span>
                 </div>
                 <UserTooltip
                     :label="`@${user.username}`"
