@@ -166,8 +166,9 @@ onMounted(async () => {
     }
 
     cacheUpdateHash.value = await libraryManager.getUpdateHash(props.fileReference);
-    mitt.on('item-change', async () => {
-        cacheUpdateHash.value = await libraryManager.getUpdateHash(chart.value.fileReference);
+    mitt.on('item-change', async (queueItem) => {
+        if(queueItem.id !== props.id) return;
+        cacheUpdateHash.value = await libraryManager.getUpdateHash(queueItem.fileReference);
     });
 });
 

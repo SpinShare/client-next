@@ -237,8 +237,9 @@ const playDialog = ref(null);
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
     cacheItem.value = await libraryManager.get(chart.value.fileReference);
-    mitt.on('item-change', async () => {
-        cacheItem.value = await libraryManager.get(chart.value.fileReference);
+    mitt.on('item-change', async (queueItem) => {
+        if(queueItem.id !== chart.value.id) return;
+        cacheItem.value = await libraryManager.get(queueItem.fileReference);
     });
 });
 
