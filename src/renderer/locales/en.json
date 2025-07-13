@@ -1,0 +1,10 @@
+{
+  "updateToast": {
+    "header": "Update available",
+    "body": "Update to the latest version to receive new features and bugfixes.",
+    "actions": {
+      "get": "Get update",
+      "later": "Later"
+    }
+  }
+}
