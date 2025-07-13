@@ -87,7 +87,7 @@
     "noSpinPlays": "No SpinPlays uploaded yet."
   },
   "chart": {
-    "explicitLabel": "Explicit Content &ndash; Hover to reveal",
+    "explicitLabel": "Explicit Content – Hover to reveal",
     "noDescription": "No description yet.",
     "noPlaylists": "Not in any playlist yet.",
     "noReviews": "No reviews yet.",
@@ -198,7 +198,7 @@
     "account": {
       "header": "Account",
       "logout": {
-        "header": "Logout",
+        "label": "Logout",
         "description": "After logging out, you should also remove access to 'SpinShare Next' on spinsha.re",
         "logout": "Logout"
       }

@@ -191,6 +191,9 @@ async function loadResults() {
             break;
     }
 
+    // Maximum 500 results
+    results.value = results.value.slice(0, 500);
+
     isLoading.value = false;
 }
 
