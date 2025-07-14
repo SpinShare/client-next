@@ -26,7 +26,7 @@ npm run start
 ### Building
 
 ```
-npm run package
+npm run make
 ```
 
 ### Documentation
@@ -36,4 +36,6 @@ npm run package
 
 ### Update translations
 
-TODO
+For translations, we are using *Crowdin*, please join our Discord if you would like to contribute.
+
+The files are stored in `src/renderer/locales`, `en.json` is the base language.
