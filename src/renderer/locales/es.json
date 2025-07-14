@@ -2,78 +2,78 @@
   "header": {
     "search": {
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Canciones",
+        "playlists": "Listas de reproducción",
+        "users": "Usuarios"
       },
-      "placeholder": ""
+      "placeholder": "Busca una canción, usuario o lista de reproducción..."
     },
     "auth": {
-      "login": "",
-      "logout": "",
-      "upload": "",
-      "profile": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": "",
+      "login": "Ingresar",
+      "logout": "Salir",
+      "upload": "Subir",
+      "profile": "Perfil",
+      "charts": "Canciones",
+      "reviews": "Reseñas",
+      "playlists": "Listas de reproducción",
+      "spinPlays": "SpinPlays",
       "notifications": {
-        "header": "",
-        "noNotifications": "",
-        "newReview": "",
-        "newSpinPlay": "",
-        "receivedCard": ""
+        "header": "Notificaciones",
+        "noNotifications": "No hay notificaciones",
+        "newReview": "{username} reseñó tu canción '{title}'",
+        "newSpinPlay": "{username} agregó un SpinPlay a tu canción '{title}'",
+        "receivedCard": "Has recibido la tarjeta de perfil '{card}'"
       }
     }
   },
   "sidebar": {
-    "frontpage": "",
-    "newest": "",
-    "updated": "",
-    "hotThisWeek": "",
-    "hotThisMonth": "",
-    "library": "",
-    "toggleSidebar": "",
+    "frontpage": "Portada",
+    "newest": "Más recientes",
+    "updated": "Actualizados",
+    "hotThisWeek": "De moda esta semana",
+    "hotThisMonth": "De moda este mes",
+    "library": "Biblioteca",
+    "toggleSidebar": "Alternar Barra Lateral",
     "downloadQueue": {
-      "downloads": "",
-      "header": "",
-      "noDownloads": ""
+      "downloads": "Descargas",
+      "header": "Cola de descarga ({count})",
+      "noDownloads": "No hay descargas en cola."
     },
-    "settings": ""
+    "settings": "Configuración"
   },
   "connect": {
     "login": {
-      "header": "",
-      "body": ""
+      "header": "Ingresa a tu cuenta",
+      "body": "Ve a {link} e ingresa a tu cuenta."
     },
     "code": {
-      "header": "",
-      "body": "",
-      "link_label": ""
+      "header": "Encuentra tu código de conexión",
+      "body": "Haz clic en {link} o haz clic en tu foto de perfil en la parte superior derecha y ve a <strong>Settings</strong>. Ve a la pestaña <strong>Connect</strong> y encuentra tu código de conexión.",
+      "link_label": "aquí"
     },
     "input": {
-      "header": "",
-      "body": "",
-      "placeholder": "",
-      "login": "",
-      "errorIncorrect": "",
-      "errorServer": ""
+      "header": "Introduzca su código de conexión",
+      "body": "Introduzca su código de conexión abajo y haga clic en <strong>Ingresa a tu cuenta</strong>.",
+      "placeholder": "Código de conexión...",
+      "login": "Ingresa a tu cuenta",
+      "errorIncorrect": "Tu código de conexión no es correcto. Por favor, inténtalo de nuevo.",
+      "errorServer": "No se pudo iniciar sesión. Por favor, inténtalo de nuevo más tarde."
     }
   },
   "discover": {
     "promos": {
-      "header": ""
+      "header": "Descubre"
     },
     "featured": {
-      "header": "",
-      "seeMore": ""
+      "header": "Destacados",
+      "seeMore": "Ver más"
     },
-    "previousPage": "",
-    "nextPage": ""
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente"
   },
   "user": {
-    "supporter": "",
-    "verified": "",
+    "supporter": "Donador",
+    "verified": "Verificado",
     "tabs": {
       "detail": "",
       "charts": "",
