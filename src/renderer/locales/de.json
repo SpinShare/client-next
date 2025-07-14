@@ -228,9 +228,9 @@
     "cache": {
       "header": "Sammlungs-Cache",
       "body": "Um schnell und einfach zu erkennen, ob du eine Chart bereits heruntergeladen hast oder ob sie veraltet ist, müssen wir einen Cache erstellen.",
-      "explanation": "Dieser Cache geht durch deinen Spieleordner und erstellt eine kleine Textdatei mit allen installierten Charts. Er erstellt auch ein kleines Thumbnail des Covers, damit dein Client auch mit vielen Charts schnell und ressourcenschonend bleibt.",
-      "timeNeeded": "Wenn du noch keine Spin Rhythm XD Charts installiert hast, wird dies nicht einmal eine Sekunde benötigen. Wenn du eine größere Sammlung hast, kann dieser Schritt ein bis zwei Minuten dauern.",
-      "tip": "Tipp: Du kannst deine Sammlung jederzeit erneut analysieren.",
+      "explanation": "",
+      "timeNeeded": "",
+      "tip": "",
       "analyze": "Sammlung analysieren",
       "done": "Fertig!"
     },
