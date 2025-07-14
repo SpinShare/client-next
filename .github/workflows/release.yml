@@ -10,6 +10,7 @@ on:
     paths-ignore:
       - 'docs/**'
       - '**/*.md'
+      - 'src/renderer/locales/**'
 
 jobs:
   build:
