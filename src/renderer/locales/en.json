@@ -137,7 +137,7 @@
     "overlay": {
       "header": "Add/Edit your review",
       "commentPlaceholder": "Your comment here...",
-      "recommendedLabel": "Do you recommend this chart?",
+      "recommendedLabel": "Do you recommend others to play this chart?",
       "save": "Save",
       "close": "Close"
     }

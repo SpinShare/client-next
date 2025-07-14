@@ -124,7 +124,23 @@
   },
   "review": {
     "noComment": "Kein Kommentar abgegeben.",
-    "recommended": "Empfohlen"
+    "recommended": "Empfohlen",
+    "yourReview": {
+      "header": "Deine Bewertung",
+      "noReview": "Du hast für diese Chart noch keine Bewertung abgegeben.",
+      "actions": {
+        "write": "Bewertung schreiben",
+        "edit": "Bewertung ändern",
+        "remove": "Bewertung löschen"
+      }
+    },
+    "overlay": {
+      "header": "Bewertung schreiben/ändern",
+      "commentPlaceholder": "Dein Kommentar hier...",
+      "recommendedLabel": "Empfiehlst du anderen diese Chart zu spielen?",
+      "save": "Speichern",
+      "close": "Schließen"
+    }
   },
   "search": {
     "minimumDifficulty": "Mindeste Schwierigkeit",
