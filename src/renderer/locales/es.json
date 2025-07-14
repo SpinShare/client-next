@@ -36,7 +36,7 @@
     "toggleSidebar": "Alternar Barra Lateral",
     "downloadQueue": {
       "downloads": "Descargas",
-      "header": "Cola de descarga ({count})",
+      "header": "Cola de descargas ({count})",
       "noDownloads": "No hay descargas en cola."
     },
     "settings": "Configuración"
@@ -75,170 +75,170 @@
     "supporter": "Donador",
     "verified": "Verificado",
     "tabs": {
-      "detail": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Detalle",
+      "charts": "Canciones ({count})",
+      "reviews": "Reseñas ({count})",
+      "playlists": "Listas de reproducción ({count})",
+      "spinPlays": "SpinPlays ({count})"
     },
-    "noCards": "",
-    "noCharts": "",
-    "noReviews": "",
-    "noSpinPlays": ""
+    "noCards": "Aún no hay tarjetas recibidas.",
+    "noCharts": "Aún no hay canciones subidas.",
+    "noReviews": "Aún no hay reseñas dadas.",
+    "noSpinPlays": "Aún no hay SpinPlays subidos."
   },
   "chart": {
-    "explicitLabel": "",
-    "noDescription": "",
-    "noPlaylists": "",
-    "noReviews": "",
-    "noSpinPlays": "",
+    "explicitLabel": "Contenido explícito - Despliegue para revelar",
+    "noDescription": "Aún no hay una descripción.",
+    "noPlaylists": "Aún no está en ninguna lista de reproducción.",
+    "noReviews": "Aún no hay reseñas.",
+    "noSpinPlays": "Aún no hay SpinPlays.",
     "status": {
-      "installed": "",
-      "outOfDate": ""
+      "installed": "Instalada",
+      "outOfDate": "Desactualizada"
     },
-    "play": "",
-    "addToQueue": "",
+    "play": "Jugar",
+    "addToQueue": "Añadir a la cola",
     "tabs": {
-      "detail": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Detalle",
+      "reviews": "Reseñas",
+      "playlists": "Listas de reproducción",
+      "spinPlays": "SpinPlays"
     },
     "playDialog": {
-      "header": "",
-      "body": "",
-      "close": ""
+      "header": "Jugar",
+      "body": "Seleccione una dificultad para iniciar Spin Rhythm XD e inmediatamente jugar <strong>{title}</strong>.",
+      "close": "Cerrar"
     },
     "statistics": {
-      "views": "",
-      "downloads": "",
-      "uploaded": "",
-      "updated": ""
+      "views": "Vistas",
+      "downloads": "Descargas",
+      "uploaded": "Subido",
+      "updated": "Actualizado"
     }
   },
   "playlist": {
-    "official": "",
-    "count": "",
-    "addToQueue": "",
-    "withChartsBy": ""
+    "official": "Oficial",
+    "count": "{count} canciones",
+    "addToQueue": "Añadir a la cola",
+    "withChartsBy": "Con canciones por"
   },
   "review": {
-    "noComment": "",
-    "recommended": ""
+    "noComment": "Sin comentario.",
+    "recommended": "Recomendado"
   },
   "search": {
-    "minimumDifficulty": "",
-    "maximumDifficulty": "",
-    "explicit": "",
-    "apply": "",
-    "noChartResults": "",
-    "noPlaylistResults": "",
-    "noUserResults": ""
+    "minimumDifficulty": "Dificultad mínima",
+    "maximumDifficulty": "Dificultad máxima",
+    "explicit": "Explícito",
+    "apply": "Aplicar",
+    "noChartResults": "No se encontraron canciones. Intenta una consulta de búsqueda diferente o ajusta los filtros anteriores.",
+    "noPlaylistResults": "No se encontraron listas de reproducción. Intenta una consulta de búsqueda diferente.",
+    "noUserResults": "No se encontraron usuarios. Intenta una consulta de búsqueda diferente."
   },
   "difficulty": {
-    "easy": "",
-    "normal": "",
-    "hard": "",
-    "expert": "",
-    "xd": ""
+    "easy": "Fácil",
+    "normal": "Normal",
+    "hard": "Difícil",
+    "expert": "Experto",
+    "xd": "XD"
   },
   "library": {
-    "header": "",
-    "open": "",
-    "rebuild": "",
-    "noCharts": ""
+    "header": "Biblioteca",
+    "open": "Abrir",
+    "rebuild": "Reconstruir",
+    "noCharts": "No se encontraron canciones. Reconstruye el caché o descargue canciones."
   },
   "updateToast": {
-    "header": "",
-    "body": "",
+    "header": "Actualización disponible",
+    "body": "Actualice a la última versión para recibir novedades y correcciones de errores.",
     "actions": {
-      "get": "",
-      "later": ""
+      "get": "Actualizar",
+      "later": "Más tarde"
     }
   },
   "settings": {
     "general": {
-      "header": "",
-      "version": "",
-      "checkForUpdates": "",
-      "getUpdate": "",
+      "header": "General",
+      "version": "Versión {version}",
+      "checkForUpdates": "Detectar actualizaciones",
+      "getUpdate": "Actualizar",
       "theme": {
-        "label": "",
-        "dark": "",
-        "light": ""
+        "label": "Tema",
+        "dark": "Modo oscuro",
+        "light": "Modo claro"
       },
       "language": {
-        "label": "",
-        "description": ""
+        "label": "Idioma",
+        "description": "Traducido por TheWay123"
       }
     },
     "interface": {
-      "header": "",
+      "header": "Interfaz",
       "showExplicit": {
-        "label": "",
-        "description": ""
+        "label": "Mostrar explícito",
+        "description": "Desenfocar automáticamente los metadatos explícitos de canciones"
       },
       "downloadNotifications": {
-        "label": "",
-        "description": ""
+        "label": "Notificaciones de descarga",
+        "description": "Notificar cuando se descargó una canción o terminó la cola"
       },
       "openDownloadQueue": {
-        "label": "",
-        "description": ""
+        "label": "Abrir cola de descargas",
+        "description": "Abrir automáticamente la cola de descargas cada vez que se ha añadido una nueva canción a la cola"
       },
       "sfxEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Efectos de sonido activados",
+        "description": "Reproducir efectos de sonido UI"
       },
       "musicEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Música de menú activada",
+        "description": "Reproducir música de menú"
       }
     },
     "account": {
-      "header": "",
+      "header": "Cuenta",
       "logout": {
-        "label": "",
-        "description": "",
-        "logout": ""
+        "label": "Cerrar sesión",
+        "description": "Después de cerrar la sesión, también debes eliminar el acceso a 'SpinShare Next' en spinsha.re",
+        "logout": "Salir"
       }
     },
     "game": {
-      "header": "",
+      "header": "Juego",
       "pathCustoms": {
-        "label": "",
-        "description": "",
-        "placeholder": "",
-        "select": "",
-        "detect": ""
+        "label": "Directorio de archivos",
+        "description": "Ruta a su carpeta de canciones para el juego",
+        "placeholder": "Aún no definido",
+        "select": "Seleccionar",
+        "detect": "Detectar"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": ""
+      "body": "¡Gracias por descargar el cliente de escritorio de SpinShare! Antes de empezar a descargar canciones para el juego de la comunidad SpinShare, tenemos que pasar por nuestra configuración inicial."
     },
     "general": {
-      "header": ""
+      "header": "Configuración general"
     },
     "game": {
-      "header": "",
-      "tip": ""
+      "header": "Configuraciones del juego",
+      "tip": "Consejo: Para almacenar tus canciones para el juego en una carpeta diferente o en una unidad diferente, puedes añadir {code} a tus opciones de lanzamiento de Steam."
     },
     "cache": {
-      "header": "",
-      "body": "",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
-      "analyze": "",
-      "done": ""
+      "header": "Caché de biblioteca",
+      "body": "Para mostrar fácilmente si ya tienes una canción instalada y si hay una actualización disponible, es necesario compilar una caché.",
+      "explanation": "Este caché pasa por la carpeta de canciones para el juego y crea un archivo de texto más pequeño con todas las canciones existentes. También crea una pequeña miniatura de la imagen del álbum para que su experiencia de navegación es más estable, incluso con muchas canciones instaladas.",
+      "timeNeeded": "Si aún no has instalado canciones para Spin Rhythm XD, este paso será instantáneo. Si tienes una biblioteca muy grande, puede tardar hasta un minuto.",
+      "tip": "Consejo: Siempre puedes volver a analizar tu biblioteca en la pestaña de biblioteca.",
+      "analyze": "Analizar biblioteca",
+      "done": "¡Todo listo!"
     },
     "done": {
-      "header": "",
-      "body": "",
-      "tip": "",
-      "welcome": ""
+      "header": "¡Hemos terminado!",
+      "body": "Ahora has configurado el cliente de escritorio SpinShare. Estás a solo un clic de una biblioteca de miles de canciones creadas para Spin Rhythm XD.",
+      "tip": "Consejo: Haz clic en la esquina superior derecha para ingresar a tu cuenta. El inicio de sesión le permite reseñar canciones y añadirlas a las listas de reproducción cómodamente sin usar el sitio web. En el futuro, también podrás subir tus propios canciones para el juego.",
+      "welcome": "¡Pero por ahora, entremos en la <strong>dimensión del ritmo</strong>!"
     }
   }
 }
