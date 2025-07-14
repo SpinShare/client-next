@@ -54,7 +54,7 @@ const api = inject('api');
 
 onMounted(async () => {
     let apiCharts = await api.getNewCharts(currentPage.value);
-    charts.value = apiCharts?.slice(0, 10) ?? [];
+    charts.value = apiCharts ?? [];
 });
 
 function handlePrevious() {
