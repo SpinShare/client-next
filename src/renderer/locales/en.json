@@ -228,9 +228,9 @@
     "cache": {
       "header": "Library cache",
       "body": "To easily display whether you already have a chart installed and whether an update is available, a cache needs to be build.",
-      "explanation": "This cache goes through your games custom charts folder and creates a smaller text file with all existing charts, it also creates a small thumbnail of the album art so your browsing experience is more stable, even with many charts installed.",
-      "timeNeeded": "If you did not install any Spin Rhythm XD custom charts yet, this step will be instant. If you have a very large library, it may take up to a minute.",
-      "tip": "Tip: You can always re-analyze your library on the library tab.",
+      "explanation": "This cache goes through your game's custom charts folder and creates a smaller text file with all existing charts. It also creates a small thumbnail of the album art so your browsing experience is more stable, even with many charts installed.",
+      "timeNeeded": "If you have not installed any Spin Rhythm XD custom charts yet, this step will be instant. If you have a very large library, it may take up to a minute.",
+      "tip": "Tip: You can always re-analyze your library in the library tab.",
       "analyze": "Analyze your library",
       "done": "Good to go!"
     },
