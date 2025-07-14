@@ -126,20 +126,20 @@
     "noComment": "Speen speen.",
     "recommended": "Speen",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Speen speen",
+      "noReview": "Speen speen speen Speen speen.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Speen speen",
+        "edit": "Speen speen",
+        "remove": "Speen speen speen"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Speen/Speen speen",
+      "commentPlaceholder": "Speen speen speen...",
+      "recommendedLabel": "Speen speen speen Speen speen?",
+      "save": "Speen",
+      "close": "Speen"
     }
   },
   "search": {
@@ -244,9 +244,9 @@
     "cache": {
       "header": "Speen speen",
       "body": "Speen speen speen Speen speen speen Speen speen speen, speen speen Speen Speen speen speen. Speen speen speen.",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
+      "explanation": "Speen speen speen speen Speen speen Speen speen speen speen, speen Speen Speen Speen speen speen speen speen Speen speen speen speen Speen speen speen. Speen speen speen speen Speen speen speen speen Speen speen.",
+      "timeNeeded": "Speen speen speen Speen speen Speen Speen speen speen, speen Speen speen. speen speen Speen Speen speen, Speen speen Speen speen.",
+      "tip": "Speen: Speen speen speen speen Speen speen speen.",
       "analyze": "Speen speen Speen",
       "done": "Speen Speen!"
     },
