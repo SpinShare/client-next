@@ -124,7 +124,23 @@
   },
   "review": {
     "noComment": "Speen speen.",
-    "recommended": "Speen"
+    "recommended": "Speen",
+    "yourReview": {
+      "header": "",
+      "noReview": "",
+      "actions": {
+        "write": "",
+        "edit": "",
+        "remove": ""
+      }
+    },
+    "overlay": {
+      "header": "",
+      "commentPlaceholder": "",
+      "recommendedLabel": "",
+      "save": "",
+      "close": ""
+    }
   },
   "search": {
     "minimumDifficulty": "Speen speen",
