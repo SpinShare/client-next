@@ -381,7 +381,7 @@ header.chart {
 }
 
 .play-dialog:open {
-    @apply bg-base-900 text-base-100 w-full max-w-[500px] m-auto rounded-md p-10 flex flex-col gap-4 transition-all;
+    @apply bg-base-900 text-base-100 w-full max-w-[500px] m-auto rounded-md p-10 flex flex-col gap-4 transition-all border border-base-300 dark:border-base-800;
 
     @starting-style {
         @apply opacity-0;

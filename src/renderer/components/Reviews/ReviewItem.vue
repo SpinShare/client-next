@@ -1,6 +1,6 @@
 <template>
     <RouterLink
-        :to="`/chart/${id}`"
+        :to="`/chart/${song.id}`"
         :class="`review-item`"
         v-interactable
     >
@@ -99,6 +99,10 @@ const props = defineProps({
                 @apply text-base-600 dark:text-base-300 flex gap-1.5 items-center;
             }
         }
+    }
+
+    &:hover {
+        @apply bg-base-300 dark:bg-base-800;
     }
 }
 </style>

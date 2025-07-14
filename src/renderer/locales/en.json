@@ -124,7 +124,23 @@
   },
   "review": {
     "noComment": "No comment.",
-    "recommended": "Recommended"
+    "recommended": "Recommended",
+    "yourReview": {
+      "header": "Your review",
+      "noReview": "You have not written a review for this chart yet.",
+      "actions": {
+        "write": "Write a review",
+        "edit": "Edit your review",
+        "remove": "Remove your review"
+      }
+    },
+    "overlay": {
+      "header": "Add/Edit your review",
+      "commentPlaceholder": "Your comment here...",
+      "recommendedLabel": "Do you recommend this chart?",
+      "save": "Save",
+      "close": "Close"
+    }
   },
   "search": {
     "minimumDifficulty": "Minimum difficulty",

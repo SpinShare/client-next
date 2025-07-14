@@ -333,6 +333,15 @@ app.whenReady().then(() => {
     ipcMain.handle('connect-clear-all-notifications', async (event) => {
         return await authManager.clearAllNotifications();
     });
+    ipcMain.handle('connect-get-review', async (event, chartId) => {
+        return await authManager.getReview(chartId);
+    });
+    ipcMain.handle('connect-add-review', async (event, chartId, recommended, comment) => {
+        return await authManager.addReview(chartId, recommended, comment);
+    });
+    ipcMain.handle('connect-remove-review', async (event, chartId) => {
+        return await authManager.removeReview(chartId);
+    });
     ipcMain.handle('connect-is-logged-in', (event) => {
         return authManager.isLoggedIn;
     });

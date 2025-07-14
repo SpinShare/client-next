@@ -137,4 +137,37 @@ export class AuthManager {
             return null;
         }
     }
+
+    async getReview(chartId) {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectGetReview(this.connectToken, chartId);
+        } catch (e) {
+            console.error(e.message);
+            return [];
+        }
+    }
+
+    async addReview(chartId, recommended, comment) {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectAddReview(this.connectToken, chartId, recommended, comment);
+        } catch (e) {
+            console.error(e.message);
+            return [];
+        }
+    }
+
+    async removeReview(chartId) {
+        if (!this.isLoggedIn) return null;
+
+        try {
+            return await this.#apiClient.connectRemoveReview(this.connectToken, chartId);
+        } catch (e) {
+            console.error(e.message);
+            return [];
+        }
+    }
 }
