@@ -126,20 +126,20 @@
     "noComment": "Kein Kommentar abgegeben.",
     "recommended": "Empfohlen",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Deine Bewertung",
+      "noReview": "Du hast für diese Chart noch keine Bewertung abgegeben.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Bewertung schreiben",
+        "edit": "Bewertung ändern",
+        "remove": "Bewertung löschen"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Bewertung schreiben/ändern",
+      "commentPlaceholder": "Dein Kommentar hier...",
+      "recommendedLabel": "Empfiehlst du anderen diese Chart zu spielen?",
+      "save": "Speichern",
+      "close": "Schließen"
     }
   },
   "search": {
@@ -244,9 +244,9 @@
     "cache": {
       "header": "Sammlungs-Cache",
       "body": "Um schnell und einfach zu erkennen, ob du eine Chart bereits heruntergeladen hast oder ob sie veraltet ist, müssen wir einen Cache erstellen.",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
+      "explanation": "Dieser Cache geht durch deinen Spieleordner und erstellt eine kleine Textdatei mit allen installierten Charts. Er erstellt auch ein kleines Thumbnail des Covers, damit dein Client auch mit vielen Charts schnell und ressourcenschonend bleibt.",
+      "timeNeeded": "Wenn du noch keine Spin Rhythm XD Charts installiert hast, wird dies nicht einmal eine Sekunde benötigen. Wenn du eine größere Sammlung hast, kann dieser Schritt ein bis zwei Minuten dauern.",
+      "tip": "Tipp: Du kannst deine Sammlung jederzeit erneut analysieren.",
       "analyze": "Sammlung analysieren",
       "done": "Fertig!"
     },
