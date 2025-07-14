@@ -228,9 +228,9 @@
     "cache": {
       "header": "Cache de la bibliothèque",
       "body": "Pour facilement afficher si vous avez déjà téléchargé une chart ou si une mise à jour est disponible pour celle-ci, un cache doit être compilé.",
-      "explanation": "Ce cache inspecte votre dossier de charts custom et crée un fichier texte plus petit avec toutes les charts existantes. Cela crée également une miniature des pochettes d'album pour permettre une navigation stable, même avec de nombreuses charts installées.",
-      "timeNeeded": "Si vous n'avez pas encore installé de charts custom pour Spin Rhythm XD, cette étape sera instantanée. Si vous avez une très grande quantité de charts, cela peut prendre jusqu'à une minute.",
-      "tip": "Astuce : Vous pouvez analyser votre bibliothèque de charts à tout moment dans l'onglet Bibliothèque.",
+      "explanation": "",
+      "timeNeeded": "",
+      "tip": "",
       "analyze": "Analyser votre bibliothèque",
       "done": "Tout est bon !"
     },
