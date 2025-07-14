@@ -124,7 +124,23 @@
   },
   "review": {
     "noComment": "Kein Kommentar abgegeben.",
-    "recommended": "Empfohlen"
+    "recommended": "Empfohlen",
+    "yourReview": {
+      "header": "",
+      "noReview": "",
+      "actions": {
+        "write": "",
+        "edit": "",
+        "remove": ""
+      }
+    },
+    "overlay": {
+      "header": "",
+      "commentPlaceholder": "",
+      "recommendedLabel": "",
+      "save": "",
+      "close": ""
+    }
   },
   "search": {
     "minimumDifficulty": "Mindeste Schwierigkeit",
