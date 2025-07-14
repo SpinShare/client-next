@@ -27,8 +27,14 @@
                     class="button brand"
                     v-interactable
                 >
-                    <Remixicon icon="arrow-right" v-if="currentStep < 4" />
-                    <Remixicon icon="check" v-else />
+                    <Remixicon
+                        icon="arrow-right"
+                        v-if="currentStep < 4"
+                    />
+                    <Remixicon
+                        icon="check"
+                        v-else
+                    />
                 </button>
             </div>
         </div>
@@ -39,9 +45,9 @@
 </template>
 
 <script setup>
-import {useRoute, useRouter} from "vue-router";
-import {computed, inject, onMounted} from "vue";
-import Remixicon from "@/components/Remixicon.vue";
+import { useRoute, useRouter } from 'vue-router';
+import { computed, inject, onMounted } from 'vue';
+import Remixicon from '@/components/Remixicon.vue';
 
 const settingsManager = inject('settingsManager');
 const router = useRouter();
@@ -58,7 +64,7 @@ function handleBack() {
     router.push(`/setup/step/${currentStep.value - 1}`);
 }
 async function handleContinue() {
-    if(currentStep.value === 4) {
+    if (currentStep.value === 4) {
         await settingsManager.set('setupCompleted', true);
         router.push('/');
     } else {
@@ -81,7 +87,7 @@ async function handleContinue() {
                 @apply w-3 h-3 rounded-full  bg-base-400 dark:bg-base-200;
 
                 &.future {
-                    @apply  bg-base-200 dark:bg-base-700;
+                    @apply bg-base-200 dark:bg-base-700;
                 }
             }
             & .line {

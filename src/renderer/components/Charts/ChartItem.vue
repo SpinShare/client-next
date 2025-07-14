@@ -24,8 +24,18 @@
                 class="info"
                 v-if="!mini"
             >
-                <div class="installation-status installed" v-if="cacheUpdateHash === updateHash">{{ $t('chart.status.installed') }}</div>
-                <div class="installation-status update" v-if="cacheUpdateHash && cacheUpdateHash !== updateHash">{{ $t('chart.status.outOfDate') }}</div>
+                <div
+                    class="installation-status installed"
+                    v-if="cacheUpdateHash === updateHash"
+                >
+                    {{ $t('chart.status.installed') }}
+                </div>
+                <div
+                    class="installation-status update"
+                    v-if="cacheUpdateHash && cacheUpdateHash !== updateHash"
+                >
+                    {{ $t('chart.status.outOfDate') }}
+                </div>
                 <div class="difficulties">
                     <div :class="`difficulty ${hasEasyDifficulty ? 'active' : ''}`">
                         <span>E</span>
@@ -60,7 +70,7 @@
 </template>
 
 <script setup>
-import {inject, onMounted, onUnmounted, ref} from 'vue';
+import { inject, onMounted, onUnmounted, ref } from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const props = defineProps({
@@ -167,7 +177,7 @@ onMounted(async () => {
 
     cacheUpdateHash.value = await libraryManager.getUpdateHash(props.fileReference);
     mitt.on('item-change', async (queueItem) => {
-        if(queueItem.id !== props.id) return;
+        if (queueItem.id !== props.id) return;
         cacheUpdateHash.value = await libraryManager.getUpdateHash(queueItem.fileReference);
     });
 });

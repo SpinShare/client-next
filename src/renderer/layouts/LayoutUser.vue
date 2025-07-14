@@ -80,24 +80,27 @@
                     />
                     <TabItemLink
                         :to="`/user/${userId}/charts`"
-                        :label="$t('user.tabs.charts', {count: user.songs})"
+                        :label="$t('user.tabs.charts', { count: user.songs })"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/reviews`"
-                        :label="$t('user.tabs.reviews', {count: user.reviews})"
+                        :label="$t('user.tabs.reviews', { count: user.reviews })"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/playlists`"
-                        :label="$t('user.tabs.playlists', {count: user.playlists})"
+                        :label="$t('user.tabs.playlists', { count: user.playlists })"
                     />
                     <TabItemLink
                         :to="`/user/${userId}/spinplays`"
-                        :label="$t('user.tabs.spinPlays', {count: user.spinplays})"
+                        :label="$t('user.tabs.spinPlays', { count: user.spinplays })"
                     />
                 </TabList>
             </nav>
             <main>
-                <router-view :key="route.fullPath" :user="user" />
+                <router-view
+                    :key="route.fullPath"
+                    :user="user"
+                />
             </main>
         </template>
     </LayoutBase>
@@ -106,7 +109,7 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import {inject, onMounted, ref, watch} from 'vue';
+import { inject, onMounted, ref, watch } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -130,10 +133,13 @@ function handleOpenReport() {
     externalApi.openUrl(`https://spinsha.re/report/user/${user.value.id}`);
 }
 
-watch(() => [route.params.userId], async () => {
-    userId.value = route.params.userId;
-    user.value = await api.getUserDetail(userId.value);
-});
+watch(
+    () => [route.params.userId],
+    async () => {
+        userId.value = route.params.userId;
+        user.value = await api.getUserDetail(userId.value);
+    },
+);
 </script>
 
 <style scoped>

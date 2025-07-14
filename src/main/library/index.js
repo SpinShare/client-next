@@ -62,7 +62,7 @@ export class LibraryManager extends EventEmitter {
                 const chartPath = path.join(this.chartsPath, file);
                 try {
                     await this.add(chartPath, false);
-                } catch(e) {
+                } catch (e) {
                     console.error(`[Library] Failed to add chart to cache: ${e.message}`);
                 }
             }

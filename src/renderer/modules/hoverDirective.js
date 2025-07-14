@@ -1,6 +1,6 @@
 // modules/hoverDirective.js
-import clickSound from "@/assets/audio/click.ogg?url";
-import hoverSound from "@/assets/audio/hover.ogg?url";
+import clickSound from '@/assets/audio/click.ogg?url';
+import hoverSound from '@/assets/audio/hover.ogg?url';
 
 export function createHoverDirective() {
     let audioHover;
@@ -15,7 +15,7 @@ export function createHoverDirective() {
                 console.error('Audio loading error:', e);
             });
         }
-    }
+    };
 
     const createAudioClick = () => {
         if (!audioClick) {
@@ -26,10 +26,10 @@ export function createHoverDirective() {
                 console.error('Audio loading error:', e);
             });
         }
-    }
+    };
 
     const playHoverSound = async () => {
-        if(!await window.spshSettings.get('sfxEnabled')) {
+        if (!(await window.spshSettings.get('sfxEnabled'))) {
             return;
         }
         if (!audioHover) {
@@ -40,16 +40,16 @@ export function createHoverDirective() {
             audioHover.currentTime = 0;
             const playPromise = audioHover.play();
 
-            playPromise.catch(error => {
+            playPromise.catch((error) => {
                 console.error('Play failed:', error);
             });
         } catch (error) {
             console.error('Sound playback error:', error);
         }
-    }
+    };
 
     const playClickSound = async () => {
-        if(!await window.spshSettings.get('sfxEnabled')) {
+        if (!(await window.spshSettings.get('sfxEnabled'))) {
             return;
         }
         if (!audioClick) {
@@ -60,13 +60,13 @@ export function createHoverDirective() {
             audioClick.currentTime = 0;
             const playPromise = audioClick.play();
 
-            playPromise.catch(error => {
+            playPromise.catch((error) => {
                 console.error('Play failed:', error);
             });
         } catch (error) {
             console.error('Sound playback error:', error);
         }
-    }
+    };
 
     return {
         mounted(el) {
@@ -77,6 +77,6 @@ export function createHoverDirective() {
         },
         unmounted(el) {
             el.removeEventListener('mouseenter', playHoverSound);
-        }
-    }
+        },
+    };
 }

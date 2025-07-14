@@ -1,15 +1,24 @@
 <template>
     <div class="update-toast">
-        <Remixicon icon="refresh" size="4xl" />
+        <Remixicon
+            icon="refresh"
+            size="4xl"
+        />
         <div class="content">
             <h1>{{ $t('updateToast.header') }}</h1>
             <p>{{ $t('updateToast.body') }}</p>
 
             <div class="actions">
-                <button @click="handleGetUpdate" class="button brand">
+                <button
+                    @click="handleGetUpdate"
+                    class="button brand"
+                >
                     <span>{{ $t('updateToast.actions.get') }}</span>
                 </button>
-                <button @click="handleLater" class="button ghost">
+                <button
+                    @click="handleLater"
+                    class="button ghost"
+                >
                     <span>{{ $t('updateToast.actions.later') }}</span>
                 </button>
             </div>
@@ -18,8 +27,8 @@
 </template>
 
 <script setup>
-import Remixicon from "@/components/Remixicon.vue";
-import {inject} from "vue";
+import Remixicon from '@/components/Remixicon.vue';
+import { inject } from 'vue';
 
 const externalApi = inject('externalApi');
 const emits = defineEmits(['close']);

@@ -164,7 +164,7 @@ import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
 import { onMounted, inject, ref, onUnmounted } from 'vue';
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n({ useScope: 'global' });
 const externalApi = inject('externalApi');
@@ -175,7 +175,7 @@ const mitt = inject('mitt');
 const connect = inject('connect');
 const isLoggedIn = ref(false);
 const updateAvailable = ref(false);
-const appVersion = ref("0.0.0");
+const appVersion = ref('0.0.0');
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
@@ -213,7 +213,7 @@ async function handleLogout() {
 
 async function handleCustomsSelect() {
     const folderPath = await externalApi.selectFolder(settings.value.pathCustoms);
-    if(folderPath) {
+    if (folderPath) {
         settings.value.pathCustoms = folderPath;
         await handleSave();
     }
@@ -227,7 +227,7 @@ async function handleCustomsDetect() {
 async function handleSave() {
     mitt.emit('save-settings', settings.value);
 
-    if(settings.value.language !== locale.value) {
+    if (settings.value.language !== locale.value) {
         locale.value = settings.value.language;
     }
 

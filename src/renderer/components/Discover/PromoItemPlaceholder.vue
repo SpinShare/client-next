@@ -8,8 +8,7 @@
     </button>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .promo-item-placeholder {

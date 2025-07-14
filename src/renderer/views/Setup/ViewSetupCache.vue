@@ -26,9 +26,9 @@
 </template>
 
 <script setup>
-import SectionHeader from "@/components/SectionHeader.vue";
-import Remixicon from "@/components/Remixicon.vue";
-import {inject, onMounted, onUnmounted, ref} from "vue";
+import SectionHeader from '@/components/SectionHeader.vue';
+import Remixicon from '@/components/Remixicon.vue';
+import { inject, onMounted, onUnmounted, ref } from 'vue';
 
 const cacheDone = ref(false);
 const libraryManager = inject('libraryManager');

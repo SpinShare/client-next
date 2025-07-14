@@ -23,11 +23,11 @@ import LayoutDiscover from '@/layouts/LayoutDiscover.vue';
 import LayoutUser from '@/layouts/LayoutUser.vue';
 import ViewUserCharts from '@/views/User/ViewUserCharts.vue';
 import ViewConnectLogin from '@/views/Connect/ViewConnectLogin.vue';
-import LayoutSetup from "@/layouts/LayoutSetup.vue";
-import ViewSetupIntroduction from "@/views/Setup/ViewSetupIntroduction.vue";
-import ViewSetupGame from "@/views/Setup/ViewSetupGame.vue";
-import ViewSetupDone from "@/views/Setup/ViewSetupDone.vue";
-import ViewSetupCache from "@/views/Setup/ViewSetupCache.vue";
+import LayoutSetup from '@/layouts/LayoutSetup.vue';
+import ViewSetupIntroduction from '@/views/Setup/ViewSetupIntroduction.vue';
+import ViewSetupGame from '@/views/Setup/ViewSetupGame.vue';
+import ViewSetupDone from '@/views/Setup/ViewSetupDone.vue';
+import ViewSetupCache from '@/views/Setup/ViewSetupCache.vue';
 
 const routes = [
     {

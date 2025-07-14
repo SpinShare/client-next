@@ -1,5 +1,5 @@
-import {app} from "electron";
-import {EventEmitter} from "events";
+import { app } from 'electron';
+import { EventEmitter } from 'events';
 
 export class UpdateManager extends EventEmitter {
     constructor(settingsManager) {
@@ -14,17 +14,17 @@ export class UpdateManager extends EventEmitter {
         const data = await response.json();
 
         // Failsafe if we get rate-limited or Github is down
-        if(!response.ok) {
+        if (!response.ok) {
             return false;
         }
 
-        const latestRelease = data.find(r => r.prerelease === false) || null;
+        const latestRelease = data.find((r) => r.prerelease === false) || null;
         const hasNewRelease = latestRelease?.name?.includes(app.getVersion()) || false;
 
         this.settingsManager.updateOrInsert('updateAvailable', hasNewRelease);
         this.emit('update-check-done', hasNewRelease);
 
-        if(hasNewRelease) {
+        if (hasNewRelease) {
             console.log(`[UpdateManager] New update available: ${latestRelease.name}`);
         } else {
             console.log(`[UpdateManager] No new update available.`);

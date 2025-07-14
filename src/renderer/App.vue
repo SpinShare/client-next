@@ -3,18 +3,24 @@
         <component :is="Component" />
     </router-view>
 
-    <UpdateToast v-if="updateAvailable" @close="handleDismissUpdate" />
-    <LibraryRebuildOverlay v-if="cacheRebuildActive && cacheRebuildStatus" :status="cacheRebuildStatus" />
+    <UpdateToast
+        v-if="updateAvailable"
+        @close="handleDismissUpdate"
+    />
+    <LibraryRebuildOverlay
+        v-if="cacheRebuildActive && cacheRebuildStatus"
+        :status="cacheRebuildStatus"
+    />
 </template>
 
 <script setup>
-import bgmDefaultFile from "@/assets/audio/bgm_default.ogg?url";
+import bgmDefaultFile from '@/assets/audio/bgm_default.ogg?url';
 import queueDoneFile from '@/assets/audio/queue_done.wav?url';
 import errorFile from '@/assets/audio/error.ogg?url';
-import {inject, onMounted, onUnmounted, ref} from "vue";
-import UpdateToast from "@/components/UpdateToast.vue";
-import {useRoute, useRouter} from "vue-router";
-import LibraryRebuildOverlay from "@/components/LibraryRebuildOverlay.vue";
+import { inject, onMounted, onUnmounted, ref } from 'vue';
+import UpdateToast from '@/components/UpdateToast.vue';
+import { useRoute, useRouter } from 'vue-router';
+import LibraryRebuildOverlay from '@/components/LibraryRebuildOverlay.vue';
 
 const mitt = inject('mitt');
 const route = useRoute();
@@ -46,10 +52,10 @@ onMounted(async () => {
         cacheRebuildActive.value = false;
     });
 
-    if(!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes("/setup")) {
+    if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
         router.push('/setup/step/0');
     }
-    if(await settingsManager.get('theme') === 'dark') {
+    if ((await settingsManager.get('theme')) === 'dark') {
         document.documentElement.dataset.theme = 'dark';
     } else {
         document.documentElement.dataset.theme = '';
@@ -61,18 +67,18 @@ onMounted(async () => {
     });
     bgmDefault.value.loop = true;
     bgmDefault.value.volume = 0.5;
-    if(await settingsManager.get('musicEnabled')) {
+    if (await settingsManager.get('musicEnabled')) {
         bgmDefault.value.play();
     }
 
     mitt.on('save-settings', (newSettings) => {
-        if(newSettings.musicEnabled) {
+        if (newSettings.musicEnabled) {
             bgmDefault.value.play();
         } else {
             bgmDefault.value.pause();
         }
 
-        if(newSettings.theme === 'dark') {
+        if (newSettings.theme === 'dark') {
             document.documentElement.dataset.theme = 'dark';
         } else {
             document.documentElement.dataset.theme = '';
@@ -89,12 +95,12 @@ onMounted(async () => {
     });
 
     mitt.on('sfx-queue-done', async () => {
-        if(!(await settingsManager.get('downloadNotifications'))) return;
+        if (!(await settingsManager.get('downloadNotifications'))) return;
 
         await sfxQueueDone.value.play();
     });
     mitt.on('sfx-error', async () => {
-        if(!(await settingsManager.get('downloadNotifications'))) return;
+        if (!(await settingsManager.get('downloadNotifications'))) return;
 
         await sfxError.value.play();
     });
@@ -102,7 +108,7 @@ onMounted(async () => {
         updateAvailable.value = hasNewRelease;
     });
     mitt.on('item-add', async () => {
-        if(await settingsManager.get('openDownloadsSidebar')) {
+        if (await settingsManager.get('openDownloadsSidebar')) {
             mitt.emit('queue-open');
         }
     });

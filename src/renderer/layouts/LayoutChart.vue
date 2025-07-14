@@ -23,8 +23,18 @@
                         <p>{{ chart.artist }} &bull; {{ chart.charter }}</p>
                     </div>
                     <div class="info">
-                        <div class="installation-status installed" v-if="cacheItem?.updateHash === chart.updateHash">{{ $t('chart.status.installed') }}</div>
-                        <div class="installation-status update" v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash">{{ $t('chart.status.outOfDate') }}</div>
+                        <div
+                            class="installation-status installed"
+                            v-if="cacheItem?.updateHash === chart.updateHash"
+                        >
+                            {{ $t('chart.status.installed') }}
+                        </div>
+                        <div
+                            class="installation-status update"
+                            v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash"
+                        >
+                            {{ $t('chart.status.outOfDate') }}
+                        </div>
                         <div class="difficulties">
                             <div :class="`difficulty ${chart.hasEasyDifficulty ? 'active' : ''}`">
                                 <span>E</span>
@@ -134,10 +144,16 @@
                 </TabList>
             </nav>
             <main>
-                <router-view :key="route.fullPath" :chart="chart" />
+                <router-view
+                    :key="route.fullPath"
+                    :chart="chart"
+                />
             </main>
 
-            <dialog class="play-dialog" ref="playDialog">
+            <dialog
+                class="play-dialog"
+                ref="playDialog"
+            >
                 <section class="copy">
                     <SectionHeader :title="$t('chart.playDialog.header')" />
                     <p v-html="$t('chart.playDialog.body', { title: chart.title })" />
@@ -150,7 +166,7 @@
                         @click="() => handlePlayDifficulty(0)"
                         v-interactable
                     >
-                        <span>{{ chart.easyDifficulty ?? "n/a" }}</span>
+                        <span>{{ chart.easyDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.easy') }}</span>
                     </button>
                     <button
@@ -159,7 +175,7 @@
                         @click="() => handlePlayDifficulty(1)"
                         v-interactable
                     >
-                        <span>{{ chart.normalDifficulty ?? "n/a" }}</span>
+                        <span>{{ chart.normalDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.normal') }}</span>
                     </button>
                     <button
@@ -168,7 +184,7 @@
                         @click="() => handlePlayDifficulty(2)"
                         v-interactable
                     >
-                        <span>{{ chart.hardDifficulty ?? "n/a" }}</span>
+                        <span>{{ chart.hardDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.hard') }}</span>
                     </button>
                     <button
@@ -177,7 +193,7 @@
                         @click="() => handlePlayDifficulty(3)"
                         v-interactable
                     >
-                        <span>{{ chart.expertDifficulty ?? "n/a" }}</span>
+                        <span>{{ chart.expertDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.expert') }}</span>
                     </button>
                     <button
@@ -186,7 +202,7 @@
                         @click="() => handlePlayDifficulty(4)"
                         v-interactable
                     >
-                        <span>{{ chart.XDDifficulty ?? "n/a" }}</span>
+                        <span>{{ chart.XDDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.xd') }}</span>
                     </button>
                 </section>
@@ -209,13 +225,13 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import {inject, onMounted, onUnmounted, ref, watch} from 'vue';
+import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
-import SectionHeader from "@/components/SectionHeader.vue";
+import SectionHeader from '@/components/SectionHeader.vue';
 
 const mitt = inject('mitt');
 const api = inject('api');
@@ -237,7 +253,7 @@ onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
     cacheItem.value = await libraryManager.get(chart.value.fileReference);
     mitt.on('item-change', async (queueItem) => {
-        if(queueItem.id !== chart.value.id) return;
+        if (queueItem.id !== chart.value.id) return;
         cacheItem.value = await libraryManager.get(queueItem.fileReference);
     });
 });
@@ -296,11 +312,14 @@ function stopPreview() {
     }
 }
 
-watch(() => [route.params.chartId], async () => {
-    chartId.value = route.params.chartId;
-    chart.value = await api.getChartDetail(chartId.value);
-    cacheItem.value = await libraryManager.get(chart.value.fileReference);
-});
+watch(
+    () => [route.params.chartId],
+    async () => {
+        chartId.value = route.params.chartId;
+        chart.value = await api.getChartDetail(chartId.value);
+        cacheItem.value = await libraryManager.get(chart.value.fileReference);
+    },
+);
 </script>
 
 <style scoped>

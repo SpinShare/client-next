@@ -3,11 +3,11 @@
         <section class="page-connect-login">
             <div class="box">
                 <h1>{{ $t('connect.login.header') }}</h1>
-                <p v-html="$t('connect.login.body', { link: '<a href=\'https://spinsha.re\' v-interactable>spinsha.re</a>'})" />
+                <p v-html="$t('connect.login.body', { link: '<a href=\'https://spinsha.re\' v-interactable>spinsha.re</a>' })" />
             </div>
             <div class="box">
                 <h1>{{ $t('connect.code.header') }}</h1>
-                <p v-html="$t('connect.code.body', { link: '<a href=\'https://spinsha.re/settings/connect\' v-interactable>' + $t('connect.code.link_label') + '</a>'})" />
+                <p v-html="$t('connect.code.body', { link: '<a href=\'https://spinsha.re/settings/connect\' v-interactable>' + $t('connect.code.link_label') + '</a>' })" />
             </div>
             <div class="box">
                 <h1>{{ $t('connect.input.header') }}</h1>

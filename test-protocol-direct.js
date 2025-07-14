@@ -11,7 +11,7 @@ const testUrls = [
     'spinshare://invalid/789', // Should log "Unknown deep link type"
     'spinshare://chart/with/extra/segments', // Should still work, using first two segments
     'spinshare://chart', // Should not navigate (not enough segments)
-    'http://example.com' // Should not be handled
+    'http://example.com', // Should not be handled
 ];
 
 // Mock the mainWindow.webContents.send function
@@ -23,10 +23,10 @@ const mockSend = (channel, route) => {
 // Function to handle deep link navigation (copied from main.js)
 function handleDeepLink(url) {
     console.log(`\nTesting URL: ${url}`);
-    
+
     try {
         const parsedUrl = new URL(url);
-        
+
         // Only handle spinshare:// URLs
         if (parsedUrl.protocol !== 'spinshare:') {
             console.log(`Not a spinshare:// URL: ${url}`);
@@ -35,12 +35,12 @@ function handleDeepLink(url) {
 
         // Remove leading slash
         let pathname = parsedUrl.pathname;
-        if(pathname.startsWith("/")) {
+        if (pathname.startsWith('/')) {
             pathname = pathname.substring(1);
         }
         const type = parsedUrl.hostname;
 
-        switch(type) {
+        switch (type) {
             default:
                 console.log(`Unknown deep link type: ${type}`);
                 return false;
@@ -62,7 +62,7 @@ console.log('=== Testing spinshare:// protocol handling ===');
 let passCount = 0;
 let failCount = 0;
 
-testUrls.forEach(url => {
+testUrls.forEach((url) => {
     const result = handleDeepLink(url);
     if (result) {
         console.log('✅ PASS');

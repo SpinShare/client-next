@@ -9,7 +9,7 @@ import { SettingsManager } from './main/settings';
 import { AuthManager } from './main/auth';
 import { LibraryManager } from './main/library';
 import { URL } from 'url';
-import {UpdateManager} from "./main/updates";
+import { UpdateManager } from './main/updates';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -57,7 +57,7 @@ const settingsManager = new SettingsManager();
 // Function to extract the deep link URL from command line arguments
 function getDeepLinkUrl(argv) {
     // Check for spinshare:// protocol URLs in the arguments
-    const deepLinkUrl = argv.find(arg => arg.startsWith('spinshare://'));
+    const deepLinkUrl = argv.find((arg) => arg.startsWith('spinshare://'));
     return deepLinkUrl || null;
 }
 
@@ -76,12 +76,12 @@ function handleDeepLink(url) {
 
         // Remove leading slash
         let pathname = parsedUrl.pathname;
-        if(pathname.startsWith("/")) {
+        if (pathname.startsWith('/')) {
             pathname = pathname.substring(1);
         }
         const type = parsedUrl.hostname;
 
-        switch(type) {
+        switch (type) {
             default:
                 console.error(`[DeepLink] Unknown deep link type: ${url} - ${type} - ${pathname}`);
                 return false;

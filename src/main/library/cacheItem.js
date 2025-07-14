@@ -81,7 +81,7 @@ export class CacheItem {
         cacheItem.hardDifficulty = 0;
         cacheItem.expertDifficulty = 0;
         cacheItem.XDDifficulty = 0;
-        cacheItem.srtbPath = "";
+        cacheItem.srtbPath = '';
 
         trackDataContainers.forEach((container) => {
             switch (container.difficultyType) {

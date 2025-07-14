@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="card-item"
-    >
+    <div class="card-item">
         <img
             :src="icon"
             alt="Card Image"
@@ -17,7 +15,7 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { TZDate } from '@date-fns/tz';
 import VanillaTilt from 'vanilla-tilt';
 
@@ -66,7 +64,7 @@ const cleanDescription = computed(() => {
 });
 
 onMounted(() => {
-    VanillaTilt.init(cardImage.value, { max: 20, speed: 400, scale: "1.25", reverse: true, perspective: 1000 });
+    VanillaTilt.init(cardImage.value, { max: 20, speed: 400, scale: '1.25', reverse: true, perspective: 1000 });
 });
 </script>
 

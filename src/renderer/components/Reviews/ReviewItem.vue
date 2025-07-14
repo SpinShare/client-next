@@ -10,7 +10,10 @@
                 v-else
                 class="no-comment"
             >
-                <Remixicon icon="chat-off" size="md" />
+                <Remixicon
+                    icon="chat-off"
+                    size="md"
+                />
                 <span>{{ $t('review.noComment') }}</span>
             </p>
             <div

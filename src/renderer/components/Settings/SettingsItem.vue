@@ -23,7 +23,7 @@ defineProps({
     twoLine: {
         type: Boolean,
         default: false,
-    }
+    },
 });
 </script>
 

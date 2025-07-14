@@ -14,15 +14,11 @@
                             v-interactable
                             @click="popoverDifficultiesOpen = !popoverDifficultiesOpen"
                         >
-                            <Remixicon icon="shapes" :filled="true" />
-                            <span>{{ [
-                                searchDifficultyEasy && 'E',
-                                searchDifficultyNormal && 'N',
-                                searchDifficultyHard && 'H',
-                                searchDifficultyExpert && 'EX',
-                                searchDifficultyXD && 'XD'
-                                ].filter(Boolean).join(', ')
-                            }}</span>
+                            <Remixicon
+                                icon="shapes"
+                                :filled="true"
+                            />
+                            <span>{{ [searchDifficultyEasy && 'E', searchDifficultyNormal && 'N', searchDifficultyHard && 'H', searchDifficultyExpert && 'EX', searchDifficultyXD && 'XD'].filter(Boolean).join(', ') }}</span>
 
                             <div
                                 class="popover popover-difficulties"
@@ -56,7 +52,10 @@
                             v-interactable
                             @click="popoverRangeOpen = !popoverRangeOpen"
                         >
-                            <Remixicon icon="expand-width" :filled="true" />
+                            <Remixicon
+                                icon="expand-width"
+                                :filled="true"
+                            />
                             <span>{{ searchDifficultyFrom }} — {{ searchDifficultyTo }}</span>
 
                             <div
@@ -66,11 +65,19 @@
                             >
                                 <div>
                                     <span>{{ $t('search.minimumDifficulty') }}</span>
-                                    <input type="number" class="input" v-model="searchDifficultyFrom" />
+                                    <input
+                                        type="number"
+                                        class="input"
+                                        v-model="searchDifficultyFrom"
+                                    />
                                 </div>
                                 <div>
                                     <span>{{ $t('search.maximumDifficulty') }}</span>
-                                    <input type="number" class="input" v-model="searchDifficultyTo" />
+                                    <input
+                                        type="number"
+                                        class="input"
+                                        v-model="searchDifficultyTo"
+                                    />
                                 </div>
                             </div>
                         </button>
@@ -80,7 +87,11 @@
                             @click="searchShowExplicit = !searchShowExplicit"
                         >
                             <span>{{ $t('search.explicit') }}</span>
-                            <Switch v-model="searchShowExplicit" style="pointer-events: none" :mini="true" />
+                            <Switch
+                                v-model="searchShowExplicit"
+                                style="pointer-events: none"
+                                :mini="true"
+                            />
                         </button>
                         <button
                             class="button brand"
@@ -96,7 +107,11 @@
                         v-if="results.length === 0"
                     />
                     <ChartGrid v-else>
-                        <ChartItem v-for="chart in results" :key="chart.id" v-bind="chart" />
+                        <ChartItem
+                            v-for="chart in results"
+                            :key="chart.id"
+                            v-bind="chart"
+                        />
                     </ChartGrid>
                 </section>
             </template>
@@ -110,8 +125,15 @@
                         icon="album"
                     />
                 </div>
-                <PlaylistGrid class="p-10" v-else>
-                    <PlaylistItem v-for="playlist in results" :key="playlist.id" v-bind="playlist" />
+                <PlaylistGrid
+                    class="p-10"
+                    v-else
+                >
+                    <PlaylistItem
+                        v-for="playlist in results"
+                        :key="playlist.id"
+                        v-bind="playlist"
+                    />
                 </PlaylistGrid>
             </template>
             <template v-if="searchType === 'users'">
@@ -124,8 +146,15 @@
                         icon="user-3"
                     />
                 </div>
-                <section class="user-grid" v-else>
-                    <UserItem v-for="user in results" :key="user.id" v-bind="user" />
+                <section
+                    class="user-grid"
+                    v-else
+                >
+                    <UserItem
+                        v-for="user in results"
+                        :key="user.id"
+                        v-bind="user"
+                    />
                 </section>
             </template>
         </template>
@@ -134,17 +163,17 @@
 
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
-import {useRoute} from "vue-router";
-import {computed, inject, nextTick, onMounted, ref, watch} from "vue";
-import Loader from "@/components/Loader.vue";
-import UserItem from "@/components/Users/UserItem.vue";
-import PlaylistGrid from "@/components/Playlists/PlaylistGrid.vue";
-import PlaylistItem from "@/components/Playlists/PlaylistItem.vue";
-import ChartGrid from "@/components/Charts/ChartGrid.vue";
-import ChartItem from "@/components/Charts/ChartItem.vue";
-import Remixicon from "@/components/Remixicon.vue";
-import Switch from "@/components/Switch.vue";
-import EmptyState from "@/components/EmptyState.vue";
+import { useRoute } from 'vue-router';
+import { computed, inject, nextTick, onMounted, ref, watch } from 'vue';
+import Loader from '@/components/Loader.vue';
+import UserItem from '@/components/Users/UserItem.vue';
+import PlaylistGrid from '@/components/Playlists/PlaylistGrid.vue';
+import PlaylistItem from '@/components/Playlists/PlaylistItem.vue';
+import ChartGrid from '@/components/Charts/ChartGrid.vue';
+import ChartItem from '@/components/Charts/ChartItem.vue';
+import Remixicon from '@/components/Remixicon.vue';
+import Switch from '@/components/Switch.vue';
+import EmptyState from '@/components/EmptyState.vue';
 
 const api = inject('api');
 const route = useRoute();
@@ -170,7 +199,7 @@ async function loadResults() {
     popoverRangeOpen.value = false;
     results.value = [];
 
-    switch(searchType.value) {
+    switch (searchType.value) {
         case 'charts':
             results.value = await api.searchCharts(searchQuery.value, {
                 diffEasy: searchDifficultyEasy.value,
@@ -200,9 +229,12 @@ async function loadResults() {
 onMounted(() => {
     loadResults();
 });
-watch(() => [searchType.value, searchQuery.value], () => {
-    loadResults();
-});
+watch(
+    () => [searchType.value, searchQuery.value],
+    () => {
+        loadResults();
+    },
+);
 </script>
 
 <style scoped>
@@ -224,7 +256,7 @@ watch(() => [searchType.value, searchQuery.value], () => {
                 & > span {
                     @apply grow text-left;
                 }
-                & > input[type="number"] {
+                & > input[type='number'] {
                     @apply w-20;
                 }
             }

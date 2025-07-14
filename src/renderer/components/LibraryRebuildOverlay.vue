@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="overlay-cache-rebuild"
-    >
+    <div class="overlay-cache-rebuild">
         <Loader />
 
         <p class="mt-8 text-xl font-bold">{{ status?.percent }}%</p>

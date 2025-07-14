@@ -6,10 +6,10 @@ import '@/assets/css/app.css';
 import Router from './router';
 import mitt from 'mitt';
 import * as Sentry from '@sentry/electron/renderer';
-import {createHoverDirective} from "@/modules/hoverDirective";
-import {createI18n} from "vue-i18n";
-import enMessages from "@/locales/en.json";
-import deMessages from "@/locales/de.json";
+import { createHoverDirective } from '@/modules/hoverDirective';
+import { createI18n } from 'vue-i18n';
+import enMessages from '@/locales/en.json';
+import deMessages from '@/locales/de.json';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -19,12 +19,12 @@ const app = createApp(App);
 const mittInstance = mitt();
 
 const i18n = createI18n({
-    locale: await window.spshSettings.get('language') || 'en',
+    locale: (await window.spshSettings.get('language')) || 'en',
     fallbackLocale: 'en',
     messages: {
         en: enMessages,
         de: deMessages,
-    }
+    },
 });
 app.use(i18n);
 

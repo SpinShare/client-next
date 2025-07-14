@@ -33,15 +33,18 @@
             </button>
         </SettingsItem>
 
-        <p class="tip" v-html="$t('setup.game.tip', {code: '<code>custom_path &quot;C:\\YOUR_PATH\&quot;</code>'})" />
+        <p
+            class="tip"
+            v-html="$t('setup.game.tip', { code: '<code>custom_path &quot;C:\\YOUR_PATH\&quot;</code>' })"
+        />
     </section>
 </template>
 
 <script setup>
-import SectionHeader from "@/components/SectionHeader.vue";
-import SettingsItem from "@/components/Settings/SettingsItem.vue";
+import SectionHeader from '@/components/SectionHeader.vue';
+import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import { onMounted, inject, ref } from 'vue';
-import Remixicon from "@/components/Remixicon.vue";
+import Remixicon from '@/components/Remixicon.vue';
 
 const settingsManager = inject('settingsManager');
 const externalApi = inject('externalApi');
@@ -62,7 +65,7 @@ async function handleSave() {
 
 async function handleCustomsSelect() {
     const folderPath = await externalApi.selectFolder(settings.value.pathCustoms);
-    if(folderPath) {
+    if (folderPath) {
         settings.value.pathCustoms = folderPath;
         await handleSave();
     }

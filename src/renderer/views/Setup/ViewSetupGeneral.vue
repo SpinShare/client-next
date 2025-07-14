@@ -61,11 +61,11 @@
 </template>
 
 <script setup>
-import SectionHeader from "@/components/SectionHeader.vue";
-import Switch from "@/components/Switch.vue";
-import SettingsItem from "@/components/Settings/SettingsItem.vue";
+import SectionHeader from '@/components/SectionHeader.vue';
+import Switch from '@/components/Switch.vue';
+import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import { onMounted, inject, ref } from 'vue';
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n({ useScope: 'global' });
 const settingsManager = inject('settingsManager');
@@ -79,7 +79,7 @@ onMounted(async () => {
 async function handleSave() {
     mitt.emit('save-settings', settings.value);
 
-    if(settings.value.language !== locale.value) {
+    if (settings.value.language !== locale.value) {
         locale.value = settings.value.language;
     }
 

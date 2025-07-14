@@ -56,7 +56,7 @@
 
 <script setup>
 import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
-import {computed, inject, onMounted, onUnmounted, ref} from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import SectionHeader from '@/components/SectionHeader.vue';
 import DownloadQueueItem from '@/components/DownloadQueueItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -100,7 +100,7 @@ onMounted(async () => {
             updatedItems[index] = queueItem;
             queueItemsList.value = updatedItems;
 
-            if(updatedItems[index].state === 4) {
+            if (updatedItems[index].state === 4) {
                 mitt.emit('sfx-error');
             }
         }

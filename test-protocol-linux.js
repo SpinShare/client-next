@@ -14,7 +14,7 @@ const isAppRunning = () => {
                 resolve(false);
                 return;
             }
-            
+
             // If we found a process ID, the app is running
             resolve(stdout.trim() !== '');
         });
@@ -25,17 +25,17 @@ const isAppRunning = () => {
 const startApp = () => {
     return new Promise((resolve) => {
         console.log('Starting SpinShare in development mode...');
-        
+
         // Start the app in a new process
         const child = exec('npm start', { detached: true }, (error) => {
             if (error) {
                 console.error(`Error starting app: ${error}`);
             }
         });
-        
+
         // Detach the child process
         child.unref();
-        
+
         // Give the app some time to start
         setTimeout(() => {
             console.log('App should be started now.');
@@ -60,17 +60,17 @@ const openProtocolUrl = (url) => {
 // Main function
 async function main() {
     console.log('Testing spinshare:// protocol in development mode');
-    
+
     // Check if the app is already running
     const appRunning = await isAppRunning();
-    
+
     if (!appRunning) {
         console.log('App is not running.');
         await startApp();
     } else {
         console.log('App is already running.');
     }
-    
+
     // Open the URL with the spinshare:// protocol
     openProtocolUrl(testUrl);
 }

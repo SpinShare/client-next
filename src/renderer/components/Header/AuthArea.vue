@@ -33,7 +33,11 @@
                     @click="connectNotificationPopupOpen = !connectNotificationPopupOpen"
                 >
                     <Remixicon icon="notification" />
-                    <span class="badge" v-if="notifications.length">{{ notifications.length || 0 }}</span>
+                    <span
+                        class="badge"
+                        v-if="notifications.length"
+                        >{{ notifications.length || 0 }}</span
+                    >
                 </button>
                 <transition name="popup">
                     <div
@@ -53,7 +57,12 @@
                         </header>
 
                         <div class="notifications">
-                            <EmptyState :label="$t('header.auth.notifications.noNotifications')" icon="notification" class="m-4" v-if="notifications.length === 0" />
+                            <EmptyState
+                                :label="$t('header.auth.notifications.noNotifications')"
+                                icon="notification"
+                                class="m-4"
+                                v-if="notifications.length === 0"
+                            />
 
                             <button
                                 class="item"
@@ -62,28 +71,29 @@
                                 :key="notification.id"
                                 @click="handleNotificationClick(notification)"
                             >
-                                <template
-                                    v-if="notification.notificationType === NOTIFICATION_TYPE_SYSTEM"
-                                >
+                                <template v-if="notification.notificationType === NOTIFICATION_TYPE_SYSTEM">
                                     <Remixicon icon="megaphone" />
                                     <p>{{ notification.notificationData }}</p>
                                 </template>
-                                <template
-                                    v-if="notification.notificationType === NOTIFICATION_TYPE_NEWREVIEW"
-                                >
-                                    <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
+                                <template v-if="notification.notificationType === NOTIFICATION_TYPE_NEWREVIEW">
+                                    <div
+                                        class="chart-icon"
+                                        :style="`background-image: url(${notification.connectedSong.cover})`"
+                                    ></div>
                                     <p>{{ $t('header.auth.notifications.newReview', { username: notification.connectedUser.username, title: notification.connectedSong.title }) }}</p>
                                 </template>
-                                <template
-                                    v-if="notification.notificationType === NOTIFICATION_TYPE_NEWSPINPLAY"
-                                >
-                                    <div class="chart-icon" :style="`background-image: url(${notification.connectedSong.cover})`"></div>
+                                <template v-if="notification.notificationType === NOTIFICATION_TYPE_NEWSPINPLAY">
+                                    <div
+                                        class="chart-icon"
+                                        :style="`background-image: url(${notification.connectedSong.cover})`"
+                                    ></div>
                                     <p>{{ $t('header.auth.notifications.newSpinPlay', { username: notification.connectedUser.username, title: notification.connectedSong.title }) }}</p>
                                 </template>
-                                <template
-                                    v-if="notification.notificationType === NOTIFICATION_TYPE_RECEIVEDCARD"
-                                >
-                                    <div class="card-icon" :style="`background-image: url(${notification.connectedCard.icon})`"></div>
+                                <template v-if="notification.notificationType === NOTIFICATION_TYPE_RECEIVEDCARD">
+                                    <div
+                                        class="card-icon"
+                                        :style="`background-image: url(${notification.connectedCard.icon})`"
+                                    ></div>
                                     <p>{{ $t('header.auth.notifications.receivedCard', { card: notification.connectedCard.title }) }}</p>
                                 </template>
                             </button>
@@ -216,14 +226,9 @@
 import Remixicon from '@/components/Remixicon.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Loader from '@/components/Loader.vue';
-import {
-    NOTIFICATION_TYPE_NEWREVIEW,
-    NOTIFICATION_TYPE_NEWSPINPLAY,
-    NOTIFICATION_TYPE_RECEIVEDCARD,
-    NOTIFICATION_TYPE_SYSTEM
-} from "@spinshare/api-js";
-import EmptyState from "@/components/EmptyState.vue";
-import router from "@/router";
+import { NOTIFICATION_TYPE_NEWREVIEW, NOTIFICATION_TYPE_NEWSPINPLAY, NOTIFICATION_TYPE_RECEIVEDCARD, NOTIFICATION_TYPE_SYSTEM } from '@spinshare/api-js';
+import EmptyState from '@/components/EmptyState.vue';
+import router from '@/router';
 
 const mitt = inject('mitt');
 const connect = inject('connect');
@@ -247,7 +252,7 @@ onUnmounted(() => {
 async function onAuthUpdated() {
     isLoggedIn.value = await connect.isLoggedIn();
 
-    if(notificationCheckInterval.value) {
+    if (notificationCheckInterval.value) {
         clearInterval(notificationCheckInterval.value);
     }
 
@@ -264,7 +269,7 @@ async function onAuthUpdated() {
 }
 
 function handleUpload() {
-    externalApi.openUrl("https://spinsha.re/upload");
+    externalApi.openUrl('https://spinsha.re/upload');
 }
 
 function handleLogout() {
@@ -275,7 +280,7 @@ function handleLogout() {
 async function handleNotificationClick(notification) {
     await connect.clearNotification(notification.id);
 
-    switch(notification.notificationType) {
+    switch (notification.notificationType) {
         case NOTIFICATION_TYPE_NEWREVIEW:
             router.push(`/chart/${notification.connectedSong.id}/reviews`);
             break;
@@ -330,7 +335,8 @@ async function handleNotificationClearAll() {
                     @apply bg-brand-700 text-brand-200 w-[32px] h-[32px] rounded-full flex items-center justify-center;
                 }
 
-                & .chart-icon, & .card-icon {
+                & .chart-icon,
+                & .card-icon {
                     @apply bg-cover bg-center w-[32px] h-[32px] rounded-sm;
                 }
 
