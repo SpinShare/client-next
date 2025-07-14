@@ -244,9 +244,9 @@
     "cache": {
       "header": "Caché de biblioteca",
       "body": "Para mostrar fácilmente si ya tienes una canción instalada y si hay una actualización disponible, es necesario compilar una caché.",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
+      "explanation": "Este caché pasa por la carpeta de canciones para el juego y crea un archivo de texto más pequeño con todas las canciones existentes. También crea una pequeña miniatura de la imagen del álbum para que su experiencia de navegación es más estable, incluso con muchas canciones instaladas.",
+      "timeNeeded": "Si aún no has instalado canciones para Spin Rhythm XD, este paso será instantáneo. Si tienes una biblioteca muy grande, puede tardar hasta un minuto.",
+      "tip": "Consejo: Siempre puedes volver a analizar tu biblioteca en la pestaña de biblioteca.",
       "analyze": "Analizar biblioteca",
       "done": "¡Todo listo!"
     },
