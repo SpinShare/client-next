@@ -124,7 +124,23 @@
   },
   "review": {
     "noComment": "Speen speen.",
-    "recommended": "Speen"
+    "recommended": "Speen",
+    "yourReview": {
+      "header": "Speen speen",
+      "noReview": "Speen speen speen Speen speen.",
+      "actions": {
+        "write": "Speen speen",
+        "edit": "Speen speen",
+        "remove": "Speen speen speen"
+      }
+    },
+    "overlay": {
+      "header": "Speen/Speen speen",
+      "commentPlaceholder": "Speen speen speen...",
+      "recommendedLabel": "Speen speen speen Speen speen?",
+      "save": "Speen",
+      "close": "Speen"
+    }
   },
   "search": {
     "minimumDifficulty": "Speen speen",
