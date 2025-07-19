@@ -61,6 +61,15 @@
                         </button>
                         <button
                             class="button"
+                            @click="handleCopyLink"
+                            v-interactable
+                        >
+                            <Remixicon
+                                icon="clipboard"
+                            />
+                        </button>
+                        <button
+                            class="button"
                             @click="handleOpenReport"
                             v-interactable
                         >
@@ -131,6 +140,10 @@ function handleOpenUrl() {
 
 function handleOpenReport() {
     externalApi.openUrl(`https://spinsha.re/report/user/${user.value.id}`);
+}
+
+function handleCopyLink() {
+  externalApi.copyText(`https://spinsha.re/user/${user.value.id}`);
 }
 
 watch(
