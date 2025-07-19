@@ -44,6 +44,15 @@
                                 filled
                             />
                         </button>
+                        <button
+                            class="button"
+                            @click="handleCopyLink"
+                            v-interactable
+                        >
+                            <Remixicon
+                                icon="clipboard"
+                            />
+                        </button>
                     </div>
 
                     <UserItem v-bind="playlist.user" />
@@ -116,6 +125,10 @@ function handleAddToQueue() {
 
 function handleOpenUrl() {
     externalApi.openUrl(`https://spinsha.re/playlist/${playlist.value.id}`);
+}
+
+function handleCopyLink() {
+    externalApi.copyText(`https://spinsha.re/playlist/${playlist.value.id}`);
 }
 </script>
 

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, shell, dialog, clipboard } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { SpinShareClient } from '@spinshare/api-js';
@@ -278,6 +278,13 @@ app.whenReady().then(() => {
         } catch (error) {
             console.error('Error selecting folder:', error);
             return null;
+        }
+    });
+    ipcMain.handle('copy-text', async (event, text) => {
+        try {
+            clipboard.writeText(text);
+        } catch (error) {
+            console.error('Error copying text:', error);
         }
     });
 

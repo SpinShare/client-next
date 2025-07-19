@@ -112,12 +112,20 @@
                         </button>
                         <button
                             class="button"
+                            @click="handleCopyLink"
+                            v-interactable
+                        >
+                          <Remixicon
+                              icon="clipboard"
+                          />
+                        </button>
+                        <button
+                            class="button"
                             @click="handleOpenReport"
                             v-interactable
                         >
                             <Remixicon
                                 icon="flag-2"
-                                filled
                             />
                         </button>
                     </div>
@@ -288,6 +296,10 @@ function handleOpenUrl() {
 
 function handleOpenReport() {
     externalApi.openUrl(`https://spinsha.re/report/song/${chart.value.id}`);
+}
+
+function handleCopyLink() {
+    externalApi.copyText(`https://spinsha.re/song/${chart.value.id}`);
 }
 
 function playPreview() {
