@@ -126,7 +126,6 @@
                         >
                             <Remixicon
                                 icon="flag-2"
-                                filled
                             />
                         </button>
                     </div>
