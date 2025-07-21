@@ -1,9 +1,10 @@
 <template>
-    <RouterLink
+    <component
+        :is="isLocalChart ? 'div' : RouterLink"
         :to="`/chart/${id || fileReference}`"
-        :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''}`"
-        @click.middle.prevent="handleAddToQueue"
-        v-interactable
+        :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''} ${isLocalChart ? 'local-chart' : ''}`"
+        @click.middle.prevent="isLocalChart ? null : handleAddToQueue"
+        v-interactable="!isLocalChart"
     >
         <div
             v-if="!isLocal"
@@ -25,14 +26,20 @@
                 v-if="!mini"
             >
                 <div
+                    class="installation-status local"
+                    v-if="isLocalChart"
+                >
+                    {{ $t('chart.status.local') }}
+                </div>
+                <div
                     class="installation-status installed"
-                    v-if="cacheUpdateHash === updateHash"
+                    v-if="!isLocalChart && cacheUpdateHash === updateHash"
                 >
                     {{ $t('chart.status.installed') }}
                 </div>
                 <div
                     class="installation-status update"
-                    v-if="cacheUpdateHash && cacheUpdateHash !== updateHash"
+                    v-if="!isLocalChart && cacheUpdateHash && cacheUpdateHash !== updateHash"
                 >
                     {{ $t('chart.status.outOfDate') }}
                 </div>
@@ -66,12 +73,13 @@
         >
             {{ $t('chart.explicitLabel') }}
         </div>
-    </RouterLink>
+    </component>
 </template>
 
 <script setup>
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import {computed, inject, onMounted, onUnmounted, ref} from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
+import {RouterLink} from "vue-router";
 
 const props = defineProps({
     id: {
@@ -186,6 +194,10 @@ onUnmounted(() => {
     mitt.off('item-change');
 });
 
+const isLocalChart = computed(() => {
+    return !Number.isInteger(props.id) && !props.fileReference.startsWith("spinshare_");
+});
+
 async function handleAddToQueue() {
     const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter, props.fileReference);
     await queue.addQueueItem(newDownloadItem);
@@ -240,6 +252,9 @@ async function handleAddToQueue() {
             & .installation-status {
                 @apply text-xs py-0.5 px-1.5 rounded;
 
+                &.local {
+                    @apply bg-cyan-800 text-green-50;
+                }
                 &.installed {
                     @apply bg-green-800 text-green-50;
                 }
@@ -267,6 +282,10 @@ async function handleAddToQueue() {
 
     &:hover {
         @apply bg-base-300 dark:bg-base-800;
+    }
+
+    &.local-chart {
+        @apply bg-transparent border border-base-300 dark:border-base-800 cursor-default;
     }
 
     &.mini {

@@ -112,12 +112,20 @@
                         </button>
                         <button
                             class="button"
+                            @click="handleCopyLink"
+                            v-interactable
+                        >
+                          <Remixicon
+                              icon="clipboard"
+                          />
+                        </button>
+                        <button
+                            class="button"
                             @click="handleOpenReport"
                             v-interactable
                         >
                             <Remixicon
                                 icon="flag-2"
-                                filled
                             />
                         </button>
                     </div>
@@ -232,6 +240,7 @@ import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
 import SectionHeader from '@/components/SectionHeader.vue';
+import router from "@/router";
 
 const mitt = inject('mitt');
 const api = inject('api');
@@ -251,6 +260,15 @@ const playDialog = ref(null);
 
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
+    if(chart.value === null) {
+        externalApi.showDialog({
+            title: 'Error loading chart',
+            type: 'error',
+            message: `There is no chart with the ID: ${chartId.value}`
+        });
+        await router.push('/');
+        return;
+    }
     cacheItem.value = await libraryManager.get(chart.value.fileReference);
     mitt.on('item-change', async (queueItem) => {
         if (queueItem.id !== chart.value.id) return;
@@ -290,6 +308,10 @@ function handleOpenReport() {
     externalApi.openUrl(`https://spinsha.re/report/song/${chart.value.id}`);
 }
 
+function handleCopyLink() {
+    externalApi.copyText(`https://spinsha.re/song/${chart.value.id}`);
+}
+
 function playPreview() {
     if (chartPreview.value) {
         chartPreview.value.currentTime = 0;
@@ -317,6 +339,15 @@ watch(
     async () => {
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
+        if(chart.value === null) {
+            externalApi.showDialog({
+                title: 'Error loading chart',
+                type: 'error',
+                message: `There is no chart with the ID: ${chartId.value}`
+            });
+            await router.push('/');
+            return;
+        }
         cacheItem.value = await libraryManager.get(chart.value.fileReference);
     },
 );

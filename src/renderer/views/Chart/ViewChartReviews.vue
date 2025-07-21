@@ -11,7 +11,7 @@
     >
         <div
             class="your-review"
-            v-if="isLoggedIn"
+            v-if="isLoggedIn && profile.id !== chart.uploader"
         >
             <SectionHeader :title="$t('review.yourReview.header')" />
 
@@ -95,11 +95,19 @@ const connect = inject('connect');
 const route = useRoute();
 const chartId = route.params.chartId;
 const isLoggedIn = ref(false);
+const profile = ref(null);
 const reviewOverlay = ref(null);
 const userReview = ref(null);
 const userReviewRemoveLoading = ref(false);
 const reviews = ref(null);
 const reviewAverage = ref(0);
+
+const props = defineProps({
+    chart: {
+        type: Object,
+        default: null,
+    },
+});
 
 onMounted(async () => {
     await loadUserReview();
@@ -115,6 +123,7 @@ async function loadReviews() {
 async function loadUserReview() {
     isLoggedIn.value = await connect.isLoggedIn();
     if(isLoggedIn.value) {
+        profile.value = await connect.getProfile();
         userReview.value = await connect.getReview(chartId);
     }
 }
