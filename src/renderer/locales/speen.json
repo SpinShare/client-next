@@ -93,6 +93,7 @@
     "noReviews": "Speen speen Speen.",
     "noSpinPlays": "Speen speen Speen.",
     "status": {
+      "local": "",
       "installed": "Speen",
       "outOfDate": "Speen speen"
     },
