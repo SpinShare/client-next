@@ -69,7 +69,8 @@ export function createHoverDirective() {
     };
 
     return {
-        mounted(el) {
+        mounted(el, binding) {
+            if (binding.value === false) return;
             createAudioHover();
             createAudioClick();
             el.addEventListener('mouseenter', playHoverSound);
@@ -77,6 +78,19 @@ export function createHoverDirective() {
         },
         unmounted(el) {
             el.removeEventListener('mouseenter', playHoverSound);
+            el.removeEventListener('click', playClickSound);
         },
+        updated(el, binding) {
+            el.removeEventListener('mouseenter', playHoverSound);
+            el.removeEventListener('click', playClickSound);
+
+            if (binding.value === false) return;
+
+            createAudioHover();
+            createAudioClick();
+            el.addEventListener('mouseenter', playHoverSound);
+            el.addEventListener('click', playClickSound);
+        }
+
     };
 }
