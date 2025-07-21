@@ -53,12 +53,20 @@ function stripHtml(html) {
 const strippedTitle = computed(() => stripHtml(props.title));
 
 function handleClick() {
-    let id = 0;
-    if (props.button.type === 0 || props.button.type === 1) {
-        id = parseInt(props.button.data);
+    // Legacy behavior: Sometimes, playlists are setup as external
+    let buttonType = props?.button?.type ?? 3;
+    let buttonData = props?.button?.data ?? '';
+    if(buttonType === 3 && props.button.data.startsWith("https://spinsha.re/playlist")) {
+        buttonType = 1;
+        buttonData = props.button.data.split("playlist/")[1];
     }
 
-    switch (props.button.type) {
+    let id = 0;
+    if (buttonType === 0 || buttonType === 1) {
+        id = parseInt(buttonData);
+    }
+
+    switch (buttonType) {
         case 0:
             // Chart Deeplink
             router.push(`/chart/${id}`);
@@ -69,11 +77,11 @@ function handleClick() {
             break;
         case 2:
             // Search Deeplink
-            router.push(`/discover/search?type=charts&query=${encodeURIComponent(props.button.data)}`);
+            router.push(`/discover/search?type=charts&query=${encodeURIComponent(buttonData)}`);
             break;
         case 3:
             // External
-            externalApi.openUrl(props.button.data);
+            externalApi.openUrl(buttonData);
             break;
     }
 }
