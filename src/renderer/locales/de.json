@@ -93,6 +93,7 @@
     "noReviews": "Noch keine Reviews abgegeben.",
     "noSpinPlays": "Noch keine SpinPlays.",
     "status": {
+      "local": "",
       "installed": "Installiert",
       "outOfDate": "Veraltet"
     },
