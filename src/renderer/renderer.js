@@ -58,6 +58,12 @@ window.spshLibrary.onCacheRebuildDone(() => {
 window.spshUpdates.onUpdateCheckDone((hasNewRelease) => {
     mittInstance.emit('update-check-done', hasNewRelease);
 });
+window.spshExternalApi.onWindowFocused(() => {
+    mittInstance.emit('window-focused');
+});
+window.spshExternalApi.onWindowBlurred(() => {
+   mittInstance.emit('window-blurred');
+});
 
 // Handle deep link navigation
 window.spshDeepLink.onNavigateTo((route) => {

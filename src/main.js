@@ -290,6 +290,12 @@ app.whenReady().then(() => {
             console.error('Error copying text:', error);
         }
     });
+    app.on('browser-window-focus', (event) => {
+        mainWindow.webContents.send('window-focused');
+    });
+    app.on('browser-window-blur', (event) => {
+        mainWindow.webContents.send('window-blurred');
+    });
 
     /* SettingsManager */
     ipcMain.handle('get-settings-all', (event) => {

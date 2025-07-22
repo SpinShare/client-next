@@ -1,7 +1,7 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
-import { contextBridge, ipcRenderer } from 'electron';
+import {contextBridge, ipcRenderer} from 'electron';
 
 contextBridge.exposeInMainWorld('spshApi', {
     getClientLatestVersion: async () => ipcRenderer.invoke('get-client-latest-version'),
@@ -129,6 +129,16 @@ contextBridge.exposeInMainWorld('spshExternalApi', {
     showDialog: async(options) => ipcRenderer.invoke('show-dialog', options),
     selectFolder: async (folderPath) => ipcRenderer.invoke('select-folder', folderPath),
     copyText: async (text) => ipcRenderer.invoke('copy-text', text),
+    onWindowFocused: (callback) => {
+        const listener = () => callback();
+        ipcRenderer.on('window-focused', listener);
+        return () => ipcRenderer.removeListener('window-focused', listener);
+    },
+    onWindowBlurred: (callback) => {
+        const listener = () => callback();
+        ipcRenderer.on('window-blurred', listener);
+        return () => ipcRenderer.removeListener('window-blurred', listener);
+    },
 });
 
 contextBridge.exposeInMainWorld('spshDeepLink', {
