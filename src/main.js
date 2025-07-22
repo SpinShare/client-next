@@ -265,6 +265,9 @@ app.whenReady().then(() => {
             return { success: false, error: error.message };
         }
     });
+    ipcMain.handle('show-dialog', async (event, options) => {
+        await dialog.showMessageBox(mainWindow, options);
+    });
     ipcMain.handle('select-folder', async (event, folderPath) => {
         try {
             const selectedFolderPath = await dialog.showOpenDialog({

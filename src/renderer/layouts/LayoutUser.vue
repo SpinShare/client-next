@@ -122,6 +122,7 @@ import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
+import router from "@/router";
 
 const api = inject('api');
 const externalApi = inject('externalApi');
@@ -131,6 +132,15 @@ const user = ref(null);
 
 onMounted(async () => {
     user.value = await api.getUserDetail(userId.value);
+    if(user.value === null) {
+        externalApi.showDialog({
+            title: 'Error loading user',
+            type: 'error',
+            message: `There is no user with the ID: ${userId.value}`
+        });
+        await router.push('/');
+        return;
+    }
 });
 
 function handleOpenUrl() {
@@ -150,6 +160,15 @@ watch(
     async () => {
         userId.value = route.params.userId;
         user.value = await api.getUserDetail(userId.value);
+        if(user.value === null) {
+            externalApi.showDialog({
+                title: 'Error loading user',
+                type: 'error',
+                message: `There is no user with the ID: ${userId.value}`
+            });
+            await router.push('/');
+            return;
+        }
     },
 );
 </script>
