@@ -10,6 +10,9 @@ import { createHoverDirective } from '@/modules/hoverDirective';
 import { createI18n } from 'vue-i18n';
 import enMessages from '@/locales/en.json';
 import deMessages from '@/locales/de.json';
+import frMessages from '@/locales/fr.json';
+import esMessages from '@/locales/es.json';
+import speenMessages from '@/locales/speen.json';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -24,6 +27,9 @@ const i18n = createI18n({
     messages: {
         en: enMessages,
         de: deMessages,
+        fr: frMessages,
+        es: esMessages,
+        speen: speenMessages,
     },
 });
 app.use(i18n);
