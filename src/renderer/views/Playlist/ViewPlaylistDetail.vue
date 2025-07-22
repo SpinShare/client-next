@@ -103,7 +103,6 @@ const playlist = ref(null);
 
 onMounted(async () => {
     playlist.value = await api.getPlaylist(playlistId);
-    console.log(playlist.value);
     if(playlist.value === null) {
         externalApi.showDialog({
             title: 'Error loading playlist',
