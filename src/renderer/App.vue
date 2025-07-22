@@ -25,6 +25,7 @@ import LibraryRebuildOverlay from '@/components/LibraryRebuildOverlay.vue';
 const mitt = inject('mitt');
 const route = useRoute();
 const router = useRouter();
+const externalApi = inject('externalApi');
 const settingsManager = inject('settingsManager');
 const updateManager = inject('updateManager');
 const libraryManager = inject('libraryManager');
@@ -50,6 +51,12 @@ onMounted(async () => {
     });
     libraryManager.onCacheRebuildDone(() => {
         cacheRebuildActive.value = false;
+    });
+    externalApi.onWindowFocused(() => {
+        bgmDefault.value.volume = 0.5;
+    });
+    externalApi.onWindowBlurred(() => {
+        bgmDefault.value.volume = 0.0;
     });
 
     if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
