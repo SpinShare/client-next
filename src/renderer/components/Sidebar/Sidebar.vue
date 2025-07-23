@@ -35,17 +35,17 @@
                 :active="route.fullPath.includes('hotThisMonth/')"
                 :expanded="expanded"
             />
+        </nav>
+
+        <nav>
+            <SidebarExpandedToggle :expanded="expanded" />
+            <SidebarDownloadQueue :expanded="expanded" />
             <SidebarItemLink
                 to="/library"
                 :label="$t('sidebar.library')"
                 icon="book-shelf"
                 :expanded="expanded"
             />
-        </nav>
-
-        <nav>
-            <SidebarExpandedToggle :expanded="expanded" />
-            <SidebarDownloadQueue :expanded="expanded" />
             <SidebarItemLink
                 to="/settings"
                 :label="$t('sidebar.settings')"

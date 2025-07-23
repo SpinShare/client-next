@@ -3,7 +3,7 @@
         :is="isLocalChart ? 'div' : RouterLink"
         :to="`/chart/${id || fileReference}`"
         :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''} ${isLocalChart ? 'local-chart' : ''}`"
-        @click.middle.prevent="isLocalChart ? null : handleAddToQueue"
+        @click.middle.prevent="handleAddToQueue"
         v-interactable="!isLocalChart"
     >
         <div
@@ -199,6 +199,8 @@ const isLocalChart = computed(() => {
 });
 
 async function handleAddToQueue() {
+    if(isLocalChart.value) return;
+
     const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter, props.fileReference);
     await queue.addQueueItem(newDownloadItem);
 }
