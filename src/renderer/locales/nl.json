@@ -2,260 +2,260 @@
   "header": {
     "search": {
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Charts",
+        "playlists": "Afspeellijsten",
+        "users": "Gebruikers"
       },
-      "placeholder": ""
+      "placeholder": "Een chart, charter of afspeellijst zoeken..."
     },
     "auth": {
-      "login": "",
-      "logout": "",
-      "upload": "",
-      "profile": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": "",
+      "login": "Aanmelden",
+      "logout": "Afmelden",
+      "upload": "Uploaden",
+      "profile": "Profiel",
+      "charts": "Charts",
+      "reviews": "Beoordelingen",
+      "playlists": "Afspeellijsten",
+      "spinPlays": "SpinPlays",
       "notifications": {
-        "header": "",
-        "noNotifications": "",
-        "newReview": "",
-        "newSpinPlay": "",
-        "receivedCard": ""
+        "header": "Notificaties",
+        "noNotifications": "Geen meldingen",
+        "newReview": "{username} heeft je chart '{title}' nagekeken",
+        "newSpinPlay": "{username} heeft een SpinPlay toegevoegd aan je chart '{title}'",
+        "receivedCard": "Je hebt de profielkaart '{card}' ontvangen"
       }
     }
   },
   "sidebar": {
-    "frontpage": "",
-    "newest": "",
-    "updated": "",
-    "hotThisWeek": "",
-    "hotThisMonth": "",
-    "library": "",
-    "toggleSidebar": "",
+    "frontpage": "Voorpagina",
+    "newest": "Nieuwste",
+    "updated": "Bijgewerkt",
+    "hotThisWeek": "Hot deze week",
+    "hotThisMonth": "Hot deze maand",
+    "library": "Bibliotheek",
+    "toggleSidebar": "Zijbalk in-/uitschakelen",
     "downloadQueue": {
-      "downloads": "",
-      "header": "",
-      "noDownloads": ""
+      "downloads": "Downloads",
+      "header": "Download wachtrij ({count})",
+      "noDownloads": "Geen downloads in de wachtrij."
     },
-    "settings": ""
+    "settings": "Instellingen"
   },
   "connect": {
     "login": {
-      "header": "",
-      "body": ""
+      "header": "Log in op je account",
+      "body": "Ga naar {link} en log in op je account."
     },
     "code": {
-      "header": "",
-      "body": "",
-      "link_label": ""
+      "header": "Vind je verbindingscode",
+      "body": "Klik op {link} of klik op je profielfoto rechtsboven en ga naar <strong>Settings</strong>. Ga naar het tabblad <strong>Connect</strong> en zoek je verbindingscode.",
+      "link_label": "hier"
     },
     "input": {
-      "header": "",
-      "body": "",
-      "placeholder": "",
-      "login": "",
-      "errorIncorrect": "",
-      "errorServer": ""
+      "header": "Voer de verbindingscode in",
+      "body": "Voer hieronder de verbindingscode in en klik op <strong>Log in op uw account</strong>.",
+      "placeholder": "Verbind code...",
+      "login": "Log in op uw account",
+      "errorIncorrect": "De verbindingscode was niet correct. Probeer het opnieuw.",
+      "errorServer": "Kan niet inloggen. Probeer het later opnieuw."
     }
   },
   "discover": {
     "promos": {
-      "header": ""
+      "header": "Ontdek"
     },
     "featured": {
-      "header": "",
-      "seeMore": ""
+      "header": "Aanbevolen",
+      "seeMore": "Meer weergeven"
     },
-    "previousPage": "",
-    "nextPage": ""
+    "previousPage": "Vorige pagina",
+    "nextPage": "Volgende pagina"
   },
   "user": {
-    "supporter": "",
-    "verified": "",
+    "supporter": "Supporter",
+    "verified": "Geverifieerd",
     "tabs": {
-      "detail": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Detail",
+      "charts": "Charts ({count})",
+      "reviews": "Beoordelingen ({count})",
+      "playlists": "Afspeellijsten ({count})",
+      "spinPlays": "SpinPlays ({count})"
     },
-    "noCards": "",
-    "noCharts": "",
-    "noReviews": "",
-    "noSpinPlays": ""
+    "noCards": "Nog geen kaarten ontvangen.",
+    "noCharts": "Nog geen charts geüpload.",
+    "noReviews": "Er zijn nog geen beoordelingen gegeven.",
+    "noSpinPlays": "Er zijn nog geen SpinPlays geüpload."
   },
   "chart": {
-    "explicitLabel": "",
-    "noDescription": "",
-    "noPlaylists": "",
-    "noReviews": "",
-    "noSpinPlays": "",
+    "explicitLabel": "Expliciete inhoud – Beweeg om te onthullen",
+    "noDescription": "Nog geen beschrijving.",
+    "noPlaylists": "Nog niet in een afspeellijst.",
+    "noReviews": "Nog geen beoordelingen.",
+    "noSpinPlays": "Nog geen SpinPlays.",
     "status": {
-      "local": "",
-      "installed": "",
-      "outOfDate": ""
+      "local": "Lokaal",
+      "installed": "Geïnstalleerd",
+      "outOfDate": "Verouderd"
     },
-    "play": "",
-    "addToQueue": "",
+    "play": "Speel",
+    "addToQueue": "Toevoegen aan wachtrij",
     "tabs": {
-      "detail": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Detail",
+      "reviews": "Beoordelingen",
+      "playlists": "Afspeellijsten",
+      "spinPlays": "SpinPlays"
     },
     "playDialog": {
-      "header": "",
-      "body": "",
-      "close": ""
+      "header": "Speel",
+      "body": "Selecteer een moeilijkheid om Spin Rhythm XD te starten en meteen te spelen <strong>{title}</strong>.",
+      "close": "Afsluiten"
     },
     "statistics": {
-      "views": "",
-      "downloads": "",
-      "uploaded": "",
-      "updated": ""
+      "views": "Weergaven",
+      "downloads": "Downloads",
+      "uploaded": "Geüpload",
+      "updated": "Bijgewerkt"
     }
   },
   "playlist": {
-    "official": "",
-    "count": "",
-    "addToQueue": "",
-    "withChartsBy": ""
+    "official": "Officiële",
+    "count": "{count} charts",
+    "addToQueue": "Toevoegen aan wachtrij",
+    "withChartsBy": "Met charts door"
   },
   "review": {
-    "noComment": "",
-    "recommended": "",
+    "noComment": "Geen commentaar.",
+    "recommended": "Aanbevolen",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Uw beoordeling",
+      "noReview": "Je hebt nog geen beoordeling voor deze chart geschreven.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Schrijf een beoordeling",
+        "edit": "Bewerk uw beoordeling",
+        "remove": "Verwijder uw beoordeling"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Uw recensie toevoegen/wijzigen",
+      "commentPlaceholder": "Uw commentaar hier...",
+      "recommendedLabel": "Wil je anderen aanraden om deze chart te spelen?",
+      "save": "Opslaan",
+      "close": "Afsluiten"
     }
   },
   "search": {
-    "minimumDifficulty": "",
-    "maximumDifficulty": "",
-    "explicit": "",
-    "apply": "",
-    "noChartResults": "",
-    "noPlaylistResults": "",
-    "noUserResults": ""
+    "minimumDifficulty": "Minimale moeilijkheidsgraad",
+    "maximumDifficulty": "Maximale moeilijkheidsgraad",
+    "explicit": "Expliciet",
+    "apply": "Toepassen",
+    "noChartResults": "Geen charts gevonden. Probeer een andere zoekopdracht of pas bovenstaande filters aan.",
+    "noPlaylistResults": "Geen afspeellijsten gevonden. Probeer een andere zoekopdracht.",
+    "noUserResults": "Geen gebruikers gevonden. Probeer een andere zoekopdracht."
   },
   "difficulty": {
-    "easy": "",
-    "normal": "",
-    "hard": "",
-    "expert": "",
-    "xd": ""
+    "easy": "Makkelijk",
+    "normal": "Normaal",
+    "hard": "Moeilijk",
+    "expert": "Expert",
+    "xd": "XD"
   },
   "library": {
-    "header": "",
-    "open": "",
-    "rebuild": "",
-    "noCharts": ""
+    "header": "Bibliotheek",
+    "open": "Open",
+    "rebuild": "Maak opnieuw aan",
+    "noCharts": "Geen charts gevonden. Maak de cache opnieuw aan of download charts."
   },
   "updateToast": {
-    "header": "",
-    "body": "",
+    "header": "Update beschikbaar",
+    "body": "Update naar de nieuwste versie om nieuwe functies en bugfixes te ontvangen.",
     "actions": {
-      "get": "",
-      "later": ""
+      "get": "Haal update",
+      "later": "Later"
     }
   },
   "settings": {
     "general": {
-      "header": "",
-      "version": "",
-      "checkForUpdates": "",
-      "getUpdate": "",
+      "header": "Algemeen",
+      "version": "Versie {version}",
+      "checkForUpdates": "Op updates controleren",
+      "getUpdate": "Haal update",
       "theme": {
-        "label": "",
-        "dark": "",
-        "light": ""
+        "label": "Thema",
+        "dark": "Donkere modus",
+        "light": "Lichte modus"
       },
       "language": {
-        "label": "",
-        "description": ""
+        "label": "Taal",
+        "description": "Vertaald door ellitedev"
       }
     },
     "interface": {
-      "header": "",
+      "header": "Interface",
       "showExplicit": {
-        "label": "",
-        "description": ""
+        "label": "Toon expliciet",
+        "description": "Automatisch expliciete charts met metadata weergeven"
       },
       "downloadNotifications": {
-        "label": "",
-        "description": ""
+        "label": "Meldingen downloaden",
+        "description": "Waarschuw wanneer een chart is gedownload of de wachtrij is voltooid"
       },
       "openDownloadQueue": {
-        "label": "",
-        "description": ""
+        "label": "Open download wachtrij",
+        "description": "Open automatisch de downloadwachtrij wanneer een nieuwe chart is toegevoegd aan de wachtrij"
       },
       "sfxEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Geluidseffecten ingeschakeld",
+        "description": "Speelt UI geluidseffecten"
       },
       "musicEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Menu muziek ingeschakeld",
+        "description": "Speelt menumuziek af"
       }
     },
     "account": {
-      "header": "",
+      "header": "Account",
       "logout": {
-        "label": "",
-        "description": "",
-        "logout": ""
+        "label": "Afmelden",
+        "description": "Na het uitloggen moet u ook de toegang tot 'SpinShare Next' op spinsha.re verwijderen",
+        "logout": "Afmelden"
       }
     },
     "game": {
-      "header": "",
+      "header": "Spel",
       "pathCustoms": {
-        "label": "",
-        "description": "",
-        "placeholder": "",
-        "select": "",
-        "detect": ""
+        "label": "Customs pad",
+        "description": "Pad naar de map met custom charts",
+        "placeholder": "Nog niet ingesteld",
+        "select": "Selecteer",
+        "detect": "Detecteer"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": ""
+      "body": "Bedankt voor het downloaden van de SpinShare desktop client! Voordat je charts kunt downloaden van de SpinShare community, moeten we onze initiële installatie doorlopen."
     },
     "general": {
-      "header": ""
+      "header": "Algemene instellingen"
     },
     "game": {
-      "header": "",
-      "tip": ""
+      "header": "Spel instellingen",
+      "tip": "Tip: Om je charts in een andere map of op een andere schijf op te slaan, voeg je {code} toe aan je Steam launch options."
     },
     "cache": {
-      "header": "",
-      "body": "",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
-      "analyze": "",
-      "done": ""
+      "header": "Bibliotheek cache",
+      "body": "Om eenvoudig te tonen of je al een chart hebt geïnstalleerd en of er een update beschikbaar is, moet een cache worden gebouwd.",
+      "explanation": "Deze cache gaat door de map met de custom charts van je spel en maakt een kleiner tekstbestand met alle bestaande charts. Het creëert ook een kleine thumbnail van de album art zodat je browsing ervaring stabieler is, zelfs wanneer er veel charts zijn geïnstalleerd.",
+      "timeNeeded": "Als je nog geen Spin Rhythm XD custom charts hebt geïnstalleerd, zal deze stap in een oogwenk klaar zijn. Als je een zeer grote bibliotheek hebt, kan het tot een minuut duren.",
+      "tip": "Tip: Je kunt je bibliotheek altijd opnieuw analyseren in het tabblad bibliotheek.",
+      "analyze": "Analyseer je bibliotheek",
+      "done": "En klaar is Kees!"
     },
     "done": {
-      "header": "",
-      "body": "",
-      "tip": "",
-      "welcome": ""
+      "header": "We zijn klaar!",
+      "body": "U heeft nu de SpinShare desktop client ingesteld. Je bent slechts een klik verwijderd van een bibliotheek van duizenden custom charts voor Spin Rhythm XD.",
+      "tip": "Tip: Klik op de rechterbovenhoek om in te loggen op je account. Door in te loggen kun je charts bekijken en ze comfortabel toevoegen aan afspeellijsten zonder de website te gebruiken. In de toekomst kun je ook je eigen custom charts uploaden.",
+      "welcome": "Maar op dit moment gaan we naar de <strong>ritme dimensie</strong>!"
     }
   }
 }
