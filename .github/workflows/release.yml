@@ -3,10 +3,10 @@ permissions:
   contents: write
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
-      - 'release/**'
     paths-ignore:
       - 'docs/**'
       - '**/*.md'
