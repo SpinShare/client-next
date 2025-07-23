@@ -50,7 +50,7 @@
                         <option value="de">German</option>
                         <option value="fr">French</option>
                         <option value="es">Spanish</option>
-                        <!-- <option value="nl">Dutch</option> -->
+                        <option value="nl">Dutch</option>
                         <option value="speen">SPEEN</option>
                     </select>
                 </SettingsItem>
