@@ -19,7 +19,7 @@ export class UpdateManager extends EventEmitter {
         }
 
         const latestRelease = data.find((r) => r.prerelease === false) || null;
-        const hasNewRelease = latestRelease?.name?.includes(app.getVersion()) || false;
+        const hasNewRelease = !latestRelease?.name?.includes(app.getVersion()) || false;
 
         this.settingsManager.updateOrInsert('updateAvailable', hasNewRelease);
         this.emit('update-check-done', hasNewRelease);
