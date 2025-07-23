@@ -12,6 +12,7 @@ import enMessages from '@/locales/en.json';
 import deMessages from '@/locales/de.json';
 import frMessages from '@/locales/fr.json';
 import esMessages from '@/locales/es.json';
+import nlMessages from '@/locales/nl.json';
 import speenMessages from '@/locales/speen.json';
 
 Sentry.init({
@@ -29,6 +30,7 @@ const i18n = createI18n({
         de: deMessages,
         fr: frMessages,
         es: esMessages,
+        nl: nlMessages,
         speen: speenMessages,
     },
 });
