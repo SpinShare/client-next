@@ -14,7 +14,7 @@
       "upload": "Publier",
       "profile": "Profil",
       "charts": "Charts",
-      "reviews": "Commentaires",
+      "reviews": "Avis",
       "playlists": "Playlists",
       "spinPlays": "SpinPlays",
       "notifications": {
@@ -77,31 +77,31 @@
     "tabs": {
       "detail": "Détail",
       "charts": "Charts ({count})",
-      "reviews": "Commentaires ({count})",
+      "reviews": "Avis ({count})",
       "playlists": "Playlists ({count})",
       "spinPlays": "SpinPlays ({count})"
     },
     "noCards": "Aucun badge reçu pour le moment.",
     "noCharts": "Aucune chart publiée pour le moment.",
-    "noReviews": "Aucun commentaire posté pour le moment.",
+    "noReviews": "Aucun avis posté pour le moment.",
     "noSpinPlays": "Aucun SpinPlay posté pour le moment."
   },
   "chart": {
     "explicitLabel": "Contenu explicite – Passer le curseur dessus pour révéler",
     "noDescription": "Pas de description.",
     "noPlaylists": "Présente dans aucune playlist pour le moment.",
-    "noReviews": "Pas de commentaires postés pour le moment.",
+    "noReviews": "Pas d'avis postés pour le moment.",
     "noSpinPlays": "Pas de SpinPlays postés pour le moment.",
     "status": {
-      "local": "",
+      "local": "Local",
       "installed": "Installée",
       "outOfDate": "Obsolète"
     },
     "play": "Jouer",
-    "addToQueue": "Ajouter à la file de téléchargements",
+    "addToQueue": "Télécharger",
     "tabs": {
       "detail": "Détail",
-      "reviews": "Commentaires",
+      "reviews": "Avis",
       "playlists": "Playlists",
       "spinPlays": "SpinPlays"
     },
@@ -120,27 +120,27 @@
   "playlist": {
     "official": "Officielle",
     "count": "{count} charts",
-    "addToQueue": "Ajouter à la file de téléchargements",
+    "addToQueue": "Télécharger",
     "withChartsBy": "Contient des charts créées par"
   },
   "review": {
-    "noComment": "Aucun commentaire.",
+    "noComment": "Aucun avis.",
     "recommended": "Recommandé",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Votre avis",
+      "noReview": "Vous n'avez pas encore écrit d'avis sur cette chart.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Écrire un avis",
+        "edit": "Modifier votre avis",
+        "remove": "Supprimer votre avis"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Ajouter/Modifier votre avis",
+      "commentPlaceholder": "Votre commentaire ici...",
+      "recommendedLabel": "Recommanderiez-vous cette chart aux autres joueurs ?",
+      "save": "Enregistrer",
+      "close": "Fermer"
     }
   },
   "search": {
@@ -254,7 +254,7 @@
     "done": {
       "header": "C'est terminé !",
       "body": "Vous avez désormais configuré le client SpinShare. Vous n'êtes plus qu'à un clic d'une bibliothèque composée de milliers de charts customs créées pour Spin Rhythm XD.",
-      "tip": "Astuce : Cliquez dans le coin supérieur droit pour vous connecter à votre compte. Se connecter vous permet de laisser des commentaires et de créer des playlists de charts sans avoir besoin d'utiliser le site web. Dans une prochaine mise à jour, vous serez également capable de publier vos propres charts custom.",
+      "tip": "Astuce : Cliquez dans le coin supérieur droit pour vous connecter à votre compte. Se connecter vous permet de laisser des avis et de créer des playlists de charts sans avoir besoin d'utiliser le site web. Dans une prochaine mise à jour, vous serez également capable de publier vos propres charts custom.",
       "welcome": "Mais pour le moment, entrons dans la <strong>dimension du rythme</strong> !"
     }
   }
