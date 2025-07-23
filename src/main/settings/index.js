@@ -78,9 +78,14 @@ export class SettingsManager {
         }
         if (system === 'linux') {
             const linuxHomedir = homedir();
-            return path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
+            const nativeLinuxFolder = path.join(linuxHomedir, '.config', 'unity3d', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
+            const protonFolder = path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
 
-            // TODO: Native Linux build path
+            if(fs.existsSync(nativeLinuxFolder)) {
+                return nativeLinuxFolder;
+            } else {
+                return protonFolder;
+            }
         }
     }
 }
