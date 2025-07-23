@@ -81,6 +81,7 @@ function close() {
 
 async function save() {
     loading.value = true;
+    console.log(props.chartId, reviewRecommended.value, reviewComment.value);
     await connect.addReview(props.chartId, reviewRecommended.value === true, reviewComment.value);
     loading.value = false;
     emits('reviewUpdated');

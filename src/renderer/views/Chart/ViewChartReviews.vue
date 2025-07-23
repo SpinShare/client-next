@@ -56,7 +56,7 @@
 
             <ReviewOverlay
                 ref="reviewOverlay"
-                :chartId="chartId"
+                :chartId="chart.id"
                 :recommend="userReview?.recommended ?? null"
                 :comment="userReview?.comment ?? ''"
                 @reviewUpdated="onReviewUpdated"
@@ -115,7 +115,7 @@ onMounted(async () => {
 });
 
 async function loadReviews() {
-    const response = await api.getChartReviews(chartId);
+    const response = await api.getChartReviews(props.chart.id);
     reviews.value = response.reviews || [];
     reviewAverage.value = response.average;
 }
@@ -124,7 +124,7 @@ async function loadUserReview() {
     isLoggedIn.value = await connect.isLoggedIn();
     if(isLoggedIn.value) {
         profile.value = await connect.getProfile();
-        userReview.value = await connect.getReview(chartId);
+        userReview.value = await connect.getReview(props.chart.id);
     }
 }
 
