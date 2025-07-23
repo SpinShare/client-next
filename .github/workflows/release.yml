@@ -11,6 +11,7 @@ on:
       - 'docs/**'
       - '**/*.md'
       - 'src/renderer/locales/**'
+      - '.github'
 
 jobs:
   build:
