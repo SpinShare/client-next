@@ -196,6 +196,17 @@ export class DownloadQueue extends EventEmitter {
         this.emit('queue-change', this.items);
     }
 
+    restartFailed() {
+        this.items.filter((item) => item.state === STATE_ERROR).forEach((item) => {
+            item.state = STATE_PENDING;
+        });
+
+        this.emit('queue-count-change', this.pendingItemsCount());
+        this.emit('queue-change', this.items);
+
+        this.startWorker();
+    }
+
     // DEBUG
     delay(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));

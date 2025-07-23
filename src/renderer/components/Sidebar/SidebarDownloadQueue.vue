@@ -126,7 +126,7 @@ async function handleClearDone() {
 }
 
 async function handleRestartFailed() {
-    // TODO
+    await queue.restartFailed();
 }
 
 async function handleRemoveItem(chartId) {

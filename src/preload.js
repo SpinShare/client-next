@@ -30,6 +30,7 @@ contextBridge.exposeInMainWorld('spshQueue', {
     addQueueItem: async (item) => ipcRenderer.invoke('add-queue-item', item),
     removeQueueItem: async (itemId) => ipcRenderer.invoke('remove-queue-item', itemId),
     clearQueueDone: async () => ipcRenderer.invoke('clear-queue-done'),
+    restartFailed: async () => ipcRenderer.invoke('queue-restart-failed'),
     getQueueItems: async () => ipcRenderer.invoke('get-queue-items'),
     getQueueCount: async () => ipcRenderer.invoke('get-queue-count'),
     onQueueChange: (callback) => {
