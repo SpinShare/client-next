@@ -93,7 +93,7 @@
     "noReviews": "Aún no hay reseñas.",
     "noSpinPlays": "Aún no hay SpinPlays.",
     "status": {
-      "local": "",
+      "local": "Local",
       "installed": "Instalada",
       "outOfDate": "Desactualizada"
     },
@@ -127,20 +127,20 @@
     "noComment": "Sin comentario.",
     "recommended": "Recomendado",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Tu reseña",
+      "noReview": "Aún no has escrito una reseña para esta canción.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Escribir una reseña",
+        "edit": "Editar tu reseña",
+        "remove": "Eliminar tu reseña"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Añadir/Editar tu reseña",
+      "commentPlaceholder": "Tus observaciones aquí...",
+      "recommendedLabel": "¿Recomiendas a otros jugar esta canción?",
+      "save": "Guardar",
+      "close": "Cerrar"
     }
   },
   "search": {
