@@ -180,7 +180,7 @@ app.whenReady().then(() => {
         return await updateManager.checkForUpdates();
     });
     ipcMain.handle('get-app-version', (event) => {
-        return `${app.getVersion()}-${process.env.NODE_ENV}`;
+        return `${app.getVersion()}-${process.env.NODE_ENV || 'production'}`;
     });
 
     /* Library */
