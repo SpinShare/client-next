@@ -2,81 +2,81 @@
   "header": {
     "search": {
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Chart",
+        "playlists": "Playlist",
+        "users": "Utenti"
       },
-      "placeholder": ""
+      "placeholder": "Cerca chart, creatori o una playlist..."
     },
     "auth": {
-      "login": "",
-      "logout": "",
-      "upload": "",
-      "profile": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": "",
+      "login": "Accedi",
+      "logout": "Logout",
+      "upload": "Upload",
+      "profile": "Profilo",
+      "charts": "Chart",
+      "reviews": "Recensioni",
+      "playlists": "Playlist",
+      "spinPlays": "SpinPlays",
       "notifications": {
-        "header": "",
-        "noNotifications": "",
-        "newReview": "",
-        "newSpinPlay": "",
-        "receivedCard": ""
+        "header": "Notifiche",
+        "noNotifications": "Nessuna notifica",
+        "newReview": "{username} ha lasciato una recensione per '{title}'",
+        "newSpinPlay": "{username} ha aggiunto un SpinPlay per '{title}'",
+        "receivedCard": "Hai ricevuto la scheda profilo '{card}'"
       }
     }
   },
   "sidebar": {
-    "frontpage": "",
-    "newest": "",
-    "updated": "",
-    "hotThisWeek": "",
-    "hotThisMonth": "",
-    "library": "",
-    "toggleSidebar": "",
+    "frontpage": "Frontpage",
+    "newest": "Nuove uscite",
+    "updated": "Aggiornati",
+    "hotThisWeek": "Di tendenza questa settimana",
+    "hotThisMonth": "Di tendenza questo mese",
+    "library": "Libreria",
+    "toggleSidebar": "Attiva/Disattiva barra laterale",
     "downloadQueue": {
-      "downloads": "",
-      "header": "",
-      "noDownloads": ""
+      "downloads": "Download",
+      "header": "Coda download ({count})",
+      "noDownloads": "Nessun download in coda."
     },
-    "settings": ""
+    "settings": "Impostazioni"
   },
   "connect": {
     "login": {
-      "header": "",
-      "body": ""
+      "header": "Accedi al tuo account",
+      "body": "Vai su {link} e accedi al tuo account."
     },
     "code": {
-      "header": "",
-      "body": "",
-      "link_label": ""
+      "header": "Trova il tuo codice di connessione",
+      "body": "Clicca {link} o clicca sulla tua immagine del profilo in alto a destra e vai su <strong>Impostazioni</strong>. Vai alla scheda <strong>Connect</strong> e trova il tuo codice di connessione.",
+      "link_label": "qui"
     },
     "input": {
-      "header": "",
-      "body": "",
-      "placeholder": "",
-      "login": "",
-      "errorIncorrect": "",
-      "errorServer": ""
+      "header": "Inserisci il tuo codice di connessione",
+      "body": "Inserisci il codice di connessione qui sotto e clicca su <strong>Accedi al tuo account</strong>.",
+      "placeholder": "Codice connessione...",
+      "login": "Accedi al tuo account",
+      "errorIncorrect": "Il codice di connessione non è corretto. Riprova.",
+      "errorServer": "Impossibile effettuare il login. Riprova più tardi."
     }
   },
   "discover": {
     "promos": {
-      "header": ""
+      "header": "Scopri"
     },
     "featured": {
-      "header": "",
-      "seeMore": ""
+      "header": "In evidenza",
+      "seeMore": "Vedi altro"
     },
-    "previousPage": "",
-    "nextPage": ""
+    "previousPage": "Pagina precedente",
+    "nextPage": "Pagina successiva"
   },
   "user": {
-    "supporter": "",
-    "verified": "",
+    "supporter": "Supporter",
+    "verified": "Verificato",
     "tabs": {
-      "detail": "",
-      "charts": "",
+      "detail": "Dettaglio",
+      "charts": "Chart ({count})",
       "reviews": "",
       "playlists": "",
       "spinPlays": ""
@@ -93,7 +93,7 @@
     "noReviews": "",
     "noSpinPlays": "",
     "status": {
-      "local": "",
+      "local": "Locale",
       "installed": "",
       "outOfDate": ""
     },
@@ -119,7 +119,7 @@
   },
   "playlist": {
     "official": "",
-    "count": "",
+    "count": "{count} chart",
     "addToQueue": "",
     "withChartsBy": ""
   },
@@ -154,97 +154,97 @@
   },
   "difficulty": {
     "easy": "",
-    "normal": "",
-    "hard": "",
-    "expert": "",
-    "xd": ""
+    "normal": "Normale",
+    "hard": "Difficile",
+    "expert": "Esperto",
+    "xd": "XD"
   },
   "library": {
-    "header": "",
-    "open": "",
-    "rebuild": "",
-    "noCharts": ""
+    "header": "Libreria",
+    "open": "Apri",
+    "rebuild": "Ricostruisci",
+    "noCharts": "Nessun chart trovato. Ricostruisci la cache o scarica chart."
   },
   "updateToast": {
-    "header": "",
-    "body": "",
+    "header": "Aggiornamento disponibile",
+    "body": "Aggiorna all'ultima versione per ricevere nuove funzionalità e correzioni di bug.",
     "actions": {
-      "get": "",
-      "later": ""
+      "get": "Aggiorna",
+      "later": "Più tardi"
     }
   },
   "settings": {
     "general": {
-      "header": "",
-      "version": "",
-      "checkForUpdates": "",
-      "getUpdate": "",
+      "header": "Generale",
+      "version": "Versione {version}",
+      "checkForUpdates": "Controlla per aggiornamenti",
+      "getUpdate": "Aggiorna",
       "theme": {
-        "label": "",
-        "dark": "",
-        "light": ""
+        "label": "Tema",
+        "dark": "Tema scuro",
+        "light": "Tema chiaro"
       },
       "language": {
-        "label": "",
-        "description": ""
+        "label": "Lingua",
+        "description": "Tradotto da Edge"
       }
     },
     "interface": {
-      "header": "",
+      "header": "Interfaccia",
       "showExplicit": {
-        "label": "",
-        "description": ""
+        "label": "Mostra espliciti",
+        "description": "Mostra metadata per chart con contenuti espliciti"
       },
       "downloadNotifications": {
-        "label": "",
-        "description": ""
+        "label": "Notifiche download",
+        "description": "Notifica quando un chart è stato scaricato o la coda di download si è conclusa"
       },
       "openDownloadQueue": {
-        "label": "",
-        "description": ""
+        "label": "Apri coda download",
+        "description": "Apri automaticamente la coda di download ogni volta che un nuovo chart è stato aggiunto alla coda"
       },
       "sfxEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Effetti sonori abilitati",
+        "description": "Riproduce effetti sonori UI"
       },
       "musicEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Musica del menu abilitata",
+        "description": "Riproduci musica menu"
       }
     },
     "account": {
-      "header": "",
+      "header": "Account",
       "logout": {
-        "label": "",
-        "description": "",
-        "logout": ""
+        "label": "Logout",
+        "description": "Dopo il logout, dovresti anche rimuovere l'accesso a 'SpinShare Next' su spinsha.re",
+        "logout": "Logout"
       }
     },
     "game": {
-      "header": "",
+      "header": "Gioco",
       "pathCustoms": {
-        "label": "",
-        "description": "",
-        "placeholder": "",
-        "select": "",
-        "detect": ""
+        "label": "Percorso custom",
+        "description": "Percorso alla cartella dei chart",
+        "placeholder": "Non ancora impostato",
+        "select": "Seleziona",
+        "detect": "Rileva"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": ""
+      "body": "Grazie per aver scaricato il client desktop di SpinShare! Prima di poter iniziare a scaricare i chart dalla comunità SpinShare, dobbiamo prima effettuare una configurazione iniziale."
     },
     "general": {
-      "header": ""
+      "header": "Impostazioni generali"
     },
     "game": {
-      "header": "",
-      "tip": ""
+      "header": "Impostazioni di gioco",
+      "tip": "Suggerimento: Per salva i chart in una cartella diversa o su un'unità di memoria diversa, è possibile aggiungere {code} alle opzioni di lancio su Steam."
     },
     "cache": {
-      "header": "",
-      "body": "",
+      "header": "Cache libreria",
+      "body": "Per visualizzare facilmente se hai già installato un grafico e se è disponibile un aggiornamento, è necessario creare una cache.",
       "explanation": "",
       "timeNeeded": "",
       "tip": "",
