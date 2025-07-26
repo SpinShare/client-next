@@ -77,83 +77,83 @@
     "tabs": {
       "detail": "Dettaglio",
       "charts": "Chart ({count})",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "reviews": "Recensioni ({count})",
+      "playlists": "Playlist ({count})",
+      "spinPlays": "SpinPlays ({count})"
     },
-    "noCards": "",
-    "noCharts": "",
-    "noReviews": "",
-    "noSpinPlays": ""
+    "noCards": "Nessuna scheda profilo ricevuta.",
+    "noCharts": "Nessun chart ancora caricato.",
+    "noReviews": "Nessuna recensione.",
+    "noSpinPlays": "Nessun SpinPlays è stato ancora caricato."
   },
   "chart": {
-    "explicitLabel": "",
-    "noDescription": "",
-    "noPlaylists": "",
-    "noReviews": "",
-    "noSpinPlays": "",
+    "explicitLabel": "Contenuto esplicito – Sposta qui il cursore per rivelare",
+    "noDescription": "Nessuna descrizione.",
+    "noPlaylists": "Non ancora in nessuna playlist.",
+    "noReviews": "Nessuna recensione.",
+    "noSpinPlays": "Nessun SpinPlay.",
     "status": {
       "local": "Locale",
-      "installed": "",
-      "outOfDate": ""
+      "installed": "Installato",
+      "outOfDate": "Vecchia versione"
     },
-    "play": "",
-    "addToQueue": "",
+    "play": "Gioca",
+    "addToQueue": "Aggiungi alla coda",
     "tabs": {
-      "detail": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Dettaglio",
+      "reviews": "Recensioni",
+      "playlists": "Playlist",
+      "spinPlays": "SpinPlays"
     },
     "playDialog": {
-      "header": "",
-      "body": "",
-      "close": ""
+      "header": "Gioca",
+      "body": "Seleziona una difficoltà per avviare Spin Rhythm XD e giocare immediatamente <strong>{title}</strong>.",
+      "close": "Chiudi"
     },
     "statistics": {
-      "views": "",
-      "downloads": "",
-      "uploaded": "",
-      "updated": ""
+      "views": "Visioni",
+      "downloads": "Download",
+      "uploaded": "Caricato",
+      "updated": "Aggiornato"
     }
   },
   "playlist": {
-    "official": "",
+    "official": "Ufficiale",
     "count": "{count} chart",
-    "addToQueue": "",
-    "withChartsBy": ""
+    "addToQueue": "Aggiungi alla coda",
+    "withChartsBy": "Con grafici di"
   },
   "review": {
-    "noComment": "",
-    "recommended": "",
+    "noComment": "Nessun commento.",
+    "recommended": "Consigliato",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "La tua recensione",
+      "noReview": "Non hai ancora scritto una recensione per questo chart.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Scrivi una recensione",
+        "edit": "Modifica la tua recensione",
+        "remove": "Rimuovi la tua recensione"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Aggiungi/Modifica la tua recensione",
+      "commentPlaceholder": "Il tuo commento qui...",
+      "recommendedLabel": "Vorresti consigliare ad altri utenti di provare questo chart?",
+      "save": "Salva",
+      "close": "Chiudi"
     }
   },
   "search": {
-    "minimumDifficulty": "",
-    "maximumDifficulty": "",
-    "explicit": "",
-    "apply": "",
-    "noChartResults": "",
-    "noPlaylistResults": "",
-    "noUserResults": ""
+    "minimumDifficulty": "Difficoltà minima",
+    "maximumDifficulty": "Difficoltà massima",
+    "explicit": "Esplicito",
+    "apply": "Applica",
+    "noChartResults": "Nessun chart trovato. Prova una query di ricerca diversa o cambia i filtri sopra.",
+    "noPlaylistResults": "Nessuna playlist trovata. Prova una ricerca diversa.",
+    "noUserResults": "Nessun utente trovato. Prova una ricerca diversa."
   },
   "difficulty": {
-    "easy": "",
+    "easy": "Facile",
     "normal": "Normale",
     "hard": "Difficile",
     "expert": "Esperto",
@@ -245,17 +245,17 @@
     "cache": {
       "header": "Cache libreria",
       "body": "Per visualizzare facilmente se hai già installato un grafico e se è disponibile un aggiornamento, è necessario creare una cache.",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
-      "analyze": "",
-      "done": ""
+      "explanation": "Questa cache analizza la tua cartella dei custom chart e crea un file di testo più piccolo con tutti i chart esistenti. Inoltre, questo crea anche una piccola miniatura dell'album art in modo che la tua esperienza di navigazione sia più stabile, anche con molti chart installati.",
+      "timeNeeded": "Se non hai ancora installato alcun chart, questo passo sarà istantaneo. Se la tua libreria di chart è grande, può richiedere fino a un minuto.",
+      "tip": "Suggerimento: puoi sempre rianalizzare la tua libreria nella tab Libreria.",
+      "analyze": "Analizza la tua libreria",
+      "done": "Operazione eseguita correttamente."
     },
     "done": {
-      "header": "",
-      "body": "",
-      "tip": "",
-      "welcome": ""
+      "header": "Abbiamo finito!",
+      "body": "Hai concluso l'impostazione del client desktop SpinShare. Sei a distanza di un click da una libreria di migliaia di chart per Spin Rhythm XD.",
+      "tip": "Suggerimento: Clicca sull'angolo in alto a destra per accedere al tuo account. L'accesso consente di recensire chart e aggiungerli alle playlist comodamente senza utilizzare il sito web. In futuro, potrai anche caricare i tuoi propri chart.",
+      "welcome": "E ora, entriamo nella <strong>dimensione del ritmo!</strong>"
     }
   }
 }
