@@ -72,10 +72,10 @@
     "nextPage": "Page suivante"
   },
   "user": {
-    "supporter": "Contributeur",
+    "supporter": "Contributeur·ice",
     "verified": "Utilisateur vérifié",
     "tabs": {
-      "detail": "Détail",
+      "detail": "Informations",
       "charts": "Charts ({count})",
       "reviews": "Avis ({count})",
       "playlists": "Playlists ({count})",
@@ -100,7 +100,7 @@
     "play": "Jouer",
     "addToQueue": "Télécharger",
     "tabs": {
-      "detail": "Détail",
+      "detail": "Description",
       "reviews": "Avis",
       "playlists": "Playlists",
       "spinPlays": "SpinPlays"
