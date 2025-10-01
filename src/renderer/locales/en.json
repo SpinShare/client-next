@@ -115,6 +115,10 @@
       "downloads": "Downloads",
       "uploaded": "Uploaded",
       "updated": "Updated"
+    },
+    "dlc": {
+      "header": "DLC required",
+      "body": "The DLC <strong>{title}</strong> will be required to play this chart in the future."
     }
   },
   "playlist": {
