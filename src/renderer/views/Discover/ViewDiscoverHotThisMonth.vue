@@ -29,6 +29,7 @@
             <button
                 class="button"
                 @click="handleNext"
+                :disabled="charts.length < 12"
                 v-interactable
             >
                 <span>{{ $t('discover.nextPage') }}</span>

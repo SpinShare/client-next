@@ -70,7 +70,7 @@ window.spshExternalApi.onWindowFocused(() => {
     mittInstance.emit('window-focused');
 });
 window.spshExternalApi.onWindowBlurred(() => {
-   mittInstance.emit('window-blurred');
+    mittInstance.emit('window-blurred');
 });
 
 // Handle deep link navigation

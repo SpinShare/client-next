@@ -248,7 +248,7 @@ app.whenReady().then(() => {
     });
     ipcMain.handle('queue-restart-failed', async (event) => {
         return downloadQueue.restartFailed();
-    })
+    });
 
     /* External */
     ipcMain.handle('open-url', async (event, url) => {

@@ -165,7 +165,7 @@ import SettingsSection from '@/components/Settings/SettingsSection.vue';
 import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
-import {onMounted, inject, ref, onUnmounted, computed} from 'vue';
+import { onMounted, inject, ref, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n({ useScope: 'global' });

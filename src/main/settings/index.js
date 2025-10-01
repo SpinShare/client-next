@@ -81,7 +81,7 @@ export class SettingsManager {
             const nativeLinuxFolder = path.join(linuxHomedir, '.config', 'unity3d', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
             const protonFolder = path.join(linuxHomedir, '.local', 'share', 'Steam', 'steamapps', 'compatdata', '1058830', 'pfx', 'drive_c', 'users', 'steamuser', 'AppData', 'LocalLow', 'Super Spin Digital', 'Spin Rhythm XD', 'Custom');
 
-            if(fs.existsSync(nativeLinuxFolder)) {
+            if (fs.existsSync(nativeLinuxFolder)) {
                 return nativeLinuxFolder;
             } else {
                 return protonFolder;

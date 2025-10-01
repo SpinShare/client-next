@@ -86,9 +86,9 @@ import { useRoute } from 'vue-router';
 import ReviewGrid from '@/components/Reviews/ReviewGrid.vue';
 import ReviewItem from '@/components/Reviews/ReviewItem.vue';
 import EmptyState from '@/components/EmptyState.vue';
-import ReviewOverlay from "@/components/Reviews/ReviewOverlay.vue";
-import SectionHeader from "@/components/SectionHeader.vue";
-import Remixicon from "@/components/Remixicon.vue";
+import ReviewOverlay from '@/components/Reviews/ReviewOverlay.vue';
+import SectionHeader from '@/components/SectionHeader.vue';
+import Remixicon from '@/components/Remixicon.vue';
 
 const api = inject('api');
 const connect = inject('connect');
@@ -122,7 +122,7 @@ async function loadReviews() {
 
 async function loadUserReview() {
     isLoggedIn.value = await connect.isLoggedIn();
-    if(isLoggedIn.value) {
+    if (isLoggedIn.value) {
         profile.value = await connect.getProfile();
         userReview.value = await connect.getReview(props.chart.id);
     }

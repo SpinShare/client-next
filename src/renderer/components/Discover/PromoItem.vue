@@ -56,9 +56,9 @@ function handleClick() {
     // Legacy behavior: Sometimes, playlists are setup as external
     let buttonType = props?.button?.type ?? 3;
     let buttonData = props?.button?.data ?? '';
-    if(buttonType === 3 && props.button.data.startsWith("https://spinsha.re/playlist")) {
+    if (buttonType === 3 && props.button.data.startsWith('https://spinsha.re/playlist')) {
         buttonType = 1;
-        buttonData = props.button.data.split("playlist/")[1];
+        buttonData = props.button.data.split('playlist/')[1];
     }
 
     let id = 0;

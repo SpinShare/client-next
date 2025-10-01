@@ -197,9 +197,11 @@ export class DownloadQueue extends EventEmitter {
     }
 
     restartFailed() {
-        this.items.filter((item) => item.state === STATE_ERROR).forEach((item) => {
-            item.state = STATE_PENDING;
-        });
+        this.items
+            .filter((item) => item.state === STATE_ERROR)
+            .forEach((item) => {
+                item.state = STATE_PENDING;
+            });
 
         this.emit('queue-count-change', this.pendingItemsCount());
         this.emit('queue-change', this.items);

@@ -77,9 +77,9 @@
 </template>
 
 <script setup>
-import {computed, inject, onMounted, onUnmounted, ref} from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
-import {RouterLink} from "vue-router";
+import { RouterLink } from 'vue-router';
 
 const props = defineProps({
     id: {
@@ -195,11 +195,11 @@ onUnmounted(() => {
 });
 
 const isLocalChart = computed(() => {
-    return !Number.isInteger(props.id) && !props.fileReference.startsWith("spinshare_");
+    return !Number.isInteger(props.id) && !props.fileReference.startsWith('spinshare_');
 });
 
 async function handleAddToQueue() {
-    if(isLocalChart.value) return;
+    if (isLocalChart.value) return;
 
     const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter, props.fileReference);
     await queue.addQueueItem(newDownloadItem);

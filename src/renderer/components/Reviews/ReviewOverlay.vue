@@ -8,7 +8,13 @@
         </section>
 
         <section class="form">
-            <textarea class="textarea" v-model="reviewComment" rows="5" cols="5" :placeholder="$t('review.overlay.commentPlaceholder')"></textarea>
+            <textarea
+                class="textarea"
+                v-model="reviewComment"
+                rows="5"
+                cols="5"
+                :placeholder="$t('review.overlay.commentPlaceholder')"
+            ></textarea>
 
             <SettingsItem :label="$t('review.overlay.recommendedLabel')">
                 <Switch v-model="reviewRecommended" />
@@ -39,11 +45,11 @@
 </template>
 
 <script setup>
-import SectionHeader from "@/components/SectionHeader.vue";
-import {inject, ref} from "vue";
-import Remixicon from "@/components/Remixicon.vue";
-import SettingsItem from "@/components/Settings/SettingsItem.vue";
-import Switch from "@/components/Switch.vue";
+import SectionHeader from '@/components/SectionHeader.vue';
+import { inject, ref } from 'vue';
+import Remixicon from '@/components/Remixicon.vue';
+import SettingsItem from '@/components/Settings/SettingsItem.vue';
+import Switch from '@/components/Switch.vue';
 
 const emits = defineEmits(['reviewUpdated']);
 
@@ -59,7 +65,7 @@ const props = defineProps({
     comment: {
         type: String,
         default: '',
-    }
+    },
 });
 
 const connect = inject('connect');

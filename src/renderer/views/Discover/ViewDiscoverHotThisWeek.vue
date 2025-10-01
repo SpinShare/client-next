@@ -21,6 +21,7 @@
                 class="button"
                 :disabled="currentPage === 0"
                 @click="handlePrevious"
+                v-interactable
             >
                 <Remixicon icon="arrow-left" />
                 <span>{{ $t('discover.previousPage') }}</span>
@@ -28,6 +29,8 @@
             <button
                 class="button"
                 @click="handleNext"
+                :disabled="charts.length < 12"
+                v-interactable
             >
                 <span>{{ $t('discover.nextPage') }}</span>
                 <Remixicon icon="arrow-right" />

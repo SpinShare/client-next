@@ -7,7 +7,10 @@
         <div class="content">
             <slot />
         </div>
-        <div class="error" v-if="error">
+        <div
+            class="error"
+            v-if="error"
+        >
             {{ error }}
         </div>
     </div>
@@ -54,7 +57,7 @@ defineProps({
     }
 
     & .error {
-      @apply text-red-700 dark:text-red-400 text-sm;
+        @apply text-red-700 dark:text-red-400 text-sm;
     }
 }
 

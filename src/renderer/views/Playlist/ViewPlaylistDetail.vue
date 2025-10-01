@@ -49,9 +49,7 @@
                             @click="handleCopyLink"
                             v-interactable
                         >
-                            <Remixicon
-                                icon="clipboard"
-                            />
+                            <Remixicon icon="clipboard" />
                         </button>
                     </div>
 
@@ -92,7 +90,7 @@ import UserTooltip from '@/components/Users/UserTooltip.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import UserItem from '@/components/Users/UserItem.vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
-import router from "@/router";
+import router from '@/router';
 
 const api = inject('api');
 const externalApi = inject('externalApi');
@@ -103,11 +101,11 @@ const playlist = ref(null);
 
 onMounted(async () => {
     playlist.value = await api.getPlaylist(playlistId);
-    if(playlist.value === null) {
+    if (playlist.value === null) {
         externalApi.showDialog({
             title: 'Error loading playlist',
             type: 'error',
-            message: `There is no playlist with the ID: ${playlistId}`
+            message: `There is no playlist with the ID: ${playlistId}`,
         });
         await router.push('/');
         return;

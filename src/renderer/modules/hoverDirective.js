@@ -90,7 +90,6 @@ export function createHoverDirective() {
             createAudioClick();
             el.addEventListener('mouseenter', playHoverSound);
             el.addEventListener('click', playClickSound);
-        }
-
+        },
     };
 }

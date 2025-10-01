@@ -9,10 +9,10 @@ module.exports = {
         productName: 'SpinShare',
         protocols: [
             {
-                name: "SpinShare",
-                schemes: ["spinshare"]
-            }
-        ]
+                name: 'SpinShare',
+                schemes: ['spinshare'],
+            },
+        ],
     },
     rebuildConfig: {},
     makers: [
@@ -28,7 +28,7 @@ module.exports = {
             platforms: ['linux'],
             config: {
                 executableName: 'spinshare-client-next',
-                mimeType: ["x-scheme-handler/spinshare"]
+                mimeType: ['x-scheme-handler/spinshare'],
             },
         },
     ],

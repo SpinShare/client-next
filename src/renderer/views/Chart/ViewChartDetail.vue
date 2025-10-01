@@ -5,11 +5,15 @@
                 class="dlc-banner"
                 v-if="chart.dlc"
             >
-                <Remixicon icon="steam" size="3xl" filled />
+                <Remixicon
+                    icon="steam"
+                    size="3xl"
+                    filled
+                />
 
                 <div class="content">
-                  <strong>{{ $t('chart.dlc.header') }}</strong>
-                  <p>The DLC <strong>Monstercat DLC</strong> will be required to play this chart in the future.</p>
+                    <strong>{{ $t('chart.dlc.header') }}</strong>
+                    <p>The DLC <strong>Monstercat DLC</strong> will be required to play this chart in the future.</p>
                 </div>
             </div>
 
@@ -78,7 +82,7 @@ import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 import UserItem from '@/components/Users/UserItem.vue';
 import EmptyState from '@/components/EmptyState.vue';
-import Remixicon from "@/components/Remixicon.vue";
+import Remixicon from '@/components/Remixicon.vue';
 
 const props = defineProps({
     chart: {
@@ -182,7 +186,7 @@ const updateDateAbsolute = computed(() => {
                     @apply text-sm text-brand-800 dark:text-brand-200;
 
                     & strong {
-                      @apply text-brand-950 dark:text-brand-50;
+                        @apply text-brand-950 dark:text-brand-50;
                     }
                 }
             }

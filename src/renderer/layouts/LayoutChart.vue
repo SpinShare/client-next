@@ -116,18 +116,14 @@
                             @click="handleCopyLink"
                             v-interactable
                         >
-                          <Remixicon
-                              icon="clipboard"
-                          />
+                            <Remixicon icon="clipboard" />
                         </button>
                         <button
                             class="button"
                             @click="handleOpenReport"
                             v-interactable
                         >
-                            <Remixicon
-                                icon="flag-2"
-                            />
+                            <Remixicon icon="flag-2" />
                         </button>
                     </div>
                 </div>
@@ -241,7 +237,7 @@ import Remixicon from '@/components/Remixicon.vue';
 import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
 import SectionHeader from '@/components/SectionHeader.vue';
-import router from "@/router";
+import router from '@/router';
 
 const mitt = inject('mitt');
 const api = inject('api');
@@ -262,11 +258,11 @@ const playDialog = ref(null);
 
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
-    if(chart.value === null) {
+    if (chart.value === null) {
         externalApi.showDialog({
             title: 'Error loading chart',
             type: 'error',
-            message: `There is no chart with the ID: ${chartId.value}`
+            message: `There is no chart with the ID: ${chartId.value}`,
         });
         await router.push('/');
         return;
@@ -337,21 +333,20 @@ function stopPreview() {
 }
 
 function handlePreviewError(event) {
-  console.log('Preview audio failed to load:', event);
-  previewAvailable.value = false;
+    console.log('Preview audio failed to load:', event);
+    previewAvailable.value = false;
 }
-
 
 watch(
     () => [route.params.chartId],
     async () => {
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
-        if(chart.value === null) {
+        if (chart.value === null) {
             externalApi.showDialog({
                 title: 'Error loading chart',
                 type: 'error',
-                message: `There is no chart with the ID: ${chartId.value}`
+                message: `There is no chart with the ID: ${chartId.value}`,
             });
             await router.push('/');
             return;
