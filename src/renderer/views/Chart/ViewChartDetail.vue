@@ -13,7 +13,7 @@
 
                 <div class="content">
                     <strong>{{ $t('chart.dlc.header') }}</strong>
-                    <p>The DLC <strong>Monstercat DLC</strong> will be required to play this chart in the future.</p>
+                    <p v-html="$t('chart.dlc.body', { title: chart.dlc.title })"></p>
                 </div>
             </div>
 
