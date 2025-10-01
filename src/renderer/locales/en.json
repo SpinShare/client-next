@@ -226,6 +226,7 @@
         "label": "Customs path",
         "description": "Path to your custom charts folder",
         "placeholder": "Not set yet",
+        "notAFolder": "This path is not a valid folder.",
         "select": "Select",
         "detect": "Detect"
       }

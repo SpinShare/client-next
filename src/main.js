@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell, dialog, clipboard } from 'electron';
 import path from 'node:path';
+import fs from 'node:fs';
 import started from 'electron-squirrel-startup';
 import { SpinShareClient } from '@spinshare/api-js';
 import { setupApiHandlers } from './main/api';
@@ -266,6 +267,14 @@ app.whenReady().then(() => {
         } catch (error) {
             console.error('Error opening folder:', error);
             return { success: false, error: error.message };
+        }
+    });
+    ipcMain.handle('folder-exists', async (event, folderPath) => {
+        try {
+            return fs.existsSync(folderPath) && fs.statSync(folderPath).isDirectory();
+        } catch (error) {
+            console.error('Error checking folder existence:', error);
+            return false;
         }
     });
     ipcMain.handle('show-dialog', async (event, options) => {

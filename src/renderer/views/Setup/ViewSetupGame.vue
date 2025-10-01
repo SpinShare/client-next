@@ -5,6 +5,7 @@
         <SettingsItem
             :label="$t('settings.game.pathCustoms.label')"
             :description="$t('settings.game.pathCustoms.description')"
+            :error="customsPathIsValid ? null : $t('settings.game.pathCustoms.notAFolder')"
             :two-line="true"
         >
             <input
@@ -50,13 +51,17 @@ const settingsManager = inject('settingsManager');
 const externalApi = inject('externalApi');
 const settings = ref({});
 const mitt = inject('mitt');
+const customsPathIsValid = ref(null);
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
+    customsPathIsValid.value = await externalApi.folderExists(settings.value.pathCustoms);
 });
 
 async function handleSave() {
     mitt.emit('save-settings', settings.value);
+
+    customsPathIsValid.value = await externalApi.folderExists(settings.value.pathCustoms);
 
     // Required to lose the reference to the vue reactive state for ipc
     const serializedSettings = JSON.parse(JSON.stringify(settings.value));

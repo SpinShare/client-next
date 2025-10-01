@@ -127,6 +127,7 @@
                 <SettingsItem
                     :label="$t('settings.game.pathCustoms.label')"
                     :description="$t('settings.game.pathCustoms.description')"
+                    :error="customsPathIsValid ? null : $t('settings.game.pathCustoms.notAFolder')"
                 >
                     <input
                         v-interactable
@@ -164,7 +165,7 @@ import SettingsSection from '@/components/Settings/SettingsSection.vue';
 import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
-import { onMounted, inject, ref, onUnmounted } from 'vue';
+import {onMounted, inject, ref, onUnmounted, computed} from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n({ useScope: 'global' });
@@ -177,6 +178,7 @@ const connect = inject('connect');
 const isLoggedIn = ref(false);
 const updateAvailable = ref(false);
 const appVersion = ref('0.0.0');
+const customsPathIsValid = ref(null);
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
@@ -186,6 +188,7 @@ onMounted(async () => {
     });
     appVersion.value = await updateManager.getAppVersion();
     updateAvailable.value = await updateManager.checkForUpdates();
+    customsPathIsValid.value = await externalApi.folderExists(settings.value.pathCustoms);
 
     mitt.on('auth-updated', onAuthUpdated);
     await onAuthUpdated();
@@ -231,6 +234,8 @@ async function handleSave() {
     if (settings.value.language !== locale.value) {
         locale.value = settings.value.language;
     }
+
+    customsPathIsValid.value = await externalApi.folderExists(settings.value.pathCustoms);
 
     // Required to lose the reference to the vue reactive state for ipc
     const serializedSettings = JSON.parse(JSON.stringify(settings.value));

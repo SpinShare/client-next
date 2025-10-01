@@ -127,6 +127,7 @@ contextBridge.exposeInMainWorld('spshConnect', {
 contextBridge.exposeInMainWorld('spshExternalApi', {
     openUrl: async (url) => ipcRenderer.invoke('open-url', url),
     openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
+    folderExists: async (folderPath) => ipcRenderer.invoke('folder-exists', folderPath),
     showDialog: async(options) => ipcRenderer.invoke('show-dialog', options),
     selectFolder: async (folderPath) => ipcRenderer.invoke('select-folder', folderPath),
     copyText: async (text) => ipcRenderer.invoke('copy-text', text),

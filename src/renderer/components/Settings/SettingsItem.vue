@@ -7,6 +7,9 @@
         <div class="content">
             <slot />
         </div>
+        <div class="error" v-if="error">
+            {{ error }}
+        </div>
     </div>
 </template>
 
@@ -17,6 +20,10 @@ defineProps({
         required: true,
     },
     description: {
+        type: [String, Boolean],
+        default: false,
+    },
+    error: {
         type: [String, Boolean],
         default: false,
     },
@@ -44,6 +51,10 @@ defineProps({
     }
     & .content {
         @apply flex gap-2 items-center justify-end;
+    }
+
+    & .error {
+      @apply text-red-700 dark:text-red-400 text-sm;
     }
 }
 
