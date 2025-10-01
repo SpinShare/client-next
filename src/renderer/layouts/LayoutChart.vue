@@ -9,6 +9,7 @@
             <audio
                 ref="chartPreview"
                 :src="chart.paths.ogg"
+                @error="handlePreviewError"
             />
 
             <header class="chart">
@@ -76,7 +77,7 @@
                             <Remixicon icon="download" />
                             <span>{{ $t('chart.addToQueue') }}</span>
                         </button>
-                        <template v-if="chartPreview">
+                        <template v-if="chartPreview && previewAvailable">
                             <button
                                 class="button"
                                 v-if="!isPreviewPlaying"
@@ -255,6 +256,7 @@ const cacheItem = ref(null);
 const chartPreview = ref(null);
 const chartPreviewTimeout = ref(null);
 const isPreviewPlaying = ref(false);
+const previewAvailable = ref(true);
 
 const playDialog = ref(null);
 
@@ -313,7 +315,7 @@ function handleCopyLink() {
 }
 
 function playPreview() {
-    if (chartPreview.value) {
+    if (chartPreview.value && previewAvailable.value) {
         chartPreview.value.currentTime = 0;
         chartPreview.value.volume = 0.5;
         chartPreview.value.play();
@@ -333,6 +335,12 @@ function stopPreview() {
         clearTimeout(chartPreviewTimeout.value);
     }
 }
+
+function handlePreviewError(event) {
+  console.log('Preview audio failed to load:', event);
+  previewAvailable.value = false;
+}
+
 
 watch(
     () => [route.params.chartId],
