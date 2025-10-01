@@ -1,7 +1,7 @@
 {
     "name": "spinshare-client-next",
     "productName": "SpinShare",
-    "version": "3.30.3",
+    "version": "3.31.0",
     "description": "A cross-platform Spin Rhythm XD client",
     "main": ".vite/build/main.js",
     "scripts": {
@@ -31,7 +31,7 @@
         "@electron/fuses": "^1.8.0",
         "@eslint/js": "^9.22.0",
         "@vitejs/plugin-vue": "^5.2.1",
-        "electron": "35.0.0",
+        "electron": "^35.7.5",
         "eslint": "^9.22.0",
         "eslint-plugin-vue": "^10.0.0",
         "globals": "^16.0.0",
