@@ -214,6 +214,18 @@
       "musicEnabled": {
         "label": "Menu music enabled",
         "description": "Plays menu music"
+      },
+      "musicVolume": {
+        "label": "Menu music volume",
+        "description": "The volume of menu music"
+      },
+      "sfxVolume": {
+        "label": "Sound effects volume",
+        "description": "The volume of UI sound effects"
+      },
+      "previewVolume": {
+        "label": "Preview music volume",
+        "description": "The volume of chart previews"
       }
     },
     "account": {

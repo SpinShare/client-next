@@ -244,6 +244,7 @@ const api = inject('api');
 const externalApi = inject('externalApi');
 const libraryManager = inject('libraryManager');
 const queue = inject('queue');
+const settingsManager = inject('settingsManager');
 const route = useRoute();
 const chartId = ref(route.params.chartId);
 const chart = ref(null);
@@ -310,10 +311,10 @@ function handleCopyLink() {
     externalApi.copyText(`https://spinsha.re/song/${chart.value.id}`);
 }
 
-function playPreview() {
+async function playPreview() {
     if (chartPreview.value && previewAvailable.value) {
         chartPreview.value.currentTime = 0;
-        chartPreview.value.volume = 0.5;
+        chartPreview.value.volume = await settingsManager.get('previewVolume');
         chartPreview.value.play();
         isPreviewPlaying.value = true;
 

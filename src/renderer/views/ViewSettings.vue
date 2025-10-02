@@ -102,6 +102,51 @@
                         @change="handleSave"
                     />
                 </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.interface.musicVolume.label')"
+                    :description="$t('settings.interface.musicVolume.description')"
+                >
+                    <input
+                        v-interactable
+                        class="input"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        v-model="settings.musicVolume"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.interface.sfxVolume.label')"
+                    :description="$t('settings.interface.sfxVolume.description')"
+                >
+                    <input
+                        v-interactable
+                        class="input"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        v-model="settings.sfxVolume"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.interface.previewVolume.label')"
+                    :description="$t('settings.interface.previewVolume.description')"
+                >
+                    <input
+                        v-interactable
+                        class="input"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        v-model="settings.previewVolume"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
             </SettingsSection>
 
             <SettingsSection

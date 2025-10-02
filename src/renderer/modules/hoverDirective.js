@@ -38,6 +38,7 @@ export function createHoverDirective() {
 
         try {
             audioHover.currentTime = 0;
+            audioHover.volume = (await window.spshSettings.get('sfxVolume'))*0.25;
             const playPromise = audioHover.play();
 
             playPromise.catch((error) => {
@@ -58,6 +59,7 @@ export function createHoverDirective() {
 
         try {
             audioClick.currentTime = 0;
+            audioClick.volume = (await window.spshSettings.get('sfxVolume'))*0.5;
             const playPromise = audioClick.play();
 
             playPromise.catch((error) => {
