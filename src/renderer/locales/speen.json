@@ -115,6 +115,10 @@
       "downloads": "Speen",
       "uploaded": "Speen",
       "updated": "Speen"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -226,6 +230,7 @@
         "label": "Speen speen",
         "description": "Speen speen Speen speen speen",
         "placeholder": "Speen speen speen",
+        "notAFolder": "",
         "select": "Speen",
         "detect": "Speen"
       }
