@@ -115,6 +115,10 @@
       "downloads": "Downloads",
       "uploaded": "Geüpload",
       "updated": "Bijgewerkt"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -226,6 +230,7 @@
         "label": "Customs pad",
         "description": "Pad naar de map met custom charts",
         "placeholder": "Nog niet ingesteld",
+        "notAFolder": "",
         "select": "Selecteer",
         "detect": "Detecteer"
       }
