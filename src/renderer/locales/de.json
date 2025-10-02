@@ -93,7 +93,7 @@
     "noReviews": "Noch keine Reviews abgegeben.",
     "noSpinPlays": "Noch keine SpinPlays.",
     "status": {
-      "local": "Lokal",
+      "local": "",
       "installed": "Installiert",
       "outOfDate": "Veraltet"
     },
@@ -117,8 +117,8 @@
       "updated": "Geupdatet"
     },
     "dlc": {
-      "header": "DLC benötigt",
-      "body": "In Zukunft wird das DLC <strong>{title}</strong> benötigt, um diese Chart zu spielen."
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -230,7 +230,7 @@
         "label": "Inhalts-Pfad",
         "description": "Pfad zu deinen Inhalten (Customs Ordner)",
         "placeholder": "Noch nicht gesetzt",
-        "notAFolder": "Dieser Pfad ist kein valider Ordner.",
+        "notAFolder": "",
         "select": "Auswählen",
         "detect": "Erkennen"
       }
