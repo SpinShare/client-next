@@ -115,6 +115,10 @@
       "downloads": "Descargas",
       "uploaded": "Subido",
       "updated": "Actualizado"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -226,6 +230,7 @@
         "label": "Directorio de archivos",
         "description": "Ruta a su carpeta de canciones para el juego",
         "placeholder": "Aún no definido",
+        "notAFolder": "",
         "select": "Seleccionar",
         "detect": "Detectar"
       }
