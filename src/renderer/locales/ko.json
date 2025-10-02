@@ -115,6 +115,10 @@
       "downloads": "",
       "uploaded": "",
       "updated": ""
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -226,6 +230,7 @@
         "label": "",
         "description": "",
         "placeholder": "",
+        "notAFolder": "",
         "select": "",
         "detect": ""
       }
