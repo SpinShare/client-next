@@ -214,6 +214,18 @@
       "musicEnabled": {
         "label": "Speen speen speen",
         "description": "Speen speen Speen"
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
