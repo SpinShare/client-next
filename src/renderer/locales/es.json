@@ -214,6 +214,18 @@
       "musicEnabled": {
         "label": "Música de menú activada",
         "description": "Reproducir música de menú"
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
