@@ -55,8 +55,8 @@ onMounted(async () => {
     libraryManager.onCacheRebuildDone(() => {
         cacheRebuildActive.value = false;
     });
-    externalApi.onWindowFocused(() => {
-        bgmDefault.value.volume = 0.5;
+    externalApi.onWindowFocused(async () => {
+        bgmDefault.value.volume = await settingsManager.get('musicVolume');
     });
     externalApi.onWindowBlurred(() => {
         bgmDefault.value.volume = 0.0;
@@ -76,7 +76,7 @@ onMounted(async () => {
         console.error('Audio loading error:', e);
     });
     bgmDefault.value.loop = true;
-    bgmDefault.value.volume = 0.5;
+    bgmDefault.value.volume = await settingsManager.get('musicVolume');
     if (await settingsManager.get('musicEnabled')) {
         bgmDefault.value.play();
     }
@@ -87,6 +87,7 @@ onMounted(async () => {
         } else {
             bgmDefault.value.pause();
         }
+        bgmDefault.value.volume = newSettings.musicVolume;
 
         if (newSettings.theme === 'dark') {
             document.documentElement.dataset.theme = 'dark';
