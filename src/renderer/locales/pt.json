@@ -214,6 +214,18 @@
       "musicEnabled": {
         "label": "",
         "description": ""
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
