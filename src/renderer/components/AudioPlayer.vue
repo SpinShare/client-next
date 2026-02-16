@@ -3,10 +3,6 @@
         class="audio-player"
         v-if="currentChart"
     >
-        <audio
-            ref="audioPlayerElement"
-            style="display: none;"
-        />
         <div class="player-content">
             <div class="track-info">
                 <div
@@ -137,7 +133,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useAudioPlayer } from '@/composables/useAudioPlayer';
 import Remixicon from '@/components/Remixicon.vue';
 
@@ -157,12 +153,10 @@ const {
     playPrevious,
     seekByPercentage,
     setVolume,
-    setAudioElement,
 } = useAudioPlayer();
 
 const progressBar = ref(null);
 const volumeSlider = ref(null);
-const audioPlayerElement = ref(null);
 const isMuted = ref(false);
 const volumeBeforeMute = ref(0.5);
 
@@ -305,13 +299,6 @@ onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown);
 });
 
-// Watch for the audio element to become available and set it up
-watch(audioPlayerElement, (element) => {
-    if (element) {
-        console.log('Setting up audio player element');
-        setAudioElement(element);
-    }
-}, { immediate: true });
 </script>
 
 <style scoped>

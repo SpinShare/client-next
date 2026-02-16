@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue';
 
 // Shared state for the audio player
-const audioElement = ref(null);
 const currentChart = ref(null);
 const playlist = ref([]);
 const currentPlaylistIndex = ref(-1);
@@ -10,11 +9,35 @@ const currentTime = ref(0);
 const duration = ref(0);
 const volume = ref(0.5);
 
-// Store event listener references so we can remove them properly
-let timeUpdateHandler = null;
-let loadedMetadataHandler = null;
-let durationChangeHandler = null;
-let endedHandler = null;
+// Create a persistent Audio object at module scope so it survives component
+// unmount/remount cycles (e.g. page navigation).
+const audioElement = new Audio();
+audioElement.volume = volume.value;
+
+audioElement.addEventListener('timeupdate', () => {
+    currentTime.value = audioElement.currentTime;
+});
+audioElement.addEventListener('loadedmetadata', () => {
+    duration.value = audioElement.duration;
+    console.log('Loaded metadata, duration:', audioElement.duration);
+});
+audioElement.addEventListener('durationchange', () => {
+    if (audioElement.duration && !isNaN(audioElement.duration)) {
+        duration.value = audioElement.duration;
+    }
+});
+audioElement.addEventListener('ended', () => {
+    console.log('Audio ended');
+    // Inline stop logic to avoid referencing the function before it's defined
+    audioElement.pause();
+    audioElement.currentTime = 0;
+    isPlaying.value = false;
+    currentTime.value = 0;
+    duration.value = 0;
+    currentChart.value = null;
+    playlist.value = [];
+    currentPlaylistIndex.value = -1;
+});
 
 export function useAudioPlayer() {
     const progress = computed(() => {
@@ -37,70 +60,11 @@ export function useAudioPlayer() {
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
-    function setAudioElement(element) {
-        // Remove old event listeners if they exist
-        if (audioElement.value) {
-            if (timeUpdateHandler) audioElement.value.removeEventListener('timeupdate', timeUpdateHandler);
-            if (loadedMetadataHandler) audioElement.value.removeEventListener('loadedmetadata', loadedMetadataHandler);
-            if (durationChangeHandler) audioElement.value.removeEventListener('durationchange', durationChangeHandler);
-            if (endedHandler) audioElement.value.removeEventListener('ended', endedHandler);
-        }
-
-        audioElement.value = element;
-
-        if (element) {
-            console.log('Setting up audio element listeners');
-
-            // Create new event handlers
-            timeUpdateHandler = () => {
-                currentTime.value = element.currentTime;
-                console.log('Time update:', element.currentTime);
-            };
-            loadedMetadataHandler = () => {
-                duration.value = element.duration;
-                console.log('Loaded metadata, duration:', element.duration);
-            };
-            durationChangeHandler = () => {
-                if (element.duration && !isNaN(element.duration)) {
-                    duration.value = element.duration;
-                }
-            };
-            endedHandler = () => {
-                console.log('Audio ended');
-                stop();
-            };
-
-            // Add event listeners
-            element.addEventListener('timeupdate', timeUpdateHandler);
-            element.addEventListener('loadedmetadata', loadedMetadataHandler);
-            element.addEventListener('durationchange', durationChangeHandler);
-            element.addEventListener('ended', endedHandler);
-
-            // Update duration immediately if metadata is already loaded
-            if (element.duration && !isNaN(element.duration)) {
-                duration.value = element.duration;
-                console.log('Duration already available:', element.duration);
-            }
-
-            // Apply current volume to the new element
-            element.volume = volume.value;
-
-            // If a chart is already loaded, set its source now
-            if (currentChart.value) {
-                const audioUrl = currentChart.value.paths?.ogg || `https://spinsha.re/uploads/audio/${currentChart.value.fileReference}.ogg`;
-                console.log('Setting audio source for already-loaded chart:', audioUrl);
-                element.src = audioUrl;
-            }
-        }
-    }
-
     function loadChart(chart, chartPlaylist = null, playlistIndex = -1) {
         // Reset audio without changing isPlaying state — using stop() would
         // briefly set isPlaying to false and trigger BGM to fade back in.
-        if (audioElement.value) {
-            audioElement.value.pause();
-            audioElement.value.currentTime = 0;
-        }
+        audioElement.pause();
+        audioElement.currentTime = 0;
         currentChart.value = chart;
         currentTime.value = 0;
         duration.value = 0;
@@ -115,14 +79,12 @@ export function useAudioPlayer() {
             currentPlaylistIndex.value = 0;
         }
 
-        // Update the audio source - this will be called again by setAudioElement if element isn't ready yet
-        if (audioElement.value && chart) {
+        // Update the audio source
+        if (chart) {
             const audioUrl = chart.paths?.ogg || `https://spinsha.re/uploads/audio/${chart.fileReference}.ogg`;
             console.log('Loading chart audio:', audioUrl);
-            audioElement.value.src = audioUrl;
-            audioElement.value.load();
-        } else {
-            console.log('Audio element not ready yet, will set source when available');
+            audioElement.src = audioUrl;
+            audioElement.load();
         }
     }
 
@@ -132,7 +94,7 @@ export function useAudioPlayer() {
         const nextIndex = (currentPlaylistIndex.value + 1) % playlist.value.length;
         const nextChart = playlist.value[nextIndex];
 
-        if (nextChart && audioElement.value) {
+        if (nextChart) {
             // If the chart doesn't have paths, we need to fetch it from API
             if (!nextChart.paths?.ogg && window.spshApi) {
                 console.log('Fetching full chart data for next track:', nextChart.id);
@@ -155,7 +117,7 @@ export function useAudioPlayer() {
         const prevIndex = currentPlaylistIndex.value - 1 < 0 ? playlist.value.length - 1 : currentPlaylistIndex.value - 1;
         const prevChart = playlist.value[prevIndex];
 
-        if (prevChart && audioElement.value) {
+        if (prevChart) {
             // If the chart doesn't have paths, we need to fetch it from API
             if (!prevChart.paths?.ogg && window.spshApi) {
                 console.log('Fetching full chart data for previous track:', prevChart.id);
@@ -173,25 +135,21 @@ export function useAudioPlayer() {
     }
 
     function play() {
-        if (audioElement.value && currentChart.value) {
-            audioElement.value.volume = volume.value;
-            audioElement.value.play();
+        if (currentChart.value) {
+            audioElement.volume = volume.value;
+            audioElement.play();
             isPlaying.value = true;
         }
     }
 
     function pause() {
-        if (audioElement.value) {
-            audioElement.value.pause();
-            isPlaying.value = false;
-        }
+        audioElement.pause();
+        isPlaying.value = false;
     }
 
     function stop() {
-        if (audioElement.value) {
-            audioElement.value.pause();
-            audioElement.value.currentTime = 0;
-        }
+        audioElement.pause();
+        audioElement.currentTime = 0;
         isPlaying.value = false;
         currentTime.value = 0;
         duration.value = 0;
@@ -210,39 +168,26 @@ export function useAudioPlayer() {
 
     function seek(timeInSeconds) {
         console.log('Seeking to:', timeInSeconds);
-        if (audioElement.value) {
-            audioElement.value.currentTime = timeInSeconds;
-            currentTime.value = timeInSeconds;
-        } else {
-            console.error('No audio element available for seeking');
-        }
+        audioElement.currentTime = timeInSeconds;
+        currentTime.value = timeInSeconds;
     }
 
     function seekByPercentage(percentage) {
-        if (audioElement.value) {
-            // Get duration directly from the audio element
-            const actualDuration = audioElement.value.duration;
-            console.log('Seeking by percentage:', percentage, 'duration from element:', actualDuration, 'duration ref:', duration.value);
+        // Get duration directly from the audio element
+        const actualDuration = audioElement.duration;
+        console.log('Seeking by percentage:', percentage, 'duration from element:', actualDuration, 'duration ref:', duration.value);
 
-            if (actualDuration && !isNaN(actualDuration)) {
-                const newTime = (percentage / 100) * actualDuration;
-                seek(newTime);
-            } else {
-                console.error('Cannot seek - duration not available yet');
-            }
+        if (actualDuration && !isNaN(actualDuration)) {
+            const newTime = (percentage / 100) * actualDuration;
+            seek(newTime);
         } else {
-            console.error('Cannot seek - no audio element');
+            console.error('Cannot seek - duration not available yet');
         }
     }
 
     function skipForward(seconds = 5) {
-        if (!audioElement.value) {
-            console.error('Cannot skip forward - no audio element');
-            return;
-        }
-
         // Get current time directly from the audio element
-        const current = audioElement.value.currentTime;
+        const current = audioElement.currentTime;
 
         // Validate current time
         if (current === undefined || current === null || isNaN(current)) {
@@ -253,10 +198,10 @@ export function useAudioPlayer() {
         // Try to get duration from multiple sources
         let dur = duration.value;
         if (!dur || isNaN(dur)) {
-            dur = audioElement.value.duration;
+            dur = audioElement.duration;
         }
 
-        console.log('Skip forward - current:', current, 'duration.value:', duration.value, 'element.duration:', audioElement.value.duration, 'using dur:', dur);
+        console.log('Skip forward - current:', current, 'duration.value:', duration.value, 'element.duration:', audioElement.duration, 'using dur:', dur);
 
         if (!dur || isNaN(dur) || dur === 0) {
             console.error('Cannot skip forward - invalid duration');
@@ -281,13 +226,8 @@ export function useAudioPlayer() {
     }
 
     function skipBackward(seconds = 5) {
-        if (!audioElement.value) {
-            console.error('Cannot skip backward - no audio element');
-            return;
-        }
-
         // Get current time directly from the audio element
-        const current = audioElement.value.currentTime;
+        const current = audioElement.currentTime;
 
         // Validate current time
         if (current === undefined || current === null || isNaN(current)) {
@@ -316,14 +256,11 @@ export function useAudioPlayer() {
 
     function setVolume(newVolume) {
         volume.value = Math.max(0, Math.min(1, newVolume));
-        if (audioElement.value) {
-            audioElement.value.volume = volume.value;
-        }
+        audioElement.volume = volume.value;
     }
 
     return {
         // State
-        audioElement,
         currentChart,
         playlist,
         currentPlaylistIndex,
@@ -336,7 +273,6 @@ export function useAudioPlayer() {
         formattedDuration,
 
         // Methods
-        setAudioElement,
         loadChart,
         play,
         pause,
