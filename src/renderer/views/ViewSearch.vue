@@ -111,6 +111,7 @@
                             v-for="chart in results"
                             :key="chart.id"
                             v-bind="chart"
+                            :chart-list="results"
                         />
                     </ChartGrid>
                 </section>

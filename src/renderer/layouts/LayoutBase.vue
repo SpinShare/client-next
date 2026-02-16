@@ -10,6 +10,7 @@
                 <slot />
             </main>
         </transition>
+        <AudioPlayer />
     </div>
 </template>
 
@@ -17,6 +18,7 @@
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Header from '@/components/Header/Header.vue';
+import AudioPlayer from '@/components/AudioPlayer.vue';
 import { useStorage } from '@vueuse/core';
 
 const mitt = inject('mitt');
@@ -49,12 +51,16 @@ onUnmounted(() => {
 
 <style scoped>
 .layout-base {
-    @apply grid grid-rows-[auto_1fr] grid-cols-[auto_1fr] grow overflow-hidden;
+    @apply grid grid-cols-[auto_1fr] grow overflow-hidden;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
 }
 .overlay-cache-rebuild {
     @apply fixed inset-0 p-5 flex flex-col justify-center items-center z-100 backdrop-blur-md backdrop-brightness-75;
 }
 main {
     @apply flex flex-col overflow-y-scroll;
+    grid-column: 2;
+    grid-row: 2;
 }
 </style>

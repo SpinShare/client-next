@@ -41,6 +41,7 @@
                             v-for="chart in staffpicks"
                             :key="chart.id"
                             v-bind="chart"
+                            :chart-list="staffpicks"
                         />
                     </template>
                 </ChartGrid>

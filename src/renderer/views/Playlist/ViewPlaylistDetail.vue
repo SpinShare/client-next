@@ -72,6 +72,7 @@
                         v-for="chart in playlist.songs"
                         :key="chart.id"
                         v-bind="chart"
+                        :chart-list="playlist.songs"
                     />
                 </ChartGrid>
             </main>

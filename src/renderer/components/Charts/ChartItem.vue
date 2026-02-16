@@ -2,20 +2,42 @@
     <component
         :is="isLocalChart ? 'div' : RouterLink"
         :to="`/chart/${id || fileReference}`"
-        :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''} ${isLocalChart ? 'local-chart' : ''}`"
+        :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''} ${isLocalChart ? 'local-chart' : ''} ${isCurrentlyPlaying ? 'playing' : ''}`"
         @click.middle.prevent="handleAddToQueue"
         v-interactable="!isLocalChart"
     >
-        <div
-            v-if="!isLocal"
-            class="cover"
-            :style="`background-image: url('${cover}')`"
-        ></div>
-        <div
-            v-else
-            class="cover"
-            :style="`background-image: url('data:image/png;base64,${localCoverCache}')`"
-        ></div>
+        <div class="cover-container">
+            <div
+                v-if="!isLocal"
+                class="cover"
+                :style="`background-image: url('${cover}')`"
+            ></div>
+            <div
+                v-else
+                class="cover"
+                :style="`background-image: url('data:image/png;base64,${localCoverCache}')`"
+            ></div>
+            <button
+                v-if="!isLocalChart && !mini"
+                class="play-button"
+                @click.prevent="handlePlayPreview"
+                v-interactable
+                :title="isCurrentlyPlaying && audioIsPlaying ? 'Pause' : 'Play preview'"
+            >
+                <Remixicon
+                    v-if="isCurrentlyPlaying && audioIsPlaying"
+                    icon="pause"
+                    filled
+					color="rgba(130,235,170,1)"
+                />
+                <Remixicon
+                    v-else
+                    icon="play"
+                    filled
+					color="rgba(130,235,170,1)"
+                />
+            </button>
+        </div>
         <div class="content">
             <div class="meta">
                 <h2>{{ title }}</h2>
@@ -80,6 +102,8 @@
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 import { RouterLink } from 'vue-router';
+import { useAudioPlayer } from '@/composables/useAudioPlayer';
+import Remixicon from '@/components/Remixicon.vue';
 
 const props = defineProps({
     id: {
@@ -166,15 +190,34 @@ const props = defineProps({
         type: [String, Boolean],
         default: false,
     },
+    chartList: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const mitt = inject('mitt');
 const queue = inject('queue');
+const api = inject('api');
 const settingsManager = inject('settingsManager');
 const libraryManager = inject('libraryManager');
 const settingShowExplicit = ref(false);
 const localCoverCache = ref(null);
 const cacheUpdateHash = ref(null);
+
+// Audio player
+const {
+    currentChart,
+    isPlaying: audioIsPlaying,
+    loadChart,
+    play,
+    pause,
+    setVolume,
+} = useAudioPlayer();
+
+const isCurrentlyPlaying = computed(() => {
+    return currentChart.value?.id === props.id || currentChart.value?.fileReference === props.fileReference;
+});
 
 onMounted(async () => {
     settingShowExplicit.value = await settingsManager.get('showExplicit');
@@ -204,11 +247,50 @@ async function handleAddToQueue() {
     const newDownloadItem = new DownloadItem(props.id, props.cover, props.title, props.artist, props.charter, props.fileReference);
     await queue.addQueueItem(newDownloadItem);
 }
+
+async function handlePlayPreview(event) {
+    // Prevent navigation when clicking play button
+    event.stopPropagation();
+
+    if (isCurrentlyPlaying.value && audioIsPlaying.value) {
+        // If this chart is currently playing, pause it
+        pause();
+    } else {
+        // Fetch the full chart details to get the correct audio path
+        console.log('Fetching chart details for ID:', props.id);
+        const fullChartData = await api.getChartDetail(props.id);
+
+        if (!fullChartData) {
+            console.error('Failed to fetch chart details');
+            return;
+        }
+
+        console.log('Got chart data with audio path:', fullChartData.paths?.ogg);
+
+        // Load the chart with the playlist if available
+        // For the playlist, we need to fetch each chart's details as well
+        // Only apply previewVolume for the first song; preserve user-adjusted volume after that
+        const wasPlaying = audioIsPlaying.value;
+        loadChart(fullChartData, props.chartList.length > 0 ? props.chartList : null);
+
+        if (!wasPlaying) {
+            const volume = await settingsManager.get('previewVolume');
+            setVolume(volume);
+        }
+
+        // Play the audio
+        play();
+    }
+}
 </script>
 
 <style scoped>
 .chart-item {
     @apply bg-base-200 dark:bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
+
+    &.playing {
+        @apply bg-brand-100 dark:bg-brand-950 border border-brand-400 dark:border-brand-700;
+    }
 
     &.explicit {
         @apply transition-all;
@@ -232,8 +314,29 @@ async function handleAddToQueue() {
         }
     }
 
+    & .cover-container {
+        @apply relative;
+    }
+
     & .cover {
         @apply aspect-square w-[80px] rounded bg-center bg-cover;
+    }
+
+    & .play-button {
+        @apply absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity rounded;
+
+        &:hover {
+            @apply bg-black/80;
+        }
+
+        & .remixicon {
+            @apply text-white text-3xl drop-shadow-[0_0_6px_rgba(100,235,160,0.7)];
+        }
+    }
+
+    &:hover .play-button,
+    &.playing .play-button {
+        @apply opacity-100;
     }
     & .content {
         @apply flex flex-col gap-3 overflow-hidden;

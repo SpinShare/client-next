@@ -38,6 +38,7 @@
                             :key="chart.fileReference"
                             v-bind="chart"
                             :is-local="true"
+                            :chart-list="library"
                         />
                     </ChartGrid>
                 </template>

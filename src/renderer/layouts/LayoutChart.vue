@@ -6,12 +6,6 @@
             </section>
         </template>
         <template v-else>
-            <audio
-                ref="chartPreview"
-                :src="chart.paths.ogg"
-                @error="handlePreviewError"
-            />
-
             <header class="chart">
                 <div
                     class="cover"
@@ -77,7 +71,7 @@
                             <Remixicon icon="download" />
                             <span>{{ $t('chart.addToQueue') }}</span>
                         </button>
-                        <template v-if="chartPreview && previewAvailable">
+                        <template v-if="previewAvailable">
                             <button
                                 class="button"
                                 v-if="!isPreviewPlaying"
@@ -238,6 +232,7 @@ import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
 import SectionHeader from '@/components/SectionHeader.vue';
 import router from '@/router';
+import { useAudioPlayer } from '@/composables/useAudioPlayer';
 
 const mitt = inject('mitt');
 const api = inject('api');
@@ -250,12 +245,18 @@ const chartId = ref(route.params.chartId);
 const chart = ref(null);
 const cacheItem = ref(null);
 
-const chartPreview = ref(null);
-const chartPreviewTimeout = ref(null);
-const isPreviewPlaying = ref(false);
 const previewAvailable = ref(true);
 
 const playDialog = ref(null);
+
+// Use shared audio player
+const {
+    loadChart,
+    play,
+    stop,
+    isPlaying: isPreviewPlaying,
+    setVolume,
+} = useAudioPlayer();
 
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
@@ -276,7 +277,7 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-    stopPreview();
+    stop();
     mitt.off('item-change');
 });
 
@@ -312,35 +313,25 @@ function handleCopyLink() {
 }
 
 async function playPreview() {
-    if (chartPreview.value && previewAvailable.value) {
-        chartPreview.value.currentTime = 0;
-        chartPreview.value.volume = await settingsManager.get('previewVolume');
-        chartPreview.value.play();
-        isPreviewPlaying.value = true;
-
-        chartPreviewTimeout.value = setTimeout(() => {
-            stopPreview();
-        }, 30 * 1000);
+    if (previewAvailable.value && chart.value) {
+        const wasPlaying = isPreviewPlaying.value;
+        loadChart(chart.value);
+        if (!wasPlaying) {
+            const volume = await settingsManager.get('previewVolume');
+            setVolume(volume);
+        }
+        play();
     }
 }
 
 function stopPreview() {
-    if (chartPreview.value) {
-        chartPreview.value.pause();
-        chartPreview.value.currentTime = 0;
-        isPreviewPlaying.value = false;
-        clearTimeout(chartPreviewTimeout.value);
-    }
-}
-
-function handlePreviewError(event) {
-    console.log('Preview audio failed to load:', event);
-    previewAvailable.value = false;
+    stop();
 }
 
 watch(
     () => [route.params.chartId],
     async () => {
+        stop();
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
         if (chart.value === null) {

@@ -12,6 +12,7 @@
                     v-for="chart in charts"
                     :key="chart.id"
                     v-bind="chart"
+                    :chart-list="charts"
                 />
             </template>
         </ChartGrid>

@@ -20,11 +20,13 @@
 import bgmDefaultFile from '@/assets/audio/bgm_default.ogg?url';
 import queueDoneFile from '@/assets/audio/queue_done.wav?url';
 import errorFile from '@/assets/audio/error.ogg?url';
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import UpdateToast from '@/components/UpdateToast.vue';
 import { useRoute, useRouter } from 'vue-router';
 import LibraryRebuildOverlay from '@/components/LibraryRebuildOverlay.vue';
+import { useAudioPlayer } from '@/composables/useAudioPlayer';
 
+const { isPlaying: audioPlayerPlaying } = useAudioPlayer();
 const mitt = inject('mitt');
 const route = useRoute();
 const router = useRouter();
@@ -38,6 +40,31 @@ const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxError = ref(null);
 const updateAvailable = ref(false);
+
+let bgmFadeInterval = null;
+
+function fadeBgm(targetVolume, durationMs, onComplete) {
+    if (bgmFadeInterval) clearInterval(bgmFadeInterval);
+    if (!bgmDefault.value) return;
+
+    const startVolume = bgmDefault.value.volume;
+    const steps = 20;
+    const stepTime = durationMs / steps;
+    const volumeStep = (targetVolume - startVolume) / steps;
+    let currentStep = 0;
+
+    bgmFadeInterval = setInterval(() => {
+        currentStep++;
+        if (currentStep >= steps) {
+            clearInterval(bgmFadeInterval);
+            bgmFadeInterval = null;
+            bgmDefault.value.volume = targetVolume;
+            if (onComplete) onComplete();
+        } else {
+            bgmDefault.value.volume = Math.max(0, Math.min(1, startVolume + volumeStep * currentStep));
+        }
+    }, stepTime);
+}
 
 function handleDismissUpdate() {
     updateAvailable.value = false;
@@ -56,10 +83,14 @@ onMounted(async () => {
         cacheRebuildActive.value = false;
     });
     externalApi.onWindowFocused(async () => {
-        bgmDefault.value.volume = await settingsManager.get('musicVolume');
+        if (!audioPlayerPlaying.value) {
+            bgmDefault.value.volume = await settingsManager.get('musicVolume');
+        }
     });
     externalApi.onWindowBlurred(() => {
-        bgmDefault.value.volume = 0.0;
+        if (!audioPlayerPlaying.value) {
+            bgmDefault.value.volume = 0.0;
+        }
     });
 
     if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
@@ -82,12 +113,19 @@ onMounted(async () => {
     }
 
     mitt.on('save-settings', (newSettings) => {
-        if (newSettings.musicEnabled) {
-            bgmDefault.value.play();
+        if (audioPlayerPlaying.value) {
+            // Don't resume BGM while audio player is active
+            if (!newSettings.musicEnabled) {
+                bgmDefault.value.pause();
+            }
         } else {
-            bgmDefault.value.pause();
+            if (newSettings.musicEnabled) {
+                bgmDefault.value.play();
+            } else {
+                bgmDefault.value.pause();
+            }
+            bgmDefault.value.volume = newSettings.musicVolume;
         }
-        bgmDefault.value.volume = newSettings.musicVolume;
 
         if (newSettings.theme === 'dark') {
             document.documentElement.dataset.theme = 'dark';
@@ -127,7 +165,25 @@ onMounted(async () => {
     updateManager.checkForUpdates();
 });
 
+watch(audioPlayerPlaying, async (playing) => {
+    if (!bgmDefault.value) return;
+    const musicEnabled = await settingsManager.get('musicEnabled');
+    if (!musicEnabled) return;
+
+    if (playing) {
+        fadeBgm(0, 800, () => {
+            bgmDefault.value.pause();
+        });
+    } else {
+        const musicVolume = await settingsManager.get('musicVolume');
+        bgmDefault.value.volume = 0;
+        bgmDefault.value.play();
+        fadeBgm(musicVolume, 800);
+    }
+});
+
 onUnmounted(() => {
+    if (bgmFadeInterval) clearInterval(bgmFadeInterval);
     bgmDefault.value.pause();
     mitt.off('save-settings');
 
