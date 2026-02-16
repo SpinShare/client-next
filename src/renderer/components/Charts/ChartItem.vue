@@ -28,13 +28,11 @@
                     v-if="isCurrentlyPlaying && audioIsPlaying"
                     icon="pause"
                     filled
-					color="rgba(130,235,170,1)"
                 />
                 <Remixicon
                     v-else
                     icon="play"
                     filled
-					color="rgba(130,235,170,1)"
                 />
             </button>
         </div>
