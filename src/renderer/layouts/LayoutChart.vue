@@ -224,7 +224,7 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -254,9 +254,15 @@ const {
     loadChart,
     play,
     stop,
-    isPlaying: isPreviewPlaying,
+    isPlaying,
+    currentChart: playerCurrentChart,
     setVolume,
 } = useAudioPlayer();
+
+// Only show stop button if *this* chart is the one currently playing
+const isPreviewPlaying = computed(() => {
+    return isPlaying.value && playerCurrentChart.value?.id === chart.value?.id;
+});
 
 onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
@@ -277,7 +283,6 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-    stop();
     mitt.off('item-change');
 });
 
@@ -331,7 +336,6 @@ function stopPreview() {
 watch(
     () => [route.params.chartId],
     async () => {
-        stop();
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
         if (chart.value === null) {
