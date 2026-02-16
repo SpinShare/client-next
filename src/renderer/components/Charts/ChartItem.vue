@@ -321,14 +321,14 @@ async function handlePlayPreview(event) {
     }
 
     & .play-button {
-        @apply absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity rounded;
+        @apply absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity rounded;
 
         &:hover {
-            @apply bg-black/80;
+            @apply bg-black/70;
         }
 
-        & .remixicon {
-            @apply text-white text-3xl drop-shadow-[0_0_6px_rgba(100,235,160,0.7)];
+        & .icon {
+            @apply text-white text-3xl drop-shadow-[0_0_10px_rgba(100,235,160,0.9)];
         }
     }
 
