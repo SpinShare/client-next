@@ -284,10 +284,10 @@ async function handlePlayPreview(event) {
 
 <style scoped>
 .chart-item {
-    @apply bg-base-200 dark:bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center;
+    @apply bg-base-200 dark:bg-base-900 blur-none relative rounded-md overflow-hidden transition-all cursor-pointer text-left p-2 grid grid-cols-[auto_1fr] gap-4 items-center border border-transparent;
 
     &.playing {
-        @apply bg-brand-100 dark:bg-brand-950 border border-brand-400 dark:border-brand-700;
+        @apply bg-brand-100 dark:bg-brand-950 border-brand-400 dark:border-brand-700;
     }
 
     &.explicit {
