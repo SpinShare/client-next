@@ -19,7 +19,6 @@ audioElement.addEventListener('timeupdate', () => {
 });
 audioElement.addEventListener('loadedmetadata', () => {
     duration.value = audioElement.duration;
-    console.log('Loaded metadata, duration:', audioElement.duration);
 });
 audioElement.addEventListener('durationchange', () => {
     if (audioElement.duration && !isNaN(audioElement.duration)) {
@@ -27,7 +26,6 @@ audioElement.addEventListener('durationchange', () => {
     }
 });
 audioElement.addEventListener('ended', () => {
-    console.log('Audio ended');
     // Inline stop logic to avoid referencing the function before it's defined
     audioElement.pause();
     audioElement.currentTime = 0;
@@ -82,7 +80,6 @@ export function useAudioPlayer() {
         // Update the audio source
         if (chart) {
             const audioUrl = chart.paths?.ogg || `https://spinsha.re/uploads/audio/${chart.fileReference}.ogg`;
-            console.log('Loading chart audio:', audioUrl);
             audioElement.src = audioUrl;
             audioElement.load();
         }
@@ -97,7 +94,6 @@ export function useAudioPlayer() {
         if (nextChart) {
             // If the chart doesn't have paths, we need to fetch it from API
             if (!nextChart.paths?.ogg && window.spshApi) {
-                console.log('Fetching full chart data for next track:', nextChart.id);
                 const fullChart = await window.spshApi.getChartDetail(nextChart.id);
                 if (fullChart) {
                     loadChart(fullChart, playlist.value, nextIndex);
@@ -120,7 +116,6 @@ export function useAudioPlayer() {
         if (prevChart) {
             // If the chart doesn't have paths, we need to fetch it from API
             if (!prevChart.paths?.ogg && window.spshApi) {
-                console.log('Fetching full chart data for previous track:', prevChart.id);
                 const fullChart = await window.spshApi.getChartDetail(prevChart.id);
                 if (fullChart) {
                     loadChart(fullChart, playlist.value, prevIndex);
@@ -167,7 +162,6 @@ export function useAudioPlayer() {
     }
 
     function seek(timeInSeconds) {
-        console.log('Seeking to:', timeInSeconds);
         audioElement.currentTime = timeInSeconds;
         currentTime.value = timeInSeconds;
     }
@@ -175,7 +169,6 @@ export function useAudioPlayer() {
     function seekByPercentage(percentage) {
         // Get duration directly from the audio element
         const actualDuration = audioElement.duration;
-        console.log('Seeking by percentage:', percentage, 'duration from element:', actualDuration, 'duration ref:', duration.value);
 
         if (actualDuration && !isNaN(actualDuration)) {
             const newTime = (percentage / 100) * actualDuration;
@@ -201,8 +194,6 @@ export function useAudioPlayer() {
             dur = audioElement.duration;
         }
 
-        console.log('Skip forward - current:', current, 'duration.value:', duration.value, 'element.duration:', audioElement.duration, 'using dur:', dur);
-
         if (!dur || isNaN(dur) || dur === 0) {
             console.error('Cannot skip forward - invalid duration');
             return;
@@ -215,7 +206,6 @@ export function useAudioPlayer() {
         }
 
         const newTime = Math.min(current + seconds, dur);
-        console.log('Skip forward calculation: min(', current, '+', seconds, ',', dur, ') =', newTime);
 
         if (isNaN(newTime)) {
             console.error('Calculated newTime is NaN! current:', current, 'seconds:', seconds, 'dur:', dur);
@@ -241,10 +231,7 @@ export function useAudioPlayer() {
             return;
         }
 
-        console.log('Skip backward - current:', current, 'seconds:', seconds);
-
         const newTime = Math.max(current - seconds, 0);
-        console.log('Skip backward calculation: max(', current, '-', seconds, ', 0) =', newTime);
 
         if (isNaN(newTime)) {
             console.error('Calculated newTime is NaN! current:', current, 'seconds:', seconds);

@@ -164,7 +164,6 @@ function handleProgressClick(event) {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
-    console.log('Progress clicked at:', x, 'width:', rect.width, 'percentage:', percentage);
     seekByPercentage(percentage);
 }
 
