@@ -56,7 +56,7 @@ onMounted(async () => {
         cacheRebuildActive.value = false;
     });
     externalApi.onWindowFocused(async () => {
-        bgmDefault.value.volume = await settingsManager.get('musicVolume');
+        bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
     });
     externalApi.onWindowBlurred(() => {
         bgmDefault.value.volume = 0.0;
@@ -76,7 +76,7 @@ onMounted(async () => {
         console.error('Audio loading error:', e);
     });
     bgmDefault.value.loop = true;
-    bgmDefault.value.volume = await settingsManager.get('musicVolume');
+    bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
     if (await settingsManager.get('musicEnabled')) {
         bgmDefault.value.play();
     }
@@ -87,7 +87,7 @@ onMounted(async () => {
         } else {
             bgmDefault.value.pause();
         }
-        bgmDefault.value.volume = newSettings.musicVolume;
+        bgmDefault.value.volume = Math.pow(newSettings.musicVolume, 2);
 
         if (newSettings.theme === 'dark') {
             document.documentElement.dataset.theme = 'dark';
@@ -108,11 +108,13 @@ onMounted(async () => {
     mitt.on('sfx-queue-done', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
+        sfxQueueDone.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
         await sfxQueueDone.value.play();
     });
     mitt.on('sfx-error', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
+        sfxError.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
         await sfxError.value.play();
     });
     mitt.on('update-check-done', (hasNewRelease) => {

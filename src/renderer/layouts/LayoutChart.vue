@@ -314,7 +314,7 @@ function handleCopyLink() {
 async function playPreview() {
     if (chartPreview.value && previewAvailable.value) {
         chartPreview.value.currentTime = 0;
-        chartPreview.value.volume = await settingsManager.get('previewVolume');
+        chartPreview.value.volume = Math.pow(await settingsManager.get('previewVolume'), 2);
         chartPreview.value.play();
         isPreviewPlaying.value = true;
 
