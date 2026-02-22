@@ -38,6 +38,7 @@ const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxError = ref(null);
 const updateAvailable = ref(false);
+const isPreviewPlaying = ref(false);
 
 function handleDismissUpdate() {
     updateAvailable.value = false;
@@ -78,12 +79,26 @@ onMounted(async () => {
     bgmDefault.value.loop = true;
     bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
     if (await settingsManager.get('musicEnabled')) {
-        bgmDefault.value.play();
+        bgmDefault.value.play().catch((e) => console.error('BGM play error:', e));
     }
 
+    mitt.on('preview-play', () => {
+        isPreviewPlaying.value = true;
+        if (bgmDefault.value) {
+            bgmDefault.value.pause();
+        }
+    });
+
+    mitt.on('preview-stop', async () => {
+        isPreviewPlaying.value = false;
+        if (bgmDefault.value && (await settingsManager.get('musicEnabled'))) {
+            bgmDefault.value.play().catch((e) => console.error('BGM resume error:', e));
+        }
+    });
+
     mitt.on('save-settings', (newSettings) => {
-        if (newSettings.musicEnabled) {
-            bgmDefault.value.play();
+        if (newSettings.musicEnabled && !isPreviewPlaying.value) {
+            bgmDefault.value.play().catch((e) => console.error('BGM play error:', e));
         } else {
             bgmDefault.value.pause();
         }
@@ -132,6 +147,8 @@ onMounted(async () => {
 onUnmounted(() => {
     bgmDefault.value.pause();
     mitt.off('save-settings');
+    mitt.off('preview-play');
+    mitt.off('preview-stop');
 
     mitt.off('sfx-queue-done');
     mitt.off('sfx-error');

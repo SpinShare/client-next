@@ -10,6 +10,7 @@
                 ref="chartPreview"
                 :src="chart.paths.ogg"
                 @error="handlePreviewError"
+                @ended="stopPreview"
             />
 
             <header class="chart">
@@ -317,6 +318,7 @@ async function playPreview() {
         chartPreview.value.volume = Math.pow(await settingsManager.get('previewVolume'), 2);
         chartPreview.value.play();
         isPreviewPlaying.value = true;
+        mitt.emit('preview-play');
 
         chartPreviewTimeout.value = setTimeout(() => {
             stopPreview();
@@ -325,11 +327,12 @@ async function playPreview() {
 }
 
 function stopPreview() {
-    if (chartPreview.value) {
+    if (chartPreview.value && isPreviewPlaying.value) {
         chartPreview.value.pause();
         chartPreview.value.currentTime = 0;
         isPreviewPlaying.value = false;
         clearTimeout(chartPreviewTimeout.value);
+        mitt.emit('preview-stop');
     }
 }
 
@@ -341,6 +344,7 @@ function handlePreviewError(event) {
 watch(
     () => [route.params.chartId],
     async () => {
+        stopPreview();
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
         if (chart.value === null) {
