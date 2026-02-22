@@ -46,6 +46,25 @@ function handleDismissUpdate() {
 }
 
 onMounted(async () => {
+    bgmDefault.value = new Audio(bgmDefaultFile);
+    bgmDefault.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+    bgmDefault.value.loop = true;
+    bgmDefault.value.addEventListener('ended', () => {
+        bgmDefault.value.currentTime = 0;
+        bgmDefault.value.play().catch((e) => console.error('BGM loop error:', e));
+    });
+
+    sfxQueueDone.value = new Audio(queueDoneFile);
+    sfxQueueDone.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+    sfxError.value = new Audio(errorFile);
+    sfxError.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+
     libraryManager.onCacheRebuildStart(() => {
         cacheRebuildActive.value = true;
     });
@@ -63,35 +82,14 @@ onMounted(async () => {
         bgmDefault.value.volume = 0.0;
     });
 
-    if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
-        router.push('/setup/step/0');
-    }
-    if ((await settingsManager.get('theme')) === 'dark') {
-        document.documentElement.dataset.theme = 'dark';
-    } else {
-        document.documentElement.dataset.theme = '';
-    }
-
-    bgmDefault.value = new Audio(bgmDefaultFile);
-    bgmDefault.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
-    });
-    bgmDefault.value.loop = true;
-    bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
-    if (await settingsManager.get('musicEnabled')) {
-        bgmDefault.value.play().catch((e) => console.error('BGM play error:', e));
-    }
-
     mitt.on('preview-play', () => {
         isPreviewPlaying.value = true;
-        if (bgmDefault.value) {
-            bgmDefault.value.pause();
-        }
+        bgmDefault.value.pause();
     });
 
     mitt.on('preview-stop', async () => {
         isPreviewPlaying.value = false;
-        if (bgmDefault.value && (await settingsManager.get('musicEnabled'))) {
+        if (await settingsManager.get('musicEnabled')) {
             bgmDefault.value.play().catch((e) => console.error('BGM resume error:', e));
         }
     });
@@ -111,26 +109,17 @@ onMounted(async () => {
         }
     });
 
-    sfxQueueDone.value = new Audio(queueDoneFile);
-    sfxQueueDone.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
-    });
-    sfxError.value = new Audio(errorFile);
-    sfxError.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
-    });
-
     mitt.on('sfx-queue-done', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
         sfxQueueDone.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
-        await sfxQueueDone.value.play();
+        await sfxQueueDone.value.play().catch((e) => console.error('SFX play error:', e));
     });
     mitt.on('sfx-error', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
         sfxError.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
-        await sfxError.value.play();
+        await sfxError.value.play().catch((e) => console.error('SFX play error:', e));
     });
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
@@ -140,6 +129,20 @@ onMounted(async () => {
             mitt.emit('queue-open');
         }
     });
+
+    if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
+        router.push('/setup/step/0');
+    }
+    if ((await settingsManager.get('theme')) === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+    } else {
+        document.documentElement.dataset.theme = '';
+    }
+
+    bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
+    if (await settingsManager.get('musicEnabled')) {
+        bgmDefault.value.play().catch((e) => console.error('BGM play error:', e));
+    }
 
     updateManager.checkForUpdates();
 });
