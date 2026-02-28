@@ -92,7 +92,7 @@
                     class="control-btn"
                     @click="toggleMute"
                     v-interactable
-                    :title="isMuted ? 'Unmute' : 'Mute'"
+                    :title="isMuted ? 'Unmute (M)' : 'Mute (M)'"
                 >
                     <Remixicon
                         v-if="isMuted || volume === 0"
