@@ -254,15 +254,12 @@ async function handlePlayPreview(event) {
         pause();
     } else {
         // Fetch the full chart details to get the correct audio path
-        console.log('Fetching chart details for ID:', props.id);
         const fullChartData = await api.getChartDetail(props.id);
 
         if (!fullChartData) {
             console.error('Failed to fetch chart details');
             return;
         }
-
-        console.log('Got chart data with audio path:', fullChartData.paths?.ogg);
 
         loadChart(fullChartData, props.chartList.length > 0 ? props.chartList : null);
 
