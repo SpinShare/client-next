@@ -222,10 +222,6 @@
       "sfxVolume": {
         "label": "Sound effects volume",
         "description": "The volume of UI sound effects"
-      },
-      "previewVolume": {
-        "label": "Preview music volume",
-        "description": "The volume of chart previews"
       }
     },
     "account": {

@@ -19,8 +19,7 @@ export class SettingsManager {
             pathCustoms: SettingsManager.getDefaultCustomsPath(),
             pathGame: '',
             musicVolume: 0.5,
-            sfxVolume: 1,
-            previewVolume: 0.5
+            sfxVolume: 1
         };
         this.settings = { ...this.defaults };
 

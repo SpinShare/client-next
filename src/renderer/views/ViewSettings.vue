@@ -132,21 +132,6 @@
                         @change="handleSave"
                     />
                 </SettingsItem>
-                <SettingsItem
-                    :label="$t('settings.interface.previewVolume.label')"
-                    :description="$t('settings.interface.previewVolume.description')"
-                >
-                    <input
-                        v-interactable
-                        class="input"
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        v-model="settings.previewVolume"
-                        @change="handleSave"
-                    />
-                </SettingsItem>
             </SettingsSection>
 
             <SettingsSection
