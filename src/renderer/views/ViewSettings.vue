@@ -95,7 +95,7 @@
                 </SettingsItem>
                 <SettingsItem
                     :label="$t('settings.interface.musicEnabled.label')"
-                    :description="$t('settings.interface.musicEnabled.description')"
+                    :description="$t('settings.interface.musicEnabled.description') + ' (Music by MintoDog)'"
                 >
                     <Switch
                         v-model="settings.musicEnabled"

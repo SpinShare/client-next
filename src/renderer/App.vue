@@ -40,6 +40,7 @@ const bgmDefault = ref(null);
 const sfxQueueDone = ref(null);
 const sfxError = ref(null);
 const updateAvailable = ref(false);
+const isPreviewPlaying = ref(false);
 
 let bgmFadeInterval = null;
 
@@ -72,6 +73,25 @@ function handleDismissUpdate() {
 }
 
 onMounted(async () => {
+    bgmDefault.value = new Audio(bgmDefaultFile);
+    bgmDefault.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+    bgmDefault.value.loop = true;
+    bgmDefault.value.addEventListener('ended', () => {
+        bgmDefault.value.currentTime = 0;
+        bgmDefault.value.play().catch((e) => console.error('BGM loop error:', e));
+    });
+
+    sfxQueueDone.value = new Audio(queueDoneFile);
+    sfxQueueDone.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+    sfxError.value = new Audio(errorFile);
+    sfxError.value.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+    });
+
     libraryManager.onCacheRebuildStart(() => {
         cacheRebuildActive.value = true;
     });
@@ -93,24 +113,17 @@ onMounted(async () => {
         }
     });
 
-    if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
-        router.push('/setup/step/0');
-    }
-    if ((await settingsManager.get('theme')) === 'dark') {
-        document.documentElement.dataset.theme = 'dark';
-    } else {
-        document.documentElement.dataset.theme = '';
-    }
-
-    bgmDefault.value = new Audio(bgmDefaultFile);
-    bgmDefault.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
+    mitt.on('preview-play', () => {
+        isPreviewPlaying.value = true;
+        bgmDefault.value.pause();
     });
-    bgmDefault.value.loop = true;
-    bgmDefault.value.volume = await settingsManager.get('musicVolume');
-    if (await settingsManager.get('musicEnabled')) {
-        bgmDefault.value.play();
-    }
+
+    mitt.on('preview-stop', async () => {
+        isPreviewPlaying.value = false;
+        if (await settingsManager.get('musicEnabled')) {
+            bgmDefault.value.play().catch((e) => console.error('BGM resume error:', e));
+        }
+    });
 
     mitt.on('save-settings', (newSettings) => {
         if (audioPlayerPlaying.value) {
@@ -134,24 +147,17 @@ onMounted(async () => {
         }
     });
 
-    sfxQueueDone.value = new Audio(queueDoneFile);
-    sfxQueueDone.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
-    });
-    sfxError.value = new Audio(errorFile);
-    sfxError.value.addEventListener('error', (e) => {
-        console.error('Audio loading error:', e);
-    });
-
     mitt.on('sfx-queue-done', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
-        await sfxQueueDone.value.play();
+        sfxQueueDone.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
+        await sfxQueueDone.value.play().catch((e) => console.error('SFX play error:', e));
     });
     mitt.on('sfx-error', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
-        await sfxError.value.play();
+        sfxError.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
+        await sfxError.value.play().catch((e) => console.error('SFX play error:', e));
     });
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
@@ -161,6 +167,20 @@ onMounted(async () => {
             mitt.emit('queue-open');
         }
     });
+
+    if (!(await settingsManager.get('setupCompleted')) && !route.fullPath.includes('/setup')) {
+        router.push('/setup/step/0');
+    }
+    if ((await settingsManager.get('theme')) === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+    } else {
+        document.documentElement.dataset.theme = '';
+    }
+
+    bgmDefault.value.volume = Math.pow(await settingsManager.get('musicVolume'), 2);
+    if (await settingsManager.get('musicEnabled')) {
+        bgmDefault.value.play().catch((e) => console.error('BGM play error:', e));
+    }
 
     updateManager.checkForUpdates();
 });
@@ -186,6 +206,8 @@ onUnmounted(() => {
     if (bgmFadeInterval) clearInterval(bgmFadeInterval);
     bgmDefault.value.pause();
     mitt.off('save-settings');
+    mitt.off('preview-play');
+    mitt.off('preview-stop');
 
     mitt.off('sfx-queue-done');
     mitt.off('sfx-error');

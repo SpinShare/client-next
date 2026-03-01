@@ -315,7 +315,7 @@ async function handleNotificationClearAll() {
         }
     }
     & .connect-notification-popup {
-        @apply absolute top-10 right-10 z-10 w-[400px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
+        @apply absolute top-10 right-10 z-20 w-[400px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
 
         & header {
             @apply flex items-center px-4 py-2;
@@ -355,7 +355,7 @@ async function handleNotificationClearAll() {
         }
     }
     & .connect-profile-popup {
-        @apply absolute top-10 right-0 z-10 w-[300px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
+        @apply absolute top-10 right-0 z-20 w-[300px] bg-base-200 dark:bg-base-900 rounded-md shadow-2xl block overflow-hidden;
 
         & header {
             @apply flex items-center px-4 py-2;

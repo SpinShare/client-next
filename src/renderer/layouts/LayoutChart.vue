@@ -336,6 +336,7 @@ function stopPreview() {
 watch(
     () => [route.params.chartId],
     async () => {
+        stopPreview();
         chartId.value = route.params.chartId;
         chart.value = await api.getChartDetail(chartId.value);
         if (chart.value === null) {
