@@ -210,7 +210,6 @@ const {
     loadChart,
     play,
     pause,
-    setVolume,
 } = useAudioPlayer();
 
 const isCurrentlyPlaying = computed(() => {
@@ -265,16 +264,7 @@ async function handlePlayPreview(event) {
 
         console.log('Got chart data with audio path:', fullChartData.paths?.ogg);
 
-        // Load the chart with the playlist if available
-        // For the playlist, we need to fetch each chart's details as well
-        // Only apply previewVolume for the first song; preserve user-adjusted volume after that
-        const wasPlaying = audioIsPlaying.value;
         loadChart(fullChartData, props.chartList.length > 0 ? props.chartList : null);
-
-        if (!wasPlaying) {
-            const volume = await settingsManager.get('previewVolume');
-            setVolume(volume);
-        }
 
         // Play the audio
         play();

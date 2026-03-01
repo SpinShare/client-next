@@ -239,7 +239,6 @@ const api = inject('api');
 const externalApi = inject('externalApi');
 const libraryManager = inject('libraryManager');
 const queue = inject('queue');
-const settingsManager = inject('settingsManager');
 const route = useRoute();
 const chartId = ref(route.params.chartId);
 const chart = ref(null);
@@ -319,12 +318,7 @@ function handleCopyLink() {
 
 async function playPreview() {
     if (previewAvailable.value && chart.value) {
-        const wasPlaying = isPreviewPlaying.value;
         loadChart(chart.value);
-        if (!wasPlaying) {
-            const volume = await settingsManager.get('previewVolume');
-            setVolume(volume);
-        }
         play();
     }
 }
