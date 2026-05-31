@@ -7,6 +7,8 @@ export class AuthManager {
     connectToken = null;
     isLoggedIn = false;
     profile = null;
+    #notificationsCache = null;
+    #notificationsCacheTime = 0;
 
     constructor(settingsManager, apiClient) {
         this.#settingsManager = settingsManager;
@@ -67,6 +69,8 @@ export class AuthManager {
         this.connectToken = null;
         this.#settingsManager.updateOrInsert('connectToken', null);
         this.profile = null;
+        this.#notificationsCache = null;
+        this.#notificationsCacheTime = 0;
     }
 
     async fetchProfile() {
@@ -108,8 +112,15 @@ export class AuthManager {
     async getNotifications() {
         if (!this.isLoggedIn) return null;
 
+        const ONE_HOUR = 60 * 60 * 1000;
+        if (this.#notificationsCache !== null && Date.now() - this.#notificationsCacheTime < ONE_HOUR) {
+            return this.#notificationsCache;
+        }
+
         try {
-            return await this.#apiClient.connectGetNotifications(this.connectToken);
+            this.#notificationsCache = await this.#apiClient.connectGetNotifications(this.connectToken);
+            this.#notificationsCacheTime = Date.now();
+            return this.#notificationsCache;
         } catch (e) {
             console.error(e.message);
             return [];
@@ -118,6 +129,8 @@ export class AuthManager {
 
     async clearNotification(notificationId) {
         if (!this.isLoggedIn) return null;
+
+        this.#notificationsCacheTime = 0;
 
         try {
             return await this.#apiClient.connectClearNotification(this.connectToken, notificationId);
@@ -129,6 +142,8 @@ export class AuthManager {
 
     async clearAllNotifications() {
         if (!this.isLoggedIn) return null;
+
+        this.#notificationsCacheTime = 0;
 
         try {
             return await this.#apiClient.connectClearAllNotifications(this.connectToken);
