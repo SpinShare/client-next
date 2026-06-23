@@ -115,6 +115,10 @@
       "downloads": "Download",
       "uploaded": "Caricato",
       "updated": "Aggiornato"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -210,6 +214,18 @@
       "musicEnabled": {
         "label": "Musica del menu abilitata",
         "description": "Riproduci musica menu"
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
@@ -226,6 +242,7 @@
         "label": "Percorso custom",
         "description": "Percorso alla cartella dei chart",
         "placeholder": "Non ancora impostato",
+        "notAFolder": "",
         "select": "Seleziona",
         "detect": "Rileva"
       }

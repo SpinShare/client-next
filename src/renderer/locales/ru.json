@@ -115,6 +115,10 @@
       "downloads": "",
       "uploaded": "",
       "updated": ""
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -210,6 +214,18 @@
       "musicEnabled": {
         "label": "",
         "description": ""
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
@@ -226,6 +242,7 @@
         "label": "",
         "description": "",
         "placeholder": "",
+        "notAFolder": "",
         "select": "",
         "detect": ""
       }

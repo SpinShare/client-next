@@ -115,6 +115,10 @@
       "downloads": "Téléchargements",
       "uploaded": "Date de publication",
       "updated": "Dernière mise à jour"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -210,6 +214,18 @@
       "musicEnabled": {
         "label": "Musique du menu activée",
         "description": "Joue une musique en fond"
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
@@ -226,6 +242,7 @@
         "label": "Chemin d'accès à vos charts custom",
         "description": "Chemin d'accès à votre dossier de charts custom",
         "placeholder": "Pas encore défini",
+        "notAFolder": "",
         "select": "Sélectionner",
         "detect": "Détecter"
       }

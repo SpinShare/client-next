@@ -115,6 +115,10 @@
       "downloads": "Speen",
       "uploaded": "Speen",
       "updated": "Speen"
+    },
+    "dlc": {
+      "header": "",
+      "body": ""
     }
   },
   "playlist": {
@@ -210,6 +214,18 @@
       "musicEnabled": {
         "label": "Speen speen speen",
         "description": "Speen speen Speen"
+      },
+      "musicVolume": {
+        "label": "",
+        "description": ""
+      },
+      "sfxVolume": {
+        "label": "",
+        "description": ""
+      },
+      "previewVolume": {
+        "label": "",
+        "description": ""
       }
     },
     "account": {
@@ -226,6 +242,7 @@
         "label": "Speen speen",
         "description": "Speen speen Speen speen speen",
         "placeholder": "Speen speen speen",
+        "notAFolder": "",
         "select": "Speen",
         "detect": "Speen"
       }
