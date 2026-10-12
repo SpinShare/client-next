@@ -51,6 +51,9 @@ function handleLater() {
         & h1 {
             @apply text-lg font-bold;
         }
+        & p {
+            @apply text-base-600 dark:text-base-400;
+        }
         & .actions {
             @apply mt-2.5 flex gap-2;
         }

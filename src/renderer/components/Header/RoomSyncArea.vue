@@ -73,15 +73,11 @@
                     </div>
                 </div>
 
-                <div class="settings">
-                    <div :class="`setting ${roomSyncAutoDownload ? '' : 'disabled'}`">
-                        <Remixicon :icon="roomSyncAutoDownload ? 'checkbox-circle' : 'close-circle'" />
-                        <span>{{ $t('settings.experimental.roomSyncAutoDownload.label') }}</span>
-                    </div>
-                    <div :class="`setting ${roomSyncAutoUpdate ? '' : 'disabled'}`">
-                        <Remixicon :icon="roomSyncAutoUpdate ? 'checkbox-circle' : 'close-circle'" />
-                        <span>{{ $t('settings.experimental.roomSyncAutoUpdate.label') }}</span>
-                    </div>
+                <div
+                    v-if="!roomSyncAutoDownload || !roomSyncAutoUpdate"
+                    class="settings"
+                >
+                    {{ $t('header.roomSync.settingsHint') }}
                 </div>
             </div>
         </transition>
@@ -201,15 +197,7 @@ function handleOpenSettings() {
         }
 
         & .settings {
-            @apply flex flex-col gap-1 px-4 py-3 border-t border-base-300 dark:border-base-800;
-
-            & .setting {
-                @apply flex items-center gap-2 text-base-600 dark:text-base-700;
-
-                &.disabled {
-                    @apply text-red-600 dark:text-red-400;
-                }
-            }
+            @apply px-4 py-3 border-t border-base-300 dark:border-base-800 text-base-600 dark:text-base-400;
         }
     }
 }

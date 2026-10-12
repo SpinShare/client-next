@@ -17,6 +17,7 @@
       "players": "{count} / {max} players",
       "customsAllowed": "Customs allowed",
       "customsNotAllowed": "Customs not allowed",
+      "settingsHint": "You can setup automatic downloading/updating of charts in the settings",
       "track": {
         "missing": "Missing",
         "notCustom": "Not a custom chart",
@@ -281,8 +282,8 @@
         "description": "Enables Spin Rhythm XD Online Room support and automatically downloads or updates the charts needed for the room"
       },
       "roomSyncHost": {
-        "label": "Room host",
-        "description": "Host and port of the room server",
+        "label": "Room Websocket host",
+        "description": "Host and port of the room websocket server",
         "placeholder": "localhost:6767",
         "invalid": "Use the format host:port."
       },
