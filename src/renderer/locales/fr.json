@@ -8,6 +8,22 @@
       },
       "placeholder": "Rechercher une chart, un charter, une playlist..."
     },
+    "roomSync": {
+      "header": "",
+      "connected": "",
+      "outdated": "",
+      "disconnected": "",
+      "notInRoom": "",
+      "players": "",
+      "customsAllowed": "",
+      "customsNotAllowed": "",
+      "settingsHint": "",
+      "track": {
+        "missing": "",
+        "notCustom": "",
+        "notOnSpinShare": ""
+      }
+    },
     "auth": {
       "login": "Se connecter",
       "logout": "Se déconnecter",
@@ -99,6 +115,8 @@
     },
     "play": "Jouer",
     "addToQueue": "Télécharger",
+    "update": "",
+    "redownload": "",
     "tabs": {
       "detail": "Description",
       "reviews": "Avis",
@@ -213,7 +231,8 @@
       },
       "musicEnabled": {
         "label": "Musique du menu activée",
-        "description": "Joue une musique en fond"
+        "description": "Joue une musique en fond",
+        "credit": ""
       },
       "musicVolume": {
         "label": "",
@@ -245,6 +264,41 @@
         "notAFolder": "",
         "select": "Sélectionner",
         "detect": "Détecter"
+      },
+      "libraryHashCache": {
+        "label": "",
+        "description": "",
+        "hours4": "",
+        "hours12": "",
+        "day1": "",
+        "days3": "",
+        "days7": ""
+      }
+    },
+    "experimental": {
+      "header": "",
+      "roomSyncEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncHost": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "invalid": ""
+      },
+      "roomSyncAutoDownload": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncAutoUpdate": {
+        "label": "",
+        "description": ""
+      },
+      "openDebugger": {
+        "label": "",
+        "description": "",
+        "open": ""
       }
     }
   },
@@ -273,6 +327,33 @@
       "body": "Vous avez désormais configuré le client SpinShare. Vous n'êtes plus qu'à un clic d'une bibliothèque composée de milliers de charts customs créées pour Spin Rhythm XD.",
       "tip": "Astuce : Cliquez dans le coin supérieur droit pour vous connecter à votre compte. Se connecter vous permet de laisser des avis et de créer des playlists de charts sans avoir besoin d'utiliser le site web. Dans une prochaine mise à jour, vous serez également capable de publier vos propres charts custom.",
       "welcome": "Mais pour le moment, entrons dans la <strong>dimension du rythme</strong> !"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "userNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "playlistNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "selectFolder": {
+      "title": "",
+      "message": "",
+      "button": ""
+    }
+  },
+  "notifications": {
+    "downloadComplete": "",
+    "downloadFailed": "",
+    "queueFinished": {
+      "title": "",
+      "body": ""
     }
   }
 }
