@@ -3,10 +3,10 @@
     "search": {
       "type": {
         "charts": "Speen",
-        "playlists": "Speen",
+        "playlists": "Speen speen",
         "users": "Speen"
       },
-      "placeholder": "Speen speen Speen, Speen, speen Speen..."
+      "placeholder": "Speen speen speen, speen, speen speen..."
     },
     "auth": {
       "login": "Speen",
@@ -15,27 +15,27 @@
       "profile": "Speen",
       "charts": "Speen",
       "reviews": "Speen",
-      "playlists": "Speen",
-      "spinPlays": "Speen",
+      "playlists": "Speen speen",
+      "spinPlays": "Speen speen",
       "notifications": {
-        "header": "Speen",
-        "noNotifications": "Speen speen",
+        "header": "Speen speen",
+        "noNotifications": "Speen speen speen",
         "newReview": "{username} speen speen speen '{title}'",
-        "newSpinPlay": "{username} speen speen speen speen '{title}'",
-        "receivedCard": "Speen speen speen Speen speen '{card}'"
+        "newSpinPlay": "{username} speen Speen speen speen speen '{title}'",
+        "receivedCard": "Speen speen speen speen speen '{card}'"
       }
     }
   },
   "sidebar": {
-    "frontpage": "Speen",
+    "frontpage": "Speen speen",
     "newest": "Speen",
     "updated": "Speen",
-    "hotThisWeek": "Speen Speen",
-    "hotThisMonth": "Speen Speen",
+    "hotThisWeek": "Speen speen",
+    "hotThisMonth": "Speen speen",
     "library": "Speen",
-    "toggleSidebar": "Speen Speen Speen",
+    "toggleSidebar": "Speen Speen",
     "downloadQueue": {
-      "downloads": "Speen",
+      "downloads": "Speen speen",
       "header": "Speen Speen ({count})",
       "noDownloads": "Speen speen speen."
     },
@@ -43,21 +43,21 @@
   },
   "connect": {
     "login": {
-      "header": "Speen speen speen",
+      "header": "Speen speen speen speen",
       "body": "Speen {link} speen speen speen speen."
     },
     "code": {
-      "header": "Speen speen Speen Speen",
-      "body": "Speen {link} speen speen speen speen Speen Speen speen speen <strong>Settings</strong>. Speen speen <strong>Connect</strong> speen speen speen Speen Speen.",
-      "link_label": "speen"
+      "header": "Speen speen speen speen",
+      "body": "Speen {link} speen speen speen speen speen speen speen speen speen speen <strong>Speen</strong>. Speen speen <strong>Speen</strong> speen speen speen speen speen.",
+      "link_label": "Speen"
     },
     "input": {
-      "header": "Speen speen Speen Speen",
-      "body": "Speen speen Speen speen Speen speen speen <strong>Speen speen speen</strong>.",
+      "header": "Speen speen speen speen",
+      "body": "Speen speen speen speen speen speen speen <strong>Speen speen speen speen</strong>.",
       "placeholder": "Speen speen...",
-      "login": "Speen speen speen",
-      "errorIncorrect": "Speen speen Speen speen speen. Speen speen.",
-      "errorServer": "Speen speen speen. Speen speen Speen speen."
+      "login": "Speen speen speen speen",
+      "errorIncorrect": "Speen speen speen speen speen speen. Speen speen.",
+      "errorServer": "Speen speen speen. Speen speen speen speen."
     }
   },
   "discover": {
@@ -66,108 +66,114 @@
     },
     "featured": {
       "header": "Speen",
-      "seeMore": "Speen speen"
+      "seeMore": "Speen "
     },
-    "previousPage": "Speen Speen",
-    "nextPage": "Speen Speen"
+    "previousPage": "Speen speen",
+    "nextPage": "Speen speen"
   },
   "user": {
-    "supporter": "Speen",
+    "supporter": "Speen speen",
     "verified": "Speen",
     "tabs": {
       "detail": "Speen",
       "charts": "Speen ({count})",
       "reviews": "Speen ({count})",
-      "playlists": "Speen ({count})",
-      "spinPlays": "Speen ({count})"
+      "playlists": "Speen speen ({count})",
+      "spinPlays": "Speen speen ({count})"
     },
-    "noCards": "Speen speen Speen.",
-    "noCharts": "Speen speen Speen.",
-    "noReviews": "Speen speen Speen.",
-    "noSpinPlays": "Speen speen Speen."
+    "noCards": "Speen speen speen speen.",
+    "noCharts": "Speen speen speen speen.",
+    "noReviews": "Speen speen speen.",
+    "noSpinPlays": "Speen Speen speen speen."
   },
   "chart": {
-    "explicitLabel": "Speen Speen – Speen speen Speen",
-    "noDescription": "Speen speen Speen.",
-    "noPlaylists": "Speen speen Speen.",
-    "noReviews": "Speen speen Speen.",
-    "noSpinPlays": "Speen speen Speen.",
+    "explicitLabel": "Speen Speen speen – Speen speen",
+    "noDescription": "Speen speen speen.",
+    "noPlaylists": "Speen speen speen speen.",
+    "noReviews": "Speen speen.",
+    "noSpinPlays": "Speen Speen speen.",
     "status": {
-      "local": "",
-      "installed": "Speen",
+      "local": "Speen",
+      "installed": "Speen speen",
       "outOfDate": "Speen speen"
     },
     "play": "Speen",
     "addToQueue": "Speen speen",
+    "update": "Speen",
+    "redownload": "Speen speen",
     "tabs": {
       "detail": "Speen",
       "reviews": "Speen",
-      "playlists": "Speen",
-      "spinPlays": "Speen"
+      "playlists": "Speen speen",
+      "spinPlays": "Speen speen"
     },
     "playDialog": {
       "header": "Speen",
-      "body": "Speen speen speen speen Speen Speen speen speen speen <strong>{title}</strong>.",
+      "body": "Speen speen speen speen speen Speen Speen speen speen speen speen <strong>{title}</strong>.",
       "close": "Speen"
     },
     "statistics": {
       "views": "Speen",
-      "downloads": "Speen",
+      "downloads": "Speen speen",
       "uploaded": "Speen",
       "updated": "Speen"
+    },
+    "dlc": {
+      "header": "SPEEN speen",
+      "body": "Speen <strong>{title}</strong> speen speen speen speen speen speen speen speen."
     }
   },
   "playlist": {
     "official": "Speen",
     "count": "{count} speen",
     "addToQueue": "Speen speen",
-    "withChartsBy": "Speen speen"
+    "withChartsBy": "Speen speen "
   },
   "review": {
     "noComment": "Speen speen.",
-    "recommended": "Speen",
+    "recommended": "Speen speen",
     "yourReview": {
       "header": "Speen speen",
-      "noReview": "Speen speen speen Speen speen.",
+      "noReview": "Speen speen speen speen speen speen speen speen.",
       "actions": {
         "write": "Speen speen",
-        "edit": "Speen speen",
+        "edit": "Speen speen speen",
         "remove": "Speen speen speen"
       }
     },
     "overlay": {
-      "header": "Speen/Speen speen",
+      "header": "Speen/speen speen",
       "commentPlaceholder": "Speen speen speen...",
-      "recommendedLabel": "Speen speen speen Speen speen?",
+      "recommendedLabel": "Speen speen speen speen speen speen speen?",
       "save": "Speen",
       "close": "Speen"
     }
   },
   "search": {
-    "minimumDifficulty": "Speen speen",
-    "maximumDifficulty": "Speen Speen",
+    "minimumDifficulty": "Speen speen speen",
+    "maximumDifficulty": "Speen speen speen",
     "explicit": "Speen",
     "apply": "Speen",
-    "noChartResults": "Speen speen Speen. Speen speen speen Speen speen speen Speen.",
-    "noPlaylistResults": "Speen speen Speen. Speen speen speen speen.",
-    "noUserResults": "Speen speen speen. Speen speen speen Speen speen."
+    "noChartResults": "Speen speen speen. Speen speen speen speen speen speen speen speen speen.",
+    "noPlaylistResults": "Speen speen speen. Speen speen speen speen speen.",
+    "noUserResults": "Speen speen. Speen speen speen speen speen."
   },
   "difficulty": {
     "easy": "Speen",
     "normal": "Speen",
     "hard": "Speen",
     "expert": "Speen",
-    "xd": "Speen"
+    "xd": "SPEEN"
   },
   "library": {
     "header": "Speen",
     "open": "Speen",
     "rebuild": "Speen",
-    "noCharts": "Speen speen Speen. Speen speen speen Speen speen speen Speen."
+    "noCharts": "Speen speen speen. Speen speen speen speen speen speen."
   },
   "updateToast": {
-    "header": "Speen speen",
-    "body": "Speen speen speen speen speen Speen speen speen speen.",
+    "header": "Speen speen speen",
+    "body": "Speen speen speen speen speen speen speen speen speen speen speen.",
     "actions": {
       "get": "Speen speen",
       "later": "Speen"
@@ -186,37 +192,50 @@
       },
       "language": {
         "label": "Speen",
-        "description": "Speen speen SpinShare"
+        "description": "Speen speen Speen speen"
       }
     },
     "interface": {
-      "header": "Speen",
+      "header": "Speen speen",
       "showExplicit": {
         "label": "Speen speen",
-        "description": "Speen speen speen speen Speen"
+        "description": "Speen speen speen speen speen speen speen speen"
       },
       "downloadNotifications": {
-        "label": "Speen speen",
-        "description": "Speen speen speen speen Speen speen speen Speen"
+        "label": "Speen speen speen speen",
+        "description": "Speen speen speen speen speen speen speen speen speen"
       },
       "openDownloadQueue": {
         "label": "Speen speen speen",
-        "description": "Speen speen speen Speen speen speen speen"
+        "description": "Speen speen speen speen speen speen speen speen speen speen speen speen speen speen"
       },
       "sfxEnabled": {
-        "label": "Speen speen speen",
+        "label": "Speen speen speen speen",
         "description": "Speen speen speen speen"
       },
       "musicEnabled": {
         "label": "Speen speen speen",
-        "description": "Speen speen Speen"
+        "description": "Speen speen speen",
+        "credit": "Speen {artist}"
+      },
+      "musicVolume": {
+        "label": "Speen speen speen",
+        "description": "Speen speen speen speen"
+      },
+      "sfxVolume": {
+        "label": "Speen speen speen",
+        "description": "Speen speen SPEEN speen speen"
+      },
+      "previewVolume": {
+        "label": "Speen speen speen",
+        "description": "Speen speen speen speen speen"
       }
     },
     "account": {
       "header": "Speen",
       "logout": {
         "label": "Speen",
-        "description": "Speen speen speen, speen Speen Speen speen speen 'SpinShare Next' speen spinsha.re",
+        "description": "Speen speen speen, speen speen speen speen speen 'Speen speen Speen' speen speen.",
         "logout": "Speen"
       }
     },
@@ -224,38 +243,75 @@
       "header": "Speen",
       "pathCustoms": {
         "label": "Speen speen",
-        "description": "Speen speen Speen speen speen",
-        "placeholder": "Speen speen speen",
+        "description": "Speen speen speen speen speen speen",
+        "placeholder": "Speen speen",
+        "notAFolder": "Speen speen speen speen speen.",
         "select": "Speen",
         "detect": "Speen"
+      },
+      "libraryHashCache": {
+        "label": "Speen speen speen speen",
+        "description": "Speen speen speen speen speen speen speen speen speen speen Speen speen",
+        "hours4": "4 speen",
+        "hours12": "12 speen",
+        "day1": "1 speen",
+        "days3": "3 speen",
+        "days7": "7 speen"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": "Speen speen speen Speen speen speen speen Speen speen! speen speen Speen speen speen speen speen speen speen Speen Speen, speen speen Speen speen."
+      "body": "Speen speen speen speen speen Speen speen speen speen! Speen speen speen speen speen speen speen speen Speen speen speen speen, speen speen speen speen speen speen."
     },
     "general": {
-      "header": "Speen speen"
+      "header": "Speen speen speen"
     },
     "game": {
       "header": "Speen speen",
-      "tip": "Speen: Speen speen speen speen Speen speen speen Speen speen {code} speen Speen speen speen."
+      "tip": "Speen: Speen speen speen speen speen speen speen speen speen speen speen speen, speen speen {code} speen speen speen speen speen."
     },
     "cache": {
       "header": "Speen speen",
-      "body": "Speen speen speen Speen speen speen Speen speen speen, speen speen Speen Speen speen speen. Speen speen speen.",
-      "explanation": "Speen speen speen speen Speen speen Speen speen speen speen, speen Speen Speen Speen speen speen speen speen Speen speen speen speen Speen speen speen. Speen speen speen speen Speen speen speen speen Speen speen.",
-      "timeNeeded": "Speen speen speen Speen speen Speen Speen speen speen, speen Speen speen. speen speen Speen Speen speen, Speen speen Speen speen.",
-      "tip": "Speen: Speen speen speen speen Speen speen speen.",
-      "analyze": "Speen speen Speen",
-      "done": "Speen Speen!"
+      "body": "Speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen, speen speen speen speen.",
+      "explanation": "Speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen, speen speen speen speen speen.",
+      "timeNeeded": "Speen speen speen speen speen Speen Speen speen speen speen, speen speen speen speen speen. Speen speen speen speen speen, speen speen speen speen speen.",
+      "tip": "Speen: Speen speen speen speen speen speen speen speen speen.",
+      "analyze": "Speen speen speen",
+      "done": "Speen speen!"
     },
     "done": {
       "header": "Speen speen!",
-      "body": "Speen speen speen speen Speen speen speen. Speen speen speen Speen speen speen, speen Speen Speen speen.",
-      "tip": "Speen: Speen speen speen speen Speen speen speen. Speen speen speen speen speen Speen Speen speen speen speen speen speen, speen Speen speen Speen speen speen speen Speen speen speen speen speen.",
-      "welcome": "Speen speen speen speen <strong>Speen Speen</strong>!"
+      "body": "Speen speen speen speen Speen speen speen speen. Speen speen speen speen speen speen speen speen speen speen speen speen speen speen Speen Speen.",
+      "tip": "Speen: Speen speen speen speen speen speen speen speen speen. Speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen speen. Speen speen, speen speen speen speen speen speen speen speen speen.",
+      "welcome": "Speen speen, speen speen speen <strong>speen speen speen</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Speen speen speen",
+      "message": "Speen speen speen speen SPEEN: {id}"
+    },
+    "userNotFound": {
+      "title": "Speen speen speen",
+      "message": "Speen speen speen speen SPEEN: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Speen speen speen speen",
+      "message": "Speen speen speen speen speen: {id}"
+    },
+    "selectFolder": {
+      "title": "Speen speen",
+      "message": "Speen speen speen speen",
+      "button": "Speen"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Speen speen speen",
+    "downloadFailed": "Speen speen speen",
+    "queueFinished": {
+      "title": "Speen speen",
+      "body": "Speen speen speen speen speen speen."
     }
   }
 }

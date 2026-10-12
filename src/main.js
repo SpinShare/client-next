@@ -11,6 +11,7 @@ import { AuthManager } from './main/auth';
 import { LibraryManager } from './main/library';
 import { URL } from 'url';
 import { UpdateManager } from './main/updates';
+import { translate } from './main/i18n';
 
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
@@ -288,9 +289,9 @@ app.whenReady().then(() => {
             const selectedFolderPath = await dialog.showOpenDialog({
                 properties: ['openDirectory'],
                 defaultPath: folderPath || app.getPath('home'),
-                title: 'Select folder',
-                message: 'Select the folder to open',
-                buttonLabel: 'Open',
+                title: translate(settingsManager, 'dialogs.selectFolder.title'),
+                message: translate(settingsManager, 'dialogs.selectFolder.message'),
+                buttonLabel: translate(settingsManager, 'dialogs.selectFolder.button'),
             });
             return selectedFolderPath.filePaths[0] || null;
         } catch (error) {

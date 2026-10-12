@@ -215,7 +215,8 @@
       },
       "musicEnabled": {
         "label": "Menu music enabled",
-        "description": "Plays menu music"
+        "description": "Plays menu music",
+        "credit": "Music by {artist}"
       },
       "musicVolume": {
         "label": "Menu music volume",
@@ -284,6 +285,33 @@
       "body": "You have now set up the SpinShare desktop client. You're only a click away from a library of thousands of custom created charts for Spin Rhythm XD.",
       "tip": "Tip: Click on the top right corner to log into your account. Logging in lets you review charts and add them to playlists comfortably without using the website. In the future, you'll also be able to upload your own custom charts.",
       "welcome": "But for now, let's enter the <strong>rhythm dimension</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Error loading chart",
+      "message": "There is no chart with the ID: {id}"
+    },
+    "userNotFound": {
+      "title": "Error loading user",
+      "message": "There is no user with the ID: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Error loading playlist",
+      "message": "There is no playlist with the ID: {id}"
+    },
+    "selectFolder": {
+      "title": "Select folder",
+      "message": "Select the folder to open",
+      "button": "Open"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Download complete",
+    "downloadFailed": "Download failed",
+    "queueFinished": {
+      "title": "Queue finished",
+      "body": "All charts were downloaded or failed."
     }
   }
 }

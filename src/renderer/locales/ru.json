@@ -2,260 +2,316 @@
   "header": {
     "search": {
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "Чарты",
+        "playlists": "Плейлисты",
+        "users": "Пользователи"
       },
-      "placeholder": ""
+      "placeholder": "Поиск чарта, чартера или плейлиста..."
     },
     "auth": {
-      "login": "",
-      "logout": "",
-      "upload": "",
-      "profile": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": "",
+      "login": "Войти",
+      "logout": "Выйти",
+      "upload": "Загрузить",
+      "profile": "Профиль",
+      "charts": "Чарты",
+      "reviews": "Отзывы",
+      "playlists": "Плейлисты",
+      "spinPlays": "SpinPlays",
       "notifications": {
-        "header": "",
-        "noNotifications": "",
-        "newReview": "",
-        "newSpinPlay": "",
-        "receivedCard": ""
+        "header": "Уведомления",
+        "noNotifications": "Нет уведомлений",
+        "newReview": "{username} оставил(а) отзыв на ваш чарт «{title}»",
+        "newSpinPlay": "{username} добавил(а) SpinPlay к вашему чарту «{title}»",
+        "receivedCard": "Вы получили карточку профиля «{card}»"
       }
     }
   },
   "sidebar": {
-    "frontpage": "",
-    "newest": "",
-    "updated": "",
-    "hotThisWeek": "",
-    "hotThisMonth": "",
-    "library": "",
-    "toggleSidebar": "",
+    "frontpage": "Главная",
+    "newest": "Новые",
+    "updated": "Обновлённые",
+    "hotThisWeek": "Популярное за неделю",
+    "hotThisMonth": "Популярное за месяц",
+    "library": "Библиотека",
+    "toggleSidebar": "Показать/скрыть боковую панель",
     "downloadQueue": {
-      "downloads": "",
-      "header": "",
-      "noDownloads": ""
+      "downloads": "Загрузки",
+      "header": "Очередь загрузок ({count})",
+      "noDownloads": "Очередь загрузок пуста."
     },
-    "settings": ""
+    "settings": "Настройки"
   },
   "connect": {
     "login": {
-      "header": "",
-      "body": ""
+      "header": "Войдите в свой аккаунт",
+      "body": "Перейдите на {link} и войдите в свой аккаунт."
     },
     "code": {
-      "header": "",
-      "body": "",
-      "link_label": ""
+      "header": "Найдите свой код Connect",
+      "body": "Нажмите {link} или нажмите на изображение профиля в правом верхнем углу и перейдите в <strong>Settings</strong>. Откройте вкладку <strong>Connect</strong> и найдите свой код Connect.",
+      "link_label": "сюда"
     },
     "input": {
-      "header": "",
-      "body": "",
-      "placeholder": "",
-      "login": "",
-      "errorIncorrect": "",
-      "errorServer": ""
+      "header": "Введите свой код Connect",
+      "body": "Введите свой код Connect ниже и нажмите <strong>Войти в аккаунт</strong>.",
+      "placeholder": "Код Connect...",
+      "login": "Войти в аккаунт",
+      "errorIncorrect": "Неверный код Connect. Попробуйте ещё раз.",
+      "errorServer": "Не удалось войти. Попробуйте позже."
     }
   },
   "discover": {
     "promos": {
-      "header": ""
+      "header": "Обзор"
     },
     "featured": {
-      "header": "",
-      "seeMore": ""
+      "header": "Рекомендуемое",
+      "seeMore": "Показать больше"
     },
-    "previousPage": "",
-    "nextPage": ""
+    "previousPage": "Предыдущая страница",
+    "nextPage": "Следующая страница"
   },
   "user": {
-    "supporter": "",
-    "verified": "",
+    "supporter": "Спонсор",
+    "verified": "Подтверждён",
     "tabs": {
-      "detail": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Подробности",
+      "charts": "Чарты ({count})",
+      "reviews": "Отзывы ({count})",
+      "playlists": "Плейлисты ({count})",
+      "spinPlays": "SpinPlays ({count})"
     },
-    "noCards": "",
-    "noCharts": "",
-    "noReviews": "",
-    "noSpinPlays": ""
+    "noCards": "Карточек пока нет.",
+    "noCharts": "Чартов пока не загружено.",
+    "noReviews": "Отзывов пока не оставлено.",
+    "noSpinPlays": "SpinPlays пока не загружено."
   },
   "chart": {
-    "explicitLabel": "",
-    "noDescription": "",
-    "noPlaylists": "",
-    "noReviews": "",
-    "noSpinPlays": "",
+    "explicitLabel": "Откровенный контент – наведите, чтобы показать",
+    "noDescription": "Описания пока нет.",
+    "noPlaylists": "Пока не добавлен ни в один плейлист.",
+    "noReviews": "Отзывов пока нет.",
+    "noSpinPlays": "SpinPlays пока нет.",
     "status": {
-      "local": "",
-      "installed": "",
-      "outOfDate": ""
+      "local": "Локальный",
+      "installed": "Установлен",
+      "outOfDate": "Устарел"
     },
-    "play": "",
-    "addToQueue": "",
+    "play": "Играть",
+    "addToQueue": "В очередь",
+    "update": "Обновить",
+    "redownload": "Скачать заново",
     "tabs": {
-      "detail": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "Подробности",
+      "reviews": "Отзывы",
+      "playlists": "Плейлисты",
+      "spinPlays": "SpinPlays"
     },
     "playDialog": {
-      "header": "",
-      "body": "",
-      "close": ""
+      "header": "Играть",
+      "body": "Выберите сложность, чтобы запустить Spin Rhythm XD и сразу сыграть <strong>{title}</strong>.",
+      "close": "Закрыть"
     },
     "statistics": {
-      "views": "",
-      "downloads": "",
-      "uploaded": "",
-      "updated": ""
+      "views": "Просмотры",
+      "downloads": "Загрузки",
+      "uploaded": "Загружен",
+      "updated": "Обновлён"
+    },
+    "dlc": {
+      "header": "Требуется DLC",
+      "body": "В будущем для игры в этот чарт потребуется DLC <strong>{title}</strong>."
     }
   },
   "playlist": {
-    "official": "",
-    "count": "",
-    "addToQueue": "",
-    "withChartsBy": ""
+    "official": "Официальный",
+    "count": "Чартов: {count}",
+    "addToQueue": "В очередь",
+    "withChartsBy": "Авторы чартов"
   },
   "review": {
-    "noComment": "",
-    "recommended": "",
+    "noComment": "Без комментария.",
+    "recommended": "Рекомендует",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "Ваш отзыв",
+      "noReview": "Вы ещё не написали отзыв на этот чарт.",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "Написать отзыв",
+        "edit": "Изменить отзыв",
+        "remove": "Удалить отзыв"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "Добавить/изменить отзыв",
+      "commentPlaceholder": "Ваш комментарий...",
+      "recommendedLabel": "Вы рекомендуете этот чарт другим?",
+      "save": "Сохранить",
+      "close": "Закрыть"
     }
   },
   "search": {
-    "minimumDifficulty": "",
-    "maximumDifficulty": "",
-    "explicit": "",
-    "apply": "",
-    "noChartResults": "",
-    "noPlaylistResults": "",
-    "noUserResults": ""
+    "minimumDifficulty": "Минимальная сложность",
+    "maximumDifficulty": "Максимальная сложность",
+    "explicit": "Откровенное",
+    "apply": "Применить",
+    "noChartResults": "Чарты не найдены. Измените поисковый запрос или настройте фильтры выше.",
+    "noPlaylistResults": "Плейлисты не найдены. Измените поисковый запрос.",
+    "noUserResults": "Пользователи не найдены. Измените поисковый запрос."
   },
   "difficulty": {
-    "easy": "",
-    "normal": "",
-    "hard": "",
-    "expert": "",
-    "xd": ""
+    "easy": "Лёгкий",
+    "normal": "Обычный",
+    "hard": "Сложный",
+    "expert": "Эксперт",
+    "xd": "XD"
   },
   "library": {
-    "header": "",
-    "open": "",
-    "rebuild": "",
-    "noCharts": ""
+    "header": "Библиотека",
+    "open": "Открыть",
+    "rebuild": "Пересоздать",
+    "noCharts": "Чарты не найдены. Пересоздайте кэш или скачайте чарты."
   },
   "updateToast": {
-    "header": "",
-    "body": "",
+    "header": "Доступно обновление",
+    "body": "Обновитесь до последней версии, чтобы получить новые функции и исправления ошибок.",
     "actions": {
-      "get": "",
-      "later": ""
+      "get": "Обновить",
+      "later": "Позже"
     }
   },
   "settings": {
     "general": {
-      "header": "",
-      "version": "",
-      "checkForUpdates": "",
-      "getUpdate": "",
+      "header": "Общие",
+      "version": "Версия {version}",
+      "checkForUpdates": "Проверить обновления",
+      "getUpdate": "Обновить",
       "theme": {
-        "label": "",
-        "dark": "",
-        "light": ""
+        "label": "Тема",
+        "dark": "Тёмная тема",
+        "light": "Светлая тема"
       },
       "language": {
-        "label": "",
-        "description": ""
+        "label": "Язык",
+        "description": "Перевод: SpinShare Community"
       }
     },
     "interface": {
-      "header": "",
+      "header": "Интерфейс",
       "showExplicit": {
-        "label": "",
-        "description": ""
+        "label": "Показывать откровенное",
+        "description": "Автоматически убирать размытие с данных откровенных чартов"
       },
       "downloadNotifications": {
-        "label": "",
-        "description": ""
+        "label": "Уведомления о загрузках",
+        "description": "Уведомлять, когда чарт скачан или очередь завершена"
       },
       "openDownloadQueue": {
-        "label": "",
-        "description": ""
+        "label": "Открывать очередь загрузок",
+        "description": "Автоматически открывать очередь загрузок при добавлении нового чарта"
       },
       "sfxEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Звуковые эффекты",
+        "description": "Воспроизводит звуковые эффекты интерфейса"
       },
       "musicEnabled": {
-        "label": "",
-        "description": ""
+        "label": "Музыка в меню",
+        "description": "Воспроизводит музыку в меню",
+        "credit": "Музыка: {artist}"
+      },
+      "musicVolume": {
+        "label": "Громкость музыки в меню",
+        "description": "Громкость музыки в меню"
+      },
+      "sfxVolume": {
+        "label": "Громкость звуковых эффектов",
+        "description": "Громкость звуковых эффектов интерфейса"
+      },
+      "previewVolume": {
+        "label": "Громкость превью",
+        "description": "Громкость превью чартов"
       }
     },
     "account": {
-      "header": "",
+      "header": "Аккаунт",
       "logout": {
-        "label": "",
-        "description": "",
-        "logout": ""
+        "label": "Выход",
+        "description": "После выхода также отзовите доступ для 'SpinShare Next' на spinsha.re",
+        "logout": "Выйти"
       }
     },
     "game": {
-      "header": "",
+      "header": "Игра",
       "pathCustoms": {
-        "label": "",
-        "description": "",
-        "placeholder": "",
-        "select": "",
-        "detect": ""
+        "label": "Путь к кастомным чартам",
+        "description": "Путь к папке с вашими кастомными чартами",
+        "placeholder": "Ещё не задан",
+        "notAFolder": "Этот путь не является папкой.",
+        "select": "Выбрать",
+        "detect": "Найти"
+      },
+      "libraryHashCache": {
+        "label": "Интервал проверки обновлений",
+        "description": "Как долго библиотека помнит, для каких чартов есть обновления на SpinShare",
+        "hours4": "4 часа",
+        "hours12": "12 часов",
+        "day1": "1 день",
+        "days3": "3 дня",
+        "days7": "7 дней"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": ""
+      "body": "Спасибо, что скачали клиент SpinShare для компьютера! Прежде чем начать скачивать чарты от сообщества SpinShare, нужно пройти первоначальную настройку."
     },
     "general": {
-      "header": ""
+      "header": "Общие настройки"
     },
     "game": {
-      "header": "",
-      "tip": ""
+      "header": "Настройки игры",
+      "tip": "Совет: чтобы хранить кастомные чарты в другой папке или на другом диске, добавьте {code} в параметры запуска Steam."
     },
     "cache": {
-      "header": "",
-      "body": "",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
-      "analyze": "",
-      "done": ""
+      "header": "Кэш библиотеки",
+      "body": "Чтобы легко показывать, установлен ли у вас чарт и доступно ли для него обновление, нужно создать кэш.",
+      "explanation": "Кэш просматривает папку с кастомными чартами игры и создаёт небольшой текстовый файл со всеми имеющимися чартами. Также он создаёт маленькие миниатюры обложек альбомов, чтобы просмотр оставался стабильным даже при большом количестве установленных чартов.",
+      "timeNeeded": "Если у вас ещё нет кастомных чартов для Spin Rhythm XD, этот шаг пройдёт мгновенно. При очень большой библиотеке он может занять до минуты.",
+      "tip": "Совет: вы всегда можете заново проанализировать библиотеку на вкладке «Библиотека».",
+      "analyze": "Анализировать библиотеку",
+      "done": "Готово!"
     },
     "done": {
-      "header": "",
-      "body": "",
-      "tip": "",
-      "welcome": ""
+      "header": "Всё готово!",
+      "body": "Вы настроили клиент SpinShare для компьютера. Вас отделяет всего один клик от библиотеки из тысяч кастомных чартов для Spin Rhythm XD.",
+      "tip": "Совет: нажмите в правом верхнем углу, чтобы войти в аккаунт. После входа вы сможете оставлять отзывы на чарты и удобно добавлять их в плейлисты без сайта. В будущем вы также сможете загружать свои собственные чарты.",
+      "welcome": "А пока давайте войдём в <strong>ритмическое измерение</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Ошибка загрузки чарта",
+      "message": "Чарт с ID {id} не существует"
+    },
+    "userNotFound": {
+      "title": "Ошибка загрузки пользователя",
+      "message": "Пользователь с ID {id} не существует"
+    },
+    "playlistNotFound": {
+      "title": "Ошибка загрузки плейлиста",
+      "message": "Плейлист с ID {id} не существует"
+    },
+    "selectFolder": {
+      "title": "Выбор папки",
+      "message": "Выберите папку, которую нужно открыть",
+      "button": "Открыть"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Загрузка завершена",
+    "downloadFailed": "Ошибка загрузки",
+    "queueFinished": {
+      "title": "Очередь завершена",
+      "body": "Все чарты скачаны или завершились с ошибкой."
     }
   }
 }

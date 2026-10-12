@@ -78,6 +78,8 @@
 import { computed, inject, onMounted, ref } from 'vue';
 import { TZDate } from '@date-fns/tz';
 import { formatDistanceToNow } from 'date-fns';
+import { de, enUS, es, fr, nl, ru, zhCN } from 'date-fns/locale';
+import { useI18n } from 'vue-i18n';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 import UserItem from '@/components/Users/UserItem.vue';
@@ -90,6 +92,10 @@ const props = defineProps({
         default: null,
     },
 });
+
+const dateLocales = { en: enUS, de, fr, es, nl, ru, zh: zhCN };
+const { locale } = useI18n();
+const dateLocale = computed(() => dateLocales[locale.value] ?? enUS);
 
 const uploaderUser = ref(null);
 const api = inject('api');
@@ -125,7 +131,7 @@ const parseDateWithTimezone = ({ date, timezone }) => {
 
 const uploadDateRelative = computed(() => {
     let date = parseDateWithTimezone(props.chart.uploadDate);
-    return formatDistanceToNow(date, { addSuffix: true });
+    return formatDistanceToNow(date, { addSuffix: true, locale: dateLocale.value });
 });
 const uploadDateAbsolute = computed(() => {
     let date = parseDateWithTimezone(props.chart.uploadDate);
@@ -133,7 +139,7 @@ const uploadDateAbsolute = computed(() => {
 });
 const updateDateRelative = computed(() => {
     let date = parseDateWithTimezone(props.chart.updateDate);
-    return formatDistanceToNow(date, { addSuffix: true });
+    return formatDistanceToNow(date, { addSuffix: true, locale: dateLocale.value });
 });
 const updateDateAbsolute = computed(() => {
     let date = parseDateWithTimezone(props.chart.updateDate);

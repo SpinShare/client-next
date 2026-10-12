@@ -13,6 +13,8 @@ import deMessages from '@/locales/de.json';
 import frMessages from '@/locales/fr.json';
 import esMessages from '@/locales/es.json';
 import nlMessages from '@/locales/nl.json';
+import ruMessages from '@/locales/ru.json';
+import zhMessages from '@/locales/zh.json';
 import speenMessages from '@/locales/speen.json';
 
 Sentry.init({
@@ -23,6 +25,9 @@ const app = createApp(App);
 const mittInstance = mitt();
 
 const i18n = createI18n({
+    legacy: false,
+    // Some messages intentionally contain HTML (rendered with v-html)
+    warnHtmlMessage: false,
     locale: (await window.spshSettings.get('language')) || 'en',
     fallbackLocale: 'en',
     messages: {
@@ -31,6 +36,8 @@ const i18n = createI18n({
         fr: frMessages,
         es: esMessages,
         nl: nlMessages,
+        ru: ruMessages,
+        zh: zhMessages,
         speen: speenMessages,
     },
 });

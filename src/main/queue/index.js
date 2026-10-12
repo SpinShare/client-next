@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import fs from 'node:fs';
 import path from 'node:path';
 import unzip from 'unzip-stream';
+import { translate } from '../i18n';
 
 export const STATE_PENDING = 0;
 export const STATE_DOWNLOADING = 1;
@@ -163,7 +164,7 @@ export class DownloadQueue extends EventEmitter {
                 if (showNotifications) {
                     new Notification({
                         title: `${nextItem.title}`,
-                        body: 'Download complete',
+                        body: translate(this.settingsManager, 'notifications.downloadComplete'),
                     }).show();
                 }
             } catch (e) {
@@ -174,7 +175,7 @@ export class DownloadQueue extends EventEmitter {
                 if (showNotifications) {
                     new Notification({
                         title: `${nextItem.title}`,
-                        body: 'Download failed',
+                        body: translate(this.settingsManager, 'notifications.downloadFailed'),
                     }).show();
                 }
             }
@@ -190,8 +191,8 @@ export class DownloadQueue extends EventEmitter {
 
         if (showNotifications) {
             new Notification({
-                title: `Queue finished`,
-                body: 'All charts were downloaded or failed.',
+                title: translate(this.settingsManager, 'notifications.queueFinished.title'),
+                body: translate(this.settingsManager, 'notifications.queueFinished.body'),
             }).show();
         }
     }

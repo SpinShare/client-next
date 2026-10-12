@@ -2,260 +2,316 @@
   "header": {
     "search": {
       "type": {
-        "charts": "",
-        "playlists": "",
-        "users": ""
+        "charts": "谱面",
+        "playlists": "歌单",
+        "users": "用户"
       },
-      "placeholder": ""
+      "placeholder": "搜索谱面、谱师或歌单..."
     },
     "auth": {
-      "login": "",
-      "logout": "",
-      "upload": "",
-      "profile": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": "",
+      "login": "登录",
+      "logout": "退出登录",
+      "upload": "上传",
+      "profile": "个人资料",
+      "charts": "谱面",
+      "reviews": "评价",
+      "playlists": "歌单",
+      "spinPlays": "SpinPlays",
       "notifications": {
-        "header": "",
-        "noNotifications": "",
-        "newReview": "",
-        "newSpinPlay": "",
-        "receivedCard": ""
+        "header": "通知",
+        "noNotifications": "暂无通知",
+        "newReview": "{username} 评价了你的谱面“{title}”",
+        "newSpinPlay": "{username} 为你的谱面“{title}”添加了 SpinPlay",
+        "receivedCard": "你获得了资料卡“{card}”"
       }
     }
   },
   "sidebar": {
-    "frontpage": "",
-    "newest": "",
-    "updated": "",
-    "hotThisWeek": "",
-    "hotThisMonth": "",
-    "library": "",
-    "toggleSidebar": "",
+    "frontpage": "首页",
+    "newest": "最新",
+    "updated": "最近更新",
+    "hotThisWeek": "本周热门",
+    "hotThisMonth": "本月热门",
+    "library": "曲库",
+    "toggleSidebar": "切换侧边栏",
     "downloadQueue": {
-      "downloads": "",
-      "header": "",
-      "noDownloads": ""
+      "downloads": "下载",
+      "header": "下载队列（{count}）",
+      "noDownloads": "下载队列为空。"
     },
-    "settings": ""
+    "settings": "设置"
   },
   "connect": {
     "login": {
-      "header": "",
-      "body": ""
+      "header": "登录你的账号",
+      "body": "前往 {link} 并登录你的账号。"
     },
     "code": {
-      "header": "",
-      "body": "",
-      "link_label": ""
+      "header": "找到你的 Connect 代码",
+      "body": "点击{link}，或点击右上角的头像并进入 <strong>Settings</strong>。打开 <strong>Connect</strong> 标签页，找到你的 Connect 代码。",
+      "link_label": "这里"
     },
     "input": {
-      "header": "",
-      "body": "",
-      "placeholder": "",
-      "login": "",
-      "errorIncorrect": "",
-      "errorServer": ""
+      "header": "输入你的 Connect 代码",
+      "body": "在下方输入你的 Connect 代码，然后点击<strong>登录账号</strong>。",
+      "placeholder": "Connect 代码...",
+      "login": "登录账号",
+      "errorIncorrect": "Connect 代码不正确，请重试。",
+      "errorServer": "无法登录，请稍后再试。"
     }
   },
   "discover": {
     "promos": {
-      "header": ""
+      "header": "发现"
     },
     "featured": {
-      "header": "",
-      "seeMore": ""
+      "header": "精选",
+      "seeMore": "查看更多"
     },
-    "previousPage": "",
-    "nextPage": ""
+    "previousPage": "上一页",
+    "nextPage": "下一页"
   },
   "user": {
-    "supporter": "",
-    "verified": "",
+    "supporter": "支持者",
+    "verified": "已认证",
     "tabs": {
-      "detail": "",
-      "charts": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "详情",
+      "charts": "谱面（{count}）",
+      "reviews": "评价（{count}）",
+      "playlists": "歌单（{count}）",
+      "spinPlays": "SpinPlays（{count}）"
     },
-    "noCards": "",
-    "noCharts": "",
-    "noReviews": "",
-    "noSpinPlays": ""
+    "noCards": "还没有获得任何资料卡。",
+    "noCharts": "还没有上传任何谱面。",
+    "noReviews": "还没有发表任何评价。",
+    "noSpinPlays": "还没有上传任何 SpinPlay。"
   },
   "chart": {
-    "explicitLabel": "",
-    "noDescription": "",
-    "noPlaylists": "",
-    "noReviews": "",
-    "noSpinPlays": "",
+    "explicitLabel": "露骨内容 – 悬停以显示",
+    "noDescription": "暂无描述。",
+    "noPlaylists": "尚未被加入任何歌单。",
+    "noReviews": "暂无评价。",
+    "noSpinPlays": "暂无 SpinPlay。",
     "status": {
-      "local": "",
-      "installed": "",
-      "outOfDate": ""
+      "local": "本地",
+      "installed": "已安装",
+      "outOfDate": "有更新"
     },
-    "play": "",
-    "addToQueue": "",
+    "play": "开始游戏",
+    "addToQueue": "加入队列",
+    "update": "更新",
+    "redownload": "重新下载",
     "tabs": {
-      "detail": "",
-      "reviews": "",
-      "playlists": "",
-      "spinPlays": ""
+      "detail": "详情",
+      "reviews": "评价",
+      "playlists": "歌单",
+      "spinPlays": "SpinPlays"
     },
     "playDialog": {
-      "header": "",
-      "body": "",
-      "close": ""
+      "header": "开始游戏",
+      "body": "选择一个难度，启动 Spin Rhythm XD 并立即游玩<strong>{title}</strong>。",
+      "close": "关闭"
     },
     "statistics": {
-      "views": "",
-      "downloads": "",
-      "uploaded": "",
-      "updated": ""
+      "views": "浏览",
+      "downloads": "下载",
+      "uploaded": "上传于",
+      "updated": "更新于"
+    },
+    "dlc": {
+      "header": "需要 DLC",
+      "body": "今后游玩此谱面将需要 DLC <strong>{title}</strong>。"
     }
   },
   "playlist": {
-    "official": "",
-    "count": "",
-    "addToQueue": "",
-    "withChartsBy": ""
+    "official": "官方",
+    "count": "{count} 个谱面",
+    "addToQueue": "加入队列",
+    "withChartsBy": "参与谱师"
   },
   "review": {
-    "noComment": "",
-    "recommended": "",
+    "noComment": "无评论。",
+    "recommended": "推荐",
     "yourReview": {
-      "header": "",
-      "noReview": "",
+      "header": "你的评价",
+      "noReview": "你还没有评价这个谱面。",
       "actions": {
-        "write": "",
-        "edit": "",
-        "remove": ""
+        "write": "撰写评价",
+        "edit": "编辑评价",
+        "remove": "删除评价"
       }
     },
     "overlay": {
-      "header": "",
-      "commentPlaceholder": "",
-      "recommendedLabel": "",
-      "save": "",
-      "close": ""
+      "header": "添加/编辑评价",
+      "commentPlaceholder": "在此输入你的评论...",
+      "recommendedLabel": "你会推荐其他人游玩这个谱面吗？",
+      "save": "保存",
+      "close": "关闭"
     }
   },
   "search": {
-    "minimumDifficulty": "",
-    "maximumDifficulty": "",
-    "explicit": "",
-    "apply": "",
-    "noChartResults": "",
-    "noPlaylistResults": "",
-    "noUserResults": ""
+    "minimumDifficulty": "最低难度",
+    "maximumDifficulty": "最高难度",
+    "explicit": "露骨内容",
+    "apply": "应用",
+    "noChartResults": "未找到谱面。请尝试其他搜索词或调整上方的筛选条件。",
+    "noPlaylistResults": "未找到歌单。请尝试其他搜索词。",
+    "noUserResults": "未找到用户。请尝试其他搜索词。"
   },
   "difficulty": {
-    "easy": "",
-    "normal": "",
-    "hard": "",
-    "expert": "",
-    "xd": ""
+    "easy": "简单",
+    "normal": "普通",
+    "hard": "困难",
+    "expert": "专家",
+    "xd": "XD"
   },
   "library": {
-    "header": "",
-    "open": "",
-    "rebuild": "",
-    "noCharts": ""
+    "header": "曲库",
+    "open": "打开",
+    "rebuild": "重建",
+    "noCharts": "未找到谱面。请重建缓存或下载谱面。"
   },
   "updateToast": {
-    "header": "",
-    "body": "",
+    "header": "有可用更新",
+    "body": "更新到最新版本以获取新功能和错误修复。",
     "actions": {
-      "get": "",
-      "later": ""
+      "get": "获取更新",
+      "later": "稍后"
     }
   },
   "settings": {
     "general": {
-      "header": "",
-      "version": "",
-      "checkForUpdates": "",
-      "getUpdate": "",
+      "header": "常规",
+      "version": "版本 {version}",
+      "checkForUpdates": "检查更新",
+      "getUpdate": "获取更新",
       "theme": {
-        "label": "",
-        "dark": "",
-        "light": ""
+        "label": "主题",
+        "dark": "深色模式",
+        "light": "浅色模式"
       },
       "language": {
-        "label": "",
-        "description": ""
+        "label": "语言",
+        "description": "翻译：SpinShare Community"
       }
     },
     "interface": {
-      "header": "",
+      "header": "界面",
       "showExplicit": {
-        "label": "",
-        "description": ""
+        "label": "显示露骨内容",
+        "description": "自动取消模糊露骨谱面的信息"
       },
       "downloadNotifications": {
-        "label": "",
-        "description": ""
+        "label": "下载通知",
+        "description": "在谱面下载完成或队列结束时通知"
       },
       "openDownloadQueue": {
-        "label": "",
-        "description": ""
+        "label": "自动打开下载队列",
+        "description": "每当有新谱面加入队列时自动打开下载队列"
       },
       "sfxEnabled": {
-        "label": "",
-        "description": ""
+        "label": "启用音效",
+        "description": "播放界面音效"
       },
       "musicEnabled": {
-        "label": "",
-        "description": ""
+        "label": "启用菜单音乐",
+        "description": "播放菜单音乐",
+        "credit": "音乐：{artist}"
+      },
+      "musicVolume": {
+        "label": "菜单音乐音量",
+        "description": "菜单音乐的音量"
+      },
+      "sfxVolume": {
+        "label": "音效音量",
+        "description": "界面音效的音量"
+      },
+      "previewVolume": {
+        "label": "预览音量",
+        "description": "谱面预览的音量"
       }
     },
     "account": {
-      "header": "",
+      "header": "账号",
       "logout": {
-        "label": "",
-        "description": "",
-        "logout": ""
+        "label": "退出登录",
+        "description": "退出登录后，你还应在 spinsha.re 上移除 'SpinShare Next' 的访问权限",
+        "logout": "退出登录"
       }
     },
     "game": {
-      "header": "",
+      "header": "游戏",
       "pathCustoms": {
-        "label": "",
-        "description": "",
-        "placeholder": "",
-        "select": "",
-        "detect": ""
+        "label": "自制谱面路径",
+        "description": "自制谱面文件夹的路径",
+        "placeholder": "尚未设置",
+        "notAFolder": "此路径不是有效的文件夹。",
+        "select": "选择",
+        "detect": "自动检测"
+      },
+      "libraryHashCache": {
+        "label": "更新检查间隔",
+        "description": "曲库记住 SpinShare 上哪些谱面有更新的时长",
+        "hours4": "4 小时",
+        "hours12": "12 小时",
+        "day1": "1 天",
+        "days3": "3 天",
+        "days7": "7 天"
       }
     }
   },
   "setup": {
     "introduction": {
-      "body": ""
+      "body": "感谢你下载 SpinShare 桌面客户端！在开始下载 SpinShare 社区的谱面之前，我们需要先完成初始设置。"
     },
     "general": {
-      "header": ""
+      "header": "常规设置"
     },
     "game": {
-      "header": "",
-      "tip": ""
+      "header": "游戏设置",
+      "tip": "提示：如需将自制谱面存放在其他文件夹或其他磁盘中，可以在 Steam 启动选项中添加 {code}。"
     },
     "cache": {
-      "header": "",
-      "body": "",
-      "explanation": "",
-      "timeNeeded": "",
-      "tip": "",
-      "analyze": "",
-      "done": ""
+      "header": "曲库缓存",
+      "body": "为了方便地显示你是否已安装某个谱面以及是否有可用更新，需要先建立缓存。",
+      "explanation": "缓存会扫描游戏的自制谱面文件夹，并生成一个包含所有现有谱面的小型文本文件。它还会为专辑封面生成小缩略图，这样即使安装了大量谱面，浏览体验也会更加流畅。",
+      "timeNeeded": "如果你还没有安装任何 Spin Rhythm XD 自制谱面，这一步会立即完成。如果你的曲库非常大，可能需要一分钟左右。",
+      "tip": "提示：你可以随时在“曲库”标签页中重新分析你的曲库。",
+      "analyze": "分析曲库",
+      "done": "一切就绪！"
     },
     "done": {
-      "header": "",
-      "body": "",
-      "tip": "",
-      "welcome": ""
+      "header": "设置完成！",
+      "body": "你已完成 SpinShare 桌面客户端的设置。只需一次点击，即可畅享数千个为 Spin Rhythm XD 制作的自制谱面。",
+      "tip": "提示：点击右上角即可登录你的账号。登录后，你可以评价谱面，并且无需打开网站就能方便地将谱面添加到歌单。今后你还可以上传自己的自制谱面。",
+      "welcome": "现在，让我们进入<strong>节奏维度</strong>吧！"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "加载谱面时出错",
+      "message": "不存在 ID 为 {id} 的谱面"
+    },
+    "userNotFound": {
+      "title": "加载用户时出错",
+      "message": "不存在 ID 为 {id} 的用户"
+    },
+    "playlistNotFound": {
+      "title": "加载歌单时出错",
+      "message": "不存在 ID 为 {id} 的歌单"
+    },
+    "selectFolder": {
+      "title": "选择文件夹",
+      "message": "选择要打开的文件夹",
+      "button": "打开"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "下载完成",
+    "downloadFailed": "下载失败",
+    "queueFinished": {
+      "title": "队列已完成",
+      "body": "所有谱面均已下载或下载失败。"
     }
   }
 }

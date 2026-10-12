@@ -99,6 +99,8 @@
     },
     "play": "Jouer",
     "addToQueue": "Télécharger",
+    "update": "Mettre à jour",
+    "redownload": "Retélécharger",
     "tabs": {
       "detail": "Description",
       "reviews": "Avis",
@@ -115,6 +117,10 @@
       "downloads": "Téléchargements",
       "uploaded": "Date de publication",
       "updated": "Dernière mise à jour"
+    },
+    "dlc": {
+      "header": "DLC requis",
+      "body": "Le DLC <strong>{title}</strong> sera nécessaire à l'avenir pour jouer cette chart."
     }
   },
   "playlist": {
@@ -186,7 +192,7 @@
       },
       "language": {
         "label": "Langue",
-        "description": "Traduit par earth://"
+        "description": "Traduit par SpinShare Community"
       }
     },
     "interface": {
@@ -209,7 +215,20 @@
       },
       "musicEnabled": {
         "label": "Musique du menu activée",
-        "description": "Joue une musique en fond"
+        "description": "Joue une musique en fond",
+        "credit": "Musique par {artist}"
+      },
+      "musicVolume": {
+        "label": "Volume de la musique du menu",
+        "description": "Le volume de la musique du menu"
+      },
+      "sfxVolume": {
+        "label": "Volume des effets sonores",
+        "description": "Le volume des effets sonores de l'interface"
+      },
+      "previewVolume": {
+        "label": "Volume des aperçus",
+        "description": "Le volume des aperçus de charts"
       }
     },
     "account": {
@@ -226,8 +245,18 @@
         "label": "Chemin d'accès à vos charts custom",
         "description": "Chemin d'accès à votre dossier de charts custom",
         "placeholder": "Pas encore défini",
+        "notAFolder": "Ce chemin n'est pas un dossier valide.",
         "select": "Sélectionner",
         "detect": "Détecter"
+      },
+      "libraryHashCache": {
+        "label": "Intervalle de vérification des mises à jour",
+        "description": "Combien de temps la bibliothèque mémorise quelles charts ont des mises à jour sur SpinShare",
+        "hours4": "4 heures",
+        "hours12": "12 heures",
+        "day1": "1 jour",
+        "days3": "3 jours",
+        "days7": "7 jours"
       }
     }
   },
@@ -256,6 +285,33 @@
       "body": "Vous avez désormais configuré le client SpinShare. Vous n'êtes plus qu'à un clic d'une bibliothèque composée de milliers de charts customs créées pour Spin Rhythm XD.",
       "tip": "Astuce : Cliquez dans le coin supérieur droit pour vous connecter à votre compte. Se connecter vous permet de laisser des avis et de créer des playlists de charts sans avoir besoin d'utiliser le site web. Dans une prochaine mise à jour, vous serez également capable de publier vos propres charts custom.",
       "welcome": "Mais pour le moment, entrons dans la <strong>dimension du rythme</strong> !"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Erreur lors du chargement de la chart",
+      "message": "Il n'existe aucune chart avec l'ID : {id}"
+    },
+    "userNotFound": {
+      "title": "Erreur lors du chargement de l'utilisateur",
+      "message": "Il n'existe aucun utilisateur avec l'ID : {id}"
+    },
+    "playlistNotFound": {
+      "title": "Erreur lors du chargement de la playlist",
+      "message": "Il n'existe aucune playlist avec l'ID : {id}"
+    },
+    "selectFolder": {
+      "title": "Sélectionner un dossier",
+      "message": "Sélectionnez le dossier à ouvrir",
+      "button": "Ouvrir"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Téléchargement terminé",
+    "downloadFailed": "Échec du téléchargement",
+    "queueFinished": {
+      "title": "File terminée",
+      "body": "Toutes les charts ont été téléchargées ou ont échoué."
     }
   }
 }

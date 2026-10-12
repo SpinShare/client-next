@@ -242,6 +242,7 @@
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
 import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -257,6 +258,7 @@ const libraryManager = inject('libraryManager');
 const queue = inject('queue');
 const settingsManager = inject('settingsManager');
 const route = useRoute();
+const { t } = useI18n();
 const chartId = ref(route.params.chartId);
 const chart = ref(null);
 const cacheItem = ref(null);
@@ -274,9 +276,9 @@ onMounted(async () => {
     chart.value = await api.getChartDetail(chartId.value);
     if (chart.value === null) {
         externalApi.showDialog({
-            title: 'Error loading chart',
+            title: t('dialogs.chartNotFound.title'),
             type: 'error',
-            message: `There is no chart with the ID: ${chartId.value}`,
+            message: t('dialogs.chartNotFound.message', { id: chartId.value }),
         });
         await router.push('/');
         return;
@@ -361,9 +363,9 @@ watch(
         chart.value = await api.getChartDetail(chartId.value);
         if (chart.value === null) {
             externalApi.showDialog({
-                title: 'Error loading chart',
+                title: t('dialogs.chartNotFound.title'),
                 type: 'error',
-                message: `There is no chart with the ID: ${chartId.value}`,
+                message: t('dialogs.chartNotFound.message', { id: chartId.value }),
             });
             await router.push('/');
             return;

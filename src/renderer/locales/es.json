@@ -99,6 +99,8 @@
     },
     "play": "Jugar",
     "addToQueue": "Añadir a la cola",
+    "update": "Actualizar",
+    "redownload": "Volver a descargar",
     "tabs": {
       "detail": "Detalle",
       "reviews": "Reseñas",
@@ -115,6 +117,10 @@
       "downloads": "Descargas",
       "uploaded": "Subido",
       "updated": "Actualizado"
+    },
+    "dlc": {
+      "header": "DLC requerido",
+      "body": "En el futuro, el DLC <strong>{title}</strong> será necesario para jugar esta canción."
     }
   },
   "playlist": {
@@ -209,7 +215,20 @@
       },
       "musicEnabled": {
         "label": "Música de menú activada",
-        "description": "Reproducir música de menú"
+        "description": "Reproducir música de menú",
+        "credit": "Música de {artist}"
+      },
+      "musicVolume": {
+        "label": "Volumen de la música de menú",
+        "description": "El volumen de la música de menú"
+      },
+      "sfxVolume": {
+        "label": "Volumen de los efectos de sonido",
+        "description": "El volumen de los efectos de sonido UI"
+      },
+      "previewVolume": {
+        "label": "Volumen de la vista previa",
+        "description": "El volumen de las vistas previas de canciones"
       }
     },
     "account": {
@@ -226,8 +245,18 @@
         "label": "Directorio de archivos",
         "description": "Ruta a su carpeta de canciones para el juego",
         "placeholder": "Aún no definido",
+        "notAFolder": "Esta ruta no es una carpeta válida.",
         "select": "Seleccionar",
         "detect": "Detectar"
+      },
+      "libraryHashCache": {
+        "label": "Intervalo de búsqueda de actualizaciones",
+        "description": "Cuánto tiempo recuerda la biblioteca qué canciones tienen actualizaciones en SpinShare",
+        "hours4": "4 horas",
+        "hours12": "12 horas",
+        "day1": "1 día",
+        "days3": "3 días",
+        "days7": "7 días"
       }
     }
   },
@@ -256,6 +285,33 @@
       "body": "Ahora has configurado el cliente de escritorio SpinShare. Estás a solo un clic de una biblioteca de miles de canciones creadas para Spin Rhythm XD.",
       "tip": "Consejo: Haz clic en la esquina superior derecha para ingresar a tu cuenta. El inicio de sesión le permite reseñar canciones y añadirlas a las listas de reproducción cómodamente sin usar el sitio web. En el futuro, también podrás subir tus propios canciones para el juego.",
       "welcome": "¡Pero por ahora, entremos en la <strong>dimensión del ritmo</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Error al cargar la canción",
+      "message": "No existe ninguna canción con el ID: {id}"
+    },
+    "userNotFound": {
+      "title": "Error al cargar el usuario",
+      "message": "No existe ningún usuario con el ID: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Error al cargar la playlist",
+      "message": "No existe ninguna playlist con el ID: {id}"
+    },
+    "selectFolder": {
+      "title": "Seleccionar carpeta",
+      "message": "Selecciona la carpeta que quieres abrir",
+      "button": "Abrir"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Descarga completada",
+    "downloadFailed": "Error en la descarga",
+    "queueFinished": {
+      "title": "Cola terminada",
+      "body": "Todas las canciones se descargaron o fallaron."
     }
   }
 }

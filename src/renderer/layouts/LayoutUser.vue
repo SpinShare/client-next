@@ -114,6 +114,7 @@
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
 import { inject, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -123,6 +124,7 @@ import router from '@/router';
 const api = inject('api');
 const externalApi = inject('externalApi');
 const route = useRoute();
+const { t } = useI18n();
 const userId = ref(route.params.userId);
 const user = ref(null);
 
@@ -130,9 +132,9 @@ onMounted(async () => {
     user.value = await api.getUserDetail(userId.value);
     if (user.value === null) {
         externalApi.showDialog({
-            title: 'Error loading user',
+            title: t('dialogs.userNotFound.title'),
             type: 'error',
-            message: `There is no user with the ID: ${userId.value}`,
+            message: t('dialogs.userNotFound.message', { id: userId.value }),
         });
         await router.push('/');
         return;
@@ -158,9 +160,9 @@ watch(
         user.value = await api.getUserDetail(userId.value);
         if (user.value === null) {
             externalApi.showDialog({
-                title: 'Error loading user',
+                title: t('dialogs.userNotFound.title'),
                 type: 'error',
-                message: `There is no user with the ID: ${userId.value}`,
+                message: t('dialogs.userNotFound.message', { id: userId.value }),
             });
             await router.push('/');
             return;

@@ -99,6 +99,8 @@
     },
     "play": "Gioca",
     "addToQueue": "Aggiungi alla coda",
+    "update": "Aggiorna",
+    "redownload": "Scarica di nuovo",
     "tabs": {
       "detail": "Dettaglio",
       "reviews": "Recensioni",
@@ -115,6 +117,10 @@
       "downloads": "Download",
       "uploaded": "Caricato",
       "updated": "Aggiornato"
+    },
+    "dlc": {
+      "header": "DLC richiesto",
+      "body": "In futuro sarà necessario il DLC <strong>{title}</strong> per giocare questo chart."
     }
   },
   "playlist": {
@@ -209,7 +215,20 @@
       },
       "musicEnabled": {
         "label": "Musica del menu abilitata",
-        "description": "Riproduci musica menu"
+        "description": "Riproduci musica menu",
+        "credit": "Musica di {artist}"
+      },
+      "musicVolume": {
+        "label": "Volume musica del menu",
+        "description": "Il volume della musica del menu"
+      },
+      "sfxVolume": {
+        "label": "Volume effetti sonori",
+        "description": "Il volume degli effetti sonori UI"
+      },
+      "previewVolume": {
+        "label": "Volume anteprima",
+        "description": "Il volume delle anteprime dei chart"
       }
     },
     "account": {
@@ -226,8 +245,18 @@
         "label": "Percorso custom",
         "description": "Percorso alla cartella dei chart",
         "placeholder": "Non ancora impostato",
+        "notAFolder": "Questo percorso non è una cartella valida.",
         "select": "Seleziona",
         "detect": "Rileva"
+      },
+      "libraryHashCache": {
+        "label": "Intervallo di controllo aggiornamenti",
+        "description": "Per quanto tempo la libreria ricorda quali chart hanno aggiornamenti su SpinShare",
+        "hours4": "4 ore",
+        "hours12": "12 ore",
+        "day1": "1 giorno",
+        "days3": "3 giorni",
+        "days7": "7 giorni"
       }
     }
   },
@@ -256,6 +285,33 @@
       "body": "Hai concluso l'impostazione del client desktop SpinShare. Sei a distanza di un click da una libreria di migliaia di chart per Spin Rhythm XD.",
       "tip": "Suggerimento: Clicca sull'angolo in alto a destra per accedere al tuo account. L'accesso consente di recensire chart e aggiungerli alle playlist comodamente senza utilizzare il sito web. In futuro, potrai anche caricare i tuoi propri chart.",
       "welcome": "E ora, entriamo nella <strong>dimensione del ritmo!</strong>"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Errore durante il caricamento del chart",
+      "message": "Non esiste nessun chart con l'ID: {id}"
+    },
+    "userNotFound": {
+      "title": "Errore durante il caricamento dell'utente",
+      "message": "Non esiste nessun utente con l'ID: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Errore durante il caricamento della playlist",
+      "message": "Non esiste nessuna playlist con l'ID: {id}"
+    },
+    "selectFolder": {
+      "title": "Seleziona cartella",
+      "message": "Seleziona la cartella da aprire",
+      "button": "Apri"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Download completato",
+    "downloadFailed": "Download non riuscito",
+    "queueFinished": {
+      "title": "Coda completata",
+      "body": "Tutti i chart sono stati scaricati o non sono riusciti."
     }
   }
 }

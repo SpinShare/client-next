@@ -81,6 +81,7 @@
 
 <script setup>
 import { computed, inject, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import Loader from '@/components/Loader.vue';
@@ -96,6 +97,7 @@ const api = inject('api');
 const externalApi = inject('externalApi');
 const queue = inject('queue');
 const route = useRoute();
+const { t } = useI18n();
 const playlistId = route.params.playlistId;
 const playlist = ref(null);
 
@@ -103,9 +105,9 @@ onMounted(async () => {
     playlist.value = await api.getPlaylist(playlistId);
     if (playlist.value === null) {
         externalApi.showDialog({
-            title: 'Error loading playlist',
+            title: t('dialogs.playlistNotFound.title'),
             type: 'error',
-            message: `There is no playlist with the ID: ${playlistId}`,
+            message: t('dialogs.playlistNotFound.message', { id: playlistId }),
         });
         await router.push('/');
         return;

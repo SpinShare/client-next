@@ -215,7 +215,20 @@
       },
       "musicEnabled": {
         "label": "Menü-Musik Aktiv",
-        "description": "Spielt Hintergrundmusik im Menü"
+        "description": "Spielt Hintergrundmusik im Menü",
+        "credit": "Musik von {artist}"
+      },
+      "musicVolume": {
+        "label": "Lautstärke der Menü-Musik",
+        "description": "Die Lautstärke der Musik im Menü"
+      },
+      "sfxVolume": {
+        "label": "Lautstärke der Soundeffekte",
+        "description": "Die Lautstärke der Soundeffekte in der Benutzeroberfläche"
+      },
+      "previewVolume": {
+        "label": "Lautstärke der Vorschau",
+        "description": "Die Lautstärke der Chart-Vorschauen"
       }
     },
     "account": {
@@ -272,6 +285,33 @@
       "body": "Du hast nun den SpinShare Desktop Client eingerichtet. Jetzt bist du nur noch einen Klick davon entfernt, tausende Nutzerinhalte für Spin Rhythm Xd herunterzuladen.",
       "tip": "Tipp: Klicke oben rechts auf 'Einloggen' um dich in deinen spinsha.re Account einzuloggen. Damit kannst du direkt im Client Charts bewerten, Playlisten verwalten und bald auch eigene Charts hochladen.",
       "welcome": "Aber fürs erste: Die <strong>rhythm dimension</strong> ruft!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Fehler beim Laden der Chart",
+      "message": "Es gibt keine Chart mit der ID: {id}"
+    },
+    "userNotFound": {
+      "title": "Fehler beim Laden des Nutzers",
+      "message": "Es gibt keinen Nutzer mit der ID: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Fehler beim Laden der Playlist",
+      "message": "Es gibt keine Playlist mit der ID: {id}"
+    },
+    "selectFolder": {
+      "title": "Ordner auswählen",
+      "message": "Wähle den Ordner aus, der geöffnet werden soll",
+      "button": "Öffnen"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Download abgeschlossen",
+    "downloadFailed": "Download fehlgeschlagen",
+    "queueFinished": {
+      "title": "Warteschlange abgearbeitet",
+      "body": "Alle Charts wurden heruntergeladen oder sind fehlgeschlagen."
     }
   }
 }

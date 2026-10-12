@@ -51,6 +51,8 @@
                         <option value="fr">French</option>
                         <option value="es">Spanish</option>
                         <option value="nl">Dutch</option>
+                        <option value="ru">Russian</option>
+                        <option value="zh">Chinese</option>
                         <option value="speen">SPEEN</option>
                     </select>
                 </SettingsItem>
@@ -95,7 +97,7 @@
                 </SettingsItem>
                 <SettingsItem
                     :label="$t('settings.interface.musicEnabled.label')"
-                    :description="$t('settings.interface.musicEnabled.description') + ' (Music by MintoDog)'"
+                    :description="`${$t('settings.interface.musicEnabled.description')} (${$t('settings.interface.musicEnabled.credit', { artist: 'MintoDog' })})`"
                 >
                     <Switch
                         v-model="settings.musicEnabled"

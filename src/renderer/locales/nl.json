@@ -99,6 +99,8 @@
     },
     "play": "Speel",
     "addToQueue": "Toevoegen aan wachtrij",
+    "update": "Bijwerken",
+    "redownload": "Opnieuw downloaden",
     "tabs": {
       "detail": "Detail",
       "reviews": "Beoordelingen",
@@ -115,6 +117,10 @@
       "downloads": "Downloads",
       "uploaded": "Geüpload",
       "updated": "Bijgewerkt"
+    },
+    "dlc": {
+      "header": "DLC vereist",
+      "body": "In de toekomst is de DLC <strong>{title}</strong> vereist om deze chart te spelen."
     }
   },
   "playlist": {
@@ -209,7 +215,20 @@
       },
       "musicEnabled": {
         "label": "Menu muziek ingeschakeld",
-        "description": "Speelt menumuziek af"
+        "description": "Speelt menumuziek af",
+        "credit": "Muziek door {artist}"
+      },
+      "musicVolume": {
+        "label": "Volume menumuziek",
+        "description": "Het volume van de menumuziek"
+      },
+      "sfxVolume": {
+        "label": "Volume geluidseffecten",
+        "description": "Het volume van de UI geluidseffecten"
+      },
+      "previewVolume": {
+        "label": "Volume voorbeeld",
+        "description": "Het volume van chart voorbeelden"
       }
     },
     "account": {
@@ -226,8 +245,18 @@
         "label": "Customs pad",
         "description": "Pad naar de map met custom charts",
         "placeholder": "Nog niet ingesteld",
+        "notAFolder": "Dit pad is geen geldige map.",
         "select": "Selecteer",
         "detect": "Detecteer"
+      },
+      "libraryHashCache": {
+        "label": "Interval voor updatecontrole",
+        "description": "Hoe lang de bibliotheek onthoudt welke charts updates hebben op SpinShare",
+        "hours4": "4 uur",
+        "hours12": "12 uur",
+        "day1": "1 dag",
+        "days3": "3 dagen",
+        "days7": "7 dagen"
       }
     }
   },
@@ -256,6 +285,33 @@
       "body": "U heeft nu de SpinShare desktop client ingesteld. Je bent slechts een klik verwijderd van een bibliotheek van duizenden custom charts voor Spin Rhythm XD.",
       "tip": "Tip: Klik op de rechterbovenhoek om in te loggen op je account. Door in te loggen kun je charts bekijken en ze comfortabel toevoegen aan afspeellijsten zonder de website te gebruiken. In de toekomst kun je ook je eigen custom charts uploaden.",
       "welcome": "Maar op dit moment gaan we naar de <strong>ritme dimensie</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "Fout bij het laden van de chart",
+      "message": "Er is geen chart met het ID: {id}"
+    },
+    "userNotFound": {
+      "title": "Fout bij het laden van de gebruiker",
+      "message": "Er is geen gebruiker met het ID: {id}"
+    },
+    "playlistNotFound": {
+      "title": "Fout bij het laden van de playlist",
+      "message": "Er is geen playlist met het ID: {id}"
+    },
+    "selectFolder": {
+      "title": "Map selecteren",
+      "message": "Selecteer de map die je wilt openen",
+      "button": "Openen"
+    }
+  },
+  "notifications": {
+    "downloadComplete": "Download voltooid",
+    "downloadFailed": "Download mislukt",
+    "queueFinished": {
+      "title": "Wachtrij voltooid",
+      "body": "Alle charts zijn gedownload of mislukt."
     }
   }
 }
