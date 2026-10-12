@@ -8,6 +8,22 @@
       },
       "placeholder": "Suche nach Charts, Nutzer oder Playlisten..."
     },
+    "roomSync": {
+      "header": "",
+      "connected": "",
+      "outdated": "",
+      "disconnected": "",
+      "notInRoom": "",
+      "players": "",
+      "customsAllowed": "",
+      "customsNotAllowed": "",
+      "settingsHint": "",
+      "track": {
+        "missing": "",
+        "notCustom": "",
+        "notOnSpinShare": ""
+      }
+    },
     "auth": {
       "login": "Einloggen",
       "logout": "Ausloggen",
@@ -99,6 +115,8 @@
     },
     "play": "Spielen",
     "addToQueue": "Zur Warteschlange",
+    "update": "",
+    "redownload": "",
     "tabs": {
       "detail": "Detail",
       "reviews": "Reviews",
@@ -213,7 +231,8 @@
       },
       "musicEnabled": {
         "label": "Menü-Musik Aktiv",
-        "description": "Spielt Hintergrundmusik im Menü"
+        "description": "Spielt Hintergrundmusik im Menü",
+        "credit": ""
       },
       "musicVolume": {
         "label": "",
@@ -245,6 +264,41 @@
         "notAFolder": "",
         "select": "Auswählen",
         "detect": "Erkennen"
+      },
+      "libraryHashCache": {
+        "label": "",
+        "description": "",
+        "hours4": "",
+        "hours12": "",
+        "day1": "",
+        "days3": "",
+        "days7": ""
+      }
+    },
+    "experimental": {
+      "header": "",
+      "roomSyncEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncHost": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "invalid": ""
+      },
+      "roomSyncAutoDownload": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncAutoUpdate": {
+        "label": "",
+        "description": ""
+      },
+      "openDebugger": {
+        "label": "",
+        "description": "",
+        "open": ""
       }
     }
   },
@@ -273,6 +327,33 @@
       "body": "Du hast nun den SpinShare Desktop Client eingerichtet. Jetzt bist du nur noch einen Klick davon entfernt, tausende Nutzerinhalte für Spin Rhythm Xd herunterzuladen.",
       "tip": "Tipp: Klicke oben rechts auf 'Einloggen' um dich in deinen spinsha.re Account einzuloggen. Damit kannst du direkt im Client Charts bewerten, Playlisten verwalten und bald auch eigene Charts hochladen.",
       "welcome": "Aber fürs erste: Die <strong>rhythm dimension</strong> ruft!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "userNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "playlistNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "selectFolder": {
+      "title": "",
+      "message": "",
+      "button": ""
+    }
+  },
+  "notifications": {
+    "downloadComplete": "",
+    "downloadFailed": "",
+    "queueFinished": {
+      "title": "",
+      "body": ""
     }
   }
 }
