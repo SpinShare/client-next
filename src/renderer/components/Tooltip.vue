@@ -36,7 +36,7 @@ const props = defineProps({
         @apply block;
     }
     & .content {
-        @apply hidden absolute w-max max-w-[300px] bg-base-200 dark:bg-base-800 p-2 rounded-md z-10 shadow-2xl;
+        @apply hidden absolute w-max max-w-[300px] bg-base-200 dark:bg-base-900 text-sm p-2 rounded-md z-10 shadow-2xl;
         position-anchor: --tooltipTrigger;
         position-area: start center;
     }
