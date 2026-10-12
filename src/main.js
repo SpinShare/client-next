@@ -13,6 +13,7 @@ import { URL } from 'url';
 import { UpdateManager } from './main/updates';
 import { translate } from './main/i18n';
 import { RoomSyncClient } from './main/roomSync';
+import { setupRoomSyncAutoDownload } from './main/roomSync/autoDownload';
 
 // Ignore EPIPE on stdout/stderr. When the app is launched from a terminal or launcher that later closes (e.g. AppImage on Linux), every console.log would otherwise throw an uncaught exception.
 for (const stream of [process.stdout, process.stderr]) {
@@ -264,6 +265,7 @@ app.whenReady().then(() => {
 
     /* Room Sync */
     const roomSync = new RoomSyncClient(settingsManager);
+    const roomSyncAutoDownload = setupRoomSyncAutoDownload(roomSync, settingsManager, library, downloadQueue, apiClient);
     roomSync.on('status-change', (status) => {
         mainWindow.webContents.send('room-sync-status-change', status);
     });
@@ -370,6 +372,7 @@ app.whenReady().then(() => {
         settingsManager.settings = settings;
         settingsManager.save();
         roomSync.applySettings();
+        roomSyncAutoDownload.check();
     });
     ipcMain.handle('load-settings', (event) => {
         return settingsManager.load();
