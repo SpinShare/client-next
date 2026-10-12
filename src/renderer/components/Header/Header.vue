@@ -36,6 +36,7 @@
             </div>
         </div>
         <nav>
+            <RoomSyncArea />
             <AuthArea />
         </nav>
     </header>
@@ -47,6 +48,7 @@ import SpinShareLogo from '@/assets/images/logo_full.svg';
 import Remixicon from '@/components/Remixicon.vue';
 import { computed, ref } from 'vue';
 import AuthArea from '@/components/Header/AuthArea.vue';
+import RoomSyncArea from '@/components/Header/RoomSyncArea.vue';
 
 const router = useRouter();
 const route = useRoute();

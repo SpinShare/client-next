@@ -73,6 +73,9 @@ window.spshLibrary.onCacheRebuildDone(() => {
 window.spshUpdates.onUpdateCheckDone((hasNewRelease) => {
     mittInstance.emit('update-check-done', hasNewRelease);
 });
+window.spshRoomSync.onStatusChange((connected) => {
+    mittInstance.emit('room-sync-status-change', connected);
+});
 window.spshExternalApi.onWindowFocused(() => {
     mittInstance.emit('window-focused');
 });
@@ -93,6 +96,7 @@ app.provide('updateManager', window.spshUpdates);
 app.provide('libraryManager', window.spshLibrary);
 app.provide('queue', window.spshQueue);
 app.provide('connect', window.spshConnect);
+app.provide('roomSync', window.spshRoomSync);
 app.provide('mitt', mittInstance);
 
 /* SOUND EFFECTS */

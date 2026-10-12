@@ -12,6 +12,7 @@ import { LibraryManager } from './main/library';
 import { URL } from 'url';
 import { UpdateManager } from './main/updates';
 import { translate } from './main/i18n';
+import { RoomSyncClient } from './main/roomSync';
 
 // Ignore EPIPE on stdout/stderr. When the app is launched from a terminal or launcher that later closes (e.g. AppImage on Linux), every console.log would otherwise throw an uncaught exception.
 for (const stream of [process.stdout, process.stderr]) {
@@ -261,6 +262,19 @@ app.whenReady().then(() => {
         return downloadQueue.restartFailed();
     });
 
+    /* Room Sync */
+    const roomSync = new RoomSyncClient(settingsManager);
+    roomSync.on('status-change', (connected) => {
+        mainWindow.webContents.send('room-sync-status-change', connected);
+    });
+    ipcMain.handle('room-sync-is-connected', (event) => {
+        return roomSync.connected;
+    });
+    ipcMain.handle('room-sync-reconnect', (event) => {
+        roomSync.reconnect();
+    });
+    roomSync.applySettings();
+
     /* External */
     ipcMain.handle('open-url', async (event, url) => {
         try {
@@ -342,7 +356,8 @@ app.whenReady().then(() => {
     });
     ipcMain.handle('save-settings-all', (event, settings) => {
         settingsManager.settings = settings;
-        return settingsManager.save();
+        settingsManager.save();
+        roomSync.applySettings();
     });
     ipcMain.handle('load-settings', (event) => {
         return settingsManager.load();

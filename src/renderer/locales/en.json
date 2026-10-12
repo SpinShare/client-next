@@ -8,6 +8,9 @@
       },
       "placeholder": "Search for a chart, charter, or playlist..."
     },
+    "roomSync": {
+      "header": "Room Synchronization"
+    },
     "auth": {
       "login": "Login",
       "logout": "Logout",

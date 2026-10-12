@@ -124,6 +124,16 @@ contextBridge.exposeInMainWorld('spshConnect', {
     logout: async () => ipcRenderer.invoke('connect-logout'),
 });
 
+contextBridge.exposeInMainWorld('spshRoomSync', {
+    isConnected: () => ipcRenderer.invoke('room-sync-is-connected'),
+    reconnect: () => ipcRenderer.invoke('room-sync-reconnect'),
+    onStatusChange: (callback) => {
+        const listener = (_, connected) => callback(connected);
+        ipcRenderer.on('room-sync-status-change', listener);
+        return () => ipcRenderer.removeListener('room-sync-status-change', listener);
+    },
+});
+
 contextBridge.exposeInMainWorld('spshExternalApi', {
     openUrl: async (url) => ipcRenderer.invoke('open-url', url),
     openFolder: async (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
