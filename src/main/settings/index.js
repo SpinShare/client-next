@@ -63,7 +63,17 @@ export class SettingsManager {
 
     load() {
         console.log(`[SettingsManager] Loading settings from: ${this.settingsPath}`);
-        const loadedSettings = JSON.parse(fs.readFileSync(this.settingsPath, 'utf-8'));
+        let loadedSettings;
+        try {
+            loadedSettings = JSON.parse(fs.readFileSync(this.settingsPath, 'utf-8'));
+            if (typeof loadedSettings !== 'object' || loadedSettings === null || Array.isArray(loadedSettings)) {
+                throw new Error('Settings are not an object');
+            }
+        } catch (e) {
+            // Failsafe if the settings file is corrupted (e.g. app closed while saving)
+            console.error(`[SettingsManager] Failed to load settings, falling back to defaults: ${e.message}`);
+            loadedSettings = {};
+        }
         this.settings = { ...this.defaults, ...loadedSettings };
     }
 

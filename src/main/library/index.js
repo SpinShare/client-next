@@ -189,7 +189,17 @@ export class LibraryManager extends EventEmitter {
      */
     load() {
         console.log(`[Library] Loading cache`);
-        const loadedItems = JSON.parse(fs.readFileSync(this.cacheFilePath, 'utf-8'));
+        let loadedItems;
+        try {
+            loadedItems = JSON.parse(fs.readFileSync(this.cacheFilePath, 'utf-8'));
+            if (!Array.isArray(loadedItems)) {
+                throw new Error('Cache is not an array');
+            }
+        } catch (e) {
+            // Failsafe if the cache file is corrupted (e.g. app closed while saving)
+            console.error(`[Library] Failed to load cache, starting with an empty cache: ${e.message}`);
+            loadedItems = [];
+        }
         // Migrate items cached before the rename of hasExtremeDifficulty
         for (const item of loadedItems) {
             if (item && 'hasExtremeDifficulty' in item) {
