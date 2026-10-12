@@ -13,6 +13,13 @@ import { URL } from 'url';
 import { UpdateManager } from './main/updates';
 import { translate } from './main/i18n';
 
+// Ignore EPIPE on stdout/stderr. When the app is launched from a terminal or launcher that later closes (e.g. AppImage on Linux), every console.log would otherwise throw an uncaught exception.
+for (const stream of [process.stdout, process.stderr]) {
+    stream?.on('error', (error) => {
+        if (error.code !== 'EPIPE') throw error;
+    });
+}
+
 Sentry.init({
     dsn: 'https://d1445074964dee4d6d1b2d9f1bae8a7b@o1420803.ingest.us.sentry.io/4509152324222976',
 });
