@@ -66,5 +66,14 @@
         "vue": "^3.5.13",
         "vue-i18n": "^11.1.9",
         "vue-router": "^4.5.0"
+    },
+    "allowScripts": {
+        "@sentry/cli@2.58.4": true,
+        "@tailwindcss/oxide@4.1.11": true,
+        "vue-demi@0.14.10": true,
+        "electron@35.7.5": true,
+        "electron-winstaller@5.4.0": true,
+        "vite-plugin-vue-tailwind-auto-reference@1.0.2": true,
+        "esbuild@0.25.5": true
     }
 }
