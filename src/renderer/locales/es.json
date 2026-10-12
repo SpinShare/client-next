@@ -8,6 +8,22 @@
       },
       "placeholder": "Busca una canción, usuario o lista de reproducción..."
     },
+    "roomSync": {
+      "header": "",
+      "connected": "",
+      "outdated": "",
+      "disconnected": "",
+      "notInRoom": "",
+      "players": "",
+      "customsAllowed": "",
+      "customsNotAllowed": "",
+      "settingsHint": "",
+      "track": {
+        "missing": "",
+        "notCustom": "",
+        "notOnSpinShare": ""
+      }
+    },
     "auth": {
       "login": "Ingresar",
       "logout": "Salir",
@@ -99,6 +115,8 @@
     },
     "play": "Jugar",
     "addToQueue": "Añadir a la cola",
+    "update": "",
+    "redownload": "",
     "tabs": {
       "detail": "Detalle",
       "reviews": "Reseñas",
@@ -213,7 +231,8 @@
       },
       "musicEnabled": {
         "label": "Música de menú activada",
-        "description": "Reproducir música de menú"
+        "description": "Reproducir música de menú",
+        "credit": ""
       },
       "musicVolume": {
         "label": "",
@@ -245,6 +264,41 @@
         "notAFolder": "",
         "select": "Seleccionar",
         "detect": "Detectar"
+      },
+      "libraryHashCache": {
+        "label": "",
+        "description": "",
+        "hours4": "",
+        "hours12": "",
+        "day1": "",
+        "days3": "",
+        "days7": ""
+      }
+    },
+    "experimental": {
+      "header": "",
+      "roomSyncEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncHost": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "invalid": ""
+      },
+      "roomSyncAutoDownload": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncAutoUpdate": {
+        "label": "",
+        "description": ""
+      },
+      "openDebugger": {
+        "label": "",
+        "description": "",
+        "open": ""
       }
     }
   },
@@ -273,6 +327,33 @@
       "body": "Ahora has configurado el cliente de escritorio SpinShare. Estás a solo un clic de una biblioteca de miles de canciones creadas para Spin Rhythm XD.",
       "tip": "Consejo: Haz clic en la esquina superior derecha para ingresar a tu cuenta. El inicio de sesión le permite reseñar canciones y añadirlas a las listas de reproducción cómodamente sin usar el sitio web. En el futuro, también podrás subir tus propios canciones para el juego.",
       "welcome": "¡Pero por ahora, entremos en la <strong>dimensión del ritmo</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "userNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "playlistNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "selectFolder": {
+      "title": "",
+      "message": "",
+      "button": ""
+    }
+  },
+  "notifications": {
+    "downloadComplete": "",
+    "downloadFailed": "",
+    "queueFinished": {
+      "title": "",
+      "body": ""
     }
   }
 }
