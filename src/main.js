@@ -264,11 +264,11 @@ app.whenReady().then(() => {
 
     /* Room Sync */
     const roomSync = new RoomSyncClient(settingsManager);
-    roomSync.on('status-change', (connected) => {
-        mainWindow.webContents.send('room-sync-status-change', connected);
+    roomSync.on('status-change', (status) => {
+        mainWindow.webContents.send('room-sync-status-change', status);
     });
-    ipcMain.handle('room-sync-is-connected', (event) => {
-        return roomSync.connected;
+    ipcMain.handle('room-sync-get-status', (event) => {
+        return roomSync.status;
     });
     ipcMain.handle('room-sync-reconnect', (event) => {
         roomSync.reconnect();

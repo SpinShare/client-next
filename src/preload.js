@@ -125,10 +125,10 @@ contextBridge.exposeInMainWorld('spshConnect', {
 });
 
 contextBridge.exposeInMainWorld('spshRoomSync', {
-    isConnected: () => ipcRenderer.invoke('room-sync-is-connected'),
+    getStatus: () => ipcRenderer.invoke('room-sync-get-status'),
     reconnect: () => ipcRenderer.invoke('room-sync-reconnect'),
     onStatusChange: (callback) => {
-        const listener = (_, connected) => callback(connected);
+        const listener = (_, status) => callback(status);
         ipcRenderer.on('room-sync-status-change', listener);
         return () => ipcRenderer.removeListener('room-sync-status-change', listener);
     },

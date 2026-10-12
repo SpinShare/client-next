@@ -73,8 +73,8 @@ window.spshLibrary.onCacheRebuildDone(() => {
 window.spshUpdates.onUpdateCheckDone((hasNewRelease) => {
     mittInstance.emit('update-check-done', hasNewRelease);
 });
-window.spshRoomSync.onStatusChange((connected) => {
-    mittInstance.emit('room-sync-status-change', connected);
+window.spshRoomSync.onStatusChange((status) => {
+    mittInstance.emit('room-sync-status-change', status);
 });
 window.spshExternalApi.onWindowFocused(() => {
     mittInstance.emit('window-focused');

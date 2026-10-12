@@ -2,6 +2,9 @@ import { EventEmitter } from 'events';
 
 const RECONNECT_DELAY_MS = 5000;
 
+const VERSION = 1;
+const SCHEMA = 1;
+
 export class RoomSyncClient extends EventEmitter {
     constructor(settingsManager) {
         super();
@@ -10,7 +13,12 @@ export class RoomSyncClient extends EventEmitter {
         this.socket = null;
         this.host = null;
         this.connected = false;
+        this.outdated = false;
         this.reconnectTimeout = null;
+    }
+
+    get status() {
+        return { connected: this.connected, outdated: this.outdated };
     }
 
     get enabled() {
@@ -54,12 +62,12 @@ export class RoomSyncClient extends EventEmitter {
             if (socket !== this.socket) return;
 
             console.log(`[RoomSyncClient] Connected to ${this.host}`);
-            this.setConnected(true);
+            this.setStatus({ connected: true });
         });
         socket.addEventListener('message', (event) => {
             if (socket !== this.socket) return;
 
-            this.emit('message', event.data);
+            this.handleMessage(event.data);
         });
         // A failed handshake only fires "error" without a following "close", so both have to be handled
         socket.addEventListener('error', () => this.handleSocketLost(socket));
@@ -70,8 +78,33 @@ export class RoomSyncClient extends EventEmitter {
         if (socket !== this.socket) return;
 
         this.socket = null;
-        this.setConnected(false);
+        this.setStatus({ connected: false, outdated: false });
         this.scheduleReconnect();
+    }
+
+    handleMessage(data) {
+        let message;
+        try {
+            message = JSON.parse(data);
+        } catch {
+            console.warn(`[RoomSyncClient] Ignoring non-JSON message`);
+            return;
+        }
+        if (typeof message !== 'object' || message === null || typeof message.type !== 'string') {
+            console.warn(`[RoomSyncClient] Ignoring message without a type`);
+            return;
+        }
+
+        if (message.type === 'hello') {
+            const outdated = message.v !== VERSION || message.schema !== SCHEMA;
+            if (outdated) {
+                console.warn(`[RoomSyncClient] Version mismatch: game uses v${message.v}/schema ${message.schema}, client expects v${VERSION}/schema ${SCHEMA}`);
+            }
+            this.setStatus({ outdated });
+            return;
+        }
+
+        this.emit('message', message);
     }
 
     disconnect() {
@@ -84,7 +117,7 @@ export class RoomSyncClient extends EventEmitter {
             this.socket = null;
             socket.close();
         }
-        this.setConnected(false);
+        this.setStatus({ connected: false, outdated: false });
     }
 
     scheduleReconnect() {
@@ -97,10 +130,11 @@ export class RoomSyncClient extends EventEmitter {
         }, RECONNECT_DELAY_MS);
     }
 
-    setConnected(connected) {
-        if (this.connected === connected) return;
+    setStatus({ connected = this.connected, outdated = this.outdated }) {
+        if (this.connected === connected && this.outdated === outdated) return;
 
         this.connected = connected;
-        this.emit('status-change', connected);
+        this.outdated = outdated;
+        this.emit('status-change', this.status);
     }
 }
