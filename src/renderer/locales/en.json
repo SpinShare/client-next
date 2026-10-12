@@ -99,6 +99,8 @@
     },
     "play": "Play",
     "addToQueue": "Add to queue",
+    "update": "Update",
+    "redownload": "Redownload",
     "tabs": {
       "detail": "Detail",
       "reviews": "Reviews",
@@ -245,6 +247,15 @@
         "notAFolder": "This path is not a valid folder.",
         "select": "Select",
         "detect": "Detect"
+      },
+      "libraryHashCache": {
+        "label": "Update check interval",
+        "description": "How long the library remembers which charts have updates on SpinShare",
+        "hours4": "4 hours",
+        "hours12": "12 hours",
+        "day1": "1 day",
+        "days3": "3 days",
+        "days7": "7 days"
       }
     }
   },

@@ -10,7 +10,7 @@ export class CacheItem {
      * @param {boolean} hasEasyDifficulty
      * @param {boolean} hasNormalDifficulty
      * @param {boolean} hasHardDifficulty
-     * @param {boolean} hasExtremeDifficulty
+     * @param {boolean} hasExpertDifficulty
      * @param {boolean} hasXDDifficulty
      * @param {number} easyDifficulty
      * @param {number} normalDifficulty
@@ -21,7 +21,7 @@ export class CacheItem {
      * @param {string} updateHash
      * @param {string} srtbPath
      */
-    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExtremeDifficulty, hasXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, fileReference, updateHash, srtbPath) {
+    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExpertDifficulty, hasXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, fileReference, updateHash, srtbPath) {
         this.title = title;
         this.subtitle = subtitle;
         this.artist = artist;
@@ -29,7 +29,7 @@ export class CacheItem {
         this.hasEasyDifficulty = hasEasyDifficulty;
         this.hasNormalDifficulty = hasNormalDifficulty;
         this.hasHardDifficulty = hasHardDifficulty;
-        this.hasExtremeDifficulty = hasExtremeDifficulty;
+        this.hasExpertDifficulty = hasExpertDifficulty;
         this.hasXDDifficulty = hasXDDifficulty;
         this.easyDifficulty = easyDifficulty;
         this.normalDifficulty = normalDifficulty;
@@ -74,7 +74,7 @@ export class CacheItem {
         cacheItem.hasEasyDifficulty = false;
         cacheItem.hasNormalDifficulty = false;
         cacheItem.hasHardDifficulty = false;
-        cacheItem.hasExtremeDifficulty = false;
+        cacheItem.hasExpertDifficulty = false;
         cacheItem.hasXDDifficulty = false;
         cacheItem.easyDifficulty = 0;
         cacheItem.normalDifficulty = 0;
@@ -98,7 +98,7 @@ export class CacheItem {
                     cacheItem.hardDifficulty = container.difficultyRating;
                     break;
                 case 5:
-                    cacheItem.hasExtremeDifficulty = true;
+                    cacheItem.hasExpertDifficulty = true;
                     cacheItem.expertDifficulty = container.difficultyRating;
                     break;
                 case 6:

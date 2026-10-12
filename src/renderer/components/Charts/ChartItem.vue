@@ -33,13 +33,13 @@
                 </div>
                 <div
                     class="installation-status installed"
-                    v-if="!isLocalChart && cacheUpdateHash === updateHash"
+                    v-if="!isLocalChart && cacheUpdateHash && (!updateHash || cacheUpdateHash === updateHash)"
                 >
                     {{ $t('chart.status.installed') }}
                 </div>
                 <div
                     class="installation-status update"
-                    v-if="!isLocalChart && cacheUpdateHash && cacheUpdateHash !== updateHash"
+                    v-if="!isLocalChart && cacheUpdateHash && updateHash && cacheUpdateHash !== updateHash"
                 >
                     {{ $t('chart.status.outOfDate') }}
                 </div>
@@ -56,9 +56,9 @@
                         <span>H</span>
                         <span v-if="hasHardDifficulty">{{ hardDifficulty }}</span>
                     </div>
-                    <div :class="`difficulty ${hasExtremeDifficulty ? 'active' : ''}`">
+                    <div :class="`difficulty ${hasExpertDifficulty ? 'active' : ''}`">
                         <span>EX</span>
-                        <span v-if="hasExtremeDifficulty">{{ expertDifficulty }}</span>
+                        <span v-if="hasExpertDifficulty">{{ expertDifficulty }}</span>
                     </div>
                     <div :class="`difficulty ${hasXDDifficulty ? 'active' : ''}`">
                         <span>XD</span>
@@ -126,7 +126,7 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    hasExtremeDifficulty: {
+    hasExpertDifficulty: {
         type: Boolean,
         default: false,
     },

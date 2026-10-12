@@ -1,7 +1,7 @@
 import { NotFoundError } from '@spinshare/api-js';
 
 export class AuthManager {
-    static #connectAppApiKey = '78b1b7fdb654100473cb414c104056b2';
+    static connectAppApiKey = '78b1b7fdb654100473cb414c104056b2';
     #apiClient = null;
     #settingsManager = null;
     connectToken = null;
@@ -45,7 +45,7 @@ export class AuthManager {
 
     async login(connectCode) {
         try {
-            const response = await this.#apiClient.connectGetToken(AuthManager.#connectAppApiKey, connectCode);
+            const response = await this.#apiClient.connectGetToken(connectCode);
 
             this.isLoggedIn = true;
             this.connectToken = response;

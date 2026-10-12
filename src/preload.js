@@ -4,7 +4,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('spshApi', {
-    getClientLatestVersion: async () => ipcRenderer.invoke('get-client-latest-version'),
     getPromos: async () => ipcRenderer.invoke('get-promos'),
     getChartDetail: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-detail', chartIdOrReference),
     getChartReviews: async (chartIdOrReference) => ipcRenderer.invoke('get-chart-reviews', chartIdOrReference),
@@ -77,6 +76,7 @@ contextBridge.exposeInMainWorld('spshLibrary', {
     get: (fileReference) => ipcRenderer.invoke('get-library', fileReference),
     getThumbnail: (fileReference) => ipcRenderer.invoke('get-library-thumbnail', fileReference),
     getUpdateHash: (fileReference) => ipcRenderer.invoke('get-library-update-hash', fileReference),
+    getRemoteUpdateHashes: () => ipcRenderer.invoke('get-library-remote-update-hashes'),
     onCacheChange: (callback) => {
         const listener = (_, items) => callback(items);
         ipcRenderer.on('cache-change', listener);

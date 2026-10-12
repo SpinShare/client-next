@@ -42,11 +42,16 @@ export class DownloadQueue extends EventEmitter {
      * @return {void}
      */
     addItem(item) {
-        if (!this.isInQueue(item.id)) {
+        const existingItem = this.items.find((queueItem) => queueItem.id === item.id);
+
+        if (!existingItem) {
             console.log(`[DownloadQueue] Adding item ${item.id}`);
             this.items.push({ ...item, state: STATE_PENDING });
 
             console.log(`[DownloadQueue] Queue has ${this.pendingItemsCount()} items.`);
+        } else if (item.force && (existingItem.state === STATE_DONE || existingItem.state === STATE_ERROR)) {
+            console.log(`[DownloadQueue] Re-adding item ${item.id}`);
+            Object.assign(existingItem, item, { state: STATE_PENDING });
         }
 
         this.emit('queue-count-change', this.pendingItemsCount());
@@ -114,7 +119,7 @@ export class DownloadQueue extends EventEmitter {
 
                 console.log(`[DownloadQueue] Check: (${nextItem.id}) ${nextItem.title}`);
 
-                if (cacheItem === chartItem.updateHash) {
+                if (!nextItem.force && cacheItem === chartItem.updateHash) {
                     nextItem.state = STATE_DONE;
                     console.log(`[DownloadQueue] Skip (Up to date): (${nextItem.id}) ${nextItem.title}`);
                     this.emit('item-change', nextItem);
@@ -150,6 +155,7 @@ export class DownloadQueue extends EventEmitter {
                 // CACHE
                 console.log(`[DownloadQueue] Cache: (${nextItem.id}) ${nextItem.title}`);
                 await this.libraryManager.add(path.join(chartDestinationPath, `${nextItem.fileReference}.srtb`));
+                this.libraryManager.setRemoteUpdateHash(chartItem.fileReference, chartItem.updateHash);
 
                 nextItem.state = STATE_DONE;
                 this.emit('item-change', nextItem);

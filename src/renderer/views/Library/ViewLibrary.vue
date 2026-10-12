@@ -37,6 +37,7 @@
                             v-for="chart in library"
                             :key="chart.fileReference"
                             v-bind="chart"
+                            :update-hash="remoteUpdateHashes[chart.fileReference] || ''"
                             :is-local="true"
                         />
                     </ChartGrid>
@@ -57,6 +58,7 @@ import ChartGrid from '@/components/Charts/ChartGrid.vue';
 import ChartItem from '@/components/Charts/ChartItem.vue';
 
 const library = ref(null);
+const remoteUpdateHashes = ref({});
 const settingsManager = inject('settingsManager');
 const externalApi = inject('externalApi');
 const libraryManager = inject('libraryManager');
@@ -65,6 +67,7 @@ const mitt = inject('mitt');
 onMounted(async () => {
     mitt.on('cache-change', onCacheChange);
     library.value = await libraryManager.getAll();
+    remoteUpdateHashes.value = await libraryManager.getRemoteUpdateHashes();
 });
 
 onUnmounted(() => {

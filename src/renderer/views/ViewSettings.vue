@@ -199,6 +199,23 @@
                         <span>{{ $t('settings.game.pathCustoms.detect') }}</span>
                     </button>
                 </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.game.libraryHashCache.label')"
+                    :description="$t('settings.game.libraryHashCache.description')"
+                >
+                    <select
+                        class="select"
+                        v-model.number="settings.libraryHashCacheHours"
+                        @change="handleSave"
+                        v-interactable
+                    >
+                        <option :value="4">{{ $t('settings.game.libraryHashCache.hours4') }}</option>
+                        <option :value="12">{{ $t('settings.game.libraryHashCache.hours12') }}</option>
+                        <option :value="24">{{ $t('settings.game.libraryHashCache.day1') }}</option>
+                        <option :value="72">{{ $t('settings.game.libraryHashCache.days3') }}</option>
+                        <option :value="168">{{ $t('settings.game.libraryHashCache.days7') }}</option>
+                    </select>
+                </SettingsItem>
             </SettingsSection>
         </section>
     </LayoutBase>

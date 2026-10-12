@@ -20,7 +20,8 @@ export class SettingsManager {
             pathGame: '',
             musicVolume: 0.5,
             sfxVolume: 1,
-            previewVolume: 0.5
+            previewVolume: 0.5,
+            libraryHashCacheHours: 168,
         };
         this.settings = { ...this.defaults };
 

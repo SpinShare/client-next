@@ -99,6 +99,8 @@
     },
     "play": "Spielen",
     "addToQueue": "Zur Warteschlange",
+    "update": "Aktualisieren",
+    "redownload": "Erneut herunterladen",
     "tabs": {
       "detail": "Detail",
       "reviews": "Reviews",
@@ -233,6 +235,15 @@
         "notAFolder": "Dieser Pfad ist kein valider Ordner.",
         "select": "Auswählen",
         "detect": "Erkennen"
+      },
+      "libraryHashCache": {
+        "label": "Update-Prüfintervall",
+        "description": "Wie lange sich die Bibliothek merkt, für welche Charts es Updates auf SpinShare gibt",
+        "hours4": "4 Stunden",
+        "hours12": "12 Stunden",
+        "day1": "1 Tag",
+        "days3": "3 Tage",
+        "days7": "7 Tage"
       }
     }
   },

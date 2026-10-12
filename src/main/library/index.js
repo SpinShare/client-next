@@ -25,6 +25,8 @@ export class LibraryManager extends EventEmitter {
         this.chartsPath = this.settingsManager.get('pathCustoms');
         this.cachePath = path.join(app.getPath('userData'), 'SpinShare', 'cache');
         this.cacheFilePath = path.join(app.getPath('userData'), 'SpinShare', 'cache', 'cache.json');
+        this.remoteHashesFilePath = path.join(app.getPath('userData'), 'SpinShare', 'cache', 'remoteHashes.json');
+        this.remoteHashes = {};
         if (!fs.existsSync(this.cachePath)) {
             fs.mkdirSync(this.cachePath, { recursive: true });
         }
@@ -35,6 +37,7 @@ export class LibraryManager extends EventEmitter {
         console.log('[Library] Ready.');
 
         this.load();
+        this.loadRemoteHashes();
     }
 
     /**
@@ -44,6 +47,8 @@ export class LibraryManager extends EventEmitter {
      */
     async rebuild() {
         this.items = [];
+        this.remoteHashes = {};
+        this.saveRemoteHashes();
         this.emit('cache-rebuild-start');
 
         // Remove cached cover files
@@ -185,6 +190,13 @@ export class LibraryManager extends EventEmitter {
     load() {
         console.log(`[Library] Loading cache`);
         const loadedItems = JSON.parse(fs.readFileSync(this.cacheFilePath, 'utf-8'));
+        // Migrate items cached before the rename of hasExtremeDifficulty
+        for (const item of loadedItems) {
+            if (item && 'hasExtremeDifficulty' in item) {
+                item.hasExpertDifficulty ??= item.hasExtremeDifficulty;
+                delete item.hasExtremeDifficulty;
+            }
+        }
         this.items = [...loadedItems];
         this.emit('cache-change');
         console.log(`[Library] Cache loaded.`);
@@ -211,6 +223,90 @@ export class LibraryManager extends EventEmitter {
         }
 
         return item.updateHash;
+    }
+
+    /**
+     * Loads the cached updateHashes of charts on SpinShare
+     */
+    loadRemoteHashes() {
+        if (!fs.existsSync(this.remoteHashesFilePath)) {
+            return;
+        }
+
+        try {
+            this.remoteHashes = JSON.parse(fs.readFileSync(this.remoteHashesFilePath, 'utf-8'));
+        } catch (e) {
+            console.error(`[Library] Failed to load remote hashes: ${e.message}`);
+            this.remoteHashes = {};
+        }
+    }
+
+    /**
+     * Saves the cached updateHashes of charts on SpinShare
+     */
+    saveRemoteHashes() {
+        fs.writeFileSync(this.remoteHashesFilePath, JSON.stringify(this.remoteHashes), 'utf-8');
+    }
+
+    /**
+     * Stores the current updateHash of a chart on SpinShare
+     * @param fileReference
+     * @param updateHash
+     */
+    setRemoteUpdateHash(fileReference, updateHash) {
+        this.remoteHashes[fileReference] = { updateHash, checkedAt: Date.now() };
+        this.saveRemoteHashes();
+    }
+
+    /**
+     * Returns the updateHashes of all library charts on SpinShare. Hashes are cached for the duration set in libraryHashCacheHours.
+     * @returns {Promise<Object<string, string>>}
+     */
+    async getRemoteUpdateHashes() {
+        const maxAge = this.settingsManager.get('libraryHashCacheHours') * 60 * 60 * 1000;
+        const now = Date.now();
+
+        const staleFileReferences = this.items
+            .map((item) => item?.fileReference)
+            .filter((fileReference) => fileReference?.startsWith('spinshare_'))
+            .filter((fileReference) => {
+                const entry = this.remoteHashes[fileReference];
+                return !entry || now - entry.checkedAt > maxAge;
+            });
+
+        if (staleFileReferences.length > 0) {
+            console.log(`[Library] Checking ${staleFileReferences.length} charts for updates.`);
+
+            for (let i = 0; i < staleFileReferences.length; i += 500) {
+                const chunk = staleFileReferences.slice(i, i + 500);
+                try {
+                    const remoteHashes = await this.apiClient.getChartUpdateHashes(chunk);
+
+                    // Charts missing from the response are not on SpinShare (anymore)
+                    for (const fileReference of chunk) {
+                        this.remoteHashes[fileReference] = { updateHash: null, checkedAt: now };
+                    }
+                    for (const remoteHash of remoteHashes) {
+                        if (!remoteHash.fileReference) continue;
+                        this.remoteHashes[remoteHash.fileReference] = { updateHash: remoteHash.updateHash, checkedAt: now };
+                    }
+                } catch (e) {
+                    console.error(`[Library] Failed to check charts for updates: ${e.message}`);
+                    break;
+                }
+            }
+
+            this.saveRemoteHashes();
+        }
+
+        const updateHashes = {};
+        for (const [fileReference, entry] of Object.entries(this.remoteHashes)) {
+            if (entry.updateHash) {
+                updateHashes[fileReference] = entry.updateHash;
+            }
+        }
+
+        return updateHashes;
     }
 
     /**

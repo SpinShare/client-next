@@ -33,7 +33,7 @@
                         </div>
                         <div
                             class="installation-status update"
-                            v-if="cacheItem?.updateHash && cacheItem?.updateHash !== chart.updateHash"
+                            v-if="isOutOfDate"
                         >
                             {{ $t('chart.status.outOfDate') }}
                         </div>
@@ -50,9 +50,9 @@
                                 <span>H</span>
                                 <span v-if="chart.hasHardDifficulty">{{ chart.hardDifficulty }}</span>
                             </div>
-                            <div :class="`difficulty ${chart.hasExtremeDifficulty ? 'active' : ''}`">
+                            <div :class="`difficulty ${chart.hasExpertDifficulty ? 'active' : ''}`">
                                 <span>EX</span>
-                                <span v-if="chart.hasExtremeDifficulty">{{ chart.expertDifficulty }}</span>
+                                <span v-if="chart.hasExpertDifficulty">{{ chart.expertDifficulty }}</span>
                             </div>
                             <div :class="`difficulty ${chart.hasXDDifficulty ? 'active' : ''}`">
                                 <span>XD</span>
@@ -71,12 +71,22 @@
                             <span>{{ $t('chart.play') }}</span>
                         </button>
                         <button
-                            class="button brand"
+                            :class="`button ${isInstalled ? '' : 'brand'}`"
                             @click="handleAddToQueue"
                             v-interactable
                         >
-                            <Remixicon icon="download" />
-                            <span>{{ $t('chart.addToQueue') }}</span>
+                            <template v-if="isOutOfDate">
+                                <Remixicon icon="refresh" />
+                                <span>{{ $t('chart.update') }}</span>
+                            </template>
+                            <template v-else-if="isInstalled">
+                                <Remixicon icon="download" />
+                                <span>{{ $t('chart.redownload') }}</span>
+                            </template>
+                            <template v-else>
+                                <Remixicon icon="download" />
+                                <span>{{ $t('chart.addToQueue') }}</span>
+                            </template>
                         </button>
                         <template v-if="chartPreview && previewAvailable">
                             <button
@@ -195,7 +205,7 @@
                     </button>
                     <button
                         class="button"
-                        :disabled="!chart.hasExtremeDifficulty"
+                        :disabled="!chart.hasExpertDifficulty"
                         @click="() => handlePlayDifficulty(3)"
                         v-interactable
                     >
@@ -231,7 +241,7 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import { useRoute } from 'vue-router';
-import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import Remixicon from '@/components/Remixicon.vue';
@@ -250,6 +260,8 @@ const route = useRoute();
 const chartId = ref(route.params.chartId);
 const chart = ref(null);
 const cacheItem = ref(null);
+const isOutOfDate = computed(() => cacheItem.value?.updateHash && cacheItem.value.updateHash !== chart.value?.updateHash);
+const isInstalled = computed(() => cacheItem.value?.updateHash && cacheItem.value.updateHash === chart.value?.updateHash);
 
 const chartPreview = ref(null);
 const chartPreviewTimeout = ref(null);
@@ -296,7 +308,7 @@ function handlePlayDifficulty(difficulty) {
 }
 
 async function handleAddToQueue() {
-    const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter, chart.value.fileReference);
+    const newDownloadItem = new DownloadItem(chart.value.id, chart.value.cover, chart.value.title, chart.value.artist, chart.value.charter, chart.value.fileReference, isInstalled.value);
     await queue.addQueueItem(newDownloadItem);
 }
 

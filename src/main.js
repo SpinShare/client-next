@@ -168,7 +168,7 @@ app.whenReady().then(() => {
         handleDeepLink(deepLinkUrl);
     }
 
-    const apiClient = new SpinShareClient();
+    const apiClient = new SpinShareClient({ connectApiKey: AuthManager.connectAppApiKey });
     const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
 
@@ -206,6 +206,9 @@ app.whenReady().then(() => {
     });
     ipcMain.handle('get-library-update-hash', async (event, fileReference) => {
         return library.getUpdateHash(fileReference);
+    });
+    ipcMain.handle('get-library-remote-update-hashes', async (event) => {
+        return await library.getRemoteUpdateHashes();
     });
     ipcMain.handle('get-library-thumbnail', async (event, fileReference) => {
         return await library.getThumbnailAsBase64(fileReference);
