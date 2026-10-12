@@ -45,7 +45,7 @@
         "@fontsource-variable/outfit": "^5.2.5",
         "@sentry/electron": "^6.5.0",
         "@sentry/vite-plugin": "^3.3.1",
-        "@spinshare/api-js": "^2.1.2",
+        "@spinshare/api-js": "^3.0.0",
         "@tailwindcss/vite": "^4.0.11",
         "@vue/eslint-config-prettier": "^10.2.0",
         "@vueuse/core": "^13.1.0",
