@@ -16,7 +16,12 @@
       "notInRoom": "Not in a room",
       "players": "{count} / {max} players",
       "customsAllowed": "Customs allowed",
-      "customsNotAllowed": "Customs not allowed"
+      "customsNotAllowed": "Customs not allowed",
+      "track": {
+        "missing": "Missing",
+        "notCustom": "Not a custom chart",
+        "notOnSpinShare": "Not on SpinShare"
+      }
     },
     "auth": {
       "login": "Login",

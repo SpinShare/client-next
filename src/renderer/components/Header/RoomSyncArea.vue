@@ -63,6 +63,24 @@
                             &nbsp;&middot;&nbsp;
                             <span :class="roomSyncRoom.allowCustoms ? '' : 'no-customs'">{{ roomSyncRoom.allowCustoms ? $t('header.roomSync.customsAllowed') : $t('header.roomSync.customsNotAllowed') }}</span>
                         </p>
+                        <RoomTrackItem
+                            v-if="roomSyncTrack"
+                            :track="roomSyncTrack"
+                            :auto-download="roomSyncAutoDownload"
+                            :auto-update="roomSyncAutoUpdate"
+                            class="mt-3"
+                        />
+                    </div>
+                </div>
+
+                <div class="settings">
+                    <div :class="`setting ${roomSyncAutoDownload ? '' : 'disabled'}`">
+                        <Remixicon :icon="roomSyncAutoDownload ? 'checkbox-circle' : 'close-circle'" />
+                        <span>{{ $t('settings.experimental.roomSyncAutoDownload.label') }}</span>
+                    </div>
+                    <div :class="`setting ${roomSyncAutoUpdate ? '' : 'disabled'}`">
+                        <Remixicon :icon="roomSyncAutoUpdate ? 'checkbox-circle' : 'close-circle'" />
+                        <span>{{ $t('settings.experimental.roomSyncAutoUpdate.label') }}</span>
                     </div>
                 </div>
             </div>
@@ -73,6 +91,7 @@
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
 import EmptyState from '@/components/EmptyState.vue';
+import RoomTrackItem from '@/components/Charts/RoomTrackItem.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import router from '@/router';
 
@@ -81,24 +100,32 @@ const settingsManager = inject('settingsManager');
 const roomSync = inject('roomSync');
 const roomSyncEnabled = ref(false);
 const roomSyncHost = ref('');
+const roomSyncAutoDownload = ref(false);
+const roomSyncAutoUpdate = ref(false);
 const roomSyncStatus = ref({ connected: false, outdated: false });
 const roomSyncRoom = ref(null);
+const roomSyncTrack = ref(null);
 const roomSyncPopupOpen = ref(false);
 
 onMounted(async () => {
     mitt.on('save-settings', onSettingsSaved);
     mitt.on('room-sync-status-change', onStatusChange);
     mitt.on('room-sync-room-change', onRoomChange);
+    mitt.on('room-sync-track-change', onTrackChange);
     roomSyncEnabled.value = await settingsManager.get('roomSyncEnabled');
     roomSyncHost.value = await settingsManager.get('roomSyncHost');
+    roomSyncAutoDownload.value = await settingsManager.get('roomSyncAutoDownload');
+    roomSyncAutoUpdate.value = await settingsManager.get('roomSyncAutoUpdate');
     roomSyncStatus.value = await roomSync.getStatus();
     roomSyncRoom.value = await roomSync.getRoom();
+    roomSyncTrack.value = await roomSync.getTrack();
 });
 
 onUnmounted(() => {
     mitt.off('save-settings', onSettingsSaved);
     mitt.off('room-sync-status-change', onStatusChange);
     mitt.off('room-sync-room-change', onRoomChange);
+    mitt.off('room-sync-track-change', onTrackChange);
 });
 
 function onStatusChange(status) {
@@ -109,9 +136,15 @@ function onRoomChange(room) {
     roomSyncRoom.value = room;
 }
 
+function onTrackChange(track) {
+    roomSyncTrack.value = track;
+}
+
 function onSettingsSaved(newSettings) {
     roomSyncEnabled.value = newSettings.roomSyncEnabled;
     roomSyncHost.value = newSettings.roomSyncHost;
+    roomSyncAutoDownload.value = newSettings.roomSyncAutoDownload;
+    roomSyncAutoUpdate.value = newSettings.roomSyncAutoUpdate;
     if (!roomSyncEnabled.value) {
         roomSyncPopupOpen.value = false;
     }
@@ -163,6 +196,18 @@ function handleOpenSettings() {
 
                 & p {
                     @apply text-base-500 dark:text-base-300;
+                }
+            }
+        }
+
+        & .settings {
+            @apply flex flex-col gap-1 px-4 py-3 border-t border-base-300 dark:border-base-800;
+
+            & .setting {
+                @apply flex items-center gap-2 text-base-600 dark:text-base-700;
+
+                &.disabled {
+                    @apply text-red-600 dark:text-red-400;
                 }
             }
         }

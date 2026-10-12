@@ -270,11 +270,17 @@ app.whenReady().then(() => {
     roomSync.on('room-change', (room) => {
         mainWindow.webContents.send('room-sync-room-change', room);
     });
+    roomSync.on('track-change', (track) => {
+        mainWindow.webContents.send('room-sync-track-change', track);
+    });
     ipcMain.handle('room-sync-get-status', (event) => {
         return roomSync.status;
     });
     ipcMain.handle('room-sync-get-room', (event) => {
         return roomSync.room;
+    });
+    ipcMain.handle('room-sync-get-track', (event) => {
+        return roomSync.track;
     });
     ipcMain.handle('room-sync-reconnect', (event) => {
         roomSync.reconnect();
