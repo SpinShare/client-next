@@ -5,6 +5,7 @@
         :expanded="expanded"
         :active="isActive"
         :badge="pendingItems > 0 ? pendingItems : false"
+        :badge-icon="allItemsDone ? 'check' : false"
         @click="handleToggleQueue"
         v-interactable
     />
@@ -115,6 +116,10 @@ onUnmounted(() => {
 
 const pendingItems = computed(() => {
     return queueItemsList.value.filter((item) => item?.state === 0).length || 0;
+});
+
+const allItemsDone = computed(() => {
+    return queueItemsList.value.length > 0 && queueItemsList.value.every((item) => item?.state === 3);
 });
 
 function handleToggleQueue() {

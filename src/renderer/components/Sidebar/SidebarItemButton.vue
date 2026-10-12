@@ -22,6 +22,15 @@
                     v-if="badge"
                     >{{ badge }}</span
                 >
+                <span
+                    class="badge badge-icon"
+                    v-else-if="badgeIcon"
+                >
+                    <Remixicon
+                        :icon="badgeIcon"
+                        size="xs"
+                    />
+                </span>
             </button>
         </template>
     </Tooltip>
@@ -42,6 +51,10 @@ const props = defineProps({
     },
     badge: {
         type: [String, Number, Boolean],
+        default: false,
+    },
+    badgeIcon: {
+        type: [String, Boolean],
         default: false,
     },
     expanded: {
@@ -68,6 +81,10 @@ const props = defineProps({
 
     & .badge {
         @apply bg-brand-300 text-brand-950 dark:bg-brand-700 dark:text-brand-50 rounded-md text-xs font-bold px-1.5 py-0.5;
+
+        &.badge-icon {
+            @apply flex items-center justify-center leading-4;
+        }
     }
 
     &.expanded {
