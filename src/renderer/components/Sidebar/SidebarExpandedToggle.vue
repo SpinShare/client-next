@@ -48,7 +48,7 @@ function toggleExpanded() {
 
 <style scoped>
 .item-expanded-toggle {
-    @apply h-[45px] transition-all rounded flex items-center text-start;
+    @apply h-[45px] transition-all rounded flex items-center text-start w-full;
 
     &:hover {
         @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 cursor-pointer;

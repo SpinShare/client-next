@@ -57,7 +57,7 @@ const props = defineProps({
 
 <style scoped>
 .item-button {
-    @apply h-[45px] transition-all rounded flex items-center relative;
+    @apply h-[45px] w-full transition-all rounded flex items-center relative;
 
     &:hover {
         @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50 cursor-pointer;
