@@ -76,6 +76,9 @@ window.spshUpdates.onUpdateCheckDone((hasNewRelease) => {
 window.spshRoomSync.onStatusChange((status) => {
     mittInstance.emit('room-sync-status-change', status);
 });
+window.spshRoomSync.onRoomChange((room) => {
+    mittInstance.emit('room-sync-room-change', room);
+});
 window.spshExternalApi.onWindowFocused(() => {
     mittInstance.emit('window-focused');
 });

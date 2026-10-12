@@ -14,6 +14,7 @@ export class RoomSyncClient extends EventEmitter {
         this.host = null;
         this.connected = false;
         this.outdated = false;
+        this.room = null;
         this.reconnectTimeout = null;
     }
 
@@ -104,6 +105,15 @@ export class RoomSyncClient extends EventEmitter {
             return;
         }
 
+        if (this.outdated) return;
+
+        switch (message.type) {
+            case 'state':
+            case 'room':
+                this.setRoom(message.room ?? null);
+                break;
+        }
+
         this.emit('message', message);
     }
 
@@ -136,5 +146,16 @@ export class RoomSyncClient extends EventEmitter {
         this.connected = connected;
         this.outdated = outdated;
         this.emit('status-change', this.status);
+
+        if (!connected || outdated) {
+            this.setRoom(null);
+        }
+    }
+
+    setRoom(room) {
+        if (this.room === null && room === null) return;
+
+        this.room = room;
+        this.emit('room-change', room);
     }
 }

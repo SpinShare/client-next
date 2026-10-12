@@ -48,10 +48,22 @@
 
                 <div class="content">
                     <EmptyState
-                        label="todo"
+                        :label="$t('header.roomSync.notInRoom')"
                         icon="global"
                         class="m-4"
+                        v-if="!roomSyncRoom"
                     />
+                    <div
+                        class="room"
+                        v-else
+                    >
+                        <h1>{{ roomSyncRoom.name }}</h1>
+                        <p>
+                            {{ $t('header.roomSync.players', { count: roomSyncRoom.players.length, max: roomSyncRoom.maxPlayers }) }}
+                            &nbsp;&middot;&nbsp;
+                            <span :class="roomSyncRoom.allowCustoms ? '' : 'no-customs'">{{ roomSyncRoom.allowCustoms ? $t('header.roomSync.customsAllowed') : $t('header.roomSync.customsNotAllowed') }}</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -70,23 +82,31 @@ const roomSync = inject('roomSync');
 const roomSyncEnabled = ref(false);
 const roomSyncHost = ref('');
 const roomSyncStatus = ref({ connected: false, outdated: false });
+const roomSyncRoom = ref(null);
 const roomSyncPopupOpen = ref(false);
 
 onMounted(async () => {
     mitt.on('save-settings', onSettingsSaved);
     mitt.on('room-sync-status-change', onStatusChange);
+    mitt.on('room-sync-room-change', onRoomChange);
     roomSyncEnabled.value = await settingsManager.get('roomSyncEnabled');
     roomSyncHost.value = await settingsManager.get('roomSyncHost');
     roomSyncStatus.value = await roomSync.getStatus();
+    roomSyncRoom.value = await roomSync.getRoom();
 });
 
 onUnmounted(() => {
     mitt.off('save-settings', onSettingsSaved);
     mitt.off('room-sync-status-change', onStatusChange);
+    mitt.off('room-sync-room-change', onRoomChange);
 });
 
 function onStatusChange(status) {
     roomSyncStatus.value = status;
+}
+
+function onRoomChange(room) {
+    roomSyncRoom.value = room;
 }
 
 function onSettingsSaved(newSettings) {
@@ -131,9 +151,20 @@ function handleOpenSettings() {
                 @apply text-base-200 bg-base-700;
             }
         }
+        & .no-customs {
+            @apply text-red-400;
+        }
 
         & .content {
             @apply flex flex-col max-h-[500px] overflow-hidden overflow-y-auto;
+
+            & .room {
+                @apply flex flex-col px-4 py-4 border-t border-base-300 dark:border-base-800;
+
+                & p {
+                    @apply text-base-500 dark:text-base-300;
+                }
+            }
         }
     }
 }

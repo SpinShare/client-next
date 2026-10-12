@@ -267,8 +267,14 @@ app.whenReady().then(() => {
     roomSync.on('status-change', (status) => {
         mainWindow.webContents.send('room-sync-status-change', status);
     });
+    roomSync.on('room-change', (room) => {
+        mainWindow.webContents.send('room-sync-room-change', room);
+    });
     ipcMain.handle('room-sync-get-status', (event) => {
         return roomSync.status;
+    });
+    ipcMain.handle('room-sync-get-room', (event) => {
+        return roomSync.room;
     });
     ipcMain.handle('room-sync-reconnect', (event) => {
         roomSync.reconnect();

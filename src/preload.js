@@ -126,11 +126,17 @@ contextBridge.exposeInMainWorld('spshConnect', {
 
 contextBridge.exposeInMainWorld('spshRoomSync', {
     getStatus: () => ipcRenderer.invoke('room-sync-get-status'),
+    getRoom: () => ipcRenderer.invoke('room-sync-get-room'),
     reconnect: () => ipcRenderer.invoke('room-sync-reconnect'),
     onStatusChange: (callback) => {
         const listener = (_, status) => callback(status);
         ipcRenderer.on('room-sync-status-change', listener);
         return () => ipcRenderer.removeListener('room-sync-status-change', listener);
+    },
+    onRoomChange: (callback) => {
+        const listener = (_, room) => callback(room);
+        ipcRenderer.on('room-sync-room-change', listener);
+        return () => ipcRenderer.removeListener('room-sync-room-change', listener);
     },
 });
 

@@ -12,7 +12,11 @@
       "header": "Room Synchronization",
       "connected": "Connected to {host}",
       "outdated": "Connected, but this client is outdated. Please update your SpinShare client",
-      "disconnected": "Not connected, please check if \"Room Websocket\" is enabled in the games settings and host/port are correct"
+      "disconnected": "Not connected, please check if \"Room Websocket\" is enabled in the games settings and host/port are correct",
+      "notInRoom": "Not in a room",
+      "players": "{count} / {max} players",
+      "customsAllowed": "Customs allowed",
+      "customsNotAllowed": "Customs not allowed"
     },
     "auth": {
       "login": "Login",
