@@ -1,24 +1,35 @@
 <template>
-    <button
-        :class="`item-button ${active ? 'active' : ''} ${expanded ? 'expanded' : 'mini'}`"
-        v-interactable
+    <Tooltip
+        :disabled="expanded"
+        :right="true"
     >
-        <Remixicon
-            :icon="icon"
-            size="xl"
-            :filled="active"
-        />
-        <span class="label">{{ label }}</span>
-        <span
-            class="badge"
-            v-if="badge"
-            >{{ badge }}</span
-        >
-    </button>
+        <template #content>
+            <span>{{ label }}</span>
+        </template>
+        <template #default>
+            <button
+                :class="`item-button ${active ? 'active' : ''} ${expanded ? 'expanded' : 'mini'}`"
+                v-interactable
+            >
+                <Remixicon
+                    :icon="icon"
+                    size="xl"
+                    :filled="active"
+                />
+                <span class="label">{{ label }}</span>
+                <span
+                    class="badge"
+                    v-if="badge"
+                    >{{ badge }}</span
+                >
+            </button>
+        </template>
+    </Tooltip>
 </template>
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 const props = defineProps({
     label: {
