@@ -219,6 +219,69 @@
                     </select>
                 </SettingsItem>
             </SettingsSection>
+
+            <SettingsSection
+                :label="$t('settings.experimental.header')"
+                v-if="settings.showExperimentalSettings"
+            >
+                <SettingsItem
+                    :label="$t('settings.experimental.roomSyncEnabled.label')"
+                    :description="$t('settings.experimental.roomSyncEnabled.description')"
+                >
+                    <Switch
+                        v-model="settings.roomSyncEnabled"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.experimental.roomSyncHost.label')"
+                    :description="$t('settings.experimental.roomSyncHost.description')"
+                    :error="roomSyncHostIsValid ? null : $t('settings.experimental.roomSyncHost.invalid')"
+                >
+                    <input
+                        v-interactable
+                        class="input"
+                        type="text"
+                        :placeholder="$t('settings.experimental.roomSyncHost.placeholder')"
+                        :disabled="!settings.roomSyncEnabled"
+                        v-model.trim="settings.roomSyncHost"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.experimental.roomSyncAutoDownload.label')"
+                    :description="$t('settings.experimental.roomSyncAutoDownload.description')"
+                >
+                    <Switch
+                        v-model="settings.roomSyncAutoDownload"
+                        :disabled="!settings.roomSyncEnabled"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.experimental.roomSyncAutoUpdate.label')"
+                    :description="$t('settings.experimental.roomSyncAutoUpdate.description')"
+                >
+                    <Switch
+                        v-model="settings.roomSyncAutoUpdate"
+                        :disabled="!settings.roomSyncEnabled"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.experimental.openDebugger.label')"
+                    :description="$t('settings.experimental.openDebugger.description')"
+                >
+                    <button
+                        class="button"
+                        @click="handleOpenDebugger"
+                        v-interactable
+                    >
+                        <Remixicon icon="bug" />
+                        <span>{{ $t('settings.experimental.openDebugger.open') }}</span>
+                    </button>
+                </SettingsItem>
+            </SettingsSection>
         </section>
     </LayoutBase>
 </template>
@@ -243,6 +306,10 @@ const isLoggedIn = ref(false);
 const updateAvailable = ref(false);
 const appVersion = ref('0.0.0');
 const customsPathIsValid = ref(null);
+const roomSyncHostIsValid = computed(() => /^[^\s:]+:\d{1,5}$/.test(settings.value.roomSyncHost ?? ''));
+
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
+let konamiProgress = 0;
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
@@ -256,9 +323,12 @@ onMounted(async () => {
 
     mitt.on('auth-updated', onAuthUpdated);
     await onAuthUpdated();
+
+    window.addEventListener('keydown', handleKonamiKey);
 });
 
 onUnmounted(() => {
+    window.removeEventListener('keydown', handleKonamiKey);
     mitt.off('auth-updated');
     mitt.off('update-check-done');
 });
@@ -290,6 +360,27 @@ async function handleCustomsSelect() {
 async function handleCustomsDetect() {
     settings.value.pathCustoms = await settingsManager.getDefaultCustomsPath();
     await handleSave();
+}
+
+async function handleKonamiKey(event) {
+    // Arrow keys inside form fields change their values, don't count those
+    if (event.target.closest('input, select, textarea')) return;
+
+    if (event.key === KONAMI_CODE[konamiProgress]) {
+        konamiProgress++;
+    } else {
+        konamiProgress = event.key === KONAMI_CODE[0] ? 1 : 0;
+    }
+    if (konamiProgress < KONAMI_CODE.length) return;
+
+    konamiProgress = 0;
+    mitt.emit('sfx-experimental-unlocked');
+    settings.value.showExperimentalSettings = true;
+    await handleSave();
+}
+
+function handleOpenDebugger() {
+    externalApi.openDevTools();
 }
 
 async function handleSave() {

@@ -258,6 +258,32 @@
         "days3": "3 days",
         "days7": "7 days"
       }
+    },
+    "experimental": {
+      "header": "Experimental",
+      "roomSyncEnabled": {
+        "label": "Enable Room Synchronization",
+        "description": "Enables Spin Rhythm XD Online Room support and automatically downloads or updates the charts needed for the room"
+      },
+      "roomSyncHost": {
+        "label": "Room host",
+        "description": "Host and port of the room server",
+        "placeholder": "localhost:6767",
+        "invalid": "Use the format host:port."
+      },
+      "roomSyncAutoDownload": {
+        "label": "Automatically download charts",
+        "description": "Downloads charts of the room that are missing from your library"
+      },
+      "roomSyncAutoUpdate": {
+        "label": "Automatically update charts",
+        "description": "Updates charts of the room that are outdated in your library"
+      },
+      "openDebugger": {
+        "label": "Open Debugger",
+        "description": "Opens the developer tools",
+        "open": "Open Debugger"
+      }
     }
   },
   "setup": {

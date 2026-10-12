@@ -131,6 +131,7 @@ contextBridge.exposeInMainWorld('spshExternalApi', {
     showDialog: async (options) => ipcRenderer.invoke('show-dialog', options),
     selectFolder: async (folderPath) => ipcRenderer.invoke('select-folder', folderPath),
     copyText: async (text) => ipcRenderer.invoke('copy-text', text),
+    openDevTools: async () => ipcRenderer.invoke('open-dev-tools'),
     onWindowFocused: (callback) => {
         const listener = () => callback();
         ipcRenderer.on('window-focused', listener);

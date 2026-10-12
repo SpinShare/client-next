@@ -115,6 +115,12 @@ onMounted(async () => {
         sfxQueueDone.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
         await sfxQueueDone.value.play().catch((e) => console.error('SFX play error:', e));
     });
+    mitt.on('sfx-experimental-unlocked', async () => {
+        if (!(await settingsManager.get('sfxEnabled'))) return;
+
+        sfxQueueDone.value.volume = Math.pow(await settingsManager.get('sfxVolume'), 2);
+        await sfxQueueDone.value.play().catch((e) => console.error('SFX play error:', e));
+    });
     mitt.on('sfx-error', async () => {
         if (!(await settingsManager.get('downloadNotifications'))) return;
 
@@ -154,6 +160,7 @@ onUnmounted(() => {
     mitt.off('preview-stop');
 
     mitt.off('sfx-queue-done');
+    mitt.off('sfx-experimental-unlocked');
     mitt.off('sfx-error');
     mitt.off('update-check-done');
     mitt.off('item-add');

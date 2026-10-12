@@ -306,6 +306,10 @@ app.whenReady().then(() => {
             return null;
         }
     });
+    ipcMain.handle('open-dev-tools', (event) => {
+        if (!settingsManager.get('showExperimentalSettings')) return;
+        mainWindow.webContents.openDevTools();
+    });
     ipcMain.handle('copy-text', async (event, text) => {
         try {
             clipboard.writeText(text);

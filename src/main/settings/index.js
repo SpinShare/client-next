@@ -22,6 +22,11 @@ export class SettingsManager {
             sfxVolume: 1,
             previewVolume: 0.5,
             libraryHashCacheHours: 168,
+            showExperimentalSettings: false,
+            roomSyncEnabled: false,
+            roomSyncHost: 'localhost:6767',
+            roomSyncAutoDownload: true,
+            roomSyncAutoUpdate: true,
         };
         this.settings = { ...this.defaults };
 
