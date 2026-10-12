@@ -8,6 +8,22 @@
       },
       "placeholder": "Speen speen Speen, Speen, speen Speen..."
     },
+    "roomSync": {
+      "header": "",
+      "connected": "",
+      "outdated": "",
+      "disconnected": "",
+      "notInRoom": "",
+      "players": "",
+      "customsAllowed": "",
+      "customsNotAllowed": "",
+      "settingsHint": "",
+      "track": {
+        "missing": "",
+        "notCustom": "",
+        "notOnSpinShare": ""
+      }
+    },
     "auth": {
       "login": "Speen",
       "logout": "Speen",
@@ -99,6 +115,8 @@
     },
     "play": "Speen",
     "addToQueue": "Speen speen",
+    "update": "",
+    "redownload": "",
     "tabs": {
       "detail": "Speen",
       "reviews": "Speen",
@@ -213,7 +231,8 @@
       },
       "musicEnabled": {
         "label": "Speen speen speen",
-        "description": "Speen speen Speen"
+        "description": "Speen speen Speen",
+        "credit": ""
       },
       "musicVolume": {
         "label": "",
@@ -245,6 +264,41 @@
         "notAFolder": "",
         "select": "Speen",
         "detect": "Speen"
+      },
+      "libraryHashCache": {
+        "label": "",
+        "description": "",
+        "hours4": "",
+        "hours12": "",
+        "day1": "",
+        "days3": "",
+        "days7": ""
+      }
+    },
+    "experimental": {
+      "header": "",
+      "roomSyncEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncHost": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "invalid": ""
+      },
+      "roomSyncAutoDownload": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncAutoUpdate": {
+        "label": "",
+        "description": ""
+      },
+      "openDebugger": {
+        "label": "",
+        "description": "",
+        "open": ""
       }
     }
   },
@@ -273,6 +327,33 @@
       "body": "Speen speen speen speen Speen speen speen. Speen speen speen Speen speen speen, speen Speen Speen speen.",
       "tip": "Speen: Speen speen speen speen Speen speen speen. Speen speen speen speen speen Speen Speen speen speen speen speen speen, speen Speen speen Speen speen speen speen Speen speen speen speen speen.",
       "welcome": "Speen speen speen speen <strong>Speen Speen</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "userNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "playlistNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "selectFolder": {
+      "title": "",
+      "message": "",
+      "button": ""
+    }
+  },
+  "notifications": {
+    "downloadComplete": "",
+    "downloadFailed": "",
+    "queueFinished": {
+      "title": "",
+      "body": ""
     }
   }
 }
