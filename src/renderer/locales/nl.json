@@ -8,6 +8,22 @@
       },
       "placeholder": "Een chart, charter of afspeellijst zoeken..."
     },
+    "roomSync": {
+      "header": "",
+      "connected": "",
+      "outdated": "",
+      "disconnected": "",
+      "notInRoom": "",
+      "players": "",
+      "customsAllowed": "",
+      "customsNotAllowed": "",
+      "settingsHint": "",
+      "track": {
+        "missing": "",
+        "notCustom": "",
+        "notOnSpinShare": ""
+      }
+    },
     "auth": {
       "login": "Aanmelden",
       "logout": "Afmelden",
@@ -99,6 +115,8 @@
     },
     "play": "Speel",
     "addToQueue": "Toevoegen aan wachtrij",
+    "update": "",
+    "redownload": "",
     "tabs": {
       "detail": "Detail",
       "reviews": "Beoordelingen",
@@ -213,7 +231,8 @@
       },
       "musicEnabled": {
         "label": "Menu muziek ingeschakeld",
-        "description": "Speelt menumuziek af"
+        "description": "Speelt menumuziek af",
+        "credit": ""
       },
       "musicVolume": {
         "label": "",
@@ -245,6 +264,41 @@
         "notAFolder": "",
         "select": "Selecteer",
         "detect": "Detecteer"
+      },
+      "libraryHashCache": {
+        "label": "",
+        "description": "",
+        "hours4": "",
+        "hours12": "",
+        "day1": "",
+        "days3": "",
+        "days7": ""
+      }
+    },
+    "experimental": {
+      "header": "",
+      "roomSyncEnabled": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncHost": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "invalid": ""
+      },
+      "roomSyncAutoDownload": {
+        "label": "",
+        "description": ""
+      },
+      "roomSyncAutoUpdate": {
+        "label": "",
+        "description": ""
+      },
+      "openDebugger": {
+        "label": "",
+        "description": "",
+        "open": ""
       }
     }
   },
@@ -273,6 +327,33 @@
       "body": "U heeft nu de SpinShare desktop client ingesteld. Je bent slechts een klik verwijderd van een bibliotheek van duizenden custom charts voor Spin Rhythm XD.",
       "tip": "Tip: Klik op de rechterbovenhoek om in te loggen op je account. Door in te loggen kun je charts bekijken en ze comfortabel toevoegen aan afspeellijsten zonder de website te gebruiken. In de toekomst kun je ook je eigen custom charts uploaden.",
       "welcome": "Maar op dit moment gaan we naar de <strong>ritme dimensie</strong>!"
+    }
+  },
+  "dialogs": {
+    "chartNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "userNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "playlistNotFound": {
+      "title": "",
+      "message": ""
+    },
+    "selectFolder": {
+      "title": "",
+      "message": "",
+      "button": ""
+    }
+  },
+  "notifications": {
+    "downloadComplete": "",
+    "downloadFailed": "",
+    "queueFinished": {
+      "title": "",
+      "body": ""
     }
   }
 }
