@@ -10,11 +10,25 @@ export class UpdateManager extends EventEmitter {
     }
 
     async checkForUpdates() {
-        const response = await fetch(this.url);
-        const data = await response.json();
+        let data;
 
-        // Failsafe if we get rate-limited or Github is down
-        if (!response.ok) {
+        try {
+            const response = await fetch(this.url, { signal: AbortSignal.timeout(10000) });
+
+            // Failsafe if we get rate-limited or Github is down
+            if (!response.ok) {
+                console.warn(`[UpdateManager] Update check failed with status ${response.status}.`);
+                return false;
+            }
+
+            data = await response.json();
+        } catch (error) {
+            // Failsafe if the user is offline or Github is unreachable
+            console.warn(`[UpdateManager] Update check failed: ${error.message}`);
+            return false;
+        }
+
+        if (!Array.isArray(data)) {
             return false;
         }
 
