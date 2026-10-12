@@ -1,25 +1,36 @@
 <template>
-    <button
-        :class="`item-expanded-toggle ${expanded ? 'expanded' : 'mini'}`"
-        @click="toggleExpanded"
-        v-interactable
+    <Tooltip
+        :disabled="expanded"
+        :right="true"
     >
-        <Remixicon
-            v-if="!expanded"
-            icon="sidebar-unfold"
-            size="xl"
-        />
-        <Remixicon
-            v-if="expanded"
-            icon="sidebar-fold"
-            size="xl"
-        />
-        <span class="label">{{ $t('sidebar.toggleSidebar') }}</span>
-    </button>
+        <template #content>
+            <span>{{ $t('sidebar.toggleSidebar') }}</span>
+        </template>
+        <template #default>
+            <button
+                :class="`item-expanded-toggle ${expanded ? 'expanded' : 'mini'}`"
+                @click="toggleExpanded"
+                v-interactable
+            >
+                <Remixicon
+                    v-if="!expanded"
+                    icon="sidebar-unfold"
+                    size="xl"
+                />
+                <Remixicon
+                    v-if="expanded"
+                    icon="sidebar-fold"
+                    size="xl"
+                />
+                <span class="label">{{ $t('sidebar.toggleSidebar') }}</span>
+            </button>
+        </template>
+    </Tooltip>
 </template>
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
+import Tooltip from '@/components/Tooltip.vue';
 import { inject } from 'vue';
 
 const mitt = inject('mitt');

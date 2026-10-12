@@ -1,20 +1,31 @@
 <template>
-    <RouterLink
-        :class="`item-link ${expanded ? 'expanded' : 'mini'} ${active ? 'active' : ''}`"
-        :to="to"
-        v-interactable
+    <Tooltip
+        :disabled="expanded"
+        :right="true"
     >
-        <Remixicon
-            :icon="icon"
-            size="xl"
-            :filled="active || isExactActive"
-        />
-        <span class="label">{{ label }}</span>
-    </RouterLink>
+        <template #content>
+            <span>{{ label }}</span>
+        </template>
+        <template #default>
+            <RouterLink
+                :class="`item-link ${expanded ? 'expanded' : 'mini'} ${active ? 'active' : ''}`"
+                :to="to"
+                v-interactable
+            >
+                <Remixicon
+                    :icon="icon"
+                    size="xl"
+                    :filled="active || isExactActive"
+                />
+                <span class="label">{{ label }}</span>
+            </RouterLink>
+        </template>
+    </Tooltip>
 </template>
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
+import Tooltip from '@/components/Tooltip.vue';
 import { useLink } from 'vue-router';
 
 const props = defineProps({
