@@ -179,7 +179,8 @@
     "normal": "Normal",
     "hard": "Difficile",
     "expert": "Expert",
-    "xd": "XD"
+    "xd": "XD",
+    "remixd": ""
   },
   "library": {
     "header": "Bibliothèque",
@@ -225,6 +226,10 @@
         "label": "Ouvrir la file de téléchargements",
         "description": "Ouvrir automatiquement la file de téléchargements chaque fois qu'une nouvelle chart a été ajoutée à la file"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "Effets sonores activés",
         "description": "Active les effets sonores de l'interface"
@@ -233,6 +238,20 @@
         "label": "Musique du menu activée",
         "description": "Joue une musique en fond",
         "credit": ""
+      },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
       },
       "musicVolume": {
         "label": "",
@@ -346,6 +365,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {
