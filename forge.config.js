@@ -1,5 +1,9 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+
+const LINUX_EXECUTABLE = 'spinshare-client-next';
 
 module.exports = {
     packagerConfig: {
@@ -51,7 +55,7 @@ module.exports = {
             config: {
                 options: {
                     id: 're.spinsha.client',
-                    bin: 'spinshare-client-next',
+                    bin: `${LINUX_EXECUTABLE}.bin`,
                     productName: 'SpinShare',
                     genericName: 'SpinShare Client',
                     categories: ['Audio', 'Game'],
@@ -67,6 +71,22 @@ module.exports = {
             },
         },
     ],
+    hooks: {
+        // On Linux, put a launcher script in front of the Electron binary that removes the Steam overlay from LD_PRELOAD before Electron starts
+        postPackage: async (forgeConfig, { platform, outputPaths }) => {
+            if (platform !== 'linux') return;
+
+            const launcher = (await fs.readFile(path.resolve(__dirname, 'build/linux-launcher.sh'), 'utf8')).replaceAll('\r\n', '\n');
+
+            for (const outputPath of outputPaths) {
+                const executable = path.join(outputPath, LINUX_EXECUTABLE);
+                await fs.rename(executable, `${executable}.bin`);
+                await fs.chmod(`${executable}.bin`, 0o755);
+                await fs.writeFile(executable, launcher, { mode: 0o755 });
+                await fs.chmod(executable, 0o755);
+            }
+        },
+    },
     plugins: [
         {
             name: '@electron-forge/plugin-vite',
