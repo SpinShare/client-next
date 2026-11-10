@@ -94,7 +94,7 @@ header.main {
 
                 &:hover,
                 &:focus {
-                    @apply bg-base-100 dark:bg-base-900 outline-0;
+                    @apply bg-base-100 dark:bg-base-900;
                 }
 
                 & option {
@@ -111,7 +111,7 @@ header.main {
 
                 &:hover,
                 &:focus {
-                    @apply bg-base-100 dark:bg-base-900 outline-0;
+                    @apply bg-base-100 dark:bg-base-900;
                 }
             }
         }
