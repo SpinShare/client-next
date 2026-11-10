@@ -97,12 +97,49 @@
                 </SettingsItem>
                 <SettingsItem
                     :label="$t('settings.interface.musicEnabled.label')"
-                    :description="`${$t('settings.interface.musicEnabled.description')} (${$t('settings.interface.musicEnabled.credit', { artist: 'MintoDog' })})`"
+                    :description="$t('settings.interface.musicEnabled.description')"
                 >
                     <Switch
                         v-model="settings.musicEnabled"
                         @change="handleSave"
                     />
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.interface.musicTrack.label')"
+                    :description="settings.musicTrack === '3.0' ? `${$t('settings.interface.musicTrack.description')} (${$t('settings.interface.musicEnabled.credit', { artist: 'MintoDog' })})` : $t('settings.interface.musicTrack.description')"
+                >
+                    <select
+                        class="select"
+                        v-model="settings.musicTrack"
+                        @change="handleSave"
+                        v-interactable
+                    >
+                        <option value="3.0">{{ $t('settings.interface.musicTrack.current') }}</option>
+                        <option value="classic">{{ $t('settings.interface.musicTrack.classic') }}</option>
+                        <option value="custom">{{ $t('settings.interface.musicTrack.custom') }}</option>
+                    </select>
+                </SettingsItem>
+                <SettingsItem
+                    v-if="settings.musicTrack === 'custom'"
+                    :label="$t('settings.interface.musicCustomPath.label')"
+                    :description="$t('settings.interface.musicCustomPath.description')"
+                    :error="settings.musicCustomPath ? null : $t('settings.interface.musicCustomPath.noFile')"
+                >
+                    <input
+                        class="input"
+                        type="text"
+                        readonly
+                        :placeholder="$t('settings.interface.musicCustomPath.placeholder')"
+                        :value="settings.musicCustomPath"
+                    />
+                    <button
+                        class="button"
+                        @click="handleMusicFileSelect"
+                        v-interactable
+                    >
+                        <Remixicon icon="folder-music" />
+                        <span>{{ $t('settings.interface.musicCustomPath.select') }}</span>
+                    </button>
                 </SettingsItem>
                 <SettingsItem
                     :label="$t('settings.interface.musicVolume.label')"
@@ -362,6 +399,14 @@ async function handleCustomsDetect() {
     await handleSave();
 }
 
+async function handleMusicFileSelect() {
+    const filePath = await externalApi.selectMusicFile(settings.value.musicCustomPath);
+    if (filePath) {
+        settings.value.musicCustomPath = filePath;
+        await handleSave();
+    }
+}
+
 async function handleKonamiKey(event) {
     // Arrow keys inside form fields change their values, don't count those
     if (event.target.closest('input, select, textarea')) return;
@@ -384,8 +429,6 @@ function handleOpenDebugger() {
 }
 
 async function handleSave() {
-    mitt.emit('save-settings', settings.value);
-
     if (settings.value.language !== locale.value) {
         locale.value = settings.value.language;
     }
@@ -395,6 +438,8 @@ async function handleSave() {
     // Required to lose the reference to the vue reactive state for ipc
     const serializedSettings = JSON.parse(JSON.stringify(settings.value));
     await settingsManager.saveAll(serializedSettings);
+
+    mitt.emit('save-settings', settings.value);
 }
 </script>
 

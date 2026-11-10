@@ -219,6 +219,20 @@
         "description": "Reproducir música de menú",
         "credit": "Música de {artist}"
       },
+      "musicTrack": {
+        "label": "Música del menú",
+        "description": "La pista que se reproduce como música del menú",
+        "current": "3.0",
+        "classic": "Clásica (antes de 3.0)",
+        "custom": "Personalizada"
+      },
+      "musicCustomPath": {
+        "label": "Música del menú personalizada",
+        "description": "Archivo de audio que se reproduce como música del menú (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "Ningún archivo seleccionado",
+        "select": "Seleccionar",
+        "noFile": "Selecciona un archivo de audio para reproducir música del menú personalizada"
+      },
       "musicVolume": {
         "label": "Volumen de la música de menú",
         "description": "El volumen de la música de menú"
@@ -305,6 +319,11 @@
       "title": "Seleccionar carpeta",
       "message": "Selecciona la carpeta que quieres abrir",
       "button": "Abrir"
+    },
+    "selectMusicFile": {
+      "title": "Seleccionar música del menú",
+      "button": "Seleccionar",
+      "filter": "Archivos de audio"
     }
   },
   "notifications": {

@@ -219,6 +219,20 @@
         "description": "Joue une musique en fond",
         "credit": "Musique par {artist}"
       },
+      "musicTrack": {
+        "label": "Musique du menu",
+        "description": "Le morceau joué comme musique du menu",
+        "current": "3.0",
+        "classic": "Classique (avant 3.0)",
+        "custom": "Personnalisée"
+      },
+      "musicCustomPath": {
+        "label": "Musique du menu personnalisée",
+        "description": "Fichier audio joué comme musique du menu (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "Aucun fichier sélectionné",
+        "select": "Sélectionner",
+        "noFile": "Choisissez un fichier audio pour jouer une musique du menu personnalisée"
+      },
       "musicVolume": {
         "label": "Volume de la musique du menu",
         "description": "Le volume de la musique du menu"
@@ -305,6 +319,11 @@
       "title": "Sélectionner un dossier",
       "message": "Sélectionnez le dossier à ouvrir",
       "button": "Ouvrir"
+    },
+    "selectMusicFile": {
+      "title": "Choisir la musique du menu",
+      "button": "Choisir",
+      "filter": "Fichiers audio"
     }
   },
   "notifications": {

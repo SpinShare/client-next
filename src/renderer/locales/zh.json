@@ -219,6 +219,20 @@
         "description": "播放菜单音乐",
         "credit": "音乐：{artist}"
       },
+      "musicTrack": {
+        "label": "菜单音乐",
+        "description": "作为菜单音乐播放的曲目",
+        "current": "3.0",
+        "classic": "经典（3.0 之前）",
+        "custom": "自定义"
+      },
+      "musicCustomPath": {
+        "label": "自定义菜单音乐",
+        "description": "作为菜单音乐播放的音频文件（ogg、mp3、wav、flac、m4a、opus）",
+        "placeholder": "未选择文件",
+        "select": "选择",
+        "noFile": "请选择一个音频文件以播放自定义菜单音乐"
+      },
       "musicVolume": {
         "label": "菜单音乐音量",
         "description": "菜单音乐的音量"
@@ -305,6 +319,11 @@
       "title": "选择文件夹",
       "message": "选择要打开的文件夹",
       "button": "打开"
+    },
+    "selectMusicFile": {
+      "title": "选择菜单音乐",
+      "button": "选择",
+      "filter": "音频文件"
     }
   },
   "notifications": {

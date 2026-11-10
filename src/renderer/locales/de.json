@@ -219,6 +219,20 @@
         "description": "Spielt Hintergrundmusik im Menü",
         "credit": "Musik von {artist}"
       },
+      "musicTrack": {
+        "label": "Menümusik",
+        "description": "Der Titel, der als Menümusik abgespielt wird",
+        "current": "3.0",
+        "classic": "Klassisch (vor 3.0)",
+        "custom": "Eigene"
+      },
+      "musicCustomPath": {
+        "label": "Eigene Menümusik",
+        "description": "Audiodatei, die als Menümusik abgespielt wird (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "Keine Datei ausgewählt",
+        "select": "Auswählen",
+        "noFile": "Wähle eine Audiodatei aus, um eigene Menümusik abzuspielen"
+      },
       "musicVolume": {
         "label": "Lautstärke der Menü-Musik",
         "description": "Die Lautstärke der Musik im Menü"
@@ -305,6 +319,11 @@
       "title": "Ordner auswählen",
       "message": "Wähle den Ordner aus, der geöffnet werden soll",
       "button": "Öffnen"
+    },
+    "selectMusicFile": {
+      "title": "Menümusik auswählen",
+      "button": "Auswählen",
+      "filter": "Audiodateien"
     }
   },
   "notifications": {

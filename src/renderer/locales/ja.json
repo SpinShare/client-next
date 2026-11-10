@@ -219,6 +219,20 @@
         "description": "",
         "credit": ""
       },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "3.0",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
+      },
       "musicVolume": {
         "label": "",
         "description": ""
@@ -305,6 +319,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {

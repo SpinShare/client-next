@@ -235,6 +235,20 @@
         "description": "Plays menu music",
         "credit": "Music by {artist}"
       },
+      "musicTrack": {
+        "label": "Menu music",
+        "description": "The track played as menu music",
+        "current": "3.0",
+        "classic": "Classic (pre-3.0)",
+        "custom": "Custom"
+      },
+      "musicCustomPath": {
+        "label": "Custom menu music",
+        "description": "Audio file played as menu music (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "No file selected",
+        "select": "Select",
+        "noFile": "Select an audio file to play custom menu music"
+      },
       "musicVolume": {
         "label": "Menu music volume",
         "description": "The volume of menu music"
@@ -347,6 +361,11 @@
       "title": "Select folder",
       "message": "Select the folder to open",
       "button": "Open"
+    },
+    "selectMusicFile": {
+      "title": "Select menu music",
+      "button": "Select",
+      "filter": "Audio files"
     }
   },
   "notifications": {

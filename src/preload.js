@@ -152,6 +152,8 @@ contextBridge.exposeInMainWorld('spshExternalApi', {
     folderExists: async (folderPath) => ipcRenderer.invoke('folder-exists', folderPath),
     showDialog: async (options) => ipcRenderer.invoke('show-dialog', options),
     selectFolder: async (folderPath) => ipcRenderer.invoke('select-folder', folderPath),
+    selectMusicFile: async (filePath) => ipcRenderer.invoke('select-music-file', filePath),
+    getCustomMusic: async () => ipcRenderer.invoke('get-custom-music'),
     copyText: async (text) => ipcRenderer.invoke('copy-text', text),
     openDevTools: async () => ipcRenderer.invoke('open-dev-tools'),
     onWindowFocused: (callback) => {

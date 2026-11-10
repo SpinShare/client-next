@@ -15,6 +15,16 @@ import { translate } from './main/i18n';
 import { RoomSyncClient } from './main/roomSync';
 import { setupRoomSyncAutoDownload } from './main/roomSync/autoDownload';
 
+const MUSIC_MIME_TYPES = {
+    ogg: 'audio/ogg',
+    mp3: 'audio/mpeg',
+    wav: 'audio/wav',
+    flac: 'audio/flac',
+    m4a: 'audio/mp4',
+    opus: 'audio/ogg',
+};
+const MUSIC_MAX_FILE_SIZE = 100 * 1024 * 1024;
+
 // Ignore EPIPE on stdout/stderr. When the app is launched from a terminal or launcher that later closes (e.g. AppImage on Linux), every console.log would otherwise throw an uncaught exception.
 for (const stream of [process.stdout, process.stderr]) {
     stream?.on('error', (error) => {
@@ -331,6 +341,43 @@ app.whenReady().then(() => {
             return selectedFolderPath.filePaths[0] || null;
         } catch (error) {
             console.error('Error selecting folder:', error);
+            return null;
+        }
+    });
+    ipcMain.handle('select-music-file', async (event, filePath) => {
+        try {
+            const selectedFile = await dialog.showOpenDialog({
+                properties: ['openFile'],
+                defaultPath: filePath || app.getPath('music'),
+                title: translate(settingsManager, 'dialogs.selectMusicFile.title'),
+                buttonLabel: translate(settingsManager, 'dialogs.selectMusicFile.button'),
+                filters: [{ name: translate(settingsManager, 'dialogs.selectMusicFile.filter'), extensions: Object.keys(MUSIC_MIME_TYPES) }],
+            });
+            return selectedFile.filePaths[0] || null;
+        } catch (error) {
+            console.error('Error selecting music file:', error);
+            return null;
+        }
+    });
+    // Only ever reads the custom music path stored in the settings, never an arbitrary path from the renderer
+    ipcMain.handle('get-custom-music', async () => {
+        const musicPath = settingsManager.get('musicCustomPath');
+        const extension = path
+            .extname(musicPath || '')
+            .slice(1)
+            .toLowerCase();
+        const mimeType = MUSIC_MIME_TYPES[extension];
+        if (!musicPath || !mimeType) return null;
+
+        try {
+            const stats = await fs.promises.stat(musicPath);
+            if (!stats.isFile() || stats.size > MUSIC_MAX_FILE_SIZE) {
+                console.error(`[Music] Custom music is not a file or larger than ${MUSIC_MAX_FILE_SIZE} bytes: ${musicPath}`);
+                return null;
+            }
+            return { data: await fs.promises.readFile(musicPath), mimeType };
+        } catch (error) {
+            console.error('[Music] Error reading custom music:', error);
             return null;
         }
     });

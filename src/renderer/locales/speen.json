@@ -219,6 +219,20 @@
         "description": "Speen speen speen",
         "credit": "Speen {artist}"
       },
+      "musicTrack": {
+        "label": "Speen",
+        "description": "Speen",
+        "current": "3.0",
+        "classic": "Speen (pre-3.0)",
+        "custom": "Speen"
+      },
+      "musicCustomPath": {
+        "label": "Speen",
+        "description": "Speen",
+        "placeholder": "Speen",
+        "select": "Speen",
+        "noFile": "Speen"
+      },
       "musicVolume": {
         "label": "Speen speen speen",
         "description": "Speen speen speen speen"
@@ -305,6 +319,11 @@
       "title": "Speen speen",
       "message": "Speen speen speen speen",
       "button": "Speen"
+    },
+    "selectMusicFile": {
+      "title": "Speen",
+      "button": "Speen",
+      "filter": "Speen"
     }
   },
   "notifications": {

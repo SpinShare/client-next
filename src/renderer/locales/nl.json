@@ -219,6 +219,20 @@
         "description": "Speelt menumuziek af",
         "credit": "Muziek door {artist}"
       },
+      "musicTrack": {
+        "label": "Menumuziek",
+        "description": "Het nummer dat als menumuziek wordt afgespeeld",
+        "current": "3.0",
+        "classic": "Klassiek (vóór 3.0)",
+        "custom": "Aangepast"
+      },
+      "musicCustomPath": {
+        "label": "Aangepaste menumuziek",
+        "description": "Audiobestand dat als menumuziek wordt afgespeeld (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "Geen bestand geselecteerd",
+        "select": "Selecteer",
+        "noFile": "Kies een audiobestand om aangepaste menumuziek af te spelen"
+      },
       "musicVolume": {
         "label": "Volume menumuziek",
         "description": "Het volume van de menumuziek"
@@ -305,6 +319,11 @@
       "title": "Map selecteren",
       "message": "Selecteer de map die je wilt openen",
       "button": "Openen"
+    },
+    "selectMusicFile": {
+      "title": "Menumuziek kiezen",
+      "button": "Kiezen",
+      "filter": "Audiobestanden"
     }
   },
   "notifications": {

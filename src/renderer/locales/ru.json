@@ -219,6 +219,20 @@
         "description": "Воспроизводит музыку в меню",
         "credit": "Музыка: {artist}"
       },
+      "musicTrack": {
+        "label": "Музыка меню",
+        "description": "Трек, который играет в меню",
+        "current": "3.0",
+        "classic": "Классическая (до 3.0)",
+        "custom": "Своя"
+      },
+      "musicCustomPath": {
+        "label": "Своя музыка меню",
+        "description": "Аудиофайл, который играет в меню (ogg, mp3, wav, flac, m4a, opus)",
+        "placeholder": "Файл не выбран",
+        "select": "Выбрать",
+        "noFile": "Выберите аудиофайл, чтобы включить свою музыку меню"
+      },
       "musicVolume": {
         "label": "Громкость музыки в меню",
         "description": "Громкость музыки в меню"
@@ -305,6 +319,11 @@
       "title": "Выбор папки",
       "message": "Выберите папку, которую нужно открыть",
       "button": "Открыть"
+    },
+    "selectMusicFile": {
+      "title": "Выбор музыки меню",
+      "button": "Выбрать",
+      "filter": "Аудиофайлы"
     }
   },
   "notifications": {

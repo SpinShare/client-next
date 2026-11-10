@@ -16,6 +16,8 @@ export class SettingsManager {
             showExplicit: false,
             sfxEnabled: true,
             musicEnabled: true,
+            musicTrack: '3.0',
+            musicCustomPath: '',
             pathCustoms: SettingsManager.getDefaultCustomsPath(),
             pathGame: '',
             musicVolume: 0.5,
