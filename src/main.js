@@ -130,7 +130,7 @@ const createWindow = () => {
         minHeight: 600,
         icon: path.join(__dirname, '../renderer/assets/images/icon.png'),
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, 'preload.cjs'),
         },
         backgroundColor: '#1e1f24',
         autoHideMenuBar: true,

@@ -45,6 +45,26 @@ module.exports = {
                 },
             },
         },
+        {
+            name: '@electron-forge/maker-flatpak',
+            platforms: ['linux'],
+            config: {
+                options: {
+                    id: 're.spinsha.client',
+                    bin: 'spinshare-client-next',
+                    productName: 'SpinShare',
+                    genericName: 'SpinShare Client',
+                    categories: ['Audio', 'Game'],
+                    mimeType: ['x-scheme-handler/spinshare'],
+                    icon: './src/renderer/assets/images/icon.png',
+                    runtime: 'org.freedesktop.Platform',
+                    runtimeVersion: '24.08',
+                    sdk: 'org.freedesktop.Sdk',
+                    base: 'org.electronjs.Electron2.BaseApp',
+                    baseVersion: '24.08',
+                },
+            },
+        },
     ],
     plugins: [
         {
