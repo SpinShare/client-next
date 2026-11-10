@@ -62,11 +62,14 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          flatpak install --user --noninteractive flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08 org.electronjs.Electron2.BaseApp//24.08
+          flatpak install --user --noninteractive flathub org.freedesktop.Platform//26.08 org.freedesktop.Sdk//26.08 org.electronjs.Electron2.BaseApp//26.08
 
       # Build the application
       - name: Build application
         run: npm run make
+        env:
+          # Print flatpak-builder output
+          DEBUG: '@malept/flatpak-bundler'
 
       # List output directory contents for debugging
       - name: List output directory
