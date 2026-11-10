@@ -259,9 +259,12 @@ async function onAuthUpdated() {
     if (isLoggedIn.value) {
         profile.value = await connect.getProfile();
         notifications.value = await connect.getNotifications();
-        notificationCheckInterval.value = setInterval(async () => {
-            notifications.value = await connect.getNotifications();
-        }, 30 * 60 * 1000);
+        notificationCheckInterval.value = setInterval(
+            async () => {
+                notifications.value = await connect.getNotifications();
+            },
+            30 * 60 * 1000,
+        );
     } else {
         profile.value = null;
         notifications.value = [];
