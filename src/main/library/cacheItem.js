@@ -12,16 +12,18 @@ export class CacheItem {
      * @param {boolean} hasHardDifficulty
      * @param {boolean} hasExpertDifficulty
      * @param {boolean} hasXDDifficulty
+     * @param {boolean} hasRemiXDDifficulty
      * @param {number} easyDifficulty
      * @param {number} normalDifficulty
      * @param {number} hardDifficulty
      * @param {number} expertDifficulty
      * @param {number} XDDifficulty
+     * @param {number} remiXDDifficulty
      * @param {string} fileReference
      * @param {string} updateHash
      * @param {string} srtbPath
      */
-    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExpertDifficulty, hasXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, fileReference, updateHash, srtbPath) {
+    constructor(title, subtitle, artist, charter, hasEasyDifficulty, hasNormalDifficulty, hasHardDifficulty, hasExpertDifficulty, hasXDDifficulty, hasRemiXDDifficulty, easyDifficulty, normalDifficulty, hardDifficulty, expertDifficulty, XDDifficulty, remiXDDifficulty, fileReference, updateHash, srtbPath) {
         this.title = title;
         this.subtitle = subtitle;
         this.artist = artist;
@@ -31,11 +33,13 @@ export class CacheItem {
         this.hasHardDifficulty = hasHardDifficulty;
         this.hasExpertDifficulty = hasExpertDifficulty;
         this.hasXDDifficulty = hasXDDifficulty;
+        this.hasRemiXDDifficulty = hasRemiXDDifficulty;
         this.easyDifficulty = easyDifficulty;
         this.normalDifficulty = normalDifficulty;
         this.hardDifficulty = hardDifficulty;
         this.expertDifficulty = expertDifficulty;
         this.XDDifficulty = XDDifficulty;
+        this.remiXDDifficulty = remiXDDifficulty;
         this.fileReference = fileReference;
         this.updateHash = updateHash;
         this.srtbPath = srtbPath;
@@ -45,7 +49,7 @@ export class CacheItem {
         let trackInfoContainer = {};
         const activeTrackDataContainers = [];
         const trackDataContainers = [];
-        const cacheItem = new CacheItem('', '', '', '', false, false, false, false, false, 0, 0, 0, 0, 0, '', '');
+        const cacheItem = new CacheItem('', '', '', '', false, false, false, false, false, false, 0, 0, 0, 0, 0, 0, '', '', '');
 
         // Get TrackInfoContainer
         srtbJson.largeStringValuesContainer.values.forEach((rawContainer) => {
@@ -76,11 +80,13 @@ export class CacheItem {
         cacheItem.hasHardDifficulty = false;
         cacheItem.hasExpertDifficulty = false;
         cacheItem.hasXDDifficulty = false;
+        cacheItem.hasRemiXDDifficulty = false;
         cacheItem.easyDifficulty = 0;
         cacheItem.normalDifficulty = 0;
         cacheItem.hardDifficulty = 0;
         cacheItem.expertDifficulty = 0;
         cacheItem.XDDifficulty = 0;
+        cacheItem.remiXDDifficulty = 0;
         cacheItem.srtbPath = '';
 
         trackDataContainers.forEach((container) => {
@@ -104,6 +110,10 @@ export class CacheItem {
                 case 6:
                     cacheItem.hasXDDifficulty = true;
                     cacheItem.XDDifficulty = container.difficultyRating;
+                    break;
+                case 7:
+                    cacheItem.hasRemiXDDifficulty = true;
+                    cacheItem.remiXDDifficulty = container.difficultyRating;
                     break;
             }
         });

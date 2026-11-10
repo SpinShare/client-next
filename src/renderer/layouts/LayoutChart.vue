@@ -58,6 +58,13 @@
                                 <span>XD</span>
                                 <span v-if="chart.hasXDDifficulty">{{ chart.XDDifficulty }}</span>
                             </div>
+                            <div
+                                class="difficulty active"
+                                v-if="chart.hasRemiXDDifficulty"
+                            >
+                                <span>RXD</span>
+                                <span>{{ chart.remiXDDifficulty }}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="actions">
@@ -175,7 +182,7 @@
                     <p v-html="$t('chart.playDialog.body', { title: chart.title })" />
                 </section>
 
-                <section class="options">
+                <section :class="`options ${chart.hasRemiXDDifficulty ? 'has-remixd' : ''}`">
                     <button
                         class="button"
                         :disabled="!chart.hasEasyDifficulty"
@@ -220,6 +227,15 @@
                     >
                         <span>{{ chart.XDDifficulty ?? 'n/a' }}</span>
                         <span>{{ $t('difficulty.xd') }}</span>
+                    </button>
+                    <button
+                        class="button"
+                        v-if="chart.hasRemiXDDifficulty"
+                        @click="() => handlePlayDifficulty(5)"
+                        v-interactable
+                    >
+                        <span>{{ chart.remiXDDifficulty ?? 'n/a' }}</span>
+                        <span>{{ $t('difficulty.remixd') }}</span>
                     </button>
                 </section>
 
@@ -461,6 +477,10 @@ header.chart {
 
     & .options {
         @apply grid grid-cols-5 gap-2;
+
+        &.has-remixd {
+            @apply grid-cols-3;
+        }
 
         & .button {
             @apply flex-col h-auto gap-0.5 items-center justify-center py-2 bg-base-800;

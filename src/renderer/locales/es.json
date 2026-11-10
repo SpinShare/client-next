@@ -163,7 +163,8 @@
     "normal": "Normal",
     "hard": "Difícil",
     "expert": "Experto",
-    "xd": "XD"
+    "xd": "XD",
+    "remixd": "RemiXD"
   },
   "library": {
     "header": "Biblioteca",

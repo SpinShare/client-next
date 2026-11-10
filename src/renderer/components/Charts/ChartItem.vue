@@ -64,6 +64,13 @@
                         <span>XD</span>
                         <span v-if="hasXDDifficulty">{{ XDDifficulty }}</span>
                     </div>
+                    <div
+                        class="difficulty active"
+                        v-if="hasRemiXDDifficulty"
+                    >
+                        <span>RXD</span>
+                        <span>{{ remiXDDifficulty }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,6 +141,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    hasRemiXDDifficulty: {
+        type: Boolean,
+        default: false,
+    },
     easyDifficulty: {
         type: Number,
         default: 0,
@@ -151,6 +162,10 @@ const props = defineProps({
         default: 0,
     },
     XDDifficulty: {
+        type: Number,
+        default: 0,
+    },
+    remiXDDifficulty: {
         type: Number,
         default: 0,
     },

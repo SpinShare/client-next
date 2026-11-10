@@ -18,7 +18,7 @@
                                 icon="shapes"
                                 :filled="true"
                             />
-                            <span>{{ [searchDifficultyEasy && 'E', searchDifficultyNormal && 'N', searchDifficultyHard && 'H', searchDifficultyExpert && 'EX', searchDifficultyXD && 'XD'].filter(Boolean).join(', ') }}</span>
+                            <span>{{ [searchDifficultyEasy && 'E', searchDifficultyNormal && 'N', searchDifficultyHard && 'H', searchDifficultyExpert && 'EX', searchDifficultyXD && 'XD', searchDifficultyRemiXD && 'RXD'].filter(Boolean).join(', ') }}</span>
 
                             <div
                                 class="popover popover-difficulties"
@@ -44,6 +44,10 @@
                                 <div>
                                     <span>{{ $t('difficulty.xd') }}</span>
                                     <Switch v-model="searchDifficultyXD" />
+                                </div>
+                                <div>
+                                    <span>{{ $t('difficulty.remixd') }}</span>
+                                    <Switch v-model="searchDifficultyRemiXD" />
                                 </div>
                             </div>
                         </button>
@@ -185,6 +189,7 @@ const searchDifficultyNormal = ref(true);
 const searchDifficultyHard = ref(true);
 const searchDifficultyExpert = ref(true);
 const searchDifficultyXD = ref(true);
+const searchDifficultyRemiXD = ref(true);
 const searchDifficultyFrom = ref(0);
 const searchDifficultyTo = ref(99);
 const popoverDifficultiesOpen = ref(false);
@@ -207,6 +212,7 @@ async function loadResults() {
                 diffHard: searchDifficultyHard.value,
                 diffExpert: searchDifficultyExpert.value,
                 diffXD: searchDifficultyXD.value,
+                diffRemiXD: searchDifficultyRemiXD.value,
                 diffRatingFrom: searchDifficultyFrom.value,
                 diffRatingTo: searchDifficultyTo.value,
                 showExplicit: searchShowExplicit.value,
