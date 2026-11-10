@@ -387,7 +387,7 @@ app.whenReady().then(() => {
     });
     ipcMain.handle('copy-text', async (event, text) => {
         try {
-            clipboard.writeText(text);
+            await clipboard.writeText(text);
         } catch (error) {
             console.error('Error copying text:', error);
         }
