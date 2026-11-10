@@ -179,7 +179,8 @@
     "normal": "Normal",
     "hard": "Difícil",
     "expert": "Experto",
-    "xd": "XD"
+    "xd": "XD",
+    "remixd": ""
   },
   "library": {
     "header": "Biblioteca",
@@ -225,6 +226,10 @@
         "label": "Abrir cola de descargas",
         "description": "Abrir automáticamente la cola de descargas cada vez que se ha añadido una nueva canción a la cola"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "Efectos de sonido activados",
         "description": "Reproducir efectos de sonido UI"
@@ -233,6 +238,20 @@
         "label": "Música de menú activada",
         "description": "Reproducir música de menú",
         "credit": ""
+      },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
       },
       "musicVolume": {
         "label": "",
@@ -346,6 +365,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {
