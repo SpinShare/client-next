@@ -179,7 +179,8 @@
     "normal": "Normaal",
     "hard": "Moeilijk",
     "expert": "Expert",
-    "xd": "XD"
+    "xd": "XD",
+    "remixd": ""
   },
   "library": {
     "header": "Bibliotheek",
@@ -225,6 +226,10 @@
         "label": "Open download wachtrij",
         "description": "Open automatisch de downloadwachtrij wanneer een nieuwe chart is toegevoegd aan de wachtrij"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "Geluidseffecten ingeschakeld",
         "description": "Speelt UI geluidseffecten"
@@ -233,6 +238,20 @@
         "label": "Menu muziek ingeschakeld",
         "description": "Speelt menumuziek af",
         "credit": ""
+      },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
       },
       "musicVolume": {
         "label": "",
@@ -346,6 +365,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {
