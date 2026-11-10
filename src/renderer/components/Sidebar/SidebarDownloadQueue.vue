@@ -5,7 +5,7 @@
         :expanded="expanded"
         :active="isActive"
         :badge="pendingItems > 0 ? pendingItems : false"
-        :badge-icon="allItemsDone ? 'check' : false"
+        :badge-icon="allItemsDone && !hideQueueDoneCheckmark ? 'check' : false"
         @click="handleToggleQueue"
         v-interactable
     />
@@ -65,9 +65,15 @@ import EmptyState from '@/components/EmptyState.vue';
 
 const queue = inject('queue');
 const mitt = inject('mitt');
+const settingsManager = inject('settingsManager');
 const isActive = ref(false);
 const queueItemsList = ref([]);
 const queueItemCount = ref(0);
+const hideQueueDoneCheckmark = ref(false);
+
+function onSettingsSaved(newSettings) {
+    hideQueueDoneCheckmark.value = newSettings.hideQueueDoneCheckmark;
+}
 
 defineProps({
     expanded: {
@@ -79,6 +85,8 @@ defineProps({
 onMounted(async () => {
     queueItemsList.value = await queue.getQueueItems();
     queueItemCount.value = await queue.getQueueCount();
+    hideQueueDoneCheckmark.value = await settingsManager.get('hideQueueDoneCheckmark');
+    mitt.on('save-settings', onSettingsSaved);
 
     mitt.on('queue-open', () => {
         isActive.value = true;
@@ -112,6 +120,7 @@ onUnmounted(() => {
     mitt.off('queue-count-change');
     mitt.off('queue-done');
     mitt.off('item-change');
+    mitt.off('save-settings', onSettingsSaved);
 });
 
 const pendingItems = computed(() => {

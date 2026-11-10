@@ -210,6 +210,10 @@
         "label": "Apri coda download",
         "description": "Apri automaticamente la coda di download ogni volta che un nuovo chart è stato aggiunto alla coda"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Nascondi la spunta della coda di download",
+        "description": "Nasconde la spunta sulla coda di download quando tutti i download sono completati"
+      },
       "sfxEnabled": {
         "label": "Effetti sonori abilitati",
         "description": "Riproduce effetti sonori UI"

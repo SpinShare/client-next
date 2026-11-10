@@ -87,6 +87,15 @@
                     />
                 </SettingsItem>
                 <SettingsItem
+                    :label="$t('settings.interface.hideQueueDoneCheckmark.label')"
+                    :description="$t('settings.interface.hideQueueDoneCheckmark.description')"
+                >
+                    <Switch
+                        v-model="settings.hideQueueDoneCheckmark"
+                        @change="handleSave"
+                    />
+                </SettingsItem>
+                <SettingsItem
                     :label="$t('settings.interface.sfxEnabled.label')"
                     :description="$t('settings.interface.sfxEnabled.description')"
                 >

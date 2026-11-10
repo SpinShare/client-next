@@ -210,6 +210,10 @@
         "label": "",
         "description": ""
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "",
         "description": ""

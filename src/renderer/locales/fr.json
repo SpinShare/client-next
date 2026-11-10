@@ -210,6 +210,10 @@
         "label": "Ouvrir la file de téléchargements",
         "description": "Ouvrir automatiquement la file de téléchargements chaque fois qu'une nouvelle chart a été ajoutée à la file"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Masquer la coche de la file de téléchargement",
+        "description": "Masque la coche sur la file de téléchargement une fois tous les téléchargements terminés"
+      },
       "sfxEnabled": {
         "label": "Effets sonores activés",
         "description": "Active les effets sonores de l'interface"

@@ -210,6 +210,10 @@
         "label": "自动打开下载队列",
         "description": "每当有新谱面加入队列时自动打开下载队列"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "隐藏下载队列的勾号",
+        "description": "所有下载完成后隐藏下载队列上的勾号"
+      },
       "sfxEnabled": {
         "label": "启用音效",
         "description": "播放界面音效"

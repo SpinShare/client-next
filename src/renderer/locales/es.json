@@ -210,6 +210,10 @@
         "label": "Abrir cola de descargas",
         "description": "Abrir automáticamente la cola de descargas cada vez que se ha añadido una nueva canción a la cola"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Ocultar la marca de la cola de descargas",
+        "description": "Oculta la marca de la cola de descargas cuando todas las descargas han terminado"
+      },
       "sfxEnabled": {
         "label": "Efectos de sonido activados",
         "description": "Reproducir efectos de sonido UI"

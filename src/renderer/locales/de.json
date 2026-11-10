@@ -210,6 +210,10 @@
         "label": "Warteschlange Öffnen",
         "description": "Öffnet automatisch die Download-Warteschlange, wenn eine neue Chart hinzugefügt wurde"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Häkchen der Download-Warteschlange ausblenden",
+        "description": "Blendet das Häkchen an der Download-Warteschlange aus, sobald alle Downloads abgeschlossen sind"
+      },
       "sfxEnabled": {
         "label": "Soundeffekte Aktiv",
         "description": "Spielt Soundeffekte in der Benutzeroberfläche ab"

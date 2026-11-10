@@ -226,6 +226,10 @@
         "label": "Open download queue",
         "description": "Automatically open the download queue whenever a new chart has been added to the queue"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Hide download queue checkmark",
+        "description": "Hide the checkmark on the download queue once all downloads are completed"
+      },
       "sfxEnabled": {
         "label": "Sound effects enabled",
         "description": "Plays UI sound effects"

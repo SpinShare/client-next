@@ -18,6 +18,7 @@ export class SettingsManager {
             musicEnabled: true,
             musicTrack: '3.0',
             musicCustomPath: '',
+            hideQueueDoneCheckmark: false,
             pathCustoms: SettingsManager.getDefaultCustomsPath(),
             pathGame: '',
             musicVolume: 0.5,

@@ -210,6 +210,10 @@
         "label": "Open download wachtrij",
         "description": "Open automatisch de downloadwachtrij wanneer een nieuwe chart is toegevoegd aan de wachtrij"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "Vinkje van downloadwachtrij verbergen",
+        "description": "Verbergt het vinkje op de downloadwachtrij zodra alle downloads klaar zijn"
+      },
       "sfxEnabled": {
         "label": "Geluidseffecten ingeschakeld",
         "description": "Speelt UI geluidseffecten"
