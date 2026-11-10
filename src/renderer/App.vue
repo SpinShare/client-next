@@ -19,7 +19,7 @@
 <script setup>
 import bgmDefaultFile from '@/assets/audio/bgm_default.ogg?url';
 import bgmClassicFile from '@/assets/audio/bgm_classic.ogg?url';
-import queueDoneFile from '@/assets/audio/queue_done.wav?url';
+import queueDoneFile from '@/assets/audio/queue_done.ogg?url';
 import errorFile from '@/assets/audio/error.ogg?url';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import UpdateToast from '@/components/UpdateToast.vue';
