@@ -179,7 +179,8 @@
     "normal": "Speen",
     "hard": "Speen",
     "expert": "Speen",
-    "xd": "Speen"
+    "xd": "Speen",
+    "remixd": ""
   },
   "library": {
     "header": "Speen",
@@ -225,6 +226,10 @@
         "label": "Speen speen speen",
         "description": "Speen speen speen Speen speen speen speen"
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "Speen speen speen",
         "description": "Speen speen speen speen"
@@ -233,6 +238,20 @@
         "label": "Speen speen speen",
         "description": "Speen speen Speen",
         "credit": ""
+      },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
       },
       "musicVolume": {
         "label": "",
@@ -346,6 +365,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {
