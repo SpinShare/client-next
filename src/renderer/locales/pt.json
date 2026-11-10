@@ -179,7 +179,8 @@
     "normal": "",
     "hard": "",
     "expert": "",
-    "xd": ""
+    "xd": "",
+    "remixd": ""
   },
   "library": {
     "header": "",
@@ -225,6 +226,10 @@
         "label": "",
         "description": ""
       },
+      "hideQueueDoneCheckmark": {
+        "label": "",
+        "description": ""
+      },
       "sfxEnabled": {
         "label": "",
         "description": ""
@@ -233,6 +238,20 @@
         "label": "",
         "description": "",
         "credit": ""
+      },
+      "musicTrack": {
+        "label": "",
+        "description": "",
+        "current": "",
+        "classic": "",
+        "custom": ""
+      },
+      "musicCustomPath": {
+        "label": "",
+        "description": "",
+        "placeholder": "",
+        "select": "",
+        "noFile": ""
       },
       "musicVolume": {
         "label": "",
@@ -346,6 +365,11 @@
       "title": "",
       "message": "",
       "button": ""
+    },
+    "selectMusicFile": {
+      "title": "",
+      "button": "",
+      "filter": ""
     }
   },
   "notifications": {
