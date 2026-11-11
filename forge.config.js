@@ -67,6 +67,7 @@ module.exports = {
                     base: 'org.electronjs.Electron2.BaseApp',
                     baseVersion: '26.08',
                     modules: [],
+                    finishArgs: ['--socket=x11', '--share=ipc', '--device=dri', '--socket=pulseaudio', '--filesystem=home', '--env=TMPDIR=/var/tmp', '--share=network', '--talk-name=org.freedesktop.Notifications', '--device=all', '--filesystem=/run/udev:ro', '--filesystem=/run/media', '--filesystem=/media'],
                 },
             },
         },
