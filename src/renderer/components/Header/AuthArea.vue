@@ -43,6 +43,8 @@
                     <div
                         v-if="connectNotificationPopupOpen"
                         :class="`connect-notification-popup`"
+                        data-nav-scope
+                        @nav-back.prevent="connectNotificationPopupOpen = false"
                     >
                         <header>
                             <h1>{{ $t('header.auth.notifications.header') }}</h1>
@@ -111,6 +113,8 @@
                     <div
                         v-if="connectProfilePopupOpen"
                         :class="`connect-profile-popup`"
+                        data-nav-scope
+                        @nav-back.prevent="connectProfilePopupOpen = false"
                     >
                         <header>
                             <div class="content">
@@ -224,84 +228,38 @@
 
 <script setup>
 import Remixicon from '@/components/Remixicon.vue';
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import Loader from '@/components/Loader.vue';
 import { NOTIFICATION_TYPE_NEWREVIEW, NOTIFICATION_TYPE_NEWSPINPLAY, NOTIFICATION_TYPE_RECEIVEDCARD, NOTIFICATION_TYPE_SYSTEM } from '@spinshare/api-js';
 import EmptyState from '@/components/EmptyState.vue';
 import router from '@/router';
+import { notificationTarget, useAccount } from '@/modules/account';
 
-const mitt = inject('mitt');
-const connect = inject('connect');
 const externalApi = inject('externalApi');
-const isLoggedIn = ref(false);
-const profile = ref(null);
-const notifications = ref([]);
+const { account, clearNotification, clearAllNotifications, logout } = useAccount();
+const isLoggedIn = computed(() => account.isLoggedIn);
+const profile = computed(() => account.profile);
+const notifications = computed(() => account.notifications);
 const connectProfilePopupOpen = ref(false);
 const connectNotificationPopupOpen = ref(false);
-const notificationCheckInterval = ref(null);
-
-onMounted(async () => {
-    mitt.on('auth-updated', onAuthUpdated);
-    await onAuthUpdated();
-});
-
-onUnmounted(() => {
-    mitt.off('auth-updated');
-});
-
-async function onAuthUpdated() {
-    isLoggedIn.value = await connect.isLoggedIn();
-
-    if (notificationCheckInterval.value) {
-        clearInterval(notificationCheckInterval.value);
-    }
-
-    if (isLoggedIn.value) {
-        profile.value = await connect.getProfile();
-        notifications.value = await connect.getNotifications();
-        notificationCheckInterval.value = setInterval(
-            async () => {
-                notifications.value = await connect.getNotifications();
-            },
-            30 * 60 * 1000,
-        );
-    } else {
-        profile.value = null;
-        notifications.value = [];
-    }
-}
 
 function handleUpload() {
     externalApi.openUrl('https://spinsha.re/upload');
 }
 
 function handleLogout() {
-    connect.logout();
-    mitt.emit('auth-updated');
+    logout();
 }
 
 async function handleNotificationClick(notification) {
-    await connect.clearNotification(notification.id);
-
-    switch (notification.notificationType) {
-        case NOTIFICATION_TYPE_NEWREVIEW:
-            router.push(`/chart/${notification.connectedSong.id}/reviews`);
-            break;
-        case NOTIFICATION_TYPE_NEWSPINPLAY:
-            router.push(`/chart/${notification.connectedSong.id}/spinplays`);
-            break;
-        case NOTIFICATION_TYPE_RECEIVEDCARD:
-            router.push(`/user/${notification.user.id}`);
-            break;
-    }
-
-    notifications.value = await connect.getNotifications();
+    const target = notificationTarget(notification);
+    if (target) router.push(target);
     connectNotificationPopupOpen.value = false;
+    await clearNotification(notification.id);
 }
 
 async function handleNotificationClearAll() {
-    await connect.clearAllNotifications();
-    notifications.value = await connect.getNotifications();
+    await clearAllNotifications();
     connectNotificationPopupOpen.value = false;
 }
 </script>
