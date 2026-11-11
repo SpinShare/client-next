@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, watch } from 'vue';
 import App from './App.vue';
 import '@fontsource-variable/outfit';
 import 'remixicon/fonts/remixicon.css';
@@ -7,6 +7,8 @@ import Router from './router';
 import mitt from 'mitt';
 import * as Sentry from '@sentry/electron/renderer';
 import { createHoverDirective } from '@/modules/hoverDirective';
+import { gamepadState, initGamepadState, isBigPicture } from '@/modules/gamepad/state';
+import { createNavigation } from '@/modules/gamepad/navigation';
 import { createI18n } from 'vue-i18n';
 import enMessages from '@/locales/en.json';
 import deMessages from '@/locales/de.json';
@@ -107,6 +109,25 @@ app.provide('mitt', mittInstance);
 
 /* SOUND EFFECTS */
 app.directive('interactable', createHoverDirective());
+
+/* GAMEPAD / BIG PICTURE */
+await initGamepadState(window.spshSettings);
+const navigation = createNavigation({ router: Router, mitt: mittInstance });
+watch(
+    isBigPicture,
+    (enabled) => {
+        if (enabled) {
+            navigation.start();
+        } else {
+            navigation.stop();
+        }
+    },
+    { immediate: true },
+);
+mittInstance.on('save-settings', (newSettings) => {
+    gamepadState.setting = newSettings.gamepadUi || 'auto';
+});
+app.provide('navigation', navigation);
 
 app.use(Router);
 app.mount('#app');
