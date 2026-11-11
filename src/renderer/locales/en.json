@@ -319,6 +319,22 @@
         "description": "Opens the developer tools",
         "open": "Open Debugger"
       }
+    },
+    "gamepad": {
+      "header": "Controller",
+      "mode": {
+        "label": "Gamepad mode (Big Picture)",
+        "description": "A console-like interface you can fully control with a gamepad. \"Automatic\" turns it on for SteamOS and the Steam Deck.",
+        "auto": "Automatic",
+        "on": "On",
+        "off": "Off"
+      },
+      "diagnostics": {
+        "label": "Controller diagnostics",
+        "description": "Shows which controllers SpinShare detects. Helpful if your controller doesn't work.",
+        "show": "Show",
+        "hide": "Hide"
+      }
     }
   },
   "setup": {
@@ -378,6 +394,36 @@
     "queueFinished": {
       "title": "Queue finished",
       "body": "All charts were downloaded or failed."
+    }
+  },
+  "bigPicture": {
+    "hints": {
+      "select": "Select",
+      "back": "Back",
+      "search": "Search",
+      "download": "Download",
+      "downloads": "Downloads",
+      "keyboard": "Keyboard",
+      "confirm": "Confirm",
+      "page": "Page",
+      "menu": "Menu",
+      "close": "Close",
+      "steamKeyboard": "Keyboard not showing up? Press STEAM + X"
+    },
+    "home": {
+      "seeAll": "See all"
+    },
+    "search": {
+      "header": "Search",
+      "submit": "Search",
+      "cancel": "Cancel"
+    },
+    "chart": {
+      "queued": "Queued",
+      "explicit": "Explicit content"
+    },
+    "account": {
+      "clearAll": "Clear all"
     }
   }
 }

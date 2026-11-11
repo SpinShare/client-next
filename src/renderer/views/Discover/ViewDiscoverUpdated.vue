@@ -21,6 +21,7 @@
                 class="button"
                 :disabled="currentPage === 0"
                 @click="handlePrevious"
+                data-nav-prev-page
                 v-interactable
             >
                 <Remixicon icon="arrow-left" />
@@ -29,6 +30,7 @@
             <button
                 class="button"
                 @click="handleNext"
+                data-nav-next-page
                 :disabled="charts.length < 12"
                 v-interactable
             >

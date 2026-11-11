@@ -14,6 +14,8 @@
             <div
                 v-if="roomSyncPopupOpen"
                 class="room-sync-popup"
+                data-nav-scope
+                @nav-back.prevent="roomSyncPopupOpen = false"
             >
                 <header>
                     <h1>{{ $t('header.roomSync.header') }}</h1>

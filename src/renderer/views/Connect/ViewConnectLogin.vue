@@ -25,6 +25,8 @@
                         max="6"
                         :placeholder="$t('connect.input.placeholder')"
                         v-model="connectCode"
+                        data-nav-autofocus
+                        @keyup.enter="connectCode.length === 6 && handleLogin()"
                     />
                     <button
                         class="button brand shrink-0"
@@ -69,6 +71,7 @@ import Loader from '@/components/Loader.vue';
 const router = useRouter();
 const connectCode = ref('');
 const connect = inject('connect');
+const mitt = inject('mitt');
 const isLoading = ref(false);
 const errorCodeWrong = ref(false);
 const errorServer = ref(false);
@@ -82,6 +85,7 @@ async function handleLogin() {
     isLoading.value = false;
 
     if (result) {
+        mitt.emit('auth-updated');
         router.push(`/`);
     } else if (result === null) {
         errorServer.value = true;

@@ -15,6 +15,11 @@
 
             <header class="chart">
                 <div
+                    v-if="isBigPicture"
+                    class="hero-backdrop"
+                    :style="`background-image: url('${chart.cover}')`"
+                ></div>
+                <div
                     class="cover"
                     :style="`background-image: url('${chart.cover}')`"
                 ></div>
@@ -71,6 +76,7 @@
                         <button
                             class="button brand"
                             @click="handlePlay"
+                            data-nav-autofocus
                             v-interactable
                             v-if="cacheItem"
                         >
@@ -80,6 +86,7 @@
                         <button
                             :class="`button ${isInstalled ? '' : 'brand'}`"
                             @click="handleAddToQueue"
+                            :data-nav-autofocus="cacheItem ? null : ''"
                             v-interactable
                         >
                             <template v-if="isOutOfDate">
@@ -266,6 +273,7 @@ import Loader from '@/components/Loader.vue';
 import { DownloadItem } from '../../main/queue/downloadQueueItem';
 import SectionHeader from '@/components/SectionHeader.vue';
 import router from '@/router';
+import { isBigPicture } from '@/modules/gamepad/state';
 
 const mitt = inject('mitt');
 const api = inject('api');
@@ -504,6 +512,43 @@ header.chart {
 }
 nav {
     @apply sticky top-0 z-5  bg-base-50 dark:bg-base-950;
+}
+
+:root.big-picture header.chart {
+    @apply grid grid-cols-[auto_1fr] items-end gap-8 px-10 pt-8 pb-8 relative isolate overflow-hidden;
+
+    & .hero-backdrop {
+        @apply absolute inset-0 bg-cover bg-center -z-10 pointer-events-none;
+        filter: blur(50px) saturate(1.5);
+        opacity: 0.35;
+        transform: scale(1.3);
+        mask-image: linear-gradient(to bottom, black 40%, transparent);
+    }
+    & .cover {
+        @apply w-[220px] rounded-lg shadow-2xl;
+    }
+    & .content {
+        @apply gap-4;
+
+        & .meta h1 {
+            @apply text-3xl font-bold mb-1;
+        }
+        & .meta h2,
+        & .meta p {
+            @apply text-lg;
+        }
+        & .info .installation-status,
+        & .info .difficulties .difficulty {
+            @apply text-sm px-2 py-1;
+        }
+    }
+}
+:root.big-picture .play-dialog:open {
+    @apply max-w-[720px];
+
+    & .options .button {
+        @apply py-4;
+    }
 }
 
 @media screen and (min-width: 1100px) {

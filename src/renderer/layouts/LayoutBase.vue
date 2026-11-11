@@ -1,5 +1,19 @@
 <template>
-    <div class="layout-base">
+    <div
+        v-if="isBigPicture"
+        class="layout-big-picture"
+    >
+        <BigPictureTopBar />
+        <main data-nav-main>
+            <slot />
+        </main>
+        <BigPictureHintBar />
+        <BigPictureSidebar />
+    </div>
+    <div
+        v-else
+        class="layout-base"
+    >
         <Header />
         <Sidebar :expanded="isExpanded" />
         <transition
@@ -18,6 +32,10 @@ import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import Header from '@/components/Header/Header.vue';
 import { useStorage } from '@vueuse/core';
+import BigPictureTopBar from '@/components/BigPicture/BigPictureTopBar.vue';
+import BigPictureHintBar from '@/components/BigPicture/BigPictureHintBar.vue';
+import BigPictureSidebar from '@/components/BigPicture/BigPictureSidebar.vue';
+import { isBigPicture } from '@/modules/gamepad/state';
 
 const mitt = inject('mitt');
 const cacheRebuildActive = ref(false);
@@ -56,5 +74,17 @@ onUnmounted(() => {
 }
 main {
     @apply flex flex-col overflow-y-scroll;
+}
+.layout-big-picture {
+    @apply grid grid-rows-[auto_1fr_auto] grow overflow-hidden;
+
+    & main {
+        @apply overflow-y-auto overflow-x-hidden;
+        scrollbar-width: none;
+
+        & > :deep(*) {
+            flex-shrink: 0;
+        }
+    }
 }
 </style>

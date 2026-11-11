@@ -23,6 +23,8 @@
                             <div
                                 class="popover popover-difficulties"
                                 v-if="popoverDifficultiesOpen"
+                                data-nav-scope
+                                @nav-back.prevent="popoverDifficultiesOpen = false"
                                 @click.stop
                             >
                                 <div>
@@ -65,6 +67,8 @@
                             <div
                                 class="popover popover-range"
                                 v-if="popoverRangeOpen"
+                                data-nav-scope
+                                @nav-back.prevent="popoverRangeOpen = false"
                                 @click.stop
                             >
                                 <div>
@@ -95,6 +99,7 @@
                                 v-model="searchShowExplicit"
                                 style="pointer-events: none"
                                 :mini="true"
+                                data-nav-skip
                             />
                         </button>
                         <button

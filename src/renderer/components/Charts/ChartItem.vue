@@ -4,6 +4,8 @@
         :to="`/chart/${id || fileReference}`"
         :class="`chart-item ${isExplicit && !settingShowExplicit ? 'explicit' : ''} ${mini ? 'mini' : ''} ${isLocalChart ? 'local-chart' : ''}`"
         @click.middle.prevent="handleAddToQueue"
+        @nav-secondary="handleSecondary"
+        :data-nav-hint-x="isLocalChart ? null : $t('bigPicture.hints.download')"
         v-interactable="!isLocalChart"
     >
         <div
@@ -78,8 +80,24 @@
             class="explicit-label"
             v-if="isExplicit && !settingShowExplicit"
         >
-            {{ $t('chart.explicitLabel') }}
+            <template v-if="isBigPicture">
+                <Remixicon
+                    icon="eye-off"
+                    size="2xl"
+                />
+                <span>{{ $t('bigPicture.chart.explicit') }}</span>
+            </template>
+            <template v-else>{{ $t('chart.explicitLabel') }}</template>
         </div>
+        <transition name="popup">
+            <div
+                class="queued-label"
+                v-if="showQueuedLabel"
+            >
+                <Remixicon icon="download" />
+                <span>{{ $t('bigPicture.chart.queued') }}</span>
+            </div>
+        </transition>
     </component>
 </template>
 
@@ -87,6 +105,9 @@
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 import { RouterLink } from 'vue-router';
+import Remixicon from '@/components/Remixicon.vue';
+import { playClickSound } from '@/modules/hoverDirective';
+import { isBigPicture } from '@/modules/gamepad/state';
 
 const props = defineProps({
     id: {
@@ -207,11 +228,27 @@ onMounted(async () => {
 
 onUnmounted(() => {
     mitt.off('item-change');
+    clearTimeout(queuedLabelTimeout);
 });
 
 const isLocalChart = computed(() => {
     return !Number.isInteger(props.id) && !props.fileReference.startsWith('spinshare_');
 });
+
+const showQueuedLabel = ref(false);
+let queuedLabelTimeout = null;
+
+// X on a controller
+async function handleSecondary() {
+    if (isLocalChart.value) return;
+    playClickSound();
+    await handleAddToQueue();
+    showQueuedLabel.value = true;
+    clearTimeout(queuedLabelTimeout);
+    queuedLabelTimeout = setTimeout(() => {
+        showQueuedLabel.value = false;
+    }, 1500);
+}
 
 async function handleAddToQueue() {
     if (isLocalChart.value) return;
@@ -227,7 +264,7 @@ async function handleAddToQueue() {
 
     &.explicit {
         @apply transition-all;
-        & *:not(.explicit-label) {
+        & > *:not(.explicit-label) {
             @apply blur-none transition-all;
         }
         & .explicit-label {
@@ -237,8 +274,8 @@ async function handleAddToQueue() {
         & .explicit-label {
             @apply absolute inset-0 flex items-center justify-center pointer-events-none opacity-0;
         }
-        &:not(:hover) {
-            & *:not(.explicit-label) {
+        &:not(:hover):not(:focus) {
+            & > *:not(.explicit-label) {
                 @apply blur-xl;
             }
             & .explicit-label {
@@ -301,6 +338,10 @@ async function handleAddToQueue() {
         @apply bg-base-300 dark:bg-base-800;
     }
 
+    & .queued-label {
+        @apply absolute top-2 right-2 flex items-center gap-1 text-sm font-bold px-2 py-1 rounded-md bg-brand-400 text-brand-950 dark:bg-brand-700 dark:text-brand-50 shadow-lg pointer-events-none;
+    }
+
     &.local-chart {
         @apply bg-transparent border border-base-300 dark:border-base-800 cursor-default;
     }
@@ -311,6 +352,42 @@ async function handleAddToQueue() {
         & .cover {
             @apply w-[40px];
         }
+    }
+}
+
+:root.big-picture .chart-item:not(.mini) {
+    @apply flex flex-col items-stretch gap-0 p-2 rounded-lg;
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
+
+    & .cover {
+        @apply w-full h-auto rounded-md;
+    }
+    & .content {
+        @apply gap-2 px-1 pt-2.5 pb-1;
+
+        & .meta h2 {
+            @apply font-semibold;
+        }
+        & .meta p {
+            @apply text-sm;
+        }
+        & .info .difficulties .difficulty {
+            @apply px-1;
+        }
+        & .info .difficulties .difficulty:not(.active) {
+            @apply hidden;
+        }
+    }
+
+    &:focus {
+        @apply bg-base-300 dark:bg-base-800;
+        transform: scale(1.04);
+    }
+
+    & .explicit-label {
+        @apply flex-col gap-2 px-4 text-center font-semibold text-base-700 dark:text-base-200;
     }
 }
 </style>

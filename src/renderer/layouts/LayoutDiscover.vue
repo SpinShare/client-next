@@ -4,21 +4,25 @@
             <TabList>
                 <TabItemLink
                     to="/discover/new/0"
+                    :icon="sectionIcon('/discover/new/0')"
                     :label="$t('sidebar.newest')"
                     :active="route.fullPath.includes('new/')"
                 />
                 <TabItemLink
                     to="/discover/updated/0"
+                    :icon="sectionIcon('/discover/updated/0')"
                     :label="$t('sidebar.updated')"
                     :active="route.fullPath.includes('updated/')"
                 />
                 <TabItemLink
                     to="/discover/hotThisWeek/0"
+                    :icon="sectionIcon('/discover/hotThisWeek/0')"
                     :label="$t('sidebar.hotThisWeek')"
                     :active="route.fullPath.includes('hotThisWeek/')"
                 />
                 <TabItemLink
                     to="/discover/hotThisMonth/0"
+                    :icon="sectionIcon('/discover/hotThisMonth/0')"
                     :label="$t('sidebar.hotThisMonth')"
                     :active="route.fullPath.includes('hotThisMonth/')"
                 />
@@ -35,6 +39,7 @@ import LayoutBase from '@/layouts/LayoutBase.vue';
 import TabList from '@/components/Tabs/TabList.vue';
 import TabItemLink from '@/components/Tabs/TabItemLink.vue';
 import { useRoute } from 'vue-router';
+import { sectionIcon } from '@/components/BigPicture/sections';
 
 const route = useRoute();
 </script>

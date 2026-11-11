@@ -142,3 +142,104 @@ html[data-theme="dark"] .select {
 .section-center {
     @apply flex justify-center items-center h-full;
 }
+
+/* Big Picture (Gamepad UI) */
+/* html.big-picture => Big Picture mode */
+/* html.nav-gamepad => Gamepad is in use */
+html.big-picture {
+    font-size: 17px;
+
+    & .button {
+        @apply h-[48px] px-4;
+
+        &.square {
+            @apply w-[48px] px-0;
+        }
+    }
+    & .input,
+    & .select {
+        @apply h-[48px];
+    }
+
+    & [data-nav-main] * {
+        scroll-margin: 32px 40px;
+    }
+}
+
+.bp-card {
+    @apply fixed top-4 bottom-[68px] z-80 flex flex-col rounded-2xl overflow-hidden;
+    @apply bg-base-50/95 dark:bg-base-950/95 backdrop-blur-xl border border-base-200 dark:border-base-800 shadow-2xl;
+}
+.bp-card-backdrop {
+    @apply fixed inset-x-0 top-0 bottom-[52px] z-70 bg-base-950/55 backdrop-blur-sm cursor-pointer;
+}
+.bp-menu-item {
+    @apply flex items-center gap-3 h-[52px] px-4 rounded w-full shrink-0 text-base-700 dark:text-base-200 transition-colors cursor-pointer;
+
+    &:hover {
+        @apply bg-base-200 text-base-900 dark:bg-base-900 dark:text-base-50;
+    }
+    &.active {
+        @apply bg-brand-400 text-brand-950 dark:bg-brand-700 dark:text-brand-50;
+    }
+    & .label {
+        @apply grow text-left font-semibold whitespace-nowrap truncate;
+    }
+    & .count {
+        @apply bg-brand-300 text-brand-950 dark:bg-brand-700 dark:text-brand-50 rounded-md text-xs font-bold px-1.5 py-0.5;
+    }
+}
+
+.bp-slide-left-enter-active,
+.bp-slide-left-leave-active,
+.bp-slide-right-enter-active,
+.bp-slide-right-leave-active {
+    @apply transition-[opacity,transform] duration-200 ease-snappy;
+}
+.bp-slide-left-enter-from,
+.bp-slide-left-leave-to {
+    @apply opacity-0 -translate-x-8;
+}
+.bp-slide-right-enter-from,
+.bp-slide-right-leave-to {
+    @apply opacity-0 translate-x-8;
+}
+.bp-fade-enter-active,
+.bp-fade-leave-active {
+    @apply transition-opacity duration-200;
+}
+.bp-fade-enter-from,
+.bp-fade-leave-to {
+    @apply opacity-0;
+}
+
+/* While navigating with a controller, hide the mouse cursor and ignore hover states from a resting cursor */
+html.nav-gamepad {
+    &,
+    & * {
+        cursor: none !important;
+    }
+    & #app {
+        pointer-events: none;
+    }
+}
+
+html.big-picture :focus {
+    outline: none;
+}
+html.big-picture.nav-gamepad {
+    & :focus,
+    & .spin-switch:has(input:focus) {
+        outline: 4px solid var(--color-brand);
+        outline-offset: 3px;
+    }
+    & .spin-switch input:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    & .search-box input:focus,
+    & .bp-search input:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}

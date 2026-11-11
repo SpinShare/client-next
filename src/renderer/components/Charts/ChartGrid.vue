@@ -22,4 +22,9 @@ defineProps({
         @apply grid grid-cols-2;
     }
 }
+
+:root.big-picture .chart-grid {
+    @apply grid gap-5;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
 </style>

@@ -1,6 +1,10 @@
 <template>
     <LayoutBase>
-        <section class="page-discover">
+        <BigPictureHome v-if="isBigPicture" />
+        <section
+            v-else
+            class="page-discover"
+        >
             <div>
                 <SectionHeader :title="$t('discover.promos.header')" />
                 <PromoGrid>
@@ -60,12 +64,15 @@ import SectionHeader from '@/components/SectionHeader.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import ChartItemPlaceholder from '@/components/Charts/ChartItemPlaceholder.vue';
 import PromoItemPlaceholder from '@/components/Discover/PromoItemPlaceholder.vue';
+import BigPictureHome from '@/components/BigPicture/BigPictureHome.vue';
+import { isBigPicture } from '@/modules/gamepad/state';
 
 const promos = ref([]);
 const staffpicks = ref([]);
 const api = inject('api');
 
 onMounted(async () => {
+    if (isBigPicture.value) return;
     promos.value = await api.getPromos();
     staffpicks.value = (await api.getPlaylist(144))?.songs?.slice(0, 10) ?? [];
 });

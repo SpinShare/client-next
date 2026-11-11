@@ -14,6 +14,11 @@
         v-if="cacheRebuildActive && cacheRebuildStatus"
         :status="cacheRebuildStatus"
     />
+
+    <template v-if="isBigPicture">
+        <BigPictureSearch />
+        <BigPicturePicker />
+    </template>
 </template>
 
 <script setup>
@@ -25,6 +30,9 @@ import { inject, onMounted, onUnmounted, ref } from 'vue';
 import UpdateToast from '@/components/UpdateToast.vue';
 import { useRoute, useRouter } from 'vue-router';
 import LibraryRebuildOverlay from '@/components/LibraryRebuildOverlay.vue';
+import BigPictureSearch from '@/components/BigPicture/BigPictureSearch.vue';
+import BigPicturePicker from '@/components/BigPicture/BigPicturePicker.vue';
+import { isBigPicture } from '@/modules/gamepad/state';
 
 const mitt = inject('mitt');
 const route = useRoute();

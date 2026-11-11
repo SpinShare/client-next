@@ -197,6 +197,38 @@
                 </SettingsItem>
             </SettingsSection>
 
+            <SettingsSection :label="$t('settings.gamepad.header')">
+                <SettingsItem
+                    :label="$t('settings.gamepad.mode.label')"
+                    :description="$t('settings.gamepad.mode.description')"
+                >
+                    <select
+                        class="select"
+                        v-model="settings.gamepadUi"
+                        @change="handleSave"
+                        v-interactable
+                    >
+                        <option value="auto">{{ $t('settings.gamepad.mode.auto') }}</option>
+                        <option value="on">{{ $t('settings.gamepad.mode.on') }}</option>
+                        <option value="off">{{ $t('settings.gamepad.mode.off') }}</option>
+                    </select>
+                </SettingsItem>
+                <SettingsItem
+                    :label="$t('settings.gamepad.diagnostics.label')"
+                    :description="$t('settings.gamepad.diagnostics.description')"
+                >
+                    <button
+                        class="button"
+                        @click="showGamepadDiagnostics = !showGamepadDiagnostics"
+                        v-interactable
+                    >
+                        <Remixicon icon="gamepad" />
+                        <span>{{ showGamepadDiagnostics ? $t('settings.gamepad.diagnostics.hide') : $t('settings.gamepad.diagnostics.show') }}</span>
+                    </button>
+                </SettingsItem>
+                <GamepadDiagnostics v-if="showGamepadDiagnostics" />
+            </SettingsSection>
+
             <SettingsSection
                 :label="$t('settings.account.header')"
                 v-if="isLoggedIn"
@@ -338,6 +370,7 @@ import SettingsSection from '@/components/Settings/SettingsSection.vue';
 import SettingsItem from '@/components/Settings/SettingsItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import Switch from '@/components/Switch.vue';
+import GamepadDiagnostics from '@/components/Settings/GamepadDiagnostics.vue';
 import { onMounted, inject, ref, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -351,6 +384,7 @@ const connect = inject('connect');
 const isLoggedIn = ref(false);
 const updateAvailable = ref(false);
 const appVersion = ref('0.0.0');
+const showGamepadDiagnostics = ref(false);
 const customsPathIsValid = ref(null);
 const roomSyncHostIsValid = computed(() => /^[^\s:]+:\d{1,5}$/.test(settings.value.roomSyncHost ?? ''));
 
@@ -359,6 +393,7 @@ let konamiProgress = 0;
 
 onMounted(async () => {
     settings.value = await settingsManager.getAll();
+    settings.value.gamepadUi ??= 'auto';
 
     mitt.on('update-check-done', (hasNewRelease) => {
         updateAvailable.value = hasNewRelease;
@@ -371,11 +406,13 @@ onMounted(async () => {
     await onAuthUpdated();
 
     window.addEventListener('keydown', handleKonamiKey);
+    mitt.on('bp-direction', handleKonamiDirection);
 });
 
 onUnmounted(() => {
     window.removeEventListener('keydown', handleKonamiKey);
-    mitt.off('auth-updated');
+    mitt.off('bp-direction', handleKonamiDirection);
+    mitt.off('auth-updated', onAuthUpdated);
     mitt.off('update-check-done');
 });
 
@@ -414,6 +451,11 @@ async function handleMusicFileSelect() {
         settings.value.musicCustomPath = filePath;
         await handleSave();
     }
+}
+
+function handleKonamiDirection(direction) {
+    const key = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' }[direction];
+    handleKonamiKey({ key, target: document.activeElement || document.body });
 }
 
 async function handleKonamiKey(event) {

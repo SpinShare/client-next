@@ -9,59 +9,68 @@
         @click="handleToggleQueue"
         v-interactable
     />
-    <div
-        :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
-        v-if="isActive"
+    <Teleport
+        to="#app"
+        :disabled="!isBigPicture"
     >
-        <SectionHeader :title="$t('sidebar.downloadQueue.header', { count: pendingItems })">
-            <button
-                class="button ghost"
-                @click="handleClearDone"
-                v-interactable
-            >
-                <Remixicon icon="delete-bin" />
-            </button>
-            <button
-                class="button ghost"
-                @click="handleRestartFailed"
-                v-interactable
-            >
-                <Remixicon icon="refresh" />
-            </button>
-        </SectionHeader>
-
         <div
-            class="list"
-            v-if="queueItemsList.length > 0"
+            :class="`downloads-queue ${expanded ? 'expanded' : ''}`"
+            v-if="isActive"
+            data-nav-scope
+            @nav-back.prevent="isActive = false"
         >
-            <DownloadQueueItem
-                v-for="item in queueItemsList"
-                :key="item.id"
-                v-bind="item"
-                @remove="handleRemoveItem"
+            <SectionHeader :title="$t('sidebar.downloadQueue.header', { count: pendingItems })">
+                <button
+                    class="button ghost"
+                    @click="handleClearDone"
+                    data-nav-autofocus
+                    v-interactable
+                >
+                    <Remixicon icon="delete-bin" />
+                </button>
+                <button
+                    class="button ghost"
+                    @click="handleRestartFailed"
+                    v-interactable
+                >
+                    <Remixicon icon="refresh" />
+                </button>
+            </SectionHeader>
+
+            <div
+                class="list"
+                v-if="queueItemsList.length > 0"
+            >
+                <DownloadQueueItem
+                    v-for="item in queueItemsList"
+                    :key="item.id"
+                    v-bind="item"
+                    @remove="handleRemoveItem"
+                />
+            </div>
+            <EmptyState
+                class="m-5 mt-0"
+                :label="$t('sidebar.downloadQueue.noDownloads')"
+                icon="music-2"
+                v-else
             />
         </div>
-        <EmptyState
-            class="m-5 mt-0"
-            :label="$t('sidebar.downloadQueue.noDownloads')"
-            icon="music-2"
-            v-else
-        />
-    </div>
-    <div
-        :class="`download-queue-backdrop  ${expanded ? 'expanded' : ''}`"
-        @click="handleToggleQueue"
-        v-if="isActive"
-    ></div>
+        <div
+            :class="`download-queue-backdrop  ${expanded ? 'expanded' : ''}`"
+            @click="handleToggleQueue"
+            v-if="isActive"
+        ></div>
+    </Teleport>
 </template>
 
 <script setup>
 import SidebarItemButton from '@/components/Sidebar/SidebarItemButton.vue';
-import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import SectionHeader from '@/components/SectionHeader.vue';
 import DownloadQueueItem from '@/components/DownloadQueueItem.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import EmptyState from '@/components/EmptyState.vue';
+import { gamepadState, isBigPicture } from '@/modules/gamepad/state';
 
 const queue = inject('queue');
 const mitt = inject('mitt');
@@ -88,9 +97,9 @@ onMounted(async () => {
     hideQueueDoneCheckmark.value = await settingsManager.get('hideQueueDoneCheckmark');
     mitt.on('save-settings', onSettingsSaved);
 
-    mitt.on('queue-open', () => {
-        isActive.value = true;
-    });
+    mitt.on('queue-open', onQueueOpen);
+    mitt.on('queue-toggle', handleToggleQueue);
+    mitt.on('queue-close', onQueueClose);
 
     mitt.on('queue-change', (queueItems) => {
         queueItemsList.value = queueItems;
@@ -121,7 +130,22 @@ onUnmounted(() => {
     mitt.off('queue-done');
     mitt.off('item-change');
     mitt.off('save-settings', onSettingsSaved);
+    mitt.off('queue-open', onQueueOpen);
+    mitt.off('queue-toggle', handleToggleQueue);
+    mitt.off('queue-close', onQueueClose);
 });
+
+watch(isActive, (active) => {
+    gamepadState.downloadsOpen = active;
+});
+
+function onQueueOpen() {
+    isActive.value = true;
+}
+
+function onQueueClose() {
+    isActive.value = false;
+}
 
 const pendingItems = computed(() => {
     return queueItemsList.value.filter((item) => item?.state === 0).length || 0;
@@ -168,6 +192,27 @@ async function handleRemoveItem(chartId) {
 
     &.expanded {
         @apply left-[275px];
+    }
+}
+:root.big-picture .downloads-queue {
+    @apply left-[328px] top-4 bottom-[68px] w-[460px] z-80 rounded-2xl border border-base-200 dark:border-base-800 shadow-2xl;
+    @apply bg-base-50/95 dark:bg-base-950/95 backdrop-blur-xl;
+    animation: bp-queue-in 200ms var(--ease-snappy, ease-out);
+
+    & header {
+        @apply p-6 pb-0;
+    }
+    & .list {
+        @apply px-6 pb-6;
+    }
+}
+:root.big-picture .download-queue-backdrop {
+    @apply hidden;
+}
+@keyframes bp-queue-in {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
     }
 }
 </style>
