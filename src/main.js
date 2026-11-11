@@ -14,6 +14,7 @@ import { UpdateManager } from './main/updates';
 import { translate } from './main/i18n';
 import { RoomSyncClient } from './main/roomSync';
 import { setupRoomSyncAutoDownload } from './main/roomSync/autoDownload';
+import { setupGamepadHandlers } from './main/gamepad';
 
 const MUSIC_MIME_TYPES = {
     ogg: 'audio/ogg',
@@ -191,6 +192,7 @@ app.whenReady().then(() => {
     const apiClient = new SpinShareClient({ connectApiKey: AuthManager.connectAppApiKey });
     const authManager = new AuthManager(settingsManager, apiClient);
     setupApiHandlers(apiClient);
+    setupGamepadHandlers(() => mainWindow);
 
     /* Updates */
     const updateManager = new UpdateManager(settingsManager);

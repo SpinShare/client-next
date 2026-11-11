@@ -1,7 +1,7 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer, webFrame } from 'electron';
 
 contextBridge.exposeInMainWorld('spshApi', {
     getPromos: async () => ipcRenderer.invoke('get-promos'),
@@ -165,6 +165,21 @@ contextBridge.exposeInMainWorld('spshExternalApi', {
         const listener = () => callback();
         ipcRenderer.on('window-blurred', listener);
         return () => ipcRenderer.removeListener('window-blurred', listener);
+    },
+});
+
+contextBridge.exposeInMainWorld('spshGamepad', {
+    getPlatform: () => ipcRenderer.invoke('gamepad-get-platform'),
+    startNative: () => ipcRenderer.invoke('gamepad-native-start'),
+    stopNative: () => ipcRenderer.invoke('gamepad-native-stop'),
+    getDiagnostics: () => ipcRenderer.invoke('gamepad-get-diagnostics'),
+    openSteamKeyboard: () => ipcRenderer.invoke('open-steam-keyboard'),
+    getZoomFactor: () => webFrame.getZoomFactor(),
+    setZoomFactor: (factor) => webFrame.setZoomFactor(factor),
+    onNativeState: (callback) => {
+        const listener = (_, state) => callback(state);
+        ipcRenderer.on('gamepad-native-state', listener);
+        return () => ipcRenderer.removeListener('gamepad-native-state', listener);
     },
 });
 

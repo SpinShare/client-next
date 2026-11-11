@@ -30,6 +30,7 @@ export class SettingsManager {
             roomSyncHost: 'localhost:6767',
             roomSyncAutoDownload: true,
             roomSyncAutoUpdate: true,
+            gamepadUi: 'auto',
         };
         this.settings = { ...this.defaults };
 
