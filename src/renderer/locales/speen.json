@@ -319,6 +319,22 @@
         "description": "",
         "open": ""
       }
+    },
+    "gamepad": {
+      "header": "",
+      "mode": {
+        "label": "",
+        "description": "",
+        "auto": "",
+        "on": "",
+        "off": ""
+      },
+      "diagnostics": {
+        "label": "",
+        "description": "",
+        "show": "",
+        "hide": ""
+      }
     }
   },
   "setup": {
@@ -378,6 +394,36 @@
     "queueFinished": {
       "title": "",
       "body": ""
+    }
+  },
+  "bigPicture": {
+    "hints": {
+      "select": "",
+      "back": "",
+      "search": "",
+      "download": "",
+      "downloads": "",
+      "keyboard": "",
+      "confirm": "",
+      "page": "",
+      "menu": "",
+      "close": "",
+      "steamKeyboard": ""
+    },
+    "home": {
+      "seeAll": ""
+    },
+    "search": {
+      "header": "",
+      "submit": "",
+      "cancel": ""
+    },
+    "chart": {
+      "queued": "",
+      "explicit": ""
+    },
+    "account": {
+      "clearAll": ""
     }
   }
 }
