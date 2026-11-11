@@ -9,6 +9,15 @@
             <section class="page-library">
                 <SectionHeader :title="$t('library.header')">
                     <button
+                        v-if="outdatedCharts?.length"
+                        class="button brand"
+                        @click="handleUpdateAll"
+                        v-interactable
+                    >
+                        <Remixicon icon="download" />
+                        <span>{{ $t('library.updateAll', { count: outdatedCharts.length }) }}</span>
+                    </button>
+                    <button
                         class="button"
                         @click="handleOpen"
                         v-interactable
@@ -50,19 +59,23 @@
 <script setup>
 import LayoutBase from '@/layouts/LayoutBase.vue';
 import Loader from '@/components/Loader.vue';
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import EmptyState from '@/components/EmptyState.vue';
 import SectionHeader from '@/components/SectionHeader.vue';
 import Remixicon from '@/components/Remixicon.vue';
 import ChartGrid from '@/components/Charts/ChartGrid.vue';
 import ChartItem from '@/components/Charts/ChartItem.vue';
+import { DownloadItem } from '../../../main/queue/downloadQueueItem';
 
 const library = ref(null);
 const remoteUpdateHashes = ref({});
+const outdatedCharts = computed(() => library?.value.filter(isChartOutdated));
 const settingsManager = inject('settingsManager');
+const api = inject('api');
 const externalApi = inject('externalApi');
 const libraryManager = inject('libraryManager');
 const mitt = inject('mitt');
+const queue = inject('queue');
 
 onMounted(async () => {
     mitt.on('cache-change', onCacheChange);
@@ -85,6 +98,24 @@ async function handleOpen() {
 
 function handleRebuild() {
     libraryManager.rebuild();
+}
+
+function isChartOutdated(chart) {
+    return chart.fileReference.startsWith('spinshare_') && chart.updateHash !== remoteUpdateHashes?.value[chart.fileReference];
+}
+
+function handleUpdateAll() {
+    for (const chart of outdatedCharts.value) {
+        handleAddToQueue(chart);
+    }
+}
+
+async function handleAddToQueue(chart) {
+    const chartDetail = await api.getChartDetail(chart.fileReference);
+    if (chartDetail === null) return;
+
+    const newDownloadItem = new DownloadItem(chartDetail.id, chartDetail.cover, chartDetail.title, chartDetail.artist, chartDetail.charter, chartDetail.fileReference, false);
+    await queue.addQueueItem(newDownloadItem);
 }
 </script>
 
