@@ -6,13 +6,13 @@ export default defineConfig({
     plugins: [vue()],
     test: {
         globals: true,
-        environment: 'jsdom',
+        environment: 'node',
         include: ['tests/**/*.test.js'],
         exclude: ['node_modules/**', '.vite/**'],
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './src'),
+            '@': path.resolve(__dirname, './src/renderer'),
         },
     },
 });
