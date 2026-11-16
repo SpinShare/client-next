@@ -371,7 +371,7 @@ export class LibraryManager extends EventEmitter {
 
     /**
      * Writes data as JSON to a temporary file and renames it over filePath, so a crash never leaves a half-written file.
-     * 
+     *
      * @param {string} filePath
      * @param {function(): *} getData
      * @returns {Promise<void>}

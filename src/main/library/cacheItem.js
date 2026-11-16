@@ -126,7 +126,7 @@ export class CacheItem {
 
         return {
             cacheItem: cacheItem,
-            albumArtReference: trackInfoContainer.albumArtReference.assetName,
+            albumArtReference: trackInfoContainer.albumArtReference?.assetName,
         };
     }
 }
