@@ -46,6 +46,7 @@ import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import Remixicon from '@/components/Remixicon.vue';
 import { DownloadItem } from '../../../main/queue/downloadQueueItem';
+import { getLibraryCoverUrl } from '@/modules/libraryCover';
 
 const STATUS_LABELS = {
     installed: 'chart.status.installed',
@@ -130,13 +131,11 @@ async function resolveTrack(track) {
     const [cacheItem, chart] = await Promise.all([libraryManager.get(fileReference), api.getChartDetail(fileReference)]);
 
     if (cacheItem) {
-        const thumbnail = await libraryManager.getThumbnail(fileReference);
-
         const isOutOfDate = chart?.updateHash && cacheItem.updateHash !== chart.updateHash;
 
         return {
             title: cacheItem.title,
-            cover: thumbnail ? `data:image/png;base64,${thumbnail}` : null,
+            cover: cacheItem.hasCover === false ? null : getLibraryCoverUrl(fileReference, cacheItem.updateHash),
             link: `/chart/${chart?.id ?? fileReference}`,
             status: isOutOfDate ? 'outOfDate' : 'installed',
             chart,

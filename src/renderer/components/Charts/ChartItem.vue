@@ -16,7 +16,7 @@
         <div
             v-else
             class="cover"
-            :style="`background-image: url('data:image/png;base64,${localCoverCache}')`"
+            :style="`background-image: url('${localCoverUrl}')`"
         ></div>
         <div class="content">
             <div class="meta">
@@ -35,13 +35,13 @@
                 </div>
                 <div
                     class="installation-status installed"
-                    v-if="!isLocalChart && cacheUpdateHash && (!updateHash || cacheUpdateHash === updateHash)"
+                    v-if="!isLocalChart && installedUpdateHash && (!updateHash || installedUpdateHash === updateHash)"
                 >
                     {{ $t('chart.status.installed') }}
                 </div>
                 <div
                     class="installation-status update"
-                    v-if="!isLocalChart && cacheUpdateHash && updateHash && cacheUpdateHash !== updateHash"
+                    v-if="!isLocalChart && installedUpdateHash && updateHash && installedUpdateHash !== updateHash"
                 >
                     {{ $t('chart.status.outOfDate') }}
                 </div>
@@ -108,6 +108,7 @@ import { RouterLink } from 'vue-router';
 import Remixicon from '@/components/Remixicon.vue';
 import { playClickSound } from '@/modules/hoverDirective';
 import { isBigPicture } from '@/modules/gamepad/state';
+import { getLibraryCoverUrl } from '@/modules/libraryCover';
 
 const props = defineProps({
     id: {
@@ -190,6 +191,10 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    localUpdateHash: {
+        type: String,
+        default: '',
+    },
     updateHash: {
         type: String,
         default: '',
@@ -209,25 +214,27 @@ const queue = inject('queue');
 const settingsManager = inject('settingsManager');
 const libraryManager = inject('libraryManager');
 const settingShowExplicit = ref(false);
-const localCoverCache = ref(null);
 const cacheUpdateHash = ref(null);
+
+const localCoverUrl = computed(() => getLibraryCoverUrl(props.fileReference, props.localUpdateHash));
+const installedUpdateHash = computed(() => (props.isLocal ? props.localUpdateHash : cacheUpdateHash.value));
+
+async function onItemChange(queueItem) {
+    if (queueItem.id !== props.id) return;
+    cacheUpdateHash.value = await libraryManager.getUpdateHash(queueItem.fileReference);
+}
 
 onMounted(async () => {
     settingShowExplicit.value = await settingsManager.get('showExplicit');
 
-    if (props.isLocal) {
-        localCoverCache.value = await libraryManager.getThumbnail(props.fileReference);
-    }
+    if (props.isLocal) return;
 
     cacheUpdateHash.value = await libraryManager.getUpdateHash(props.fileReference);
-    mitt.on('item-change', async (queueItem) => {
-        if (queueItem.id !== props.id) return;
-        cacheUpdateHash.value = await libraryManager.getUpdateHash(queueItem.fileReference);
-    });
+    mitt.on('item-change', onItemChange);
 });
 
 onUnmounted(() => {
-    mitt.off('item-change');
+    mitt.off('item-change', onItemChange);
     clearTimeout(queuedLabelTimeout);
 });
 

@@ -43,6 +43,12 @@ export class CacheItem {
         this.fileReference = fileReference;
         this.updateHash = updateHash;
         this.srtbPath = srtbPath;
+        /** @type {number|undefined} mtime of the srtb file when it was cached */
+        this.mtimeMs = undefined;
+        /** @type {number|undefined} size of the srtb file when it was cached */
+        this.size = undefined;
+        /** @type {boolean} whether a thumbnail was generated */
+        this.hasCover = false;
     }
 
     static fromSrtb(srtbJson) {

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell, dialog, clipboard } from 'electron';
+import { app, BrowserWindow, ipcMain, shell, dialog, clipboard, protocol, net } from 'electron';
 import path from 'node:path';
 import fs from 'node:fs';
 import started from 'electron-squirrel-startup';
@@ -9,7 +9,7 @@ import { DownloadQueue } from './main/queue';
 import { SettingsManager } from './main/settings';
 import { AuthManager } from './main/auth';
 import { LibraryManager } from './main/library';
-import { URL } from 'url';
+import { URL, pathToFileURL } from 'url';
 import { UpdateManager } from './main/updates';
 import { translate } from './main/i18n';
 import { RoomSyncClient } from './main/roomSync';
@@ -41,6 +41,9 @@ Sentry.init({
 if (started) {
     app.quit();
 }
+
+// Serves cached library thumbnails to the renderer: spinshare-cover://thumbnail/<fileReference>
+protocol.registerSchemesAsPrivileged([{ scheme: 'spinshare-cover', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
 // Register the spinshare:// protocol
 if (process.defaultApp) {
@@ -209,7 +212,8 @@ app.whenReady().then(() => {
     /* Library */
     const library = new LibraryManager(apiClient, settingsManager);
     library.on('cache-change', () => {
-        mainWindow.webContents.send('cache-change', library.items);
+        if (mainWindow?.isDestroyed()) return;
+        mainWindow.webContents.send('cache-change', library.getAll());
     });
     library.on('cache-rebuild-start', () => {
         mainWindow.webContents.send('cache-rebuild-start');
@@ -221,7 +225,7 @@ app.whenReady().then(() => {
         mainWindow.webContents.send('cache-rebuild-done');
     });
     ipcMain.handle('get-library-all', async (event) => {
-        return library.items;
+        return library.getAll();
     });
     ipcMain.handle('get-library', async (event, fileReference) => {
         return library.get(fileReference);
@@ -238,6 +242,24 @@ app.whenReady().then(() => {
     ipcMain.handle('rebuild-library', async (event) => {
         await library.rebuild();
     });
+    protocol.handle('spinshare-cover', async (request) => {
+        const fileReference = decodeURIComponent(new URL(request.url).pathname.slice(1));
+        const thumbnailPath = library.getThumbnailPath(fileReference);
+        if (!thumbnailPath) {
+            return new Response(null, { status: 404 });
+        }
+        try {
+            return await net.fetch(pathToFileURL(thumbnailPath).toString());
+        } catch {
+            return new Response(null, { status: 404 });
+        }
+    });
+    app.on('before-quit', () => {
+        library.saveSync();
+    });
+    
+    // Pick up charts added or removed outside the app while it was closed
+    library.sync();
 
     /* Queue */
     const downloadQueue = new DownloadQueue(apiClient, settingsManager, library, app.getPath('temp'));

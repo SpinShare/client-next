@@ -37,6 +37,7 @@
                             v-for="chart in library"
                             :key="chart.fileReference"
                             v-bind="chart"
+                            :local-update-hash="chart.updateHash"
                             :update-hash="remoteUpdateHashes[chart.fileReference] || ''"
                             :is-local="true"
                         />
@@ -71,7 +72,7 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-    mitt.off('cache-change');
+    mitt.off('cache-change', onCacheChange);
 });
 
 function onCacheChange(cacheItems) {

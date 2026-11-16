@@ -91,6 +91,29 @@ defineProps({
     },
 });
 
+function onQueueChange(queueItems) {
+    queueItemsList.value = queueItems;
+}
+function onQueueCountChange(queueCount) {
+    queueItemCount.value = queueCount;
+}
+function onQueueDone() {
+    mitt.emit('sfx-queue-done');
+}
+function onItemChange(queueItem) {
+    const index = queueItemsList.value.findIndex((item) => item.id === queueItem.id);
+
+    if (index !== -1) {
+        const updatedItems = [...queueItemsList.value];
+        updatedItems[index] = queueItem;
+        queueItemsList.value = updatedItems;
+
+        if (updatedItems[index].state === 4) {
+            mitt.emit('sfx-error');
+        }
+    }
+}
+
 onMounted(async () => {
     queueItemsList.value = await queue.getQueueItems();
     queueItemCount.value = await queue.getQueueCount();
@@ -101,34 +124,16 @@ onMounted(async () => {
     mitt.on('queue-toggle', handleToggleQueue);
     mitt.on('queue-close', onQueueClose);
 
-    mitt.on('queue-change', (queueItems) => {
-        queueItemsList.value = queueItems;
-    });
-    mitt.on('queue-count-change', (queueCount) => {
-        queueItemCount.value = queueCount;
-    });
-    mitt.on('queue-done', () => {
-        mitt.emit('sfx-queue-done');
-    });
-    mitt.on('item-change', (queueItem) => {
-        const index = queueItemsList.value.findIndex((item) => item.id === queueItem.id);
-
-        if (index !== -1) {
-            const updatedItems = [...queueItemsList.value];
-            updatedItems[index] = queueItem;
-            queueItemsList.value = updatedItems;
-
-            if (updatedItems[index].state === 4) {
-                mitt.emit('sfx-error');
-            }
-        }
-    });
+    mitt.on('queue-change', onQueueChange);
+    mitt.on('queue-count-change', onQueueCountChange);
+    mitt.on('queue-done', onQueueDone);
+    mitt.on('item-change', onItemChange);
 });
 onUnmounted(() => {
-    mitt.off('queue-change');
-    mitt.off('queue-count-change');
-    mitt.off('queue-done');
-    mitt.off('item-change');
+    mitt.off('queue-change', onQueueChange);
+    mitt.off('queue-count-change', onQueueCountChange);
+    mitt.off('queue-done', onQueueDone);
+    mitt.off('item-change', onItemChange);
     mitt.off('save-settings', onSettingsSaved);
     mitt.off('queue-open', onQueueOpen);
     mitt.off('queue-toggle', handleToggleQueue);

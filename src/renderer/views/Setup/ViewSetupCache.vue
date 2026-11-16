@@ -34,14 +34,16 @@ const cacheDone = ref(false);
 const libraryManager = inject('libraryManager');
 const mitt = inject('mitt');
 
+function onCacheRebuildDone() {
+    cacheDone.value = true;
+}
+
 onMounted(async () => {
-    mitt.on('cache-change', () => {
-        cacheDone.value = true;
-    });
+    mitt.on('cache-rebuild-done', onCacheRebuildDone);
 });
 
 onUnmounted(() => {
-    mitt.off('cache-change');
+    mitt.off('cache-rebuild-done', onCacheRebuildDone);
 });
 
 function handleAnalyze() {

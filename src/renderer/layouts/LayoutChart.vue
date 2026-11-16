@@ -308,15 +308,17 @@ onMounted(async () => {
         return;
     }
     cacheItem.value = await libraryManager.get(chart.value.fileReference);
-    mitt.on('item-change', async (queueItem) => {
-        if (queueItem.id !== chart.value.id) return;
-        cacheItem.value = await libraryManager.get(queueItem.fileReference);
-    });
+    mitt.on('item-change', onItemChange);
 });
+
+async function onItemChange(queueItem) {
+    if (queueItem.id !== chart.value?.id) return;
+    cacheItem.value = await libraryManager.get(queueItem.fileReference);
+}
 
 onUnmounted(() => {
     stopPreview();
-    mitt.off('item-change');
+    mitt.off('item-change', onItemChange);
 });
 
 function handlePlay() {
