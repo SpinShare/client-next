@@ -74,7 +74,7 @@ const RESCAN_INTERVAL_MS = 3000;
 
 /**
  * Parses a bitmap line from /proc/bus/input/devices (like "7cdb000000000000 0 0 0 0") into a bit checker.
- * 
+ *
  * @param {string} line
  * @returns {(bit: number) => boolean}
  */
@@ -96,7 +96,7 @@ function parseBitmap(line) {
 
 /**
  * Lists gamepad-like devices from /proc/bus/input/devices.
- * 
+ *
  * @returns {{ name: string, vendor: string, product: string, eventPath: string, hasDigitalTriggers: boolean }[]}
  */
 function listGamepadDevices() {

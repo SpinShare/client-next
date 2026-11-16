@@ -607,7 +607,7 @@ describe('LibraryManager', () => {
             const realReaddir = fs.promises.readdir.bind(fs.promises);
             vi.spyOn(fs.promises, 'readdir').mockImplementation(async (folder, ...args) => {
                 const files = await realReaddir(folder, ...args);
-                
+
                 if (folder === dirs.customs) writeChart('spinshare_downloaded');
                 return files;
             });

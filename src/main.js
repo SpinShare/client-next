@@ -257,7 +257,7 @@ app.whenReady().then(() => {
     app.on('before-quit', () => {
         library.saveSync();
     });
-    
+
     // Pick up charts added or removed outside the app while it was closed
     library.sync();
 
